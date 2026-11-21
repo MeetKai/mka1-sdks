@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const CreateAgentRunRequest$inboundSchema: z.ZodType<
   CreateAgentRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateAgentRunRequest: components.CreateAgentRunRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateAgentRunRequest": "createAgentRunRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateAgentRunRequest: components.CreateAgentRunRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateAgentRunRequest": "createAgentRunRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentRunRequest$Outbound = {
   agent_id: string;
@@ -46,17 +48,19 @@ export const CreateAgentRunRequest$outboundSchema: z.ZodType<
   CreateAgentRunRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentRunRequest
-> = z.object({
-  agentId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createAgentRunRequest: components.CreateAgentRunRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createAgentRunRequest: "CreateAgentRunRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createAgentRunRequest: components.CreateAgentRunRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createAgentRunRequest: "CreateAgentRunRequest",
+    });
+  })
+);
 
 export function createAgentRunRequestToJSON(
   createAgentRunRequest: CreateAgentRunRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -70,7 +70,9 @@ export const CreateVectorStoreFileBatchRequestAttributes$inboundSchema:
     CreateVectorStoreFileBatchRequestAttributes,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.string(), z.boolean(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.boolean(), z.number()])
+  );
 /** @internal */
 export type CreateVectorStoreFileBatchRequestAttributes$Outbound =
   | string
@@ -83,7 +85,9 @@ export const CreateVectorStoreFileBatchRequestAttributes$outboundSchema:
     CreateVectorStoreFileBatchRequestAttributes$Outbound,
     z.ZodTypeDef,
     CreateVectorStoreFileBatchRequestAttributes
-  > = z.union([z.string(), z.boolean(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.boolean(), z.number()])
+  );
 
 export function createVectorStoreFileBatchRequestAttributesToJSON(
   createVectorStoreFileBatchRequestAttributes:
@@ -117,10 +121,12 @@ export const CreateVectorStoreFileBatchRequestChunkingStrategy$inboundSchema:
     CreateVectorStoreFileBatchRequestChunkingStrategy,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ])
+  );
 /** @internal */
 export type CreateVectorStoreFileBatchRequestChunkingStrategy$Outbound =
   | AutoChunkingStrategy$Outbound
@@ -132,10 +138,12 @@ export const CreateVectorStoreFileBatchRequestChunkingStrategy$outboundSchema:
     CreateVectorStoreFileBatchRequestChunkingStrategy$Outbound,
     z.ZodTypeDef,
     CreateVectorStoreFileBatchRequestChunkingStrategy
-  > = z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ])
+  );
 
 export function createVectorStoreFileBatchRequestChunkingStrategyToJSON(
   createVectorStoreFileBatchRequestChunkingStrategy:
@@ -168,23 +176,25 @@ export const CreateVectorStoreFileBatchRequest$inboundSchema: z.ZodType<
   CreateVectorStoreFileBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_ids: z.array(z.string()).optional(),
-  files: z.array(FileWithMetadata$inboundSchema).optional(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunking_strategy: z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]).optional(),
-  skip_duplicates: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "file_ids": "fileIds",
-    "chunking_strategy": "chunkingStrategy",
-    "skip_duplicates": "skipDuplicates",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_ids: z.array(z.string()).optional(),
+    files: z.array(FileWithMetadata$inboundSchema).optional(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunking_strategy: z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ]).optional(),
+    skip_duplicates: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_ids": "fileIds",
+      "chunking_strategy": "chunkingStrategy",
+      "skip_duplicates": "skipDuplicates",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStoreFileBatchRequest$Outbound = {
   file_ids?: Array<string> | undefined;
@@ -202,23 +212,25 @@ export const CreateVectorStoreFileBatchRequest$outboundSchema: z.ZodType<
   CreateVectorStoreFileBatchRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreFileBatchRequest
-> = z.object({
-  fileIds: z.array(z.string()).optional(),
-  files: z.array(FileWithMetadata$outboundSchema).optional(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunkingStrategy: z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]).optional(),
-  skipDuplicates: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    fileIds: "file_ids",
-    chunkingStrategy: "chunking_strategy",
-    skipDuplicates: "skip_duplicates",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileIds: z.array(z.string()).optional(),
+    files: z.array(FileWithMetadata$outboundSchema).optional(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunkingStrategy: z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ]).optional(),
+    skipDuplicates: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      fileIds: "file_ids",
+      chunkingStrategy: "chunking_strategy",
+      skipDuplicates: "skip_duplicates",
+    });
+  })
+);
 
 export function createVectorStoreFileBatchRequestToJSON(
   createVectorStoreFileBatchRequest: CreateVectorStoreFileBatchRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const WaitAction$inboundSchema: z.ZodType<
   WaitAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("wait"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("wait"),
+  })
+);
 /** @internal */
 export type WaitAction$Outbound = {
   type: "wait";
@@ -29,9 +31,11 @@ export const WaitAction$outboundSchema: z.ZodType<
   WaitAction$Outbound,
   z.ZodTypeDef,
   WaitAction
-> = z.object({
-  type: z.literal("wait"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("wait"),
+  })
+);
 
 export function waitActionToJSON(waitAction: WaitAction): string {
   return JSON.stringify(WaitAction$outboundSchema.parse(waitAction));

@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 from datetime import date
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import FieldMetadata, HeaderMetadata, validate_const
 import pydantic
 from pydantic import model_serializer
@@ -25,13 +33,20 @@ class ListModelsRequest(BaseModel):
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["X-On-Behalf-Of"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -179,12 +194,19 @@ class ListModelsLifecycle(BaseModel):
     r"""Registry id of the model callers should move to. Null when none is named. A cluster catalog id: an organisation uses it the way it uses any catalog model, activating it in its registry if it has not already."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -227,12 +249,19 @@ class ListModelsCapabilities(BaseModel):
     r"""Whether this LLM's upstream enforces a JSON-schema response format (structured outputs), mirroring the registry's `capabilities.supportsStructuredOutputs`. Null when the registry does not say. False for every non-LLM model, meaning not applicable rather than recorded as unsupported, so null occurs only on LLMs. The gateway forwards a requested schema whatever this reports; when false the upstream may not honour it. Judge-based `auto` routing treats anything but true as unsupported."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -374,12 +403,19 @@ class ListModelsData(BaseModel):
     ] = "model"
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

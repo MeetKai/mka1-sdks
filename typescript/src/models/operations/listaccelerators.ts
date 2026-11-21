@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -31,8 +31,8 @@ export type ListAcceleratorsResponse =
   | components.ComputeErrorEnvelope;
 
 /** @internal */
-export const Vendor$inboundSchema: z.ZodNativeEnum<typeof Vendor> = z
-  .nativeEnum(Vendor);
+export const Vendor$inboundSchema: z.ZodNativeEnum<typeof Vendor> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Vendor));
 /** @internal */
 export const Vendor$outboundSchema: z.ZodNativeEnum<typeof Vendor> =
   Vendor$inboundSchema;
@@ -42,16 +42,18 @@ export const ListAcceleratorsRequest$inboundSchema: z.ZodType<
   ListAcceleratorsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vendor: Vendor$inboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vendor: Vendor$inboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListAcceleratorsRequest$Outbound = {
   vendor?: string | undefined;
@@ -65,16 +67,18 @@ export const ListAcceleratorsRequest$outboundSchema: z.ZodType<
   ListAcceleratorsRequest$Outbound,
   z.ZodTypeDef,
   ListAcceleratorsRequest
-> = z.object({
-  vendor: Vendor$outboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vendor: Vendor$outboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listAcceleratorsRequestToJSON(
   listAcceleratorsRequest: ListAcceleratorsRequest,
@@ -98,10 +102,12 @@ export const ListAcceleratorsResponse$inboundSchema: z.ZodType<
   ListAcceleratorsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeAcceleratorList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeAcceleratorList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListAcceleratorsResponse$Outbound =
   | components.ComputeAcceleratorList$Outbound
@@ -112,10 +118,12 @@ export const ListAcceleratorsResponse$outboundSchema: z.ZodType<
   ListAcceleratorsResponse$Outbound,
   z.ZodTypeDef,
   ListAcceleratorsResponse
-> = z.union([
-  components.ComputeAcceleratorList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeAcceleratorList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listAcceleratorsResponseToJSON(
   listAcceleratorsResponse: ListAcceleratorsResponse,

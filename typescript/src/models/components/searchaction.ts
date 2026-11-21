@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,11 +24,13 @@ export const SearchAction$inboundSchema: z.ZodType<
   SearchAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("search"),
-  query: z.string(),
-  sources: z.array(SearchActionSource$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("search"),
+    query: z.string(),
+    sources: z.array(SearchActionSource$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type SearchAction$Outbound = {
   type: "search";
@@ -41,11 +43,13 @@ export const SearchAction$outboundSchema: z.ZodType<
   SearchAction$Outbound,
   z.ZodTypeDef,
   SearchAction
-> = z.object({
-  type: z.literal("search"),
-  query: z.string(),
-  sources: z.array(SearchActionSource$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("search"),
+    query: z.string(),
+    sources: z.array(SearchActionSource$outboundSchema).optional(),
+  })
+);
 
 export function searchActionToJSON(searchAction: SearchAction): string {
   return JSON.stringify(SearchAction$outboundSchema.parse(searchAction));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,15 +28,17 @@ export const UploadEvalSampleTrajectoryRequest$inboundSchema: z.ZodType<
   UploadEvalSampleTrajectoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schema_version: z.string().default("ATIF-v1.7"),
-  steps: z.array(z.any()),
-  logs: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "schema_version": "schemaVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schema_version: z.string().default("ATIF-v1.7"),
+    steps: z.array(z.any()),
+    logs: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema_version": "schemaVersion",
+    });
+  })
+);
 /** @internal */
 export type UploadEvalSampleTrajectoryRequest$Outbound = {
   schema_version: string;
@@ -49,15 +51,17 @@ export const UploadEvalSampleTrajectoryRequest$outboundSchema: z.ZodType<
   UploadEvalSampleTrajectoryRequest$Outbound,
   z.ZodTypeDef,
   UploadEvalSampleTrajectoryRequest
-> = z.object({
-  schemaVersion: z.string().default("ATIF-v1.7"),
-  steps: z.array(z.any()),
-  logs: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    schemaVersion: "schema_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaVersion: z.string().default("ATIF-v1.7"),
+    steps: z.array(z.any()),
+    logs: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      schemaVersion: "schema_version",
+    });
+  })
+);
 
 export function uploadEvalSampleTrajectoryRequestToJSON(
   uploadEvalSampleTrajectoryRequest: UploadEvalSampleTrajectoryRequest,

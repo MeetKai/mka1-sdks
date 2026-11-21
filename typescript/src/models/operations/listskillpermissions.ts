@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const ListSkillPermissionsRequest$inboundSchema: z.ZodType<
   ListSkillPermissionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  skill_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skill_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListSkillPermissionsRequest$Outbound = {
   skill_id: string;
@@ -41,15 +43,17 @@ export const ListSkillPermissionsRequest$outboundSchema: z.ZodType<
   ListSkillPermissionsRequest$Outbound,
   z.ZodTypeDef,
   ListSkillPermissionsRequest
-> = z.object({
-  skillId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listSkillPermissionsRequestToJSON(
   listSkillPermissionsRequest: ListSkillPermissionsRequest,

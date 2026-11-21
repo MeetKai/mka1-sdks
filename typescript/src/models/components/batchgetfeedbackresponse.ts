@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -76,7 +76,7 @@ export type BatchGetFeedbackResponse = {
 /** @internal */
 export const ResultsRating$inboundSchema: z.ZodNativeEnum<
   typeof ResultsRating
-> = z.nativeEnum(ResultsRating);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResultsRating));
 /** @internal */
 export const ResultsRating$outboundSchema: z.ZodNativeEnum<
   typeof ResultsRating
@@ -87,20 +87,24 @@ export const Results2$inboundSchema: z.ZodType<
   Results2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  rating: ResultsRating$inboundSchema.optional(),
-  description: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: ResultsRating$inboundSchema.optional(),
+    description: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type Results2$Outbound = {
   id: string;
@@ -115,18 +119,20 @@ export const Results2$outboundSchema: z.ZodType<
   Results2$Outbound,
   z.ZodTypeDef,
   Results2
-> = z.object({
-  id: z.string(),
-  rating: ResultsRating$outboundSchema.optional(),
-  description: z.string().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: ResultsRating$outboundSchema.optional(),
+    description: z.string().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function results2ToJSON(results2: Results2): string {
   return JSON.stringify(Results2$outboundSchema.parse(results2));
@@ -146,10 +152,12 @@ export const Results1$inboundSchema: z.ZodType<
   Results1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  error: z.literal("not_found"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    error: z.literal("not_found"),
+  })
+);
 /** @internal */
 export type Results1$Outbound = {
   id: string;
@@ -161,10 +169,12 @@ export const Results1$outboundSchema: z.ZodType<
   Results1$Outbound,
   z.ZodTypeDef,
   Results1
-> = z.object({
-  id: z.string(),
-  error: z.literal("not_found"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    error: z.literal("not_found"),
+  })
+);
 
 export function results1ToJSON(results1: Results1): string {
   return JSON.stringify(Results1$outboundSchema.parse(results1));
@@ -181,10 +191,12 @@ export function results1FromJSON(
 
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => Results1$inboundSchema),
-    z.lazy(() => Results2$inboundSchema),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Results1$inboundSchema),
+      z.lazy(() => Results2$inboundSchema),
+    ])
+  );
 /** @internal */
 export type Results$Outbound = Results1$Outbound | Results2$Outbound;
 
@@ -193,10 +205,12 @@ export const Results$outboundSchema: z.ZodType<
   Results$Outbound,
   z.ZodTypeDef,
   Results
-> = z.union([
-  z.lazy(() => Results1$outboundSchema),
-  z.lazy(() => Results2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Results1$outboundSchema),
+    z.lazy(() => Results2$outboundSchema),
+  ])
+);
 
 export function resultsToJSON(results: Results): string {
   return JSON.stringify(Results$outboundSchema.parse(results));
@@ -216,14 +230,14 @@ export const BatchGetFeedbackResponse$inboundSchema: z.ZodType<
   BatchGetFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.array(z.union([
       z.lazy(() => Results1$inboundSchema),
       z.lazy(() => Results2$inboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 /** @internal */
 export type BatchGetFeedbackResponse$Outbound = {
   results: Array<Results1$Outbound | Results2$Outbound>;
@@ -234,14 +248,14 @@ export const BatchGetFeedbackResponse$outboundSchema: z.ZodType<
   BatchGetFeedbackResponse$Outbound,
   z.ZodTypeDef,
   BatchGetFeedbackResponse
-> = z.object({
-  results: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.array(z.union([
       z.lazy(() => Results1$outboundSchema),
       z.lazy(() => Results2$outboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function batchGetFeedbackResponseToJSON(
   batchGetFeedbackResponse: BatchGetFeedbackResponse,

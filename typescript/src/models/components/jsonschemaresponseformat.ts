@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const JSONSchemaResponseFormat$inboundSchema: z.ZodType<
   JSONSchemaResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("json_schema"),
-  name: z.string(),
-  schema: z.record(z.any()),
-  description: z.string().optional(),
-  strict: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    name: z.string(),
+    schema: z.record(z.any()),
+    description: z.string().optional(),
+    strict: z.boolean().default(false),
+  })
+);
 /** @internal */
 export type JSONSchemaResponseFormat$Outbound = {
   type: "json_schema";
@@ -41,13 +43,15 @@ export const JSONSchemaResponseFormat$outboundSchema: z.ZodType<
   JSONSchemaResponseFormat$Outbound,
   z.ZodTypeDef,
   JSONSchemaResponseFormat
-> = z.object({
-  type: z.literal("json_schema"),
-  name: z.string(),
-  schema: z.record(z.any()),
-  description: z.string().optional(),
-  strict: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("json_schema"),
+    name: z.string(),
+    schema: z.record(z.any()),
+    description: z.string().optional(),
+    strict: z.boolean().default(false),
+  })
+);
 
 export function jsonSchemaResponseFormatToJSON(
   jsonSchemaResponseFormat: JSONSchemaResponseFormat,

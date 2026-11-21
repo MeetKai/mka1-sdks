@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
@@ -256,19 +256,20 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody$inboundSc
     ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody$Outbound =
@@ -282,11 +283,13 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody$outboundS
     ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody$inboundSchema:
@@ -294,19 +297,20 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody$inboundSc
     ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody$Outbound =
@@ -320,15 +324,17 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody$outboundS
     ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Status));
 /** @internal */
 export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
   Status$inboundSchema;
@@ -338,11 +344,13 @@ export const RequestedBy$inboundSchema: z.ZodType<
   RequestedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type RequestedBy$Outbound = {
   id: string;
@@ -355,11 +363,13 @@ export const RequestedBy$outboundSchema: z.ZodType<
   RequestedBy$Outbound,
   z.ZodTypeDef,
   RequestedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function requestedByToJSON(requestedBy: RequestedBy): string {
   return JSON.stringify(RequestedBy$outboundSchema.parse(requestedBy));
@@ -379,11 +389,13 @@ export const DecidedBy$inboundSchema: z.ZodType<
   DecidedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type DecidedBy$Outbound = {
   id: string;
@@ -396,11 +408,13 @@ export const DecidedBy$outboundSchema: z.ZodType<
   DecidedBy$Outbound,
   z.ZodTypeDef,
   DecidedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function decidedByToJSON(decidedBy: DecidedBy): string {
   return JSON.stringify(DecidedBy$outboundSchema.parse(decidedBy));
@@ -420,23 +434,25 @@ export const RequestT$inboundSchema: z.ZodType<
   RequestT,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: Status$inboundSchema,
-  requestedBy: z.lazy(() => RequestedBy$inboundSchema),
-  decidedBy: z.nullable(z.lazy(() => DecidedBy$inboundSchema)),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: Status$inboundSchema,
+    requestedBy: z.lazy(() => RequestedBy$inboundSchema),
+    decidedBy: z.nullable(z.lazy(() => DecidedBy$inboundSchema)),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type RequestT$Outbound = {
   id: string;
@@ -461,23 +477,25 @@ export const RequestT$outboundSchema: z.ZodType<
   RequestT$Outbound,
   z.ZodTypeDef,
   RequestT
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: Status$outboundSchema,
-  requestedBy: z.lazy(() => RequestedBy$outboundSchema),
-  decidedBy: z.nullable(z.lazy(() => DecidedBy$outboundSchema)),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: Status$outboundSchema,
+    requestedBy: z.lazy(() => RequestedBy$outboundSchema),
+    decidedBy: z.nullable(z.lazy(() => DecidedBy$outboundSchema)),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 
 export function requestToJSON(requestT: RequestT): string {
   return JSON.stringify(RequestT$outboundSchema.parse(requestT));
@@ -498,21 +516,22 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody$inboundSc
     ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request: z.lazy(() => RequestT$inboundSchema).optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request: z.lazy(() => RequestT$inboundSchema).optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody$Outbound =
@@ -528,13 +547,15 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody$outboundS
     ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-      request: z.lazy(() => RequestT$outboundSchema).optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+        request: z.lazy(() => RequestT$outboundSchema).optional(),
+      }))
+  );
 
 /** @internal */
 export const ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody$inboundSchema:
@@ -542,19 +563,20 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody$inboundSc
     ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody$Outbound =
@@ -568,11 +590,13 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody$outboundS
     ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody$inboundSchema:
@@ -580,20 +604,22 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody$inboundSchem
     ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody$Outbound = {
@@ -607,12 +633,14 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody$outboundSche
     ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const ApproveOwnerKeyRecoveryAuthClusterResponseBody$inboundSchema:
@@ -620,19 +648,21 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponseBody$inboundSchema:
     ApproveOwnerKeyRecoveryAuthClusterResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ApproveOwnerKeyRecoveryAuthClusterResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ApproveOwnerKeyRecoveryAuthClusterResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterResponseBody$Outbound = {
@@ -645,30 +675,34 @@ export const ApproveOwnerKeyRecoveryAuthClusterResponseBody$outboundSchema:
     ApproveOwnerKeyRecoveryAuthClusterResponseBody$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterResponseBody
-  > = z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ApproveOwnerKeyRecoveryAuthClusterResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ApproveOwnerKeyRecoveryResponseBody$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ApproveOwnerKeyRecoveryResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ApproveOwnerKeyRecoveryResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type ApproveOwnerKeyRecoveryResponseBody$Outbound = {
@@ -680,8 +714,10 @@ export const ApproveOwnerKeyRecoveryResponseBody$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryResponseBody$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryResponseBody
-> = z.instanceof(ApproveOwnerKeyRecoveryResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ApproveOwnerKeyRecoveryResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

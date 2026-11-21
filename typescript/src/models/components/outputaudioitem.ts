@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -50,7 +50,7 @@ export type OutputAudioItem = {
 /** @internal */
 export const OutputAudioItemStatus$inboundSchema: z.ZodNativeEnum<
   typeof OutputAudioItemStatus
-> = z.nativeEnum(OutputAudioItemStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputAudioItemStatus));
 /** @internal */
 export const OutputAudioItemStatus$outboundSchema: z.ZodNativeEnum<
   typeof OutputAudioItemStatus
@@ -61,13 +61,15 @@ export const OutputAudioItem$inboundSchema: z.ZodType<
   OutputAudioItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("output_audio"),
-  data: z.string(),
-  transcript: z.string(),
-  id: z.string(),
-  status: OutputAudioItemStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_audio"),
+    data: z.string(),
+    transcript: z.string(),
+    id: z.string(),
+    status: OutputAudioItemStatus$inboundSchema,
+  })
+);
 /** @internal */
 export type OutputAudioItem$Outbound = {
   type: "output_audio";
@@ -82,13 +84,15 @@ export const OutputAudioItem$outboundSchema: z.ZodType<
   OutputAudioItem$Outbound,
   z.ZodTypeDef,
   OutputAudioItem
-> = z.object({
-  type: z.literal("output_audio"),
-  data: z.string(),
-  transcript: z.string(),
-  id: z.string(),
-  status: OutputAudioItemStatus$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_audio"),
+    data: z.string(),
+    transcript: z.string(),
+    id: z.string(),
+    status: OutputAudioItemStatus$outboundSchema,
+  })
+);
 
 export function outputAudioItemToJSON(
   outputAudioItem: OutputAudioItem,

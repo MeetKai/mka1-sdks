@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const RepoTagList$inboundSchema: z.ZodType<
   RepoTagList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tags: z.array(RepoTag$inboundSchema),
-  truncated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(RepoTag$inboundSchema),
+    truncated: z.boolean(),
+  })
+);
 /** @internal */
 export type RepoTagList$Outbound = {
   tags: Array<RepoTag$Outbound>;
@@ -47,10 +49,12 @@ export const RepoTagList$outboundSchema: z.ZodType<
   RepoTagList$Outbound,
   z.ZodTypeDef,
   RepoTagList
-> = z.object({
-  tags: z.array(RepoTag$outboundSchema),
-  truncated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tags: z.array(RepoTag$outboundSchema),
+    truncated: z.boolean(),
+  })
+);
 
 export function repoTagListToJSON(repoTagList: RepoTagList): string {
   return JSON.stringify(RepoTagList$outboundSchema.parse(repoTagList));

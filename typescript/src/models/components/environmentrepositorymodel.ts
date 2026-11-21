@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const EnvironmentRepositoryModel$inboundSchema: z.ZodType<
   EnvironmentRepositoryModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repository_id: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "repository_id": "repositoryId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository_id: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "repository_id": "repositoryId",
+    });
+  })
+);
 /** @internal */
 export type EnvironmentRepositoryModel$Outbound = {
   repository_id: number;
@@ -37,14 +39,16 @@ export const EnvironmentRepositoryModel$outboundSchema: z.ZodType<
   EnvironmentRepositoryModel$Outbound,
   z.ZodTypeDef,
   EnvironmentRepositoryModel
-> = z.object({
-  repositoryId: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    repositoryId: "repository_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositoryId: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      repositoryId: "repository_id",
+    });
+  })
+);
 
 export function environmentRepositoryModelToJSON(
   environmentRepositoryModel: EnvironmentRepositoryModel,

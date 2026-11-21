@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,17 +34,19 @@ export const TrackingRunsLogMetricRequestBody$inboundSchema: z.ZodType<
   TrackingRunsLogMetricRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  key: z.string(),
-  value: z.number(),
-  timestamp: z.number().int(),
-  step: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    key: z.string(),
+    value: z.number(),
+    timestamp: z.number().int(),
+    step: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsLogMetricRequestBody$Outbound = {
   run_id: string;
@@ -59,17 +61,19 @@ export const TrackingRunsLogMetricRequestBody$outboundSchema: z.ZodType<
   TrackingRunsLogMetricRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogMetricRequestBody
-> = z.object({
-  runId: z.string(),
-  key: z.string(),
-  value: z.number(),
-  timestamp: z.number().int(),
-  step: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    key: z.string(),
+    value: z.number(),
+    timestamp: z.number().int(),
+    step: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+    });
+  })
+);
 
 export function trackingRunsLogMetricRequestBodyToJSON(
   trackingRunsLogMetricRequestBody: TrackingRunsLogMetricRequestBody,
@@ -95,15 +99,17 @@ export const TrackingRunsLogMetricRequest$inboundSchema: z.ZodType<
   TrackingRunsLogMetricRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingRunsLogMetricRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TrackingRunsLogMetricRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsLogMetricRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -115,15 +121,17 @@ export const TrackingRunsLogMetricRequest$outboundSchema: z.ZodType<
   TrackingRunsLogMetricRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogMetricRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TrackingRunsLogMetricRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TrackingRunsLogMetricRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingRunsLogMetricRequestToJSON(
   trackingRunsLogMetricRequest: TrackingRunsLogMetricRequest,
@@ -149,7 +157,7 @@ export const TrackingRunsLogMetricResponseBody$inboundSchema: z.ZodType<
   TrackingRunsLogMetricResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrackingRunsLogMetricResponseBody$Outbound = {};
 
@@ -158,7 +166,7 @@ export const TrackingRunsLogMetricResponseBody$outboundSchema: z.ZodType<
   TrackingRunsLogMetricResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogMetricResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trackingRunsLogMetricResponseBodyToJSON(
   trackingRunsLogMetricResponseBody: TrackingRunsLogMetricResponseBody,

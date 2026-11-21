@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,10 +35,12 @@ export type GetCostsUsageRequest = {
 
 /** @internal */
 export const GroupBy$inboundSchema: z.ZodType<GroupBy, z.ZodTypeDef, unknown> =
-  z.union([
-    z.array(components.CostsUsageGroupBy$inboundSchema),
-    components.CostsUsageGroupBy$inboundSchema,
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.array(components.CostsUsageGroupBy$inboundSchema),
+      components.CostsUsageGroupBy$inboundSchema,
+    ])
+  );
 /** @internal */
 export type GroupBy$Outbound = Array<string> | string;
 
@@ -47,10 +49,12 @@ export const GroupBy$outboundSchema: z.ZodType<
   GroupBy$Outbound,
   z.ZodTypeDef,
   GroupBy
-> = z.union([
-  z.array(components.CostsUsageGroupBy$outboundSchema),
-  components.CostsUsageGroupBy$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.array(components.CostsUsageGroupBy$outboundSchema),
+    components.CostsUsageGroupBy$outboundSchema,
+  ])
+);
 
 export function groupByToJSON(groupBy: GroupBy): string {
   return JSON.stringify(GroupBy$outboundSchema.parse(groupBy));
@@ -70,24 +74,26 @@ export const GetCostsUsageRequest$inboundSchema: z.ZodType<
   GetCostsUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start_time: z.number().int(),
-  end_time: z.number().int(),
-  org_id: z.string().optional(),
-  group_by: z.union([
-    z.array(components.CostsUsageGroupBy$inboundSchema),
-    components.CostsUsageGroupBy$inboundSchema,
-  ]).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "org_id": "orgId",
-    "group_by": "groupBy",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start_time: z.number().int(),
+    end_time: z.number().int(),
+    org_id: z.string().optional(),
+    group_by: z.union([
+      z.array(components.CostsUsageGroupBy$inboundSchema),
+      components.CostsUsageGroupBy$inboundSchema,
+    ]).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "org_id": "orgId",
+      "group_by": "groupBy",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetCostsUsageRequest$Outbound = {
   start_time: number;
@@ -102,24 +108,26 @@ export const GetCostsUsageRequest$outboundSchema: z.ZodType<
   GetCostsUsageRequest$Outbound,
   z.ZodTypeDef,
   GetCostsUsageRequest
-> = z.object({
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  orgId: z.string().optional(),
-  groupBy: z.union([
-    z.array(components.CostsUsageGroupBy$outboundSchema),
-    components.CostsUsageGroupBy$outboundSchema,
-  ]).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    orgId: "org_id",
-    groupBy: "group_by",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    orgId: z.string().optional(),
+    groupBy: z.union([
+      z.array(components.CostsUsageGroupBy$outboundSchema),
+      components.CostsUsageGroupBy$outboundSchema,
+    ]).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      orgId: "org_id",
+      groupBy: "group_by",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getCostsUsageRequestToJSON(
   getCostsUsageRequest: GetCostsUsageRequest,

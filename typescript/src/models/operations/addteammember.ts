@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,9 +49,11 @@ export const AddTeamMemberRequestBody$inboundSchema: z.ZodType<
   AddTeamMemberRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  })
+);
 /** @internal */
 export type AddTeamMemberRequestBody$Outbound = {
   userId: string;
@@ -62,9 +64,11 @@ export const AddTeamMemberRequestBody$outboundSchema: z.ZodType<
   AddTeamMemberRequestBody$Outbound,
   z.ZodTypeDef,
   AddTeamMemberRequestBody
-> = z.object({
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  })
+);
 
 export function addTeamMemberRequestBodyToJSON(
   addTeamMemberRequestBody: AddTeamMemberRequestBody,
@@ -88,17 +92,20 @@ export const AddTeamMemberRequest$inboundSchema: z.ZodType<
   AddTeamMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => AddTeamMemberRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => AddTeamMemberRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type AddTeamMemberRequest$Outbound = {
   orgId: string;
@@ -112,17 +119,20 @@ export const AddTeamMemberRequest$outboundSchema: z.ZodType<
   AddTeamMemberRequest$Outbound,
   z.ZodTypeDef,
   AddTeamMemberRequest
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => AddTeamMemberRequestBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => AddTeamMemberRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function addTeamMemberRequestToJSON(
   addTeamMemberRequest: AddTeamMemberRequest,
@@ -144,7 +154,7 @@ export function addTeamMemberRequestFromJSON(
 /** @internal */
 export const AddTeamMemberRole$inboundSchema: z.ZodNativeEnum<
   typeof AddTeamMemberRole
-> = z.nativeEnum(AddTeamMemberRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AddTeamMemberRole));
 /** @internal */
 export const AddTeamMemberRole$outboundSchema: z.ZodNativeEnum<
   typeof AddTeamMemberRole
@@ -155,13 +165,15 @@ export const AddTeamMemberMember$inboundSchema: z.ZodType<
   AddTeamMemberMember,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: AddTeamMemberRole$inboundSchema,
-  id: z.string(),
-  teamId: z.string(),
-  userId: z.string(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: AddTeamMemberRole$inboundSchema,
+    id: z.string(),
+    teamId: z.string(),
+    userId: z.string(),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type AddTeamMemberMember$Outbound = {
   role: string;
@@ -176,13 +188,15 @@ export const AddTeamMemberMember$outboundSchema: z.ZodType<
   AddTeamMemberMember$Outbound,
   z.ZodTypeDef,
   AddTeamMemberMember
-> = z.object({
-  role: AddTeamMemberRole$outboundSchema,
-  id: z.string(),
-  teamId: z.string(),
-  userId: z.string(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: AddTeamMemberRole$outboundSchema,
+    id: z.string(),
+    teamId: z.string(),
+    userId: z.string(),
+    createdAt: z.string(),
+  })
+);
 
 export function addTeamMemberMemberToJSON(
   addTeamMemberMember: AddTeamMemberMember,
@@ -206,9 +220,11 @@ export const AddTeamMemberResponseBody$inboundSchema: z.ZodType<
   AddTeamMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  member: z.lazy(() => AddTeamMemberMember$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    member: z.lazy(() => AddTeamMemberMember$inboundSchema),
+  })
+);
 /** @internal */
 export type AddTeamMemberResponseBody$Outbound = {
   member: AddTeamMemberMember$Outbound;
@@ -219,9 +235,11 @@ export const AddTeamMemberResponseBody$outboundSchema: z.ZodType<
   AddTeamMemberResponseBody$Outbound,
   z.ZodTypeDef,
   AddTeamMemberResponseBody
-> = z.object({
-  member: z.lazy(() => AddTeamMemberMember$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    member: z.lazy(() => AddTeamMemberMember$outboundSchema),
+  })
+);
 
 export function addTeamMemberResponseBodyToJSON(
   addTeamMemberResponseBody: AddTeamMemberResponseBody,

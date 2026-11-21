@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -58,16 +58,18 @@ export const CreateChatCompletionStreamRequest$inboundSchema: z.ZodType<
   CreateChatCompletionStreamRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  OpenAIChatCompletionRequestParams:
-    components.OpenAIChatCompletionRequestParams$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "OpenAIChatCompletionRequestParams": "openAIChatCompletionRequestParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    OpenAIChatCompletionRequestParams:
+      components.OpenAIChatCompletionRequestParams$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "OpenAIChatCompletionRequestParams": "openAIChatCompletionRequestParams",
+    });
+  })
+);
 /** @internal */
 export type CreateChatCompletionStreamRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -80,16 +82,18 @@ export const CreateChatCompletionStreamRequest$outboundSchema: z.ZodType<
   CreateChatCompletionStreamRequest$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionStreamRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  openAIChatCompletionRequestParams:
-    components.OpenAIChatCompletionRequestParams$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    openAIChatCompletionRequestParams: "OpenAIChatCompletionRequestParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    openAIChatCompletionRequestParams:
+      components.OpenAIChatCompletionRequestParams$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      openAIChatCompletionRequestParams: "OpenAIChatCompletionRequestParams",
+    });
+  })
+);
 
 export function createChatCompletionStreamRequestToJSON(
   createChatCompletionStreamRequest: CreateChatCompletionStreamRequest,
@@ -111,13 +115,15 @@ export function createChatCompletionStreamRequestFromJSON(
 }
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
-  .object({
-    event: z.literal("error"),
-    data: z.nullable(z.string()).optional(),
-    id: z.string().optional(),
-    retry: z.number().int().optional(),
-  });
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      event: z.literal("error"),
+      data: z.nullable(z.string()).optional(),
+      id: z.string().optional(),
+      retry: z.number().int().optional(),
+    })
+  );
 /** @internal */
 export type Three$Outbound = {
   event: "error";
@@ -131,12 +137,14 @@ export const Three$outboundSchema: z.ZodType<
   Three$Outbound,
   z.ZodTypeDef,
   Three
-> = z.object({
-  event: z.literal("error"),
-  data: z.nullable(z.string()).optional(),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.literal("error"),
+    data: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 
 export function threeToJSON(three: Three): string {
   return JSON.stringify(Three$outboundSchema.parse(three));
@@ -156,12 +164,14 @@ export const ResponseBody2$inboundSchema: z.ZodType<
   ResponseBody2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event: z.literal("done"),
-  data: z.nullable(z.string()).optional(),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.literal("done"),
+    data: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ResponseBody2$Outbound = {
   event: "done";
@@ -175,12 +185,14 @@ export const ResponseBody2$outboundSchema: z.ZodType<
   ResponseBody2$Outbound,
   z.ZodTypeDef,
   ResponseBody2
-> = z.object({
-  event: z.literal("done"),
-  data: z.nullable(z.string()).optional(),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.literal("done"),
+    data: z.nullable(z.string()).optional(),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 
 export function responseBody2ToJSON(responseBody2: ResponseBody2): string {
   return JSON.stringify(ResponseBody2$outboundSchema.parse(responseBody2));
@@ -200,20 +212,22 @@ export const ResponseBody1$inboundSchema: z.ZodType<
   ResponseBody1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event: z.literal("message"),
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(components.OpenAIChatCompletionChunk$inboundSchema),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.literal("message"),
+    data: z.unknown().transform((v, ctx) => {
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.OpenAIChatCompletionChunk$inboundSchema),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type ResponseBody1$Outbound = {
   event: "message";
@@ -227,12 +241,14 @@ export const ResponseBody1$outboundSchema: z.ZodType<
   ResponseBody1$Outbound,
   z.ZodTypeDef,
   ResponseBody1
-> = z.object({
-  event: z.literal("message"),
-  data: components.OpenAIChatCompletionChunk$outboundSchema,
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.literal("message"),
+    data: components.OpenAIChatCompletionChunk$outboundSchema,
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 
 export function responseBody1ToJSON(responseBody1: ResponseBody1): string {
   return JSON.stringify(ResponseBody1$outboundSchema.parse(responseBody1));
@@ -252,11 +268,13 @@ export const CreateChatCompletionStreamResponseBody$inboundSchema: z.ZodType<
   CreateChatCompletionStreamResponseBody,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("event", {
-  message: z.lazy(() => ResponseBody1$inboundSchema),
-  done: z.lazy(() => ResponseBody2$inboundSchema),
-  error: z.lazy(() => Three$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("event", {
+    message: z.lazy(() => ResponseBody1$inboundSchema),
+    done: z.lazy(() => ResponseBody2$inboundSchema),
+    error: z.lazy(() => Three$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateChatCompletionStreamResponseBody$Outbound =
   | ResponseBody1$Outbound
@@ -268,11 +286,13 @@ export const CreateChatCompletionStreamResponseBody$outboundSchema: z.ZodType<
   CreateChatCompletionStreamResponseBody$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionStreamResponseBody
-> = z.union([
-  z.lazy(() => ResponseBody1$outboundSchema),
-  z.lazy(() => ResponseBody2$outboundSchema),
-  z.lazy(() => Three$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ResponseBody1$outboundSchema),
+    z.lazy(() => ResponseBody2$outboundSchema),
+    z.lazy(() => Three$outboundSchema),
+  ])
+);
 
 export function createChatCompletionStreamResponseBodyToJSON(
   createChatCompletionStreamResponseBody:

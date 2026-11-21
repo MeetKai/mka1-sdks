@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const TopLogProb$inboundSchema: z.ZodType<
   TopLogProb,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.array(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number()),
+  })
+);
 /** @internal */
 export type TopLogProb$Outbound = {
   token: string;
@@ -35,11 +37,13 @@ export const TopLogProb$outboundSchema: z.ZodType<
   TopLogProb$Outbound,
   z.ZodTypeDef,
   TopLogProb
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.array(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number()),
+  })
+);
 
 export function topLogProbToJSON(topLogProb: TopLogProb): string {
   return JSON.stringify(TopLogProb$outboundSchema.parse(topLogProb));

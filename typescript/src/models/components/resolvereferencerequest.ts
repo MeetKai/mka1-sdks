@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const ResolveReferenceRequest$inboundSchema: z.ZodType<
   ResolveReferenceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repository_id: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "repository_id": "repositoryId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository_id: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "repository_id": "repositoryId",
+    });
+  })
+);
 /** @internal */
 export type ResolveReferenceRequest$Outbound = {
   repository_id: number;
@@ -37,14 +39,16 @@ export const ResolveReferenceRequest$outboundSchema: z.ZodType<
   ResolveReferenceRequest$Outbound,
   z.ZodTypeDef,
   ResolveReferenceRequest
-> = z.object({
-  repositoryId: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    repositoryId: "repository_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositoryId: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      repositoryId: "repository_id",
+    });
+  })
+);
 
 export function resolveReferenceRequestToJSON(
   resolveReferenceRequest: ResolveReferenceRequest,

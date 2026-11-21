@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,13 +30,15 @@ export const TrackingExperimentsDeleteRequestBody$inboundSchema: z.ZodType<
   TrackingExperimentsDeleteRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "experiment_id": "experimentId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "experiment_id": "experimentId",
+    });
+  })
+);
 /** @internal */
 export type TrackingExperimentsDeleteRequestBody$Outbound = {
   experiment_id: string;
@@ -47,13 +49,15 @@ export const TrackingExperimentsDeleteRequestBody$outboundSchema: z.ZodType<
   TrackingExperimentsDeleteRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingExperimentsDeleteRequestBody
-> = z.object({
-  experimentId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+    });
+  })
+);
 
 export function trackingExperimentsDeleteRequestBodyToJSON(
   trackingExperimentsDeleteRequestBody: TrackingExperimentsDeleteRequestBody,
@@ -80,15 +84,19 @@ export const TrackingExperimentsDeleteRequest$inboundSchema: z.ZodType<
   TrackingExperimentsDeleteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingExperimentsDeleteRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      TrackingExperimentsDeleteRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingExperimentsDeleteRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -100,17 +108,19 @@ export const TrackingExperimentsDeleteRequest$outboundSchema: z.ZodType<
   TrackingExperimentsDeleteRequest$Outbound,
   z.ZodTypeDef,
   TrackingExperimentsDeleteRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() =>
-    TrackingExperimentsDeleteRequestBody$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      TrackingExperimentsDeleteRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingExperimentsDeleteRequestToJSON(
   trackingExperimentsDeleteRequest: TrackingExperimentsDeleteRequest,
@@ -136,7 +146,7 @@ export const TrackingExperimentsDeleteResponseBody$inboundSchema: z.ZodType<
   TrackingExperimentsDeleteResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrackingExperimentsDeleteResponseBody$Outbound = {};
 
@@ -145,7 +155,7 @@ export const TrackingExperimentsDeleteResponseBody$outboundSchema: z.ZodType<
   TrackingExperimentsDeleteResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingExperimentsDeleteResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trackingExperimentsDeleteResponseBodyToJSON(
   trackingExperimentsDeleteResponseBody: TrackingExperimentsDeleteResponseBody,

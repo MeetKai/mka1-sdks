@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -53,21 +53,23 @@ export const ReasoningWithId$inboundSchema: z.ZodType<
   ReasoningWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("reasoning"),
-  id: z.string(),
-  summary: z.array(SummaryText$inboundSchema),
-  content: z.array(ReasoningText$inboundSchema).optional(),
-  encrypted_content: z.nullable(z.string()).optional(),
-  status: z.nullable(Status$inboundSchema).optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encrypted_content": "encryptedContent",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning"),
+    id: z.string(),
+    summary: z.array(SummaryText$inboundSchema),
+    content: z.array(ReasoningText$inboundSchema).optional(),
+    encrypted_content: z.nullable(z.string()).optional(),
+    status: z.nullable(Status$inboundSchema).optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ReasoningWithId$Outbound = {
   type: "reasoning";
@@ -85,21 +87,23 @@ export const ReasoningWithId$outboundSchema: z.ZodType<
   ReasoningWithId$Outbound,
   z.ZodTypeDef,
   ReasoningWithId
-> = z.object({
-  type: z.literal("reasoning"),
-  id: z.string(),
-  summary: z.array(SummaryText$outboundSchema),
-  content: z.array(ReasoningText$outboundSchema).optional(),
-  encryptedContent: z.nullable(z.string()).optional(),
-  status: z.nullable(Status$outboundSchema).optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encryptedContent: "encrypted_content",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning"),
+    id: z.string(),
+    summary: z.array(SummaryText$outboundSchema),
+    content: z.array(ReasoningText$outboundSchema).optional(),
+    encryptedContent: z.nullable(z.string()).optional(),
+    status: z.nullable(Status$outboundSchema).optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encryptedContent: "encrypted_content",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function reasoningWithIdToJSON(
   reasoningWithId: ReasoningWithId,

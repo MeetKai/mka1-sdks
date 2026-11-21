@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,16 +30,18 @@ export const AppliedClusterDefaultGuardrails$inboundSchema: z.ZodType<
   AppliedClusterDefaultGuardrails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  guardrails: z.array(ClusterDefaultRuleSummary$inboundSchema),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    guardrails: z.array(ClusterDefaultRuleSummary$inboundSchema),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type AppliedClusterDefaultGuardrails$Outbound = {
   guardrails: Array<ClusterDefaultRuleSummary$Outbound>;
@@ -51,14 +53,16 @@ export const AppliedClusterDefaultGuardrails$outboundSchema: z.ZodType<
   AppliedClusterDefaultGuardrails$Outbound,
   z.ZodTypeDef,
   AppliedClusterDefaultGuardrails
-> = z.object({
-  guardrails: z.array(ClusterDefaultRuleSummary$outboundSchema),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    guardrails: z.array(ClusterDefaultRuleSummary$outboundSchema),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function appliedClusterDefaultGuardrailsToJSON(
   appliedClusterDefaultGuardrails: AppliedClusterDefaultGuardrails,

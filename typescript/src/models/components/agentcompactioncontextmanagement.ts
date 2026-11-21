@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,10 @@ export type AgentCompactionContextManagement = {
 
 /** @internal */
 export const AgentCompactionContextManagementType$inboundSchema:
-  z.ZodNativeEnum<typeof AgentCompactionContextManagementType> = z.nativeEnum(
-    AgentCompactionContextManagementType,
-  );
+  z.ZodNativeEnum<typeof AgentCompactionContextManagementType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(AgentCompactionContextManagementType)
+    );
 /** @internal */
 export const AgentCompactionContextManagementType$outboundSchema:
   z.ZodNativeEnum<typeof AgentCompactionContextManagementType> =
@@ -39,14 +40,16 @@ export const AgentCompactionContextManagement$inboundSchema: z.ZodType<
   AgentCompactionContextManagement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AgentCompactionContextManagementType$inboundSchema,
-  compact_threshold: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "compact_threshold": "compactThreshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentCompactionContextManagementType$inboundSchema,
+    compact_threshold: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "compact_threshold": "compactThreshold",
+    });
+  })
+);
 /** @internal */
 export type AgentCompactionContextManagement$Outbound = {
   type: string;
@@ -58,14 +61,16 @@ export const AgentCompactionContextManagement$outboundSchema: z.ZodType<
   AgentCompactionContextManagement$Outbound,
   z.ZodTypeDef,
   AgentCompactionContextManagement
-> = z.object({
-  type: AgentCompactionContextManagementType$outboundSchema,
-  compactThreshold: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    compactThreshold: "compact_threshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentCompactionContextManagementType$outboundSchema,
+    compactThreshold: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      compactThreshold: "compact_threshold",
+    });
+  })
+);
 
 export function agentCompactionContextManagementToJSON(
   agentCompactionContextManagement: AgentCompactionContextManagement,

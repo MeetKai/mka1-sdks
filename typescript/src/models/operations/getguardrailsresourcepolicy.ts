@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,7 +35,7 @@ export type GetGuardrailsResourcePolicyRequest = {
 
 /** @internal */
 export const ResourceType$inboundSchema: z.ZodNativeEnum<typeof ResourceType> =
-  z.nativeEnum(ResourceType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResourceType));
 /** @internal */
 export const ResourceType$outboundSchema: z.ZodNativeEnum<typeof ResourceType> =
   ResourceType$inboundSchema;
@@ -45,17 +45,19 @@ export const GetGuardrailsResourcePolicyRequest$inboundSchema: z.ZodType<
   GetGuardrailsResourcePolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resource_type: ResourceType$inboundSchema,
-  resource_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-    "resource_id": "resourceId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource_type: ResourceType$inboundSchema,
+    resource_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+      "resource_id": "resourceId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetGuardrailsResourcePolicyRequest$Outbound = {
   resource_type: string;
@@ -68,17 +70,19 @@ export const GetGuardrailsResourcePolicyRequest$outboundSchema: z.ZodType<
   GetGuardrailsResourcePolicyRequest$Outbound,
   z.ZodTypeDef,
   GetGuardrailsResourcePolicyRequest
-> = z.object({
-  resourceType: ResourceType$outboundSchema,
-  resourceId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-    resourceId: "resource_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceType: ResourceType$outboundSchema,
+    resourceId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+      resourceId: "resource_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getGuardrailsResourcePolicyRequestToJSON(
   getGuardrailsResourcePolicyRequest: GetGuardrailsResourcePolicyRequest,

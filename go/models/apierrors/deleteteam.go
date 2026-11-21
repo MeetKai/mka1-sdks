@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type DeleteTeamTooManyRequestsError struct {
 var _ error = &DeleteTeamTooManyRequestsError{}
 
 func (e *DeleteTeamTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type DeleteTeamGoneError struct {
 var _ error = &DeleteTeamGoneError{}
 
 func (e *DeleteTeamGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type DeleteTeamConflictError struct {
 var _ error = &DeleteTeamConflictError{}
 
 func (e *DeleteTeamConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type DeleteTeamNotFoundError struct {
 var _ error = &DeleteTeamNotFoundError{}
 
 func (e *DeleteTeamNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type DeleteTeamForbiddenError struct {
 var _ error = &DeleteTeamForbiddenError{}
 
 func (e *DeleteTeamForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type DeleteTeamUnauthorizedError struct {
 var _ error = &DeleteTeamUnauthorizedError{}
 
 func (e *DeleteTeamUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type DeleteTeamBadRequestError struct {
 var _ error = &DeleteTeamBadRequestError{}
 
 func (e *DeleteTeamBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

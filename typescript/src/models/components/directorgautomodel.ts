@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,7 +56,7 @@ export type DirectOrgAutoModel = {
 /** @internal */
 export const FallbackLanguage$inboundSchema: z.ZodNativeEnum<
   typeof FallbackLanguage
-> = z.nativeEnum(FallbackLanguage);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FallbackLanguage));
 /** @internal */
 export const FallbackLanguage$outboundSchema: z.ZodNativeEnum<
   typeof FallbackLanguage
@@ -67,22 +67,24 @@ export const DirectOrgAutoModel$inboundSchema: z.ZodType<
   DirectOrgAutoModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endpoint: AutoEndpoint$inboundSchema,
-  set_by: z.string(),
-  set_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  fallback_language: z.nullable(FallbackLanguage$inboundSchema).optional(),
-  mode: z.literal("direct"),
-  model_id: z.string(),
-  resolvable: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "set_by": "setBy",
-    "set_at": "setAt",
-    "fallback_language": "fallbackLanguage",
-    "model_id": "modelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$inboundSchema,
+    set_by: z.string(),
+    set_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    fallback_language: z.nullable(FallbackLanguage$inboundSchema).optional(),
+    mode: z.literal("direct"),
+    model_id: z.string(),
+    resolvable: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "set_by": "setBy",
+      "set_at": "setAt",
+      "fallback_language": "fallbackLanguage",
+      "model_id": "modelId",
+    });
+  })
+);
 /** @internal */
 export type DirectOrgAutoModel$Outbound = {
   endpoint: string;
@@ -99,22 +101,24 @@ export const DirectOrgAutoModel$outboundSchema: z.ZodType<
   DirectOrgAutoModel$Outbound,
   z.ZodTypeDef,
   DirectOrgAutoModel
-> = z.object({
-  endpoint: AutoEndpoint$outboundSchema,
-  setBy: z.string(),
-  setAt: z.date().transform(v => v.toISOString()),
-  fallbackLanguage: z.nullable(FallbackLanguage$outboundSchema).optional(),
-  mode: z.literal("direct"),
-  modelId: z.string(),
-  resolvable: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    setBy: "set_by",
-    setAt: "set_at",
-    fallbackLanguage: "fallback_language",
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$outboundSchema,
+    setBy: z.string(),
+    setAt: z.date().transform(v => v.toISOString()),
+    fallbackLanguage: z.nullable(FallbackLanguage$outboundSchema).optional(),
+    mode: z.literal("direct"),
+    modelId: z.string(),
+    resolvable: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      setBy: "set_by",
+      setAt: "set_at",
+      fallbackLanguage: "fallback_language",
+      modelId: "model_id",
+    });
+  })
+);
 
 export function directOrgAutoModelToJSON(
   directOrgAutoModel: DirectOrgAutoModel,

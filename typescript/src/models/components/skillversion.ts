@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,20 +41,22 @@ export const SkillVersion$inboundSchema: z.ZodType<
   SkillVersion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  created_at: z.number().int(),
-  description: z.string(),
-  name: z.string(),
-  object: z.literal("skill.version").default("skill.version"),
-  skill_id: z.string(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "skill_id": "skillId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    created_at: z.number().int(),
+    description: z.string(),
+    name: z.string(),
+    object: z.literal("skill.version").default("skill.version"),
+    skill_id: z.string(),
+    version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "skill_id": "skillId",
+    });
+  })
+);
 /** @internal */
 export type SkillVersion$Outbound = {
   id: string;
@@ -71,20 +73,22 @@ export const SkillVersion$outboundSchema: z.ZodType<
   SkillVersion$Outbound,
   z.ZodTypeDef,
   SkillVersion
-> = z.object({
-  id: z.string(),
-  createdAt: z.number().int(),
-  description: z.string(),
-  name: z.string(),
-  object: z.literal("skill.version").default("skill.version" as const),
-  skillId: z.string(),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    skillId: "skill_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    createdAt: z.number().int(),
+    description: z.string(),
+    name: z.string(),
+    object: z.literal("skill.version").default("skill.version" as const),
+    skillId: z.string(),
+    version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      skillId: "skill_id",
+    });
+  })
+);
 
 export function skillVersionToJSON(skillVersion: SkillVersion): string {
   return JSON.stringify(SkillVersion$outboundSchema.parse(skillVersion));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -33,20 +33,22 @@ export const FeatureFlagCreateRequest$inboundSchema: z.ZodType<
   FeatureFlagCreateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  default_value: z.any().optional(),
-  description: z.string().optional(),
-  key: z.string(),
-  name: z.string(),
-  project_id: z.string().optional(),
-  value_type: FeatureFlagValueType$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "default_value": "defaultValue",
-    "project_id": "projectId",
-    "value_type": "valueType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    default_value: z.any().optional(),
+    description: z.string().optional(),
+    key: z.string(),
+    name: z.string(),
+    project_id: z.string().optional(),
+    value_type: FeatureFlagValueType$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "default_value": "defaultValue",
+      "project_id": "projectId",
+      "value_type": "valueType",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagCreateRequest$Outbound = {
   default_value?: any | undefined;
@@ -62,20 +64,22 @@ export const FeatureFlagCreateRequest$outboundSchema: z.ZodType<
   FeatureFlagCreateRequest$Outbound,
   z.ZodTypeDef,
   FeatureFlagCreateRequest
-> = z.object({
-  defaultValue: z.any().optional(),
-  description: z.string().optional(),
-  key: z.string(),
-  name: z.string(),
-  projectId: z.string().optional(),
-  valueType: FeatureFlagValueType$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-    projectId: "project_id",
-    valueType: "value_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.any().optional(),
+    description: z.string().optional(),
+    key: z.string(),
+    name: z.string(),
+    projectId: z.string().optional(),
+    valueType: FeatureFlagValueType$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      defaultValue: "default_value",
+      projectId: "project_id",
+      valueType: "value_type",
+    });
+  })
+);
 
 export function featureFlagCreateRequestToJSON(
   featureFlagCreateRequest: FeatureFlagCreateRequest,

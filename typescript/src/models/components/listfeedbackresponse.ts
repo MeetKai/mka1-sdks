@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -82,7 +82,7 @@ export type ListFeedbackResponse = {
 /** @internal */
 export const ListFeedbackResponseRating$inboundSchema: z.ZodNativeEnum<
   typeof ListFeedbackResponseRating
-> = z.nativeEnum(ListFeedbackResponseRating);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListFeedbackResponseRating));
 /** @internal */
 export const ListFeedbackResponseRating$outboundSchema: z.ZodNativeEnum<
   typeof ListFeedbackResponseRating
@@ -93,19 +93,25 @@ export const ListFeedbackResponseData$inboundSchema: z.ZodType<
   ListFeedbackResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  rating: ListFeedbackResponseRating$inboundSchema.optional(),
-  description: z.string().optional(),
-  model: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: ListFeedbackResponseRating$inboundSchema.optional(),
+    description: z.string().optional(),
+    model: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ListFeedbackResponseData$Outbound = {
   id: string;
@@ -121,19 +127,21 @@ export const ListFeedbackResponseData$outboundSchema: z.ZodType<
   ListFeedbackResponseData$Outbound,
   z.ZodTypeDef,
   ListFeedbackResponseData
-> = z.object({
-  id: z.string(),
-  rating: ListFeedbackResponseRating$outboundSchema.optional(),
-  description: z.string().optional(),
-  model: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: ListFeedbackResponseRating$outboundSchema.optional(),
+    description: z.string().optional(),
+    model: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function listFeedbackResponseDataToJSON(
   listFeedbackResponseData: ListFeedbackResponseData,
@@ -157,19 +165,21 @@ export const ListFeedbackResponse$inboundSchema: z.ZodType<
   ListFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListFeedbackResponseData$inboundSchema)),
-  first_id: z.string().optional(),
-  last_id: z.string().optional(),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListFeedbackResponseData$inboundSchema)),
+    first_id: z.string().optional(),
+    last_id: z.string().optional(),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type ListFeedbackResponse$Outbound = {
   object: "list";
@@ -184,19 +194,21 @@ export const ListFeedbackResponse$outboundSchema: z.ZodType<
   ListFeedbackResponse$Outbound,
   z.ZodTypeDef,
   ListFeedbackResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListFeedbackResponseData$outboundSchema)),
-  firstId: z.string().optional(),
-  lastId: z.string().optional(),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListFeedbackResponseData$outboundSchema)),
+    firstId: z.string().optional(),
+    lastId: z.string().optional(),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function listFeedbackResponseToJSON(
   listFeedbackResponse: ListFeedbackResponse,

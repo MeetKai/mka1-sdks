@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,15 +59,17 @@ export type ListVectorStoreFilesRequest = {
 /** @internal */
 export const ListVectorStoreFilesQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListVectorStoreFilesQueryParamOrder
-> = z.nativeEnum(ListVectorStoreFilesQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListVectorStoreFilesQueryParamOrder)
+);
 /** @internal */
 export const ListVectorStoreFilesQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListVectorStoreFilesQueryParamOrder> =
     ListVectorStoreFilesQueryParamOrder$inboundSchema;
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodNativeEnum<typeof Filter> = z
-  .nativeEnum(Filter);
+export const Filter$inboundSchema: z.ZodNativeEnum<typeof Filter> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Filter));
 /** @internal */
 export const Filter$outboundSchema: z.ZodNativeEnum<typeof Filter> =
   Filter$inboundSchema;
@@ -77,20 +79,22 @@ export const ListVectorStoreFilesRequest$inboundSchema: z.ZodType<
   ListVectorStoreFilesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreFilesQueryParamOrder$inboundSchema.default("desc"),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  filter: Filter$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreFilesQueryParamOrder$inboundSchema.default("desc"),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    filter: Filter$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListVectorStoreFilesRequest$Outbound = {
   vector_store_id: string;
@@ -107,20 +111,22 @@ export const ListVectorStoreFilesRequest$outboundSchema: z.ZodType<
   ListVectorStoreFilesRequest$Outbound,
   z.ZodTypeDef,
   ListVectorStoreFilesRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreFilesQueryParamOrder$outboundSchema.default("desc"),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  filter: Filter$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreFilesQueryParamOrder$outboundSchema.default("desc"),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    filter: Filter$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listVectorStoreFilesRequestToJSON(
   listVectorStoreFilesRequest: ListVectorStoreFilesRequest,

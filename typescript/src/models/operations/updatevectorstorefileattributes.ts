@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,21 +25,23 @@ export const UpdateVectorStoreFileAttributesRequest$inboundSchema: z.ZodType<
   UpdateVectorStoreFileAttributesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  file_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateVectorStoreFileAttributesRequest:
-    components.UpdateVectorStoreFileAttributesRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "file_id": "fileId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateVectorStoreFileAttributesRequest":
-      "updateVectorStoreFileAttributesRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    file_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateVectorStoreFileAttributesRequest:
+      components.UpdateVectorStoreFileAttributesRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "file_id": "fileId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateVectorStoreFileAttributesRequest":
+        "updateVectorStoreFileAttributesRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateVectorStoreFileAttributesRequest$Outbound = {
   vector_store_id: string;
@@ -54,21 +56,23 @@ export const UpdateVectorStoreFileAttributesRequest$outboundSchema: z.ZodType<
   UpdateVectorStoreFileAttributesRequest$Outbound,
   z.ZodTypeDef,
   UpdateVectorStoreFileAttributesRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  fileId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateVectorStoreFileAttributesRequest:
-    components.UpdateVectorStoreFileAttributesRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    fileId: "file_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    fileId: z.string(),
+    xOnBehalfOf: z.string().optional(),
     updateVectorStoreFileAttributesRequest:
-      "UpdateVectorStoreFileAttributesRequest",
-  });
-});
+      components.UpdateVectorStoreFileAttributesRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      fileId: "file_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateVectorStoreFileAttributesRequest:
+        "UpdateVectorStoreFileAttributesRequest",
+    });
+  })
+);
 
 export function updateVectorStoreFileAttributesRequestToJSON(
   updateVectorStoreFileAttributesRequest:

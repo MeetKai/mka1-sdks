@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,12 +50,14 @@ export const GetJwtFromKeyRequestBody$inboundSchema: z.ZodType<
   GetJwtFromKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audience: z.string(),
-  externalUserId: z.string(),
-  expiresIn: z.number().default(3600),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+    externalUserId: z.string(),
+    expiresIn: z.number().default(3600),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type GetJwtFromKeyRequestBody$Outbound = {
   audience: string;
@@ -69,12 +71,14 @@ export const GetJwtFromKeyRequestBody$outboundSchema: z.ZodType<
   GetJwtFromKeyRequestBody$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyRequestBody
-> = z.object({
-  audience: z.string(),
-  externalUserId: z.string(),
-  expiresIn: z.number().default(3600),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+    externalUserId: z.string(),
+    expiresIn: z.number().default(3600),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 
 export function getJwtFromKeyRequestBodyToJSON(
   getJwtFromKeyRequestBody: GetJwtFromKeyRequestBody,
@@ -98,15 +102,17 @@ export const GetJwtFromKeyRequest$inboundSchema: z.ZodType<
   GetJwtFromKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => GetJwtFromKeyRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => GetJwtFromKeyRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type GetJwtFromKeyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -118,15 +124,17 @@ export const GetJwtFromKeyRequest$outboundSchema: z.ZodType<
   GetJwtFromKeyRequest$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => GetJwtFromKeyRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => GetJwtFromKeyRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function getJwtFromKeyRequestToJSON(
   getJwtFromKeyRequest: GetJwtFromKeyRequest,
@@ -150,9 +158,11 @@ export const GetJwtFromKeyResponseBody$inboundSchema: z.ZodType<
   GetJwtFromKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+  })
+);
 /** @internal */
 export type GetJwtFromKeyResponseBody$Outbound = {
   token: string;
@@ -163,9 +173,11 @@ export const GetJwtFromKeyResponseBody$outboundSchema: z.ZodType<
   GetJwtFromKeyResponseBody$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyResponseBody
-> = z.object({
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+  })
+);
 
 export function getJwtFromKeyResponseBodyToJSON(
   getJwtFromKeyResponseBody: GetJwtFromKeyResponseBody,

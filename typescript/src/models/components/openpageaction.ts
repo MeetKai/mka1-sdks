@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const OpenPageAction$inboundSchema: z.ZodType<
   OpenPageAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("open_page"),
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("open_page"),
+    url: z.string(),
+  })
+);
 /** @internal */
 export type OpenPageAction$Outbound = {
   type: "open_page";
@@ -32,10 +34,12 @@ export const OpenPageAction$outboundSchema: z.ZodType<
   OpenPageAction$Outbound,
   z.ZodTypeDef,
   OpenPageAction
-> = z.object({
-  type: z.literal("open_page"),
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("open_page"),
+    url: z.string(),
+  })
+);
 
 export function openPageActionToJSON(openPageAction: OpenPageAction): string {
   return JSON.stringify(OpenPageAction$outboundSchema.parse(openPageAction));

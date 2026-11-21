@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const FileContentItem$inboundSchema: z.ZodType<
   FileContentItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  })
+);
 /** @internal */
 export type FileContentItem$Outbound = {
   type: "text";
@@ -41,10 +43,12 @@ export const FileContentItem$outboundSchema: z.ZodType<
   FileContentItem$Outbound,
   z.ZodTypeDef,
   FileContentItem
-> = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+    text: z.string(),
+  })
+);
 
 export function fileContentItemToJSON(
   fileContentItem: FileContentItem,

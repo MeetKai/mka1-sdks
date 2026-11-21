@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,9 @@ export type AgentsOpenApiToolDefinition = {
 /** @internal */
 export const AgentsOpenApiToolDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiToolDefinitionType
-> = z.nativeEnum(AgentsOpenApiToolDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentsOpenApiToolDefinitionType)
+);
 /** @internal */
 export const AgentsOpenApiToolDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiToolDefinitionType
@@ -48,20 +50,22 @@ export const AgentsOpenApiToolDefinition$inboundSchema: z.ZodType<
   AgentsOpenApiToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AgentsOpenApiToolDefinitionType$inboundSchema,
-  name: z.string(),
-  server_url: z.string(),
-  mcp_server_id: z.string().optional(),
-  mcp_credential_id: z.string().optional(),
-  operations: z.array(AgentsOpenApiOperation$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "mcp_server_id": "mcpServerId",
-    "mcp_credential_id": "mcpCredentialId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentsOpenApiToolDefinitionType$inboundSchema,
+    name: z.string(),
+    server_url: z.string(),
+    mcp_server_id: z.string().optional(),
+    mcp_credential_id: z.string().optional(),
+    operations: z.array(AgentsOpenApiOperation$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_url": "serverUrl",
+      "mcp_server_id": "mcpServerId",
+      "mcp_credential_id": "mcpCredentialId",
+    });
+  })
+);
 /** @internal */
 export type AgentsOpenApiToolDefinition$Outbound = {
   type: string;
@@ -77,20 +81,22 @@ export const AgentsOpenApiToolDefinition$outboundSchema: z.ZodType<
   AgentsOpenApiToolDefinition$Outbound,
   z.ZodTypeDef,
   AgentsOpenApiToolDefinition
-> = z.object({
-  type: AgentsOpenApiToolDefinitionType$outboundSchema,
-  name: z.string(),
-  serverUrl: z.string(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-  operations: z.array(AgentsOpenApiOperation$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentsOpenApiToolDefinitionType$outboundSchema,
+    name: z.string(),
+    serverUrl: z.string(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+    operations: z.array(AgentsOpenApiOperation$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverUrl: "server_url",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+    });
+  })
+);
 
 export function agentsOpenApiToolDefinitionToJSON(
   agentsOpenApiToolDefinition: AgentsOpenApiToolDefinition,

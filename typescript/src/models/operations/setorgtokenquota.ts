@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -51,20 +51,24 @@ export type SetOrgTokenQuotaResponseBody = {
 };
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z
-  .object({
-    enabled: z.literal(false),
-  });
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.literal(false),
+    })
+  );
 /** @internal */
 export type Two$Outbound = {
   enabled: false;
 };
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .object({
-    enabled: z.literal(false),
-  });
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      enabled: z.literal(false),
+    })
+  );
 
 export function twoToJSON(two: Two): string {
   return JSON.stringify(Two$outboundSchema.parse(two));
@@ -82,19 +86,21 @@ export function twoFromJSON(
 /** @internal */
 export const RequestBodyPeriod$inboundSchema: z.ZodNativeEnum<
   typeof RequestBodyPeriod
-> = z.nativeEnum(RequestBodyPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequestBodyPeriod));
 /** @internal */
 export const RequestBodyPeriod$outboundSchema: z.ZodNativeEnum<
   typeof RequestBodyPeriod
 > = RequestBodyPeriod$inboundSchema;
 
 /** @internal */
-export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> = z
-  .object({
-    limit: z.number().int(),
-    period: RequestBodyPeriod$inboundSchema,
-    enabled: z.literal(true),
-  });
+export const One$inboundSchema: z.ZodType<One, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: z.number().int(),
+      period: RequestBodyPeriod$inboundSchema,
+      enabled: z.literal(true),
+    })
+  );
 /** @internal */
 export type One$Outbound = {
   limit: number;
@@ -103,12 +109,14 @@ export type One$Outbound = {
 };
 
 /** @internal */
-export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> = z
-  .object({
-    limit: z.number().int(),
-    period: RequestBodyPeriod$outboundSchema,
-    enabled: z.literal(true),
-  });
+export const One$outboundSchema: z.ZodType<One$Outbound, z.ZodTypeDef, One> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: z.number().int(),
+      period: RequestBodyPeriod$outboundSchema,
+      enabled: z.literal(true),
+    })
+  );
 
 export function oneToJSON(one: One): string {
   return JSON.stringify(One$outboundSchema.parse(one));
@@ -128,7 +136,9 @@ export const SetOrgTokenQuotaRequestBody$inboundSchema: z.ZodType<
   SetOrgTokenQuotaRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => One$inboundSchema), z.lazy(() => Two$inboundSchema)])
+);
 /** @internal */
 export type SetOrgTokenQuotaRequestBody$Outbound = One$Outbound | Two$Outbound;
 
@@ -137,10 +147,9 @@ export const SetOrgTokenQuotaRequestBody$outboundSchema: z.ZodType<
   SetOrgTokenQuotaRequestBody$Outbound,
   z.ZodTypeDef,
   SetOrgTokenQuotaRequestBody
-> = z.union([
-  z.lazy(() => One$outboundSchema),
-  z.lazy(() => Two$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => One$outboundSchema), z.lazy(() => Two$outboundSchema)])
+);
 
 export function setOrgTokenQuotaRequestBodyToJSON(
   setOrgTokenQuotaRequestBody: SetOrgTokenQuotaRequestBody,
@@ -166,18 +175,20 @@ export const SetOrgTokenQuotaRequest$inboundSchema: z.ZodType<
   SetOrgTokenQuotaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  RequestBody: z.union([
-    z.lazy(() => One$inboundSchema),
-    z.lazy(() => Two$inboundSchema),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    RequestBody: z.union([
+      z.lazy(() => One$inboundSchema),
+      z.lazy(() => Two$inboundSchema),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type SetOrgTokenQuotaRequest$Outbound = {
   org_id: string;
@@ -189,18 +200,20 @@ export const SetOrgTokenQuotaRequest$outboundSchema: z.ZodType<
   SetOrgTokenQuotaRequest$Outbound,
   z.ZodTypeDef,
   SetOrgTokenQuotaRequest
-> = z.object({
-  orgId: z.string(),
-  requestBody: z.union([
-    z.lazy(() => One$outboundSchema),
-    z.lazy(() => Two$outboundSchema),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    requestBody: z.union([
+      z.lazy(() => One$outboundSchema),
+      z.lazy(() => Two$outboundSchema),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function setOrgTokenQuotaRequestToJSON(
   setOrgTokenQuotaRequest: SetOrgTokenQuotaRequest,
@@ -222,7 +235,7 @@ export function setOrgTokenQuotaRequestFromJSON(
 /** @internal */
 export const SetOrgTokenQuotaPeriod$inboundSchema: z.ZodNativeEnum<
   typeof SetOrgTokenQuotaPeriod
-> = z.nativeEnum(SetOrgTokenQuotaPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SetOrgTokenQuotaPeriod));
 /** @internal */
 export const SetOrgTokenQuotaPeriod$outboundSchema: z.ZodNativeEnum<
   typeof SetOrgTokenQuotaPeriod
@@ -233,16 +246,18 @@ export const SetOrgTokenQuotaResponseBody$inboundSchema: z.ZodType<
   SetOrgTokenQuotaResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  enabled: z.boolean(),
-  limit: z.nullable(z.number().int()),
-  period: z.nullable(SetOrgTokenQuotaPeriod$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    enabled: z.boolean(),
+    limit: z.nullable(z.number().int()),
+    period: z.nullable(SetOrgTokenQuotaPeriod$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type SetOrgTokenQuotaResponseBody$Outbound = {
   org_id: string;
@@ -256,16 +271,18 @@ export const SetOrgTokenQuotaResponseBody$outboundSchema: z.ZodType<
   SetOrgTokenQuotaResponseBody$Outbound,
   z.ZodTypeDef,
   SetOrgTokenQuotaResponseBody
-> = z.object({
-  orgId: z.string(),
-  enabled: z.boolean(),
-  limit: z.nullable(z.number().int()),
-  period: z.nullable(SetOrgTokenQuotaPeriod$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    enabled: z.boolean(),
+    limit: z.nullable(z.number().int()),
+    period: z.nullable(SetOrgTokenQuotaPeriod$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function setOrgTokenQuotaResponseBodyToJSON(
   setOrgTokenQuotaResponseBody: SetOrgTokenQuotaResponseBody,

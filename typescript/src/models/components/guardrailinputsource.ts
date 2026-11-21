@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -25,7 +26,7 @@ export type GuardrailInputSource = ClosedEnum<typeof GuardrailInputSource>;
 /** @internal */
 export const GuardrailInputSource$inboundSchema: z.ZodNativeEnum<
   typeof GuardrailInputSource
-> = z.nativeEnum(GuardrailInputSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GuardrailInputSource));
 /** @internal */
 export const GuardrailInputSource$outboundSchema: z.ZodNativeEnum<
   typeof GuardrailInputSource

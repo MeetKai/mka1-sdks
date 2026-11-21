@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const UserLocation$inboundSchema: z.ZodType<
   UserLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("approximate").default("approximate"),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("approximate").default("approximate"),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    region: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 /** @internal */
 export type UserLocation$Outbound = {
   type: "approximate";
@@ -41,13 +43,15 @@ export const UserLocation$outboundSchema: z.ZodType<
   UserLocation$Outbound,
   z.ZodTypeDef,
   UserLocation
-> = z.object({
-  type: z.literal("approximate").default("approximate" as const),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("approximate").default("approximate" as const),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    region: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function userLocationToJSON(userLocation: UserLocation): string {
   return JSON.stringify(UserLocation$outboundSchema.parse(userLocation));

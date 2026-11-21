@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateServiceAccountAPIKeyTooManyRequestsError struct {
 var _ error = &UpdateServiceAccountAPIKeyTooManyRequestsError{}
 
 func (e *UpdateServiceAccountAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateServiceAccountAPIKeyGoneError struct {
 var _ error = &UpdateServiceAccountAPIKeyGoneError{}
 
 func (e *UpdateServiceAccountAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateServiceAccountAPIKeyConflictError struct {
 var _ error = &UpdateServiceAccountAPIKeyConflictError{}
 
 func (e *UpdateServiceAccountAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateServiceAccountAPIKeyNotFoundError struct {
 var _ error = &UpdateServiceAccountAPIKeyNotFoundError{}
 
 func (e *UpdateServiceAccountAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateServiceAccountAPIKeyForbiddenError struct {
 var _ error = &UpdateServiceAccountAPIKeyForbiddenError{}
 
 func (e *UpdateServiceAccountAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateServiceAccountAPIKeyUnauthorizedError struct {
 var _ error = &UpdateServiceAccountAPIKeyUnauthorizedError{}
 
 func (e *UpdateServiceAccountAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateServiceAccountAPIKeyBadRequestError struct {
 var _ error = &UpdateServiceAccountAPIKeyBadRequestError{}
 
 func (e *UpdateServiceAccountAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

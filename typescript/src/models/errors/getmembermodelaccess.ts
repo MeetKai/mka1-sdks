@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -119,19 +120,20 @@ export const GetMemberModelAccessAuthModelAccessResponse404ResponseBody$inboundS
     GetMemberModelAccessAuthModelAccessResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetMemberModelAccessAuthModelAccessResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetMemberModelAccessAuthModelAccessResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type GetMemberModelAccessAuthModelAccessResponse404ResponseBody$Outbound =
@@ -145,11 +147,13 @@ export const GetMemberModelAccessAuthModelAccessResponse404ResponseBody$outbound
     GetMemberModelAccessAuthModelAccessResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     GetMemberModelAccessAuthModelAccessResponse404ResponseBody
-  > = z.instanceof(GetMemberModelAccessAuthModelAccessResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetMemberModelAccessAuthModelAccessResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetMemberModelAccessAuthModelAccessResponseResponseBody$inboundSchema:
@@ -157,19 +161,21 @@ export const GetMemberModelAccessAuthModelAccessResponseResponseBody$inboundSche
     GetMemberModelAccessAuthModelAccessResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetMemberModelAccessAuthModelAccessResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetMemberModelAccessAuthModelAccessResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetMemberModelAccessAuthModelAccessResponseResponseBody$Outbound = {
@@ -182,11 +188,13 @@ export const GetMemberModelAccessAuthModelAccessResponseResponseBody$outboundSch
     GetMemberModelAccessAuthModelAccessResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetMemberModelAccessAuthModelAccessResponseResponseBody
-  > = z.instanceof(GetMemberModelAccessAuthModelAccessResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetMemberModelAccessAuthModelAccessResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetMemberModelAccessAuthModelAccessResponseBody$inboundSchema:
@@ -194,19 +202,21 @@ export const GetMemberModelAccessAuthModelAccessResponseBody$inboundSchema:
     GetMemberModelAccessAuthModelAccessResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetMemberModelAccessAuthModelAccessResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetMemberModelAccessAuthModelAccessResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetMemberModelAccessAuthModelAccessResponseBody$Outbound = {
@@ -219,30 +229,34 @@ export const GetMemberModelAccessAuthModelAccessResponseBody$outboundSchema:
     GetMemberModelAccessAuthModelAccessResponseBody$Outbound,
     z.ZodTypeDef,
     GetMemberModelAccessAuthModelAccessResponseBody
-  > = z.instanceof(GetMemberModelAccessAuthModelAccessResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetMemberModelAccessAuthModelAccessResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetMemberModelAccessResponseBody$inboundSchema: z.ZodType<
   GetMemberModelAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetMemberModelAccessResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetMemberModelAccessResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetMemberModelAccessResponseBody$Outbound = {
@@ -254,8 +268,10 @@ export const GetMemberModelAccessResponseBody$outboundSchema: z.ZodType<
   GetMemberModelAccessResponseBody$Outbound,
   z.ZodTypeDef,
   GetMemberModelAccessResponseBody
-> = z.instanceof(GetMemberModelAccessResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetMemberModelAccessResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

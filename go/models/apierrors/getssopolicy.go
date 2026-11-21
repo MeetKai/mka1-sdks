@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetSsoPolicyTooManyRequestsError struct {
 var _ error = &GetSsoPolicyTooManyRequestsError{}
 
 func (e *GetSsoPolicyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetSsoPolicyGoneError struct {
 var _ error = &GetSsoPolicyGoneError{}
 
 func (e *GetSsoPolicyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetSsoPolicyConflictError struct {
 var _ error = &GetSsoPolicyConflictError{}
 
 func (e *GetSsoPolicyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetSsoPolicyNotFoundError struct {
 var _ error = &GetSsoPolicyNotFoundError{}
 
 func (e *GetSsoPolicyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetSsoPolicyForbiddenError struct {
 var _ error = &GetSsoPolicyForbiddenError{}
 
 func (e *GetSsoPolicyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetSsoPolicyUnauthorizedError struct {
 var _ error = &GetSsoPolicyUnauthorizedError{}
 
 func (e *GetSsoPolicyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetSsoPolicyBadRequestError struct {
 var _ error = &GetSsoPolicyBadRequestError{}
 
 func (e *GetSsoPolicyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

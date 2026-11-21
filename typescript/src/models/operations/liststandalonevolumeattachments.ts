@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,18 +29,20 @@ export const ListStandaloneVolumeAttachmentsRequest$inboundSchema: z.ZodType<
   ListStandaloneVolumeAttachmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  status: components.ComputeStandaloneVolumeAttachmentState$inboundSchema
-    .optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: components.ComputeStandaloneVolumeAttachmentState$inboundSchema
+      .optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListStandaloneVolumeAttachmentsRequest$Outbound = {
   id: string;
@@ -55,18 +57,20 @@ export const ListStandaloneVolumeAttachmentsRequest$outboundSchema: z.ZodType<
   ListStandaloneVolumeAttachmentsRequest$Outbound,
   z.ZodTypeDef,
   ListStandaloneVolumeAttachmentsRequest
-> = z.object({
-  id: z.string(),
-  status: components.ComputeStandaloneVolumeAttachmentState$outboundSchema
-    .optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: components.ComputeStandaloneVolumeAttachmentState$outboundSchema
+      .optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listStandaloneVolumeAttachmentsRequestToJSON(
   listStandaloneVolumeAttachmentsRequest:
@@ -94,10 +98,12 @@ export const ListStandaloneVolumeAttachmentsResponse$inboundSchema: z.ZodType<
   ListStandaloneVolumeAttachmentsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeStandaloneVolumeAttachmentList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeStandaloneVolumeAttachmentList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListStandaloneVolumeAttachmentsResponse$Outbound =
   | components.ComputeStandaloneVolumeAttachmentList$Outbound
@@ -108,10 +114,12 @@ export const ListStandaloneVolumeAttachmentsResponse$outboundSchema: z.ZodType<
   ListStandaloneVolumeAttachmentsResponse$Outbound,
   z.ZodTypeDef,
   ListStandaloneVolumeAttachmentsResponse
-> = z.union([
-  components.ComputeStandaloneVolumeAttachmentList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeStandaloneVolumeAttachmentList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listStandaloneVolumeAttachmentsResponseToJSON(
   listStandaloneVolumeAttachmentsResponse:

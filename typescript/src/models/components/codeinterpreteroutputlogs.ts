@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const CodeInterpreterOutputLogs$inboundSchema: z.ZodType<
   CodeInterpreterOutputLogs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("logs"),
-  logs: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("logs"),
+    logs: z.string(),
+  })
+);
 /** @internal */
 export type CodeInterpreterOutputLogs$Outbound = {
   type: "logs";
@@ -32,10 +34,12 @@ export const CodeInterpreterOutputLogs$outboundSchema: z.ZodType<
   CodeInterpreterOutputLogs$Outbound,
   z.ZodTypeDef,
   CodeInterpreterOutputLogs
-> = z.object({
-  type: z.literal("logs"),
-  logs: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("logs"),
+    logs: z.string(),
+  })
+);
 
 export function codeInterpreterOutputLogsToJSON(
   codeInterpreterOutputLogs: CodeInterpreterOutputLogs,

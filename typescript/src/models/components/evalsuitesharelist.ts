@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,10 +26,12 @@ export const EvalSuiteShareList$inboundSchema: z.ZodType<
   EvalSuiteShareList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(EvalSuiteShareObject$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(EvalSuiteShareObject$inboundSchema),
+  })
+);
 /** @internal */
 export type EvalSuiteShareList$Outbound = {
   object: "list";
@@ -41,10 +43,12 @@ export const EvalSuiteShareList$outboundSchema: z.ZodType<
   EvalSuiteShareList$Outbound,
   z.ZodTypeDef,
   EvalSuiteShareList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(EvalSuiteShareObject$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(EvalSuiteShareObject$outboundSchema),
+  })
+);
 
 export function evalSuiteShareListToJSON(
   evalSuiteShareList: EvalSuiteShareList,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const FeatureFlagOverride$inboundSchema: z.ZodType<
   FeatureFlagOverride,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  identity: z.string(),
-  value: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    identity: z.string(),
+    value: z.any().optional(),
+  })
+);
 /** @internal */
 export type FeatureFlagOverride$Outbound = {
   enabled: boolean;
@@ -38,11 +40,13 @@ export const FeatureFlagOverride$outboundSchema: z.ZodType<
   FeatureFlagOverride$Outbound,
   z.ZodTypeDef,
   FeatureFlagOverride
-> = z.object({
-  enabled: z.boolean(),
-  identity: z.string(),
-  value: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    identity: z.string(),
+    value: z.any().optional(),
+  })
+);
 
 export function featureFlagOverrideToJSON(
   featureFlagOverride: FeatureFlagOverride,

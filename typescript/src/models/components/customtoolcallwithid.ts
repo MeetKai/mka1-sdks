@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,20 +35,22 @@ export const CustomToolCallWithId$inboundSchema: z.ZodType<
   CustomToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom_tool_call"),
-  call_id: z.string(),
-  input: z.string(),
-  name: z.string(),
-  id: z.string(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom_tool_call"),
+    call_id: z.string(),
+    input: z.string(),
+    name: z.string(),
+    id: z.string(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type CustomToolCallWithId$Outbound = {
   type: "custom_tool_call";
@@ -65,20 +67,22 @@ export const CustomToolCallWithId$outboundSchema: z.ZodType<
   CustomToolCallWithId$Outbound,
   z.ZodTypeDef,
   CustomToolCallWithId
-> = z.object({
-  type: z.literal("custom_tool_call"),
-  callId: z.string(),
-  input: z.string(),
-  name: z.string(),
-  id: z.string(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom_tool_call"),
+    callId: z.string(),
+    input: z.string(),
+    name: z.string(),
+    id: z.string(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function customToolCallWithIdToJSON(
   customToolCallWithId: CustomToolCallWithId,

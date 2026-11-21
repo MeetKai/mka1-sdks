@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,11 +24,13 @@ export const CatalogListResponse$inboundSchema: z.ZodType<
   CatalogListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  currency: z.nullable(z.string()),
-  data: z.array(CatalogEntry$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    currency: z.nullable(z.string()),
+    data: z.array(CatalogEntry$inboundSchema),
+  })
+);
 /** @internal */
 export type CatalogListResponse$Outbound = {
   object: "list";
@@ -41,11 +43,13 @@ export const CatalogListResponse$outboundSchema: z.ZodType<
   CatalogListResponse$Outbound,
   z.ZodTypeDef,
   CatalogListResponse
-> = z.object({
-  object: z.literal("list"),
-  currency: z.nullable(z.string()),
-  data: z.array(CatalogEntry$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    currency: z.nullable(z.string()),
+    data: z.array(CatalogEntry$outboundSchema),
+  })
+);
 
 export function catalogListResponseToJSON(
   catalogListResponse: CatalogListResponse,

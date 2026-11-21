@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,16 +23,18 @@ export const CreateSandboxConnectorAuthorizationIntentRequest$inboundSchema:
     CreateSandboxConnectorAuthorizationIntentRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    "X-On-Behalf-Of": z.string().optional(),
-    CreateConnectorIntentRequest:
-      components.CreateConnectorIntentRequest$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "X-On-Behalf-Of": "xOnBehalfOf",
-      "CreateConnectorIntentRequest": "createConnectorIntentRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      "X-On-Behalf-Of": z.string().optional(),
+      CreateConnectorIntentRequest:
+        components.CreateConnectorIntentRequest$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "X-On-Behalf-Of": "xOnBehalfOf",
+        "CreateConnectorIntentRequest": "createConnectorIntentRequest",
+      });
+    })
+  );
 /** @internal */
 export type CreateSandboxConnectorAuthorizationIntentRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -46,16 +48,18 @@ export const CreateSandboxConnectorAuthorizationIntentRequest$outboundSchema:
     CreateSandboxConnectorAuthorizationIntentRequest$Outbound,
     z.ZodTypeDef,
     CreateSandboxConnectorAuthorizationIntentRequest
-  > = z.object({
-    xOnBehalfOf: z.string().optional(),
-    createConnectorIntentRequest:
-      components.CreateConnectorIntentRequest$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      xOnBehalfOf: "X-On-Behalf-Of",
-      createConnectorIntentRequest: "CreateConnectorIntentRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      xOnBehalfOf: z.string().optional(),
+      createConnectorIntentRequest:
+        components.CreateConnectorIntentRequest$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        xOnBehalfOf: "X-On-Behalf-Of",
+        createConnectorIntentRequest: "CreateConnectorIntentRequest",
+      });
+    })
+  );
 
 export function createSandboxConnectorAuthorizationIntentRequestToJSON(
   createSandboxConnectorAuthorizationIntentRequest:

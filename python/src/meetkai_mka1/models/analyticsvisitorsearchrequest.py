@@ -8,7 +8,10 @@ from meetkai_mka1.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from meetkai_mka1.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import model_serializer
 from typing import List, Literal, Optional, Union
@@ -60,14 +63,21 @@ class AnalyticsVisitorSearchRequestFilter(BaseModel):
     r"""Value to compare. The number 1 differs from the string '1'. Omit for exists and not_exists."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["value"])
         nullable_fields = set(["value"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -120,13 +130,20 @@ class AnalyticsVisitorSearchRequest(BaseModel):
     r"""Opaque cursor of at most 4096 characters, copied from next_cursor of the previous page. Omit for the first page, which takes the snapshot the whole sequence reads at. Cursors belong to one list and one sort order; a cursor that does not decode, or one from another list, returns 400. A cursor is a position, not a capability: one that decodes only moves the caller within the same project."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["event_name", "filters", "limit", "cursor"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

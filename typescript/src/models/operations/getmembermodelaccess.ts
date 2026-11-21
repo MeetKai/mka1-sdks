@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const GetMemberModelAccessSecurity$inboundSchema: z.ZodType<
   GetMemberModelAccessSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type GetMemberModelAccessSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -45,10 +47,12 @@ export const GetMemberModelAccessSecurity$outboundSchema: z.ZodType<
   GetMemberModelAccessSecurity$Outbound,
   z.ZodTypeDef,
   GetMemberModelAccessSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function getMemberModelAccessSecurityToJSON(
   getMemberModelAccessSecurity: GetMemberModelAccessSecurity,
@@ -74,10 +78,12 @@ export const GetMemberModelAccessRequest$inboundSchema: z.ZodType<
   GetMemberModelAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+  })
+);
 /** @internal */
 export type GetMemberModelAccessRequest$Outbound = {
   orgId: string;
@@ -89,10 +95,12 @@ export const GetMemberModelAccessRequest$outboundSchema: z.ZodType<
   GetMemberModelAccessRequest$Outbound,
   z.ZodTypeDef,
   GetMemberModelAccessRequest
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+  })
+);
 
 export function getMemberModelAccessRequestToJSON(
   getMemberModelAccessRequest: GetMemberModelAccessRequest,
@@ -118,13 +126,15 @@ export const GetMemberModelAccessResponseBody$inboundSchema: z.ZodType<
   GetMemberModelAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_ids: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    "model_ids": "modelIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_ids: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_ids": "modelIds",
+    });
+  })
+);
 /** @internal */
 export type GetMemberModelAccessResponseBody$Outbound = {
   model_ids: Array<string> | null;
@@ -135,13 +145,15 @@ export const GetMemberModelAccessResponseBody$outboundSchema: z.ZodType<
   GetMemberModelAccessResponseBody$Outbound,
   z.ZodTypeDef,
   GetMemberModelAccessResponseBody
-> = z.object({
-  modelIds: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    modelIds: "model_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelIds: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      modelIds: "model_ids",
+    });
+  })
+);
 
 export function getMemberModelAccessResponseBodyToJSON(
   getMemberModelAccessResponseBody: GetMemberModelAccessResponseBody,

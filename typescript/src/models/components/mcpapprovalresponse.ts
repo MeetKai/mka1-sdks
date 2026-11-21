@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,17 +24,19 @@ export const MCPApprovalResponse$inboundSchema: z.ZodType<
   MCPApprovalResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_approval_response"),
-  approval_request_id: z.string(),
-  approve: z.boolean(),
-  id: z.string().optional(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_response"),
+    approval_request_id: z.string(),
+    approve: z.boolean(),
+    id: z.string().optional(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+    });
+  })
+);
 /** @internal */
 export type MCPApprovalResponse$Outbound = {
   type: "mcp_approval_response";
@@ -49,17 +51,19 @@ export const MCPApprovalResponse$outboundSchema: z.ZodType<
   MCPApprovalResponse$Outbound,
   z.ZodTypeDef,
   MCPApprovalResponse
-> = z.object({
-  type: z.literal("mcp_approval_response"),
-  approvalRequestId: z.string(),
-  approve: z.boolean(),
-  id: z.string().optional(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_response"),
+    approvalRequestId: z.string(),
+    approve: z.boolean(),
+    id: z.string().optional(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+    });
+  })
+);
 
 export function mcpApprovalResponseToJSON(
   mcpApprovalResponse: MCPApprovalResponse,

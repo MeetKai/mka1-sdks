@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,10 +65,12 @@ export const UpdateOrgMemberSecurity$inboundSchema: z.ZodType<
   UpdateOrgMemberSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateOrgMemberSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -80,10 +82,12 @@ export const UpdateOrgMemberSecurity$outboundSchema: z.ZodType<
   UpdateOrgMemberSecurity$Outbound,
   z.ZodTypeDef,
   UpdateOrgMemberSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function updateOrgMemberSecurityToJSON(
   updateOrgMemberSecurity: UpdateOrgMemberSecurity,
@@ -105,7 +109,7 @@ export function updateOrgMemberSecurityFromJSON(
 /** @internal */
 export const UpdateOrgMemberRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdateOrgMemberRole
-> = z.nativeEnum(UpdateOrgMemberRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateOrgMemberRole));
 /** @internal */
 export const UpdateOrgMemberRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdateOrgMemberRole
@@ -116,9 +120,11 @@ export const UpdateOrgMemberRequestBody$inboundSchema: z.ZodType<
   UpdateOrgMemberRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: UpdateOrgMemberRole$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: UpdateOrgMemberRole$inboundSchema,
+  })
+);
 /** @internal */
 export type UpdateOrgMemberRequestBody$Outbound = {
   role: string;
@@ -129,9 +135,11 @@ export const UpdateOrgMemberRequestBody$outboundSchema: z.ZodType<
   UpdateOrgMemberRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgMemberRequestBody
-> = z.object({
-  role: UpdateOrgMemberRole$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: UpdateOrgMemberRole$outboundSchema,
+  })
+);
 
 export function updateOrgMemberRequestBodyToJSON(
   updateOrgMemberRequestBody: UpdateOrgMemberRequestBody,
@@ -155,17 +163,19 @@ export const UpdateOrgMemberRequest$inboundSchema: z.ZodType<
   UpdateOrgMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateOrgMemberRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateOrgMemberRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrgMemberRequest$Outbound = {
   orgId: string;
@@ -179,17 +189,19 @@ export const UpdateOrgMemberRequest$outboundSchema: z.ZodType<
   UpdateOrgMemberRequest$Outbound,
   z.ZodTypeDef,
   UpdateOrgMemberRequest
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateOrgMemberRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateOrgMemberRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateOrgMemberRequestToJSON(
   updateOrgMemberRequest: UpdateOrgMemberRequest,
@@ -213,13 +225,15 @@ export const UpdateOrgMemberUser$inboundSchema: z.ZodType<
   UpdateOrgMemberUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.string(),
-  name: z.string(),
-  image: z.nullable(z.string()),
-  userType: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.string(),
+    name: z.string(),
+    image: z.nullable(z.string()),
+    userType: z.string(),
+  })
+);
 /** @internal */
 export type UpdateOrgMemberUser$Outbound = {
   id: string;
@@ -234,13 +248,15 @@ export const UpdateOrgMemberUser$outboundSchema: z.ZodType<
   UpdateOrgMemberUser$Outbound,
   z.ZodTypeDef,
   UpdateOrgMemberUser
-> = z.object({
-  id: z.string(),
-  email: z.string(),
-  name: z.string(),
-  image: z.nullable(z.string()),
-  userType: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.string(),
+    name: z.string(),
+    image: z.nullable(z.string()),
+    userType: z.string(),
+  })
+);
 
 export function updateOrgMemberUserToJSON(
   updateOrgMemberUser: UpdateOrgMemberUser,
@@ -260,17 +276,19 @@ export function updateOrgMemberUserFromJSON(
 }
 
 /** @internal */
-export const Member$inboundSchema: z.ZodType<Member, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    organizationId: z.string(),
-    userId: z.string(),
-    role: z.string(),
-    createdAt: z.string(),
-    scimManaged: z.boolean(),
-    scimActive: z.nullable(z.boolean()),
-    user: z.lazy(() => UpdateOrgMemberUser$inboundSchema),
-  });
+export const Member$inboundSchema: z.ZodType<Member, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      organizationId: z.string(),
+      userId: z.string(),
+      role: z.string(),
+      createdAt: z.string(),
+      scimManaged: z.boolean(),
+      scimActive: z.nullable(z.boolean()),
+      user: z.lazy(() => UpdateOrgMemberUser$inboundSchema),
+    })
+  );
 /** @internal */
 export type Member$Outbound = {
   id: string;
@@ -288,16 +306,18 @@ export const Member$outboundSchema: z.ZodType<
   Member$Outbound,
   z.ZodTypeDef,
   Member
-> = z.object({
-  id: z.string(),
-  organizationId: z.string(),
-  userId: z.string(),
-  role: z.string(),
-  createdAt: z.string(),
-  scimManaged: z.boolean(),
-  scimActive: z.nullable(z.boolean()),
-  user: z.lazy(() => UpdateOrgMemberUser$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    organizationId: z.string(),
+    userId: z.string(),
+    role: z.string(),
+    createdAt: z.string(),
+    scimManaged: z.boolean(),
+    scimActive: z.nullable(z.boolean()),
+    user: z.lazy(() => UpdateOrgMemberUser$outboundSchema),
+  })
+);
 
 export function memberToJSON(member: Member): string {
   return JSON.stringify(Member$outboundSchema.parse(member));
@@ -317,9 +337,11 @@ export const UpdateOrgMemberResponseBody$inboundSchema: z.ZodType<
   UpdateOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  member: z.lazy(() => Member$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    member: z.lazy(() => Member$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateOrgMemberResponseBody$Outbound = {
   member: Member$Outbound;
@@ -330,9 +352,11 @@ export const UpdateOrgMemberResponseBody$outboundSchema: z.ZodType<
   UpdateOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgMemberResponseBody
-> = z.object({
-  member: z.lazy(() => Member$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    member: z.lazy(() => Member$outboundSchema),
+  })
+);
 
 export function updateOrgMemberResponseBodyToJSON(
   updateOrgMemberResponseBody: UpdateOrgMemberResponseBody,

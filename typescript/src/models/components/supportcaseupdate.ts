@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,19 +40,21 @@ export type SupportCaseUpdate = {
 /** @internal */
 export const SupportCaseUpdateKind$inboundSchema: z.ZodNativeEnum<
   typeof SupportCaseUpdateKind
-> = z.nativeEnum(SupportCaseUpdateKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SupportCaseUpdateKind));
 /** @internal */
 export const SupportCaseUpdateKind$outboundSchema: z.ZodNativeEnum<
   typeof SupportCaseUpdateKind
 > = SupportCaseUpdateKind$inboundSchema;
 
 /** @internal */
-export const Author$inboundSchema: z.ZodType<Author, z.ZodTypeDef, unknown> = z
-  .object({
-    kind: SupportCaseUpdateKind$inboundSchema,
-    id: z.nullable(z.string()),
-    name: z.nullable(z.string()),
-  });
+export const Author$inboundSchema: z.ZodType<Author, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      kind: SupportCaseUpdateKind$inboundSchema,
+      id: z.nullable(z.string()),
+      name: z.nullable(z.string()),
+    })
+  );
 /** @internal */
 export type Author$Outbound = {
   kind: string;
@@ -65,11 +67,13 @@ export const Author$outboundSchema: z.ZodType<
   Author$Outbound,
   z.ZodTypeDef,
   Author
-> = z.object({
-  kind: SupportCaseUpdateKind$outboundSchema,
-  id: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: SupportCaseUpdateKind$outboundSchema,
+    id: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function authorToJSON(author: Author): string {
   return JSON.stringify(Author$outboundSchema.parse(author));
@@ -89,17 +93,21 @@ export const SupportCaseUpdate$inboundSchema: z.ZodType<
   SupportCaseUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  author: z.lazy(() => Author$inboundSchema),
-  body: z.nullable(z.string()),
-  status: z.nullable(SupportCaseStatus$inboundSchema),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    author: z.lazy(() => Author$inboundSchema),
+    body: z.nullable(z.string()),
+    status: z.nullable(SupportCaseStatus$inboundSchema),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type SupportCaseUpdate$Outbound = {
   id: string;
@@ -114,17 +122,19 @@ export const SupportCaseUpdate$outboundSchema: z.ZodType<
   SupportCaseUpdate$Outbound,
   z.ZodTypeDef,
   SupportCaseUpdate
-> = z.object({
-  id: z.string(),
-  author: z.lazy(() => Author$outboundSchema),
-  body: z.nullable(z.string()),
-  status: z.nullable(SupportCaseStatus$outboundSchema),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    author: z.lazy(() => Author$outboundSchema),
+    body: z.nullable(z.string()),
+    status: z.nullable(SupportCaseStatus$outboundSchema),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function supportCaseUpdateToJSON(
   supportCaseUpdate: SupportCaseUpdate,

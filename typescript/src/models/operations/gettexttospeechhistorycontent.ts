@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,15 +25,17 @@ export const GetTextToSpeechHistoryContentRequest$inboundSchema: z.ZodType<
   GetTextToSpeechHistoryContentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tts_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tts_id": "ttsId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tts_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tts_id": "ttsId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetTextToSpeechHistoryContentRequest$Outbound = {
   tts_id: string;
@@ -45,15 +47,17 @@ export const GetTextToSpeechHistoryContentRequest$outboundSchema: z.ZodType<
   GetTextToSpeechHistoryContentRequest$Outbound,
   z.ZodTypeDef,
   GetTextToSpeechHistoryContentRequest
-> = z.object({
-  ttsId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ttsId: "tts_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ttsId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ttsId: "tts_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getTextToSpeechHistoryContentRequestToJSON(
   getTextToSpeechHistoryContentRequest: GetTextToSpeechHistoryContentRequest,
@@ -80,10 +84,12 @@ export const GetTextToSpeechHistoryContentResponse$inboundSchema: z.ZodType<
   GetTextToSpeechHistoryContentResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+  ])
+);
 /** @internal */
 export type GetTextToSpeechHistoryContentResponse$Outbound =
   | ReadableStream<Uint8Array>
@@ -94,10 +100,12 @@ export const GetTextToSpeechHistoryContentResponse$outboundSchema: z.ZodType<
   GetTextToSpeechHistoryContentResponse$Outbound,
   z.ZodTypeDef,
   GetTextToSpeechHistoryContentResponse
-> = z.union([
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+  ])
+);
 
 export function getTextToSpeechHistoryContentResponseToJSON(
   getTextToSpeechHistoryContentResponse: GetTextToSpeechHistoryContentResponse,

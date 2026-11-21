@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,33 +40,35 @@ export const MisuseFindingExportRow$inboundSchema: z.ZodType<
   MisuseFindingExportRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  findingId: z.any().optional(),
-  dedupeKey: z.any().optional(),
-  ruleId: z.any().optional(),
-  ruleVersion: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  userId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  apiKeyId: z.any().optional(),
-  subjectType: z.any().optional(),
-  subjectId: z.any().optional(),
-  windowStart: z.any().optional(),
-  windowEnd: z.any().optional(),
-  observedValue: z.any().optional(),
-  threshold: z.any().optional(),
-  severity: z.any().optional(),
-  status: z.any().optional(),
-  evidence: z.any().optional(),
-  acknowledgedAt: z.any().optional(),
-  acknowledgedBy: z.any().optional(),
-  resolvedAt: z.any().optional(),
-  resolvedBy: z.any().optional(),
-  resolutionNote: z.any().optional(),
-  createdAt: z.any().optional(),
-  updatedAt: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.any().optional(),
+    dedupeKey: z.any().optional(),
+    ruleId: z.any().optional(),
+    ruleVersion: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    userId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    apiKeyId: z.any().optional(),
+    subjectType: z.any().optional(),
+    subjectId: z.any().optional(),
+    windowStart: z.any().optional(),
+    windowEnd: z.any().optional(),
+    observedValue: z.any().optional(),
+    threshold: z.any().optional(),
+    severity: z.any().optional(),
+    status: z.any().optional(),
+    evidence: z.any().optional(),
+    acknowledgedAt: z.any().optional(),
+    acknowledgedBy: z.any().optional(),
+    resolvedAt: z.any().optional(),
+    resolvedBy: z.any().optional(),
+    resolutionNote: z.any().optional(),
+    createdAt: z.any().optional(),
+    updatedAt: z.any().optional(),
+  })
+);
 /** @internal */
 export type MisuseFindingExportRow$Outbound = {
   findingId?: any | undefined;
@@ -101,33 +103,35 @@ export const MisuseFindingExportRow$outboundSchema: z.ZodType<
   MisuseFindingExportRow$Outbound,
   z.ZodTypeDef,
   MisuseFindingExportRow
-> = z.object({
-  findingId: z.any().optional(),
-  dedupeKey: z.any().optional(),
-  ruleId: z.any().optional(),
-  ruleVersion: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  userId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  apiKeyId: z.any().optional(),
-  subjectType: z.any().optional(),
-  subjectId: z.any().optional(),
-  windowStart: z.any().optional(),
-  windowEnd: z.any().optional(),
-  observedValue: z.any().optional(),
-  threshold: z.any().optional(),
-  severity: z.any().optional(),
-  status: z.any().optional(),
-  evidence: z.any().optional(),
-  acknowledgedAt: z.any().optional(),
-  acknowledgedBy: z.any().optional(),
-  resolvedAt: z.any().optional(),
-  resolvedBy: z.any().optional(),
-  resolutionNote: z.any().optional(),
-  createdAt: z.any().optional(),
-  updatedAt: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    findingId: z.any().optional(),
+    dedupeKey: z.any().optional(),
+    ruleId: z.any().optional(),
+    ruleVersion: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    userId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    apiKeyId: z.any().optional(),
+    subjectType: z.any().optional(),
+    subjectId: z.any().optional(),
+    windowStart: z.any().optional(),
+    windowEnd: z.any().optional(),
+    observedValue: z.any().optional(),
+    threshold: z.any().optional(),
+    severity: z.any().optional(),
+    status: z.any().optional(),
+    evidence: z.any().optional(),
+    acknowledgedAt: z.any().optional(),
+    acknowledgedBy: z.any().optional(),
+    resolvedAt: z.any().optional(),
+    resolvedBy: z.any().optional(),
+    resolutionNote: z.any().optional(),
+    createdAt: z.any().optional(),
+    updatedAt: z.any().optional(),
+  })
+);
 
 export function misuseFindingExportRowToJSON(
   misuseFindingExportRow: MisuseFindingExportRow,

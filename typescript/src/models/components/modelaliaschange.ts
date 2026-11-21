@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,8 +49,8 @@ export type ModelAliasChange = {
 };
 
 /** @internal */
-export const Reason$inboundSchema: z.ZodNativeEnum<typeof Reason> = z
-  .nativeEnum(Reason);
+export const Reason$inboundSchema: z.ZodNativeEnum<typeof Reason> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Reason));
 /** @internal */
 export const Reason$outboundSchema: z.ZodNativeEnum<typeof Reason> =
   Reason$inboundSchema;
@@ -60,28 +60,32 @@ export const ModelAliasChange$inboundSchema: z.ZodType<
   ModelAliasChange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("model.alias.change"),
-  id: z.string(),
-  alias_name: z.string(),
-  from_model_id: z.nullable(z.string()),
-  to_model_id: z.nullable(z.string()),
-  reason: Reason$inboundSchema,
-  run_id: z.nullable(z.string()),
-  suite_version: z.nullable(z.number().int()),
-  standings: z.array(ModelAliasStanding$inboundSchema),
-  actor: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "alias_name": "aliasName",
-    "from_model_id": "fromModelId",
-    "to_model_id": "toModelId",
-    "run_id": "runId",
-    "suite_version": "suiteVersion",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("model.alias.change"),
+    id: z.string(),
+    alias_name: z.string(),
+    from_model_id: z.nullable(z.string()),
+    to_model_id: z.nullable(z.string()),
+    reason: Reason$inboundSchema,
+    run_id: z.nullable(z.string()),
+    suite_version: z.nullable(z.number().int()),
+    standings: z.array(ModelAliasStanding$inboundSchema),
+    actor: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "alias_name": "aliasName",
+      "from_model_id": "fromModelId",
+      "to_model_id": "toModelId",
+      "run_id": "runId",
+      "suite_version": "suiteVersion",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type ModelAliasChange$Outbound = {
   object: "model.alias.change";
@@ -102,28 +106,30 @@ export const ModelAliasChange$outboundSchema: z.ZodType<
   ModelAliasChange$Outbound,
   z.ZodTypeDef,
   ModelAliasChange
-> = z.object({
-  object: z.literal("model.alias.change"),
-  id: z.string(),
-  aliasName: z.string(),
-  fromModelId: z.nullable(z.string()),
-  toModelId: z.nullable(z.string()),
-  reason: Reason$outboundSchema,
-  runId: z.nullable(z.string()),
-  suiteVersion: z.nullable(z.number().int()),
-  standings: z.array(ModelAliasStanding$outboundSchema),
-  actor: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    aliasName: "alias_name",
-    fromModelId: "from_model_id",
-    toModelId: "to_model_id",
-    runId: "run_id",
-    suiteVersion: "suite_version",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("model.alias.change"),
+    id: z.string(),
+    aliasName: z.string(),
+    fromModelId: z.nullable(z.string()),
+    toModelId: z.nullable(z.string()),
+    reason: Reason$outboundSchema,
+    runId: z.nullable(z.string()),
+    suiteVersion: z.nullable(z.number().int()),
+    standings: z.array(ModelAliasStanding$outboundSchema),
+    actor: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      aliasName: "alias_name",
+      fromModelId: "from_model_id",
+      toModelId: "to_model_id",
+      runId: "run_id",
+      suiteVersion: "suite_version",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function modelAliasChangeToJSON(
   modelAliasChange: ModelAliasChange,

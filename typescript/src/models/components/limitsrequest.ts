@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,17 +27,19 @@ export const LimitsRequest$inboundSchema: z.ZodType<
   LimitsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_runtime_hours: z.nullable(z.number()).optional(),
-  max_cost: z.nullable(z.number()).optional(),
-  max_llm_calls: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_runtime_hours": "maxRuntimeHours",
-    "max_cost": "maxCost",
-    "max_llm_calls": "maxLlmCalls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_runtime_hours: z.nullable(z.number()).optional(),
+    max_cost: z.nullable(z.number()).optional(),
+    max_llm_calls: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_runtime_hours": "maxRuntimeHours",
+      "max_cost": "maxCost",
+      "max_llm_calls": "maxLlmCalls",
+    });
+  })
+);
 /** @internal */
 export type LimitsRequest$Outbound = {
   max_runtime_hours?: number | null | undefined;
@@ -50,17 +52,19 @@ export const LimitsRequest$outboundSchema: z.ZodType<
   LimitsRequest$Outbound,
   z.ZodTypeDef,
   LimitsRequest
-> = z.object({
-  maxRuntimeHours: z.nullable(z.number()).optional(),
-  maxCost: z.nullable(z.number()).optional(),
-  maxLlmCalls: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxRuntimeHours: "max_runtime_hours",
-    maxCost: "max_cost",
-    maxLlmCalls: "max_llm_calls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxRuntimeHours: z.nullable(z.number()).optional(),
+    maxCost: z.nullable(z.number()).optional(),
+    maxLlmCalls: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxRuntimeHours: "max_runtime_hours",
+      maxCost: "max_cost",
+      maxLlmCalls: "max_llm_calls",
+    });
+  })
+);
 
 export function limitsRequestToJSON(limitsRequest: LimitsRequest): string {
   return JSON.stringify(LimitsRequest$outboundSchema.parse(limitsRequest));

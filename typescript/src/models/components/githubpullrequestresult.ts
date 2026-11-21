@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,26 +27,28 @@ export const GitHubPullRequestResult$inboundSchema: z.ZodType<
   GitHubPullRequestResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  number: z.number().int(),
-  url: z.string(),
-  state: z.string(),
-  draft: z.boolean(),
-  head_branch: z.string(),
-  base_branch: z.nullable(z.string()),
-  created: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "repository_id": "repositoryId",
-    "head_branch": "headBranch",
-    "base_branch": "baseBranch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    number: z.number().int(),
+    url: z.string(),
+    state: z.string(),
+    draft: z.boolean(),
+    head_branch: z.string(),
+    base_branch: z.nullable(z.string()),
+    created: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "repository_id": "repositoryId",
+      "head_branch": "headBranch",
+      "base_branch": "baseBranch",
+    });
+  })
+);
 /** @internal */
 export type GitHubPullRequestResult$Outbound = {
   session_id: string;
@@ -67,26 +69,28 @@ export const GitHubPullRequestResult$outboundSchema: z.ZodType<
   GitHubPullRequestResult$Outbound,
   z.ZodTypeDef,
   GitHubPullRequestResult
-> = z.object({
-  sessionId: z.string(),
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  number: z.number().int(),
-  url: z.string(),
-  state: z.string(),
-  draft: z.boolean(),
-  headBranch: z.string(),
-  baseBranch: z.nullable(z.string()),
-  created: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    repositoryId: "repository_id",
-    headBranch: "head_branch",
-    baseBranch: "base_branch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    number: z.number().int(),
+    url: z.string(),
+    state: z.string(),
+    draft: z.boolean(),
+    headBranch: z.string(),
+    baseBranch: z.nullable(z.string()),
+    created: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      repositoryId: "repository_id",
+      headBranch: "head_branch",
+      baseBranch: "base_branch",
+    });
+  })
+);
 
 export function gitHubPullRequestResultToJSON(
   gitHubPullRequestResult: GitHubPullRequestResult,

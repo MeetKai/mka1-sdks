@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,15 +26,17 @@ export const CreateComputeSecretRequest$inboundSchema: z.ZodType<
   CreateComputeSecretRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeSecretCreate: components.ComputeSecretCreate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeSecretCreate": "computeSecretCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeSecretCreate: components.ComputeSecretCreate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeSecretCreate": "computeSecretCreate",
+    });
+  })
+);
 /** @internal */
 export type CreateComputeSecretRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -46,15 +48,17 @@ export const CreateComputeSecretRequest$outboundSchema: z.ZodType<
   CreateComputeSecretRequest$Outbound,
   z.ZodTypeDef,
   CreateComputeSecretRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  computeSecretCreate: components.ComputeSecretCreate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeSecretCreate: "ComputeSecretCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    computeSecretCreate: components.ComputeSecretCreate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeSecretCreate: "ComputeSecretCreate",
+    });
+  })
+);
 
 export function createComputeSecretRequestToJSON(
   createComputeSecretRequest: CreateComputeSecretRequest,
@@ -78,10 +82,12 @@ export const CreateComputeSecretResponse$inboundSchema: z.ZodType<
   CreateComputeSecretResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeSecret$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeSecret$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateComputeSecretResponse$Outbound =
   | components.ComputeSecret$Outbound
@@ -92,10 +98,12 @@ export const CreateComputeSecretResponse$outboundSchema: z.ZodType<
   CreateComputeSecretResponse$Outbound,
   z.ZodTypeDef,
   CreateComputeSecretResponse
-> = z.union([
-  components.ComputeSecret$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeSecret$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function createComputeSecretResponseToJSON(
   createComputeSecretResponse: CreateComputeSecretResponse,

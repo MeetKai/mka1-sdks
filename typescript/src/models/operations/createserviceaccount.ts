@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,10 +42,12 @@ export const CreateServiceAccountRequestBody$inboundSchema: z.ZodType<
   CreateServiceAccountRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  admin: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    admin: z.boolean().default(false),
+  })
+);
 /** @internal */
 export type CreateServiceAccountRequestBody$Outbound = {
   name: string;
@@ -57,10 +59,12 @@ export const CreateServiceAccountRequestBody$outboundSchema: z.ZodType<
   CreateServiceAccountRequestBody$Outbound,
   z.ZodTypeDef,
   CreateServiceAccountRequestBody
-> = z.object({
-  name: z.string(),
-  admin: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    admin: z.boolean().default(false),
+  })
+);
 
 export function createServiceAccountRequestBodyToJSON(
   createServiceAccountRequestBody: CreateServiceAccountRequestBody,
@@ -86,17 +90,19 @@ export const CreateServiceAccountRequest$inboundSchema: z.ZodType<
   CreateServiceAccountRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreateServiceAccountRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreateServiceAccountRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateServiceAccountRequest$Outbound = {
   orgId: string;
@@ -109,17 +115,19 @@ export const CreateServiceAccountRequest$outboundSchema: z.ZodType<
   CreateServiceAccountRequest$Outbound,
   z.ZodTypeDef,
   CreateServiceAccountRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreateServiceAccountRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreateServiceAccountRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createServiceAccountRequestToJSON(
   createServiceAccountRequest: CreateServiceAccountRequest,
@@ -145,13 +153,15 @@ export const ServiceAccount$inboundSchema: z.ZodType<
   ServiceAccount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type ServiceAccount$Outbound = {
   id: string;
@@ -166,13 +176,15 @@ export const ServiceAccount$outboundSchema: z.ZodType<
   ServiceAccount$Outbound,
   z.ZodTypeDef,
   ServiceAccount
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 
 export function serviceAccountToJSON(serviceAccount: ServiceAccount): string {
   return JSON.stringify(ServiceAccount$outboundSchema.parse(serviceAccount));
@@ -192,9 +204,11 @@ export const CreateServiceAccountResponseBody$inboundSchema: z.ZodType<
   CreateServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  serviceAccount: z.lazy(() => ServiceAccount$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() => ServiceAccount$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateServiceAccountResponseBody$Outbound = {
   serviceAccount: ServiceAccount$Outbound;
@@ -205,9 +219,11 @@ export const CreateServiceAccountResponseBody$outboundSchema: z.ZodType<
   CreateServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   CreateServiceAccountResponseBody
-> = z.object({
-  serviceAccount: z.lazy(() => ServiceAccount$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() => ServiceAccount$outboundSchema),
+  })
+);
 
 export function createServiceAccountResponseBodyToJSON(
   createServiceAccountResponseBody: CreateServiceAccountResponseBody,

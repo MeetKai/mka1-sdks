@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ComputeJobList$inboundSchema: z.ZodType<
   ComputeJobList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  next_cursor: z.nullable(z.string()),
-  total: z.number().int(),
-  data: z.array(ComputeJob$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    next_cursor: z.nullable(z.string()),
+    total: z.number().int(),
+    data: z.array(ComputeJob$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type ComputeJobList$Outbound = {
   next_cursor: string | null;
@@ -46,15 +48,17 @@ export const ComputeJobList$outboundSchema: z.ZodType<
   ComputeJobList$Outbound,
   z.ZodTypeDef,
   ComputeJobList
-> = z.object({
-  nextCursor: z.nullable(z.string()),
-  total: z.number().int(),
-  data: z.array(ComputeJob$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    nextCursor: z.nullable(z.string()),
+    total: z.number().int(),
+    data: z.array(ComputeJob$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function computeJobListToJSON(computeJobList: ComputeJobList): string {
   return JSON.stringify(ComputeJobList$outboundSchema.parse(computeJobList));

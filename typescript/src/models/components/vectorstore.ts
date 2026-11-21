@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -140,7 +140,7 @@ export type VectorStore = {
 /** @internal */
 export const VectorStoreRetrievalMode$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreRetrievalMode
-> = z.nativeEnum(VectorStoreRetrievalMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VectorStoreRetrievalMode));
 /** @internal */
 export const VectorStoreRetrievalMode$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreRetrievalMode
@@ -149,7 +149,7 @@ export const VectorStoreRetrievalMode$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const VectorStoreStatus$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreStatus
-> = z.nativeEnum(VectorStoreStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VectorStoreStatus));
 /** @internal */
 export const VectorStoreStatus$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreStatus
@@ -160,10 +160,12 @@ export const VectorStoreExpiresAfter$inboundSchema: z.ZodType<
   VectorStoreExpiresAfter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 /** @internal */
 export type VectorStoreExpiresAfter$Outbound = {
   anchor: "last_active_at";
@@ -175,10 +177,12 @@ export const VectorStoreExpiresAfter$outboundSchema: z.ZodType<
   VectorStoreExpiresAfter$Outbound,
   z.ZodTypeDef,
   VectorStoreExpiresAfter
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 
 export function vectorStoreExpiresAfterToJSON(
   vectorStoreExpiresAfter: VectorStoreExpiresAfter,
@@ -202,7 +206,9 @@ export const VectorStoreMetadata$inboundSchema: z.ZodType<
   VectorStoreMetadata,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type VectorStoreMetadata$Outbound = string | boolean | number;
 
@@ -211,7 +217,9 @@ export const VectorStoreMetadata$outboundSchema: z.ZodType<
   VectorStoreMetadata$Outbound,
   z.ZodTypeDef,
   VectorStoreMetadata
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function vectorStoreMetadataToJSON(
   vectorStoreMetadata: VectorStoreMetadata,
@@ -235,41 +243,44 @@ export const VectorStore$inboundSchema: z.ZodType<
   VectorStore,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store"),
-  created_at: z.number().int(),
-  name: z.nullable(z.string()),
-  usage_bytes: z.number().int(),
-  embedding_model: z.nullable(z.string()),
-  embedding_dimensions: z.nullable(z.number().int()),
-  retrieval_mode: VectorStoreRetrievalMode$inboundSchema,
-  extraction_model: z.nullable(z.string()).optional(),
-  max_hops: z.nullable(z.number().int()).optional(),
-  file_counts: FileCounts$inboundSchema,
-  status: VectorStoreStatus$inboundSchema,
-  expires_after: z.lazy(() => VectorStoreExpiresAfter$inboundSchema).optional(),
-  expires_at: z.nullable(z.number().int()).optional(),
-  last_active_at: z.nullable(z.number().int()),
-  metadata: z.record(z.union([z.string(), z.boolean(), z.number()])),
-  description: z.nullable(z.string()).optional(),
-  last_used_at: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "usage_bytes": "usageBytes",
-    "embedding_model": "embeddingModel",
-    "embedding_dimensions": "embeddingDimensions",
-    "retrieval_mode": "retrievalMode",
-    "extraction_model": "extractionModel",
-    "max_hops": "maxHops",
-    "file_counts": "fileCounts",
-    "expires_after": "expiresAfter",
-    "expires_at": "expiresAt",
-    "last_active_at": "lastActiveAt",
-    "last_used_at": "lastUsedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store"),
+    created_at: z.number().int(),
+    name: z.nullable(z.string()),
+    usage_bytes: z.number().int(),
+    embedding_model: z.nullable(z.string()),
+    embedding_dimensions: z.nullable(z.number().int()),
+    retrieval_mode: VectorStoreRetrievalMode$inboundSchema,
+    extraction_model: z.nullable(z.string()).optional(),
+    max_hops: z.nullable(z.number().int()).optional(),
+    file_counts: FileCounts$inboundSchema,
+    status: VectorStoreStatus$inboundSchema,
+    expires_after: z.lazy(() => VectorStoreExpiresAfter$inboundSchema)
+      .optional(),
+    expires_at: z.nullable(z.number().int()).optional(),
+    last_active_at: z.nullable(z.number().int()),
+    metadata: z.record(z.union([z.string(), z.boolean(), z.number()])),
+    description: z.nullable(z.string()).optional(),
+    last_used_at: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "usage_bytes": "usageBytes",
+      "embedding_model": "embeddingModel",
+      "embedding_dimensions": "embeddingDimensions",
+      "retrieval_mode": "retrievalMode",
+      "extraction_model": "extractionModel",
+      "max_hops": "maxHops",
+      "file_counts": "fileCounts",
+      "expires_after": "expiresAfter",
+      "expires_at": "expiresAt",
+      "last_active_at": "lastActiveAt",
+      "last_used_at": "lastUsedAt",
+    });
+  })
+);
 /** @internal */
 export type VectorStore$Outbound = {
   id: string;
@@ -297,41 +308,44 @@ export const VectorStore$outboundSchema: z.ZodType<
   VectorStore$Outbound,
   z.ZodTypeDef,
   VectorStore
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store"),
-  createdAt: z.number().int(),
-  name: z.nullable(z.string()),
-  usageBytes: z.number().int(),
-  embeddingModel: z.nullable(z.string()),
-  embeddingDimensions: z.nullable(z.number().int()),
-  retrievalMode: VectorStoreRetrievalMode$outboundSchema,
-  extractionModel: z.nullable(z.string()).optional(),
-  maxHops: z.nullable(z.number().int()).optional(),
-  fileCounts: FileCounts$outboundSchema,
-  status: VectorStoreStatus$outboundSchema,
-  expiresAfter: z.lazy(() => VectorStoreExpiresAfter$outboundSchema).optional(),
-  expiresAt: z.nullable(z.number().int()).optional(),
-  lastActiveAt: z.nullable(z.number().int()),
-  metadata: z.record(z.union([z.string(), z.boolean(), z.number()])),
-  description: z.nullable(z.string()).optional(),
-  lastUsedAt: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    usageBytes: "usage_bytes",
-    embeddingModel: "embedding_model",
-    embeddingDimensions: "embedding_dimensions",
-    retrievalMode: "retrieval_mode",
-    extractionModel: "extraction_model",
-    maxHops: "max_hops",
-    fileCounts: "file_counts",
-    expiresAfter: "expires_after",
-    expiresAt: "expires_at",
-    lastActiveAt: "last_active_at",
-    lastUsedAt: "last_used_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store"),
+    createdAt: z.number().int(),
+    name: z.nullable(z.string()),
+    usageBytes: z.number().int(),
+    embeddingModel: z.nullable(z.string()),
+    embeddingDimensions: z.nullable(z.number().int()),
+    retrievalMode: VectorStoreRetrievalMode$outboundSchema,
+    extractionModel: z.nullable(z.string()).optional(),
+    maxHops: z.nullable(z.number().int()).optional(),
+    fileCounts: FileCounts$outboundSchema,
+    status: VectorStoreStatus$outboundSchema,
+    expiresAfter: z.lazy(() => VectorStoreExpiresAfter$outboundSchema)
+      .optional(),
+    expiresAt: z.nullable(z.number().int()).optional(),
+    lastActiveAt: z.nullable(z.number().int()),
+    metadata: z.record(z.union([z.string(), z.boolean(), z.number()])),
+    description: z.nullable(z.string()).optional(),
+    lastUsedAt: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      usageBytes: "usage_bytes",
+      embeddingModel: "embedding_model",
+      embeddingDimensions: "embedding_dimensions",
+      retrievalMode: "retrieval_mode",
+      extractionModel: "extraction_model",
+      maxHops: "max_hops",
+      fileCounts: "file_counts",
+      expiresAfter: "expires_after",
+      expiresAt: "expires_at",
+      lastActiveAt: "last_active_at",
+      lastUsedAt: "last_used_at",
+    });
+  })
+);
 
 export function vectorStoreToJSON(vectorStore: VectorStore): string {
   return JSON.stringify(VectorStore$outboundSchema.parse(vectorStore));

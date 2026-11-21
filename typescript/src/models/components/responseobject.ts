@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -393,7 +393,9 @@ export const Instructions$inboundSchema: z.ZodType<
   Instructions,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(Item$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$inboundSchema)])
+);
 /** @internal */
 export type Instructions$Outbound = string | Array<Item$Outbound>;
 
@@ -402,7 +404,9 @@ export const Instructions$outboundSchema: z.ZodType<
   Instructions$Outbound,
   z.ZodTypeDef,
   Instructions
-> = z.union([z.string(), z.array(Item$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$outboundSchema)])
+);
 
 export function instructionsToJSON(instructions: Instructions): string {
   return JSON.stringify(Instructions$outboundSchema.parse(instructions));
@@ -420,15 +424,15 @@ export function instructionsFromJSON(
 /** @internal */
 export const ResponseObjectServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectServiceTier
-> = z.nativeEnum(ResponseObjectServiceTier);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseObjectServiceTier));
 /** @internal */
 export const ResponseObjectServiceTier$outboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectServiceTier
 > = ResponseObjectServiceTier$inboundSchema;
 
 /** @internal */
-export const FiltersType$inboundSchema: z.ZodNativeEnum<typeof FiltersType> = z
-  .nativeEnum(FiltersType);
+export const FiltersType$inboundSchema: z.ZodNativeEnum<typeof FiltersType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FiltersType));
 /** @internal */
 export const FiltersType$outboundSchema: z.ZodNativeEnum<typeof FiltersType> =
   FiltersType$inboundSchema;
@@ -436,7 +440,7 @@ export const FiltersType$outboundSchema: z.ZodNativeEnum<typeof FiltersType> =
 /** @internal */
 export const ResponseObjectFiltersType$inboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectFiltersType
-> = z.nativeEnum(ResponseObjectFiltersType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseObjectFiltersType));
 /** @internal */
 export const ResponseObjectFiltersType$outboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectFiltersType
@@ -447,10 +451,12 @@ export const ResponseObjectFilters2$inboundSchema: z.ZodType<
   ResponseObjectFilters2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ResponseObjectFiltersType$inboundSchema,
-  filters: z.array(z.nullable(z.any())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ResponseObjectFiltersType$inboundSchema,
+    filters: z.array(z.nullable(z.any())),
+  })
+);
 /** @internal */
 export type ResponseObjectFilters2$Outbound = {
   type: string;
@@ -462,10 +468,12 @@ export const ResponseObjectFilters2$outboundSchema: z.ZodType<
   ResponseObjectFilters2$Outbound,
   z.ZodTypeDef,
   ResponseObjectFilters2
-> = z.object({
-  type: ResponseObjectFiltersType$outboundSchema,
-  filters: z.array(z.nullable(z.any())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ResponseObjectFiltersType$outboundSchema,
+    filters: z.array(z.nullable(z.any())),
+  })
+);
 
 export function responseObjectFilters2ToJSON(
   responseObjectFilters2: ResponseObjectFilters2,
@@ -489,20 +497,26 @@ export const FiltersFilters$inboundSchema: z.ZodType<
   FiltersFilters,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-  ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-  gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-  gte: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-  lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-  lte: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-  and: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  or: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+    ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+    gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+    gte: ComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+    lte: ComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    and: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    or: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  })
+);
 /** @internal */
 export type FiltersFilters$Outbound =
   | (ComparisonFilter$Outbound & { type: "eq" })
@@ -519,20 +533,22 @@ export const FiltersFilters$outboundSchema: z.ZodType<
   FiltersFilters$Outbound,
   z.ZodTypeDef,
   FiltersFilters
-> = z.union([
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-  z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+    z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function filtersFiltersToJSON(filtersFilters: FiltersFilters): string {
   return JSON.stringify(FiltersFilters$outboundSchema.parse(filtersFilters));
@@ -552,27 +568,37 @@ export const Filters2$inboundSchema: z.ZodType<
   Filters2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FiltersType$inboundSchema,
-  filters: z.array(discriminatedUnion("type", {
-    eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-    ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-    gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-    gte: ComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("gte") }),
-    ),
-    lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-    lte: ComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("lte") }),
-    ),
-    and: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
-      z.object({ type: z.literal("and") }),
-    ),
-    or: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
-      z.object({ type: z.literal("or") }),
-    ),
-  })),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FiltersType$inboundSchema,
+    filters: z.array(discriminatedUnion("type", {
+      eq: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      ne: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      gt: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      gte: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      lt: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      lte: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      and: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      or: z.lazy(() => ResponseObjectFilters2$inboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    })),
+  })
+);
 /** @internal */
 export type Filters2$Outbound = {
   type: string;
@@ -593,25 +619,39 @@ export const Filters2$outboundSchema: z.ZodType<
   Filters2$Outbound,
   z.ZodTypeDef,
   Filters2
-> = z.object({
-  type: FiltersType$outboundSchema,
-  filters: z.array(
-    z.union([
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-      z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
-        z.object({ type: z.literal("and") }),
-      ),
-      z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
-        z.object({ type: z.literal("or") }),
-      ),
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FiltersType$outboundSchema,
+    filters: z.array(
+      z.union([
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("eq") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("ne") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gt") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gte") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lt") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lte") }),
+        ),
+        z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
+          z.object({ type: z.literal("and") }),
+        ),
+        z.lazy(() => ResponseObjectFilters2$outboundSchema).and(
+          z.object({ type: z.literal("or") }),
+        ),
+      ]),
+    ),
+  })
+);
 
 export function filters2ToJSON(filters2: Filters2): string {
   return JSON.stringify(Filters2$outboundSchema.parse(filters2));
@@ -631,20 +671,26 @@ export const ToolsFilters$inboundSchema: z.ZodType<
   ToolsFilters,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-  ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-  gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-  gte: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-  lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-  lte: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-  and: z.lazy(() => Filters2$inboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  or: z.lazy(() => Filters2$inboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+    ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+    gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+    gte: ComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+    lte: ComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    and: z.lazy(() => Filters2$inboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    or: z.lazy(() => Filters2$inboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  })
+);
 /** @internal */
 export type ToolsFilters$Outbound =
   | (ComparisonFilter$Outbound & { type: "eq" })
@@ -661,20 +707,22 @@ export const ToolsFilters$outboundSchema: z.ZodType<
   ToolsFilters$Outbound,
   z.ZodTypeDef,
   ToolsFilters
-> = z.union([
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-  z.lazy(() => Filters2$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => Filters2$outboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+    z.lazy(() => Filters2$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => Filters2$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function toolsFiltersToJSON(toolsFilters: ToolsFilters): string {
   return JSON.stringify(ToolsFilters$outboundSchema.parse(toolsFilters));
@@ -694,36 +742,46 @@ export const ToolsFileSearchToolDefinition$inboundSchema: z.ZodType<
   ToolsFileSearchToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_search"),
-  vector_store_ids: z.array(z.string()),
-  filters: discriminatedUnion("type", {
-    eq: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-    ne: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-    gt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-    gte: ComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("gte") }),
-    ),
-    lt: ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-    lte: ComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("lte") }),
-    ),
-    and: z.lazy(() => Filters2$inboundSchema).and(
-      z.object({ type: z.literal("and") }),
-    ),
-    or: z.lazy(() => Filters2$inboundSchema).and(
-      z.object({ type: z.literal("or") }),
-    ),
-  }).optional(),
-  max_num_results: z.number().int().optional(),
-  ranking_options: RankingOptions$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_ids": "vectorStoreIds",
-    "max_num_results": "maxNumResults",
-    "ranking_options": "rankingOptions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search"),
+    vector_store_ids: z.array(z.string()),
+    filters: discriminatedUnion("type", {
+      eq: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      ne: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      gt: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      gte: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      lt: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      lte: ComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      and: z.lazy(() => Filters2$inboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      or: z.lazy(() => Filters2$inboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    }).optional(),
+    max_num_results: z.number().int().optional(),
+    ranking_options: RankingOptions$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_ids": "vectorStoreIds",
+      "max_num_results": "maxNumResults",
+      "ranking_options": "rankingOptions",
+    });
+  })
+);
 /** @internal */
 export type ToolsFileSearchToolDefinition$Outbound = {
   type: "file_search";
@@ -747,32 +805,34 @@ export const ToolsFileSearchToolDefinition$outboundSchema: z.ZodType<
   ToolsFileSearchToolDefinition$Outbound,
   z.ZodTypeDef,
   ToolsFileSearchToolDefinition
-> = z.object({
-  type: z.literal("file_search"),
-  vectorStoreIds: z.array(z.string()),
-  filters: z.union([
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-    z.lazy(() => Filters2$outboundSchema).and(
-      z.object({ type: z.literal("and") }),
-    ),
-    z.lazy(() => Filters2$outboundSchema).and(
-      z.object({ type: z.literal("or") }),
-    ),
-  ]).optional(),
-  maxNumResults: z.number().int().optional(),
-  rankingOptions: RankingOptions$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreIds: "vector_store_ids",
-    maxNumResults: "max_num_results",
-    rankingOptions: "ranking_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search"),
+    vectorStoreIds: z.array(z.string()),
+    filters: z.union([
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+      z.lazy(() => Filters2$outboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      z.lazy(() => Filters2$outboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    ]).optional(),
+    maxNumResults: z.number().int().optional(),
+    rankingOptions: RankingOptions$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreIds: "vector_store_ids",
+      maxNumResults: "max_num_results",
+      rankingOptions: "ranking_options",
+    });
+  })
+);
 
 export function toolsFileSearchToolDefinitionToJSON(
   toolsFileSearchToolDefinition: ToolsFileSearchToolDefinition,
@@ -798,26 +858,28 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
   ResponseObjectTools,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  FunctionToolDefinition$inboundSchema,
-  ComputerUseToolDefinition$inboundSchema,
-  OpenApiToolDefinition$inboundSchema,
-  z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
-  CodeInterpreterToolDefinition$inboundSchema,
-  CustomToolDefinition$inboundSchema,
-  AgentToolDefinition$inboundSchema,
-  ScheduleToolDefinition$inboundSchema,
-  WebSearchToolDefinition$inboundSchema,
-  ImageGenerationToolDefinition$inboundSchema,
-  LocalShellToolDefinition$inboundSchema,
-  ShellToolDefinition$inboundSchema,
-  WebSearchPreviewToolDefinition$inboundSchema,
-  HostedToolDefinition$inboundSchema,
-  SleepToolDefinition$inboundSchema,
-  HistoryToolDefinition$inboundSchema,
-  ApprovalToolDefinition$inboundSchema,
-  z.any(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FunctionToolDefinition$inboundSchema,
+    ComputerUseToolDefinition$inboundSchema,
+    OpenApiToolDefinition$inboundSchema,
+    z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
+    CodeInterpreterToolDefinition$inboundSchema,
+    CustomToolDefinition$inboundSchema,
+    AgentToolDefinition$inboundSchema,
+    ScheduleToolDefinition$inboundSchema,
+    WebSearchToolDefinition$inboundSchema,
+    ImageGenerationToolDefinition$inboundSchema,
+    LocalShellToolDefinition$inboundSchema,
+    ShellToolDefinition$inboundSchema,
+    WebSearchPreviewToolDefinition$inboundSchema,
+    HostedToolDefinition$inboundSchema,
+    SleepToolDefinition$inboundSchema,
+    HistoryToolDefinition$inboundSchema,
+    ApprovalToolDefinition$inboundSchema,
+    z.any(),
+  ])
+);
 /** @internal */
 export type ResponseObjectTools$Outbound =
   | FunctionToolDefinition$Outbound
@@ -844,26 +906,28 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
   ResponseObjectTools$Outbound,
   z.ZodTypeDef,
   ResponseObjectTools
-> = z.union([
-  FunctionToolDefinition$outboundSchema,
-  ComputerUseToolDefinition$outboundSchema,
-  OpenApiToolDefinition$outboundSchema,
-  z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
-  CodeInterpreterToolDefinition$outboundSchema,
-  CustomToolDefinition$outboundSchema,
-  AgentToolDefinition$outboundSchema,
-  ScheduleToolDefinition$outboundSchema,
-  WebSearchToolDefinition$outboundSchema,
-  ImageGenerationToolDefinition$outboundSchema,
-  LocalShellToolDefinition$outboundSchema,
-  ShellToolDefinition$outboundSchema,
-  WebSearchPreviewToolDefinition$outboundSchema,
-  HostedToolDefinition$outboundSchema,
-  SleepToolDefinition$outboundSchema,
-  HistoryToolDefinition$outboundSchema,
-  ApprovalToolDefinition$outboundSchema,
-  z.any(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FunctionToolDefinition$outboundSchema,
+    ComputerUseToolDefinition$outboundSchema,
+    OpenApiToolDefinition$outboundSchema,
+    z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
+    CodeInterpreterToolDefinition$outboundSchema,
+    CustomToolDefinition$outboundSchema,
+    AgentToolDefinition$outboundSchema,
+    ScheduleToolDefinition$outboundSchema,
+    WebSearchToolDefinition$outboundSchema,
+    ImageGenerationToolDefinition$outboundSchema,
+    LocalShellToolDefinition$outboundSchema,
+    ShellToolDefinition$outboundSchema,
+    WebSearchPreviewToolDefinition$outboundSchema,
+    HostedToolDefinition$outboundSchema,
+    SleepToolDefinition$outboundSchema,
+    HistoryToolDefinition$outboundSchema,
+    ApprovalToolDefinition$outboundSchema,
+    z.any(),
+  ])
+);
 
 export function responseObjectToolsToJSON(
   responseObjectTools: ResponseObjectTools,
@@ -885,7 +949,7 @@ export function responseObjectToolsFromJSON(
 /** @internal */
 export const ResponseObjectTruncation$inboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectTruncation
-> = z.nativeEnum(ResponseObjectTruncation);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseObjectTruncation));
 /** @internal */
 export const ResponseObjectTruncation$outboundSchema: z.ZodNativeEnum<
   typeof ResponseObjectTruncation
@@ -896,95 +960,99 @@ export const ResponseObject$inboundSchema: z.ZodType<
   ResponseObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("response"),
-  created_at: z.number(),
-  completed_at: z.nullable(z.number()),
-  status: ResponseStatus$inboundSchema,
-  error: z.nullable(ErrorT$inboundSchema),
-  incomplete_details: z.nullable(IncompleteDetails$inboundSchema),
-  background: z.boolean(),
-  conversation: Conversation$inboundSchema.optional(),
-  instructions: z.nullable(z.union([z.string(), z.array(Item$inboundSchema)])),
-  max_output_tokens: z.nullable(z.number().int()),
-  max_tool_calls: z.nullable(z.number().int()),
-  metadata: z.record(z.string()),
-  model: z.string(),
-  resolved_model: z.string().optional(),
-  resolved_provider: z.string().optional(),
-  resolved_serving_location: z.nullable(z.string()).optional(),
-  groundedness: GroundednessVerdict$inboundSchema.optional(),
-  output: z.array(Item$inboundSchema),
-  output_text: z.string().optional(),
-  parallel_tool_calls: z.boolean(),
-  previous_response_id: z.nullable(z.string()),
-  prompt: PromptTemplate$inboundSchema.optional(),
-  prompt_cache_key: z.string().optional(),
-  reasoning: ReasoningConfiguration$inboundSchema.optional(),
-  safety_identifier: z.string().optional(),
-  service_tier: ResponseObjectServiceTier$inboundSchema.optional(),
-  store: z.boolean(),
-  temperature: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  text: TextConfiguration$inboundSchema,
-  tool_choice: ToolChoice$inboundSchema,
-  tools: z.array(
-    z.nullable(
-      z.union([
-        FunctionToolDefinition$inboundSchema,
-        ComputerUseToolDefinition$inboundSchema,
-        OpenApiToolDefinition$inboundSchema,
-        z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
-        CodeInterpreterToolDefinition$inboundSchema,
-        CustomToolDefinition$inboundSchema,
-        AgentToolDefinition$inboundSchema,
-        ScheduleToolDefinition$inboundSchema,
-        WebSearchToolDefinition$inboundSchema,
-        ImageGenerationToolDefinition$inboundSchema,
-        LocalShellToolDefinition$inboundSchema,
-        ShellToolDefinition$inboundSchema,
-        WebSearchPreviewToolDefinition$inboundSchema,
-        HostedToolDefinition$inboundSchema,
-        SleepToolDefinition$inboundSchema,
-        HistoryToolDefinition$inboundSchema,
-        ApprovalToolDefinition$inboundSchema,
-        z.any(),
-      ]),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("response"),
+    created_at: z.number(),
+    completed_at: z.nullable(z.number()),
+    status: ResponseStatus$inboundSchema,
+    error: z.nullable(ErrorT$inboundSchema),
+    incomplete_details: z.nullable(IncompleteDetails$inboundSchema),
+    background: z.boolean(),
+    conversation: Conversation$inboundSchema.optional(),
+    instructions: z.nullable(
+      z.union([z.string(), z.array(Item$inboundSchema)]),
     ),
-  ),
-  top_logprobs: z.number().int().optional(),
-  top_p: z.number().optional(),
-  truncation: ResponseObjectTruncation$inboundSchema,
-  context_management: z.array(CompactionContextManagement$inboundSchema)
-    .optional(),
-  usage: Usage$inboundSchema,
-  user: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "completed_at": "completedAt",
-    "incomplete_details": "incompleteDetails",
-    "max_output_tokens": "maxOutputTokens",
-    "max_tool_calls": "maxToolCalls",
-    "resolved_model": "resolvedModel",
-    "resolved_provider": "resolvedProvider",
-    "resolved_serving_location": "resolvedServingLocation",
-    "output_text": "outputText",
-    "parallel_tool_calls": "parallelToolCalls",
-    "previous_response_id": "previousResponseId",
-    "prompt_cache_key": "promptCacheKey",
-    "safety_identifier": "safetyIdentifier",
-    "service_tier": "serviceTier",
-    "presence_penalty": "presencePenalty",
-    "frequency_penalty": "frequencyPenalty",
-    "tool_choice": "toolChoice",
-    "top_logprobs": "topLogprobs",
-    "top_p": "topP",
-    "context_management": "contextManagement",
-  });
-});
+    max_output_tokens: z.nullable(z.number().int()),
+    max_tool_calls: z.nullable(z.number().int()),
+    metadata: z.record(z.string()),
+    model: z.string(),
+    resolved_model: z.string().optional(),
+    resolved_provider: z.string().optional(),
+    resolved_serving_location: z.nullable(z.string()).optional(),
+    groundedness: GroundednessVerdict$inboundSchema.optional(),
+    output: z.array(Item$inboundSchema),
+    output_text: z.string().optional(),
+    parallel_tool_calls: z.boolean(),
+    previous_response_id: z.nullable(z.string()),
+    prompt: PromptTemplate$inboundSchema.optional(),
+    prompt_cache_key: z.string().optional(),
+    reasoning: ReasoningConfiguration$inboundSchema.optional(),
+    safety_identifier: z.string().optional(),
+    service_tier: ResponseObjectServiceTier$inboundSchema.optional(),
+    store: z.boolean(),
+    temperature: z.number().optional(),
+    presence_penalty: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    text: TextConfiguration$inboundSchema,
+    tool_choice: ToolChoice$inboundSchema,
+    tools: z.array(
+      z.nullable(
+        z.union([
+          FunctionToolDefinition$inboundSchema,
+          ComputerUseToolDefinition$inboundSchema,
+          OpenApiToolDefinition$inboundSchema,
+          z.lazy(() => ToolsFileSearchToolDefinition$inboundSchema),
+          CodeInterpreterToolDefinition$inboundSchema,
+          CustomToolDefinition$inboundSchema,
+          AgentToolDefinition$inboundSchema,
+          ScheduleToolDefinition$inboundSchema,
+          WebSearchToolDefinition$inboundSchema,
+          ImageGenerationToolDefinition$inboundSchema,
+          LocalShellToolDefinition$inboundSchema,
+          ShellToolDefinition$inboundSchema,
+          WebSearchPreviewToolDefinition$inboundSchema,
+          HostedToolDefinition$inboundSchema,
+          SleepToolDefinition$inboundSchema,
+          HistoryToolDefinition$inboundSchema,
+          ApprovalToolDefinition$inboundSchema,
+          z.any(),
+        ]),
+      ),
+    ),
+    top_logprobs: z.number().int().optional(),
+    top_p: z.number().optional(),
+    truncation: ResponseObjectTruncation$inboundSchema,
+    context_management: z.array(CompactionContextManagement$inboundSchema)
+      .optional(),
+    usage: Usage$inboundSchema,
+    user: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "completed_at": "completedAt",
+      "incomplete_details": "incompleteDetails",
+      "max_output_tokens": "maxOutputTokens",
+      "max_tool_calls": "maxToolCalls",
+      "resolved_model": "resolvedModel",
+      "resolved_provider": "resolvedProvider",
+      "resolved_serving_location": "resolvedServingLocation",
+      "output_text": "outputText",
+      "parallel_tool_calls": "parallelToolCalls",
+      "previous_response_id": "previousResponseId",
+      "prompt_cache_key": "promptCacheKey",
+      "safety_identifier": "safetyIdentifier",
+      "service_tier": "serviceTier",
+      "presence_penalty": "presencePenalty",
+      "frequency_penalty": "frequencyPenalty",
+      "tool_choice": "toolChoice",
+      "top_logprobs": "topLogprobs",
+      "top_p": "topP",
+      "context_management": "contextManagement",
+    });
+  })
+);
 /** @internal */
 export type ResponseObject$Outbound = {
   id: string;
@@ -1054,95 +1122,99 @@ export const ResponseObject$outboundSchema: z.ZodType<
   ResponseObject$Outbound,
   z.ZodTypeDef,
   ResponseObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("response"),
-  createdAt: z.number(),
-  completedAt: z.nullable(z.number()),
-  status: ResponseStatus$outboundSchema,
-  error: z.nullable(ErrorT$outboundSchema),
-  incompleteDetails: z.nullable(IncompleteDetails$outboundSchema),
-  background: z.boolean(),
-  conversation: Conversation$outboundSchema.optional(),
-  instructions: z.nullable(z.union([z.string(), z.array(Item$outboundSchema)])),
-  maxOutputTokens: z.nullable(z.number().int()),
-  maxToolCalls: z.nullable(z.number().int()),
-  metadata: z.record(z.string()),
-  model: z.string(),
-  resolvedModel: z.string().optional(),
-  resolvedProvider: z.string().optional(),
-  resolvedServingLocation: z.nullable(z.string()).optional(),
-  groundedness: GroundednessVerdict$outboundSchema.optional(),
-  output: z.array(Item$outboundSchema),
-  outputText: z.string().optional(),
-  parallelToolCalls: z.boolean(),
-  previousResponseId: z.nullable(z.string()),
-  prompt: PromptTemplate$outboundSchema.optional(),
-  promptCacheKey: z.string().optional(),
-  reasoning: ReasoningConfiguration$outboundSchema.optional(),
-  safetyIdentifier: z.string().optional(),
-  serviceTier: ResponseObjectServiceTier$outboundSchema.optional(),
-  store: z.boolean(),
-  temperature: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  text: TextConfiguration$outboundSchema,
-  toolChoice: ToolChoice$outboundSchema,
-  tools: z.array(
-    z.nullable(
-      z.union([
-        FunctionToolDefinition$outboundSchema,
-        ComputerUseToolDefinition$outboundSchema,
-        OpenApiToolDefinition$outboundSchema,
-        z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
-        CodeInterpreterToolDefinition$outboundSchema,
-        CustomToolDefinition$outboundSchema,
-        AgentToolDefinition$outboundSchema,
-        ScheduleToolDefinition$outboundSchema,
-        WebSearchToolDefinition$outboundSchema,
-        ImageGenerationToolDefinition$outboundSchema,
-        LocalShellToolDefinition$outboundSchema,
-        ShellToolDefinition$outboundSchema,
-        WebSearchPreviewToolDefinition$outboundSchema,
-        HostedToolDefinition$outboundSchema,
-        SleepToolDefinition$outboundSchema,
-        HistoryToolDefinition$outboundSchema,
-        ApprovalToolDefinition$outboundSchema,
-        z.any(),
-      ]),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("response"),
+    createdAt: z.number(),
+    completedAt: z.nullable(z.number()),
+    status: ResponseStatus$outboundSchema,
+    error: z.nullable(ErrorT$outboundSchema),
+    incompleteDetails: z.nullable(IncompleteDetails$outboundSchema),
+    background: z.boolean(),
+    conversation: Conversation$outboundSchema.optional(),
+    instructions: z.nullable(
+      z.union([z.string(), z.array(Item$outboundSchema)]),
     ),
-  ),
-  topLogprobs: z.number().int().optional(),
-  topP: z.number().optional(),
-  truncation: ResponseObjectTruncation$outboundSchema,
-  contextManagement: z.array(CompactionContextManagement$outboundSchema)
-    .optional(),
-  usage: Usage$outboundSchema,
-  user: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    completedAt: "completed_at",
-    incompleteDetails: "incomplete_details",
-    maxOutputTokens: "max_output_tokens",
-    maxToolCalls: "max_tool_calls",
-    resolvedModel: "resolved_model",
-    resolvedProvider: "resolved_provider",
-    resolvedServingLocation: "resolved_serving_location",
-    outputText: "output_text",
-    parallelToolCalls: "parallel_tool_calls",
-    previousResponseId: "previous_response_id",
-    promptCacheKey: "prompt_cache_key",
-    safetyIdentifier: "safety_identifier",
-    serviceTier: "service_tier",
-    presencePenalty: "presence_penalty",
-    frequencyPenalty: "frequency_penalty",
-    toolChoice: "tool_choice",
-    topLogprobs: "top_logprobs",
-    topP: "top_p",
-    contextManagement: "context_management",
-  });
-});
+    maxOutputTokens: z.nullable(z.number().int()),
+    maxToolCalls: z.nullable(z.number().int()),
+    metadata: z.record(z.string()),
+    model: z.string(),
+    resolvedModel: z.string().optional(),
+    resolvedProvider: z.string().optional(),
+    resolvedServingLocation: z.nullable(z.string()).optional(),
+    groundedness: GroundednessVerdict$outboundSchema.optional(),
+    output: z.array(Item$outboundSchema),
+    outputText: z.string().optional(),
+    parallelToolCalls: z.boolean(),
+    previousResponseId: z.nullable(z.string()),
+    prompt: PromptTemplate$outboundSchema.optional(),
+    promptCacheKey: z.string().optional(),
+    reasoning: ReasoningConfiguration$outboundSchema.optional(),
+    safetyIdentifier: z.string().optional(),
+    serviceTier: ResponseObjectServiceTier$outboundSchema.optional(),
+    store: z.boolean(),
+    temperature: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    text: TextConfiguration$outboundSchema,
+    toolChoice: ToolChoice$outboundSchema,
+    tools: z.array(
+      z.nullable(
+        z.union([
+          FunctionToolDefinition$outboundSchema,
+          ComputerUseToolDefinition$outboundSchema,
+          OpenApiToolDefinition$outboundSchema,
+          z.lazy(() => ToolsFileSearchToolDefinition$outboundSchema),
+          CodeInterpreterToolDefinition$outboundSchema,
+          CustomToolDefinition$outboundSchema,
+          AgentToolDefinition$outboundSchema,
+          ScheduleToolDefinition$outboundSchema,
+          WebSearchToolDefinition$outboundSchema,
+          ImageGenerationToolDefinition$outboundSchema,
+          LocalShellToolDefinition$outboundSchema,
+          ShellToolDefinition$outboundSchema,
+          WebSearchPreviewToolDefinition$outboundSchema,
+          HostedToolDefinition$outboundSchema,
+          SleepToolDefinition$outboundSchema,
+          HistoryToolDefinition$outboundSchema,
+          ApprovalToolDefinition$outboundSchema,
+          z.any(),
+        ]),
+      ),
+    ),
+    topLogprobs: z.number().int().optional(),
+    topP: z.number().optional(),
+    truncation: ResponseObjectTruncation$outboundSchema,
+    contextManagement: z.array(CompactionContextManagement$outboundSchema)
+      .optional(),
+    usage: Usage$outboundSchema,
+    user: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      completedAt: "completed_at",
+      incompleteDetails: "incomplete_details",
+      maxOutputTokens: "max_output_tokens",
+      maxToolCalls: "max_tool_calls",
+      resolvedModel: "resolved_model",
+      resolvedProvider: "resolved_provider",
+      resolvedServingLocation: "resolved_serving_location",
+      outputText: "output_text",
+      parallelToolCalls: "parallel_tool_calls",
+      previousResponseId: "previous_response_id",
+      promptCacheKey: "prompt_cache_key",
+      safetyIdentifier: "safety_identifier",
+      serviceTier: "service_tier",
+      presencePenalty: "presence_penalty",
+      frequencyPenalty: "frequency_penalty",
+      toolChoice: "tool_choice",
+      topLogprobs: "top_logprobs",
+      topP: "top_p",
+      contextManagement: "context_management",
+    });
+  })
+);
 
 export function responseObjectToJSON(responseObject: ResponseObject): string {
   return JSON.stringify(ResponseObject$outboundSchema.parse(responseObject));

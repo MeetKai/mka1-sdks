@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -64,15 +64,17 @@ export const ComputeJobCreate$inboundSchema: z.ZodType<
   ComputeJobCreate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access: ComputeAccessCreate$inboundSchema.optional(),
-  compute: ComputeRequest$inboundSchema,
-  container: ComputeContainerCreate$inboundSchema,
-  limits: ComputeLimits$inboundSchema.optional(),
-  name: z.string().optional(),
-  placement: ComputePlacement$inboundSchema,
-  volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: ComputeAccessCreate$inboundSchema.optional(),
+    compute: ComputeRequest$inboundSchema,
+    container: ComputeContainerCreate$inboundSchema,
+    limits: ComputeLimits$inboundSchema.optional(),
+    name: z.string().optional(),
+    placement: ComputePlacement$inboundSchema,
+    volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ComputeJobCreate$Outbound = {
   access?: ComputeAccessCreate$Outbound | undefined;
@@ -89,15 +91,17 @@ export const ComputeJobCreate$outboundSchema: z.ZodType<
   ComputeJobCreate$Outbound,
   z.ZodTypeDef,
   ComputeJobCreate
-> = z.object({
-  access: ComputeAccessCreate$outboundSchema.optional(),
-  compute: ComputeRequest$outboundSchema,
-  container: ComputeContainerCreate$outboundSchema,
-  limits: ComputeLimits$outboundSchema.optional(),
-  name: z.string().optional(),
-  placement: ComputePlacement$outboundSchema,
-  volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: ComputeAccessCreate$outboundSchema.optional(),
+    compute: ComputeRequest$outboundSchema,
+    container: ComputeContainerCreate$outboundSchema,
+    limits: ComputeLimits$outboundSchema.optional(),
+    name: z.string().optional(),
+    placement: ComputePlacement$outboundSchema,
+    volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
+  })
+);
 
 export function computeJobCreateToJSON(
   computeJobCreate: ComputeJobCreate,

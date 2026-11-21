@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,20 +40,22 @@ export const ShellNetworkPolicyDomainSecret$inboundSchema: z.ZodType<
   ShellNetworkPolicyDomainSecret,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  domain: z.string(),
-  name: z.string(),
-  value: z.string().optional(),
-  mcp_server_id: z.string().optional(),
-  mcp_credential_id: z.string().optional(),
-  header_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "mcp_server_id": "mcpServerId",
-    "mcp_credential_id": "mcpCredentialId",
-    "header_name": "headerName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domain: z.string(),
+    name: z.string(),
+    value: z.string().optional(),
+    mcp_server_id: z.string().optional(),
+    mcp_credential_id: z.string().optional(),
+    header_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mcp_server_id": "mcpServerId",
+      "mcp_credential_id": "mcpCredentialId",
+      "header_name": "headerName",
+    });
+  })
+);
 /** @internal */
 export type ShellNetworkPolicyDomainSecret$Outbound = {
   domain: string;
@@ -69,20 +71,22 @@ export const ShellNetworkPolicyDomainSecret$outboundSchema: z.ZodType<
   ShellNetworkPolicyDomainSecret$Outbound,
   z.ZodTypeDef,
   ShellNetworkPolicyDomainSecret
-> = z.object({
-  domain: z.string(),
-  name: z.string(),
-  value: z.string().optional(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-  headerName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-    headerName: "header_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    domain: z.string(),
+    name: z.string(),
+    value: z.string().optional(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+    headerName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+      headerName: "header_name",
+    });
+  })
+);
 
 export function shellNetworkPolicyDomainSecretToJSON(
   shellNetworkPolicyDomainSecret: ShellNetworkPolicyDomainSecret,

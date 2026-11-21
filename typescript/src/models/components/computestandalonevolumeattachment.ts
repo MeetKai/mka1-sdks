@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,27 +40,31 @@ export const ComputeStandaloneVolumeAttachment$inboundSchema: z.ZodType<
   ComputeStandaloneVolumeAttachment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cleanup_failure: z.nullable(ComputeReason$inboundSchema),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  id: z.string(),
-  mount_path: z.string(),
-  released_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  resource_id: z.string(),
-  resource_type: ComputeResourceType$inboundSchema,
-  status: ComputeStandaloneVolumeAttachmentState$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cleanup_failure": "cleanupFailure",
-    "created_at": "createdAt",
-    "mount_path": "mountPath",
-    "released_at": "releasedAt",
-    "resource_id": "resourceId",
-    "resource_type": "resourceType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cleanup_failure: z.nullable(ComputeReason$inboundSchema),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    id: z.string(),
+    mount_path: z.string(),
+    released_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    resource_id: z.string(),
+    resource_type: ComputeResourceType$inboundSchema,
+    status: ComputeStandaloneVolumeAttachmentState$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cleanup_failure": "cleanupFailure",
+      "created_at": "createdAt",
+      "mount_path": "mountPath",
+      "released_at": "releasedAt",
+      "resource_id": "resourceId",
+      "resource_type": "resourceType",
+    });
+  })
+);
 /** @internal */
 export type ComputeStandaloneVolumeAttachment$Outbound = {
   cleanup_failure: ComputeReason$Outbound | null;
@@ -78,25 +82,27 @@ export const ComputeStandaloneVolumeAttachment$outboundSchema: z.ZodType<
   ComputeStandaloneVolumeAttachment$Outbound,
   z.ZodTypeDef,
   ComputeStandaloneVolumeAttachment
-> = z.object({
-  cleanupFailure: z.nullable(ComputeReason$outboundSchema),
-  createdAt: z.date().transform(v => v.toISOString()),
-  id: z.string(),
-  mountPath: z.string(),
-  releasedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  resourceId: z.string(),
-  resourceType: ComputeResourceType$outboundSchema,
-  status: ComputeStandaloneVolumeAttachmentState$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    cleanupFailure: "cleanup_failure",
-    createdAt: "created_at",
-    mountPath: "mount_path",
-    releasedAt: "released_at",
-    resourceId: "resource_id",
-    resourceType: "resource_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cleanupFailure: z.nullable(ComputeReason$outboundSchema),
+    createdAt: z.date().transform(v => v.toISOString()),
+    id: z.string(),
+    mountPath: z.string(),
+    releasedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    resourceId: z.string(),
+    resourceType: ComputeResourceType$outboundSchema,
+    status: ComputeStandaloneVolumeAttachmentState$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      cleanupFailure: "cleanup_failure",
+      createdAt: "created_at",
+      mountPath: "mount_path",
+      releasedAt: "released_at",
+      resourceId: "resource_id",
+      resourceType: "resource_type",
+    });
+  })
+);
 
 export function computeStandaloneVolumeAttachmentToJSON(
   computeStandaloneVolumeAttachment: ComputeStandaloneVolumeAttachment,

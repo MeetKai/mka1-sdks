@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -78,12 +78,14 @@ export const Annotations$inboundSchema: z.ZodType<
   Annotations,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  file_citation: FileCitation$inboundSchema,
-  url_citation: URLCitation$inboundSchema,
-  container_file_citation: ContainerFileCitation$inboundSchema,
-  file_path: FilePath$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    file_citation: FileCitation$inboundSchema,
+    url_citation: URLCitation$inboundSchema,
+    container_file_citation: ContainerFileCitation$inboundSchema,
+    file_path: FilePath$inboundSchema,
+  })
+);
 /** @internal */
 export type Annotations$Outbound =
   | FileCitation$Outbound
@@ -96,12 +98,14 @@ export const Annotations$outboundSchema: z.ZodType<
   Annotations$Outbound,
   z.ZodTypeDef,
   Annotations
-> = z.union([
-  FileCitation$outboundSchema,
-  URLCitation$outboundSchema,
-  ContainerFileCitation$outboundSchema,
-  FilePath$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FileCitation$outboundSchema,
+    URLCitation$outboundSchema,
+    ContainerFileCitation$outboundSchema,
+    FilePath$outboundSchema,
+  ])
+);
 
 export function annotationsToJSON(annotations: Annotations): string {
   return JSON.stringify(Annotations$outboundSchema.parse(annotations));
@@ -121,17 +125,19 @@ export const OutputText$inboundSchema: z.ZodType<
   OutputText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("output_text"),
-  text: z.string(),
-  annotations: z.array(discriminatedUnion("type", {
-    file_citation: FileCitation$inboundSchema,
-    url_citation: URLCitation$inboundSchema,
-    container_file_citation: ContainerFileCitation$inboundSchema,
-    file_path: FilePath$inboundSchema,
-  })).optional(),
-  logprobs: z.array(LogProb$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_text"),
+    text: z.string(),
+    annotations: z.array(discriminatedUnion("type", {
+      file_citation: FileCitation$inboundSchema,
+      url_citation: URLCitation$inboundSchema,
+      container_file_citation: ContainerFileCitation$inboundSchema,
+      file_path: FilePath$inboundSchema,
+    })).optional(),
+    logprobs: z.array(LogProb$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type OutputText$Outbound = {
   type: "output_text";
@@ -152,19 +158,21 @@ export const OutputText$outboundSchema: z.ZodType<
   OutputText$Outbound,
   z.ZodTypeDef,
   OutputText
-> = z.object({
-  type: z.literal("output_text"),
-  text: z.string(),
-  annotations: z.array(
-    z.union([
-      FileCitation$outboundSchema,
-      URLCitation$outboundSchema,
-      ContainerFileCitation$outboundSchema,
-      FilePath$outboundSchema,
-    ]),
-  ).optional(),
-  logprobs: z.array(LogProb$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_text"),
+    text: z.string(),
+    annotations: z.array(
+      z.union([
+        FileCitation$outboundSchema,
+        URLCitation$outboundSchema,
+        ContainerFileCitation$outboundSchema,
+        FilePath$outboundSchema,
+      ]),
+    ).optional(),
+    logprobs: z.array(LogProb$outboundSchema).optional(),
+  })
+);
 
 export function outputTextToJSON(outputText: OutputText): string {
   return JSON.stringify(OutputText$outboundSchema.parse(outputText));

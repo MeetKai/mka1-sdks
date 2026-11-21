@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type AddOrgMemberTooManyRequestsError struct {
 var _ error = &AddOrgMemberTooManyRequestsError{}
 
 func (e *AddOrgMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type AddOrgMemberGoneError struct {
 var _ error = &AddOrgMemberGoneError{}
 
 func (e *AddOrgMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type AddOrgMemberConflictError struct {
 var _ error = &AddOrgMemberConflictError{}
 
 func (e *AddOrgMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type AddOrgMemberNotFoundError struct {
 var _ error = &AddOrgMemberNotFoundError{}
 
 func (e *AddOrgMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type AddOrgMemberForbiddenError struct {
 var _ error = &AddOrgMemberForbiddenError{}
 
 func (e *AddOrgMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type AddOrgMemberUnauthorizedError struct {
 var _ error = &AddOrgMemberUnauthorizedError{}
 
 func (e *AddOrgMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type AddOrgMemberBadRequestError struct {
 var _ error = &AddOrgMemberBadRequestError{}
 
 func (e *AddOrgMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

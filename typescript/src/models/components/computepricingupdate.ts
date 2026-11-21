@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const ComputePricingUpdate$inboundSchema: z.ZodType<
   ComputePricingUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  volume_storage_usd_per_gib_hour: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "volume_storage_usd_per_gib_hour": "volumeStorageUsdPerGibHour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    volume_storage_usd_per_gib_hour: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "volume_storage_usd_per_gib_hour": "volumeStorageUsdPerGibHour",
+    });
+  })
+);
 /** @internal */
 export type ComputePricingUpdate$Outbound = {
   volume_storage_usd_per_gib_hour: number;
@@ -37,13 +39,15 @@ export const ComputePricingUpdate$outboundSchema: z.ZodType<
   ComputePricingUpdate$Outbound,
   z.ZodTypeDef,
   ComputePricingUpdate
-> = z.object({
-  volumeStorageUsdPerGibHour: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    volumeStorageUsdPerGibHour: "volume_storage_usd_per_gib_hour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    volumeStorageUsdPerGibHour: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      volumeStorageUsdPerGibHour: "volume_storage_usd_per_gib_hour",
+    });
+  })
+);
 
 export function computePricingUpdateToJSON(
   computePricingUpdate: ComputePricingUpdate,

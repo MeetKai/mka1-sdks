@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const AccessListResponse$inboundSchema: z.ZodType<
   AccessListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(AccessEntry$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(AccessEntry$inboundSchema),
+  })
+);
 /** @internal */
 export type AccessListResponse$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const AccessListResponse$outboundSchema: z.ZodType<
   AccessListResponse$Outbound,
   z.ZodTypeDef,
   AccessListResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(AccessEntry$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(AccessEntry$outboundSchema),
+  })
+);
 
 export function accessListResponseToJSON(
   accessListResponse: AccessListResponse,

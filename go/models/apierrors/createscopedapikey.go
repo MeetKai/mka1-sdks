@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,12 @@ type CreateScopedAPIKeyTooManyRequestsError struct {
 var _ error = &CreateScopedAPIKeyTooManyRequestsError{}
 
 func (e *CreateScopedAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +37,12 @@ type CreateScopedAPIKeyGoneError struct {
 var _ error = &CreateScopedAPIKeyGoneError{}
 
 func (e *CreateScopedAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,12 @@ type CreateScopedAPIKeyConflictError struct {
 var _ error = &CreateScopedAPIKeyConflictError{}
 
 func (e *CreateScopedAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +75,12 @@ type CreateScopedAPIKeyNotFoundError struct {
 var _ error = &CreateScopedAPIKeyNotFoundError{}
 
 func (e *CreateScopedAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -70,6 +95,15 @@ type CreateScopedAPIKeyForbiddenError struct {
 var _ error = &CreateScopedAPIKeyForbiddenError{}
 
 func (e *CreateScopedAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -83,6 +117,12 @@ type CreateScopedAPIKeyUnauthorizedError struct {
 var _ error = &CreateScopedAPIKeyUnauthorizedError{}
 
 func (e *CreateScopedAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -97,6 +137,12 @@ type CreateScopedAPIKeyBadRequestError struct {
 var _ error = &CreateScopedAPIKeyBadRequestError{}
 
 func (e *CreateScopedAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

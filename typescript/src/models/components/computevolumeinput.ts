@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,16 +25,18 @@ export const ComputeVolumeInput$inboundSchema: z.ZodType<
   ComputeVolumeInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(ComputeVolumeDataInput$inboundSchema).optional(),
-  mount_path: z.string(),
-  size_gb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "mount_path": "mountPath",
-    "size_gb": "sizeGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ComputeVolumeDataInput$inboundSchema).optional(),
+    mount_path: z.string(),
+    size_gb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mount_path": "mountPath",
+      "size_gb": "sizeGb",
+    });
+  })
+);
 /** @internal */
 export type ComputeVolumeInput$Outbound = {
   data?: Array<ComputeVolumeDataInput$Outbound> | undefined;
@@ -47,16 +49,18 @@ export const ComputeVolumeInput$outboundSchema: z.ZodType<
   ComputeVolumeInput$Outbound,
   z.ZodTypeDef,
   ComputeVolumeInput
-> = z.object({
-  data: z.array(ComputeVolumeDataInput$outboundSchema).optional(),
-  mountPath: z.string(),
-  sizeGb: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    mountPath: "mount_path",
-    sizeGb: "size_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ComputeVolumeDataInput$outboundSchema).optional(),
+    mountPath: z.string(),
+    sizeGb: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      mountPath: "mount_path",
+      sizeGb: "size_gb",
+    });
+  })
+);
 
 export function computeVolumeInputToJSON(
   computeVolumeInput: ComputeVolumeInput,

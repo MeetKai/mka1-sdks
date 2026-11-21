@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,15 +30,15 @@ export type TenantResourcePolicy = {
 };
 
 /** @internal */
-export const CpuCores$inboundSchema: z.ZodNativeEnum<typeof CpuCores> = z
-  .nativeEnum(CpuCores);
+export const CpuCores$inboundSchema: z.ZodNativeEnum<typeof CpuCores> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CpuCores));
 /** @internal */
 export const CpuCores$outboundSchema: z.ZodNativeEnum<typeof CpuCores> =
   CpuCores$inboundSchema;
 
 /** @internal */
-export const MemoryMib$inboundSchema: z.ZodNativeEnum<typeof MemoryMib> = z
-  .nativeEnum(MemoryMib);
+export const MemoryMib$inboundSchema: z.ZodNativeEnum<typeof MemoryMib> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MemoryMib));
 /** @internal */
 export const MemoryMib$outboundSchema: z.ZodNativeEnum<typeof MemoryMib> =
   MemoryMib$inboundSchema;
@@ -48,18 +48,20 @@ export const TenantResourcePolicy$inboundSchema: z.ZodType<
   TenantResourcePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu_cores: z.nullable(CpuCores$inboundSchema).optional(),
-  memory_mib: z.nullable(MemoryMib$inboundSchema).optional(),
-  timeout_seconds: z.nullable(z.number().int()).optional(),
-  revision: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "cpu_cores": "cpuCores",
-    "memory_mib": "memoryMib",
-    "timeout_seconds": "timeoutSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu_cores: z.nullable(CpuCores$inboundSchema).optional(),
+    memory_mib: z.nullable(MemoryMib$inboundSchema).optional(),
+    timeout_seconds: z.nullable(z.number().int()).optional(),
+    revision: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "cpu_cores": "cpuCores",
+      "memory_mib": "memoryMib",
+      "timeout_seconds": "timeoutSeconds",
+    });
+  })
+);
 /** @internal */
 export type TenantResourcePolicy$Outbound = {
   cpu_cores?: number | null | undefined;
@@ -73,18 +75,20 @@ export const TenantResourcePolicy$outboundSchema: z.ZodType<
   TenantResourcePolicy$Outbound,
   z.ZodTypeDef,
   TenantResourcePolicy
-> = z.object({
-  cpuCores: z.nullable(CpuCores$outboundSchema).optional(),
-  memoryMib: z.nullable(MemoryMib$outboundSchema).optional(),
-  timeoutSeconds: z.nullable(z.number().int()).optional(),
-  revision: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    cpuCores: "cpu_cores",
-    memoryMib: "memory_mib",
-    timeoutSeconds: "timeout_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpuCores: z.nullable(CpuCores$outboundSchema).optional(),
+    memoryMib: z.nullable(MemoryMib$outboundSchema).optional(),
+    timeoutSeconds: z.nullable(z.number().int()).optional(),
+    revision: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      cpuCores: "cpu_cores",
+      memoryMib: "memory_mib",
+      timeoutSeconds: "timeout_seconds",
+    });
+  })
+);
 
 export function tenantResourcePolicyToJSON(
   tenantResourcePolicy: TenantResourcePolicy,

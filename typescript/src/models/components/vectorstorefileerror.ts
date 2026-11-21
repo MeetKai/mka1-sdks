@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,9 +37,8 @@ export type VectorStoreFileError = {
 };
 
 /** @internal */
-export const Code$inboundSchema: z.ZodNativeEnum<typeof Code> = z.nativeEnum(
-  Code,
-);
+export const Code$inboundSchema: z.ZodNativeEnum<typeof Code> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Code));
 /** @internal */
 export const Code$outboundSchema: z.ZodNativeEnum<typeof Code> =
   Code$inboundSchema;
@@ -49,10 +48,12 @@ export const VectorStoreFileError$inboundSchema: z.ZodType<
   VectorStoreFileError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: Code$inboundSchema,
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: Code$inboundSchema,
+    message: z.string(),
+  })
+);
 /** @internal */
 export type VectorStoreFileError$Outbound = {
   code: string;
@@ -64,10 +65,12 @@ export const VectorStoreFileError$outboundSchema: z.ZodType<
   VectorStoreFileError$Outbound,
   z.ZodTypeDef,
   VectorStoreFileError
-> = z.object({
-  code: Code$outboundSchema,
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: Code$outboundSchema,
+    message: z.string(),
+  })
+);
 
 export function vectorStoreFileErrorToJSON(
   vectorStoreFileError: VectorStoreFileError,

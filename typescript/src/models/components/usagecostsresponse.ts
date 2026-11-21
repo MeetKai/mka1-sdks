@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -58,33 +58,35 @@ export const UsageCostsResponse$inboundSchema: z.ZodType<
   UsageCostsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("usage.costs"),
-  currency: z.nullable(z.string()),
-  start_time: z.number().int(),
-  end_time: z.number().int(),
-  group_by: z.array(CostsUsageGroupBy$inboundSchema),
-  data: z.array(CostGroupRow$inboundSchema),
-  total_cost: z.number(),
-  total_cost_nano: z.string(),
-  unpriced_entries: z.number().int(),
-  as_of: z.number().int(),
-  settlement_window_seconds: z.number().int(),
-  final_through: z.number().int(),
-  final: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "group_by": "groupBy",
-    "total_cost": "totalCost",
-    "total_cost_nano": "totalCostNano",
-    "unpriced_entries": "unpricedEntries",
-    "as_of": "asOf",
-    "settlement_window_seconds": "settlementWindowSeconds",
-    "final_through": "finalThrough",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("usage.costs"),
+    currency: z.nullable(z.string()),
+    start_time: z.number().int(),
+    end_time: z.number().int(),
+    group_by: z.array(CostsUsageGroupBy$inboundSchema),
+    data: z.array(CostGroupRow$inboundSchema),
+    total_cost: z.number(),
+    total_cost_nano: z.string(),
+    unpriced_entries: z.number().int(),
+    as_of: z.number().int(),
+    settlement_window_seconds: z.number().int(),
+    final_through: z.number().int(),
+    final: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "group_by": "groupBy",
+      "total_cost": "totalCost",
+      "total_cost_nano": "totalCostNano",
+      "unpriced_entries": "unpricedEntries",
+      "as_of": "asOf",
+      "settlement_window_seconds": "settlementWindowSeconds",
+      "final_through": "finalThrough",
+    });
+  })
+);
 /** @internal */
 export type UsageCostsResponse$Outbound = {
   object: "usage.costs";
@@ -107,33 +109,35 @@ export const UsageCostsResponse$outboundSchema: z.ZodType<
   UsageCostsResponse$Outbound,
   z.ZodTypeDef,
   UsageCostsResponse
-> = z.object({
-  object: z.literal("usage.costs"),
-  currency: z.nullable(z.string()),
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  groupBy: z.array(CostsUsageGroupBy$outboundSchema),
-  data: z.array(CostGroupRow$outboundSchema),
-  totalCost: z.number(),
-  totalCostNano: z.string(),
-  unpricedEntries: z.number().int(),
-  asOf: z.number().int(),
-  settlementWindowSeconds: z.number().int(),
-  finalThrough: z.number().int(),
-  final: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    groupBy: "group_by",
-    totalCost: "total_cost",
-    totalCostNano: "total_cost_nano",
-    unpricedEntries: "unpriced_entries",
-    asOf: "as_of",
-    settlementWindowSeconds: "settlement_window_seconds",
-    finalThrough: "final_through",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("usage.costs"),
+    currency: z.nullable(z.string()),
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    groupBy: z.array(CostsUsageGroupBy$outboundSchema),
+    data: z.array(CostGroupRow$outboundSchema),
+    totalCost: z.number(),
+    totalCostNano: z.string(),
+    unpricedEntries: z.number().int(),
+    asOf: z.number().int(),
+    settlementWindowSeconds: z.number().int(),
+    finalThrough: z.number().int(),
+    final: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      groupBy: "group_by",
+      totalCost: "total_cost",
+      totalCostNano: "total_cost_nano",
+      unpricedEntries: "unpriced_entries",
+      asOf: "as_of",
+      settlementWindowSeconds: "settlement_window_seconds",
+      finalThrough: "final_through",
+    });
+  })
+);
 
 export function usageCostsResponseToJSON(
   usageCostsResponse: UsageCostsResponse,

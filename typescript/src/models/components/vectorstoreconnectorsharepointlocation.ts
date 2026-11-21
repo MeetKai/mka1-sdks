@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,15 +28,17 @@ export const VectorStoreConnectorSharePointLocation$inboundSchema: z.ZodType<
   VectorStoreConnectorSharePointLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  site_url: z.string(),
-  library: z.string(),
-  folder: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    "site_url": "siteUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    site_url: z.string(),
+    library: z.string(),
+    folder: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      "site_url": "siteUrl",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorSharePointLocation$Outbound = {
   site_url: string;
@@ -49,15 +51,17 @@ export const VectorStoreConnectorSharePointLocation$outboundSchema: z.ZodType<
   VectorStoreConnectorSharePointLocation$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorSharePointLocation
-> = z.object({
-  siteUrl: z.string(),
-  library: z.string(),
-  folder: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    siteUrl: "site_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    siteUrl: z.string(),
+    library: z.string(),
+    folder: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      siteUrl: "site_url",
+    });
+  })
+);
 
 export function vectorStoreConnectorSharePointLocationToJSON(
   vectorStoreConnectorSharePointLocation:

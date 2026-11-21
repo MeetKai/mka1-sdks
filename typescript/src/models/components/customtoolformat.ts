@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -31,10 +31,12 @@ export const CustomToolFormat$inboundSchema: z.ZodType<
   CustomToolFormat,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  text: TextFormat$inboundSchema,
-  grammar: GrammarFormat$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    text: TextFormat$inboundSchema,
+    grammar: GrammarFormat$inboundSchema,
+  })
+);
 /** @internal */
 export type CustomToolFormat$Outbound =
   | TextFormat$Outbound
@@ -45,7 +47,9 @@ export const CustomToolFormat$outboundSchema: z.ZodType<
   CustomToolFormat$Outbound,
   z.ZodTypeDef,
   CustomToolFormat
-> = z.union([TextFormat$outboundSchema, GrammarFormat$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([TextFormat$outboundSchema, GrammarFormat$outboundSchema])
+);
 
 export function customToolFormatToJSON(
   customToolFormat: CustomToolFormat,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,20 +24,22 @@ export const AddSessionGitHubRepositoryRequest$inboundSchema: z.ZodType<
   AddSessionGitHubRepositoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  repository_id: z.number().int(),
-  "X-On-Behalf-Of": z.string().optional(),
-  PutSessionRepositoryRequest:
-    components.PutSessionRepositoryRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "repository_id": "repositoryId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "PutSessionRepositoryRequest": "putSessionRepositoryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    repository_id: z.number().int(),
+    "X-On-Behalf-Of": z.string().optional(),
+    PutSessionRepositoryRequest:
+      components.PutSessionRepositoryRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "repository_id": "repositoryId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "PutSessionRepositoryRequest": "putSessionRepositoryRequest",
+    });
+  })
+);
 /** @internal */
 export type AddSessionGitHubRepositoryRequest$Outbound = {
   session_id: string;
@@ -51,20 +53,22 @@ export const AddSessionGitHubRepositoryRequest$outboundSchema: z.ZodType<
   AddSessionGitHubRepositoryRequest$Outbound,
   z.ZodTypeDef,
   AddSessionGitHubRepositoryRequest
-> = z.object({
-  sessionId: z.string(),
-  repositoryId: z.number().int(),
-  xOnBehalfOf: z.string().optional(),
-  putSessionRepositoryRequest:
-    components.PutSessionRepositoryRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    repositoryId: "repository_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    putSessionRepositoryRequest: "PutSessionRepositoryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    repositoryId: z.number().int(),
+    xOnBehalfOf: z.string().optional(),
+    putSessionRepositoryRequest:
+      components.PutSessionRepositoryRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      repositoryId: "repository_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      putSessionRepositoryRequest: "PutSessionRepositoryRequest",
+    });
+  })
+);
 
 export function addSessionGitHubRepositoryRequestToJSON(
   addSessionGitHubRepositoryRequest: AddSessionGitHubRepositoryRequest,

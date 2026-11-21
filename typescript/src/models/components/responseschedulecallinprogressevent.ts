@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,8 +32,10 @@ export type ResponseScheduleCallInProgressEvent = {
 
 /** @internal */
 export const ResponseScheduleCallInProgressEventAction$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseScheduleCallInProgressEventAction> = z
-    .nativeEnum(ResponseScheduleCallInProgressEventAction);
+  z.ZodNativeEnum<typeof ResponseScheduleCallInProgressEventAction> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ResponseScheduleCallInProgressEventAction)
+    );
 /** @internal */
 export const ResponseScheduleCallInProgressEventAction$outboundSchema:
   z.ZodNativeEnum<typeof ResponseScheduleCallInProgressEventAction> =
@@ -44,9 +46,11 @@ export const ResponseScheduleCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseScheduleCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  action: ResponseScheduleCallInProgressEventAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: ResponseScheduleCallInProgressEventAction$inboundSchema,
+  })
+);
 /** @internal */
 export type ResponseScheduleCallInProgressEventArgs$Outbound = {
   action: string;
@@ -57,9 +61,11 @@ export const ResponseScheduleCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseScheduleCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseScheduleCallInProgressEventArgs
-> = z.object({
-  action: ResponseScheduleCallInProgressEventAction$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    action: ResponseScheduleCallInProgressEventAction$outboundSchema,
+  })
+);
 
 export function responseScheduleCallInProgressEventArgsToJSON(
   responseScheduleCallInProgressEventArgs:
@@ -92,20 +98,22 @@ export const ResponseScheduleCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseScheduleCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.schedule_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseScheduleCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.schedule_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseScheduleCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseScheduleCallInProgressEvent$Outbound = {
   type: "response.schedule_call.in_progress";
@@ -120,20 +128,22 @@ export const ResponseScheduleCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseScheduleCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseScheduleCallInProgressEvent
-> = z.object({
-  type: z.literal("response.schedule_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseScheduleCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.schedule_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseScheduleCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseScheduleCallInProgressEventToJSON(
   responseScheduleCallInProgressEvent: ResponseScheduleCallInProgressEvent,

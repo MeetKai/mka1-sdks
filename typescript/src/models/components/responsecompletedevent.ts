@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ResponseCompletedEvent$inboundSchema: z.ZodType<
   ResponseCompletedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.completed"),
-  sequence_number: z.number().int(),
-  response: ResponseObject$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.completed"),
+    sequence_number: z.number().int(),
+    response: ResponseObject$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 /** @internal */
 export type ResponseCompletedEvent$Outbound = {
   type: "response.completed";
@@ -46,15 +48,17 @@ export const ResponseCompletedEvent$outboundSchema: z.ZodType<
   ResponseCompletedEvent$Outbound,
   z.ZodTypeDef,
   ResponseCompletedEvent
-> = z.object({
-  type: z.literal("response.completed"),
-  sequenceNumber: z.number().int(),
-  response: ResponseObject$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.completed"),
+    sequenceNumber: z.number().int(),
+    response: ResponseObject$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+    });
+  })
+);
 
 export function responseCompletedEventToJSON(
   responseCompletedEvent: ResponseCompletedEvent,

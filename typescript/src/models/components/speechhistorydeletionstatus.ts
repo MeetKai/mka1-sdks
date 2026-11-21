@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const SpeechHistoryDeletionStatus$inboundSchema: z.ZodType<
   SpeechHistoryDeletionStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.string(),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.string(),
+    deleted: z.literal(true),
+  })
+);
 /** @internal */
 export type SpeechHistoryDeletionStatus$Outbound = {
   id: string;
@@ -47,11 +49,13 @@ export const SpeechHistoryDeletionStatus$outboundSchema: z.ZodType<
   SpeechHistoryDeletionStatus$Outbound,
   z.ZodTypeDef,
   SpeechHistoryDeletionStatus
-> = z.object({
-  id: z.string(),
-  object: z.string(),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.string(),
+    deleted: z.literal(true),
+  })
+);
 
 export function speechHistoryDeletionStatusToJSON(
   speechHistoryDeletionStatus: SpeechHistoryDeletionStatus,

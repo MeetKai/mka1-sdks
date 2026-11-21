@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,18 +27,20 @@ export const CreateStandaloneVolumeRequest$inboundSchema: z.ZodType<
   CreateStandaloneVolumeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "Idempotency-Key": z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeStandaloneVolumeCreate:
-    components.ComputeStandaloneVolumeCreate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Idempotency-Key": "idempotencyKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeStandaloneVolumeCreate": "computeStandaloneVolumeCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "Idempotency-Key": z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeStandaloneVolumeCreate:
+      components.ComputeStandaloneVolumeCreate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Idempotency-Key": "idempotencyKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeStandaloneVolumeCreate": "computeStandaloneVolumeCreate",
+    });
+  })
+);
 /** @internal */
 export type CreateStandaloneVolumeRequest$Outbound = {
   "Idempotency-Key": string;
@@ -52,18 +54,20 @@ export const CreateStandaloneVolumeRequest$outboundSchema: z.ZodType<
   CreateStandaloneVolumeRequest$Outbound,
   z.ZodTypeDef,
   CreateStandaloneVolumeRequest
-> = z.object({
-  idempotencyKey: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  computeStandaloneVolumeCreate:
-    components.ComputeStandaloneVolumeCreate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "Idempotency-Key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeStandaloneVolumeCreate: "ComputeStandaloneVolumeCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    computeStandaloneVolumeCreate:
+      components.ComputeStandaloneVolumeCreate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "Idempotency-Key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeStandaloneVolumeCreate: "ComputeStandaloneVolumeCreate",
+    });
+  })
+);
 
 export function createStandaloneVolumeRequestToJSON(
   createStandaloneVolumeRequest: CreateStandaloneVolumeRequest,
@@ -89,10 +93,12 @@ export const CreateStandaloneVolumeResponse$inboundSchema: z.ZodType<
   CreateStandaloneVolumeResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeStandaloneVolume$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeStandaloneVolume$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateStandaloneVolumeResponse$Outbound =
   | components.ComputeStandaloneVolume$Outbound
@@ -103,10 +109,12 @@ export const CreateStandaloneVolumeResponse$outboundSchema: z.ZodType<
   CreateStandaloneVolumeResponse$Outbound,
   z.ZodTypeDef,
   CreateStandaloneVolumeResponse
-> = z.union([
-  components.ComputeStandaloneVolume$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeStandaloneVolume$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function createStandaloneVolumeResponseToJSON(
   createStandaloneVolumeResponse: CreateStandaloneVolumeResponse,

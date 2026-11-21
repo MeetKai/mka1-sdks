@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,14 +54,16 @@ export const CreateVectorStorePermissionRequest2$inboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantee_type: z.literal("team"),
-  role: GrantableVectorStorePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "grantee_type": "granteeType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantee_type: z.literal("team"),
+    role: GrantableVectorStorePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "grantee_type": "granteeType",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStorePermissionRequest2$Outbound = {
   grantee_type: "team";
@@ -73,14 +75,16 @@ export const CreateVectorStorePermissionRequest2$outboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest2$Outbound,
   z.ZodTypeDef,
   CreateVectorStorePermissionRequest2
-> = z.object({
-  granteeType: z.literal("team"),
-  role: GrantableVectorStorePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    granteeType: "grantee_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granteeType: z.literal("team"),
+    role: GrantableVectorStorePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      granteeType: "grantee_type",
+    });
+  })
+);
 
 export function createVectorStorePermissionRequest2ToJSON(
   createVectorStorePermissionRequest2: CreateVectorStorePermissionRequest2,
@@ -107,16 +111,18 @@ export const CreateVectorStorePermissionRequest1$inboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantee_type: z.literal("user"),
-  user_id: z.string(),
-  role: GrantableVectorStorePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantee_type: z.literal("user"),
+    user_id: z.string(),
+    role: GrantableVectorStorePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStorePermissionRequest1$Outbound = {
   grantee_type: "user";
@@ -129,16 +135,18 @@ export const CreateVectorStorePermissionRequest1$outboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest1$Outbound,
   z.ZodTypeDef,
   CreateVectorStorePermissionRequest1
-> = z.object({
-  granteeType: z.literal("user"),
-  userId: z.string(),
-  role: GrantableVectorStorePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granteeType: z.literal("user"),
+    userId: z.string(),
+    role: GrantableVectorStorePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function createVectorStorePermissionRequest1ToJSON(
   createVectorStorePermissionRequest1: CreateVectorStorePermissionRequest1,
@@ -165,10 +173,12 @@ export const CreateVectorStorePermissionRequest$inboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateVectorStorePermissionRequest1$inboundSchema),
-  z.lazy(() => CreateVectorStorePermissionRequest2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateVectorStorePermissionRequest1$inboundSchema),
+    z.lazy(() => CreateVectorStorePermissionRequest2$inboundSchema),
+  ])
+);
 /** @internal */
 export type CreateVectorStorePermissionRequest$Outbound =
   | CreateVectorStorePermissionRequest1$Outbound
@@ -179,10 +189,12 @@ export const CreateVectorStorePermissionRequest$outboundSchema: z.ZodType<
   CreateVectorStorePermissionRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStorePermissionRequest
-> = z.union([
-  z.lazy(() => CreateVectorStorePermissionRequest1$outboundSchema),
-  z.lazy(() => CreateVectorStorePermissionRequest2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateVectorStorePermissionRequest1$outboundSchema),
+    z.lazy(() => CreateVectorStorePermissionRequest2$outboundSchema),
+  ])
+);
 
 export function createVectorStorePermissionRequestToJSON(
   createVectorStorePermissionRequest: CreateVectorStorePermissionRequest,

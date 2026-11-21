@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const PendingSafetyCheck$inboundSchema: z.ZodType<
   PendingSafetyCheck,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  id: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    id: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type PendingSafetyCheck$Outbound = {
   code: string;
@@ -35,11 +37,13 @@ export const PendingSafetyCheck$outboundSchema: z.ZodType<
   PendingSafetyCheck$Outbound,
   z.ZodTypeDef,
   PendingSafetyCheck
-> = z.object({
-  code: z.string(),
-  id: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    id: z.string(),
+    message: z.string(),
+  })
+);
 
 export function pendingSafetyCheckToJSON(
   pendingSafetyCheck: PendingSafetyCheck,

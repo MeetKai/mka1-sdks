@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const BatchErrors$inboundSchema: z.ZodType<
   BatchErrors,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(BatchErrorData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(BatchErrorData$inboundSchema),
+  })
+);
 /** @internal */
 export type BatchErrors$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const BatchErrors$outboundSchema: z.ZodType<
   BatchErrors$Outbound,
   z.ZodTypeDef,
   BatchErrors
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(BatchErrorData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(BatchErrorData$outboundSchema),
+  })
+);
 
 export function batchErrorsToJSON(batchErrors: BatchErrors): string {
   return JSON.stringify(BatchErrors$outboundSchema.parse(batchErrors));

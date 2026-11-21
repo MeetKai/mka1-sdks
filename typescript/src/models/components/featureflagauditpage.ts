@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,14 +27,16 @@ export const FeatureFlagAuditPage$inboundSchema: z.ZodType<
   FeatureFlagAuditPage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  entries: z.array(FeatureFlagAuditEntry$inboundSchema),
-  next_before: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "next_before": "nextBefore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entries: z.array(FeatureFlagAuditEntry$inboundSchema),
+    next_before: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_before": "nextBefore",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagAuditPage$Outbound = {
   entries: Array<FeatureFlagAuditEntry$Outbound>;
@@ -46,14 +48,16 @@ export const FeatureFlagAuditPage$outboundSchema: z.ZodType<
   FeatureFlagAuditPage$Outbound,
   z.ZodTypeDef,
   FeatureFlagAuditPage
-> = z.object({
-  entries: z.array(FeatureFlagAuditEntry$outboundSchema),
-  nextBefore: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    nextBefore: "next_before",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    entries: z.array(FeatureFlagAuditEntry$outboundSchema),
+    nextBefore: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      nextBefore: "next_before",
+    });
+  })
+);
 
 export function featureFlagAuditPageToJSON(
   featureFlagAuditPage: FeatureFlagAuditPage,

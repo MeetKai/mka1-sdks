@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,10 +35,12 @@ export const ComputeReadiness2$inboundSchema: z.ZodType<
   ComputeReadiness2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  port: z.string(),
-  type: z.literal("tcp"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    port: z.string(),
+    type: z.literal("tcp"),
+  })
+);
 /** @internal */
 export type ComputeReadiness2$Outbound = {
   port: string;
@@ -50,10 +52,12 @@ export const ComputeReadiness2$outboundSchema: z.ZodType<
   ComputeReadiness2$Outbound,
   z.ZodTypeDef,
   ComputeReadiness2
-> = z.object({
-  port: z.string(),
-  type: z.literal("tcp"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    port: z.string(),
+    type: z.literal("tcp"),
+  })
+);
 
 export function computeReadiness2ToJSON(
   computeReadiness2: ComputeReadiness2,
@@ -77,16 +81,18 @@ export const ComputeReadiness1$inboundSchema: z.ZodType<
   ComputeReadiness1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  port: z.string(),
-  success_status: z.number().int().optional(),
-  type: z.literal("http"),
-}).transform((v) => {
-  return remap$(v, {
-    "success_status": "successStatus",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    port: z.string(),
+    success_status: z.number().int().optional(),
+    type: z.literal("http"),
+  }).transform((v) => {
+    return remap$(v, {
+      "success_status": "successStatus",
+    });
+  })
+);
 /** @internal */
 export type ComputeReadiness1$Outbound = {
   path: string;
@@ -100,16 +106,18 @@ export const ComputeReadiness1$outboundSchema: z.ZodType<
   ComputeReadiness1$Outbound,
   z.ZodTypeDef,
   ComputeReadiness1
-> = z.object({
-  path: z.string(),
-  port: z.string(),
-  successStatus: z.number().int().optional(),
-  type: z.literal("http"),
-}).transform((v) => {
-  return remap$(v, {
-    successStatus: "success_status",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    port: z.string(),
+    successStatus: z.number().int().optional(),
+    type: z.literal("http"),
+  }).transform((v) => {
+    return remap$(v, {
+      successStatus: "success_status",
+    });
+  })
+);
 
 export function computeReadiness1ToJSON(
   computeReadiness1: ComputeReadiness1,
@@ -133,10 +141,12 @@ export const ComputeReadiness$inboundSchema: z.ZodType<
   ComputeReadiness,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ComputeReadiness1$inboundSchema),
-  z.lazy(() => ComputeReadiness2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ComputeReadiness1$inboundSchema),
+    z.lazy(() => ComputeReadiness2$inboundSchema),
+  ])
+);
 /** @internal */
 export type ComputeReadiness$Outbound =
   | ComputeReadiness1$Outbound
@@ -147,10 +157,12 @@ export const ComputeReadiness$outboundSchema: z.ZodType<
   ComputeReadiness$Outbound,
   z.ZodTypeDef,
   ComputeReadiness
-> = z.union([
-  z.lazy(() => ComputeReadiness1$outboundSchema),
-  z.lazy(() => ComputeReadiness2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ComputeReadiness1$outboundSchema),
+    z.lazy(() => ComputeReadiness2$outboundSchema),
+  ])
+);
 
 export function computeReadinessToJSON(
   computeReadiness: ComputeReadiness,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,12 +33,14 @@ export const OrganizationMetadataOutput$inboundSchema: z.ZodType<
   OrganizationMetadataOutput,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    codeConfig: z.nullable(OrganizationCodeConfig$inboundSchema).optional(),
-  }).catchall(Schema1$inboundSchema),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      codeConfig: z.nullable(OrganizationCodeConfig$inboundSchema).optional(),
+    }).catchall(Schema1$inboundSchema),
+    "additionalProperties",
+    true,
+  )
 );
 /** @internal */
 export type OrganizationMetadataOutput$Outbound = {
@@ -50,17 +53,20 @@ export const OrganizationMetadataOutput$outboundSchema: z.ZodType<
   OrganizationMetadataOutput$Outbound,
   z.ZodTypeDef,
   OrganizationMetadataOutput
-> = z.object({
-  codeConfig: z.nullable(OrganizationCodeConfig$outboundSchema).optional(),
-  additionalProperties: z.record(z.nullable(Schema1$outboundSchema)).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    codeConfig: z.nullable(OrganizationCodeConfig$outboundSchema).optional(),
+    additionalProperties: z.record(z.nullable(Schema1$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function organizationMetadataOutputToJSON(
   organizationMetadataOutput: OrganizationMetadataOutput,

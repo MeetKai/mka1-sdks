@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,8 +24,8 @@ export type ClusterInviteSeedQuota = {
 };
 
 /** @internal */
-export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> = z
-  .nativeEnum(Period);
+export const Period$inboundSchema: z.ZodNativeEnum<typeof Period> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Period));
 /** @internal */
 export const Period$outboundSchema: z.ZodNativeEnum<typeof Period> =
   Period$inboundSchema;
@@ -35,11 +35,13 @@ export const ClusterInviteSeedQuota$inboundSchema: z.ZodType<
   ClusterInviteSeedQuota,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  period: z.nullable(Period$inboundSchema),
-  max: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    period: z.nullable(Period$inboundSchema),
+    max: z.nullable(z.number().int()),
+  })
+);
 /** @internal */
 export type ClusterInviteSeedQuota$Outbound = {
   enabled: boolean;
@@ -52,11 +54,13 @@ export const ClusterInviteSeedQuota$outboundSchema: z.ZodType<
   ClusterInviteSeedQuota$Outbound,
   z.ZodTypeDef,
   ClusterInviteSeedQuota
-> = z.object({
-  enabled: z.boolean(),
-  period: z.nullable(Period$outboundSchema),
-  max: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    period: z.nullable(Period$outboundSchema),
+    max: z.nullable(z.number().int()),
+  })
+);
 
 export function clusterInviteSeedQuotaToJSON(
   clusterInviteSeedQuota: ClusterInviteSeedQuota,

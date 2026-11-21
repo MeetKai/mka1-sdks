@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const ResponseApprovalCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseApprovalCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool: z.string(),
+  })
+);
 /** @internal */
 export type ResponseApprovalCallInProgressEventArgs$Outbound = {
   tool: string;
@@ -38,9 +40,11 @@ export const ResponseApprovalCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseApprovalCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseApprovalCallInProgressEventArgs
-> = z.object({
-  tool: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool: z.string(),
+  })
+);
 
 export function responseApprovalCallInProgressEventArgsToJSON(
   responseApprovalCallInProgressEventArgs:
@@ -73,20 +77,22 @@ export const ResponseApprovalCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseApprovalCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.approval_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseApprovalCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.approval_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseApprovalCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseApprovalCallInProgressEvent$Outbound = {
   type: "response.approval_call.in_progress";
@@ -101,20 +107,22 @@ export const ResponseApprovalCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseApprovalCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseApprovalCallInProgressEvent
-> = z.object({
-  type: z.literal("response.approval_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseApprovalCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.approval_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseApprovalCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseApprovalCallInProgressEventToJSON(
   responseApprovalCallInProgressEvent: ResponseApprovalCallInProgressEvent,

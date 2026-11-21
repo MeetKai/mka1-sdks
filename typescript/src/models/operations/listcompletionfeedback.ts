@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -54,9 +54,10 @@ export type ListCompletionFeedbackRequest = {
 
 /** @internal */
 export const ListCompletionFeedbackQueryParamOrder$inboundSchema:
-  z.ZodNativeEnum<typeof ListCompletionFeedbackQueryParamOrder> = z.nativeEnum(
-    ListCompletionFeedbackQueryParamOrder,
-  );
+  z.ZodNativeEnum<typeof ListCompletionFeedbackQueryParamOrder> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListCompletionFeedbackQueryParamOrder)
+    );
 /** @internal */
 export const ListCompletionFeedbackQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListCompletionFeedbackQueryParamOrder> =
@@ -65,7 +66,7 @@ export const ListCompletionFeedbackQueryParamOrder$outboundSchema:
 /** @internal */
 export const QueryParamRating$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamRating
-> = z.nativeEnum(QueryParamRating);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamRating));
 /** @internal */
 export const QueryParamRating$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamRating
@@ -76,17 +77,19 @@ export const ListCompletionFeedbackRequest$inboundSchema: z.ZodType<
   ListCompletionFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListCompletionFeedbackQueryParamOrder$inboundSchema.default("desc"),
-  rating: QueryParamRating$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListCompletionFeedbackQueryParamOrder$inboundSchema.default("desc"),
+    rating: QueryParamRating$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListCompletionFeedbackRequest$Outbound = {
   after?: string | undefined;
@@ -101,17 +104,19 @@ export const ListCompletionFeedbackRequest$outboundSchema: z.ZodType<
   ListCompletionFeedbackRequest$Outbound,
   z.ZodTypeDef,
   ListCompletionFeedbackRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListCompletionFeedbackQueryParamOrder$outboundSchema.default("desc"),
-  rating: QueryParamRating$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListCompletionFeedbackQueryParamOrder$outboundSchema.default("desc"),
+    rating: QueryParamRating$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listCompletionFeedbackRequestToJSON(
   listCompletionFeedbackRequest: ListCompletionFeedbackRequest,

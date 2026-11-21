@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,16 +22,18 @@ export const ImportOpenApiToolSetRequest$inboundSchema: z.ZodType<
   ImportOpenApiToolSetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ImportOpenApiToolSetRequest:
-    components.ImportOpenApiToolSetRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ImportOpenApiToolSetRequest": "importOpenApiToolSetRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ImportOpenApiToolSetRequest:
+      components.ImportOpenApiToolSetRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ImportOpenApiToolSetRequest": "importOpenApiToolSetRequest",
+    });
+  })
+);
 /** @internal */
 export type ImportOpenApiToolSetRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -43,16 +45,18 @@ export const ImportOpenApiToolSetRequest$outboundSchema: z.ZodType<
   ImportOpenApiToolSetRequest$Outbound,
   z.ZodTypeDef,
   ImportOpenApiToolSetRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  importOpenApiToolSetRequest:
-    components.ImportOpenApiToolSetRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    importOpenApiToolSetRequest: "ImportOpenApiToolSetRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    importOpenApiToolSetRequest:
+      components.ImportOpenApiToolSetRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      importOpenApiToolSetRequest: "ImportOpenApiToolSetRequest",
+    });
+  })
+);
 
 export function importOpenApiToolSetRequestToJSON(
   importOpenApiToolSetRequest: ImportOpenApiToolSetRequest,

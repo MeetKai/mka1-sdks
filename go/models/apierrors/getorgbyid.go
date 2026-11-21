@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetOrgByIDInternalServerError struct {
 var _ error = &GetOrgByIDInternalServerError{}
 
 func (e *GetOrgByIDInternalServerError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetOrgByIDTooManyRequestsError struct {
 var _ error = &GetOrgByIDTooManyRequestsError{}
 
 func (e *GetOrgByIDTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetOrgByIDGoneError struct {
 var _ error = &GetOrgByIDGoneError{}
 
 func (e *GetOrgByIDGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetOrgByIDConflictError struct {
 var _ error = &GetOrgByIDConflictError{}
 
 func (e *GetOrgByIDConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -68,6 +93,12 @@ type GetOrgByIDNotFoundError struct {
 var _ error = &GetOrgByIDNotFoundError{}
 
 func (e *GetOrgByIDNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +113,15 @@ type GetOrgByIDForbiddenError struct {
 var _ error = &GetOrgByIDForbiddenError{}
 
 func (e *GetOrgByIDForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetOrgByIDUnauthorizedError struct {
 var _ error = &GetOrgByIDUnauthorizedError{}
 
 func (e *GetOrgByIDUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -108,6 +154,12 @@ type GetOrgByIDBadRequestError struct {
 var _ error = &GetOrgByIDBadRequestError{}
 
 func (e *GetOrgByIDBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

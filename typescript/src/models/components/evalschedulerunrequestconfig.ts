@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,28 +32,30 @@ export const EvalScheduleRunRequestConfig$inboundSchema: z.ZodType<
   EvalScheduleRunRequestConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  models: z.array(z.string()),
-  task_ids: z.array(z.string()).optional(),
-  judge_model: z.string().optional(),
-  embedding_model: z.string().optional(),
-  generation: EvalGenerationRequestConfig$inboundSchema.optional(),
-  generation_concurrency: z.number().int().optional(),
-  concurrency: z.number().int().optional(),
-  grader_concurrency: z.number().int().optional(),
-  max_samples_per_task: z.number().int().optional(),
-  max_workflow_sample_activities: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_ids": "taskIds",
-    "judge_model": "judgeModel",
-    "embedding_model": "embeddingModel",
-    "generation_concurrency": "generationConcurrency",
-    "grader_concurrency": "graderConcurrency",
-    "max_samples_per_task": "maxSamplesPerTask",
-    "max_workflow_sample_activities": "maxWorkflowSampleActivities",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    models: z.array(z.string()),
+    task_ids: z.array(z.string()).optional(),
+    judge_model: z.string().optional(),
+    embedding_model: z.string().optional(),
+    generation: EvalGenerationRequestConfig$inboundSchema.optional(),
+    generation_concurrency: z.number().int().optional(),
+    concurrency: z.number().int().optional(),
+    grader_concurrency: z.number().int().optional(),
+    max_samples_per_task: z.number().int().optional(),
+    max_workflow_sample_activities: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "task_ids": "taskIds",
+      "judge_model": "judgeModel",
+      "embedding_model": "embeddingModel",
+      "generation_concurrency": "generationConcurrency",
+      "grader_concurrency": "graderConcurrency",
+      "max_samples_per_task": "maxSamplesPerTask",
+      "max_workflow_sample_activities": "maxWorkflowSampleActivities",
+    });
+  })
+);
 /** @internal */
 export type EvalScheduleRunRequestConfig$Outbound = {
   models: Array<string>;
@@ -73,28 +75,30 @@ export const EvalScheduleRunRequestConfig$outboundSchema: z.ZodType<
   EvalScheduleRunRequestConfig$Outbound,
   z.ZodTypeDef,
   EvalScheduleRunRequestConfig
-> = z.object({
-  models: z.array(z.string()),
-  taskIds: z.array(z.string()).optional(),
-  judgeModel: z.string().optional(),
-  embeddingModel: z.string().optional(),
-  generation: EvalGenerationRequestConfig$outboundSchema.optional(),
-  generationConcurrency: z.number().int().optional(),
-  concurrency: z.number().int().optional(),
-  graderConcurrency: z.number().int().optional(),
-  maxSamplesPerTask: z.number().int().optional(),
-  maxWorkflowSampleActivities: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskIds: "task_ids",
-    judgeModel: "judge_model",
-    embeddingModel: "embedding_model",
-    generationConcurrency: "generation_concurrency",
-    graderConcurrency: "grader_concurrency",
-    maxSamplesPerTask: "max_samples_per_task",
-    maxWorkflowSampleActivities: "max_workflow_sample_activities",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    models: z.array(z.string()),
+    taskIds: z.array(z.string()).optional(),
+    judgeModel: z.string().optional(),
+    embeddingModel: z.string().optional(),
+    generation: EvalGenerationRequestConfig$outboundSchema.optional(),
+    generationConcurrency: z.number().int().optional(),
+    concurrency: z.number().int().optional(),
+    graderConcurrency: z.number().int().optional(),
+    maxSamplesPerTask: z.number().int().optional(),
+    maxWorkflowSampleActivities: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskIds: "task_ids",
+      judgeModel: "judge_model",
+      embeddingModel: "embedding_model",
+      generationConcurrency: "generation_concurrency",
+      graderConcurrency: "grader_concurrency",
+      maxSamplesPerTask: "max_samples_per_task",
+      maxWorkflowSampleActivities: "max_workflow_sample_activities",
+    });
+  })
+);
 
 export function evalScheduleRunRequestConfigToJSON(
   evalScheduleRunRequestConfig: EvalScheduleRunRequestConfig,

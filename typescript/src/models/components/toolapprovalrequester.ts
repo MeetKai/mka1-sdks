@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,19 +35,21 @@ export const ToolApprovalRequester$inboundSchema: z.ZodType<
   ToolApprovalRequester,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_id: z.string(),
-  user_type: z.string(),
-  external_user_id: z.nullable(z.string()),
-  team_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-    "user_type": "userType",
-    "external_user_id": "externalUserId",
-    "team_id": "teamId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_id: z.string(),
+    user_type: z.string(),
+    external_user_id: z.nullable(z.string()),
+    team_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_id": "userId",
+      "user_type": "userType",
+      "external_user_id": "externalUserId",
+      "team_id": "teamId",
+    });
+  })
+);
 /** @internal */
 export type ToolApprovalRequester$Outbound = {
   user_id: string;
@@ -61,19 +63,21 @@ export const ToolApprovalRequester$outboundSchema: z.ZodType<
   ToolApprovalRequester$Outbound,
   z.ZodTypeDef,
   ToolApprovalRequester
-> = z.object({
-  userId: z.string(),
-  userType: z.string(),
-  externalUserId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-    userType: "user_type",
-    externalUserId: "external_user_id",
-    teamId: "team_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+    userType: z.string(),
+    externalUserId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+      userType: "user_type",
+      externalUserId: "external_user_id",
+      teamId: "team_id",
+    });
+  })
+);
 
 export function toolApprovalRequesterToJSON(
   toolApprovalRequester: ToolApprovalRequester,

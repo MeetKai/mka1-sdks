@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const WorkspaceManifest$inboundSchema: z.ZodType<
   WorkspaceManifest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  files: z.array(WorkspaceFile$inboundSchema).optional(),
-  paths: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    files: z.array(WorkspaceFile$inboundSchema).optional(),
+    paths: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+    });
+  })
+);
 /** @internal */
 export type WorkspaceManifest$Outbound = {
   session_id: string;
@@ -46,15 +48,17 @@ export const WorkspaceManifest$outboundSchema: z.ZodType<
   WorkspaceManifest$Outbound,
   z.ZodTypeDef,
   WorkspaceManifest
-> = z.object({
-  sessionId: z.string(),
-  files: z.array(WorkspaceFile$outboundSchema).optional(),
-  paths: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    files: z.array(WorkspaceFile$outboundSchema).optional(),
+    paths: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+    });
+  })
+);
 
 export function workspaceManifestToJSON(
   workspaceManifest: WorkspaceManifest,

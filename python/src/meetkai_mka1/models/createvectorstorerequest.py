@@ -6,7 +6,13 @@ from .staticchunkingstrategy import (
     StaticChunkingStrategy,
     StaticChunkingStrategyTypedDict,
 )
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import Field, model_serializer
@@ -124,6 +130,9 @@ class CreateVectorStoreRequest(BaseModel):
     r"""Graph expansion depth for graph-mode queries (1-4, engine default 2). Only valid for graph stores."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -140,11 +149,15 @@ class CreateVectorStoreRequest(BaseModel):
                 "max_hops",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

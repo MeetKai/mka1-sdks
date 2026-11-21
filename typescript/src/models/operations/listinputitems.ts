@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +55,7 @@ export type ListInputItemsRequest = {
 /** @internal */
 export const QueryParamInclude$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamInclude
-> = z.nativeEnum(QueryParamInclude);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamInclude));
 /** @internal */
 export const QueryParamInclude$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamInclude
@@ -61,7 +64,9 @@ export const QueryParamInclude$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ListInputItemsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListInputItemsQueryParamOrder
-> = z.nativeEnum(ListInputItemsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListInputItemsQueryParamOrder)
+);
 /** @internal */
 export const ListInputItemsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListInputItemsQueryParamOrder
@@ -72,19 +77,21 @@ export const ListInputItemsRequest$inboundSchema: z.ZodType<
   ListInputItemsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  after: z.string().optional(),
-  include: z.array(QueryParamInclude$inboundSchema).optional(),
-  limit: z.number().int().default(20),
-  order: ListInputItemsQueryParamOrder$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    after: z.string().optional(),
+    include: z.array(QueryParamInclude$inboundSchema).optional(),
+    limit: z.number().int().default(20),
+    order: ListInputItemsQueryParamOrder$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListInputItemsRequest$Outbound = {
   response_id: string;
@@ -100,19 +107,23 @@ export const ListInputItemsRequest$outboundSchema: z.ZodType<
   ListInputItemsRequest$Outbound,
   z.ZodTypeDef,
   ListInputItemsRequest
-> = z.object({
-  responseId: z.string(),
-  after: z.string().optional(),
-  include: z.array(QueryParamInclude$outboundSchema).optional(),
-  limit: z.number().int().default(20),
-  order: ListInputItemsQueryParamOrder$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string().refine(matchesPattern$("^resp[-_][a-zA-Z0-9]+$"), {
+      message: "Value must match pattern ^resp[-_][a-zA-Z0-9]+$",
+    }),
+    after: z.string().optional(),
+    include: z.array(QueryParamInclude$outboundSchema).optional(),
+    limit: z.number().int().default(20),
+    order: ListInputItemsQueryParamOrder$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listInputItemsRequestToJSON(
   listInputItemsRequest: ListInputItemsRequest,

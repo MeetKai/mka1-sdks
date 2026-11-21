@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteVectorStoreConnectorRequest$inboundSchema: z.ZodType<
   DeleteVectorStoreConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteVectorStoreConnectorRequest$Outbound = {
   connector_id: string;
@@ -41,15 +43,17 @@ export const DeleteVectorStoreConnectorRequest$outboundSchema: z.ZodType<
   DeleteVectorStoreConnectorRequest$Outbound,
   z.ZodTypeDef,
   DeleteVectorStoreConnectorRequest
-> = z.object({
-  connectorId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteVectorStoreConnectorRequestToJSON(
   deleteVectorStoreConnectorRequest: DeleteVectorStoreConnectorRequest,

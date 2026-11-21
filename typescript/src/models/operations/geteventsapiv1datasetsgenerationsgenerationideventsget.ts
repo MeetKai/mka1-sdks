@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,15 +22,17 @@ export const GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest$inbou
     GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    generation_id: z.string(),
-    "X-On-Behalf-Of": z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "generation_id": "generationId",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generation_id: z.string(),
+      "X-On-Behalf-Of": z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "generation_id": "generationId",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+      });
+    })
+  );
 /** @internal */
 export type GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest$Outbound =
   {
@@ -44,15 +46,17 @@ export const GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest$outbo
     GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest$Outbound,
     z.ZodTypeDef,
     GetEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest
-  > = z.object({
-    generationId: z.string(),
-    xOnBehalfOf: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      generationId: "generation_id",
-      xOnBehalfOf: "X-On-Behalf-Of",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generationId: z.string(),
+      xOnBehalfOf: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        generationId: "generation_id",
+        xOnBehalfOf: "X-On-Behalf-Of",
+      });
+    })
+  );
 
 export function getEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequestToJSON(
   getEventsApiV1DatasetsGenerationsGenerationIdEventsGetRequest:

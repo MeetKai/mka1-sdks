@@ -4,7 +4,14 @@ from __future__ import annotations
 from .classifierconfig import ClassifierConfig, ClassifierConfigTypedDict
 from .guardrailinputsource import GuardrailInputSource
 from .outputwindow import OutputWindow, OutputWindowTypedDict
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
@@ -62,6 +69,9 @@ class ClassifierGuardrail(BaseModel):
     r"""Request sources this guardrail checks before they reach the model. Omit to use the mode's default: every source for classifier; every source except system for ban_words, since instructions often name the terms they forbid; only what the user sends for prompt_injection and leakage, whose keyword patterns match ordinary instructions, replies and documents. An empty list checks no input, so the rule only checks output when check_output is set. Rules saved before this field existed were set to user messages only."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -72,11 +82,15 @@ class ClassifierGuardrail(BaseModel):
                 "input_sources",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

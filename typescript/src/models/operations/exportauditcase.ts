@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type ExportAuditCaseResponse =
 /** @internal */
 export const QueryParamFormat$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamFormat
-> = z.nativeEnum(QueryParamFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamFormat));
 /** @internal */
 export const QueryParamFormat$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamFormat
@@ -58,17 +58,19 @@ export const ExportAuditCaseRequest$inboundSchema: z.ZodType<
   ExportAuditCaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  format: QueryParamFormat$inboundSchema.default("json"),
-  orgId: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    format: QueryParamFormat$inboundSchema.default("json"),
+    orgId: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ExportAuditCaseRequest$Outbound = {
   response_id: string;
@@ -82,17 +84,19 @@ export const ExportAuditCaseRequest$outboundSchema: z.ZodType<
   ExportAuditCaseRequest$Outbound,
   z.ZodTypeDef,
   ExportAuditCaseRequest
-> = z.object({
-  responseId: z.string(),
-  format: QueryParamFormat$outboundSchema.default("json"),
-  orgId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string(),
+    format: QueryParamFormat$outboundSchema.default("json"),
+    orgId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function exportAuditCaseRequestToJSON(
   exportAuditCaseRequest: ExportAuditCaseRequest,
@@ -116,7 +120,7 @@ export const ExportAuditCaseResponseBody$inboundSchema: z.ZodType<
   ExportAuditCaseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ExportAuditCaseResponseBody$Outbound = {};
 
@@ -125,7 +129,7 @@ export const ExportAuditCaseResponseBody$outboundSchema: z.ZodType<
   ExportAuditCaseResponseBody$Outbound,
   z.ZodTypeDef,
   ExportAuditCaseResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function exportAuditCaseResponseBodyToJSON(
   exportAuditCaseResponseBody: ExportAuditCaseResponseBody,
@@ -151,12 +155,14 @@ export const ExportAuditCaseResponse$inboundSchema: z.ZodType<
   ExportAuditCaseResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ExportAuditCaseResponseBody$inboundSchema),
-  z.string(),
-  z.string(),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ExportAuditCaseResponseBody$inboundSchema),
+    z.string(),
+    z.string(),
+    z.string(),
+  ])
+);
 /** @internal */
 export type ExportAuditCaseResponse$Outbound =
   | ExportAuditCaseResponseBody$Outbound
@@ -169,12 +175,14 @@ export const ExportAuditCaseResponse$outboundSchema: z.ZodType<
   ExportAuditCaseResponse$Outbound,
   z.ZodTypeDef,
   ExportAuditCaseResponse
-> = z.union([
-  z.lazy(() => ExportAuditCaseResponseBody$outboundSchema),
-  z.string(),
-  z.string(),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ExportAuditCaseResponseBody$outboundSchema),
+    z.string(),
+    z.string(),
+    z.string(),
+  ])
+);
 
 export function exportAuditCaseResponseToJSON(
   exportAuditCaseResponse: ExportAuditCaseResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,17 +24,19 @@ export const QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest$in
     QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    generator_id: z.string(),
-    "X-On-Behalf-Of": z.string().optional(),
-    QuoteRequest: components.QuoteRequest$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "generator_id": "generatorId",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-      "QuoteRequest": "quoteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generator_id: z.string(),
+      "X-On-Behalf-Of": z.string().optional(),
+      QuoteRequest: components.QuoteRequest$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "generator_id": "generatorId",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+        "QuoteRequest": "quoteRequest",
+      });
+    })
+  );
 /** @internal */
 export type QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest$Outbound =
   {
@@ -49,17 +51,19 @@ export const QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest$ou
     QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest$Outbound,
     z.ZodTypeDef,
     QuoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest
-  > = z.object({
-    generatorId: z.string(),
-    xOnBehalfOf: z.string().optional(),
-    quoteRequest: components.QuoteRequest$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      generatorId: "generator_id",
-      xOnBehalfOf: "X-On-Behalf-Of",
-      quoteRequest: "QuoteRequest",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generatorId: z.string(),
+      xOnBehalfOf: z.string().optional(),
+      quoteRequest: components.QuoteRequest$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        generatorId: "generator_id",
+        xOnBehalfOf: "X-On-Behalf-Of",
+        quoteRequest: "QuoteRequest",
+      });
+    })
+  );
 
 export function quoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequestToJSON(
   quoteGeneratorApiV1DatasetsGeneratorsGeneratorIdQuotePostRequest:

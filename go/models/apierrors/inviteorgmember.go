@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type InviteOrgMemberTooManyRequestsError struct {
 var _ error = &InviteOrgMemberTooManyRequestsError{}
 
 func (e *InviteOrgMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type InviteOrgMemberGoneError struct {
 var _ error = &InviteOrgMemberGoneError{}
 
 func (e *InviteOrgMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type InviteOrgMemberConflictError struct {
 var _ error = &InviteOrgMemberConflictError{}
 
 func (e *InviteOrgMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type InviteOrgMemberNotFoundError struct {
 var _ error = &InviteOrgMemberNotFoundError{}
 
 func (e *InviteOrgMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type InviteOrgMemberForbiddenError struct {
 var _ error = &InviteOrgMemberForbiddenError{}
 
 func (e *InviteOrgMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type InviteOrgMemberUnauthorizedError struct {
 var _ error = &InviteOrgMemberUnauthorizedError{}
 
 func (e *InviteOrgMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type InviteOrgMemberBadRequestError struct {
 var _ error = &InviteOrgMemberBadRequestError{}
 
 func (e *InviteOrgMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

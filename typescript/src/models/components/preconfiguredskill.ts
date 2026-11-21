@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,11 +24,13 @@ export const PreconfiguredSkill$inboundSchema: z.ZodType<
   PreconfiguredSkill,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  object: z.literal("preconfigured_skill").default("preconfigured_skill"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    object: z.literal("preconfigured_skill").default("preconfigured_skill"),
+  })
+);
 /** @internal */
 export type PreconfiguredSkill$Outbound = {
   name: string;
@@ -41,13 +43,15 @@ export const PreconfiguredSkill$outboundSchema: z.ZodType<
   PreconfiguredSkill$Outbound,
   z.ZodTypeDef,
   PreconfiguredSkill
-> = z.object({
-  name: z.string(),
-  description: z.string(),
-  object: z.literal("preconfigured_skill").default(
-    "preconfigured_skill" as const,
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string(),
+    object: z.literal("preconfigured_skill").default(
+      "preconfigured_skill" as const,
+    ),
+  })
+);
 
 export function preconfiguredSkillToJSON(
   preconfiguredSkill: PreconfiguredSkill,

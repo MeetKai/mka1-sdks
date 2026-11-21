@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,29 +42,31 @@ export const EvalSuiteObject$inboundSchema: z.ZodType<
   EvalSuiteObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  org_id: z.string(),
-  team_id: z.string(),
-  access: EvalSuiteAccess$inboundSchema,
-  active_version: z.number().int(),
-  latest_version: z.number().int(),
-  metadata: z.record(z.string()),
-  created_at: z.number().int(),
-  updated_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "team_id": "teamId",
-    "active_version": "activeVersion",
-    "latest_version": "latestVersion",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    org_id: z.string(),
+    team_id: z.string(),
+    access: EvalSuiteAccess$inboundSchema,
+    active_version: z.number().int(),
+    latest_version: z.number().int(),
+    metadata: z.record(z.string()),
+    created_at: z.number().int(),
+    updated_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "team_id": "teamId",
+      "active_version": "activeVersion",
+      "latest_version": "latestVersion",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteObject$Outbound = {
   id: string;
@@ -86,29 +88,31 @@ export const EvalSuiteObject$outboundSchema: z.ZodType<
   EvalSuiteObject$Outbound,
   z.ZodTypeDef,
   EvalSuiteObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  orgId: z.string(),
-  teamId: z.string(),
-  access: EvalSuiteAccess$outboundSchema,
-  activeVersion: z.number().int(),
-  latestVersion: z.number().int(),
-  metadata: z.record(z.string()),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    teamId: "team_id",
-    activeVersion: "active_version",
-    latestVersion: "latest_version",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    orgId: z.string(),
+    teamId: z.string(),
+    access: EvalSuiteAccess$outboundSchema,
+    activeVersion: z.number().int(),
+    latestVersion: z.number().int(),
+    metadata: z.record(z.string()),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      teamId: "team_id",
+      activeVersion: "active_version",
+      latestVersion: "latest_version",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function evalSuiteObjectToJSON(
   evalSuiteObject: EvalSuiteObject,

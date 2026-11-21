@@ -7,7 +7,13 @@ from .staticchunkingstrategy import (
     StaticChunkingStrategy,
     StaticChunkingStrategyTypedDict,
 )
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from pydantic import Field, model_serializer
 from typing import Dict, List, Optional, Union
 from typing_extensions import Annotated, NotRequired, TypeAliasType, TypedDict
@@ -76,15 +82,22 @@ class CreateVectorStoreFileBatchRequest(BaseModel):
     r"""When a file has the same content (SHA-256) as a file the store already holds, or as an earlier file in this batch, skip it instead of refusing the batch. A skipped file gets a cancelled row whose last_error is duplicate_file and names the file that holds the content. Default false: a duplicate fails the whole batch with 409 and nothing is attached."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["file_ids", "files", "attributes", "chunking_strategy", "skip_duplicates"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

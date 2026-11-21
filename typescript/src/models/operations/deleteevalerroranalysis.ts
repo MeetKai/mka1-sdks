@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const DeleteEvalErrorAnalysisRequest$inboundSchema: z.ZodType<
   DeleteEvalErrorAnalysisRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  analysis_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "analysis_id": "analysisId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    analysis_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "analysis_id": "analysisId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteEvalErrorAnalysisRequest$Outbound = {
   suite_id: string;
@@ -45,17 +47,19 @@ export const DeleteEvalErrorAnalysisRequest$outboundSchema: z.ZodType<
   DeleteEvalErrorAnalysisRequest$Outbound,
   z.ZodTypeDef,
   DeleteEvalErrorAnalysisRequest
-> = z.object({
-  suiteId: z.string(),
-  analysisId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    analysisId: "analysis_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    analysisId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      analysisId: "analysis_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteEvalErrorAnalysisRequestToJSON(
   deleteEvalErrorAnalysisRequest: DeleteEvalErrorAnalysisRequest,

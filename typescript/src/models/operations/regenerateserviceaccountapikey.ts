@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,16 +32,18 @@ export const RegenerateServiceAccountApiKeyRequest$inboundSchema: z.ZodType<
   RegenerateServiceAccountApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RegenerateServiceAccountApiKeyRequest$Outbound = {
   orgId: string;
@@ -55,16 +57,18 @@ export const RegenerateServiceAccountApiKeyRequest$outboundSchema: z.ZodType<
   RegenerateServiceAccountApiKeyRequest$Outbound,
   z.ZodTypeDef,
   RegenerateServiceAccountApiKeyRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function regenerateServiceAccountApiKeyRequestToJSON(
   regenerateServiceAccountApiKeyRequest: RegenerateServiceAccountApiKeyRequest,
@@ -89,11 +93,13 @@ export function regenerateServiceAccountApiKeyRequestFromJSON(
 /** @internal */
 export const RegenerateServiceAccountApiKeyResponseBody$inboundSchema:
   z.ZodType<RegenerateServiceAccountApiKeyResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      id: z.string(),
-      key: z.string(),
-      start: z.string(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        id: z.string(),
+        key: z.string(),
+        start: z.string(),
+      })
+    );
 /** @internal */
 export type RegenerateServiceAccountApiKeyResponseBody$Outbound = {
   id: string;
@@ -107,11 +113,13 @@ export const RegenerateServiceAccountApiKeyResponseBody$outboundSchema:
     RegenerateServiceAccountApiKeyResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateServiceAccountApiKeyResponseBody
-  > = z.object({
-    id: z.string(),
-    key: z.string(),
-    start: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      key: z.string(),
+      start: z.string(),
+    })
+  );
 
 export function regenerateServiceAccountApiKeyResponseBodyToJSON(
   regenerateServiceAccountApiKeyResponseBody:

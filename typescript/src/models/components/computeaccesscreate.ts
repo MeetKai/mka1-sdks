@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ComputeAccessCreate$inboundSchema: z.ZodType<
   ComputeAccessCreate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh_public_key: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ssh_public_key": "sshPublicKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh_public_key: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ssh_public_key": "sshPublicKey",
+    });
+  })
+);
 /** @internal */
 export type ComputeAccessCreate$Outbound = {
   ssh_public_key?: string | undefined;
@@ -34,13 +36,15 @@ export const ComputeAccessCreate$outboundSchema: z.ZodType<
   ComputeAccessCreate$Outbound,
   z.ZodTypeDef,
   ComputeAccessCreate
-> = z.object({
-  sshPublicKey: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sshPublicKey: "ssh_public_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sshPublicKey: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sshPublicKey: "ssh_public_key",
+    });
+  })
+);
 
 export function computeAccessCreateToJSON(
   computeAccessCreate: ComputeAccessCreate,

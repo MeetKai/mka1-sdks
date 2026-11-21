@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateMcpCredentialRequest$inboundSchema: z.ZodType<
   CreateMcpCredentialRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateMcpCredentialRequest:
-    components.CreateMcpCredentialRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateMcpCredentialRequest": "createMcpCredentialRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateMcpCredentialRequest:
+      components.CreateMcpCredentialRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateMcpCredentialRequest": "createMcpCredentialRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateMcpCredentialRequest$Outbound = {
   server_id: string;
@@ -47,18 +49,20 @@ export const CreateMcpCredentialRequest$outboundSchema: z.ZodType<
   CreateMcpCredentialRequest$Outbound,
   z.ZodTypeDef,
   CreateMcpCredentialRequest
-> = z.object({
-  serverId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createMcpCredentialRequest:
-    components.CreateMcpCredentialRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createMcpCredentialRequest: "CreateMcpCredentialRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createMcpCredentialRequest:
+      components.CreateMcpCredentialRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createMcpCredentialRequest: "CreateMcpCredentialRequest",
+    });
+  })
+);
 
 export function createMcpCredentialRequestToJSON(
   createMcpCredentialRequest: CreateMcpCredentialRequest,

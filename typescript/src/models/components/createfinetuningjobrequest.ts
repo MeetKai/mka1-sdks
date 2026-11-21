@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -76,7 +76,7 @@ export const HyperparametersBatchSize$inboundSchema: z.ZodType<
   HyperparametersBatchSize,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type HyperparametersBatchSize$Outbound = string | number;
 
@@ -85,7 +85,7 @@ export const HyperparametersBatchSize$outboundSchema: z.ZodType<
   HyperparametersBatchSize$Outbound,
   z.ZodTypeDef,
   HyperparametersBatchSize
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function hyperparametersBatchSizeToJSON(
   hyperparametersBatchSize: HyperparametersBatchSize,
@@ -109,7 +109,7 @@ export const HyperparametersLearningRateMultiplier$inboundSchema: z.ZodType<
   HyperparametersLearningRateMultiplier,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type HyperparametersLearningRateMultiplier$Outbound = string | number;
 
@@ -118,7 +118,7 @@ export const HyperparametersLearningRateMultiplier$outboundSchema: z.ZodType<
   HyperparametersLearningRateMultiplier$Outbound,
   z.ZodTypeDef,
   HyperparametersLearningRateMultiplier
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function hyperparametersLearningRateMultiplierToJSON(
   hyperparametersLearningRateMultiplier: HyperparametersLearningRateMultiplier,
@@ -145,7 +145,7 @@ export const HyperparametersNEpochs$inboundSchema: z.ZodType<
   HyperparametersNEpochs,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type HyperparametersNEpochs$Outbound = string | number;
 
@@ -154,7 +154,7 @@ export const HyperparametersNEpochs$outboundSchema: z.ZodType<
   HyperparametersNEpochs$Outbound,
   z.ZodTypeDef,
   HyperparametersNEpochs
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function hyperparametersNEpochsToJSON(
   hyperparametersNEpochs: HyperparametersNEpochs,
@@ -178,18 +178,20 @@ export const Hyperparameters$inboundSchema: z.ZodType<
   Hyperparameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_size": "batchSize",
-    "learning_rate_multiplier": "learningRateMultiplier",
-    "n_epochs": "nEpochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_size": "batchSize",
+      "learning_rate_multiplier": "learningRateMultiplier",
+      "n_epochs": "nEpochs",
+    });
+  })
+);
 /** @internal */
 export type Hyperparameters$Outbound = {
   batch_size?: string | number | null | undefined;
@@ -202,18 +204,20 @@ export const Hyperparameters$outboundSchema: z.ZodType<
   Hyperparameters$Outbound,
   z.ZodTypeDef,
   Hyperparameters
-> = z.object({
-  batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchSize: "batch_size",
-    learningRateMultiplier: "learning_rate_multiplier",
-    nEpochs: "n_epochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchSize: "batch_size",
+      learningRateMultiplier: "learning_rate_multiplier",
+      nEpochs: "n_epochs",
+    });
+  })
+);
 
 export function hyperparametersToJSON(
   hyperparameters: Hyperparameters,
@@ -235,23 +239,26 @@ export const CreateFineTuningJobRequest$inboundSchema: z.ZodType<
   CreateFineTuningJobRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  training_file: z.string(),
-  validation_file: z.nullable(z.string()).optional(),
-  suffix: z.nullable(z.string()).optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  hyperparameters: z.nullable(z.lazy(() => Hyperparameters$inboundSchema))
-    .optional(),
-  method: z.nullable(Method$inboundSchema).optional(),
-  integrations: z.nullable(z.array(IntegrationObject$inboundSchema)).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "training_file": "trainingFile",
-    "validation_file": "validationFile",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    training_file: z.string(),
+    validation_file: z.nullable(z.string()).optional(),
+    suffix: z.nullable(z.string()).optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    hyperparameters: z.nullable(z.lazy(() => Hyperparameters$inboundSchema))
+      .optional(),
+    method: z.nullable(Method$inboundSchema).optional(),
+    integrations: z.nullable(z.array(IntegrationObject$inboundSchema))
+      .optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "training_file": "trainingFile",
+      "validation_file": "validationFile",
+    });
+  })
+);
 /** @internal */
 export type CreateFineTuningJobRequest$Outbound = {
   model: string;
@@ -270,24 +277,26 @@ export const CreateFineTuningJobRequest$outboundSchema: z.ZodType<
   CreateFineTuningJobRequest$Outbound,
   z.ZodTypeDef,
   CreateFineTuningJobRequest
-> = z.object({
-  model: z.string(),
-  trainingFile: z.string(),
-  validationFile: z.nullable(z.string()).optional(),
-  suffix: z.nullable(z.string()).optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  hyperparameters: z.nullable(z.lazy(() => Hyperparameters$outboundSchema))
-    .optional(),
-  method: z.nullable(Method$outboundSchema).optional(),
-  integrations: z.nullable(z.array(IntegrationObject$outboundSchema))
-    .optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    trainingFile: "training_file",
-    validationFile: "validation_file",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    trainingFile: z.string(),
+    validationFile: z.nullable(z.string()).optional(),
+    suffix: z.nullable(z.string()).optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    hyperparameters: z.nullable(z.lazy(() => Hyperparameters$outboundSchema))
+      .optional(),
+    method: z.nullable(Method$outboundSchema).optional(),
+    integrations: z.nullable(z.array(IntegrationObject$outboundSchema))
+      .optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      trainingFile: "training_file",
+      validationFile: "validation_file",
+    });
+  })
+);
 
 export function createFineTuningJobRequestToJSON(
   createFineTuningJobRequest: CreateFineTuningJobRequest,

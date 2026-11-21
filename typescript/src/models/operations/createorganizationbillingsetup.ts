@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,7 +21,7 @@ export const CreateOrganizationBillingSetupRequestBody$inboundSchema: z.ZodType<
   CreateOrganizationBillingSetupRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type CreateOrganizationBillingSetupRequestBody$Outbound = {};
 
@@ -31,7 +31,7 @@ export const CreateOrganizationBillingSetupRequestBody$outboundSchema:
     CreateOrganizationBillingSetupRequestBody$Outbound,
     z.ZodTypeDef,
     CreateOrganizationBillingSetupRequestBody
-  > = z.object({});
+  > = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function createOrganizationBillingSetupRequestBodyToJSON(
   createOrganizationBillingSetupRequestBody:
@@ -62,9 +62,11 @@ export function createOrganizationBillingSetupRequestBodyFromJSON(
 /** @internal */
 export const CreateOrganizationBillingSetupResponseBody$inboundSchema:
   z.ZodType<CreateOrganizationBillingSetupResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      url: z.string(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        url: z.string(),
+      })
+    );
 /** @internal */
 export type CreateOrganizationBillingSetupResponseBody$Outbound = {
   url: string;
@@ -76,9 +78,11 @@ export const CreateOrganizationBillingSetupResponseBody$outboundSchema:
     CreateOrganizationBillingSetupResponseBody$Outbound,
     z.ZodTypeDef,
     CreateOrganizationBillingSetupResponseBody
-  > = z.object({
-    url: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      url: z.string(),
+    })
+  );
 
 export function createOrganizationBillingSetupResponseBodyToJSON(
   createOrganizationBillingSetupResponseBody:

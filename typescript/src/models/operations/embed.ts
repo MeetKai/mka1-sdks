@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const EmbedRequest$inboundSchema: z.ZodType<
   EmbedRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  EmbeddingsRequest: components.EmbeddingsRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "EmbeddingsRequest": "embeddingsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    EmbeddingsRequest: components.EmbeddingsRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "EmbeddingsRequest": "embeddingsRequest",
+    });
+  })
+);
 /** @internal */
 export type EmbedRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const EmbedRequest$outboundSchema: z.ZodType<
   EmbedRequest$Outbound,
   z.ZodTypeDef,
   EmbedRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  embeddingsRequest: components.EmbeddingsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    embeddingsRequest: "EmbeddingsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    embeddingsRequest: components.EmbeddingsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      embeddingsRequest: "EmbeddingsRequest",
+    });
+  })
+);
 
 export function embedRequestToJSON(embedRequest: EmbedRequest): string {
   return JSON.stringify(EmbedRequest$outboundSchema.parse(embedRequest));

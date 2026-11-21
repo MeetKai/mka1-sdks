@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,23 +27,25 @@ export const UploadEvalSampleTrajectoryRequest$inboundSchema: z.ZodType<
   UploadEvalSampleTrajectoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  sample_index: z.number().int(),
-  task_id: z.string().optional(),
-  model: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UploadEvalSampleTrajectoryRequest:
-    components.UploadEvalSampleTrajectoryRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UploadEvalSampleTrajectoryRequest": "uploadEvalSampleTrajectoryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    sample_index: z.number().int(),
+    task_id: z.string().optional(),
+    model: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UploadEvalSampleTrajectoryRequest:
+      components.UploadEvalSampleTrajectoryRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UploadEvalSampleTrajectoryRequest": "uploadEvalSampleTrajectoryRequest",
+    });
+  })
+);
 /** @internal */
 export type UploadEvalSampleTrajectoryRequest$Outbound = {
   run_id: string;
@@ -60,23 +62,25 @@ export const UploadEvalSampleTrajectoryRequest$outboundSchema: z.ZodType<
   UploadEvalSampleTrajectoryRequest$Outbound,
   z.ZodTypeDef,
   UploadEvalSampleTrajectoryRequest
-> = z.object({
-  runId: z.string(),
-  sampleIndex: z.number().int(),
-  taskId: z.string().optional(),
-  model: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-  uploadEvalSampleTrajectoryRequest:
-    components.UploadEvalSampleTrajectoryRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    uploadEvalSampleTrajectoryRequest: "UploadEvalSampleTrajectoryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    sampleIndex: z.number().int(),
+    taskId: z.string().optional(),
+    model: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+    uploadEvalSampleTrajectoryRequest:
+      components.UploadEvalSampleTrajectoryRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      uploadEvalSampleTrajectoryRequest: "UploadEvalSampleTrajectoryRequest",
+    });
+  })
+);
 
 export function uploadEvalSampleTrajectoryRequestToJSON(
   uploadEvalSampleTrajectoryRequest: UploadEvalSampleTrajectoryRequest,

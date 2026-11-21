@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const DatasetInput$inboundSchema: z.ZodType<
   DatasetInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dataset: Dataset$inboundSchema,
-  tags: z.array(Tag$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dataset: Dataset$inboundSchema,
+    tags: z.array(Tag$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type DatasetInput$Outbound = {
   dataset: Dataset$Outbound;
@@ -44,10 +46,12 @@ export const DatasetInput$outboundSchema: z.ZodType<
   DatasetInput$Outbound,
   z.ZodTypeDef,
   DatasetInput
-> = z.object({
-  dataset: Dataset$outboundSchema,
-  tags: z.array(Tag$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dataset: Dataset$outboundSchema,
+    tags: z.array(Tag$outboundSchema).optional(),
+  })
+);
 
 export function datasetInputToJSON(datasetInput: DatasetInput): string {
   return JSON.stringify(DatasetInput$outboundSchema.parse(datasetInput));

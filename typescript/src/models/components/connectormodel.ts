@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,8 +29,8 @@ export type ConnectorModel = {
 };
 
 /** @internal */
-export const AuthKind$inboundSchema: z.ZodNativeEnum<typeof AuthKind> = z
-  .nativeEnum(AuthKind);
+export const AuthKind$inboundSchema: z.ZodNativeEnum<typeof AuthKind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuthKind));
 /** @internal */
 export const AuthKind$outboundSchema: z.ZodNativeEnum<typeof AuthKind> =
   AuthKind$inboundSchema;
@@ -40,17 +40,19 @@ export const ConnectorModel$inboundSchema: z.ZodType<
   ConnectorModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  display_name: z.string(),
-  auth_kind: AuthKind$inboundSchema,
-  connection: z.nullable(ConnectorConnectionModel$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "auth_kind": "authKind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    display_name: z.string(),
+    auth_kind: AuthKind$inboundSchema,
+    connection: z.nullable(ConnectorConnectionModel$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "auth_kind": "authKind",
+    });
+  })
+);
 /** @internal */
 export type ConnectorModel$Outbound = {
   key: string;
@@ -64,17 +66,19 @@ export const ConnectorModel$outboundSchema: z.ZodType<
   ConnectorModel$Outbound,
   z.ZodTypeDef,
   ConnectorModel
-> = z.object({
-  key: z.string(),
-  displayName: z.string(),
-  authKind: AuthKind$outboundSchema,
-  connection: z.nullable(ConnectorConnectionModel$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    authKind: "auth_kind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    displayName: z.string(),
+    authKind: AuthKind$outboundSchema,
+    connection: z.nullable(ConnectorConnectionModel$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      authKind: "auth_kind",
+    });
+  })
+);
 
 export function connectorModelToJSON(connectorModel: ConnectorModel): string {
   return JSON.stringify(ConnectorModel$outboundSchema.parse(connectorModel));

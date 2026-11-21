@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,8 +25,8 @@ export type ClickAction = {
 };
 
 /** @internal */
-export const Button$inboundSchema: z.ZodNativeEnum<typeof Button> = z
-  .nativeEnum(Button);
+export const Button$inboundSchema: z.ZodNativeEnum<typeof Button> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Button));
 /** @internal */
 export const Button$outboundSchema: z.ZodNativeEnum<typeof Button> =
   Button$inboundSchema;
@@ -36,12 +36,14 @@ export const ClickAction$inboundSchema: z.ZodType<
   ClickAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("click"),
-  button: Button$inboundSchema,
-  x: z.number().int(),
-  y: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("click"),
+    button: Button$inboundSchema,
+    x: z.number().int(),
+    y: z.number().int(),
+  })
+);
 /** @internal */
 export type ClickAction$Outbound = {
   type: "click";
@@ -55,12 +57,14 @@ export const ClickAction$outboundSchema: z.ZodType<
   ClickAction$Outbound,
   z.ZodTypeDef,
   ClickAction
-> = z.object({
-  type: z.literal("click"),
-  button: Button$outboundSchema,
-  x: z.number().int(),
-  y: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("click"),
+    button: Button$outboundSchema,
+    x: z.number().int(),
+    y: z.number().int(),
+  })
+);
 
 export function clickActionToJSON(clickAction: ClickAction): string {
   return JSON.stringify(ClickAction$outboundSchema.parse(clickAction));

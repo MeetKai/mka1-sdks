@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,20 +37,22 @@ export const UpdateServiceScalingRequest$inboundSchema: z.ZodType<
   UpdateServiceScalingRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "Idempotency-Key": z.string(),
-  "If-Match": z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeScalingInput: components.ComputeScalingInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Idempotency-Key": "idempotencyKey",
-    "If-Match": "ifMatch",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeScalingInput": "computeScalingInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "Idempotency-Key": z.string(),
+    "If-Match": z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeScalingInput: components.ComputeScalingInput$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Idempotency-Key": "idempotencyKey",
+      "If-Match": "ifMatch",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeScalingInput": "computeScalingInput",
+    });
+  })
+);
 /** @internal */
 export type UpdateServiceScalingRequest$Outbound = {
   id: string;
@@ -65,20 +67,22 @@ export const UpdateServiceScalingRequest$outboundSchema: z.ZodType<
   UpdateServiceScalingRequest$Outbound,
   z.ZodTypeDef,
   UpdateServiceScalingRequest
-> = z.object({
-  id: z.string(),
-  idempotencyKey: z.string(),
-  ifMatch: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-  computeScalingInput: components.ComputeScalingInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "Idempotency-Key",
-    ifMatch: "If-Match",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeScalingInput: "ComputeScalingInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    idempotencyKey: z.string(),
+    ifMatch: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+    computeScalingInput: components.ComputeScalingInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "Idempotency-Key",
+      ifMatch: "If-Match",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeScalingInput: "ComputeScalingInput",
+    });
+  })
+);
 
 export function updateServiceScalingRequestToJSON(
   updateServiceScalingRequest: UpdateServiceScalingRequest,
@@ -104,10 +108,12 @@ export const UpdateServiceScalingResponseResult$inboundSchema: z.ZodType<
   UpdateServiceScalingResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeService$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type UpdateServiceScalingResponseResult$Outbound =
   | components.ComputeService$Outbound
@@ -118,10 +124,12 @@ export const UpdateServiceScalingResponseResult$outboundSchema: z.ZodType<
   UpdateServiceScalingResponseResult$Outbound,
   z.ZodTypeDef,
   UpdateServiceScalingResponseResult
-> = z.union([
-  components.ComputeService$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function updateServiceScalingResponseResultToJSON(
   updateServiceScalingResponseResult: UpdateServiceScalingResponseResult,
@@ -148,18 +156,20 @@ export const UpdateServiceScalingResponse$inboundSchema: z.ZodType<
   UpdateServiceScalingResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    components.ComputeService$inboundSchema,
-    components.ComputeErrorEnvelope$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      components.ComputeService$inboundSchema,
+      components.ComputeErrorEnvelope$inboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type UpdateServiceScalingResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -173,18 +183,20 @@ export const UpdateServiceScalingResponse$outboundSchema: z.ZodType<
   UpdateServiceScalingResponse$Outbound,
   z.ZodTypeDef,
   UpdateServiceScalingResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    components.ComputeService$outboundSchema,
-    components.ComputeErrorEnvelope$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      components.ComputeService$outboundSchema,
+      components.ComputeErrorEnvelope$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function updateServiceScalingResponseToJSON(
   updateServiceScalingResponse: UpdateServiceScalingResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,14 +24,16 @@ export const AnalyticsKeyList$inboundSchema: z.ZodType<
   AnalyticsKeyList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keys: z.array(AnalyticsCaptureKey$inboundSchema),
-  next_cursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keys: z.array(AnalyticsCaptureKey$inboundSchema),
+    next_cursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsKeyList$Outbound = {
   keys: Array<AnalyticsCaptureKey$Outbound>;
@@ -43,14 +45,16 @@ export const AnalyticsKeyList$outboundSchema: z.ZodType<
   AnalyticsKeyList$Outbound,
   z.ZodTypeDef,
   AnalyticsKeyList
-> = z.object({
-  keys: z.array(AnalyticsCaptureKey$outboundSchema),
-  nextCursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keys: z.array(AnalyticsCaptureKey$outboundSchema),
+    nextCursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function analyticsKeyListToJSON(
   analyticsKeyList: AnalyticsKeyList,

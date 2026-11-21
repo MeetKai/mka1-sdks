@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,7 +56,9 @@ export type AgentRunApprovalResume = {
 /** @internal */
 export const AgentRunApprovalResumeObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunApprovalResumeObject
-> = z.nativeEnum(AgentRunApprovalResumeObject);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentRunApprovalResumeObject)
+);
 /** @internal */
 export const AgentRunApprovalResumeObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunApprovalResumeObject
@@ -65,7 +67,9 @@ export const AgentRunApprovalResumeObject$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AgentRunApprovalResumeStatus$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunApprovalResumeStatus
-> = z.nativeEnum(AgentRunApprovalResumeStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentRunApprovalResumeStatus)
+);
 /** @internal */
 export const AgentRunApprovalResumeStatus$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunApprovalResumeStatus
@@ -76,18 +80,20 @@ export const AgentRunApprovalResume$inboundSchema: z.ZodType<
   AgentRunApprovalResume,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentRunApprovalResumeObject$inboundSchema,
-  status: AgentRunApprovalResumeStatus$inboundSchema,
-  source_run_id: z.string(),
-  pending: z.number().int().optional(),
-  continuation_run: AgentRun$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "source_run_id": "sourceRunId",
-    "continuation_run": "continuationRun",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunApprovalResumeObject$inboundSchema,
+    status: AgentRunApprovalResumeStatus$inboundSchema,
+    source_run_id: z.string(),
+    pending: z.number().int().optional(),
+    continuation_run: AgentRun$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "source_run_id": "sourceRunId",
+      "continuation_run": "continuationRun",
+    });
+  })
+);
 /** @internal */
 export type AgentRunApprovalResume$Outbound = {
   object: string;
@@ -102,18 +108,20 @@ export const AgentRunApprovalResume$outboundSchema: z.ZodType<
   AgentRunApprovalResume$Outbound,
   z.ZodTypeDef,
   AgentRunApprovalResume
-> = z.object({
-  object: AgentRunApprovalResumeObject$outboundSchema,
-  status: AgentRunApprovalResumeStatus$outboundSchema,
-  sourceRunId: z.string(),
-  pending: z.number().int().optional(),
-  continuationRun: AgentRun$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sourceRunId: "source_run_id",
-    continuationRun: "continuation_run",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunApprovalResumeObject$outboundSchema,
+    status: AgentRunApprovalResumeStatus$outboundSchema,
+    sourceRunId: z.string(),
+    pending: z.number().int().optional(),
+    continuationRun: AgentRun$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sourceRunId: "source_run_id",
+      continuationRun: "continuation_run",
+    });
+  })
+);
 
 export function agentRunApprovalResumeToJSON(
   agentRunApprovalResume: AgentRunApprovalResume,

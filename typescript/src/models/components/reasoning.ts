@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,18 +42,20 @@ export const Reasoning$inboundSchema: z.ZodType<
   Reasoning,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("reasoning"),
-  id: z.string(),
-  summary: z.array(SummaryText$inboundSchema),
-  content: z.array(ReasoningText$inboundSchema).optional(),
-  encrypted_content: z.nullable(z.string()).optional(),
-  status: z.nullable(Status$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encrypted_content": "encryptedContent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning"),
+    id: z.string(),
+    summary: z.array(SummaryText$inboundSchema),
+    content: z.array(ReasoningText$inboundSchema).optional(),
+    encrypted_content: z.nullable(z.string()).optional(),
+    status: z.nullable(Status$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+    });
+  })
+);
 /** @internal */
 export type Reasoning$Outbound = {
   type: "reasoning";
@@ -69,18 +71,20 @@ export const Reasoning$outboundSchema: z.ZodType<
   Reasoning$Outbound,
   z.ZodTypeDef,
   Reasoning
-> = z.object({
-  type: z.literal("reasoning"),
-  id: z.string(),
-  summary: z.array(SummaryText$outboundSchema),
-  content: z.array(ReasoningText$outboundSchema).optional(),
-  encryptedContent: z.nullable(z.string()).optional(),
-  status: z.nullable(Status$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encryptedContent: "encrypted_content",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning"),
+    id: z.string(),
+    summary: z.array(SummaryText$outboundSchema),
+    content: z.array(ReasoningText$outboundSchema).optional(),
+    encryptedContent: z.nullable(z.string()).optional(),
+    status: z.nullable(Status$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encryptedContent: "encrypted_content",
+    });
+  })
+);
 
 export function reasoningToJSON(reasoning: Reasoning): string {
   return JSON.stringify(Reasoning$outboundSchema.parse(reasoning));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,16 +45,18 @@ export const ImageGenerationResponseData$inboundSchema: z.ZodType<
   ImageGenerationResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string().optional(),
-  b64_json: z.string().optional(),
-  revised_prompt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "b64_json": "b64Json",
-    "revised_prompt": "revisedPrompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string().optional(),
+    b64_json: z.string().optional(),
+    revised_prompt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "b64_json": "b64Json",
+      "revised_prompt": "revisedPrompt",
+    });
+  })
+);
 /** @internal */
 export type ImageGenerationResponseData$Outbound = {
   url?: string | undefined;
@@ -67,16 +69,18 @@ export const ImageGenerationResponseData$outboundSchema: z.ZodType<
   ImageGenerationResponseData$Outbound,
   z.ZodTypeDef,
   ImageGenerationResponseData
-> = z.object({
-  url: z.string().optional(),
-  b64Json: z.string().optional(),
-  revisedPrompt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    b64Json: "b64_json",
-    revisedPrompt: "revised_prompt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string().optional(),
+    b64Json: z.string().optional(),
+    revisedPrompt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      b64Json: "b64_json",
+      revisedPrompt: "revised_prompt",
+    });
+  })
+);
 
 export function imageGenerationResponseDataToJSON(
   imageGenerationResponseData: ImageGenerationResponseData,
@@ -102,10 +106,12 @@ export const ImageGenerationResponse$inboundSchema: z.ZodType<
   ImageGenerationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created: z.number(),
-  data: z.array(z.lazy(() => ImageGenerationResponseData$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created: z.number(),
+    data: z.array(z.lazy(() => ImageGenerationResponseData$inboundSchema)),
+  })
+);
 /** @internal */
 export type ImageGenerationResponse$Outbound = {
   created: number;
@@ -117,10 +123,12 @@ export const ImageGenerationResponse$outboundSchema: z.ZodType<
   ImageGenerationResponse$Outbound,
   z.ZodTypeDef,
   ImageGenerationResponse
-> = z.object({
-  created: z.number(),
-  data: z.array(z.lazy(() => ImageGenerationResponseData$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created: z.number(),
+    data: z.array(z.lazy(() => ImageGenerationResponseData$outboundSchema)),
+  })
+);
 
 export function imageGenerationResponseToJSON(
   imageGenerationResponse: ImageGenerationResponse,

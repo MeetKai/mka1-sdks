@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,20 +52,22 @@ export const Declaration$inboundSchema: z.ZodType<
   Declaration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-  title: z.string(),
-  description: z.string(),
-  emits: z.string(),
-  inputs: z.record(Input$inboundSchema).optional(),
-  resources: Resources$inboundSchema.optional(),
-  default_limits: Limits$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "default_limits": "defaultLimits",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+    title: z.string(),
+    description: z.string(),
+    emits: z.string(),
+    inputs: z.record(Input$inboundSchema).optional(),
+    resources: Resources$inboundSchema.optional(),
+    default_limits: Limits$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "default_limits": "defaultLimits",
+    });
+  })
+);
 /** @internal */
 export type Declaration$Outbound = {
   id: string;
@@ -83,20 +85,22 @@ export const Declaration$outboundSchema: z.ZodType<
   Declaration$Outbound,
   z.ZodTypeDef,
   Declaration
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-  title: z.string(),
-  description: z.string(),
-  emits: z.string(),
-  inputs: z.record(Input$outboundSchema).optional(),
-  resources: Resources$outboundSchema.optional(),
-  defaultLimits: Limits$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    defaultLimits: "default_limits",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+    title: z.string(),
+    description: z.string(),
+    emits: z.string(),
+    inputs: z.record(Input$outboundSchema).optional(),
+    resources: Resources$outboundSchema.optional(),
+    defaultLimits: Limits$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      defaultLimits: "default_limits",
+    });
+  })
+);
 
 export function declarationToJSON(declaration: Declaration): string {
   return JSON.stringify(Declaration$outboundSchema.parse(declaration));

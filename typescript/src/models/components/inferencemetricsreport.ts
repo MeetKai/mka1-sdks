@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,11 +24,13 @@ export const InferenceMetricsReport$inboundSchema: z.ZodType<
   InferenceMetricsReport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  models: z.array(ModelInferenceMetrics$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    models: z.array(ModelInferenceMetrics$inboundSchema),
+  })
+);
 /** @internal */
 export type InferenceMetricsReport$Outbound = {
   from: string;
@@ -41,11 +43,13 @@ export const InferenceMetricsReport$outboundSchema: z.ZodType<
   InferenceMetricsReport$Outbound,
   z.ZodTypeDef,
   InferenceMetricsReport
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  models: z.array(ModelInferenceMetrics$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    models: z.array(ModelInferenceMetrics$outboundSchema),
+  })
+);
 
 export function inferenceMetricsReportToJSON(
   inferenceMetricsReport: InferenceMetricsReport,

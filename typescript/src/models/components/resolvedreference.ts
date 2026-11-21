@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,19 +22,21 @@ export const ResolvedReference$inboundSchema: z.ZodType<
   ResolvedReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  ref: z.string(),
-  sha: z.string(),
-  default_branch: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "repository_id": "repositoryId",
-    "default_branch": "defaultBranch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    ref: z.string(),
+    sha: z.string(),
+    default_branch: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "repository_id": "repositoryId",
+      "default_branch": "defaultBranch",
+    });
+  })
+);
 /** @internal */
 export type ResolvedReference$Outbound = {
   repository_id: number;
@@ -50,19 +52,21 @@ export const ResolvedReference$outboundSchema: z.ZodType<
   ResolvedReference$Outbound,
   z.ZodTypeDef,
   ResolvedReference
-> = z.object({
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  ref: z.string(),
-  sha: z.string(),
-  defaultBranch: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    repositoryId: "repository_id",
-    defaultBranch: "default_branch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    ref: z.string(),
+    sha: z.string(),
+    defaultBranch: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      repositoryId: "repository_id",
+      defaultBranch: "default_branch",
+    });
+  })
+);
 
 export function resolvedReferenceToJSON(
   resolvedReference: ResolvedReference,

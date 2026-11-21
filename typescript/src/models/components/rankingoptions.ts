@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,14 +21,16 @@ export const RankingOptions$inboundSchema: z.ZodType<
   RankingOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ranker: z.string().optional(),
-  score_threshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "score_threshold": "scoreThreshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().optional(),
+    score_threshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "score_threshold": "scoreThreshold",
+    });
+  })
+);
 /** @internal */
 export type RankingOptions$Outbound = {
   ranker?: string | undefined;
@@ -40,14 +42,16 @@ export const RankingOptions$outboundSchema: z.ZodType<
   RankingOptions$Outbound,
   z.ZodTypeDef,
   RankingOptions
-> = z.object({
-  ranker: z.string().optional(),
-  scoreThreshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    scoreThreshold: "score_threshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().optional(),
+    scoreThreshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      scoreThreshold: "score_threshold",
+    });
+  })
+);
 
 export function rankingOptionsToJSON(rankingOptions: RankingOptions): string {
   return JSON.stringify(RankingOptions$outboundSchema.parse(rankingOptions));

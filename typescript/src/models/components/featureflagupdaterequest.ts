@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,17 +23,19 @@ export const FeatureFlagUpdateRequest$inboundSchema: z.ZodType<
   FeatureFlagUpdateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  default_value: z.any().optional(),
-  description: z.string().optional(),
-  name: z.string().optional(),
-  project_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "default_value": "defaultValue",
-    "project_id": "projectId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    default_value: z.any().optional(),
+    description: z.string().optional(),
+    name: z.string().optional(),
+    project_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_value": "defaultValue",
+      "project_id": "projectId",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagUpdateRequest$Outbound = {
   default_value?: any | undefined;
@@ -47,17 +49,19 @@ export const FeatureFlagUpdateRequest$outboundSchema: z.ZodType<
   FeatureFlagUpdateRequest$Outbound,
   z.ZodTypeDef,
   FeatureFlagUpdateRequest
-> = z.object({
-  defaultValue: z.any().optional(),
-  description: z.string().optional(),
-  name: z.string().optional(),
-  projectId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultValue: "default_value",
-    projectId: "project_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultValue: z.any().optional(),
+    description: z.string().optional(),
+    name: z.string().optional(),
+    projectId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      defaultValue: "default_value",
+      projectId: "project_id",
+    });
+  })
+);
 
 export function featureFlagUpdateRequestToJSON(
   featureFlagUpdateRequest: FeatureFlagUpdateRequest,

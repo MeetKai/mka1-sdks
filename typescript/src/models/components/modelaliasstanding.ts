@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,7 @@ export type ModelAliasStanding = {
 /** @internal */
 export const IneligibleReason$inboundSchema: z.ZodNativeEnum<
   typeof IneligibleReason
-> = z.nativeEnum(IneligibleReason);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IneligibleReason));
 /** @internal */
 export const IneligibleReason$outboundSchema: z.ZodNativeEnum<
   typeof IneligibleReason
@@ -48,27 +48,29 @@ export const ModelAliasStanding$inboundSchema: z.ZodType<
   ModelAliasStanding,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  score: z.nullable(z.number()),
-  run_id: z.nullable(z.string()),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  sample_count: z.nullable(z.number()),
-  failed_count: z.nullable(z.number()),
-  eligible: z.boolean(),
-  ineligible_reason: z.nullable(IneligibleReason$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "run_id": "runId",
-    "completed_at": "completedAt",
-    "sample_count": "sampleCount",
-    "failed_count": "failedCount",
-    "ineligible_reason": "ineligibleReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    score: z.nullable(z.number()),
+    run_id: z.nullable(z.string()),
+    completed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    sample_count: z.nullable(z.number()),
+    failed_count: z.nullable(z.number()),
+    eligible: z.boolean(),
+    ineligible_reason: z.nullable(IneligibleReason$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "run_id": "runId",
+      "completed_at": "completedAt",
+      "sample_count": "sampleCount",
+      "failed_count": "failedCount",
+      "ineligible_reason": "ineligibleReason",
+    });
+  })
+);
 /** @internal */
 export type ModelAliasStanding$Outbound = {
   model_id: string;
@@ -86,25 +88,27 @@ export const ModelAliasStanding$outboundSchema: z.ZodType<
   ModelAliasStanding$Outbound,
   z.ZodTypeDef,
   ModelAliasStanding
-> = z.object({
-  modelId: z.string(),
-  score: z.nullable(z.number()),
-  runId: z.nullable(z.string()),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  sampleCount: z.nullable(z.number()),
-  failedCount: z.nullable(z.number()),
-  eligible: z.boolean(),
-  ineligibleReason: z.nullable(IneligibleReason$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    runId: "run_id",
-    completedAt: "completed_at",
-    sampleCount: "sample_count",
-    failedCount: "failed_count",
-    ineligibleReason: "ineligible_reason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    score: z.nullable(z.number()),
+    runId: z.nullable(z.string()),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    sampleCount: z.nullable(z.number()),
+    failedCount: z.nullable(z.number()),
+    eligible: z.boolean(),
+    ineligibleReason: z.nullable(IneligibleReason$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      runId: "run_id",
+      completedAt: "completed_at",
+      sampleCount: "sample_count",
+      failedCount: "failed_count",
+      ineligibleReason: "ineligible_reason",
+    });
+  })
+);
 
 export function modelAliasStandingToJSON(
   modelAliasStanding: ModelAliasStanding,

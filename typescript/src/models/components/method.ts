@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -288,9 +288,8 @@ export type Method = {
 };
 
 /** @internal */
-export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> = z.nativeEnum(
-  Type,
-);
+export const Type$inboundSchema: z.ZodNativeEnum<typeof Type> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Type));
 /** @internal */
 export const Type$outboundSchema: z.ZodNativeEnum<typeof Type> =
   Type$inboundSchema;
@@ -300,10 +299,12 @@ export const Supervised$inboundSchema: z.ZodType<
   Supervised,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  hyperparameters: z.nullable(SupervisedHyperparameters$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hyperparameters: z.nullable(SupervisedHyperparameters$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type Supervised$Outbound = {
   hyperparameters?: SupervisedHyperparameters$Outbound | null | undefined;
@@ -314,10 +315,12 @@ export const Supervised$outboundSchema: z.ZodType<
   Supervised$Outbound,
   z.ZodTypeDef,
   Supervised
-> = z.object({
-  hyperparameters: z.nullable(SupervisedHyperparameters$outboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    hyperparameters: z.nullable(SupervisedHyperparameters$outboundSchema)
+      .optional(),
+  })
+);
 
 export function supervisedToJSON(supervised: Supervised): string {
   return JSON.stringify(Supervised$outboundSchema.parse(supervised));
@@ -333,20 +336,24 @@ export function supervisedFromJSON(
 }
 
 /** @internal */
-export const Dpo$inboundSchema: z.ZodType<Dpo, z.ZodTypeDef, unknown> = z
-  .object({
-    hyperparameters: z.nullable(DpoHyperparameters$inboundSchema).optional(),
-  });
+export const Dpo$inboundSchema: z.ZodType<Dpo, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      hyperparameters: z.nullable(DpoHyperparameters$inboundSchema).optional(),
+    })
+  );
 /** @internal */
 export type Dpo$Outbound = {
   hyperparameters?: DpoHyperparameters$Outbound | null | undefined;
 };
 
 /** @internal */
-export const Dpo$outboundSchema: z.ZodType<Dpo$Outbound, z.ZodTypeDef, Dpo> = z
-  .object({
-    hyperparameters: z.nullable(DpoHyperparameters$outboundSchema).optional(),
-  });
+export const Dpo$outboundSchema: z.ZodType<Dpo$Outbound, z.ZodTypeDef, Dpo> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      hyperparameters: z.nullable(DpoHyperparameters$outboundSchema).optional(),
+    })
+  );
 
 export function dpoToJSON(dpo: Dpo): string {
   return JSON.stringify(Dpo$outboundSchema.parse(dpo));
@@ -366,10 +373,12 @@ export const MethodGradersInput$inboundSchema: z.ZodType<
   MethodGradersInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 /** @internal */
 export type MethodGradersInput$Outbound = {
   role: string;
@@ -381,10 +390,12 @@ export const MethodGradersInput$outboundSchema: z.ZodType<
   MethodGradersInput$Outbound,
   z.ZodTypeDef,
   MethodGradersInput
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 
 export function methodGradersInputToJSON(
   methodGradersInput: MethodGradersInput,
@@ -408,18 +419,20 @@ export const Graders5$inboundSchema: z.ZodType<
   Graders5,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("label_model"),
-  name: z.string(),
-  model: z.string(),
-  input: z.array(z.lazy(() => MethodGradersInput$inboundSchema)),
-  labels: z.array(z.string()),
-  passing_labels: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "passing_labels": "passingLabels",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("label_model"),
+    name: z.string(),
+    model: z.string(),
+    input: z.array(z.lazy(() => MethodGradersInput$inboundSchema)),
+    labels: z.array(z.string()),
+    passing_labels: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "passing_labels": "passingLabels",
+    });
+  })
+);
 /** @internal */
 export type Graders5$Outbound = {
   type: "label_model";
@@ -435,18 +448,20 @@ export const Graders5$outboundSchema: z.ZodType<
   Graders5$Outbound,
   z.ZodTypeDef,
   Graders5
-> = z.object({
-  type: z.literal("label_model"),
-  name: z.string(),
-  model: z.string(),
-  input: z.array(z.lazy(() => MethodGradersInput$outboundSchema)),
-  labels: z.array(z.string()),
-  passingLabels: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    passingLabels: "passing_labels",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("label_model"),
+    name: z.string(),
+    model: z.string(),
+    input: z.array(z.lazy(() => MethodGradersInput$outboundSchema)),
+    labels: z.array(z.string()),
+    passingLabels: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      passingLabels: "passing_labels",
+    });
+  })
+);
 
 export function graders5ToJSON(graders5: Graders5): string {
   return JSON.stringify(Graders5$outboundSchema.parse(graders5));
@@ -466,10 +481,12 @@ export const GradersInput$inboundSchema: z.ZodType<
   GradersInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 /** @internal */
 export type GradersInput$Outbound = {
   role: string;
@@ -481,10 +498,12 @@ export const GradersInput$outboundSchema: z.ZodType<
   GradersInput$Outbound,
   z.ZodTypeDef,
   GradersInput
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 
 export function gradersInputToJSON(gradersInput: GradersInput): string {
   return JSON.stringify(GradersInput$outboundSchema.parse(gradersInput));
@@ -502,7 +521,9 @@ export function gradersInputFromJSON(
 /** @internal */
 export const MethodSamplingParamsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof MethodSamplingParamsReasoningEffort
-> = z.nativeEnum(MethodSamplingParamsReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(MethodSamplingParamsReasoningEffort)
+);
 /** @internal */
 export const MethodSamplingParamsReasoningEffort$outboundSchema:
   z.ZodNativeEnum<typeof MethodSamplingParamsReasoningEffort> =
@@ -513,21 +534,23 @@ export const GradersSamplingParams$inboundSchema: z.ZodType<
   GradersSamplingParams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_completions_tokens: z.nullable(z.number().int()).optional(),
-  reasoning_effort: z.nullable(
-    MethodSamplingParamsReasoningEffort$inboundSchema,
-  ).optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_completions_tokens": "maxCompletionsTokens",
-    "reasoning_effort": "reasoningEffort",
-    "top_p": "topP",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_completions_tokens: z.nullable(z.number().int()).optional(),
+    reasoning_effort: z.nullable(
+      MethodSamplingParamsReasoningEffort$inboundSchema,
+    ).optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_completions_tokens": "maxCompletionsTokens",
+      "reasoning_effort": "reasoningEffort",
+      "top_p": "topP",
+    });
+  })
+);
 /** @internal */
 export type GradersSamplingParams$Outbound = {
   max_completions_tokens?: number | null | undefined;
@@ -542,21 +565,23 @@ export const GradersSamplingParams$outboundSchema: z.ZodType<
   GradersSamplingParams$Outbound,
   z.ZodTypeDef,
   GradersSamplingParams
-> = z.object({
-  maxCompletionsTokens: z.nullable(z.number().int()).optional(),
-  reasoningEffort: z.nullable(
-    MethodSamplingParamsReasoningEffort$outboundSchema,
-  ).optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxCompletionsTokens: "max_completions_tokens",
-    reasoningEffort: "reasoning_effort",
-    topP: "top_p",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxCompletionsTokens: z.nullable(z.number().int()).optional(),
+    reasoningEffort: z.nullable(
+      MethodSamplingParamsReasoningEffort$outboundSchema,
+    ).optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxCompletionsTokens: "max_completions_tokens",
+      reasoningEffort: "reasoning_effort",
+      topP: "top_p",
+    });
+  })
+);
 
 export function gradersSamplingParamsToJSON(
   gradersSamplingParams: GradersSamplingParams,
@@ -580,19 +605,22 @@ export const Graders4$inboundSchema: z.ZodType<
   Graders4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("score_model"),
-  name: z.string(),
-  model: z.string(),
-  input: z.array(z.lazy(() => GradersInput$inboundSchema)),
-  range: z.nullable(z.array(z.number())).optional(),
-  sampling_params: z.nullable(z.lazy(() => GradersSamplingParams$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sampling_params": "samplingParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("score_model"),
+    name: z.string(),
+    model: z.string(),
+    input: z.array(z.lazy(() => GradersInput$inboundSchema)),
+    range: z.nullable(z.array(z.number())).optional(),
+    sampling_params: z.nullable(
+      z.lazy(() => GradersSamplingParams$inboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sampling_params": "samplingParams",
+    });
+  })
+);
 /** @internal */
 export type Graders4$Outbound = {
   type: "score_model";
@@ -608,19 +636,22 @@ export const Graders4$outboundSchema: z.ZodType<
   Graders4$Outbound,
   z.ZodTypeDef,
   Graders4
-> = z.object({
-  type: z.literal("score_model"),
-  name: z.string(),
-  model: z.string(),
-  input: z.array(z.lazy(() => GradersInput$outboundSchema)),
-  range: z.nullable(z.array(z.number())).optional(),
-  samplingParams: z.nullable(z.lazy(() => GradersSamplingParams$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    samplingParams: "sampling_params",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("score_model"),
+    name: z.string(),
+    model: z.string(),
+    input: z.array(z.lazy(() => GradersInput$outboundSchema)),
+    range: z.nullable(z.array(z.number())).optional(),
+    samplingParams: z.nullable(
+      z.lazy(() => GradersSamplingParams$outboundSchema),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      samplingParams: "sampling_params",
+    });
+  })
+);
 
 export function graders4ToJSON(graders4: Graders4): string {
   return JSON.stringify(Graders4$outboundSchema.parse(graders4));
@@ -640,16 +671,18 @@ export const Graders3$inboundSchema: z.ZodType<
   Graders3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("python"),
-  name: z.string(),
-  source: z.string(),
-  image_tag: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_tag": "imageTag",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    name: z.string(),
+    source: z.string(),
+    image_tag: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_tag": "imageTag",
+    });
+  })
+);
 /** @internal */
 export type Graders3$Outbound = {
   type: "python";
@@ -663,16 +696,18 @@ export const Graders3$outboundSchema: z.ZodType<
   Graders3$Outbound,
   z.ZodTypeDef,
   Graders3
-> = z.object({
-  type: z.literal("python"),
-  name: z.string(),
-  source: z.string(),
-  imageTag: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imageTag: "image_tag",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    name: z.string(),
+    source: z.string(),
+    imageTag: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      imageTag: "image_tag",
+    });
+  })
+);
 
 export function graders3ToJSON(graders3: Graders3): string {
   return JSON.stringify(Graders3$outboundSchema.parse(graders3));
@@ -690,7 +725,7 @@ export function graders3FromJSON(
 /** @internal */
 export const GradersEvaluationMetric$inboundSchema: z.ZodNativeEnum<
   typeof GradersEvaluationMetric
-> = z.nativeEnum(GradersEvaluationMetric);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GradersEvaluationMetric));
 /** @internal */
 export const GradersEvaluationMetric$outboundSchema: z.ZodNativeEnum<
   typeof GradersEvaluationMetric
@@ -701,17 +736,19 @@ export const Graders2$inboundSchema: z.ZodType<
   Graders2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text_similarity"),
-  name: z.string(),
-  input: z.string(),
-  reference: z.string(),
-  evaluation_metric: GradersEvaluationMetric$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "evaluation_metric": "evaluationMetric",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text_similarity"),
+    name: z.string(),
+    input: z.string(),
+    reference: z.string(),
+    evaluation_metric: GradersEvaluationMetric$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "evaluation_metric": "evaluationMetric",
+    });
+  })
+);
 /** @internal */
 export type Graders2$Outbound = {
   type: "text_similarity";
@@ -726,17 +763,19 @@ export const Graders2$outboundSchema: z.ZodType<
   Graders2$Outbound,
   z.ZodTypeDef,
   Graders2
-> = z.object({
-  type: z.literal("text_similarity"),
-  name: z.string(),
-  input: z.string(),
-  reference: z.string(),
-  evaluationMetric: GradersEvaluationMetric$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    evaluationMetric: "evaluation_metric",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text_similarity"),
+    name: z.string(),
+    input: z.string(),
+    reference: z.string(),
+    evaluationMetric: GradersEvaluationMetric$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      evaluationMetric: "evaluation_metric",
+    });
+  })
+);
 
 export function graders2ToJSON(graders2: Graders2): string {
   return JSON.stringify(Graders2$outboundSchema.parse(graders2));
@@ -754,7 +793,7 @@ export function graders2FromJSON(
 /** @internal */
 export const GradersOperation$inboundSchema: z.ZodNativeEnum<
   typeof GradersOperation
-> = z.nativeEnum(GradersOperation);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GradersOperation));
 /** @internal */
 export const GradersOperation$outboundSchema: z.ZodNativeEnum<
   typeof GradersOperation
@@ -765,13 +804,15 @@ export const Graders1$inboundSchema: z.ZodType<
   Graders1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("string_check"),
-  name: z.string(),
-  input: z.string(),
-  reference: z.string(),
-  operation: GradersOperation$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("string_check"),
+    name: z.string(),
+    input: z.string(),
+    reference: z.string(),
+    operation: GradersOperation$inboundSchema,
+  })
+);
 /** @internal */
 export type Graders1$Outbound = {
   type: "string_check";
@@ -786,13 +827,15 @@ export const Graders1$outboundSchema: z.ZodType<
   Graders1$Outbound,
   z.ZodTypeDef,
   Graders1
-> = z.object({
-  type: z.literal("string_check"),
-  name: z.string(),
-  input: z.string(),
-  reference: z.string(),
-  operation: GradersOperation$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("string_check"),
+    name: z.string(),
+    input: z.string(),
+    reference: z.string(),
+    operation: GradersOperation$outboundSchema,
+  })
+);
 
 export function graders1ToJSON(graders1: Graders1): string {
   return JSON.stringify(Graders1$outboundSchema.parse(graders1));
@@ -809,13 +852,15 @@ export function graders1FromJSON(
 
 /** @internal */
 export const Graders$inboundSchema: z.ZodType<Graders, z.ZodTypeDef, unknown> =
-  discriminatedUnion("type", {
-    string_check: z.lazy(() => Graders1$inboundSchema),
-    text_similarity: z.lazy(() => Graders2$inboundSchema),
-    python: z.lazy(() => Graders3$inboundSchema),
-    score_model: z.lazy(() => Graders4$inboundSchema),
-    label_model: z.lazy(() => Graders5$inboundSchema),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    discriminatedUnion("type", {
+      string_check: z.lazy(() => Graders1$inboundSchema),
+      text_similarity: z.lazy(() => Graders2$inboundSchema),
+      python: z.lazy(() => Graders3$inboundSchema),
+      score_model: z.lazy(() => Graders4$inboundSchema),
+      label_model: z.lazy(() => Graders5$inboundSchema),
+    })
+  );
 /** @internal */
 export type Graders$Outbound =
   | Graders1$Outbound
@@ -829,13 +874,15 @@ export const Graders$outboundSchema: z.ZodType<
   Graders$Outbound,
   z.ZodTypeDef,
   Graders
-> = z.union([
-  z.lazy(() => Graders1$outboundSchema),
-  z.lazy(() => Graders2$outboundSchema),
-  z.lazy(() => Graders3$outboundSchema),
-  z.lazy(() => Graders4$outboundSchema),
-  z.lazy(() => Graders5$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Graders1$outboundSchema),
+    z.lazy(() => Graders2$outboundSchema),
+    z.lazy(() => Graders3$outboundSchema),
+    z.lazy(() => Graders4$outboundSchema),
+    z.lazy(() => Graders5$outboundSchema),
+  ])
+);
 
 export function gradersToJSON(graders: Graders): string {
   return JSON.stringify(Graders$outboundSchema.parse(graders));
@@ -852,22 +899,24 @@ export function gradersFromJSON(
 
 /** @internal */
 export const Grader2$inboundSchema: z.ZodType<Grader2, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("multi"),
-    name: z.string(),
-    graders: z.record(discriminatedUnion("type", {
-      string_check: z.lazy(() => Graders1$inboundSchema),
-      text_similarity: z.lazy(() => Graders2$inboundSchema),
-      python: z.lazy(() => Graders3$inboundSchema),
-      score_model: z.lazy(() => Graders4$inboundSchema),
-      label_model: z.lazy(() => Graders5$inboundSchema),
-    })),
-    calculate_output: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "calculate_output": "calculateOutput",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("multi"),
+      name: z.string(),
+      graders: z.record(discriminatedUnion("type", {
+        string_check: z.lazy(() => Graders1$inboundSchema),
+        text_similarity: z.lazy(() => Graders2$inboundSchema),
+        python: z.lazy(() => Graders3$inboundSchema),
+        score_model: z.lazy(() => Graders4$inboundSchema),
+        label_model: z.lazy(() => Graders5$inboundSchema),
+      })),
+      calculate_output: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "calculate_output": "calculateOutput",
+      });
+    })
+  );
 /** @internal */
 export type Grader2$Outbound = {
   type: "multi";
@@ -888,24 +937,24 @@ export const Grader2$outboundSchema: z.ZodType<
   Grader2$Outbound,
   z.ZodTypeDef,
   Grader2
-> = z.object({
-  type: z.literal("multi"),
-  name: z.string(),
-  graders: z.record(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("multi"),
+    name: z.string(),
+    graders: z.record(z.union([
       z.lazy(() => Graders1$outboundSchema),
       z.lazy(() => Graders2$outboundSchema),
       z.lazy(() => Graders3$outboundSchema),
       z.lazy(() => Graders4$outboundSchema),
       z.lazy(() => Graders5$outboundSchema),
-    ]),
-  ),
-  calculateOutput: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    calculateOutput: "calculate_output",
-  });
-});
+    ])),
+    calculateOutput: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      calculateOutput: "calculate_output",
+    });
+  })
+);
 
 export function grader2ToJSON(grader2: Grader2): string {
   return JSON.stringify(Grader2$outboundSchema.parse(grader2));
@@ -925,10 +974,12 @@ export const Method1Input$inboundSchema: z.ZodType<
   Method1Input,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 /** @internal */
 export type Method1Input$Outbound = {
   role: string;
@@ -940,10 +991,12 @@ export const Method1Input$outboundSchema: z.ZodType<
   Method1Input$Outbound,
   z.ZodTypeDef,
   Method1Input
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 
 export function method1InputToJSON(method1Input: Method1Input): string {
   return JSON.stringify(Method1Input$outboundSchema.parse(method1Input));
@@ -959,19 +1012,21 @@ export function method1InputFromJSON(
 }
 
 /** @internal */
-export const One5$inboundSchema: z.ZodType<One5, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("label_model"),
-    name: z.string(),
-    model: z.string(),
-    input: z.array(z.lazy(() => Method1Input$inboundSchema)),
-    labels: z.array(z.string()),
-    passing_labels: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      "passing_labels": "passingLabels",
-    });
-  });
+export const One5$inboundSchema: z.ZodType<One5, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("label_model"),
+      name: z.string(),
+      model: z.string(),
+      input: z.array(z.lazy(() => Method1Input$inboundSchema)),
+      labels: z.array(z.string()),
+      passing_labels: z.array(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        "passing_labels": "passingLabels",
+      });
+    })
+  );
 /** @internal */
 export type One5$Outbound = {
   type: "label_model";
@@ -984,18 +1039,20 @@ export type One5$Outbound = {
 
 /** @internal */
 export const One5$outboundSchema: z.ZodType<One5$Outbound, z.ZodTypeDef, One5> =
-  z.object({
-    type: z.literal("label_model"),
-    name: z.string(),
-    model: z.string(),
-    input: z.array(z.lazy(() => Method1Input$outboundSchema)),
-    labels: z.array(z.string()),
-    passingLabels: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      passingLabels: "passing_labels",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("label_model"),
+      name: z.string(),
+      model: z.string(),
+      input: z.array(z.lazy(() => Method1Input$outboundSchema)),
+      labels: z.array(z.string()),
+      passingLabels: z.array(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        passingLabels: "passing_labels",
+      });
+    })
+  );
 
 export function one5ToJSON(one5: One5): string {
   return JSON.stringify(One5$outboundSchema.parse(one5));
@@ -1015,10 +1072,12 @@ export const OneInput$inboundSchema: z.ZodType<
   OneInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 /** @internal */
 export type OneInput$Outbound = {
   role: string;
@@ -1030,10 +1089,12 @@ export const OneInput$outboundSchema: z.ZodType<
   OneInput$Outbound,
   z.ZodTypeDef,
   OneInput
-> = z.object({
-  role: z.string(),
-  content: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: z.string(),
+    content: z.string(),
+  })
+);
 
 export function oneInputToJSON(oneInput: OneInput): string {
   return JSON.stringify(OneInput$outboundSchema.parse(oneInput));
@@ -1051,7 +1112,9 @@ export function oneInputFromJSON(
 /** @internal */
 export const SamplingParamsReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof SamplingParamsReasoningEffort
-> = z.nativeEnum(SamplingParamsReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SamplingParamsReasoningEffort)
+);
 /** @internal */
 export const SamplingParamsReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof SamplingParamsReasoningEffort
@@ -1062,20 +1125,22 @@ export const SamplingParams$inboundSchema: z.ZodType<
   SamplingParams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_completions_tokens: z.nullable(z.number().int()).optional(),
-  reasoning_effort: z.nullable(SamplingParamsReasoningEffort$inboundSchema)
-    .optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  top_p: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_completions_tokens": "maxCompletionsTokens",
-    "reasoning_effort": "reasoningEffort",
-    "top_p": "topP",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_completions_tokens: z.nullable(z.number().int()).optional(),
+    reasoning_effort: z.nullable(SamplingParamsReasoningEffort$inboundSchema)
+      .optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    top_p: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_completions_tokens": "maxCompletionsTokens",
+      "reasoning_effort": "reasoningEffort",
+      "top_p": "topP",
+    });
+  })
+);
 /** @internal */
 export type SamplingParams$Outbound = {
   max_completions_tokens?: number | null | undefined;
@@ -1090,20 +1155,22 @@ export const SamplingParams$outboundSchema: z.ZodType<
   SamplingParams$Outbound,
   z.ZodTypeDef,
   SamplingParams
-> = z.object({
-  maxCompletionsTokens: z.nullable(z.number().int()).optional(),
-  reasoningEffort: z.nullable(SamplingParamsReasoningEffort$outboundSchema)
-    .optional(),
-  seed: z.nullable(z.number().int()).optional(),
-  temperature: z.nullable(z.number()).optional(),
-  topP: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxCompletionsTokens: "max_completions_tokens",
-    reasoningEffort: "reasoning_effort",
-    topP: "top_p",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxCompletionsTokens: z.nullable(z.number().int()).optional(),
+    reasoningEffort: z.nullable(SamplingParamsReasoningEffort$outboundSchema)
+      .optional(),
+    seed: z.nullable(z.number().int()).optional(),
+    temperature: z.nullable(z.number()).optional(),
+    topP: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxCompletionsTokens: "max_completions_tokens",
+      reasoningEffort: "reasoning_effort",
+      topP: "top_p",
+    });
+  })
+);
 
 export function samplingParamsToJSON(samplingParams: SamplingParams): string {
   return JSON.stringify(SamplingParams$outboundSchema.parse(samplingParams));
@@ -1119,20 +1186,22 @@ export function samplingParamsFromJSON(
 }
 
 /** @internal */
-export const One4$inboundSchema: z.ZodType<One4, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("score_model"),
-    name: z.string(),
-    model: z.string(),
-    input: z.array(z.lazy(() => OneInput$inboundSchema)),
-    range: z.nullable(z.array(z.number())).optional(),
-    sampling_params: z.nullable(z.lazy(() => SamplingParams$inboundSchema))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "sampling_params": "samplingParams",
-    });
-  });
+export const One4$inboundSchema: z.ZodType<One4, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("score_model"),
+      name: z.string(),
+      model: z.string(),
+      input: z.array(z.lazy(() => OneInput$inboundSchema)),
+      range: z.nullable(z.array(z.number())).optional(),
+      sampling_params: z.nullable(z.lazy(() => SamplingParams$inboundSchema))
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "sampling_params": "samplingParams",
+      });
+    })
+  );
 /** @internal */
 export type One4$Outbound = {
   type: "score_model";
@@ -1145,19 +1214,21 @@ export type One4$Outbound = {
 
 /** @internal */
 export const One4$outboundSchema: z.ZodType<One4$Outbound, z.ZodTypeDef, One4> =
-  z.object({
-    type: z.literal("score_model"),
-    name: z.string(),
-    model: z.string(),
-    input: z.array(z.lazy(() => OneInput$outboundSchema)),
-    range: z.nullable(z.array(z.number())).optional(),
-    samplingParams: z.nullable(z.lazy(() => SamplingParams$outboundSchema))
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      samplingParams: "sampling_params",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("score_model"),
+      name: z.string(),
+      model: z.string(),
+      input: z.array(z.lazy(() => OneInput$outboundSchema)),
+      range: z.nullable(z.array(z.number())).optional(),
+      samplingParams: z.nullable(z.lazy(() => SamplingParams$outboundSchema))
+        .optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        samplingParams: "sampling_params",
+      });
+    })
+  );
 
 export function one4ToJSON(one4: One4): string {
   return JSON.stringify(One4$outboundSchema.parse(one4));
@@ -1173,17 +1244,19 @@ export function one4FromJSON(
 }
 
 /** @internal */
-export const One3$inboundSchema: z.ZodType<One3, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("python"),
-    name: z.string(),
-    source: z.string(),
-    image_tag: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "image_tag": "imageTag",
-    });
-  });
+export const One3$inboundSchema: z.ZodType<One3, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("python"),
+      name: z.string(),
+      source: z.string(),
+      image_tag: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "image_tag": "imageTag",
+      });
+    })
+  );
 /** @internal */
 export type One3$Outbound = {
   type: "python";
@@ -1194,16 +1267,18 @@ export type One3$Outbound = {
 
 /** @internal */
 export const One3$outboundSchema: z.ZodType<One3$Outbound, z.ZodTypeDef, One3> =
-  z.object({
-    type: z.literal("python"),
-    name: z.string(),
-    source: z.string(),
-    imageTag: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      imageTag: "image_tag",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("python"),
+      name: z.string(),
+      source: z.string(),
+      imageTag: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        imageTag: "image_tag",
+      });
+    })
+  );
 
 export function one3ToJSON(one3: One3): string {
   return JSON.stringify(One3$outboundSchema.parse(one3));
@@ -1221,25 +1296,27 @@ export function one3FromJSON(
 /** @internal */
 export const EvaluationMetric$inboundSchema: z.ZodNativeEnum<
   typeof EvaluationMetric
-> = z.nativeEnum(EvaluationMetric);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EvaluationMetric));
 /** @internal */
 export const EvaluationMetric$outboundSchema: z.ZodNativeEnum<
   typeof EvaluationMetric
 > = EvaluationMetric$inboundSchema;
 
 /** @internal */
-export const One2$inboundSchema: z.ZodType<One2, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("text_similarity"),
-    name: z.string(),
-    input: z.string(),
-    reference: z.string(),
-    evaluation_metric: EvaluationMetric$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "evaluation_metric": "evaluationMetric",
-    });
-  });
+export const One2$inboundSchema: z.ZodType<One2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text_similarity"),
+      name: z.string(),
+      input: z.string(),
+      reference: z.string(),
+      evaluation_metric: EvaluationMetric$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "evaluation_metric": "evaluationMetric",
+      });
+    })
+  );
 /** @internal */
 export type One2$Outbound = {
   type: "text_similarity";
@@ -1251,17 +1328,19 @@ export type One2$Outbound = {
 
 /** @internal */
 export const One2$outboundSchema: z.ZodType<One2$Outbound, z.ZodTypeDef, One2> =
-  z.object({
-    type: z.literal("text_similarity"),
-    name: z.string(),
-    input: z.string(),
-    reference: z.string(),
-    evaluationMetric: EvaluationMetric$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      evaluationMetric: "evaluation_metric",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text_similarity"),
+      name: z.string(),
+      input: z.string(),
+      reference: z.string(),
+      evaluationMetric: EvaluationMetric$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        evaluationMetric: "evaluation_metric",
+      });
+    })
+  );
 
 export function one2ToJSON(one2: One2): string {
   return JSON.stringify(One2$outboundSchema.parse(one2));
@@ -1277,21 +1356,23 @@ export function one2FromJSON(
 }
 
 /** @internal */
-export const Operation$inboundSchema: z.ZodNativeEnum<typeof Operation> = z
-  .nativeEnum(Operation);
+export const Operation$inboundSchema: z.ZodNativeEnum<typeof Operation> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Operation));
 /** @internal */
 export const Operation$outboundSchema: z.ZodNativeEnum<typeof Operation> =
   Operation$inboundSchema;
 
 /** @internal */
-export const One1$inboundSchema: z.ZodType<One1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("string_check"),
-    name: z.string(),
-    input: z.string(),
-    reference: z.string(),
-    operation: Operation$inboundSchema,
-  });
+export const One1$inboundSchema: z.ZodType<One1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("string_check"),
+      name: z.string(),
+      input: z.string(),
+      reference: z.string(),
+      operation: Operation$inboundSchema,
+    })
+  );
 /** @internal */
 export type One1$Outbound = {
   type: "string_check";
@@ -1303,13 +1384,15 @@ export type One1$Outbound = {
 
 /** @internal */
 export const One1$outboundSchema: z.ZodType<One1$Outbound, z.ZodTypeDef, One1> =
-  z.object({
-    type: z.literal("string_check"),
-    name: z.string(),
-    input: z.string(),
-    reference: z.string(),
-    operation: Operation$outboundSchema,
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("string_check"),
+      name: z.string(),
+      input: z.string(),
+      reference: z.string(),
+      operation: Operation$outboundSchema,
+    })
+  );
 
 export function one1ToJSON(one1: One1): string {
   return JSON.stringify(One1$outboundSchema.parse(one1));
@@ -1326,13 +1409,15 @@ export function one1FromJSON(
 
 /** @internal */
 export const Grader1$inboundSchema: z.ZodType<Grader1, z.ZodTypeDef, unknown> =
-  discriminatedUnion("type", {
-    string_check: z.lazy(() => One1$inboundSchema),
-    text_similarity: z.lazy(() => One2$inboundSchema),
-    python: z.lazy(() => One3$inboundSchema),
-    score_model: z.lazy(() => One4$inboundSchema),
-    label_model: z.lazy(() => One5$inboundSchema),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    discriminatedUnion("type", {
+      string_check: z.lazy(() => One1$inboundSchema),
+      text_similarity: z.lazy(() => One2$inboundSchema),
+      python: z.lazy(() => One3$inboundSchema),
+      score_model: z.lazy(() => One4$inboundSchema),
+      label_model: z.lazy(() => One5$inboundSchema),
+    })
+  );
 /** @internal */
 export type Grader1$Outbound =
   | One1$Outbound
@@ -1346,13 +1431,15 @@ export const Grader1$outboundSchema: z.ZodType<
   Grader1$Outbound,
   z.ZodTypeDef,
   Grader1
-> = z.union([
-  z.lazy(() => One1$outboundSchema),
-  z.lazy(() => One2$outboundSchema),
-  z.lazy(() => One3$outboundSchema),
-  z.lazy(() => One4$outboundSchema),
-  z.lazy(() => One5$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => One1$outboundSchema),
+    z.lazy(() => One2$outboundSchema),
+    z.lazy(() => One3$outboundSchema),
+    z.lazy(() => One4$outboundSchema),
+    z.lazy(() => One5$outboundSchema),
+  ])
+);
 
 export function grader1ToJSON(grader1: Grader1): string {
   return JSON.stringify(Grader1$outboundSchema.parse(grader1));
@@ -1368,17 +1455,19 @@ export function grader1FromJSON(
 }
 
 /** @internal */
-export const Grader$inboundSchema: z.ZodType<Grader, z.ZodTypeDef, unknown> = z
-  .union([
-    z.lazy(() => Grader2$inboundSchema),
-    discriminatedUnion("type", {
-      string_check: z.lazy(() => One1$inboundSchema),
-      text_similarity: z.lazy(() => One2$inboundSchema),
-      python: z.lazy(() => One3$inboundSchema),
-      score_model: z.lazy(() => One4$inboundSchema),
-      label_model: z.lazy(() => One5$inboundSchema),
-    }),
-  ]);
+export const Grader$inboundSchema: z.ZodType<Grader, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Grader2$inboundSchema),
+      discriminatedUnion("type", {
+        string_check: z.lazy(() => One1$inboundSchema),
+        text_similarity: z.lazy(() => One2$inboundSchema),
+        python: z.lazy(() => One3$inboundSchema),
+        score_model: z.lazy(() => One4$inboundSchema),
+        label_model: z.lazy(() => One5$inboundSchema),
+      }),
+    ])
+  );
 /** @internal */
 export type Grader$Outbound =
   | Grader2$Outbound
@@ -1393,16 +1482,18 @@ export const Grader$outboundSchema: z.ZodType<
   Grader$Outbound,
   z.ZodTypeDef,
   Grader
-> = z.union([
-  z.lazy(() => Grader2$outboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
   z.union([
-    z.lazy(() => One1$outboundSchema),
-    z.lazy(() => One2$outboundSchema),
-    z.lazy(() => One3$outboundSchema),
-    z.lazy(() => One4$outboundSchema),
-    z.lazy(() => One5$outboundSchema),
-  ]),
-]);
+    z.lazy(() => Grader2$outboundSchema),
+    z.union([
+      z.lazy(() => One1$outboundSchema),
+      z.lazy(() => One2$outboundSchema),
+      z.lazy(() => One3$outboundSchema),
+      z.lazy(() => One4$outboundSchema),
+      z.lazy(() => One5$outboundSchema),
+    ]),
+  ])
+);
 
 export function graderToJSON(grader: Grader): string {
   return JSON.stringify(Grader$outboundSchema.parse(grader));
@@ -1422,20 +1513,22 @@ export const Reinforcement$inboundSchema: z.ZodType<
   Reinforcement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grader: z.union([
-    z.lazy(() => Grader2$inboundSchema),
-    discriminatedUnion("type", {
-      string_check: z.lazy(() => One1$inboundSchema),
-      text_similarity: z.lazy(() => One2$inboundSchema),
-      python: z.lazy(() => One3$inboundSchema),
-      score_model: z.lazy(() => One4$inboundSchema),
-      label_model: z.lazy(() => One5$inboundSchema),
-    }),
-  ]),
-  hyperparameters: z.nullable(ReinforcementHyperparameters$inboundSchema)
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grader: z.union([
+      z.lazy(() => Grader2$inboundSchema),
+      discriminatedUnion("type", {
+        string_check: z.lazy(() => One1$inboundSchema),
+        text_similarity: z.lazy(() => One2$inboundSchema),
+        python: z.lazy(() => One3$inboundSchema),
+        score_model: z.lazy(() => One4$inboundSchema),
+        label_model: z.lazy(() => One5$inboundSchema),
+      }),
+    ]),
+    hyperparameters: z.nullable(ReinforcementHyperparameters$inboundSchema)
+      .optional(),
+  })
+);
 /** @internal */
 export type Reinforcement$Outbound = {
   grader:
@@ -1453,20 +1546,22 @@ export const Reinforcement$outboundSchema: z.ZodType<
   Reinforcement$Outbound,
   z.ZodTypeDef,
   Reinforcement
-> = z.object({
-  grader: z.union([
-    z.lazy(() => Grader2$outboundSchema),
-    z.union([
-      z.lazy(() => One1$outboundSchema),
-      z.lazy(() => One2$outboundSchema),
-      z.lazy(() => One3$outboundSchema),
-      z.lazy(() => One4$outboundSchema),
-      z.lazy(() => One5$outboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grader: z.union([
+      z.lazy(() => Grader2$outboundSchema),
+      z.union([
+        z.lazy(() => One1$outboundSchema),
+        z.lazy(() => One2$outboundSchema),
+        z.lazy(() => One3$outboundSchema),
+        z.lazy(() => One4$outboundSchema),
+        z.lazy(() => One5$outboundSchema),
+      ]),
     ]),
-  ]),
-  hyperparameters: z.nullable(ReinforcementHyperparameters$outboundSchema)
-    .optional(),
-});
+    hyperparameters: z.nullable(ReinforcementHyperparameters$outboundSchema)
+      .optional(),
+  })
+);
 
 export function reinforcementToJSON(reinforcement: Reinforcement): string {
   return JSON.stringify(Reinforcement$outboundSchema.parse(reinforcement));
@@ -1482,14 +1577,16 @@ export function reinforcementFromJSON(
 }
 
 /** @internal */
-export const Method$inboundSchema: z.ZodType<Method, z.ZodTypeDef, unknown> = z
-  .object({
-    type: Type$inboundSchema,
-    supervised: z.nullable(z.lazy(() => Supervised$inboundSchema)).optional(),
-    dpo: z.nullable(z.lazy(() => Dpo$inboundSchema)).optional(),
-    reinforcement: z.nullable(z.lazy(() => Reinforcement$inboundSchema))
-      .optional(),
-  });
+export const Method$inboundSchema: z.ZodType<Method, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: Type$inboundSchema,
+      supervised: z.nullable(z.lazy(() => Supervised$inboundSchema)).optional(),
+      dpo: z.nullable(z.lazy(() => Dpo$inboundSchema)).optional(),
+      reinforcement: z.nullable(z.lazy(() => Reinforcement$inboundSchema))
+        .optional(),
+    })
+  );
 /** @internal */
 export type Method$Outbound = {
   type: string;
@@ -1503,13 +1600,15 @@ export const Method$outboundSchema: z.ZodType<
   Method$Outbound,
   z.ZodTypeDef,
   Method
-> = z.object({
-  type: Type$outboundSchema,
-  supervised: z.nullable(z.lazy(() => Supervised$outboundSchema)).optional(),
-  dpo: z.nullable(z.lazy(() => Dpo$outboundSchema)).optional(),
-  reinforcement: z.nullable(z.lazy(() => Reinforcement$outboundSchema))
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: Type$outboundSchema,
+    supervised: z.nullable(z.lazy(() => Supervised$outboundSchema)).optional(),
+    dpo: z.nullable(z.lazy(() => Dpo$outboundSchema)).optional(),
+    reinforcement: z.nullable(z.lazy(() => Reinforcement$outboundSchema))
+      .optional(),
+  })
+);
 
 export function methodToJSON(method: Method): string {
   return JSON.stringify(Method$outboundSchema.parse(method));

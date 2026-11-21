@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,15 +20,17 @@ export const MCPAllowedTools2$inboundSchema: z.ZodType<
   MCPAllowedTools2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  read_only: z.boolean().optional(),
-  tool_names: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "tool_names": "toolNames",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    read_only: z.boolean().optional(),
+    tool_names: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "tool_names": "toolNames",
+    });
+  })
+);
 /** @internal */
 export type MCPAllowedTools2$Outbound = {
   read_only?: boolean | undefined;
@@ -40,15 +42,17 @@ export const MCPAllowedTools2$outboundSchema: z.ZodType<
   MCPAllowedTools2$Outbound,
   z.ZodTypeDef,
   MCPAllowedTools2
-> = z.object({
-  readOnly: z.boolean().optional(),
-  toolNames: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    toolNames: "tool_names",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readOnly: z.boolean().optional(),
+    toolNames: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      toolNames: "tool_names",
+    });
+  })
+);
 
 export function mcpAllowedTools2ToJSON(
   mcpAllowedTools2: MCPAllowedTools2,
@@ -72,10 +76,9 @@ export const MCPAllowedTools$inboundSchema: z.ZodType<
   MCPAllowedTools,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.array(z.string()),
-  z.lazy(() => MCPAllowedTools2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), z.lazy(() => MCPAllowedTools2$inboundSchema)])
+);
 /** @internal */
 export type MCPAllowedTools$Outbound =
   | Array<string>
@@ -86,10 +89,9 @@ export const MCPAllowedTools$outboundSchema: z.ZodType<
   MCPAllowedTools$Outbound,
   z.ZodTypeDef,
   MCPAllowedTools
-> = z.union([
-  z.array(z.string()),
-  z.lazy(() => MCPAllowedTools2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), z.lazy(() => MCPAllowedTools2$outboundSchema)])
+);
 
 export function mcpAllowedToolsToJSON(
   mcpAllowedTools: MCPAllowedTools,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -192,35 +192,37 @@ export type Item =
   | ItemReference;
 
 /** @internal */
-export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> = z
-  .union([
-    ComputerToolCall$inboundSchema,
-    CodeInterpreterToolCall$inboundSchema,
-    OutputMessage$inboundSchema,
-    OutputAudioItem$inboundSchema,
-    LocalShellCall$inboundSchema,
-    ShellCall$inboundSchema,
-    MCPApprovalRequest$inboundSchema,
-    ToolApprovalRequest$inboundSchema,
-    MCPToolCall$inboundSchema,
-    FileSearchToolCall$inboundSchema,
-    WebSearchToolCall$inboundSchema,
-    FunctionToolCall$inboundSchema,
-    ImageGenerationCall$inboundSchema,
-    ShellCallOutput$inboundSchema,
-    MCPListTools$inboundSchema,
-    CustomToolCall$inboundSchema,
-    ComputerToolCallOutput$inboundSchema,
-    FunctionToolCallOutput$inboundSchema,
-    Reasoning$inboundSchema,
-    LocalShellCallOutput$inboundSchema,
-    MCPApprovalResponse$inboundSchema,
-    ToolApprovalResponse$inboundSchema,
-    CustomToolCallOutput$inboundSchema,
-    ResponseCompactionItem$inboundSchema,
-    InputMessage$inboundSchema,
-    ItemReference$inboundSchema,
-  ]);
+export const Item$inboundSchema: z.ZodType<Item, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      ComputerToolCall$inboundSchema,
+      CodeInterpreterToolCall$inboundSchema,
+      OutputMessage$inboundSchema,
+      OutputAudioItem$inboundSchema,
+      LocalShellCall$inboundSchema,
+      ShellCall$inboundSchema,
+      MCPApprovalRequest$inboundSchema,
+      ToolApprovalRequest$inboundSchema,
+      MCPToolCall$inboundSchema,
+      FileSearchToolCall$inboundSchema,
+      WebSearchToolCall$inboundSchema,
+      FunctionToolCall$inboundSchema,
+      ImageGenerationCall$inboundSchema,
+      ShellCallOutput$inboundSchema,
+      MCPListTools$inboundSchema,
+      CustomToolCall$inboundSchema,
+      ComputerToolCallOutput$inboundSchema,
+      FunctionToolCallOutput$inboundSchema,
+      Reasoning$inboundSchema,
+      LocalShellCallOutput$inboundSchema,
+      MCPApprovalResponse$inboundSchema,
+      ToolApprovalResponse$inboundSchema,
+      CustomToolCallOutput$inboundSchema,
+      ResponseCompactionItem$inboundSchema,
+      InputMessage$inboundSchema,
+      ItemReference$inboundSchema,
+    ])
+  );
 /** @internal */
 export type Item$Outbound =
   | ComputerToolCall$Outbound
@@ -252,34 +254,36 @@ export type Item$Outbound =
 
 /** @internal */
 export const Item$outboundSchema: z.ZodType<Item$Outbound, z.ZodTypeDef, Item> =
-  z.union([
-    ComputerToolCall$outboundSchema,
-    CodeInterpreterToolCall$outboundSchema,
-    OutputMessage$outboundSchema,
-    OutputAudioItem$outboundSchema,
-    LocalShellCall$outboundSchema,
-    ShellCall$outboundSchema,
-    MCPApprovalRequest$outboundSchema,
-    ToolApprovalRequest$outboundSchema,
-    MCPToolCall$outboundSchema,
-    FileSearchToolCall$outboundSchema,
-    WebSearchToolCall$outboundSchema,
-    FunctionToolCall$outboundSchema,
-    ImageGenerationCall$outboundSchema,
-    ShellCallOutput$outboundSchema,
-    MCPListTools$outboundSchema,
-    CustomToolCall$outboundSchema,
-    ComputerToolCallOutput$outboundSchema,
-    FunctionToolCallOutput$outboundSchema,
-    Reasoning$outboundSchema,
-    LocalShellCallOutput$outboundSchema,
-    MCPApprovalResponse$outboundSchema,
-    ToolApprovalResponse$outboundSchema,
-    CustomToolCallOutput$outboundSchema,
-    ResponseCompactionItem$outboundSchema,
-    InputMessage$outboundSchema,
-    ItemReference$outboundSchema,
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      ComputerToolCall$outboundSchema,
+      CodeInterpreterToolCall$outboundSchema,
+      OutputMessage$outboundSchema,
+      OutputAudioItem$outboundSchema,
+      LocalShellCall$outboundSchema,
+      ShellCall$outboundSchema,
+      MCPApprovalRequest$outboundSchema,
+      ToolApprovalRequest$outboundSchema,
+      MCPToolCall$outboundSchema,
+      FileSearchToolCall$outboundSchema,
+      WebSearchToolCall$outboundSchema,
+      FunctionToolCall$outboundSchema,
+      ImageGenerationCall$outboundSchema,
+      ShellCallOutput$outboundSchema,
+      MCPListTools$outboundSchema,
+      CustomToolCall$outboundSchema,
+      ComputerToolCallOutput$outboundSchema,
+      FunctionToolCallOutput$outboundSchema,
+      Reasoning$outboundSchema,
+      LocalShellCallOutput$outboundSchema,
+      MCPApprovalResponse$outboundSchema,
+      ToolApprovalResponse$outboundSchema,
+      CustomToolCallOutput$outboundSchema,
+      ResponseCompactionItem$outboundSchema,
+      InputMessage$outboundSchema,
+      ItemReference$outboundSchema,
+    ])
+  );
 
 export function itemToJSON(item: Item): string {
   return JSON.stringify(Item$outboundSchema.parse(item));

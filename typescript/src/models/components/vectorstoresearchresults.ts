@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,19 +45,21 @@ export const VectorStoreSearchResults$inboundSchema: z.ZodType<
   VectorStoreSearchResults,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("vector_store.search_results.page"),
-  search_query: z.string(),
-  data: z.array(VectorSearchResult$inboundSchema),
-  has_more: z.boolean(),
-  next_page: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "search_query": "searchQuery",
-    "has_more": "hasMore",
-    "next_page": "nextPage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.search_results.page"),
+    search_query: z.string(),
+    data: z.array(VectorSearchResult$inboundSchema),
+    has_more: z.boolean(),
+    next_page: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "search_query": "searchQuery",
+      "has_more": "hasMore",
+      "next_page": "nextPage",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreSearchResults$Outbound = {
   object: "vector_store.search_results.page";
@@ -72,19 +74,21 @@ export const VectorStoreSearchResults$outboundSchema: z.ZodType<
   VectorStoreSearchResults$Outbound,
   z.ZodTypeDef,
   VectorStoreSearchResults
-> = z.object({
-  object: z.literal("vector_store.search_results.page"),
-  searchQuery: z.string(),
-  data: z.array(VectorSearchResult$outboundSchema),
-  hasMore: z.boolean(),
-  nextPage: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    searchQuery: "search_query",
-    hasMore: "has_more",
-    nextPage: "next_page",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.search_results.page"),
+    searchQuery: z.string(),
+    data: z.array(VectorSearchResult$outboundSchema),
+    hasMore: z.boolean(),
+    nextPage: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      searchQuery: "search_query",
+      hasMore: "has_more",
+      nextPage: "next_page",
+    });
+  })
+);
 
 export function vectorStoreSearchResultsToJSON(
   vectorStoreSearchResults: VectorStoreSearchResults,

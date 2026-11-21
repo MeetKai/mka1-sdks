@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,9 +36,10 @@ export type GuardrailsResourceTarget = {
 
 /** @internal */
 export const GuardrailsResourceTargetResourceType$inboundSchema:
-  z.ZodNativeEnum<typeof GuardrailsResourceTargetResourceType> = z.nativeEnum(
-    GuardrailsResourceTargetResourceType,
-  );
+  z.ZodNativeEnum<typeof GuardrailsResourceTargetResourceType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GuardrailsResourceTargetResourceType)
+    );
 /** @internal */
 export const GuardrailsResourceTargetResourceType$outboundSchema:
   z.ZodNativeEnum<typeof GuardrailsResourceTargetResourceType> =
@@ -49,15 +50,17 @@ export const GuardrailsResourceTarget$inboundSchema: z.ZodType<
   GuardrailsResourceTarget,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resource_type: GuardrailsResourceTargetResourceType$inboundSchema,
-  resource_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-    "resource_id": "resourceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource_type: GuardrailsResourceTargetResourceType$inboundSchema,
+    resource_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+      "resource_id": "resourceId",
+    });
+  })
+);
 /** @internal */
 export type GuardrailsResourceTarget$Outbound = {
   resource_type: string;
@@ -69,15 +72,17 @@ export const GuardrailsResourceTarget$outboundSchema: z.ZodType<
   GuardrailsResourceTarget$Outbound,
   z.ZodTypeDef,
   GuardrailsResourceTarget
-> = z.object({
-  resourceType: GuardrailsResourceTargetResourceType$outboundSchema,
-  resourceId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-    resourceId: "resource_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceType: GuardrailsResourceTargetResourceType$outboundSchema,
+    resourceId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+      resourceId: "resource_id",
+    });
+  })
+);
 
 export function guardrailsResourceTargetToJSON(
   guardrailsResourceTarget: GuardrailsResourceTarget,

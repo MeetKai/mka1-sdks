@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,7 @@ export type CreateRepoRequest = {
 /** @internal */
 export const CreateRepoRequestKind$inboundSchema: z.ZodNativeEnum<
   typeof CreateRepoRequestKind
-> = z.nativeEnum(CreateRepoRequestKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateRepoRequestKind));
 /** @internal */
 export const CreateRepoRequestKind$outboundSchema: z.ZodNativeEnum<
   typeof CreateRepoRequestKind
@@ -51,11 +51,13 @@ export const CreateRepoRequest$inboundSchema: z.ZodType<
   CreateRepoRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  kind: CreateRepoRequestKind$inboundSchema.default("repo"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    kind: CreateRepoRequestKind$inboundSchema.default("repo"),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type CreateRepoRequest$Outbound = {
   description?: string | undefined;
@@ -68,11 +70,13 @@ export const CreateRepoRequest$outboundSchema: z.ZodType<
   CreateRepoRequest$Outbound,
   z.ZodTypeDef,
   CreateRepoRequest
-> = z.object({
-  description: z.string().optional(),
-  kind: CreateRepoRequestKind$outboundSchema.default("repo"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    kind: CreateRepoRequestKind$outboundSchema.default("repo"),
+    name: z.string(),
+  })
+);
 
 export function createRepoRequestToJSON(
   createRepoRequest: CreateRepoRequest,

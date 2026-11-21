@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,24 +28,26 @@ export const McpServerOAuthConfig$inboundSchema: z.ZodType<
   McpServerOAuthConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  authorization_url: z.string(),
-  token_url: z.string(),
-  client_id: z.string(),
-  has_client_secret: z.boolean(),
-  scopes: z.array(z.string()),
-  token_endpoint_auth_method: MCPOAuthTokenEndpointAuthMethod$inboundSchema,
-  redirect_uris: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "authorization_url": "authorizationUrl",
-    "token_url": "tokenUrl",
-    "client_id": "clientId",
-    "has_client_secret": "hasClientSecret",
-    "token_endpoint_auth_method": "tokenEndpointAuthMethod",
-    "redirect_uris": "redirectUris",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authorization_url: z.string(),
+    token_url: z.string(),
+    client_id: z.string(),
+    has_client_secret: z.boolean(),
+    scopes: z.array(z.string()),
+    token_endpoint_auth_method: MCPOAuthTokenEndpointAuthMethod$inboundSchema,
+    redirect_uris: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "authorization_url": "authorizationUrl",
+      "token_url": "tokenUrl",
+      "client_id": "clientId",
+      "has_client_secret": "hasClientSecret",
+      "token_endpoint_auth_method": "tokenEndpointAuthMethod",
+      "redirect_uris": "redirectUris",
+    });
+  })
+);
 /** @internal */
 export type McpServerOAuthConfig$Outbound = {
   authorization_url: string;
@@ -62,24 +64,26 @@ export const McpServerOAuthConfig$outboundSchema: z.ZodType<
   McpServerOAuthConfig$Outbound,
   z.ZodTypeDef,
   McpServerOAuthConfig
-> = z.object({
-  authorizationUrl: z.string(),
-  tokenUrl: z.string(),
-  clientId: z.string(),
-  hasClientSecret: z.boolean(),
-  scopes: z.array(z.string()),
-  tokenEndpointAuthMethod: MCPOAuthTokenEndpointAuthMethod$outboundSchema,
-  redirectUris: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    authorizationUrl: "authorization_url",
-    tokenUrl: "token_url",
-    clientId: "client_id",
-    hasClientSecret: "has_client_secret",
-    tokenEndpointAuthMethod: "token_endpoint_auth_method",
-    redirectUris: "redirect_uris",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    authorizationUrl: z.string(),
+    tokenUrl: z.string(),
+    clientId: z.string(),
+    hasClientSecret: z.boolean(),
+    scopes: z.array(z.string()),
+    tokenEndpointAuthMethod: MCPOAuthTokenEndpointAuthMethod$outboundSchema,
+    redirectUris: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      authorizationUrl: "authorization_url",
+      tokenUrl: "token_url",
+      clientId: "client_id",
+      hasClientSecret: "has_client_secret",
+      tokenEndpointAuthMethod: "token_endpoint_auth_method",
+      redirectUris: "redirect_uris",
+    });
+  })
+);
 
 export function mcpServerOAuthConfigToJSON(
   mcpServerOAuthConfig: McpServerOAuthConfig,

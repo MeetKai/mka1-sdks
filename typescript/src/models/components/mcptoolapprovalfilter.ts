@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const MCPToolApprovalFilter$inboundSchema: z.ZodType<
   MCPToolApprovalFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  always: MCPToolFilter$inboundSchema.optional(),
-  never: MCPToolFilter$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$inboundSchema.optional(),
+    never: MCPToolFilter$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type MCPToolApprovalFilter$Outbound = {
   always?: MCPToolFilter$Outbound | undefined;
@@ -38,10 +40,12 @@ export const MCPToolApprovalFilter$outboundSchema: z.ZodType<
   MCPToolApprovalFilter$Outbound,
   z.ZodTypeDef,
   MCPToolApprovalFilter
-> = z.object({
-  always: MCPToolFilter$outboundSchema.optional(),
-  never: MCPToolFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$outboundSchema.optional(),
+    never: MCPToolFilter$outboundSchema.optional(),
+  })
+);
 
 export function mcpToolApprovalFilterToJSON(
   mcpToolApprovalFilter: MCPToolApprovalFilter,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -154,18 +155,20 @@ export const ListEvalSchedulesRequest$inboundSchema: z.ZodType<
   ListEvalSchedulesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  suite_id: z.string().optional(),
-  enabled: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    suite_id: z.string().optional(),
+    enabled: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSchedulesRequest$Outbound = {
   after?: string | undefined;
@@ -180,18 +183,20 @@ export const ListEvalSchedulesRequest$outboundSchema: z.ZodType<
   ListEvalSchedulesRequest$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  suiteId: z.string().optional(),
-  enabled: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    suiteId: z.string().optional(),
+    enabled: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listEvalSchedulesRequestToJSON(
   listEvalSchedulesRequest: ListEvalSchedulesRequest,
@@ -215,7 +220,9 @@ export const ListEvalSchedulesStop$inboundSchema: z.ZodType<
   ListEvalSchedulesStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 /** @internal */
 export type ListEvalSchedulesStop$Outbound = string | Array<string>;
 
@@ -224,7 +231,9 @@ export const ListEvalSchedulesStop$outboundSchema: z.ZodType<
   ListEvalSchedulesStop$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function listEvalSchedulesStopToJSON(
   listEvalSchedulesStop: ListEvalSchedulesStop,
@@ -246,7 +255,9 @@ export function listEvalSchedulesStopFromJSON(
 /** @internal */
 export const ListEvalSchedulesTruncation$inboundSchema: z.ZodNativeEnum<
   typeof ListEvalSchedulesTruncation
-> = z.nativeEnum(ListEvalSchedulesTruncation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListEvalSchedulesTruncation)
+);
 /** @internal */
 export const ListEvalSchedulesTruncation$outboundSchema: z.ZodNativeEnum<
   typeof ListEvalSchedulesTruncation
@@ -255,7 +266,9 @@ export const ListEvalSchedulesTruncation$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ListEvalSchedulesServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof ListEvalSchedulesServiceTier
-> = z.nativeEnum(ListEvalSchedulesServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListEvalSchedulesServiceTier)
+);
 /** @internal */
 export const ListEvalSchedulesServiceTier$outboundSchema: z.ZodNativeEnum<
   typeof ListEvalSchedulesServiceTier
@@ -266,7 +279,7 @@ export const ListEvalSchedulesPrefillThink$inboundSchema: z.ZodType<
   ListEvalSchedulesPrefillThink,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 /** @internal */
 export type ListEvalSchedulesPrefillThink$Outbound = boolean | string;
 
@@ -275,7 +288,7 @@ export const ListEvalSchedulesPrefillThink$outboundSchema: z.ZodType<
   ListEvalSchedulesPrefillThink$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesPrefillThink
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 
 export function listEvalSchedulesPrefillThinkToJSON(
   listEvalSchedulesPrefillThink: ListEvalSchedulesPrefillThink,
@@ -301,63 +314,65 @@ export const ListEvalSchedulesGeneration$inboundSchema: z.ZodType<
   ListEvalSchedulesGeneration,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    instructions: z.string().optional(),
-    temperature: z.number().optional(),
-    top_p: z.number().optional(),
-    max_output_tokens: z.number().int().optional(),
-    max_gen_toks: z.number().int().optional(),
-    stop: z.union([z.string(), z.array(z.string())]).optional(),
-    until: z.array(z.string()).optional(),
-    max_tool_calls: z.number().int().optional(),
-    reasoning: z.any().optional(),
-    text: z.any().optional(),
-    tools: z.array(z.nullable(z.any())).optional(),
-    tool_choice: z.any().optional(),
-    parallel_tool_calls: z.boolean().optional(),
-    truncation: ListEvalSchedulesTruncation$inboundSchema.optional(),
-    service_tier: ListEvalSchedulesServiceTier$inboundSchema.optional(),
-    presence_penalty: z.number().optional(),
-    frequency_penalty: z.number().optional(),
-    top_k: z.number().int().optional(),
-    min_p: z.number().optional(),
-    repetition_penalty: z.number().optional(),
-    do_sample: z.boolean().optional(),
-    extra_body: z.record(z.any()).optional(),
-    chat_template_kwargs: z.record(z.any()).optional(),
-    prefill_think: z.union([z.boolean(), z.string()]).optional(),
-    use_cache: z.boolean().optional(),
-    timeout_seconds: z.number().int().optional(),
-    max_retries: z.number().int().optional(),
-    max_empty_retries: z.number().int().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "top_p": "topP",
-    "max_output_tokens": "maxOutputTokens",
-    "max_gen_toks": "maxGenToks",
-    "max_tool_calls": "maxToolCalls",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "service_tier": "serviceTier",
-    "presence_penalty": "presencePenalty",
-    "frequency_penalty": "frequencyPenalty",
-    "top_k": "topK",
-    "min_p": "minP",
-    "repetition_penalty": "repetitionPenalty",
-    "do_sample": "doSample",
-    "extra_body": "extraBody",
-    "chat_template_kwargs": "chatTemplateKwargs",
-    "prefill_think": "prefillThink",
-    "use_cache": "useCache",
-    "timeout_seconds": "timeoutSeconds",
-    "max_retries": "maxRetries",
-    "max_empty_retries": "maxEmptyRetries",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      instructions: z.string().optional(),
+      temperature: z.number().optional(),
+      top_p: z.number().optional(),
+      max_output_tokens: z.number().int().optional(),
+      max_gen_toks: z.number().int().optional(),
+      stop: z.union([z.string(), z.array(z.string())]).optional(),
+      until: z.array(z.string()).optional(),
+      max_tool_calls: z.number().int().optional(),
+      reasoning: z.any().optional(),
+      text: z.any().optional(),
+      tools: z.array(z.nullable(z.any())).optional(),
+      tool_choice: z.any().optional(),
+      parallel_tool_calls: z.boolean().optional(),
+      truncation: ListEvalSchedulesTruncation$inboundSchema.optional(),
+      service_tier: ListEvalSchedulesServiceTier$inboundSchema.optional(),
+      presence_penalty: z.number().optional(),
+      frequency_penalty: z.number().optional(),
+      top_k: z.number().int().optional(),
+      min_p: z.number().optional(),
+      repetition_penalty: z.number().optional(),
+      do_sample: z.boolean().optional(),
+      extra_body: z.record(z.any()).optional(),
+      chat_template_kwargs: z.record(z.any()).optional(),
+      prefill_think: z.union([z.boolean(), z.string()]).optional(),
+      use_cache: z.boolean().optional(),
+      timeout_seconds: z.number().int().optional(),
+      max_retries: z.number().int().optional(),
+      max_empty_retries: z.number().int().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "top_p": "topP",
+      "max_output_tokens": "maxOutputTokens",
+      "max_gen_toks": "maxGenToks",
+      "max_tool_calls": "maxToolCalls",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "service_tier": "serviceTier",
+      "presence_penalty": "presencePenalty",
+      "frequency_penalty": "frequencyPenalty",
+      "top_k": "topK",
+      "min_p": "minP",
+      "repetition_penalty": "repetitionPenalty",
+      "do_sample": "doSample",
+      "extra_body": "extraBody",
+      "chat_template_kwargs": "chatTemplateKwargs",
+      "prefill_think": "prefillThink",
+      "use_cache": "useCache",
+      "timeout_seconds": "timeoutSeconds",
+      "max_retries": "maxRetries",
+      "max_empty_retries": "maxEmptyRetries",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSchedulesGeneration$Outbound = {
   instructions?: string | undefined;
@@ -396,64 +411,66 @@ export const ListEvalSchedulesGeneration$outboundSchema: z.ZodType<
   ListEvalSchedulesGeneration$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesGeneration
-> = z.object({
-  instructions: z.string().optional(),
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  maxOutputTokens: z.number().int().optional(),
-  maxGenToks: z.number().int().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  until: z.array(z.string()).optional(),
-  maxToolCalls: z.number().int().optional(),
-  reasoning: z.any().optional(),
-  text: z.any().optional(),
-  tools: z.array(z.nullable(z.any())).optional(),
-  toolChoice: z.any().optional(),
-  parallelToolCalls: z.boolean().optional(),
-  truncation: ListEvalSchedulesTruncation$outboundSchema.optional(),
-  serviceTier: ListEvalSchedulesServiceTier$outboundSchema.optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  topK: z.number().int().optional(),
-  minP: z.number().optional(),
-  repetitionPenalty: z.number().optional(),
-  doSample: z.boolean().optional(),
-  extraBody: z.record(z.any()).optional(),
-  chatTemplateKwargs: z.record(z.any()).optional(),
-  prefillThink: z.union([z.boolean(), z.string()]).optional(),
-  useCache: z.boolean().optional(),
-  timeoutSeconds: z.number().int().optional(),
-  maxRetries: z.number().int().optional(),
-  maxEmptyRetries: z.number().int().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      topP: "top_p",
-      maxOutputTokens: "max_output_tokens",
-      maxGenToks: "max_gen_toks",
-      maxToolCalls: "max_tool_calls",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
-      serviceTier: "service_tier",
-      presencePenalty: "presence_penalty",
-      frequencyPenalty: "frequency_penalty",
-      topK: "top_k",
-      minP: "min_p",
-      repetitionPenalty: "repetition_penalty",
-      doSample: "do_sample",
-      extraBody: "extra_body",
-      chatTemplateKwargs: "chat_template_kwargs",
-      prefillThink: "prefill_think",
-      useCache: "use_cache",
-      timeoutSeconds: "timeout_seconds",
-      maxRetries: "max_retries",
-      maxEmptyRetries: "max_empty_retries",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    instructions: z.string().optional(),
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    maxOutputTokens: z.number().int().optional(),
+    maxGenToks: z.number().int().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    until: z.array(z.string()).optional(),
+    maxToolCalls: z.number().int().optional(),
+    reasoning: z.any().optional(),
+    text: z.any().optional(),
+    tools: z.array(z.nullable(z.any())).optional(),
+    toolChoice: z.any().optional(),
+    parallelToolCalls: z.boolean().optional(),
+    truncation: ListEvalSchedulesTruncation$outboundSchema.optional(),
+    serviceTier: ListEvalSchedulesServiceTier$outboundSchema.optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    topK: z.number().int().optional(),
+    minP: z.number().optional(),
+    repetitionPenalty: z.number().optional(),
+    doSample: z.boolean().optional(),
+    extraBody: z.record(z.any()).optional(),
+    chatTemplateKwargs: z.record(z.any()).optional(),
+    prefillThink: z.union([z.boolean(), z.string()]).optional(),
+    useCache: z.boolean().optional(),
+    timeoutSeconds: z.number().int().optional(),
+    maxRetries: z.number().int().optional(),
+    maxEmptyRetries: z.number().int().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        topP: "top_p",
+        maxOutputTokens: "max_output_tokens",
+        maxGenToks: "max_gen_toks",
+        maxToolCalls: "max_tool_calls",
+        toolChoice: "tool_choice",
+        parallelToolCalls: "parallel_tool_calls",
+        serviceTier: "service_tier",
+        presencePenalty: "presence_penalty",
+        frequencyPenalty: "frequency_penalty",
+        topK: "top_k",
+        minP: "min_p",
+        repetitionPenalty: "repetition_penalty",
+        doSample: "do_sample",
+        extraBody: "extra_body",
+        chatTemplateKwargs: "chat_template_kwargs",
+        prefillThink: "prefill_think",
+        useCache: "use_cache",
+        timeoutSeconds: "timeout_seconds",
+        maxRetries: "max_retries",
+        maxEmptyRetries: "max_empty_retries",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function listEvalSchedulesGenerationToJSON(
   listEvalSchedulesGeneration: ListEvalSchedulesGeneration,
@@ -479,33 +496,35 @@ export const ListEvalSchedulesRun$inboundSchema: z.ZodType<
   ListEvalSchedulesRun,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    models: z.array(z.string()),
-    task_ids: z.array(z.string()).optional(),
-    judge_model: z.string().optional(),
-    embedding_model: z.string().optional(),
-    generation: z.lazy(() => ListEvalSchedulesGeneration$inboundSchema)
-      .optional(),
-    generation_concurrency: z.number().int().optional(),
-    concurrency: z.number().int().optional(),
-    grader_concurrency: z.number().int().optional(),
-    max_samples_per_task: z.number().int().optional(),
-    max_workflow_sample_activities: z.number().int().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "task_ids": "taskIds",
-    "judge_model": "judgeModel",
-    "embedding_model": "embeddingModel",
-    "generation_concurrency": "generationConcurrency",
-    "grader_concurrency": "graderConcurrency",
-    "max_samples_per_task": "maxSamplesPerTask",
-    "max_workflow_sample_activities": "maxWorkflowSampleActivities",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      models: z.array(z.string()),
+      task_ids: z.array(z.string()).optional(),
+      judge_model: z.string().optional(),
+      embedding_model: z.string().optional(),
+      generation: z.lazy(() => ListEvalSchedulesGeneration$inboundSchema)
+        .optional(),
+      generation_concurrency: z.number().int().optional(),
+      concurrency: z.number().int().optional(),
+      grader_concurrency: z.number().int().optional(),
+      max_samples_per_task: z.number().int().optional(),
+      max_workflow_sample_activities: z.number().int().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "task_ids": "taskIds",
+      "judge_model": "judgeModel",
+      "embedding_model": "embeddingModel",
+      "generation_concurrency": "generationConcurrency",
+      "grader_concurrency": "graderConcurrency",
+      "max_samples_per_task": "maxSamplesPerTask",
+      "max_workflow_sample_activities": "maxWorkflowSampleActivities",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSchedulesRun$Outbound = {
   models: Array<string>;
@@ -526,34 +545,36 @@ export const ListEvalSchedulesRun$outboundSchema: z.ZodType<
   ListEvalSchedulesRun$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesRun
-> = z.object({
-  models: z.array(z.string()),
-  taskIds: z.array(z.string()).optional(),
-  judgeModel: z.string().optional(),
-  embeddingModel: z.string().optional(),
-  generation: z.lazy(() => ListEvalSchedulesGeneration$outboundSchema)
-    .optional(),
-  generationConcurrency: z.number().int().optional(),
-  concurrency: z.number().int().optional(),
-  graderConcurrency: z.number().int().optional(),
-  maxSamplesPerTask: z.number().int().optional(),
-  maxWorkflowSampleActivities: z.number().int().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      taskIds: "task_ids",
-      judgeModel: "judge_model",
-      embeddingModel: "embedding_model",
-      generationConcurrency: "generation_concurrency",
-      graderConcurrency: "grader_concurrency",
-      maxSamplesPerTask: "max_samples_per_task",
-      maxWorkflowSampleActivities: "max_workflow_sample_activities",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    models: z.array(z.string()),
+    taskIds: z.array(z.string()).optional(),
+    judgeModel: z.string().optional(),
+    embeddingModel: z.string().optional(),
+    generation: z.lazy(() => ListEvalSchedulesGeneration$outboundSchema)
+      .optional(),
+    generationConcurrency: z.number().int().optional(),
+    concurrency: z.number().int().optional(),
+    graderConcurrency: z.number().int().optional(),
+    maxSamplesPerTask: z.number().int().optional(),
+    maxWorkflowSampleActivities: z.number().int().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        taskIds: "task_ids",
+        judgeModel: "judge_model",
+        embeddingModel: "embedding_model",
+        generationConcurrency: "generation_concurrency",
+        graderConcurrency: "grader_concurrency",
+        maxSamplesPerTask: "max_samples_per_task",
+        maxWorkflowSampleActivities: "max_workflow_sample_activities",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function listEvalSchedulesRunToJSON(
   listEvalSchedulesRun: ListEvalSchedulesRun,
@@ -577,45 +598,47 @@ export const ListEvalSchedulesData$inboundSchema: z.ZodType<
   ListEvalSchedulesData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.schedule"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  suite_id: z.string(),
-  suite_version: z.nullable(z.number().int()),
-  cron: z.nullable(z.string()),
-  interval_seconds: z.nullable(z.number().int()),
-  timezone: z.string(),
-  overlap_policy: components.EvalScheduleOverlapPolicy$inboundSchema,
-  enabled: z.boolean(),
-  webhook_url: z.nullable(z.string()),
-  webhook_configured: z.boolean(),
-  run: z.lazy(() => ListEvalSchedulesRun$inboundSchema),
-  metadata: z.record(z.string()),
-  last_run_id: z.nullable(z.string()),
-  last_run_at: z.nullable(z.number().int()),
-  last_run_status: z.nullable(z.string()),
-  next_run_at: z.nullable(z.number().int()),
-  stalled: z.nullable(z.boolean()),
-  created_at: z.number().int(),
-  updated_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "interval_seconds": "intervalSeconds",
-    "overlap_policy": "overlapPolicy",
-    "webhook_url": "webhookUrl",
-    "webhook_configured": "webhookConfigured",
-    "last_run_id": "lastRunId",
-    "last_run_at": "lastRunAt",
-    "last_run_status": "lastRunStatus",
-    "next_run_at": "nextRunAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.schedule"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    suite_id: z.string(),
+    suite_version: z.nullable(z.number().int()),
+    cron: z.nullable(z.string()),
+    interval_seconds: z.nullable(z.number().int()),
+    timezone: z.string(),
+    overlap_policy: components.EvalScheduleOverlapPolicy$inboundSchema,
+    enabled: z.boolean(),
+    webhook_url: z.nullable(z.string()),
+    webhook_configured: z.boolean(),
+    run: z.lazy(() => ListEvalSchedulesRun$inboundSchema),
+    metadata: z.record(z.string()),
+    last_run_id: z.nullable(z.string()),
+    last_run_at: z.nullable(z.number().int()),
+    last_run_status: z.nullable(z.string()),
+    next_run_at: z.nullable(z.number().int()),
+    stalled: z.nullable(z.boolean()),
+    created_at: z.number().int(),
+    updated_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "interval_seconds": "intervalSeconds",
+      "overlap_policy": "overlapPolicy",
+      "webhook_url": "webhookUrl",
+      "webhook_configured": "webhookConfigured",
+      "last_run_id": "lastRunId",
+      "last_run_at": "lastRunAt",
+      "last_run_status": "lastRunStatus",
+      "next_run_at": "nextRunAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSchedulesData$Outbound = {
   id: string;
@@ -647,45 +670,47 @@ export const ListEvalSchedulesData$outboundSchema: z.ZodType<
   ListEvalSchedulesData$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesData
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.schedule"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  suiteId: z.string(),
-  suiteVersion: z.nullable(z.number().int()),
-  cron: z.nullable(z.string()),
-  intervalSeconds: z.nullable(z.number().int()),
-  timezone: z.string(),
-  overlapPolicy: components.EvalScheduleOverlapPolicy$outboundSchema,
-  enabled: z.boolean(),
-  webhookUrl: z.nullable(z.string()),
-  webhookConfigured: z.boolean(),
-  run: z.lazy(() => ListEvalSchedulesRun$outboundSchema),
-  metadata: z.record(z.string()),
-  lastRunId: z.nullable(z.string()),
-  lastRunAt: z.nullable(z.number().int()),
-  lastRunStatus: z.nullable(z.string()),
-  nextRunAt: z.nullable(z.number().int()),
-  stalled: z.nullable(z.boolean()),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    intervalSeconds: "interval_seconds",
-    overlapPolicy: "overlap_policy",
-    webhookUrl: "webhook_url",
-    webhookConfigured: "webhook_configured",
-    lastRunId: "last_run_id",
-    lastRunAt: "last_run_at",
-    lastRunStatus: "last_run_status",
-    nextRunAt: "next_run_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.schedule"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    suiteId: z.string(),
+    suiteVersion: z.nullable(z.number().int()),
+    cron: z.nullable(z.string()),
+    intervalSeconds: z.nullable(z.number().int()),
+    timezone: z.string(),
+    overlapPolicy: components.EvalScheduleOverlapPolicy$outboundSchema,
+    enabled: z.boolean(),
+    webhookUrl: z.nullable(z.string()),
+    webhookConfigured: z.boolean(),
+    run: z.lazy(() => ListEvalSchedulesRun$outboundSchema),
+    metadata: z.record(z.string()),
+    lastRunId: z.nullable(z.string()),
+    lastRunAt: z.nullable(z.number().int()),
+    lastRunStatus: z.nullable(z.string()),
+    nextRunAt: z.nullable(z.number().int()),
+    stalled: z.nullable(z.boolean()),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      intervalSeconds: "interval_seconds",
+      overlapPolicy: "overlap_policy",
+      webhookUrl: "webhook_url",
+      webhookConfigured: "webhook_configured",
+      lastRunId: "last_run_id",
+      lastRunAt: "last_run_at",
+      lastRunStatus: "last_run_status",
+      nextRunAt: "next_run_at",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function listEvalSchedulesDataToJSON(
   listEvalSchedulesData: ListEvalSchedulesData,
@@ -709,19 +734,21 @@ export const ListEvalSchedulesResponseBody$inboundSchema: z.ZodType<
   ListEvalSchedulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListEvalSchedulesData$inboundSchema)),
-  first_id: z.string().optional(),
-  last_id: z.string().optional(),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListEvalSchedulesData$inboundSchema)),
+    first_id: z.string().optional(),
+    last_id: z.string().optional(),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSchedulesResponseBody$Outbound = {
   object: "list";
@@ -736,19 +763,21 @@ export const ListEvalSchedulesResponseBody$outboundSchema: z.ZodType<
   ListEvalSchedulesResponseBody$Outbound,
   z.ZodTypeDef,
   ListEvalSchedulesResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListEvalSchedulesData$outboundSchema)),
-  firstId: z.string().optional(),
-  lastId: z.string().optional(),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListEvalSchedulesData$outboundSchema)),
+    firstId: z.string().optional(),
+    lastId: z.string().optional(),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function listEvalSchedulesResponseBodyToJSON(
   listEvalSchedulesResponseBody: ListEvalSchedulesResponseBody,

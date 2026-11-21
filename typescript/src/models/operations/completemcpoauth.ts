@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CompleteMcpOAuthRequest$inboundSchema: z.ZodType<
   CompleteMcpOAuthRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  McpOAuthCompleteRequest: components.McpOAuthCompleteRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "McpOAuthCompleteRequest": "mcpOAuthCompleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    McpOAuthCompleteRequest: components.McpOAuthCompleteRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "McpOAuthCompleteRequest": "mcpOAuthCompleteRequest",
+    });
+  })
+);
 /** @internal */
 export type CompleteMcpOAuthRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CompleteMcpOAuthRequest$outboundSchema: z.ZodType<
   CompleteMcpOAuthRequest$Outbound,
   z.ZodTypeDef,
   CompleteMcpOAuthRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  mcpOAuthCompleteRequest: components.McpOAuthCompleteRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    mcpOAuthCompleteRequest: "McpOAuthCompleteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    mcpOAuthCompleteRequest: components.McpOAuthCompleteRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      mcpOAuthCompleteRequest: "McpOAuthCompleteRequest",
+    });
+  })
+);
 
 export function completeMcpOAuthRequestToJSON(
   completeMcpOAuthRequest: CompleteMcpOAuthRequest,

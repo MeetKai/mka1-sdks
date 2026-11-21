@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const UpdateMemoryEntryRequest$inboundSchema: z.ZodType<
   UpdateMemoryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.string(),
-  if_match: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "if_match": "ifMatch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.string(),
+    if_match: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "if_match": "ifMatch",
+    });
+  })
+);
 /** @internal */
 export type UpdateMemoryEntryRequest$Outbound = {
   content: string;
@@ -40,15 +42,17 @@ export const UpdateMemoryEntryRequest$outboundSchema: z.ZodType<
   UpdateMemoryEntryRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryEntryRequest
-> = z.object({
-  content: z.string(),
-  ifMatch: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ifMatch: "if_match",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.string(),
+    ifMatch: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ifMatch: "if_match",
+    });
+  })
+);
 
 export function updateMemoryEntryRequestToJSON(
   updateMemoryEntryRequest: UpdateMemoryEntryRequest,

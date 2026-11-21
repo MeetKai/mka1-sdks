@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ResponseQueuedEvent$inboundSchema: z.ZodType<
   ResponseQueuedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.queued"),
-  sequence_number: z.number().int(),
-  response: ResponseObject$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.queued"),
+    sequence_number: z.number().int(),
+    response: ResponseObject$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 /** @internal */
 export type ResponseQueuedEvent$Outbound = {
   type: "response.queued";
@@ -46,15 +48,17 @@ export const ResponseQueuedEvent$outboundSchema: z.ZodType<
   ResponseQueuedEvent$Outbound,
   z.ZodTypeDef,
   ResponseQueuedEvent
-> = z.object({
-  type: z.literal("response.queued"),
-  sequenceNumber: z.number().int(),
-  response: ResponseObject$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.queued"),
+    sequenceNumber: z.number().int(),
+    response: ResponseObject$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+    });
+  })
+);
 
 export function responseQueuedEventToJSON(
   responseQueuedEvent: ResponseQueuedEvent,

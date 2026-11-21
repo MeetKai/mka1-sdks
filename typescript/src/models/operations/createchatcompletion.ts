@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,16 +27,18 @@ export const CreateChatCompletionRequest$inboundSchema: z.ZodType<
   CreateChatCompletionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  OpenAIChatCompletionRequestParams:
-    components.OpenAIChatCompletionRequestParams$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "OpenAIChatCompletionRequestParams": "openAIChatCompletionRequestParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    OpenAIChatCompletionRequestParams:
+      components.OpenAIChatCompletionRequestParams$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "OpenAIChatCompletionRequestParams": "openAIChatCompletionRequestParams",
+    });
+  })
+);
 /** @internal */
 export type CreateChatCompletionRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -49,16 +51,18 @@ export const CreateChatCompletionRequest$outboundSchema: z.ZodType<
   CreateChatCompletionRequest$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  openAIChatCompletionRequestParams:
-    components.OpenAIChatCompletionRequestParams$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    openAIChatCompletionRequestParams: "OpenAIChatCompletionRequestParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    openAIChatCompletionRequestParams:
+      components.OpenAIChatCompletionRequestParams$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      openAIChatCompletionRequestParams: "OpenAIChatCompletionRequestParams",
+    });
+  })
+);
 
 export function createChatCompletionRequestToJSON(
   createChatCompletionRequest: CreateChatCompletionRequest,
@@ -84,7 +88,9 @@ export const CreateChatCompletionResponse$inboundSchema: z.ZodType<
   CreateChatCompletionResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([components.OpenAIChatCompletion$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([components.OpenAIChatCompletion$inboundSchema, z.string()])
+);
 /** @internal */
 export type CreateChatCompletionResponse$Outbound =
   | components.OpenAIChatCompletion$Outbound
@@ -95,7 +101,9 @@ export const CreateChatCompletionResponse$outboundSchema: z.ZodType<
   CreateChatCompletionResponse$Outbound,
   z.ZodTypeDef,
   CreateChatCompletionResponse
-> = z.union([components.OpenAIChatCompletion$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([components.OpenAIChatCompletion$outboundSchema, z.string()])
+);
 
 export function createChatCompletionResponseToJSON(
   createChatCompletionResponse: CreateChatCompletionResponse,

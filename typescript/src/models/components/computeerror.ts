@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,16 +20,18 @@ export const ComputeError$inboundSchema: z.ZodType<
   ComputeError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  details: z.record(z.any()).optional(),
-  message: z.string(),
-  request_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_id": "requestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    details: z.record(z.any()).optional(),
+    message: z.string(),
+    request_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_id": "requestId",
+    });
+  })
+);
 /** @internal */
 export type ComputeError$Outbound = {
   code: string;
@@ -43,16 +45,18 @@ export const ComputeError$outboundSchema: z.ZodType<
   ComputeError$Outbound,
   z.ZodTypeDef,
   ComputeError
-> = z.object({
-  code: z.string(),
-  details: z.record(z.any()).optional(),
-  message: z.string(),
-  requestId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    requestId: "request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    details: z.record(z.any()).optional(),
+    message: z.string(),
+    requestId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestId: "request_id",
+    });
+  })
+);
 
 export function computeErrorToJSON(computeError: ComputeError): string {
   return JSON.stringify(ComputeError$outboundSchema.parse(computeError));

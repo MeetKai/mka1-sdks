@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const StatusIncidentList$inboundSchema: z.ZodType<
   StatusIncidentList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(StatusIncident$inboundSchema),
-  total: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(StatusIncident$inboundSchema),
+    total: z.number().int(),
+  })
+);
 /** @internal */
 export type StatusIncidentList$Outbound = {
   data: Array<StatusIncident$Outbound>;
@@ -38,10 +40,12 @@ export const StatusIncidentList$outboundSchema: z.ZodType<
   StatusIncidentList$Outbound,
   z.ZodTypeDef,
   StatusIncidentList
-> = z.object({
-  data: z.array(StatusIncident$outboundSchema),
-  total: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(StatusIncident$outboundSchema),
+    total: z.number().int(),
+  })
+);
 
 export function statusIncidentListToJSON(
   statusIncidentList: StatusIncidentList,

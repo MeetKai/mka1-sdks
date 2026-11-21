@@ -226,7 +226,7 @@ class Agents(BaseSDK):
 
         If set, this operation will use `bearer_auth` from the global security.
 
-        :param type:
+        :param type_:
         :param name:
         :param parameters:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -338,7 +338,7 @@ class Agents(BaseSDK):
 
         If set, this operation will use `bearer_auth` from the global security.
 
-        :param type:
+        :param type_:
         :param name:
         :param parameters:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -638,7 +638,7 @@ class Agents(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param tool_id:
-        :param type:
+        :param type_:
         :param name:
         :param parameters:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -755,7 +755,7 @@ class Agents(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param tool_id:
-        :param type:
+        :param type_:
         :param name:
         :param parameters:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
@@ -1257,7 +1257,7 @@ class Agents(BaseSDK):
         :param spec: The OpenAPI 3.0 or 3.1 document, as an object or as JSON or YAML text (at most 4 MiB).
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Label for the tool set. Defaults to a slug of the document's info.title.
-        :param server_url: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
+        :param server_url_: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
         :param operations: operationIds to import. Defaults to every supported operation (at most 128).
         :param mcp_server_id: Credential vault server, registered for the API's base URL, whose credential authenticates every call.
         :param mcp_credential_id: Credential of mcp_server_id to use. Defaults to the server's newest active credential at run time.
@@ -1371,7 +1371,7 @@ class Agents(BaseSDK):
         :param spec: The OpenAPI 3.0 or 3.1 document, as an object or as JSON or YAML text (at most 4 MiB).
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Label for the tool set. Defaults to a slug of the document's info.title.
-        :param server_url: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
+        :param server_url_: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
         :param operations: operationIds to import. Defaults to every supported operation (at most 128).
         :param mcp_server_id: Credential vault server, registered for the API's base URL, whose credential authenticates every call.
         :param mcp_credential_id: Credential of mcp_server_id to use. Defaults to the server's newest active credential at run time.
@@ -1671,7 +1671,7 @@ class Agents(BaseSDK):
         :param spec: The OpenAPI 3.0 or 3.1 document, as an object or as JSON or YAML text (at most 4 MiB).
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Label for the tool set. Defaults to a slug of the document's info.title.
-        :param server_url: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
+        :param server_url_: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
         :param operations: operationIds to import. Defaults to every supported operation (at most 128).
         :param mcp_server_id: Credential vault server, registered for the API's base URL, whose credential authenticates every call.
         :param mcp_credential_id: Credential of mcp_server_id to use. Defaults to the server's newest active credential at run time.
@@ -1788,7 +1788,7 @@ class Agents(BaseSDK):
         :param spec: The OpenAPI 3.0 or 3.1 document, as an object or as JSON or YAML text (at most 4 MiB).
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Label for the tool set. Defaults to a slug of the document's info.title.
-        :param server_url: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
+        :param server_url_: The API's public base URL. Defaults to the document's first server, with variables set to their defaults.
         :param operations: operationIds to import. Defaults to every supported operation (at most 128).
         :param mcp_server_id: Credential vault server, registered for the API's base URL, whose credential authenticates every call.
         :param mcp_credential_id: Credential of mcp_server_id to use. Defaults to the server's newest active credential at run time.

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,16 +23,18 @@ export type LogProb = {
 
 /** @internal */
 export const LogProb$inboundSchema: z.ZodType<LogProb, z.ZodTypeDef, unknown> =
-  z.object({
-    token: z.string(),
-    logprob: z.number(),
-    bytes: z.array(z.number()),
-    top_logprobs: z.array(TopLogProb$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "top_logprobs": "topLogprobs",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      token: z.string(),
+      logprob: z.number(),
+      bytes: z.array(z.number()),
+      top_logprobs: z.array(TopLogProb$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "top_logprobs": "topLogprobs",
+      });
+    })
+  );
 /** @internal */
 export type LogProb$Outbound = {
   token: string;
@@ -46,16 +48,18 @@ export const LogProb$outboundSchema: z.ZodType<
   LogProb$Outbound,
   z.ZodTypeDef,
   LogProb
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.array(z.number()),
-  topLogprobs: z.array(TopLogProb$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    topLogprobs: "top_logprobs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number()),
+    topLogprobs: z.array(TopLogProb$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      topLogprobs: "top_logprobs",
+    });
+  })
+);
 
 export function logProbToJSON(logProb: LogProb): string {
   return JSON.stringify(LogProb$outboundSchema.parse(logProb));

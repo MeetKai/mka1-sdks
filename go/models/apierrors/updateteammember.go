@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateTeamMemberTooManyRequestsError struct {
 var _ error = &UpdateTeamMemberTooManyRequestsError{}
 
 func (e *UpdateTeamMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateTeamMemberGoneError struct {
 var _ error = &UpdateTeamMemberGoneError{}
 
 func (e *UpdateTeamMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateTeamMemberConflictError struct {
 var _ error = &UpdateTeamMemberConflictError{}
 
 func (e *UpdateTeamMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateTeamMemberNotFoundError struct {
 var _ error = &UpdateTeamMemberNotFoundError{}
 
 func (e *UpdateTeamMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateTeamMemberForbiddenError struct {
 var _ error = &UpdateTeamMemberForbiddenError{}
 
 func (e *UpdateTeamMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateTeamMemberUnauthorizedError struct {
 var _ error = &UpdateTeamMemberUnauthorizedError{}
 
 func (e *UpdateTeamMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateTeamMemberBadRequestError struct {
 var _ error = &UpdateTeamMemberBadRequestError{}
 
 func (e *UpdateTeamMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

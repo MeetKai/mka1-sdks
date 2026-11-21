@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,11 +34,13 @@ export const StatusComponent$inboundSchema: z.ZodType<
   StatusComponent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: StatusComponentId$inboundSchema,
-  name: z.string(),
-  status: StatusComponentStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: StatusComponentId$inboundSchema,
+    name: z.string(),
+    status: StatusComponentStatus$inboundSchema,
+  })
+);
 /** @internal */
 export type StatusComponent$Outbound = {
   id: string;
@@ -51,11 +53,13 @@ export const StatusComponent$outboundSchema: z.ZodType<
   StatusComponent$Outbound,
   z.ZodTypeDef,
   StatusComponent
-> = z.object({
-  id: StatusComponentId$outboundSchema,
-  name: z.string(),
-  status: StatusComponentStatus$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: StatusComponentId$outboundSchema,
+    name: z.string(),
+    status: StatusComponentStatus$outboundSchema,
+  })
+);
 
 export function statusComponentToJSON(
   statusComponent: StatusComponent,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -117,16 +117,18 @@ export type PutOrgAutoModelRequest =
   | PutOrgAutoModelRequest1;
 
 /** @internal */
-export const Policy$inboundSchema: z.ZodNativeEnum<typeof Policy> = z
-  .nativeEnum(Policy);
+export const Policy$inboundSchema: z.ZodNativeEnum<typeof Policy> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Policy));
 /** @internal */
 export const Policy$outboundSchema: z.ZodNativeEnum<typeof Policy> =
   Policy$inboundSchema;
 
 /** @internal */
 export const PutOrgAutoModelRequest2FallbackLanguage$inboundSchema:
-  z.ZodNativeEnum<typeof PutOrgAutoModelRequest2FallbackLanguage> = z
-    .nativeEnum(PutOrgAutoModelRequest2FallbackLanguage);
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequest2FallbackLanguage> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(PutOrgAutoModelRequest2FallbackLanguage)
+    );
 /** @internal */
 export const PutOrgAutoModelRequest2FallbackLanguage$outboundSchema:
   z.ZodNativeEnum<typeof PutOrgAutoModelRequest2FallbackLanguage> =
@@ -137,19 +139,21 @@ export const PutOrgAutoModelRequest2$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  policy: Policy$inboundSchema.default("balanced"),
-  judge_model_id: z.string(),
-  candidate_model_ids: z.array(z.string()),
-  fallback_language: PutOrgAutoModelRequest2FallbackLanguage$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "judge_model_id": "judgeModelId",
-    "candidate_model_ids": "candidateModelIds",
-    "fallback_language": "fallbackLanguage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: Policy$inboundSchema.default("balanced"),
+    judge_model_id: z.string(),
+    candidate_model_ids: z.array(z.string()),
+    fallback_language: PutOrgAutoModelRequest2FallbackLanguage$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "judge_model_id": "judgeModelId",
+      "candidate_model_ids": "candidateModelIds",
+      "fallback_language": "fallbackLanguage",
+    });
+  })
+);
 /** @internal */
 export type PutOrgAutoModelRequest2$Outbound = {
   policy: string;
@@ -163,19 +167,21 @@ export const PutOrgAutoModelRequest2$outboundSchema: z.ZodType<
   PutOrgAutoModelRequest2$Outbound,
   z.ZodTypeDef,
   PutOrgAutoModelRequest2
-> = z.object({
-  policy: Policy$outboundSchema.default("balanced"),
-  judgeModelId: z.string(),
-  candidateModelIds: z.array(z.string()),
-  fallbackLanguage: PutOrgAutoModelRequest2FallbackLanguage$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    judgeModelId: "judge_model_id",
-    candidateModelIds: "candidate_model_ids",
-    fallbackLanguage: "fallback_language",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    policy: Policy$outboundSchema.default("balanced"),
+    judgeModelId: z.string(),
+    candidateModelIds: z.array(z.string()),
+    fallbackLanguage: PutOrgAutoModelRequest2FallbackLanguage$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      judgeModelId: "judge_model_id",
+      candidateModelIds: "candidate_model_ids",
+      fallbackLanguage: "fallback_language",
+    });
+  })
+);
 
 export function putOrgAutoModelRequest2ToJSON(
   putOrgAutoModelRequest2: PutOrgAutoModelRequest2,
@@ -196,9 +202,10 @@ export function putOrgAutoModelRequest2FromJSON(
 
 /** @internal */
 export const PutOrgAutoModelRequestFallbackLanguage$inboundSchema:
-  z.ZodNativeEnum<typeof PutOrgAutoModelRequestFallbackLanguage> = z.nativeEnum(
-    PutOrgAutoModelRequestFallbackLanguage,
-  );
+  z.ZodNativeEnum<typeof PutOrgAutoModelRequestFallbackLanguage> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(PutOrgAutoModelRequestFallbackLanguage)
+    );
 /** @internal */
 export const PutOrgAutoModelRequestFallbackLanguage$outboundSchema:
   z.ZodNativeEnum<typeof PutOrgAutoModelRequestFallbackLanguage> =
@@ -209,16 +216,18 @@ export const PutOrgAutoModelRequest1$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  fallback_language: PutOrgAutoModelRequestFallbackLanguage$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "fallback_language": "fallbackLanguage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    fallback_language: PutOrgAutoModelRequestFallbackLanguage$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "fallback_language": "fallbackLanguage",
+    });
+  })
+);
 /** @internal */
 export type PutOrgAutoModelRequest1$Outbound = {
   model_id: string;
@@ -230,16 +239,18 @@ export const PutOrgAutoModelRequest1$outboundSchema: z.ZodType<
   PutOrgAutoModelRequest1$Outbound,
   z.ZodTypeDef,
   PutOrgAutoModelRequest1
-> = z.object({
-  modelId: z.string(),
-  fallbackLanguage: PutOrgAutoModelRequestFallbackLanguage$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    fallbackLanguage: "fallback_language",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    fallbackLanguage: PutOrgAutoModelRequestFallbackLanguage$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      fallbackLanguage: "fallback_language",
+    });
+  })
+);
 
 export function putOrgAutoModelRequest1ToJSON(
   putOrgAutoModelRequest1: PutOrgAutoModelRequest1,
@@ -263,10 +274,12 @@ export const PutOrgAutoModelRequest$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => PutOrgAutoModelRequest2$inboundSchema),
-  z.lazy(() => PutOrgAutoModelRequest1$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => PutOrgAutoModelRequest2$inboundSchema),
+    z.lazy(() => PutOrgAutoModelRequest1$inboundSchema),
+  ])
+);
 /** @internal */
 export type PutOrgAutoModelRequest$Outbound =
   | PutOrgAutoModelRequest2$Outbound
@@ -277,10 +290,12 @@ export const PutOrgAutoModelRequest$outboundSchema: z.ZodType<
   PutOrgAutoModelRequest$Outbound,
   z.ZodTypeDef,
   PutOrgAutoModelRequest
-> = z.union([
-  z.lazy(() => PutOrgAutoModelRequest2$outboundSchema),
-  z.lazy(() => PutOrgAutoModelRequest1$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => PutOrgAutoModelRequest2$outboundSchema),
+    z.lazy(() => PutOrgAutoModelRequest1$outboundSchema),
+  ])
+);
 
 export function putOrgAutoModelRequestToJSON(
   putOrgAutoModelRequest: PutOrgAutoModelRequest,

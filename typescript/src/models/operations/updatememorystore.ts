@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const UpdateMemoryStoreRequest$inboundSchema: z.ZodType<
   UpdateMemoryStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory_store_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateMemoryStoreRequest: components.UpdateMemoryStoreRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_id": "memoryStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateMemoryStoreRequest": "updateMemoryStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory_store_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateMemoryStoreRequest: components.UpdateMemoryStoreRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_store_id": "memoryStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateMemoryStoreRequest": "updateMemoryStoreRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateMemoryStoreRequest$Outbound = {
   memory_store_id: string;
@@ -46,17 +48,20 @@ export const UpdateMemoryStoreRequest$outboundSchema: z.ZodType<
   UpdateMemoryStoreRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryStoreRequest
-> = z.object({
-  memoryStoreId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateMemoryStoreRequest: components.UpdateMemoryStoreRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreId: "memory_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateMemoryStoreRequest: "UpdateMemoryStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    updateMemoryStoreRequest:
+      components.UpdateMemoryStoreRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreId: "memory_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateMemoryStoreRequest: "UpdateMemoryStoreRequest",
+    });
+  })
+);
 
 export function updateMemoryStoreRequestToJSON(
   updateMemoryStoreRequest: UpdateMemoryStoreRequest,

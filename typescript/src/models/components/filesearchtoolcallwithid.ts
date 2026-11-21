@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -51,7 +51,9 @@ export type FileSearchToolCallWithId = {
 /** @internal */
 export const FileSearchToolCallWithIdStatus$inboundSchema: z.ZodNativeEnum<
   typeof FileSearchToolCallWithIdStatus
-> = z.nativeEnum(FileSearchToolCallWithIdStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FileSearchToolCallWithIdStatus)
+);
 /** @internal */
 export const FileSearchToolCallWithIdStatus$outboundSchema: z.ZodNativeEnum<
   typeof FileSearchToolCallWithIdStatus
@@ -62,19 +64,21 @@ export const FileSearchToolCallWithId$inboundSchema: z.ZodType<
   FileSearchToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_search_call"),
-  id: z.string(),
-  queries: z.array(z.string()),
-  status: FileSearchToolCallWithIdStatus$inboundSchema,
-  results: z.array(FileSearchResult$inboundSchema).optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search_call"),
+    id: z.string(),
+    queries: z.array(z.string()),
+    status: FileSearchToolCallWithIdStatus$inboundSchema,
+    results: z.array(FileSearchResult$inboundSchema).optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type FileSearchToolCallWithId$Outbound = {
   type: "file_search_call";
@@ -91,19 +95,21 @@ export const FileSearchToolCallWithId$outboundSchema: z.ZodType<
   FileSearchToolCallWithId$Outbound,
   z.ZodTypeDef,
   FileSearchToolCallWithId
-> = z.object({
-  type: z.literal("file_search_call"),
-  id: z.string(),
-  queries: z.array(z.string()),
-  status: FileSearchToolCallWithIdStatus$outboundSchema,
-  results: z.array(FileSearchResult$outboundSchema).optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search_call"),
+    id: z.string(),
+    queries: z.array(z.string()),
+    status: FileSearchToolCallWithIdStatus$outboundSchema,
+    results: z.array(FileSearchResult$outboundSchema).optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function fileSearchToolCallWithIdToJSON(
   fileSearchToolCallWithId: FileSearchToolCallWithId,

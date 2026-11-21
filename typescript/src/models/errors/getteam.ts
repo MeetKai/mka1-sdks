@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -196,19 +197,21 @@ export const GetTeamAuthTeamsResponse429ResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse429ResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponse429ResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponse429ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponse429ResponseBody$Outbound = {
@@ -220,30 +223,34 @@ export const GetTeamAuthTeamsResponse429ResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse429ResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponse429ResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponse429ResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponse429ResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetTeamAuthTeamsResponse410ResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse410ResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponse410ResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponse410ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponse410ResponseBody$Outbound = {
@@ -255,30 +262,34 @@ export const GetTeamAuthTeamsResponse410ResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse410ResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponse410ResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponse410ResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponse410ResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetTeamAuthTeamsResponse409ResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse409ResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponse409ResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponse409ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponse409ResponseBody$Outbound = {
@@ -290,30 +301,34 @@ export const GetTeamAuthTeamsResponse409ResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse409ResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponse409ResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponse409ResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponse409ResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetTeamAuthTeamsResponse404ResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse404ResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponse404ResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponse404ResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponse404ResponseBody$Outbound = {
@@ -325,31 +340,35 @@ export const GetTeamAuthTeamsResponse404ResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponse404ResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponse404ResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponse404ResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponse404ResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetTeamAuthTeamsResponseResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  code: z.string().optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponseResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    code: z.string().optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponseResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponseResponseBody$Outbound = {
@@ -362,31 +381,35 @@ export const GetTeamAuthTeamsResponseResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponseResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponseResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponseResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    code: z.string().optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponseResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      code: z.string().optional(),
+    }))
+);
 
 /** @internal */
 export const GetTeamAuthTeamsResponseBody$inboundSchema: z.ZodType<
   GetTeamAuthTeamsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamAuthTeamsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamAuthTeamsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamAuthTeamsResponseBody$Outbound = {
@@ -398,30 +421,34 @@ export const GetTeamAuthTeamsResponseBody$outboundSchema: z.ZodType<
   GetTeamAuthTeamsResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamAuthTeamsResponseBody
-> = z.instanceof(GetTeamAuthTeamsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamAuthTeamsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetTeamResponseBody$inboundSchema: z.ZodType<
   GetTeamResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetTeamResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetTeamResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetTeamResponseBody$Outbound = {
@@ -433,8 +460,10 @@ export const GetTeamResponseBody$outboundSchema: z.ZodType<
   GetTeamResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamResponseBody
-> = z.instanceof(GetTeamResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetTeamResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

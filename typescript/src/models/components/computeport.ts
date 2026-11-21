@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,8 +22,8 @@ export type ComputePort = {
 };
 
 /** @internal */
-export const Protocol$inboundSchema: z.ZodNativeEnum<typeof Protocol> = z
-  .nativeEnum(Protocol);
+export const Protocol$inboundSchema: z.ZodNativeEnum<typeof Protocol> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Protocol));
 /** @internal */
 export const Protocol$outboundSchema: z.ZodNativeEnum<typeof Protocol> =
   Protocol$inboundSchema;
@@ -33,15 +33,17 @@ export const ComputePort$inboundSchema: z.ZodType<
   ComputePort,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  container_port: z.number().int(),
-  name: z.string(),
-  protocol: Protocol$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "container_port": "containerPort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    container_port: z.number().int(),
+    name: z.string(),
+    protocol: Protocol$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "container_port": "containerPort",
+    });
+  })
+);
 /** @internal */
 export type ComputePort$Outbound = {
   container_port: number;
@@ -54,15 +56,17 @@ export const ComputePort$outboundSchema: z.ZodType<
   ComputePort$Outbound,
   z.ZodTypeDef,
   ComputePort
-> = z.object({
-  containerPort: z.number().int(),
-  name: z.string(),
-  protocol: Protocol$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    containerPort: "container_port",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    containerPort: z.number().int(),
+    name: z.string(),
+    protocol: Protocol$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      containerPort: "container_port",
+    });
+  })
+);
 
 export function computePortToJSON(computePort: ComputePort): string {
   return JSON.stringify(ComputePort$outboundSchema.parse(computePort));

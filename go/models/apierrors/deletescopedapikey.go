@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,12 @@ type DeleteScopedAPIKeyTooManyRequestsError struct {
 var _ error = &DeleteScopedAPIKeyTooManyRequestsError{}
 
 func (e *DeleteScopedAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +37,12 @@ type DeleteScopedAPIKeyGoneError struct {
 var _ error = &DeleteScopedAPIKeyGoneError{}
 
 func (e *DeleteScopedAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,12 @@ type DeleteScopedAPIKeyConflictError struct {
 var _ error = &DeleteScopedAPIKeyConflictError{}
 
 func (e *DeleteScopedAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +75,12 @@ type DeleteScopedAPIKeyNotFoundError struct {
 var _ error = &DeleteScopedAPIKeyNotFoundError{}
 
 func (e *DeleteScopedAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -70,6 +95,15 @@ type DeleteScopedAPIKeyForbiddenError struct {
 var _ error = &DeleteScopedAPIKeyForbiddenError{}
 
 func (e *DeleteScopedAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -83,6 +117,12 @@ type DeleteScopedAPIKeyUnauthorizedError struct {
 var _ error = &DeleteScopedAPIKeyUnauthorizedError{}
 
 func (e *DeleteScopedAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -97,6 +137,12 @@ type DeleteScopedAPIKeyBadRequestError struct {
 var _ error = &DeleteScopedAPIKeyBadRequestError{}
 
 func (e *DeleteScopedAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

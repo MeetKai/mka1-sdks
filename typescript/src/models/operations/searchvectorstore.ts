@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const SearchVectorStoreRequest$inboundSchema: z.ZodType<
   SearchVectorStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SearchVectorStoreRequest: components.SearchVectorStoreRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SearchVectorStoreRequest": "searchVectorStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SearchVectorStoreRequest: components.SearchVectorStoreRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SearchVectorStoreRequest": "searchVectorStoreRequest",
+    });
+  })
+);
 /** @internal */
 export type SearchVectorStoreRequest$Outbound = {
   vector_store_id: string;
@@ -46,17 +48,20 @@ export const SearchVectorStoreRequest$outboundSchema: z.ZodType<
   SearchVectorStoreRequest$Outbound,
   z.ZodTypeDef,
   SearchVectorStoreRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  searchVectorStoreRequest: components.SearchVectorStoreRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    searchVectorStoreRequest: "SearchVectorStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    searchVectorStoreRequest:
+      components.SearchVectorStoreRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      searchVectorStoreRequest: "SearchVectorStoreRequest",
+    });
+  })
+);
 
 export function searchVectorStoreRequestToJSON(
   searchVectorStoreRequest: SearchVectorStoreRequest,

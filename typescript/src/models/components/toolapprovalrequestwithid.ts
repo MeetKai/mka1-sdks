@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,21 +48,23 @@ export const ToolApprovalRequestWithId$inboundSchema: z.ZodType<
   ToolApprovalRequestWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("tool_approval_request"),
-  id: z.string(),
-  tool_type: z.string(),
-  name: z.string(),
-  arguments: z.string(),
-  reason: z.string().optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_type": "toolType",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool_approval_request"),
+    id: z.string(),
+    tool_type: z.string(),
+    name: z.string(),
+    arguments: z.string(),
+    reason: z.string().optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_type": "toolType",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ToolApprovalRequestWithId$Outbound = {
   type: "tool_approval_request";
@@ -80,21 +82,23 @@ export const ToolApprovalRequestWithId$outboundSchema: z.ZodType<
   ToolApprovalRequestWithId$Outbound,
   z.ZodTypeDef,
   ToolApprovalRequestWithId
-> = z.object({
-  type: z.literal("tool_approval_request"),
-  id: z.string(),
-  toolType: z.string(),
-  name: z.string(),
-  arguments: z.string(),
-  reason: z.string().optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolType: "tool_type",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool_approval_request"),
+    id: z.string(),
+    toolType: z.string(),
+    name: z.string(),
+    arguments: z.string(),
+    reason: z.string().optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolType: "tool_type",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function toolApprovalRequestWithIdToJSON(
   toolApprovalRequestWithId: ToolApprovalRequestWithId,

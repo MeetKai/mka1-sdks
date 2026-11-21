@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,17 +24,19 @@ export const TerminateSessionRequest$inboundSchema: z.ZodType<
   TerminateSessionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  expected_session_kind: z.nullable(SessionKind$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_token": "sessionToken",
-    "expected_session_kind": "expectedSessionKind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    expected_session_kind: z.nullable(SessionKind$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_token": "sessionToken",
+      "expected_session_kind": "expectedSessionKind",
+    });
+  })
+);
 /** @internal */
 export type TerminateSessionRequest$Outbound = {
   session_id: string;
@@ -47,17 +49,19 @@ export const TerminateSessionRequest$outboundSchema: z.ZodType<
   TerminateSessionRequest$Outbound,
   z.ZodTypeDef,
   TerminateSessionRequest
-> = z.object({
-  sessionId: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  expectedSessionKind: z.nullable(SessionKind$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionToken: "session_token",
-    expectedSessionKind: "expected_session_kind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    expectedSessionKind: z.nullable(SessionKind$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionToken: "session_token",
+      expectedSessionKind: "expected_session_kind",
+    });
+  })
+);
 
 export function terminateSessionRequestToJSON(
   terminateSessionRequest: TerminateSessionRequest,

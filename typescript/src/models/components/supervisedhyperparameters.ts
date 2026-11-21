@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,7 +34,7 @@ export const BatchSize$inboundSchema: z.ZodType<
   BatchSize,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type BatchSize$Outbound = string | number;
 
@@ -43,7 +43,7 @@ export const BatchSize$outboundSchema: z.ZodType<
   BatchSize$Outbound,
   z.ZodTypeDef,
   BatchSize
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function batchSizeToJSON(batchSize: BatchSize): string {
   return JSON.stringify(BatchSize$outboundSchema.parse(batchSize));
@@ -63,7 +63,7 @@ export const LearningRateMultiplier$inboundSchema: z.ZodType<
   LearningRateMultiplier,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type LearningRateMultiplier$Outbound = string | number;
 
@@ -72,7 +72,7 @@ export const LearningRateMultiplier$outboundSchema: z.ZodType<
   LearningRateMultiplier$Outbound,
   z.ZodTypeDef,
   LearningRateMultiplier
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function learningRateMultiplierToJSON(
   learningRateMultiplier: LearningRateMultiplier,
@@ -93,7 +93,7 @@ export function learningRateMultiplierFromJSON(
 
 /** @internal */
 export const NEpochs$inboundSchema: z.ZodType<NEpochs, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.number().int()]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type NEpochs$Outbound = string | number;
 
@@ -102,7 +102,7 @@ export const NEpochs$outboundSchema: z.ZodType<
   NEpochs$Outbound,
   z.ZodTypeDef,
   NEpochs
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function nEpochsToJSON(nEpochs: NEpochs): string {
   return JSON.stringify(NEpochs$outboundSchema.parse(nEpochs));
@@ -122,18 +122,20 @@ export const SupervisedHyperparameters$inboundSchema: z.ZodType<
   SupervisedHyperparameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_size": "batchSize",
-    "learning_rate_multiplier": "learningRateMultiplier",
-    "n_epochs": "nEpochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_size": "batchSize",
+      "learning_rate_multiplier": "learningRateMultiplier",
+      "n_epochs": "nEpochs",
+    });
+  })
+);
 /** @internal */
 export type SupervisedHyperparameters$Outbound = {
   batch_size?: string | number | null | undefined;
@@ -146,18 +148,20 @@ export const SupervisedHyperparameters$outboundSchema: z.ZodType<
   SupervisedHyperparameters$Outbound,
   z.ZodTypeDef,
   SupervisedHyperparameters
-> = z.object({
-  batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchSize: "batch_size",
-    learningRateMultiplier: "learning_rate_multiplier",
-    nEpochs: "n_epochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchSize: "batch_size",
+      learningRateMultiplier: "learning_rate_multiplier",
+      nEpochs: "n_epochs",
+    });
+  })
+);
 
 export function supervisedHyperparametersToJSON(
   supervisedHyperparameters: SupervisedHyperparameters,

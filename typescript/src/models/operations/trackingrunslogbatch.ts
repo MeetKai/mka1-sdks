@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,16 +34,18 @@ export const TrackingRunsLogBatchRequestBody$inboundSchema: z.ZodType<
   TrackingRunsLogBatchRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  metrics: z.array(components.Metric$inboundSchema).optional(),
-  params: z.array(components.Param$inboundSchema).optional(),
-  tags: z.array(components.Tag$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    metrics: z.array(components.Metric$inboundSchema).optional(),
+    params: z.array(components.Param$inboundSchema).optional(),
+    tags: z.array(components.Tag$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsLogBatchRequestBody$Outbound = {
   run_id: string;
@@ -57,16 +59,18 @@ export const TrackingRunsLogBatchRequestBody$outboundSchema: z.ZodType<
   TrackingRunsLogBatchRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogBatchRequestBody
-> = z.object({
-  runId: z.string(),
-  metrics: z.array(components.Metric$outboundSchema).optional(),
-  params: z.array(components.Param$outboundSchema).optional(),
-  tags: z.array(components.Tag$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    metrics: z.array(components.Metric$outboundSchema).optional(),
+    params: z.array(components.Param$outboundSchema).optional(),
+    tags: z.array(components.Tag$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+    });
+  })
+);
 
 export function trackingRunsLogBatchRequestBodyToJSON(
   trackingRunsLogBatchRequestBody: TrackingRunsLogBatchRequestBody,
@@ -92,15 +96,17 @@ export const TrackingRunsLogBatchRequest$inboundSchema: z.ZodType<
   TrackingRunsLogBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingRunsLogBatchRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TrackingRunsLogBatchRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsLogBatchRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -112,15 +118,17 @@ export const TrackingRunsLogBatchRequest$outboundSchema: z.ZodType<
   TrackingRunsLogBatchRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogBatchRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TrackingRunsLogBatchRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TrackingRunsLogBatchRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingRunsLogBatchRequestToJSON(
   trackingRunsLogBatchRequest: TrackingRunsLogBatchRequest,
@@ -146,7 +154,7 @@ export const TrackingRunsLogBatchResponseBody$inboundSchema: z.ZodType<
   TrackingRunsLogBatchResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrackingRunsLogBatchResponseBody$Outbound = {};
 
@@ -155,7 +163,7 @@ export const TrackingRunsLogBatchResponseBody$outboundSchema: z.ZodType<
   TrackingRunsLogBatchResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsLogBatchResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trackingRunsLogBatchResponseBodyToJSON(
   trackingRunsLogBatchResponseBody: TrackingRunsLogBatchResponseBody,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,15 +35,19 @@ export type AnalyticsQueryResponse = {
 /** @internal */
 export const AnalyticsQueryResponseMetric$inboundSchema: z.ZodNativeEnum<
   typeof AnalyticsQueryResponseMetric
-> = z.nativeEnum(AnalyticsQueryResponseMetric);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AnalyticsQueryResponseMetric)
+);
 /** @internal */
 export const AnalyticsQueryResponseMetric$outboundSchema: z.ZodNativeEnum<
   typeof AnalyticsQueryResponseMetric
 > = AnalyticsQueryResponseMetric$inboundSchema;
 
 /** @internal */
-export const Group$inboundSchema: z.ZodType<Group, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Group$inboundSchema: z.ZodType<Group, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 /** @internal */
 export type Group$Outbound = string | number | boolean;
 
@@ -52,7 +56,9 @@ export const Group$outboundSchema: z.ZodType<
   Group$Outbound,
   z.ZodTypeDef,
   Group
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function groupToJSON(group: Group): string {
   return JSON.stringify(Group$outboundSchema.parse(group));
@@ -68,13 +74,15 @@ export function groupFromJSON(
 }
 
 /** @internal */
-export const Rows$inboundSchema: z.ZodType<Rows, z.ZodTypeDef, unknown> = z
-  .object({
-    bucket: z.string().optional(),
-    group: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
-      .optional(),
-    value: z.number(),
-  });
+export const Rows$inboundSchema: z.ZodType<Rows, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      bucket: z.string().optional(),
+      group: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+        .optional(),
+      value: z.number(),
+    })
+  );
 /** @internal */
 export type Rows$Outbound = {
   bucket?: string | undefined;
@@ -84,12 +92,14 @@ export type Rows$Outbound = {
 
 /** @internal */
 export const Rows$outboundSchema: z.ZodType<Rows$Outbound, z.ZodTypeDef, Rows> =
-  z.object({
-    bucket: z.string().optional(),
-    group: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
-      .optional(),
-    value: z.number(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      bucket: z.string().optional(),
+      group: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+        .optional(),
+      value: z.number(),
+    })
+  );
 
 export function rowsToJSON(rows: Rows): string {
   return JSON.stringify(Rows$outboundSchema.parse(rows));
@@ -109,10 +119,12 @@ export const AnalyticsQueryResponse$inboundSchema: z.ZodType<
   AnalyticsQueryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: AnalyticsQueryResponseMetric$inboundSchema,
-  rows: z.array(z.lazy(() => Rows$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: AnalyticsQueryResponseMetric$inboundSchema,
+    rows: z.array(z.lazy(() => Rows$inboundSchema)),
+  })
+);
 /** @internal */
 export type AnalyticsQueryResponse$Outbound = {
   metric: string;
@@ -124,10 +136,12 @@ export const AnalyticsQueryResponse$outboundSchema: z.ZodType<
   AnalyticsQueryResponse$Outbound,
   z.ZodTypeDef,
   AnalyticsQueryResponse
-> = z.object({
-  metric: AnalyticsQueryResponseMetric$outboundSchema,
-  rows: z.array(z.lazy(() => Rows$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: AnalyticsQueryResponseMetric$outboundSchema,
+    rows: z.array(z.lazy(() => Rows$outboundSchema)),
+  })
+);
 
 export function analyticsQueryResponseToJSON(
   analyticsQueryResponse: AnalyticsQueryResponse,

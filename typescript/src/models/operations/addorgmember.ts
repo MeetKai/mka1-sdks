@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -70,10 +70,12 @@ export const AddOrgMemberSecurity$inboundSchema: z.ZodType<
   AddOrgMemberSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type AddOrgMemberSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -85,10 +87,12 @@ export const AddOrgMemberSecurity$outboundSchema: z.ZodType<
   AddOrgMemberSecurity$Outbound,
   z.ZodTypeDef,
   AddOrgMemberSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function addOrgMemberSecurityToJSON(
   addOrgMemberSecurity: AddOrgMemberSecurity,
@@ -108,9 +112,8 @@ export function addOrgMemberSecurityFromJSON(
 }
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Role));
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
   Role$inboundSchema;
@@ -120,11 +123,13 @@ export const AddOrgMemberRequestBody$inboundSchema: z.ZodType<
   AddOrgMemberRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  name: z.string().optional(),
-  role: Role$inboundSchema.default("member"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string().optional(),
+    role: Role$inboundSchema.default("member"),
+  })
+);
 /** @internal */
 export type AddOrgMemberRequestBody$Outbound = {
   email: string;
@@ -137,11 +142,13 @@ export const AddOrgMemberRequestBody$outboundSchema: z.ZodType<
   AddOrgMemberRequestBody$Outbound,
   z.ZodTypeDef,
   AddOrgMemberRequestBody
-> = z.object({
-  email: z.string(),
-  name: z.string().optional(),
-  role: Role$outboundSchema.default("member"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string().optional(),
+    role: Role$outboundSchema.default("member"),
+  })
+);
 
 export function addOrgMemberRequestBodyToJSON(
   addOrgMemberRequestBody: AddOrgMemberRequestBody,
@@ -165,16 +172,18 @@ export const AddOrgMemberRequest$inboundSchema: z.ZodType<
   AddOrgMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => AddOrgMemberRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => AddOrgMemberRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type AddOrgMemberRequest$Outbound = {
   orgId: string;
@@ -187,16 +196,18 @@ export const AddOrgMemberRequest$outboundSchema: z.ZodType<
   AddOrgMemberRequest$Outbound,
   z.ZodTypeDef,
   AddOrgMemberRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => AddOrgMemberRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => AddOrgMemberRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function addOrgMemberRequestToJSON(
   addOrgMemberRequest: AddOrgMemberRequest,
@@ -220,12 +231,14 @@ export const AddOrgMemberAuthOrgsResponseBody$inboundSchema: z.ZodType<
   AddOrgMemberAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  status: z.literal("added"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("added"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 /** @internal */
 export type AddOrgMemberAuthOrgsResponseBody$Outbound = {
   email: string;
@@ -239,12 +252,14 @@ export const AddOrgMemberAuthOrgsResponseBody$outboundSchema: z.ZodType<
   AddOrgMemberAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   AddOrgMemberAuthOrgsResponseBody
-> = z.object({
-  email: z.string(),
-  status: z.literal("added"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("added"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 
 export function addOrgMemberAuthOrgsResponseBodyToJSON(
   addOrgMemberAuthOrgsResponseBody: AddOrgMemberAuthOrgsResponseBody,
@@ -270,12 +285,14 @@ export const AddOrgMemberResponseBody$inboundSchema: z.ZodType<
   AddOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  status: z.literal("already_member"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("already_member"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 /** @internal */
 export type AddOrgMemberResponseBody$Outbound = {
   email: string;
@@ -289,12 +306,14 @@ export const AddOrgMemberResponseBody$outboundSchema: z.ZodType<
   AddOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   AddOrgMemberResponseBody
-> = z.object({
-  email: z.string(),
-  status: z.literal("already_member"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("already_member"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 
 export function addOrgMemberResponseBodyToJSON(
   addOrgMemberResponseBody: AddOrgMemberResponseBody,
@@ -318,10 +337,12 @@ export const AddOrgMemberResponse$inboundSchema: z.ZodType<
   AddOrgMemberResponse,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("status", {
-  already_member: z.lazy(() => AddOrgMemberResponseBody$inboundSchema),
-  added: z.lazy(() => AddOrgMemberAuthOrgsResponseBody$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("status", {
+    already_member: z.lazy(() => AddOrgMemberResponseBody$inboundSchema),
+    added: z.lazy(() => AddOrgMemberAuthOrgsResponseBody$inboundSchema),
+  })
+);
 /** @internal */
 export type AddOrgMemberResponse$Outbound =
   | AddOrgMemberResponseBody$Outbound
@@ -332,10 +353,12 @@ export const AddOrgMemberResponse$outboundSchema: z.ZodType<
   AddOrgMemberResponse$Outbound,
   z.ZodTypeDef,
   AddOrgMemberResponse
-> = z.union([
-  z.lazy(() => AddOrgMemberResponseBody$outboundSchema),
-  z.lazy(() => AddOrgMemberAuthOrgsResponseBody$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => AddOrgMemberResponseBody$outboundSchema),
+    z.lazy(() => AddOrgMemberAuthOrgsResponseBody$outboundSchema),
+  ])
+);
 
 export function addOrgMemberResponseToJSON(
   addOrgMemberResponse: AddOrgMemberResponse,

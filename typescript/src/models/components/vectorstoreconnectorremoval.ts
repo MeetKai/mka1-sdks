@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,7 +36,9 @@ export type VectorStoreConnectorRemoval = {
 /** @internal */
 export const VectorStoreConnectorRemovalStatus$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRemovalStatus
-> = z.nativeEnum(VectorStoreConnectorRemovalStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VectorStoreConnectorRemovalStatus)
+);
 /** @internal */
 export const VectorStoreConnectorRemovalStatus$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRemovalStatus
@@ -47,19 +49,21 @@ export const VectorStoreConnectorRemoval$inboundSchema: z.ZodType<
   VectorStoreConnectorRemoval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.removal"),
-  connector_id: z.string(),
-  vector_store_id: z.nullable(z.string()),
-  status: VectorStoreConnectorRemovalStatus$inboundSchema,
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "vector_store_id": "vectorStoreId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.removal"),
+    connector_id: z.string(),
+    vector_store_id: z.nullable(z.string()),
+    status: VectorStoreConnectorRemovalStatus$inboundSchema,
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "vector_store_id": "vectorStoreId",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorRemoval$Outbound = {
   id: string;
@@ -75,19 +79,21 @@ export const VectorStoreConnectorRemoval$outboundSchema: z.ZodType<
   VectorStoreConnectorRemoval$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorRemoval
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.removal"),
-  connectorId: z.string(),
-  vectorStoreId: z.nullable(z.string()),
-  status: VectorStoreConnectorRemovalStatus$outboundSchema,
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    vectorStoreId: "vector_store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.removal"),
+    connectorId: z.string(),
+    vectorStoreId: z.nullable(z.string()),
+    status: VectorStoreConnectorRemovalStatus$outboundSchema,
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      vectorStoreId: "vector_store_id",
+    });
+  })
+);
 
 export function vectorStoreConnectorRemovalToJSON(
   vectorStoreConnectorRemoval: VectorStoreConnectorRemoval,

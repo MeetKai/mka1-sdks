@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,14 +23,16 @@ export const ActivateRegistryEntryRequest$inboundSchema: z.ZodType<
   ActivateRegistryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: RegistrySource$inboundSchema,
-  model_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: RegistrySource$inboundSchema,
+    model_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+    });
+  })
+);
 /** @internal */
 export type ActivateRegistryEntryRequest$Outbound = {
   source: string;
@@ -42,14 +44,16 @@ export const ActivateRegistryEntryRequest$outboundSchema: z.ZodType<
   ActivateRegistryEntryRequest$Outbound,
   z.ZodTypeDef,
   ActivateRegistryEntryRequest
-> = z.object({
-  source: RegistrySource$outboundSchema,
-  modelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: RegistrySource$outboundSchema,
+    modelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function activateRegistryEntryRequestToJSON(
   activateRegistryEntryRequest: ActivateRegistryEntryRequest,

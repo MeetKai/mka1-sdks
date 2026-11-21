@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,15 +34,17 @@ export const SandboxPricingUpdate$inboundSchema: z.ZodType<
   SandboxPricingUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rates: z.record(SandboxPriceRate$inboundSchema),
-  currency: z.nullable(z.string()).optional(),
-  allow_unpriced: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "allow_unpriced": "allowUnpriced",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rates: z.record(SandboxPriceRate$inboundSchema),
+    currency: z.nullable(z.string()).optional(),
+    allow_unpriced: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "allow_unpriced": "allowUnpriced",
+    });
+  })
+);
 /** @internal */
 export type SandboxPricingUpdate$Outbound = {
   rates: { [k: string]: SandboxPriceRate$Outbound };
@@ -55,15 +57,17 @@ export const SandboxPricingUpdate$outboundSchema: z.ZodType<
   SandboxPricingUpdate$Outbound,
   z.ZodTypeDef,
   SandboxPricingUpdate
-> = z.object({
-  rates: z.record(SandboxPriceRate$outboundSchema),
-  currency: z.nullable(z.string()).optional(),
-  allowUnpriced: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    allowUnpriced: "allow_unpriced",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rates: z.record(SandboxPriceRate$outboundSchema),
+    currency: z.nullable(z.string()).optional(),
+    allowUnpriced: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      allowUnpriced: "allow_unpriced",
+    });
+  })
+);
 
 export function sandboxPricingUpdateToJSON(
   sandboxPricingUpdate: SandboxPricingUpdate,

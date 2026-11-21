@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,19 +24,21 @@ export const UpdateMemoryEntryRequest$inboundSchema: z.ZodType<
   UpdateMemoryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory_store_id: z.string(),
-  entry_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateMemoryEntryRequest: components.UpdateMemoryEntryRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_id": "memoryStoreId",
-    "entry_id": "entryId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateMemoryEntryRequest": "updateMemoryEntryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory_store_id: z.string(),
+    entry_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateMemoryEntryRequest: components.UpdateMemoryEntryRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_store_id": "memoryStoreId",
+      "entry_id": "entryId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateMemoryEntryRequest": "updateMemoryEntryRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateMemoryEntryRequest$Outbound = {
   memory_store_id: string;
@@ -50,19 +52,22 @@ export const UpdateMemoryEntryRequest$outboundSchema: z.ZodType<
   UpdateMemoryEntryRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryEntryRequest
-> = z.object({
-  memoryStoreId: z.string(),
-  entryId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateMemoryEntryRequest: components.UpdateMemoryEntryRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreId: "memory_store_id",
-    entryId: "entry_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateMemoryEntryRequest: "UpdateMemoryEntryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreId: z.string(),
+    entryId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    updateMemoryEntryRequest:
+      components.UpdateMemoryEntryRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreId: "memory_store_id",
+      entryId: "entry_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateMemoryEntryRequest: "UpdateMemoryEntryRequest",
+    });
+  })
+);
 
 export function updateMemoryEntryRequestToJSON(
   updateMemoryEntryRequest: UpdateMemoryEntryRequest,

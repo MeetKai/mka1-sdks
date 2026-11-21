@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +26,19 @@ export const UpdateFeatureFlagProjectRequest$inboundSchema: z.ZodType<
   UpdateFeatureFlagProjectRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  project: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagProjectUpdateRequest:
-    components.FeatureFlagProjectUpdateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagProjectUpdateRequest": "featureFlagProjectUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagProjectUpdateRequest:
+      components.FeatureFlagProjectUpdateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagProjectUpdateRequest": "featureFlagProjectUpdateRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateFeatureFlagProjectRequest$Outbound = {
   project: string;
@@ -47,17 +52,21 @@ export const UpdateFeatureFlagProjectRequest$outboundSchema: z.ZodType<
   UpdateFeatureFlagProjectRequest$Outbound,
   z.ZodTypeDef,
   UpdateFeatureFlagProjectRequest
-> = z.object({
-  project: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  featureFlagProjectUpdateRequest:
-    components.FeatureFlagProjectUpdateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagProjectUpdateRequest: "FeatureFlagProjectUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    featureFlagProjectUpdateRequest:
+      components.FeatureFlagProjectUpdateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagProjectUpdateRequest: "FeatureFlagProjectUpdateRequest",
+    });
+  })
+);
 
 export function updateFeatureFlagProjectRequestToJSON(
   updateFeatureFlagProjectRequest: UpdateFeatureFlagProjectRequest,

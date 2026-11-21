@@ -16,6 +16,12 @@ type GetTeamModelAccessNotFoundError struct {
 var _ error = &GetTeamModelAccessNotFoundError{}
 
 func (e *GetTeamModelAccessNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +35,12 @@ type GetTeamModelAccessForbiddenError struct {
 var _ error = &GetTeamModelAccessForbiddenError{}
 
 func (e *GetTeamModelAccessForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +54,12 @@ type GetTeamModelAccessUnauthorizedError struct {
 var _ error = &GetTeamModelAccessUnauthorizedError{}
 
 func (e *GetTeamModelAccessUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +73,12 @@ type GetTeamModelAccessBadRequestError struct {
 var _ error = &GetTeamModelAccessBadRequestError{}
 
 func (e *GetTeamModelAccessBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

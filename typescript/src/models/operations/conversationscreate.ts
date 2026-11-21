@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,18 @@ export const ConversationsCreateRequest$inboundSchema: z.ZodType<
   ConversationsCreateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateConversationRequest: components.CreateConversationRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateConversationRequest": "createConversationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateConversationRequest:
+      components.CreateConversationRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateConversationRequest": "createConversationRequest",
+    });
+  })
+);
 /** @internal */
 export type ConversationsCreateRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,16 +45,18 @@ export const ConversationsCreateRequest$outboundSchema: z.ZodType<
   ConversationsCreateRequest$Outbound,
   z.ZodTypeDef,
   ConversationsCreateRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createConversationRequest:
-    components.CreateConversationRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createConversationRequest: "CreateConversationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createConversationRequest:
+      components.CreateConversationRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createConversationRequest: "CreateConversationRequest",
+    });
+  })
+);
 
 export function conversationsCreateRequestToJSON(
   conversationsCreateRequest: ConversationsCreateRequest,

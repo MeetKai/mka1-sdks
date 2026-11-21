@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,7 +40,9 @@ export type ListVectorStoresRequest = {
 /** @internal */
 export const ListVectorStoresQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListVectorStoresQueryParamOrder
-> = z.nativeEnum(ListVectorStoresQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListVectorStoresQueryParamOrder)
+);
 /** @internal */
 export const ListVectorStoresQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListVectorStoresQueryParamOrder
@@ -51,17 +53,19 @@ export const ListVectorStoresRequest$inboundSchema: z.ZodType<
   ListVectorStoresRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int().default(20),
-  order: ListVectorStoresQueryParamOrder$inboundSchema.default("desc"),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(20),
+    order: ListVectorStoresQueryParamOrder$inboundSchema.default("desc"),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListVectorStoresRequest$Outbound = {
   limit: number;
@@ -76,17 +80,19 @@ export const ListVectorStoresRequest$outboundSchema: z.ZodType<
   ListVectorStoresRequest$Outbound,
   z.ZodTypeDef,
   ListVectorStoresRequest
-> = z.object({
-  limit: z.number().int().default(20),
-  order: ListVectorStoresQueryParamOrder$outboundSchema.default("desc"),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(20),
+    order: ListVectorStoresQueryParamOrder$outboundSchema.default("desc"),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listVectorStoresRequestToJSON(
   listVectorStoresRequest: ListVectorStoresRequest,

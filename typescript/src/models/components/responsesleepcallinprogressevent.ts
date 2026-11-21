@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,16 +27,18 @@ export const ResponseSleepCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseSleepCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  duration_seconds: z.number().int().optional(),
-  wake_at: z.string().optional(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "duration_seconds": "durationSeconds",
-    "wake_at": "wakeAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    duration_seconds: z.number().int().optional(),
+    wake_at: z.string().optional(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "duration_seconds": "durationSeconds",
+      "wake_at": "wakeAt",
+    });
+  })
+);
 /** @internal */
 export type ResponseSleepCallInProgressEventArgs$Outbound = {
   duration_seconds?: number | undefined;
@@ -49,16 +51,18 @@ export const ResponseSleepCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseSleepCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseSleepCallInProgressEventArgs
-> = z.object({
-  durationSeconds: z.number().int().optional(),
-  wakeAt: z.string().optional(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    durationSeconds: "duration_seconds",
-    wakeAt: "wake_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    durationSeconds: z.number().int().optional(),
+    wakeAt: z.string().optional(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      durationSeconds: "duration_seconds",
+      wakeAt: "wake_at",
+    });
+  })
+);
 
 export function responseSleepCallInProgressEventArgsToJSON(
   responseSleepCallInProgressEventArgs: ResponseSleepCallInProgressEventArgs,
@@ -85,20 +89,22 @@ export const ResponseSleepCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseSleepCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.sleep_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseSleepCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseSleepCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseSleepCallInProgressEvent$Outbound = {
   type: "response.sleep_call.in_progress";
@@ -113,20 +119,22 @@ export const ResponseSleepCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseSleepCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseSleepCallInProgressEvent
-> = z.object({
-  type: z.literal("response.sleep_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseSleepCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseSleepCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseSleepCallInProgressEventToJSON(
   responseSleepCallInProgressEvent: ResponseSleepCallInProgressEvent,

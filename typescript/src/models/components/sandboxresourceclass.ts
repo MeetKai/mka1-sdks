@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -31,7 +32,7 @@ export type SandboxResourceClass = ClosedEnum<typeof SandboxResourceClass>;
 /** @internal */
 export const SandboxResourceClass$inboundSchema: z.ZodNativeEnum<
   typeof SandboxResourceClass
-> = z.nativeEnum(SandboxResourceClass);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SandboxResourceClass));
 /** @internal */
 export const SandboxResourceClass$outboundSchema: z.ZodNativeEnum<
   typeof SandboxResourceClass

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const MeasureEvalSuiteTokensRequest$inboundSchema: z.ZodType<
   MeasureEvalSuiteTokensRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  MeasureEvalSuiteTokensBody:
-    components.MeasureEvalSuiteTokensBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "MeasureEvalSuiteTokensBody": "measureEvalSuiteTokensBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    MeasureEvalSuiteTokensBody:
+      components.MeasureEvalSuiteTokensBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "MeasureEvalSuiteTokensBody": "measureEvalSuiteTokensBody",
+    });
+  })
+);
 /** @internal */
 export type MeasureEvalSuiteTokensRequest$Outbound = {
   suite_id: string;
@@ -47,18 +49,20 @@ export const MeasureEvalSuiteTokensRequest$outboundSchema: z.ZodType<
   MeasureEvalSuiteTokensRequest$Outbound,
   z.ZodTypeDef,
   MeasureEvalSuiteTokensRequest
-> = z.object({
-  suiteId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  measureEvalSuiteTokensBody:
-    components.MeasureEvalSuiteTokensBody$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    measureEvalSuiteTokensBody: "MeasureEvalSuiteTokensBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    measureEvalSuiteTokensBody:
+      components.MeasureEvalSuiteTokensBody$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      measureEvalSuiteTokensBody: "MeasureEvalSuiteTokensBody",
+    });
+  })
+);
 
 export function measureEvalSuiteTokensRequestToJSON(
   measureEvalSuiteTokensRequest: MeasureEvalSuiteTokensRequest,

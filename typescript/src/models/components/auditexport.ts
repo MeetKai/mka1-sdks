@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type AuditExport = {
 /** @internal */
 export const AuditExportStatus$inboundSchema: z.ZodNativeEnum<
   typeof AuditExportStatus
-> = z.nativeEnum(AuditExportStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuditExportStatus));
 /** @internal */
 export const AuditExportStatus$outboundSchema: z.ZodNativeEnum<
   typeof AuditExportStatus
@@ -56,7 +56,7 @@ export const AuditExportStatus$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AuditExportFormat$inboundSchema: z.ZodNativeEnum<
   typeof AuditExportFormat
-> = z.nativeEnum(AuditExportFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuditExportFormat));
 /** @internal */
 export const AuditExportFormat$outboundSchema: z.ZodNativeEnum<
   typeof AuditExportFormat
@@ -67,28 +67,32 @@ export const AuditExport$inboundSchema: z.ZodType<
   AuditExport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  export_id: z.string(),
-  status: AuditExportStatus$inboundSchema,
-  format: AuditExportFormat$inboundSchema,
-  total_rows: z.number().int(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "export_id": "exportId",
-    "total_rows": "totalRows",
-    "created_at": "createdAt",
-    "completed_at": "completedAt",
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    export_id: z.string(),
+    status: AuditExportStatus$inboundSchema,
+    format: AuditExportFormat$inboundSchema,
+    total_rows: z.number().int(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    completed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "export_id": "exportId",
+      "total_rows": "totalRows",
+      "created_at": "createdAt",
+      "completed_at": "completedAt",
+      "expires_at": "expiresAt",
+    });
+  })
+);
 /** @internal */
 export type AuditExport$Outbound = {
   export_id: string;
@@ -106,24 +110,26 @@ export const AuditExport$outboundSchema: z.ZodType<
   AuditExport$Outbound,
   z.ZodTypeDef,
   AuditExport
-> = z.object({
-  exportId: z.string(),
-  status: AuditExportStatus$outboundSchema,
-  format: AuditExportFormat$outboundSchema,
-  totalRows: z.number().int(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    exportId: "export_id",
-    totalRows: "total_rows",
-    createdAt: "created_at",
-    completedAt: "completed_at",
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exportId: z.string(),
+    status: AuditExportStatus$outboundSchema,
+    format: AuditExportFormat$outboundSchema,
+    totalRows: z.number().int(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      exportId: "export_id",
+      totalRows: "total_rows",
+      createdAt: "created_at",
+      completedAt: "completed_at",
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function auditExportToJSON(auditExport: AuditExport): string {
   return JSON.stringify(AuditExport$outboundSchema.parse(auditExport));

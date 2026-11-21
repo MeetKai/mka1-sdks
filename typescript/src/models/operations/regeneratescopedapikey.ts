@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,9 +34,11 @@ export const RegenerateScopedApiKeyRequestBody$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+  })
+);
 /** @internal */
 export type RegenerateScopedApiKeyRequestBody$Outbound = {
   keyId: string;
@@ -47,9 +49,11 @@ export const RegenerateScopedApiKeyRequestBody$outboundSchema: z.ZodType<
   RegenerateScopedApiKeyRequestBody$Outbound,
   z.ZodTypeDef,
   RegenerateScopedApiKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+  })
+);
 
 export function regenerateScopedApiKeyRequestBodyToJSON(
   regenerateScopedApiKeyRequestBody: RegenerateScopedApiKeyRequestBody,
@@ -75,16 +79,18 @@ export const RegenerateScopedApiKeyRequest$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => RegenerateScopedApiKeyRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => RegenerateScopedApiKeyRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type RegenerateScopedApiKeyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -96,16 +102,18 @@ export const RegenerateScopedApiKeyRequest$outboundSchema: z.ZodType<
   RegenerateScopedApiKeyRequest$Outbound,
   z.ZodTypeDef,
   RegenerateScopedApiKeyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => RegenerateScopedApiKeyRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => RegenerateScopedApiKeyRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function regenerateScopedApiKeyRequestToJSON(
   regenerateScopedApiKeyRequest: RegenerateScopedApiKeyRequest,
@@ -131,11 +139,13 @@ export const RegenerateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  start: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string(),
+    start: z.string(),
+  })
+);
 /** @internal */
 export type RegenerateScopedApiKeyResponseBody$Outbound = {
   id: string;
@@ -148,11 +158,13 @@ export const RegenerateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   RegenerateScopedApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   RegenerateScopedApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  start: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string(),
+    start: z.string(),
+  })
+);
 
 export function regenerateScopedApiKeyResponseBodyToJSON(
   regenerateScopedApiKeyResponseBody: RegenerateScopedApiKeyResponseBody,

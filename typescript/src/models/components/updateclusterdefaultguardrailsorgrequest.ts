@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const UpdateClusterDefaultGuardrailsOrgRequest$inboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+  })
+);
 /** @internal */
 export type UpdateClusterDefaultGuardrailsOrgRequest$Outbound = {
   enabled: boolean;
@@ -32,9 +34,11 @@ export const UpdateClusterDefaultGuardrailsOrgRequest$outboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsOrgRequest$Outbound,
   z.ZodTypeDef,
   UpdateClusterDefaultGuardrailsOrgRequest
-> = z.object({
-  enabled: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+  })
+);
 
 export function updateClusterDefaultGuardrailsOrgRequestToJSON(
   updateClusterDefaultGuardrailsOrgRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -366,7 +366,9 @@ export const LivekitTokenRequestConversation$inboundSchema: z.ZodType<
   LivekitTokenRequestConversation,
   z.ZodTypeDef,
   unknown
-> = z.union([Conversation$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([Conversation$inboundSchema, z.string()])
+);
 /** @internal */
 export type LivekitTokenRequestConversation$Outbound =
   | Conversation$Outbound
@@ -377,7 +379,9 @@ export const LivekitTokenRequestConversation$outboundSchema: z.ZodType<
   LivekitTokenRequestConversation$Outbound,
   z.ZodTypeDef,
   LivekitTokenRequestConversation
-> = z.union([Conversation$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([Conversation$outboundSchema, z.string()])
+);
 
 export function livekitTokenRequestConversationToJSON(
   livekitTokenRequestConversation: LivekitTokenRequestConversation,
@@ -403,26 +407,28 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
   LivekitTokenRequestTools,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  FunctionToolDefinition$inboundSchema,
-  ComputerUseToolDefinition$inboundSchema,
-  OpenApiToolDefinition$inboundSchema,
-  FileSearchToolDefinition$inboundSchema,
-  CodeInterpreterToolRequest$inboundSchema,
-  CustomToolDefinition$inboundSchema,
-  AgentToolDefinition$inboundSchema,
-  ScheduleToolDefinition$inboundSchema,
-  WebSearchToolDefinition$inboundSchema,
-  MCPToolDefinition$inboundSchema,
-  ImageGenerationToolDefinition$inboundSchema,
-  LocalShellToolDefinition$inboundSchema,
-  ShellToolRequest$inboundSchema,
-  WebSearchPreviewToolDefinition$inboundSchema,
-  HostedToolShorthandDefinition$inboundSchema,
-  SleepToolDefinition$inboundSchema,
-  HistoryToolDefinition$inboundSchema,
-  ApprovalToolDefinition$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FunctionToolDefinition$inboundSchema,
+    ComputerUseToolDefinition$inboundSchema,
+    OpenApiToolDefinition$inboundSchema,
+    FileSearchToolDefinition$inboundSchema,
+    CodeInterpreterToolRequest$inboundSchema,
+    CustomToolDefinition$inboundSchema,
+    AgentToolDefinition$inboundSchema,
+    ScheduleToolDefinition$inboundSchema,
+    WebSearchToolDefinition$inboundSchema,
+    MCPToolDefinition$inboundSchema,
+    ImageGenerationToolDefinition$inboundSchema,
+    LocalShellToolDefinition$inboundSchema,
+    ShellToolRequest$inboundSchema,
+    WebSearchPreviewToolDefinition$inboundSchema,
+    HostedToolShorthandDefinition$inboundSchema,
+    SleepToolDefinition$inboundSchema,
+    HistoryToolDefinition$inboundSchema,
+    ApprovalToolDefinition$inboundSchema,
+  ])
+);
 /** @internal */
 export type LivekitTokenRequestTools$Outbound =
   | FunctionToolDefinition$Outbound
@@ -449,26 +455,28 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
   LivekitTokenRequestTools$Outbound,
   z.ZodTypeDef,
   LivekitTokenRequestTools
-> = z.union([
-  FunctionToolDefinition$outboundSchema,
-  ComputerUseToolDefinition$outboundSchema,
-  OpenApiToolDefinition$outboundSchema,
-  FileSearchToolDefinition$outboundSchema,
-  CodeInterpreterToolRequest$outboundSchema,
-  CustomToolDefinition$outboundSchema,
-  AgentToolDefinition$outboundSchema,
-  ScheduleToolDefinition$outboundSchema,
-  WebSearchToolDefinition$outboundSchema,
-  MCPToolDefinition$outboundSchema,
-  ImageGenerationToolDefinition$outboundSchema,
-  LocalShellToolDefinition$outboundSchema,
-  ShellToolRequest$outboundSchema,
-  WebSearchPreviewToolDefinition$outboundSchema,
-  HostedToolShorthandDefinition$outboundSchema,
-  SleepToolDefinition$outboundSchema,
-  HistoryToolDefinition$outboundSchema,
-  ApprovalToolDefinition$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FunctionToolDefinition$outboundSchema,
+    ComputerUseToolDefinition$outboundSchema,
+    OpenApiToolDefinition$outboundSchema,
+    FileSearchToolDefinition$outboundSchema,
+    CodeInterpreterToolRequest$outboundSchema,
+    CustomToolDefinition$outboundSchema,
+    AgentToolDefinition$outboundSchema,
+    ScheduleToolDefinition$outboundSchema,
+    WebSearchToolDefinition$outboundSchema,
+    MCPToolDefinition$outboundSchema,
+    ImageGenerationToolDefinition$outboundSchema,
+    LocalShellToolDefinition$outboundSchema,
+    ShellToolRequest$outboundSchema,
+    WebSearchPreviewToolDefinition$outboundSchema,
+    HostedToolShorthandDefinition$outboundSchema,
+    SleepToolDefinition$outboundSchema,
+    HistoryToolDefinition$outboundSchema,
+    ApprovalToolDefinition$outboundSchema,
+  ])
+);
 
 export function livekitTokenRequestToolsToJSON(
   livekitTokenRequestTools: LivekitTokenRequestTools,
@@ -490,7 +498,9 @@ export function livekitTokenRequestToolsFromJSON(
 /** @internal */
 export const LivekitTokenRequestTruncation$inboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestTruncation
-> = z.nativeEnum(LivekitTokenRequestTruncation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LivekitTokenRequestTruncation)
+);
 /** @internal */
 export const LivekitTokenRequestTruncation$outboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestTruncation
@@ -499,72 +509,79 @@ export const LivekitTokenRequestTruncation$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const LivekitTokenRequestServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestServiceTier
-> = z.nativeEnum(LivekitTokenRequestServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LivekitTokenRequestServiceTier)
+);
 /** @internal */
 export const LivekitTokenRequestServiceTier$outboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestServiceTier
 > = LivekitTokenRequestServiceTier$inboundSchema;
 
 /** @internal */
-export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> = z
-  .object({
-    model: z.string(),
-    instructions: z.string().optional(),
-    conversation: z.nullable(z.union([Conversation$inboundSchema, z.string()]))
-      .optional(),
-    previous_response_id: z.string().optional(),
-    prompt: PromptTemplate$inboundSchema.optional(),
-    tools: z.array(
-      z.union([
-        FunctionToolDefinition$inboundSchema,
-        ComputerUseToolDefinition$inboundSchema,
-        OpenApiToolDefinition$inboundSchema,
-        FileSearchToolDefinition$inboundSchema,
-        CodeInterpreterToolRequest$inboundSchema,
-        CustomToolDefinition$inboundSchema,
-        AgentToolDefinition$inboundSchema,
-        ScheduleToolDefinition$inboundSchema,
-        WebSearchToolDefinition$inboundSchema,
-        MCPToolDefinition$inboundSchema,
-        ImageGenerationToolDefinition$inboundSchema,
-        LocalShellToolDefinition$inboundSchema,
-        ShellToolRequest$inboundSchema,
-        WebSearchPreviewToolDefinition$inboundSchema,
-        HostedToolShorthandDefinition$inboundSchema,
-        SleepToolDefinition$inboundSchema,
-        HistoryToolDefinition$inboundSchema,
-        ApprovalToolDefinition$inboundSchema,
-      ]),
-    ).optional(),
-    tool_choice: ToolChoice$inboundSchema.optional(),
-    parallel_tool_calls: z.boolean().default(true),
-    max_tool_calls: z.number().int().default(64),
-    reasoning: z.nullable(ReasoningConfiguration$inboundSchema).optional(),
-    max_output_tokens: z.number().int().optional(),
-    temperature: z.number().optional(),
-    top_p: z.number().optional(),
-    truncation: LivekitTokenRequestTruncation$inboundSchema.default("auto"),
-    presence_penalty: z.number().optional(),
-    frequency_penalty: z.number().optional(),
-    context_management: z.array(CompactionContextManagement$inboundSchema)
-      .optional(),
-    service_tier: LivekitTokenRequestServiceTier$inboundSchema.default("auto"),
-    metadata: z.record(z.string()).optional(),
-    text: TextConfiguration$inboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "previous_response_id": "previousResponseId",
-      "tool_choice": "toolChoice",
-      "parallel_tool_calls": "parallelToolCalls",
-      "max_tool_calls": "maxToolCalls",
-      "max_output_tokens": "maxOutputTokens",
-      "top_p": "topP",
-      "presence_penalty": "presencePenalty",
-      "frequency_penalty": "frequencyPenalty",
-      "context_management": "contextManagement",
-      "service_tier": "serviceTier",
-    });
-  });
+export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      instructions: z.string().optional(),
+      conversation: z.nullable(
+        z.union([Conversation$inboundSchema, z.string()]),
+      ).optional(),
+      previous_response_id: z.string().optional(),
+      prompt: PromptTemplate$inboundSchema.optional(),
+      tools: z.array(
+        z.union([
+          FunctionToolDefinition$inboundSchema,
+          ComputerUseToolDefinition$inboundSchema,
+          OpenApiToolDefinition$inboundSchema,
+          FileSearchToolDefinition$inboundSchema,
+          CodeInterpreterToolRequest$inboundSchema,
+          CustomToolDefinition$inboundSchema,
+          AgentToolDefinition$inboundSchema,
+          ScheduleToolDefinition$inboundSchema,
+          WebSearchToolDefinition$inboundSchema,
+          MCPToolDefinition$inboundSchema,
+          ImageGenerationToolDefinition$inboundSchema,
+          LocalShellToolDefinition$inboundSchema,
+          ShellToolRequest$inboundSchema,
+          WebSearchPreviewToolDefinition$inboundSchema,
+          HostedToolShorthandDefinition$inboundSchema,
+          SleepToolDefinition$inboundSchema,
+          HistoryToolDefinition$inboundSchema,
+          ApprovalToolDefinition$inboundSchema,
+        ]),
+      ).optional(),
+      tool_choice: ToolChoice$inboundSchema.optional(),
+      parallel_tool_calls: z.boolean().default(true),
+      max_tool_calls: z.number().int().default(64),
+      reasoning: z.nullable(ReasoningConfiguration$inboundSchema).optional(),
+      max_output_tokens: z.number().int().optional(),
+      temperature: z.number().optional(),
+      top_p: z.number().optional(),
+      truncation: LivekitTokenRequestTruncation$inboundSchema.default("auto"),
+      presence_penalty: z.number().optional(),
+      frequency_penalty: z.number().optional(),
+      context_management: z.array(CompactionContextManagement$inboundSchema)
+        .optional(),
+      service_tier: LivekitTokenRequestServiceTier$inboundSchema.default(
+        "auto",
+      ),
+      metadata: z.record(z.string()).optional(),
+      text: TextConfiguration$inboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "previous_response_id": "previousResponseId",
+        "tool_choice": "toolChoice",
+        "parallel_tool_calls": "parallelToolCalls",
+        "max_tool_calls": "maxToolCalls",
+        "max_output_tokens": "maxOutputTokens",
+        "top_p": "topP",
+        "presence_penalty": "presencePenalty",
+        "frequency_penalty": "frequencyPenalty",
+        "context_management": "contextManagement",
+        "service_tier": "serviceTier",
+      });
+    })
+  );
 /** @internal */
 export type Llm$Outbound = {
   model: string;
@@ -611,65 +628,70 @@ export type Llm$Outbound = {
 };
 
 /** @internal */
-export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> = z
-  .object({
-    model: z.string(),
-    instructions: z.string().optional(),
-    conversation: z.nullable(z.union([Conversation$outboundSchema, z.string()]))
-      .optional(),
-    previousResponseId: z.string().optional(),
-    prompt: PromptTemplate$outboundSchema.optional(),
-    tools: z.array(
-      z.union([
-        FunctionToolDefinition$outboundSchema,
-        ComputerUseToolDefinition$outboundSchema,
-        OpenApiToolDefinition$outboundSchema,
-        FileSearchToolDefinition$outboundSchema,
-        CodeInterpreterToolRequest$outboundSchema,
-        CustomToolDefinition$outboundSchema,
-        AgentToolDefinition$outboundSchema,
-        ScheduleToolDefinition$outboundSchema,
-        WebSearchToolDefinition$outboundSchema,
-        MCPToolDefinition$outboundSchema,
-        ImageGenerationToolDefinition$outboundSchema,
-        LocalShellToolDefinition$outboundSchema,
-        ShellToolRequest$outboundSchema,
-        WebSearchPreviewToolDefinition$outboundSchema,
-        HostedToolShorthandDefinition$outboundSchema,
-        SleepToolDefinition$outboundSchema,
-        HistoryToolDefinition$outboundSchema,
-        ApprovalToolDefinition$outboundSchema,
-      ]),
-    ).optional(),
-    toolChoice: ToolChoice$outboundSchema.optional(),
-    parallelToolCalls: z.boolean().default(true),
-    maxToolCalls: z.number().int().default(64),
-    reasoning: z.nullable(ReasoningConfiguration$outboundSchema).optional(),
-    maxOutputTokens: z.number().int().optional(),
-    temperature: z.number().optional(),
-    topP: z.number().optional(),
-    truncation: LivekitTokenRequestTruncation$outboundSchema.default("auto"),
-    presencePenalty: z.number().optional(),
-    frequencyPenalty: z.number().optional(),
-    contextManagement: z.array(CompactionContextManagement$outboundSchema)
-      .optional(),
-    serviceTier: LivekitTokenRequestServiceTier$outboundSchema.default("auto"),
-    metadata: z.record(z.string()).optional(),
-    text: TextConfiguration$outboundSchema.optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      previousResponseId: "previous_response_id",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
-      maxToolCalls: "max_tool_calls",
-      maxOutputTokens: "max_output_tokens",
-      topP: "top_p",
-      presencePenalty: "presence_penalty",
-      frequencyPenalty: "frequency_penalty",
-      contextManagement: "context_management",
-      serviceTier: "service_tier",
-    });
-  });
+export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      model: z.string(),
+      instructions: z.string().optional(),
+      conversation: z.nullable(
+        z.union([Conversation$outboundSchema, z.string()]),
+      ).optional(),
+      previousResponseId: z.string().optional(),
+      prompt: PromptTemplate$outboundSchema.optional(),
+      tools: z.array(
+        z.union([
+          FunctionToolDefinition$outboundSchema,
+          ComputerUseToolDefinition$outboundSchema,
+          OpenApiToolDefinition$outboundSchema,
+          FileSearchToolDefinition$outboundSchema,
+          CodeInterpreterToolRequest$outboundSchema,
+          CustomToolDefinition$outboundSchema,
+          AgentToolDefinition$outboundSchema,
+          ScheduleToolDefinition$outboundSchema,
+          WebSearchToolDefinition$outboundSchema,
+          MCPToolDefinition$outboundSchema,
+          ImageGenerationToolDefinition$outboundSchema,
+          LocalShellToolDefinition$outboundSchema,
+          ShellToolRequest$outboundSchema,
+          WebSearchPreviewToolDefinition$outboundSchema,
+          HostedToolShorthandDefinition$outboundSchema,
+          SleepToolDefinition$outboundSchema,
+          HistoryToolDefinition$outboundSchema,
+          ApprovalToolDefinition$outboundSchema,
+        ]),
+      ).optional(),
+      toolChoice: ToolChoice$outboundSchema.optional(),
+      parallelToolCalls: z.boolean().default(true),
+      maxToolCalls: z.number().int().default(64),
+      reasoning: z.nullable(ReasoningConfiguration$outboundSchema).optional(),
+      maxOutputTokens: z.number().int().optional(),
+      temperature: z.number().optional(),
+      topP: z.number().optional(),
+      truncation: LivekitTokenRequestTruncation$outboundSchema.default("auto"),
+      presencePenalty: z.number().optional(),
+      frequencyPenalty: z.number().optional(),
+      contextManagement: z.array(CompactionContextManagement$outboundSchema)
+        .optional(),
+      serviceTier: LivekitTokenRequestServiceTier$outboundSchema.default(
+        "auto",
+      ),
+      metadata: z.record(z.string()).optional(),
+      text: TextConfiguration$outboundSchema.optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        previousResponseId: "previous_response_id",
+        toolChoice: "tool_choice",
+        parallelToolCalls: "parallel_tool_calls",
+        maxToolCalls: "max_tool_calls",
+        maxOutputTokens: "max_output_tokens",
+        topP: "top_p",
+        presencePenalty: "presence_penalty",
+        frequencyPenalty: "frequency_penalty",
+        contextManagement: "context_management",
+        serviceTier: "service_tier",
+      });
+    })
+  );
 
 export function llmToJSON(llm: Llm): string {
   return JSON.stringify(Llm$outboundSchema.parse(llm));
@@ -687,7 +709,9 @@ export function llmFromJSON(
 /** @internal */
 export const LivekitTokenRequestLanguage$inboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestLanguage
-> = z.nativeEnum(LivekitTokenRequestLanguage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LivekitTokenRequestLanguage)
+);
 /** @internal */
 export const LivekitTokenRequestLanguage$outboundSchema: z.ZodNativeEnum<
   typeof LivekitTokenRequestLanguage
@@ -698,11 +722,13 @@ export const LivekitTokenRequest$inboundSchema: z.ZodType<
   LivekitTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  llm: z.lazy(() => Llm$inboundSchema),
-  stt: SttConfig$inboundSchema.optional(),
-  language: LivekitTokenRequestLanguage$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    llm: z.lazy(() => Llm$inboundSchema),
+    stt: SttConfig$inboundSchema.optional(),
+    language: LivekitTokenRequestLanguage$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type LivekitTokenRequest$Outbound = {
   llm: Llm$Outbound;
@@ -715,11 +741,13 @@ export const LivekitTokenRequest$outboundSchema: z.ZodType<
   LivekitTokenRequest$Outbound,
   z.ZodTypeDef,
   LivekitTokenRequest
-> = z.object({
-  llm: z.lazy(() => Llm$outboundSchema),
-  stt: SttConfig$outboundSchema.optional(),
-  language: LivekitTokenRequestLanguage$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    llm: z.lazy(() => Llm$outboundSchema),
+    stt: SttConfig$outboundSchema.optional(),
+    language: LivekitTokenRequestLanguage$outboundSchema.optional(),
+  })
+);
 
 export function livekitTokenRequestToJSON(
   livekitTokenRequest: LivekitTokenRequest,

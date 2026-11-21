@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const ComputeStandaloneVolumeMount$inboundSchema: z.ZodType<
   ComputeStandaloneVolumeMount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mount_path: z.string(),
-  volume_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "mount_path": "mountPath",
-    "volume_id": "volumeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mount_path: z.string(),
+    volume_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "mount_path": "mountPath",
+      "volume_id": "volumeId",
+    });
+  })
+);
 /** @internal */
 export type ComputeStandaloneVolumeMount$Outbound = {
   mount_path: string;
@@ -38,15 +40,17 @@ export const ComputeStandaloneVolumeMount$outboundSchema: z.ZodType<
   ComputeStandaloneVolumeMount$Outbound,
   z.ZodTypeDef,
   ComputeStandaloneVolumeMount
-> = z.object({
-  mountPath: z.string(),
-  volumeId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    mountPath: "mount_path",
-    volumeId: "volume_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mountPath: z.string(),
+    volumeId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      mountPath: "mount_path",
+      volumeId: "volume_id",
+    });
+  })
+);
 
 export function computeStandaloneVolumeMountToJSON(
   computeStandaloneVolumeMount: ComputeStandaloneVolumeMount,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -72,9 +72,10 @@ export type CreateAgentRequest = {
 
 /** @internal */
 export const CreateAgentRequestConcurrencyOverflow$inboundSchema:
-  z.ZodNativeEnum<typeof CreateAgentRequestConcurrencyOverflow> = z.nativeEnum(
-    CreateAgentRequestConcurrencyOverflow,
-  );
+  z.ZodNativeEnum<typeof CreateAgentRequestConcurrencyOverflow> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateAgentRequestConcurrencyOverflow)
+    );
 /** @internal */
 export const CreateAgentRequestConcurrencyOverflow$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentRequestConcurrencyOverflow> =
@@ -85,32 +86,34 @@ export const CreateAgentRequest$inboundSchema: z.ZodType<
   CreateAgentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  model: z.string(),
-  instructions: z.nullable(z.string()).optional(),
-  tools: z.array(ToolDefinition$inboundSchema).optional(),
-  tool_choice: z.any().optional(),
-  parallel_tool_calls: z.boolean().default(true),
-  max_tool_calls: z.nullable(z.number().int()).optional(),
-  fallback_models: z.array(z.string()).optional(),
-  max_concurrent_runs: z.nullable(z.number().int()).optional(),
-  concurrency_overflow: CreateAgentRequestConcurrencyOverflow$inboundSchema
-    .optional(),
-  text: z.nullable(AgentTextConfiguration$inboundSchema).optional(),
-  reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "max_tool_calls": "maxToolCalls",
-    "fallback_models": "fallbackModels",
-    "max_concurrent_runs": "maxConcurrentRuns",
-    "concurrency_overflow": "concurrencyOverflow",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    model: z.string(),
+    instructions: z.nullable(z.string()).optional(),
+    tools: z.array(ToolDefinition$inboundSchema).optional(),
+    tool_choice: z.any().optional(),
+    parallel_tool_calls: z.boolean().default(true),
+    max_tool_calls: z.nullable(z.number().int()).optional(),
+    fallback_models: z.array(z.string()).optional(),
+    max_concurrent_runs: z.nullable(z.number().int()).optional(),
+    concurrency_overflow: CreateAgentRequestConcurrencyOverflow$inboundSchema
+      .optional(),
+    text: z.nullable(AgentTextConfiguration$inboundSchema).optional(),
+    reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema).optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "max_tool_calls": "maxToolCalls",
+      "fallback_models": "fallbackModels",
+      "max_concurrent_runs": "maxConcurrentRuns",
+      "concurrency_overflow": "concurrencyOverflow",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentRequest$Outbound = {
   name: string;
@@ -134,32 +137,35 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   CreateAgentRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentRequest
-> = z.object({
-  name: z.string(),
-  description: z.nullable(z.string()).optional(),
-  model: z.string(),
-  instructions: z.nullable(z.string()).optional(),
-  tools: z.array(ToolDefinition$outboundSchema).optional(),
-  toolChoice: z.any().optional(),
-  parallelToolCalls: z.boolean().default(true),
-  maxToolCalls: z.nullable(z.number().int()).optional(),
-  fallbackModels: z.array(z.string()).optional(),
-  maxConcurrentRuns: z.nullable(z.number().int()).optional(),
-  concurrencyOverflow: CreateAgentRequestConcurrencyOverflow$outboundSchema
-    .optional(),
-  text: z.nullable(AgentTextConfiguration$outboundSchema).optional(),
-  reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    maxToolCalls: "max_tool_calls",
-    fallbackModels: "fallback_models",
-    maxConcurrentRuns: "max_concurrent_runs",
-    concurrencyOverflow: "concurrency_overflow",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.nullable(z.string()).optional(),
+    model: z.string(),
+    instructions: z.nullable(z.string()).optional(),
+    tools: z.array(ToolDefinition$outboundSchema).optional(),
+    toolChoice: z.any().optional(),
+    parallelToolCalls: z.boolean().default(true),
+    maxToolCalls: z.nullable(z.number().int()).optional(),
+    fallbackModels: z.array(z.string()).optional(),
+    maxConcurrentRuns: z.nullable(z.number().int()).optional(),
+    concurrencyOverflow: CreateAgentRequestConcurrencyOverflow$outboundSchema
+      .optional(),
+    text: z.nullable(AgentTextConfiguration$outboundSchema).optional(),
+    reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema)
+      .optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      maxToolCalls: "max_tool_calls",
+      fallbackModels: "fallback_models",
+      maxConcurrentRuns: "max_concurrent_runs",
+      concurrencyOverflow: "concurrency_overflow",
+    });
+  })
+);
 
 export function createAgentRequestToJSON(
   createAgentRequest: CreateAgentRequest,

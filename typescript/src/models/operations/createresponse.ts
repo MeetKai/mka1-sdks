@@ -5,7 +5,7 @@
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,15 +46,17 @@ export const CreateResponseRequest$inboundSchema: z.ZodType<
   CreateResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ResponsesCreateRequest: components.ResponsesCreateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ResponsesCreateRequest": "responsesCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ResponsesCreateRequest: components.ResponsesCreateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ResponsesCreateRequest": "responsesCreateRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateResponseRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -66,15 +68,17 @@ export const CreateResponseRequest$outboundSchema: z.ZodType<
   CreateResponseRequest$Outbound,
   z.ZodTypeDef,
   CreateResponseRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  responsesCreateRequest: components.ResponsesCreateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    responsesCreateRequest: "ResponsesCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    responsesCreateRequest: components.ResponsesCreateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      responsesCreateRequest: "ResponsesCreateRequest",
+    });
+  })
+);
 
 export function createResponseRequestToJSON(
   createResponseRequest: CreateResponseRequest,
@@ -98,20 +102,22 @@ export const CreateResponseResponseBody$inboundSchema: z.ZodType<
   CreateResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event: z.string().optional(),
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(components.ResponseStreamingEvent$inboundSchema),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.string().optional(),
+    data: z.unknown().transform((v, ctx) => {
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.ResponseStreamingEvent$inboundSchema),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type CreateResponseResponseBody$Outbound = {
   event?: string | undefined;
@@ -125,12 +131,14 @@ export const CreateResponseResponseBody$outboundSchema: z.ZodType<
   CreateResponseResponseBody$Outbound,
   z.ZodTypeDef,
   CreateResponseResponseBody
-> = z.object({
-  event: z.string().optional(),
-  data: components.ResponseStreamingEvent$outboundSchema,
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.string().optional(),
+    data: components.ResponseStreamingEvent$outboundSchema,
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 
 export function createResponseResponseBodyToJSON(
   createResponseResponseBody: CreateResponseResponseBody,
@@ -154,20 +162,22 @@ export const CreateResponseResponse$inboundSchema: z.ZodType<
   CreateResponseResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ResponseObject$inboundSchema,
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        return {
-          done: false,
-          value: z.lazy(() => CreateResponseResponseBody$inboundSchema).parse(
-            rawEvent,
-          ),
-        };
-      });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ResponseObject$inboundSchema,
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          return {
+            done: false,
+            value: z.lazy(() => CreateResponseResponseBody$inboundSchema).parse(
+              rawEvent,
+            ),
+          };
+        });
+      }),
+  ])
+);
 /** @internal */
 export type CreateResponseResponse$Outbound =
   | components.ResponseObject$Outbound
@@ -178,7 +188,9 @@ export const CreateResponseResponse$outboundSchema: z.ZodType<
   CreateResponseResponse$Outbound,
   z.ZodTypeDef,
   CreateResponseResponse
-> = z.union([components.ResponseObject$outboundSchema, z.never()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([components.ResponseObject$outboundSchema, z.never()])
+);
 
 export function createResponseResponseToJSON(
   createResponseResponse: CreateResponseResponse,

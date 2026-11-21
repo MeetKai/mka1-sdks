@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,22 +28,24 @@ export const DeleteMemoryEntryRequest$inboundSchema: z.ZodType<
   DeleteMemoryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory_store_id: z.string(),
-  entry_id: z.string(),
-  if_match: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  DeleteMemoryEntryRequest: components.DeleteMemoryEntryRequest$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_id": "memoryStoreId",
-    "entry_id": "entryId",
-    "if_match": "ifMatch",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "DeleteMemoryEntryRequest": "deleteMemoryEntryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory_store_id: z.string(),
+    entry_id: z.string(),
+    if_match: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    DeleteMemoryEntryRequest: components.DeleteMemoryEntryRequest$inboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_store_id": "memoryStoreId",
+      "entry_id": "entryId",
+      "if_match": "ifMatch",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "DeleteMemoryEntryRequest": "deleteMemoryEntryRequest",
+    });
+  })
+);
 /** @internal */
 export type DeleteMemoryEntryRequest$Outbound = {
   memory_store_id: string;
@@ -57,22 +62,26 @@ export const DeleteMemoryEntryRequest$outboundSchema: z.ZodType<
   DeleteMemoryEntryRequest$Outbound,
   z.ZodTypeDef,
   DeleteMemoryEntryRequest
-> = z.object({
-  memoryStoreId: z.string(),
-  entryId: z.string(),
-  ifMatch: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-  deleteMemoryEntryRequest: components.DeleteMemoryEntryRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreId: "memory_store_id",
-    entryId: "entry_id",
-    ifMatch: "if_match",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    deleteMemoryEntryRequest: "DeleteMemoryEntryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreId: z.string(),
+    entryId: z.string(),
+    ifMatch: z.string().refine(matchesPattern$("^[a-f0-9]{64}$"), {
+      message: "Value must match pattern ^[a-f0-9]{64}$",
+    }).optional(),
+    xOnBehalfOf: z.string().optional(),
+    deleteMemoryEntryRequest: components.DeleteMemoryEntryRequest$outboundSchema
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreId: "memory_store_id",
+      entryId: "entry_id",
+      ifMatch: "if_match",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      deleteMemoryEntryRequest: "DeleteMemoryEntryRequest",
+    });
+  })
+);
 
 export function deleteMemoryEntryRequestToJSON(
   deleteMemoryEntryRequest: DeleteMemoryEntryRequest,

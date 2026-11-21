@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const AccessMutationResponse$inboundSchema: z.ZodType<
   AccessMutationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  model_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "model_ids": "modelIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    model_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "model_ids": "modelIds",
+    });
+  })
+);
 /** @internal */
 export type AccessMutationResponse$Outbound = {
   org_id: string;
@@ -38,15 +40,17 @@ export const AccessMutationResponse$outboundSchema: z.ZodType<
   AccessMutationResponse$Outbound,
   z.ZodTypeDef,
   AccessMutationResponse
-> = z.object({
-  orgId: z.string(),
-  modelIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    modelIds: "model_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    modelIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      modelIds: "model_ids",
+    });
+  })
+);
 
 export function accessMutationResponseToJSON(
   accessMutationResponse: AccessMutationResponse,

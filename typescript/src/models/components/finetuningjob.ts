@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -71,7 +71,7 @@ export const FineTuningJobBatchSize$inboundSchema: z.ZodType<
   FineTuningJobBatchSize,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type FineTuningJobBatchSize$Outbound = string | number;
 
@@ -80,7 +80,7 @@ export const FineTuningJobBatchSize$outboundSchema: z.ZodType<
   FineTuningJobBatchSize$Outbound,
   z.ZodTypeDef,
   FineTuningJobBatchSize
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function fineTuningJobBatchSizeToJSON(
   fineTuningJobBatchSize: FineTuningJobBatchSize,
@@ -104,7 +104,7 @@ export const FineTuningJobLearningRateMultiplier$inboundSchema: z.ZodType<
   FineTuningJobLearningRateMultiplier,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type FineTuningJobLearningRateMultiplier$Outbound = string | number;
 
@@ -113,7 +113,7 @@ export const FineTuningJobLearningRateMultiplier$outboundSchema: z.ZodType<
   FineTuningJobLearningRateMultiplier$Outbound,
   z.ZodTypeDef,
   FineTuningJobLearningRateMultiplier
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function fineTuningJobLearningRateMultiplierToJSON(
   fineTuningJobLearningRateMultiplier: FineTuningJobLearningRateMultiplier,
@@ -140,7 +140,7 @@ export const FineTuningJobNEpochs$inboundSchema: z.ZodType<
   FineTuningJobNEpochs,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type FineTuningJobNEpochs$Outbound = string | number;
 
@@ -149,7 +149,7 @@ export const FineTuningJobNEpochs$outboundSchema: z.ZodType<
   FineTuningJobNEpochs$Outbound,
   z.ZodTypeDef,
   FineTuningJobNEpochs
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function fineTuningJobNEpochsToJSON(
   fineTuningJobNEpochs: FineTuningJobNEpochs,
@@ -173,18 +173,20 @@ export const FineTuningJobHyperparameters$inboundSchema: z.ZodType<
   FineTuningJobHyperparameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_size": "batchSize",
-    "learning_rate_multiplier": "learningRateMultiplier",
-    "n_epochs": "nEpochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_size": "batchSize",
+      "learning_rate_multiplier": "learningRateMultiplier",
+      "n_epochs": "nEpochs",
+    });
+  })
+);
 /** @internal */
 export type FineTuningJobHyperparameters$Outbound = {
   batch_size?: string | number | null | undefined;
@@ -197,18 +199,20 @@ export const FineTuningJobHyperparameters$outboundSchema: z.ZodType<
   FineTuningJobHyperparameters$Outbound,
   z.ZodTypeDef,
   FineTuningJobHyperparameters
-> = z.object({
-  batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchSize: "batch_size",
-    learningRateMultiplier: "learning_rate_multiplier",
-    nEpochs: "n_epochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchSize: "batch_size",
+      learningRateMultiplier: "learning_rate_multiplier",
+      nEpochs: "n_epochs",
+    });
+  })
+);
 
 export function fineTuningJobHyperparametersToJSON(
   fineTuningJobHyperparameters: FineTuningJobHyperparameters,
@@ -234,40 +238,43 @@ export const FineTuningJob$inboundSchema: z.ZodType<
   FineTuningJob,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job"),
-  created_at: z.number().int(),
-  model: z.string(),
-  training_file: z.string(),
-  validation_file: z.nullable(z.string()).optional(),
-  fine_tuned_model: z.nullable(z.string()).optional(),
-  organization_id: z.string(),
-  status: JobStatus$inboundSchema,
-  result_files: z.array(z.string()),
-  seed: z.number().int(),
-  hyperparameters: z.lazy(() => FineTuningJobHyperparameters$inboundSchema),
-  method: z.nullable(Method$inboundSchema).optional(),
-  finished_at: z.nullable(z.number().int()).optional(),
-  estimated_finish: z.nullable(z.number().int()).optional(),
-  trained_tokens: z.nullable(z.number().int()).optional(),
-  error: z.nullable(FineTuningError$inboundSchema).optional(),
-  integrations: z.nullable(z.array(IntegrationObject$inboundSchema)).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  suffix: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "training_file": "trainingFile",
-    "validation_file": "validationFile",
-    "fine_tuned_model": "fineTunedModel",
-    "organization_id": "organizationId",
-    "result_files": "resultFiles",
-    "finished_at": "finishedAt",
-    "estimated_finish": "estimatedFinish",
-    "trained_tokens": "trainedTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job"),
+    created_at: z.number().int(),
+    model: z.string(),
+    training_file: z.string(),
+    validation_file: z.nullable(z.string()).optional(),
+    fine_tuned_model: z.nullable(z.string()).optional(),
+    organization_id: z.string(),
+    status: JobStatus$inboundSchema,
+    result_files: z.array(z.string()),
+    seed: z.number().int(),
+    hyperparameters: z.lazy(() => FineTuningJobHyperparameters$inboundSchema),
+    method: z.nullable(Method$inboundSchema).optional(),
+    finished_at: z.nullable(z.number().int()).optional(),
+    estimated_finish: z.nullable(z.number().int()).optional(),
+    trained_tokens: z.nullable(z.number().int()).optional(),
+    error: z.nullable(FineTuningError$inboundSchema).optional(),
+    integrations: z.nullable(z.array(IntegrationObject$inboundSchema))
+      .optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    suffix: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "training_file": "trainingFile",
+      "validation_file": "validationFile",
+      "fine_tuned_model": "fineTunedModel",
+      "organization_id": "organizationId",
+      "result_files": "resultFiles",
+      "finished_at": "finishedAt",
+      "estimated_finish": "estimatedFinish",
+      "trained_tokens": "trainedTokens",
+    });
+  })
+);
 /** @internal */
 export type FineTuningJob$Outbound = {
   id: string;
@@ -297,41 +304,43 @@ export const FineTuningJob$outboundSchema: z.ZodType<
   FineTuningJob$Outbound,
   z.ZodTypeDef,
   FineTuningJob
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job"),
-  createdAt: z.number().int(),
-  model: z.string(),
-  trainingFile: z.string(),
-  validationFile: z.nullable(z.string()).optional(),
-  fineTunedModel: z.nullable(z.string()).optional(),
-  organizationId: z.string(),
-  status: JobStatus$outboundSchema,
-  resultFiles: z.array(z.string()),
-  seed: z.number().int(),
-  hyperparameters: z.lazy(() => FineTuningJobHyperparameters$outboundSchema),
-  method: z.nullable(Method$outboundSchema).optional(),
-  finishedAt: z.nullable(z.number().int()).optional(),
-  estimatedFinish: z.nullable(z.number().int()).optional(),
-  trainedTokens: z.nullable(z.number().int()).optional(),
-  error: z.nullable(FineTuningError$outboundSchema).optional(),
-  integrations: z.nullable(z.array(IntegrationObject$outboundSchema))
-    .optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  suffix: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    trainingFile: "training_file",
-    validationFile: "validation_file",
-    fineTunedModel: "fine_tuned_model",
-    organizationId: "organization_id",
-    resultFiles: "result_files",
-    finishedAt: "finished_at",
-    estimatedFinish: "estimated_finish",
-    trainedTokens: "trained_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job"),
+    createdAt: z.number().int(),
+    model: z.string(),
+    trainingFile: z.string(),
+    validationFile: z.nullable(z.string()).optional(),
+    fineTunedModel: z.nullable(z.string()).optional(),
+    organizationId: z.string(),
+    status: JobStatus$outboundSchema,
+    resultFiles: z.array(z.string()),
+    seed: z.number().int(),
+    hyperparameters: z.lazy(() => FineTuningJobHyperparameters$outboundSchema),
+    method: z.nullable(Method$outboundSchema).optional(),
+    finishedAt: z.nullable(z.number().int()).optional(),
+    estimatedFinish: z.nullable(z.number().int()).optional(),
+    trainedTokens: z.nullable(z.number().int()).optional(),
+    error: z.nullable(FineTuningError$outboundSchema).optional(),
+    integrations: z.nullable(z.array(IntegrationObject$outboundSchema))
+      .optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    suffix: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      trainingFile: "training_file",
+      validationFile: "validation_file",
+      fineTunedModel: "fine_tuned_model",
+      organizationId: "organization_id",
+      resultFiles: "result_files",
+      finishedAt: "finished_at",
+      estimatedFinish: "estimated_finish",
+      trainedTokens: "trained_tokens",
+    });
+  })
+);
 
 export function fineTuningJobToJSON(fineTuningJob: FineTuningJob): string {
   return JSON.stringify(FineTuningJob$outboundSchema.parse(fineTuningJob));

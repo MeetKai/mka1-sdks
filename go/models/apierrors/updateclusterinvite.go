@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateClusterInviteTooManyRequestsError struct {
 var _ error = &UpdateClusterInviteTooManyRequestsError{}
 
 func (e *UpdateClusterInviteTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateClusterInviteGoneError struct {
 var _ error = &UpdateClusterInviteGoneError{}
 
 func (e *UpdateClusterInviteGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateClusterInviteConflictError struct {
 var _ error = &UpdateClusterInviteConflictError{}
 
 func (e *UpdateClusterInviteConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateClusterInviteNotFoundError struct {
 var _ error = &UpdateClusterInviteNotFoundError{}
 
 func (e *UpdateClusterInviteNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateClusterInviteForbiddenError struct {
 var _ error = &UpdateClusterInviteForbiddenError{}
 
 func (e *UpdateClusterInviteForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateClusterInviteUnauthorizedError struct {
 var _ error = &UpdateClusterInviteUnauthorizedError{}
 
 func (e *UpdateClusterInviteUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateClusterInviteBadRequestError struct {
 var _ error = &UpdateClusterInviteBadRequestError{}
 
 func (e *UpdateClusterInviteBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

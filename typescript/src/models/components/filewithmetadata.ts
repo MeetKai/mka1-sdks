@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,7 +52,9 @@ export const FileWithMetadataAttributes$inboundSchema: z.ZodType<
   FileWithMetadataAttributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type FileWithMetadataAttributes$Outbound = string | boolean | number;
 
@@ -61,7 +63,9 @@ export const FileWithMetadataAttributes$outboundSchema: z.ZodType<
   FileWithMetadataAttributes$Outbound,
   z.ZodTypeDef,
   FileWithMetadataAttributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function fileWithMetadataAttributesToJSON(
   fileWithMetadataAttributes: FileWithMetadataAttributes,
@@ -85,10 +89,12 @@ export const FileWithMetadataChunkingStrategy$inboundSchema: z.ZodType<
   FileWithMetadataChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  AutoChunkingStrategy$inboundSchema,
-  StaticChunkingStrategy$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AutoChunkingStrategy$inboundSchema,
+    StaticChunkingStrategy$inboundSchema,
+  ])
+);
 /** @internal */
 export type FileWithMetadataChunkingStrategy$Outbound =
   | AutoChunkingStrategy$Outbound
@@ -99,10 +105,12 @@ export const FileWithMetadataChunkingStrategy$outboundSchema: z.ZodType<
   FileWithMetadataChunkingStrategy$Outbound,
   z.ZodTypeDef,
   FileWithMetadataChunkingStrategy
-> = z.union([
-  AutoChunkingStrategy$outboundSchema,
-  StaticChunkingStrategy$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AutoChunkingStrategy$outboundSchema,
+    StaticChunkingStrategy$outboundSchema,
+  ])
+);
 
 export function fileWithMetadataChunkingStrategyToJSON(
   fileWithMetadataChunkingStrategy: FileWithMetadataChunkingStrategy,
@@ -128,20 +136,22 @@ export const FileWithMetadata$inboundSchema: z.ZodType<
   FileWithMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunking_strategy: z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "chunking_strategy": "chunkingStrategy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunking_strategy: z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "chunking_strategy": "chunkingStrategy",
+    });
+  })
+);
 /** @internal */
 export type FileWithMetadata$Outbound = {
   file_id: string;
@@ -157,20 +167,22 @@ export const FileWithMetadata$outboundSchema: z.ZodType<
   FileWithMetadata$Outbound,
   z.ZodTypeDef,
   FileWithMetadata
-> = z.object({
-  fileId: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunkingStrategy: z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    chunkingStrategy: "chunking_strategy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunkingStrategy: z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      chunkingStrategy: "chunking_strategy",
+    });
+  })
+);
 
 export function fileWithMetadataToJSON(
   fileWithMetadata: FileWithMetadata,

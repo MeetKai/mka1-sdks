@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -55,10 +55,12 @@ export const ListOrgMembersSecurity$inboundSchema: z.ZodType<
   ListOrgMembersSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type ListOrgMembersSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -70,10 +72,12 @@ export const ListOrgMembersSecurity$outboundSchema: z.ZodType<
   ListOrgMembersSecurity$Outbound,
   z.ZodTypeDef,
   ListOrgMembersSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function listOrgMembersSecurityToJSON(
   listOrgMembersSecurity: ListOrgMembersSecurity,
@@ -97,16 +101,18 @@ export const ListOrgMembersRequest$inboundSchema: z.ZodType<
   ListOrgMembersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  limit: z.string().optional(),
-  offset: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListOrgMembersRequest$Outbound = {
   orgId: string;
@@ -120,16 +126,18 @@ export const ListOrgMembersRequest$outboundSchema: z.ZodType<
   ListOrgMembersRequest$Outbound,
   z.ZodTypeDef,
   ListOrgMembersRequest
-> = z.object({
-  orgId: z.string(),
-  limit: z.string().optional(),
-  offset: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listOrgMembersRequestToJSON(
   listOrgMembersRequest: ListOrgMembersRequest,
@@ -153,13 +161,15 @@ export const ListOrgMembersUser$inboundSchema: z.ZodType<
   ListOrgMembersUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.string(),
-  name: z.string(),
-  image: z.nullable(z.string()),
-  userType: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.string(),
+    name: z.string(),
+    image: z.nullable(z.string()),
+    userType: z.string(),
+  })
+);
 /** @internal */
 export type ListOrgMembersUser$Outbound = {
   id: string;
@@ -174,13 +184,15 @@ export const ListOrgMembersUser$outboundSchema: z.ZodType<
   ListOrgMembersUser$Outbound,
   z.ZodTypeDef,
   ListOrgMembersUser
-> = z.object({
-  id: z.string(),
-  email: z.string(),
-  name: z.string(),
-  image: z.nullable(z.string()),
-  userType: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.string(),
+    name: z.string(),
+    image: z.nullable(z.string()),
+    userType: z.string(),
+  })
+);
 
 export function listOrgMembersUserToJSON(
   listOrgMembersUser: ListOrgMembersUser,
@@ -201,16 +213,18 @@ export function listOrgMembersUserFromJSON(
 
 /** @internal */
 export const Members$inboundSchema: z.ZodType<Members, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    organizationId: z.string(),
-    userId: z.string(),
-    role: z.string(),
-    createdAt: z.string(),
-    scimManaged: z.boolean(),
-    scimActive: z.nullable(z.boolean()),
-    user: z.lazy(() => ListOrgMembersUser$inboundSchema),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      organizationId: z.string(),
+      userId: z.string(),
+      role: z.string(),
+      createdAt: z.string(),
+      scimManaged: z.boolean(),
+      scimActive: z.nullable(z.boolean()),
+      user: z.lazy(() => ListOrgMembersUser$inboundSchema),
+    })
+  );
 /** @internal */
 export type Members$Outbound = {
   id: string;
@@ -228,16 +242,18 @@ export const Members$outboundSchema: z.ZodType<
   Members$Outbound,
   z.ZodTypeDef,
   Members
-> = z.object({
-  id: z.string(),
-  organizationId: z.string(),
-  userId: z.string(),
-  role: z.string(),
-  createdAt: z.string(),
-  scimManaged: z.boolean(),
-  scimActive: z.nullable(z.boolean()),
-  user: z.lazy(() => ListOrgMembersUser$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    organizationId: z.string(),
+    userId: z.string(),
+    role: z.string(),
+    createdAt: z.string(),
+    scimManaged: z.boolean(),
+    scimActive: z.nullable(z.boolean()),
+    user: z.lazy(() => ListOrgMembersUser$outboundSchema),
+  })
+);
 
 export function membersToJSON(members: Members): string {
   return JSON.stringify(Members$outboundSchema.parse(members));
@@ -257,10 +273,12 @@ export const ListOrgMembersResponseBody$inboundSchema: z.ZodType<
   ListOrgMembersResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  members: z.array(z.lazy(() => Members$inboundSchema)),
-  total: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    members: z.array(z.lazy(() => Members$inboundSchema)),
+    total: z.number(),
+  })
+);
 /** @internal */
 export type ListOrgMembersResponseBody$Outbound = {
   members: Array<Members$Outbound>;
@@ -272,10 +290,12 @@ export const ListOrgMembersResponseBody$outboundSchema: z.ZodType<
   ListOrgMembersResponseBody$Outbound,
   z.ZodTypeDef,
   ListOrgMembersResponseBody
-> = z.object({
-  members: z.array(z.lazy(() => Members$outboundSchema)),
-  total: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    members: z.array(z.lazy(() => Members$outboundSchema)),
+    total: z.number(),
+  })
+);
 
 export function listOrgMembersResponseBodyToJSON(
   listOrgMembersResponseBody: ListOrgMembersResponseBody,

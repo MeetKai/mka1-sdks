@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,18 +27,20 @@ export const UpdateFeatureFlagEnvironmentRequest$inboundSchema: z.ZodType<
   UpdateFeatureFlagEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  env: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagEnvironmentUpdateRequest:
-    components.FeatureFlagEnvironmentUpdateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagEnvironmentUpdateRequest":
-      "featureFlagEnvironmentUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagEnvironmentUpdateRequest:
+      components.FeatureFlagEnvironmentUpdateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagEnvironmentUpdateRequest":
+        "featureFlagEnvironmentUpdateRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateFeatureFlagEnvironmentRequest$Outbound = {
   env: string;
@@ -49,17 +54,22 @@ export const UpdateFeatureFlagEnvironmentRequest$outboundSchema: z.ZodType<
   UpdateFeatureFlagEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   UpdateFeatureFlagEnvironmentRequest
-> = z.object({
-  env: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  featureFlagEnvironmentUpdateRequest:
-    components.FeatureFlagEnvironmentUpdateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagEnvironmentUpdateRequest: "FeatureFlagEnvironmentUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    featureFlagEnvironmentUpdateRequest:
+      components.FeatureFlagEnvironmentUpdateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagEnvironmentUpdateRequest:
+        "FeatureFlagEnvironmentUpdateRequest",
+    });
+  })
+);
 
 export function updateFeatureFlagEnvironmentRequestToJSON(
   updateFeatureFlagEnvironmentRequest: UpdateFeatureFlagEnvironmentRequest,

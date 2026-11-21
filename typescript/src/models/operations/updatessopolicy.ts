@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -67,9 +67,11 @@ export const UpdateSsoPolicySecurity$inboundSchema: z.ZodType<
   UpdateSsoPolicySecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type UpdateSsoPolicySecurity$Outbound = {
   sessionCookie: string;
@@ -80,9 +82,11 @@ export const UpdateSsoPolicySecurity$outboundSchema: z.ZodType<
   UpdateSsoPolicySecurity$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicySecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function updateSsoPolicySecurityToJSON(
   updateSsoPolicySecurity: UpdateSsoPolicySecurity,
@@ -104,7 +108,7 @@ export function updateSsoPolicySecurityFromJSON(
 /** @internal */
 export const UpdateSsoPolicyRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdateSsoPolicyRole
-> = z.nativeEnum(UpdateSsoPolicyRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateSsoPolicyRole));
 /** @internal */
 export const UpdateSsoPolicyRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdateSsoPolicyRole
@@ -115,10 +119,12 @@ export const Mappings$inboundSchema: z.ZodType<
   Mappings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  groupValue: z.string(),
-  role: UpdateSsoPolicyRole$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: UpdateSsoPolicyRole$inboundSchema,
+  })
+);
 /** @internal */
 export type Mappings$Outbound = {
   groupValue: string;
@@ -130,10 +136,12 @@ export const Mappings$outboundSchema: z.ZodType<
   Mappings$Outbound,
   z.ZodTypeDef,
   Mappings
-> = z.object({
-  groupValue: z.string(),
-  role: UpdateSsoPolicyRole$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: UpdateSsoPolicyRole$outboundSchema,
+  })
+);
 
 export function mappingsToJSON(mappings: Mappings): string {
   return JSON.stringify(Mappings$outboundSchema.parse(mappings));
@@ -153,12 +161,14 @@ export const UpdateSsoPolicyRequestBody$inboundSchema: z.ZodType<
   UpdateSsoPolicyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => Mappings$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => Mappings$inboundSchema)),
+  })
+);
 /** @internal */
 export type UpdateSsoPolicyRequestBody$Outbound = {
   providerId: string;
@@ -172,12 +182,14 @@ export const UpdateSsoPolicyRequestBody$outboundSchema: z.ZodType<
   UpdateSsoPolicyRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyRequestBody
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => Mappings$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => Mappings$outboundSchema)),
+  })
+);
 
 export function updateSsoPolicyRequestBodyToJSON(
   updateSsoPolicyRequestBody: UpdateSsoPolicyRequestBody,
@@ -201,15 +213,17 @@ export const UpdateSsoPolicyRequest$inboundSchema: z.ZodType<
   UpdateSsoPolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateSsoPolicyRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateSsoPolicyRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateSsoPolicyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -221,15 +235,17 @@ export const UpdateSsoPolicyRequest$outboundSchema: z.ZodType<
   UpdateSsoPolicyRequest$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateSsoPolicyRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateSsoPolicyRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateSsoPolicyRequestToJSON(
   updateSsoPolicyRequest: UpdateSsoPolicyRequest,
@@ -251,7 +267,9 @@ export function updateSsoPolicyRequestFromJSON(
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsRole$inboundSchema: z.ZodNativeEnum<
   typeof UpdateSsoPolicyAuthOrgsRole
-> = z.nativeEnum(UpdateSsoPolicyAuthOrgsRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateSsoPolicyAuthOrgsRole)
+);
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsRole$outboundSchema: z.ZodNativeEnum<
   typeof UpdateSsoPolicyAuthOrgsRole
@@ -262,10 +280,12 @@ export const UpdateSsoPolicyMappings$inboundSchema: z.ZodType<
   UpdateSsoPolicyMappings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  groupValue: z.string(),
-  role: UpdateSsoPolicyAuthOrgsRole$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: UpdateSsoPolicyAuthOrgsRole$inboundSchema,
+  })
+);
 /** @internal */
 export type UpdateSsoPolicyMappings$Outbound = {
   groupValue: string;
@@ -277,10 +297,12 @@ export const UpdateSsoPolicyMappings$outboundSchema: z.ZodType<
   UpdateSsoPolicyMappings$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyMappings
-> = z.object({
-  groupValue: z.string(),
-  role: UpdateSsoPolicyAuthOrgsRole$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: UpdateSsoPolicyAuthOrgsRole$outboundSchema,
+  })
+);
 
 export function updateSsoPolicyMappingsToJSON(
   updateSsoPolicyMappings: UpdateSsoPolicyMappings,
@@ -304,12 +326,14 @@ export const UpdateSsoPolicyResponseBody$inboundSchema: z.ZodType<
   UpdateSsoPolicyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => UpdateSsoPolicyMappings$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => UpdateSsoPolicyMappings$inboundSchema)),
+  })
+);
 /** @internal */
 export type UpdateSsoPolicyResponseBody$Outbound = {
   providerId: string;
@@ -323,12 +347,14 @@ export const UpdateSsoPolicyResponseBody$outboundSchema: z.ZodType<
   UpdateSsoPolicyResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyResponseBody
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => UpdateSsoPolicyMappings$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => UpdateSsoPolicyMappings$outboundSchema)),
+  })
+);
 
 export function updateSsoPolicyResponseBodyToJSON(
   updateSsoPolicyResponseBody: UpdateSsoPolicyResponseBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,8 +45,8 @@ export type ClassifierConfig = {
 };
 
 /** @internal */
-export const OnError$inboundSchema: z.ZodNativeEnum<typeof OnError> = z
-  .nativeEnum(OnError);
+export const OnError$inboundSchema: z.ZodNativeEnum<typeof OnError> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OnError));
 /** @internal */
 export const OnError$outboundSchema: z.ZodNativeEnum<typeof OnError> =
   OnError$inboundSchema;
@@ -56,20 +56,22 @@ export const ClassifierConfig$inboundSchema: z.ZodType<
   ClassifierConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  prompt: z.string(),
-  threshold: z.number().optional(),
-  on_error: OnError$inboundSchema.default("fail_closed"),
-  rejection_message: z.string().default(
-    "This request is not allowed by your organization's content policy.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "on_error": "onError",
-    "rejection_message": "rejectionMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    prompt: z.string(),
+    threshold: z.number().optional(),
+    on_error: OnError$inboundSchema.default("fail_closed"),
+    rejection_message: z.string().default(
+      "This request is not allowed by your organization's content policy.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_error": "onError",
+      "rejection_message": "rejectionMessage",
+    });
+  })
+);
 /** @internal */
 export type ClassifierConfig$Outbound = {
   model: string;
@@ -84,20 +86,22 @@ export const ClassifierConfig$outboundSchema: z.ZodType<
   ClassifierConfig$Outbound,
   z.ZodTypeDef,
   ClassifierConfig
-> = z.object({
-  model: z.string(),
-  prompt: z.string(),
-  threshold: z.number().optional(),
-  onError: OnError$outboundSchema.default("fail_closed"),
-  rejectionMessage: z.string().default(
-    "This request is not allowed by your organization's content policy.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    onError: "on_error",
-    rejectionMessage: "rejection_message",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    prompt: z.string(),
+    threshold: z.number().optional(),
+    onError: OnError$outboundSchema.default("fail_closed"),
+    rejectionMessage: z.string().default(
+      "This request is not allowed by your organization's content policy.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      onError: "on_error",
+      rejectionMessage: "rejection_message",
+    });
+  })
+);
 
 export function classifierConfigToJSON(
   classifierConfig: ClassifierConfig,

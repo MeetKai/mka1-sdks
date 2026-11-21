@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,16 +27,18 @@ export const LeakageConfig$inboundSchema: z.ZodType<
   LeakageConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  threshold: z.number().default(0.7),
-  rejection_message: z.string().default(
-    "I'm sorry, but I can't help with that type of request. Please ask me something else.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "rejection_message": "rejectionMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    threshold: z.number().default(0.7),
+    rejection_message: z.string().default(
+      "I'm sorry, but I can't help with that type of request. Please ask me something else.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "rejection_message": "rejectionMessage",
+    });
+  })
+);
 /** @internal */
 export type LeakageConfig$Outbound = {
   threshold: number;
@@ -48,16 +50,18 @@ export const LeakageConfig$outboundSchema: z.ZodType<
   LeakageConfig$Outbound,
   z.ZodTypeDef,
   LeakageConfig
-> = z.object({
-  threshold: z.number().default(0.7),
-  rejectionMessage: z.string().default(
-    "I'm sorry, but I can't help with that type of request. Please ask me something else.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    rejectionMessage: "rejection_message",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    threshold: z.number().default(0.7),
+    rejectionMessage: z.string().default(
+      "I'm sorry, but I can't help with that type of request. Please ask me something else.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      rejectionMessage: "rejection_message",
+    });
+  })
+);
 
 export function leakageConfigToJSON(leakageConfig: LeakageConfig): string {
   return JSON.stringify(LeakageConfig$outboundSchema.parse(leakageConfig));

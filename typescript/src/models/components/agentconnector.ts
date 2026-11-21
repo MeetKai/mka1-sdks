@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,15 +66,15 @@ export type AgentConnector = {
 /** @internal */
 export const AgentConnectorObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorObject
-> = z.nativeEnum(AgentConnectorObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentConnectorObject));
 /** @internal */
 export const AgentConnectorObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorObject
 > = AgentConnectorObject$inboundSchema;
 
 /** @internal */
-export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> = z
-  .nativeEnum(Provider);
+export const Provider$inboundSchema: z.ZodNativeEnum<typeof Provider> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Provider));
 /** @internal */
 export const Provider$outboundSchema: z.ZodNativeEnum<typeof Provider> =
   Provider$inboundSchema;
@@ -84,36 +84,42 @@ export const AgentConnector$inboundSchema: z.ZodType<
   AgentConnector,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentConnectorObject$inboundSchema,
-  id: z.string(),
-  agent_id: z.string(),
-  provider: Provider$inboundSchema,
-  name: z.nullable(z.string()),
-  status: z.string(),
-  provider_account_id: z.string(),
-  provider_account_name: z.nullable(z.string()),
-  config: z.any().optional(),
-  credentials_configured: z.boolean(),
-  last_error: z.nullable(z.any()).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  embed: z.nullable(AgentConnectorEmbed$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "provider_account_id": "providerAccountId",
-    "provider_account_name": "providerAccountName",
-    "credentials_configured": "credentialsConfigured",
-    "last_error": "lastError",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "deleted_at": "deletedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorObject$inboundSchema,
+    id: z.string(),
+    agent_id: z.string(),
+    provider: Provider$inboundSchema,
+    name: z.nullable(z.string()),
+    status: z.string(),
+    provider_account_id: z.string(),
+    provider_account_name: z.nullable(z.string()),
+    config: z.any().optional(),
+    credentials_configured: z.boolean(),
+    last_error: z.nullable(z.any()).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    deleted_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    embed: z.nullable(AgentConnectorEmbed$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "provider_account_id": "providerAccountId",
+      "provider_account_name": "providerAccountName",
+      "credentials_configured": "credentialsConfigured",
+      "last_error": "lastError",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "deleted_at": "deletedAt",
+    });
+  })
+);
 /** @internal */
 export type AgentConnector$Outbound = {
   object: string;
@@ -138,34 +144,36 @@ export const AgentConnector$outboundSchema: z.ZodType<
   AgentConnector$Outbound,
   z.ZodTypeDef,
   AgentConnector
-> = z.object({
-  object: AgentConnectorObject$outboundSchema,
-  id: z.string(),
-  agentId: z.string(),
-  provider: Provider$outboundSchema,
-  name: z.nullable(z.string()),
-  status: z.string(),
-  providerAccountId: z.string(),
-  providerAccountName: z.nullable(z.string()),
-  config: z.any().optional(),
-  credentialsConfigured: z.boolean(),
-  lastError: z.nullable(z.any()).optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  embed: z.nullable(AgentConnectorEmbed$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    providerAccountId: "provider_account_id",
-    providerAccountName: "provider_account_name",
-    credentialsConfigured: "credentials_configured",
-    lastError: "last_error",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    deletedAt: "deleted_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorObject$outboundSchema,
+    id: z.string(),
+    agentId: z.string(),
+    provider: Provider$outboundSchema,
+    name: z.nullable(z.string()),
+    status: z.string(),
+    providerAccountId: z.string(),
+    providerAccountName: z.nullable(z.string()),
+    config: z.any().optional(),
+    credentialsConfigured: z.boolean(),
+    lastError: z.nullable(z.any()).optional(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    embed: z.nullable(AgentConnectorEmbed$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      providerAccountId: "provider_account_id",
+      providerAccountName: "provider_account_name",
+      credentialsConfigured: "credentials_configured",
+      lastError: "last_error",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      deletedAt: "deleted_at",
+    });
+  })
+);
 
 export function agentConnectorToJSON(agentConnector: AgentConnector): string {
   return JSON.stringify(AgentConnector$outboundSchema.parse(agentConnector));

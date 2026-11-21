@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,20 +41,22 @@ export const LocalShellCallWithId$inboundSchema: z.ZodType<
   LocalShellCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("local_shell_call"),
-  id: z.string(),
-  call_id: z.string(),
-  action: LocalShellAction$inboundSchema,
-  status: z.string(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell_call"),
+    id: z.string(),
+    call_id: z.string(),
+    action: LocalShellAction$inboundSchema,
+    status: z.string(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type LocalShellCallWithId$Outbound = {
   type: "local_shell_call";
@@ -71,20 +73,22 @@ export const LocalShellCallWithId$outboundSchema: z.ZodType<
   LocalShellCallWithId$Outbound,
   z.ZodTypeDef,
   LocalShellCallWithId
-> = z.object({
-  type: z.literal("local_shell_call"),
-  id: z.string(),
-  callId: z.string(),
-  action: LocalShellAction$outboundSchema,
-  status: z.string(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell_call"),
+    id: z.string(),
+    callId: z.string(),
+    action: LocalShellAction$outboundSchema,
+    status: z.string(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function localShellCallWithIdToJSON(
   localShellCallWithId: LocalShellCallWithId,

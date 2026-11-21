@@ -2,7 +2,7 @@
 
 package mka1
 
-// Generated from OpenAPI doc version 1.1.0 and generator version 2.950.2
+// Generated from OpenAPI doc version 1.1.0 and generator version 2.968.1
 
 import (
 	"context"
@@ -167,11 +167,11 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "0.1.82",
+		SDKVersion: "0.1.83",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 0.1.82 2.950.2 1.1.0 github.com/MeetKai/mka1-sdks/go",
-			SDKVersion:        "0.1.82",
-			GenVersion:        "2.950.2",
+			UserAgent:         "speakeasy-sdk/go 0.1.83 2.968.1 1.1.0 github.com/MeetKai/mka1-sdks/go",
+			SDKVersion:        "0.1.83",
+			GenVersion:        "2.968.1",
 			OpenAPIDocVersion: "1.1.0",
 			ServerList:        ServerList,
 		},

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,22 +29,28 @@ export const FeatureFlagEnvironment$inboundSchema: z.ZodType<
   FeatureFlagEnvironment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  evaluation_key_configured: z.boolean(),
-  evaluation_key_hint: z.nullable(z.string()),
-  id: z.string(),
-  key: z.string(),
-  name: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "evaluation_key_configured": "evaluationKeyConfigured",
-    "evaluation_key_hint": "evaluationKeyHint",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    evaluation_key_configured: z.boolean(),
+    evaluation_key_hint: z.nullable(z.string()),
+    id: z.string(),
+    key: z.string(),
+    name: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "evaluation_key_configured": "evaluationKeyConfigured",
+      "evaluation_key_hint": "evaluationKeyHint",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagEnvironment$Outbound = {
   created_at: string;
@@ -61,22 +67,24 @@ export const FeatureFlagEnvironment$outboundSchema: z.ZodType<
   FeatureFlagEnvironment$Outbound,
   z.ZodTypeDef,
   FeatureFlagEnvironment
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  evaluationKeyConfigured: z.boolean(),
-  evaluationKeyHint: z.nullable(z.string()),
-  id: z.string(),
-  key: z.string(),
-  name: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    evaluationKeyConfigured: "evaluation_key_configured",
-    evaluationKeyHint: "evaluation_key_hint",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    evaluationKeyConfigured: z.boolean(),
+    evaluationKeyHint: z.nullable(z.string()),
+    id: z.string(),
+    key: z.string(),
+    name: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      evaluationKeyConfigured: "evaluation_key_configured",
+      evaluationKeyHint: "evaluation_key_hint",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function featureFlagEnvironmentToJSON(
   featureFlagEnvironment: FeatureFlagEnvironment,

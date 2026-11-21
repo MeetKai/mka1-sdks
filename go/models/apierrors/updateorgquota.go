@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateOrgQuotaTooManyRequestsError struct {
 var _ error = &UpdateOrgQuotaTooManyRequestsError{}
 
 func (e *UpdateOrgQuotaTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateOrgQuotaGoneError struct {
 var _ error = &UpdateOrgQuotaGoneError{}
 
 func (e *UpdateOrgQuotaGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateOrgQuotaConflictError struct {
 var _ error = &UpdateOrgQuotaConflictError{}
 
 func (e *UpdateOrgQuotaConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateOrgQuotaNotFoundError struct {
 var _ error = &UpdateOrgQuotaNotFoundError{}
 
 func (e *UpdateOrgQuotaNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateOrgQuotaForbiddenError struct {
 var _ error = &UpdateOrgQuotaForbiddenError{}
 
 func (e *UpdateOrgQuotaForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateOrgQuotaUnauthorizedError struct {
 var _ error = &UpdateOrgQuotaUnauthorizedError{}
 
 func (e *UpdateOrgQuotaUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateOrgQuotaBadRequestError struct {
 var _ error = &UpdateOrgQuotaBadRequestError{}
 
 func (e *UpdateOrgQuotaBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

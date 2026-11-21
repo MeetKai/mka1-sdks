@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -70,7 +70,7 @@ export type AgentRun = {
 /** @internal */
 export const AgentRunObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunObject
-> = z.nativeEnum(AgentRunObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentRunObject));
 /** @internal */
 export const AgentRunObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunObject
@@ -79,7 +79,7 @@ export const AgentRunObject$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AgentRunStatus$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunStatus
-> = z.nativeEnum(AgentRunStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentRunStatus));
 /** @internal */
 export const AgentRunStatus$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunStatus
@@ -90,36 +90,40 @@ export const AgentRun$inboundSchema: z.ZodType<
   AgentRun,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentRunObject$inboundSchema,
-  id: z.string(),
-  agent_id: z.string(),
-  agent_version: z.nullable(z.number().int()),
-  status: AgentRunStatus$inboundSchema,
-  input: z.any().optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previous_response_id: z.nullable(z.string()),
-  metadata: z.nullable(z.record(z.string())),
-  gateway_response_id: z.nullable(z.string()),
-  gateway_response: z.nullable(z.any()).optional(),
-  error: z.nullable(z.any()).optional(),
-  pending_approvals: z.array(AgentRunPendingApproval$inboundSchema),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "agent_version": "agentVersion",
-    "previous_response_id": "previousResponseId",
-    "gateway_response_id": "gatewayResponseId",
-    "gateway_response": "gatewayResponse",
-    "pending_approvals": "pendingApprovals",
-    "created_at": "createdAt",
-    "completed_at": "completedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunObject$inboundSchema,
+    id: z.string(),
+    agent_id: z.string(),
+    agent_version: z.nullable(z.number().int()),
+    status: AgentRunStatus$inboundSchema,
+    input: z.any().optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previous_response_id: z.nullable(z.string()),
+    metadata: z.nullable(z.record(z.string())),
+    gateway_response_id: z.nullable(z.string()),
+    gateway_response: z.nullable(z.any()).optional(),
+    error: z.nullable(z.any()).optional(),
+    pending_approvals: z.array(AgentRunPendingApproval$inboundSchema),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    completed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "agent_version": "agentVersion",
+      "previous_response_id": "previousResponseId",
+      "gateway_response_id": "gatewayResponseId",
+      "gateway_response": "gatewayResponse",
+      "pending_approvals": "pendingApprovals",
+      "created_at": "createdAt",
+      "completed_at": "completedAt",
+    });
+  })
+);
 /** @internal */
 export type AgentRun$Outbound = {
   object: string;
@@ -144,34 +148,36 @@ export const AgentRun$outboundSchema: z.ZodType<
   AgentRun$Outbound,
   z.ZodTypeDef,
   AgentRun
-> = z.object({
-  object: AgentRunObject$outboundSchema,
-  id: z.string(),
-  agentId: z.string(),
-  agentVersion: z.nullable(z.number().int()),
-  status: AgentRunStatus$outboundSchema,
-  input: z.any().optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previousResponseId: z.nullable(z.string()),
-  metadata: z.nullable(z.record(z.string())),
-  gatewayResponseId: z.nullable(z.string()),
-  gatewayResponse: z.nullable(z.any()).optional(),
-  error: z.nullable(z.any()).optional(),
-  pendingApprovals: z.array(AgentRunPendingApproval$outboundSchema),
-  createdAt: z.date().transform(v => v.toISOString()),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    agentVersion: "agent_version",
-    previousResponseId: "previous_response_id",
-    gatewayResponseId: "gateway_response_id",
-    gatewayResponse: "gateway_response",
-    pendingApprovals: "pending_approvals",
-    createdAt: "created_at",
-    completedAt: "completed_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunObject$outboundSchema,
+    id: z.string(),
+    agentId: z.string(),
+    agentVersion: z.nullable(z.number().int()),
+    status: AgentRunStatus$outboundSchema,
+    input: z.any().optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previousResponseId: z.nullable(z.string()),
+    metadata: z.nullable(z.record(z.string())),
+    gatewayResponseId: z.nullable(z.string()),
+    gatewayResponse: z.nullable(z.any()).optional(),
+    error: z.nullable(z.any()).optional(),
+    pendingApprovals: z.array(AgentRunPendingApproval$outboundSchema),
+    createdAt: z.date().transform(v => v.toISOString()),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      agentVersion: "agent_version",
+      previousResponseId: "previous_response_id",
+      gatewayResponseId: "gateway_response_id",
+      gatewayResponse: "gateway_response",
+      pendingApprovals: "pending_approvals",
+      createdAt: "created_at",
+      completedAt: "completed_at",
+    });
+  })
+);
 
 export function agentRunToJSON(agentRun: AgentRun): string {
   return JSON.stringify(AgentRun$outboundSchema.parse(agentRun));

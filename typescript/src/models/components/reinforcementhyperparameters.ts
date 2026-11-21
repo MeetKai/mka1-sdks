@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -72,7 +72,7 @@ export const ReinforcementHyperparametersBatchSize$inboundSchema: z.ZodType<
   ReinforcementHyperparametersBatchSize,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type ReinforcementHyperparametersBatchSize$Outbound = string | number;
 
@@ -81,7 +81,7 @@ export const ReinforcementHyperparametersBatchSize$outboundSchema: z.ZodType<
   ReinforcementHyperparametersBatchSize$Outbound,
   z.ZodTypeDef,
   ReinforcementHyperparametersBatchSize
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function reinforcementHyperparametersBatchSizeToJSON(
   reinforcementHyperparametersBatchSize: ReinforcementHyperparametersBatchSize,
@@ -108,7 +108,7 @@ export const ComputeMultiplier$inboundSchema: z.ZodType<
   ComputeMultiplier,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type ComputeMultiplier$Outbound = string | number;
 
@@ -117,7 +117,7 @@ export const ComputeMultiplier$outboundSchema: z.ZodType<
   ComputeMultiplier$Outbound,
   z.ZodTypeDef,
   ComputeMultiplier
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function computeMultiplierToJSON(
   computeMultiplier: ComputeMultiplier,
@@ -141,7 +141,7 @@ export const EvalInterval$inboundSchema: z.ZodType<
   EvalInterval,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type EvalInterval$Outbound = string | number;
 
@@ -150,7 +150,7 @@ export const EvalInterval$outboundSchema: z.ZodType<
   EvalInterval$Outbound,
   z.ZodTypeDef,
   EvalInterval
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function evalIntervalToJSON(evalInterval: EvalInterval): string {
   return JSON.stringify(EvalInterval$outboundSchema.parse(evalInterval));
@@ -170,7 +170,7 @@ export const EvalSamples$inboundSchema: z.ZodType<
   EvalSamples,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type EvalSamples$Outbound = string | number;
 
@@ -179,7 +179,7 @@ export const EvalSamples$outboundSchema: z.ZodType<
   EvalSamples$Outbound,
   z.ZodTypeDef,
   EvalSamples
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function evalSamplesToJSON(evalSamples: EvalSamples): string {
   return JSON.stringify(EvalSamples$outboundSchema.parse(evalSamples));
@@ -200,7 +200,7 @@ export const ReinforcementHyperparametersLearningRateMultiplier$inboundSchema:
     ReinforcementHyperparametersLearningRateMultiplier,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.string(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type ReinforcementHyperparametersLearningRateMultiplier$Outbound =
   | string
@@ -212,7 +212,7 @@ export const ReinforcementHyperparametersLearningRateMultiplier$outboundSchema:
     ReinforcementHyperparametersLearningRateMultiplier$Outbound,
     z.ZodTypeDef,
     ReinforcementHyperparametersLearningRateMultiplier
-  > = z.union([z.string(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function reinforcementHyperparametersLearningRateMultiplierToJSON(
   reinforcementHyperparametersLearningRateMultiplier:
@@ -245,7 +245,7 @@ export const ReinforcementHyperparametersNEpochs$inboundSchema: z.ZodType<
   ReinforcementHyperparametersNEpochs,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type ReinforcementHyperparametersNEpochs$Outbound = string | number;
 
@@ -254,7 +254,7 @@ export const ReinforcementHyperparametersNEpochs$outboundSchema: z.ZodType<
   ReinforcementHyperparametersNEpochs$Outbound,
   z.ZodTypeDef,
   ReinforcementHyperparametersNEpochs
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function reinforcementHyperparametersNEpochsToJSON(
   reinforcementHyperparametersNEpochs: ReinforcementHyperparametersNEpochs,
@@ -278,8 +278,10 @@ export function reinforcementHyperparametersNEpochsFromJSON(
 
 /** @internal */
 export const ReinforcementHyperparametersReasoningEffort$inboundSchema:
-  z.ZodNativeEnum<typeof ReinforcementHyperparametersReasoningEffort> = z
-    .nativeEnum(ReinforcementHyperparametersReasoningEffort);
+  z.ZodNativeEnum<typeof ReinforcementHyperparametersReasoningEffort> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ReinforcementHyperparametersReasoningEffort)
+    );
 /** @internal */
 export const ReinforcementHyperparametersReasoningEffort$outboundSchema:
   z.ZodNativeEnum<typeof ReinforcementHyperparametersReasoningEffort> =
@@ -290,28 +292,33 @@ export const ReinforcementHyperparameters$inboundSchema: z.ZodType<
   ReinforcementHyperparameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  compute_multiplier: z.nullable(z.union([z.string(), z.number()])).optional(),
-  eval_interval: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  eval_samples: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  reasoning_effort: z.nullable(
-    ReinforcementHyperparametersReasoningEffort$inboundSchema,
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_size": "batchSize",
-    "compute_multiplier": "computeMultiplier",
-    "eval_interval": "evalInterval",
-    "eval_samples": "evalSamples",
-    "learning_rate_multiplier": "learningRateMultiplier",
-    "n_epochs": "nEpochs",
-    "reasoning_effort": "reasoningEffort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    compute_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    eval_interval: z.nullable(z.union([z.string(), z.number().int()]))
+      .optional(),
+    eval_samples: z.nullable(z.union([z.string(), z.number().int()]))
+      .optional(),
+    learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    reasoning_effort: z.nullable(
+      ReinforcementHyperparametersReasoningEffort$inboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_size": "batchSize",
+      "compute_multiplier": "computeMultiplier",
+      "eval_interval": "evalInterval",
+      "eval_samples": "evalSamples",
+      "learning_rate_multiplier": "learningRateMultiplier",
+      "n_epochs": "nEpochs",
+      "reasoning_effort": "reasoningEffort",
+    });
+  })
+);
 /** @internal */
 export type ReinforcementHyperparameters$Outbound = {
   batch_size?: string | number | null | undefined;
@@ -328,28 +335,31 @@ export const ReinforcementHyperparameters$outboundSchema: z.ZodType<
   ReinforcementHyperparameters$Outbound,
   z.ZodTypeDef,
   ReinforcementHyperparameters
-> = z.object({
-  batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  computeMultiplier: z.nullable(z.union([z.string(), z.number()])).optional(),
-  evalInterval: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  evalSamples: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  reasoningEffort: z.nullable(
-    ReinforcementHyperparametersReasoningEffort$outboundSchema,
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchSize: "batch_size",
-    computeMultiplier: "compute_multiplier",
-    evalInterval: "eval_interval",
-    evalSamples: "eval_samples",
-    learningRateMultiplier: "learning_rate_multiplier",
-    nEpochs: "n_epochs",
-    reasoningEffort: "reasoning_effort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    computeMultiplier: z.nullable(z.union([z.string(), z.number()])).optional(),
+    evalInterval: z.nullable(z.union([z.string(), z.number().int()]))
+      .optional(),
+    evalSamples: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    reasoningEffort: z.nullable(
+      ReinforcementHyperparametersReasoningEffort$outboundSchema,
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchSize: "batch_size",
+      computeMultiplier: "compute_multiplier",
+      evalInterval: "eval_interval",
+      evalSamples: "eval_samples",
+      learningRateMultiplier: "learning_rate_multiplier",
+      nEpochs: "n_epochs",
+      reasoningEffort: "reasoning_effort",
+    });
+  })
+);
 
 export function reinforcementHyperparametersToJSON(
   reinforcementHyperparameters: ReinforcementHyperparameters,

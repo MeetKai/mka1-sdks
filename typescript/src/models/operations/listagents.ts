@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,7 @@ export type ListAgentsRequest = {
 /** @internal */
 export const ListAgentsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentsQueryParamOrder
-> = z.nativeEnum(ListAgentsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListAgentsQueryParamOrder));
 /** @internal */
 export const ListAgentsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentsQueryParamOrder
@@ -48,17 +48,19 @@ export const ListAgentsRequest$inboundSchema: z.ZodType<
   ListAgentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  offset: z.number().int().default(0),
-  "X-On-Behalf-Of": z.string().optional(),
-  deleted: z.boolean().default(false),
-  limit: z.number().int().default(20),
-  order: ListAgentsQueryParamOrder$inboundSchema.default("desc"),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    offset: z.number().int().default(0),
+    "X-On-Behalf-Of": z.string().optional(),
+    deleted: z.boolean().default(false),
+    limit: z.number().int().default(20),
+    order: ListAgentsQueryParamOrder$inboundSchema.default("desc"),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListAgentsRequest$Outbound = {
   offset: number;
@@ -73,17 +75,19 @@ export const ListAgentsRequest$outboundSchema: z.ZodType<
   ListAgentsRequest$Outbound,
   z.ZodTypeDef,
   ListAgentsRequest
-> = z.object({
-  offset: z.number().int().default(0),
-  xOnBehalfOf: z.string().optional(),
-  deleted: z.boolean().default(false),
-  limit: z.number().int().default(20),
-  order: ListAgentsQueryParamOrder$outboundSchema.default("desc"),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    offset: z.number().int().default(0),
+    xOnBehalfOf: z.string().optional(),
+    deleted: z.boolean().default(false),
+    limit: z.number().int().default(20),
+    order: ListAgentsQueryParamOrder$outboundSchema.default("desc"),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listAgentsRequestToJSON(
   listAgentsRequest: ListAgentsRequest,

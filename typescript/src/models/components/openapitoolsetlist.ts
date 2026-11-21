@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,7 @@ export type OpenApiToolSetList = {
 /** @internal */
 export const OpenApiToolSetListObject$inboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetListObject
-> = z.nativeEnum(OpenApiToolSetListObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OpenApiToolSetListObject));
 /** @internal */
 export const OpenApiToolSetListObject$outboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetListObject
@@ -44,19 +44,21 @@ export const OpenApiToolSetList$inboundSchema: z.ZodType<
   OpenApiToolSetList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: OpenApiToolSetListObject$inboundSchema,
-  data: z.array(OpenApiToolSet$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: OpenApiToolSetListObject$inboundSchema,
+    data: z.array(OpenApiToolSet$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type OpenApiToolSetList$Outbound = {
   object: string;
@@ -71,19 +73,21 @@ export const OpenApiToolSetList$outboundSchema: z.ZodType<
   OpenApiToolSetList$Outbound,
   z.ZodTypeDef,
   OpenApiToolSetList
-> = z.object({
-  object: OpenApiToolSetListObject$outboundSchema,
-  data: z.array(OpenApiToolSet$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: OpenApiToolSetListObject$outboundSchema,
+    data: z.array(OpenApiToolSet$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function openApiToolSetListToJSON(
   openApiToolSetList: OpenApiToolSetList,

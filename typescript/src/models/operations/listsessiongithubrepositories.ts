@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const ListSessionGitHubRepositoriesRequest$inboundSchema: z.ZodType<
   ListSessionGitHubRepositoriesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListSessionGitHubRepositoriesRequest$Outbound = {
   session_id: string;
@@ -41,15 +43,17 @@ export const ListSessionGitHubRepositoriesRequest$outboundSchema: z.ZodType<
   ListSessionGitHubRepositoriesRequest$Outbound,
   z.ZodTypeDef,
   ListSessionGitHubRepositoriesRequest
-> = z.object({
-  sessionId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listSessionGitHubRepositoriesRequestToJSON(
   listSessionGitHubRepositoriesRequest: ListSessionGitHubRepositoriesRequest,

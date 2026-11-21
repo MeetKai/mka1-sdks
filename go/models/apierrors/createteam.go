@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type CreateTeamTooManyRequestsError struct {
 var _ error = &CreateTeamTooManyRequestsError{}
 
 func (e *CreateTeamTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type CreateTeamGoneError struct {
 var _ error = &CreateTeamGoneError{}
 
 func (e *CreateTeamGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type CreateTeamConflictError struct {
 var _ error = &CreateTeamConflictError{}
 
 func (e *CreateTeamConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type CreateTeamNotFoundError struct {
 var _ error = &CreateTeamNotFoundError{}
 
 func (e *CreateTeamNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type CreateTeamForbiddenError struct {
 var _ error = &CreateTeamForbiddenError{}
 
 func (e *CreateTeamForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type CreateTeamUnauthorizedError struct {
 var _ error = &CreateTeamUnauthorizedError{}
 
 func (e *CreateTeamUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type CreateTeamBadRequestError struct {
 var _ error = &CreateTeamBadRequestError{}
 
 func (e *CreateTeamBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

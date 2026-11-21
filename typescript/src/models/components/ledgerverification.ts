@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,11 +27,13 @@ export const LedgerVerification$inboundSchema: z.ZodType<
   LedgerVerification,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  responseId: z.string(),
-  isValid: z.boolean(),
-  chains: z.array(LedgerChainVerification$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string(),
+    isValid: z.boolean(),
+    chains: z.array(LedgerChainVerification$inboundSchema),
+  })
+);
 /** @internal */
 export type LedgerVerification$Outbound = {
   responseId: string;
@@ -44,11 +46,13 @@ export const LedgerVerification$outboundSchema: z.ZodType<
   LedgerVerification$Outbound,
   z.ZodTypeDef,
   LedgerVerification
-> = z.object({
-  responseId: z.string(),
-  isValid: z.boolean(),
-  chains: z.array(LedgerChainVerification$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string(),
+    isValid: z.boolean(),
+    chains: z.array(LedgerChainVerification$outboundSchema),
+  })
+);
 
 export function ledgerVerificationToJSON(
   ledgerVerification: LedgerVerification,

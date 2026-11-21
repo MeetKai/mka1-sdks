@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,7 +36,7 @@ export type BasicOrganization = {
 /** @internal */
 export const BasicOrganizationStatus$inboundSchema: z.ZodNativeEnum<
   typeof BasicOrganizationStatus
-> = z.nativeEnum(BasicOrganizationStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BasicOrganizationStatus));
 /** @internal */
 export const BasicOrganizationStatus$outboundSchema: z.ZodNativeEnum<
   typeof BasicOrganizationStatus
@@ -47,15 +47,17 @@ export const BasicOrganization$inboundSchema: z.ZodType<
   BasicOrganization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  logo: z.nullable(z.string()),
-  createdAt: z.string(),
-  status: BasicOrganizationStatus$inboundSchema,
-  metadata: z.nullable(OrganizationMetadataOutput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    logo: z.nullable(z.string()),
+    createdAt: z.string(),
+    status: BasicOrganizationStatus$inboundSchema,
+    metadata: z.nullable(OrganizationMetadataOutput$inboundSchema),
+  })
+);
 /** @internal */
 export type BasicOrganization$Outbound = {
   id: string;
@@ -72,15 +74,17 @@ export const BasicOrganization$outboundSchema: z.ZodType<
   BasicOrganization$Outbound,
   z.ZodTypeDef,
   BasicOrganization
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  logo: z.nullable(z.string()),
-  createdAt: z.string(),
-  status: BasicOrganizationStatus$outboundSchema,
-  metadata: z.nullable(OrganizationMetadataOutput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    logo: z.nullable(z.string()),
+    createdAt: z.string(),
+    status: BasicOrganizationStatus$outboundSchema,
+    metadata: z.nullable(OrganizationMetadataOutput$outboundSchema),
+  })
+);
 
 export function basicOrganizationToJSON(
   basicOrganization: BasicOrganization,

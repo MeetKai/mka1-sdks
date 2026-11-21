@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -74,7 +74,9 @@ export type LeakageGuardrail = {
 /** @internal */
 export const LeakageGuardrailOutputTiming$inboundSchema: z.ZodNativeEnum<
   typeof LeakageGuardrailOutputTiming
-> = z.nativeEnum(LeakageGuardrailOutputTiming);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(LeakageGuardrailOutputTiming)
+);
 /** @internal */
 export const LeakageGuardrailOutputTiming$outboundSchema: z.ZodNativeEnum<
   typeof LeakageGuardrailOutputTiming
@@ -85,22 +87,24 @@ export const LeakageGuardrail$inboundSchema: z.ZodType<
   LeakageGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("leakage"),
-  enabled: z.boolean().default(true),
-  check_output: z.boolean().optional(),
-  output_timing: LeakageGuardrailOutputTiming$inboundSchema.optional(),
-  output_window: OutputWindow$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
-  config: LeakageConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "output_window": "outputWindow",
-    "input_sources": "inputSources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("leakage"),
+    enabled: z.boolean().default(true),
+    check_output: z.boolean().optional(),
+    output_timing: LeakageGuardrailOutputTiming$inboundSchema.optional(),
+    output_window: OutputWindow$inboundSchema.optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
+    config: LeakageConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "output_window": "outputWindow",
+      "input_sources": "inputSources",
+    });
+  })
+);
 /** @internal */
 export type LeakageGuardrail$Outbound = {
   mode: "leakage";
@@ -117,22 +121,24 @@ export const LeakageGuardrail$outboundSchema: z.ZodType<
   LeakageGuardrail$Outbound,
   z.ZodTypeDef,
   LeakageGuardrail
-> = z.object({
-  mode: z.literal("leakage"),
-  enabled: z.boolean().default(true),
-  checkOutput: z.boolean().optional(),
-  outputTiming: LeakageGuardrailOutputTiming$outboundSchema.optional(),
-  outputWindow: OutputWindow$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
-  config: LeakageConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    outputWindow: "output_window",
-    inputSources: "input_sources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("leakage"),
+    enabled: z.boolean().default(true),
+    checkOutput: z.boolean().optional(),
+    outputTiming: LeakageGuardrailOutputTiming$outboundSchema.optional(),
+    outputWindow: OutputWindow$outboundSchema.optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
+    config: LeakageConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      outputWindow: "output_window",
+      inputSources: "input_sources",
+    });
+  })
+);
 
 export function leakageGuardrailToJSON(
   leakageGuardrail: LeakageGuardrail,

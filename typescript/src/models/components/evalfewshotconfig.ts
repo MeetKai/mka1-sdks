@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -48,8 +48,8 @@ export type EvalFewshotConfig = {
 };
 
 /** @internal */
-export const Strategy$inboundSchema: z.ZodNativeEnum<typeof Strategy> = z
-  .nativeEnum(Strategy);
+export const Strategy$inboundSchema: z.ZodNativeEnum<typeof Strategy> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Strategy));
 /** @internal */
 export const Strategy$outboundSchema: z.ZodNativeEnum<typeof Strategy> =
   Strategy$inboundSchema;
@@ -59,22 +59,24 @@ export const EvalFewshotConfig$inboundSchema: z.ZodType<
   EvalFewshotConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  count: z.number().int().default(0),
-  dataset: EvalDataset$inboundSchema.optional(),
-  prompt_template: z.string().optional(),
-  target_template: z.string().optional(),
-  example_template: z.string().default("{{prompt}}\n{{target}}"),
-  separator: z.string().default("\n\n"),
-  strategy: Strategy$inboundSchema.default("first"),
-  seed: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_template": "promptTemplate",
-    "target_template": "targetTemplate",
-    "example_template": "exampleTemplate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(0),
+    dataset: EvalDataset$inboundSchema.optional(),
+    prompt_template: z.string().optional(),
+    target_template: z.string().optional(),
+    example_template: z.string().default("{{prompt}}\n{{target}}"),
+    separator: z.string().default("\n\n"),
+    strategy: Strategy$inboundSchema.default("first"),
+    seed: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_template": "promptTemplate",
+      "target_template": "targetTemplate",
+      "example_template": "exampleTemplate",
+    });
+  })
+);
 /** @internal */
 export type EvalFewshotConfig$Outbound = {
   count: number;
@@ -92,22 +94,24 @@ export const EvalFewshotConfig$outboundSchema: z.ZodType<
   EvalFewshotConfig$Outbound,
   z.ZodTypeDef,
   EvalFewshotConfig
-> = z.object({
-  count: z.number().int().default(0),
-  dataset: EvalDataset$outboundSchema.optional(),
-  promptTemplate: z.string().optional(),
-  targetTemplate: z.string().optional(),
-  exampleTemplate: z.string().default("{{prompt}}\n{{target}}"),
-  separator: z.string().default("\n\n"),
-  strategy: Strategy$outboundSchema.default("first"),
-  seed: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    promptTemplate: "prompt_template",
-    targetTemplate: "target_template",
-    exampleTemplate: "example_template",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    count: z.number().int().default(0),
+    dataset: EvalDataset$outboundSchema.optional(),
+    promptTemplate: z.string().optional(),
+    targetTemplate: z.string().optional(),
+    exampleTemplate: z.string().default("{{prompt}}\n{{target}}"),
+    separator: z.string().default("\n\n"),
+    strategy: Strategy$outboundSchema.default("first"),
+    seed: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTemplate: "prompt_template",
+      targetTemplate: "target_template",
+      exampleTemplate: "example_template",
+    });
+  })
+);
 
 export function evalFewshotConfigToJSON(
   evalFewshotConfig: EvalFewshotConfig,

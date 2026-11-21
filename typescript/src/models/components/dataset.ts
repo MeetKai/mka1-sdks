@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,18 +19,20 @@ export type Dataset = {
 
 /** @internal */
 export const Dataset$inboundSchema: z.ZodType<Dataset, z.ZodTypeDef, unknown> =
-  z.object({
-    name: z.string(),
-    digest: z.string(),
-    source_type: z.string(),
-    source: z.string(),
-    schema: z.string().optional(),
-    profile: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "source_type": "sourceType",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      digest: z.string(),
+      source_type: z.string(),
+      source: z.string(),
+      schema: z.string().optional(),
+      profile: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "source_type": "sourceType",
+      });
+    })
+  );
 /** @internal */
 export type Dataset$Outbound = {
   name: string;
@@ -46,18 +48,20 @@ export const Dataset$outboundSchema: z.ZodType<
   Dataset$Outbound,
   z.ZodTypeDef,
   Dataset
-> = z.object({
-  name: z.string(),
-  digest: z.string(),
-  sourceType: z.string(),
-  source: z.string(),
-  schema: z.string().optional(),
-  profile: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sourceType: "source_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    digest: z.string(),
+    sourceType: z.string(),
+    source: z.string(),
+    schema: z.string().optional(),
+    profile: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sourceType: "source_type",
+    });
+  })
+);
 
 export function datasetToJSON(dataset: Dataset): string {
   return JSON.stringify(Dataset$outboundSchema.parse(dataset));

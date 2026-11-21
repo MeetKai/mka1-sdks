@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,9 +39,10 @@ export type ListTextToSpeechHistoryRequest = {
 
 /** @internal */
 export const ListTextToSpeechHistoryQueryParamOrder$inboundSchema:
-  z.ZodNativeEnum<typeof ListTextToSpeechHistoryQueryParamOrder> = z.nativeEnum(
-    ListTextToSpeechHistoryQueryParamOrder,
-  );
+  z.ZodNativeEnum<typeof ListTextToSpeechHistoryQueryParamOrder> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListTextToSpeechHistoryQueryParamOrder)
+    );
 /** @internal */
 export const ListTextToSpeechHistoryQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListTextToSpeechHistoryQueryParamOrder> =
@@ -52,17 +53,19 @@ export const ListTextToSpeechHistoryRequest$inboundSchema: z.ZodType<
   ListTextToSpeechHistoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListTextToSpeechHistoryQueryParamOrder$inboundSchema.default("desc"),
-  model: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListTextToSpeechHistoryQueryParamOrder$inboundSchema.default("desc"),
+    model: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListTextToSpeechHistoryRequest$Outbound = {
   after?: string | undefined;
@@ -77,17 +80,21 @@ export const ListTextToSpeechHistoryRequest$outboundSchema: z.ZodType<
   ListTextToSpeechHistoryRequest$Outbound,
   z.ZodTypeDef,
   ListTextToSpeechHistoryRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListTextToSpeechHistoryQueryParamOrder$outboundSchema.default("desc"),
-  model: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListTextToSpeechHistoryQueryParamOrder$outboundSchema.default(
+      "desc",
+    ),
+    model: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listTextToSpeechHistoryRequestToJSON(
   listTextToSpeechHistoryRequest: ListTextToSpeechHistoryRequest,

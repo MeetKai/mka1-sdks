@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 export type AuditApiErrorData = {
@@ -35,24 +36,26 @@ export const AuditApiError$inboundSchema: z.ZodType<
   AuditApiError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  missing_scopes: z.array(z.string()).optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    const remapped = remap$(v, {
-      "missing_scopes": "missingScopes",
-    });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    missing_scopes: z.array(z.string()).optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      const remapped = remap$(v, {
+        "missing_scopes": "missingScopes",
+      });
 
-    return new AuditApiError(remapped, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+      return new AuditApiError(remapped, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type AuditApiError$Outbound = {
@@ -65,15 +68,17 @@ export const AuditApiError$outboundSchema: z.ZodType<
   AuditApiError$Outbound,
   z.ZodTypeDef,
   AuditApiError
-> = z.instanceof(AuditApiError)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      message: z.string(),
-      missingScopes: z.array(z.string()).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        missingScopes: "missing_scopes",
-      });
-    }),
-  );
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(AuditApiError)
+    .transform(v => v.data$)
+    .pipe(
+      z.object({
+        message: z.string(),
+        missingScopes: z.array(z.string()).optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          missingScopes: "missing_scopes",
+        });
+      }),
+    )
+);

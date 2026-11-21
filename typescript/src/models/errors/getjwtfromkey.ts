@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -152,19 +152,21 @@ export const GetJwtFromKeyAuthApiKeyResponse500ResponseBody$inboundSchema:
     GetJwtFromKeyAuthApiKeyResponse500ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetJwtFromKeyAuthApiKeyResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetJwtFromKeyAuthApiKeyResponse500ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetJwtFromKeyAuthApiKeyResponse500ResponseBody$Outbound = {
@@ -177,11 +179,13 @@ export const GetJwtFromKeyAuthApiKeyResponse500ResponseBody$outboundSchema:
     GetJwtFromKeyAuthApiKeyResponse500ResponseBody$Outbound,
     z.ZodTypeDef,
     GetJwtFromKeyAuthApiKeyResponse500ResponseBody
-  > = z.instanceof(GetJwtFromKeyAuthApiKeyResponse500ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetJwtFromKeyAuthApiKeyResponse500ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema:
@@ -189,20 +193,22 @@ export const GetJwtFromKeyAuthApiKeyResponseResponseBody$inboundSchema:
     GetJwtFromKeyAuthApiKeyResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetJwtFromKeyAuthApiKeyResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetJwtFromKeyAuthApiKeyResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetJwtFromKeyAuthApiKeyResponseResponseBody$Outbound = {
@@ -216,31 +222,35 @@ export const GetJwtFromKeyAuthApiKeyResponseResponseBody$outboundSchema:
     GetJwtFromKeyAuthApiKeyResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetJwtFromKeyAuthApiKeyResponseResponseBody
-  > = z.instanceof(GetJwtFromKeyAuthApiKeyResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetJwtFromKeyAuthApiKeyResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const GetJwtFromKeyAuthApiKeyResponseBody$inboundSchema: z.ZodType<
   GetJwtFromKeyAuthApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetJwtFromKeyAuthApiKeyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetJwtFromKeyAuthApiKeyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetJwtFromKeyAuthApiKeyResponseBody$Outbound = {
@@ -252,21 +262,25 @@ export const GetJwtFromKeyAuthApiKeyResponseBody$outboundSchema: z.ZodType<
   GetJwtFromKeyAuthApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyAuthApiKeyResponseBody
-> = z.instanceof(GetJwtFromKeyAuthApiKeyResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetJwtFromKeyAuthApiKeyResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetJwtFromKeyDetails$inboundSchema: z.ZodType<
   GetJwtFromKeyDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type GetJwtFromKeyDetails$Outbound = {
   path: string;
@@ -278,10 +292,12 @@ export const GetJwtFromKeyDetails$outboundSchema: z.ZodType<
   GetJwtFromKeyDetails$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyDetails
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 
 export function getJwtFromKeyDetailsToJSON(
   getJwtFromKeyDetails: GetJwtFromKeyDetails,
@@ -305,20 +321,22 @@ export const GetJwtFromKeyResponseBody$inboundSchema: z.ZodType<
   GetJwtFromKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  details: z.array(z.lazy(() => GetJwtFromKeyDetails$inboundSchema)),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetJwtFromKeyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    details: z.array(z.lazy(() => GetJwtFromKeyDetails$inboundSchema)),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetJwtFromKeyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetJwtFromKeyResponseBody$Outbound = {
@@ -331,9 +349,11 @@ export const GetJwtFromKeyResponseBody$outboundSchema: z.ZodType<
   GetJwtFromKeyResponseBody$Outbound,
   z.ZodTypeDef,
   GetJwtFromKeyResponseBody
-> = z.instanceof(GetJwtFromKeyResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    details: z.array(z.lazy(() => GetJwtFromKeyDetails$outboundSchema)),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetJwtFromKeyResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      details: z.array(z.lazy(() => GetJwtFromKeyDetails$outboundSchema)),
+    }))
+);

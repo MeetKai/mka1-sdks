@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,7 +30,9 @@ export type ListMcpServersRequest = {
 /** @internal */
 export const ListMcpServersQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListMcpServersQueryParamOrder
-> = z.nativeEnum(ListMcpServersQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListMcpServersQueryParamOrder)
+);
 /** @internal */
 export const ListMcpServersQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListMcpServersQueryParamOrder
@@ -41,16 +43,18 @@ export const ListMcpServersRequest$inboundSchema: z.ZodType<
   ListMcpServersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  order: ListMcpServersQueryParamOrder$inboundSchema.default("desc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    order: ListMcpServersQueryParamOrder$inboundSchema.default("desc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListMcpServersRequest$Outbound = {
   limit: number;
@@ -64,16 +68,18 @@ export const ListMcpServersRequest$outboundSchema: z.ZodType<
   ListMcpServersRequest$Outbound,
   z.ZodTypeDef,
   ListMcpServersRequest
-> = z.object({
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  order: ListMcpServersQueryParamOrder$outboundSchema.default("desc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    order: ListMcpServersQueryParamOrder$outboundSchema.default("desc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listMcpServersRequestToJSON(
   listMcpServersRequest: ListMcpServersRequest,

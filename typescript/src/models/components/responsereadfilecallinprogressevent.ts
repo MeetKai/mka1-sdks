@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,13 +25,15 @@ export const ResponseReadFileCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseReadFileCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type ResponseReadFileCallInProgressEventArgs$Outbound = {
   file_id: string;
@@ -42,13 +44,15 @@ export const ResponseReadFileCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseReadFileCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseReadFileCallInProgressEventArgs
-> = z.object({
-  fileId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function responseReadFileCallInProgressEventArgsToJSON(
   responseReadFileCallInProgressEventArgs:
@@ -81,20 +85,22 @@ export const ResponseReadFileCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseReadFileCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.read_file_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseReadFileCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.read_file_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseReadFileCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseReadFileCallInProgressEvent$Outbound = {
   type: "response.read_file_call.in_progress";
@@ -109,20 +115,22 @@ export const ResponseReadFileCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseReadFileCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseReadFileCallInProgressEvent
-> = z.object({
-  type: z.literal("response.read_file_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseReadFileCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.read_file_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseReadFileCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseReadFileCallInProgressEventToJSON(
   responseReadFileCallInProgressEvent: ResponseReadFileCallInProgressEvent,

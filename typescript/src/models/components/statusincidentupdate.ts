@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,16 +25,20 @@ export const StatusIncidentUpdate$inboundSchema: z.ZodType<
   StatusIncidentUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  status: StatusIncidentStatus$inboundSchema,
-  message: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: StatusIncidentStatus$inboundSchema,
+    message: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type StatusIncidentUpdate$Outbound = {
   id: string;
@@ -48,16 +52,18 @@ export const StatusIncidentUpdate$outboundSchema: z.ZodType<
   StatusIncidentUpdate$Outbound,
   z.ZodTypeDef,
   StatusIncidentUpdate
-> = z.object({
-  id: z.string(),
-  status: StatusIncidentStatus$outboundSchema,
-  message: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    status: StatusIncidentStatus$outboundSchema,
+    message: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function statusIncidentUpdateToJSON(
   statusIncidentUpdate: StatusIncidentUpdate,

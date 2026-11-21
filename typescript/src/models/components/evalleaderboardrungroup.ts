@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,17 +32,19 @@ export const EvalLeaderboardRunGroup$inboundSchema: z.ZodType<
   EvalLeaderboardRunGroup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  task_id: z.nullable(z.string()),
-  rank: z.number().int(),
-  run_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-    "run_id": "runId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    task_id: z.nullable(z.string()),
+    rank: z.number().int(),
+    run_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "task_id": "taskId",
+      "run_id": "runId",
+    });
+  })
+);
 /** @internal */
 export type EvalLeaderboardRunGroup$Outbound = {
   model: string;
@@ -56,17 +58,19 @@ export const EvalLeaderboardRunGroup$outboundSchema: z.ZodType<
   EvalLeaderboardRunGroup$Outbound,
   z.ZodTypeDef,
   EvalLeaderboardRunGroup
-> = z.object({
-  model: z.string(),
-  taskId: z.nullable(z.string()),
-  rank: z.number().int(),
-  runId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    taskId: z.nullable(z.string()),
+    rank: z.number().int(),
+    runId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      runId: "run_id",
+    });
+  })
+);
 
 export function evalLeaderboardRunGroupToJSON(
   evalLeaderboardRunGroup: EvalLeaderboardRunGroup,

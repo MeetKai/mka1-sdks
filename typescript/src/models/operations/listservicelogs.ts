@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,18 +33,20 @@ export const ListServiceLogsRequest$inboundSchema: z.ZodType<
   ListServiceLogsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  source: components.ComputeLogSource$inboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  order: components.ComputeOrder$inboundSchema.default("asc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    source: components.ComputeLogSource$inboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    order: components.ComputeOrder$inboundSchema.default("asc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListServiceLogsRequest$Outbound = {
   id: string;
@@ -60,18 +62,20 @@ export const ListServiceLogsRequest$outboundSchema: z.ZodType<
   ListServiceLogsRequest$Outbound,
   z.ZodTypeDef,
   ListServiceLogsRequest
-> = z.object({
-  id: z.string(),
-  source: components.ComputeLogSource$outboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  order: components.ComputeOrder$outboundSchema.default("asc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    source: components.ComputeLogSource$outboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    order: components.ComputeOrder$outboundSchema.default("asc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listServiceLogsRequestToJSON(
   listServiceLogsRequest: ListServiceLogsRequest,
@@ -95,10 +99,12 @@ export const ListServiceLogsResponse$inboundSchema: z.ZodType<
   ListServiceLogsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeLogList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeLogList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListServiceLogsResponse$Outbound =
   | components.ComputeLogList$Outbound
@@ -109,10 +115,12 @@ export const ListServiceLogsResponse$outboundSchema: z.ZodType<
   ListServiceLogsResponse$Outbound,
   z.ZodTypeDef,
   ListServiceLogsResponse
-> = z.union([
-  components.ComputeLogList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeLogList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listServiceLogsResponseToJSON(
   listServiceLogsResponse: ListServiceLogsResponse,

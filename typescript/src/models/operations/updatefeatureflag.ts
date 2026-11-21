@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,16 +26,18 @@ export const UpdateFeatureFlagRequest$inboundSchema: z.ZodType<
   UpdateFeatureFlagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagUpdateRequest: components.FeatureFlagUpdateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagUpdateRequest": "featureFlagUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagUpdateRequest: components.FeatureFlagUpdateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagUpdateRequest": "featureFlagUpdateRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateFeatureFlagRequest$Outbound = {
   key: string;
@@ -45,16 +50,21 @@ export const UpdateFeatureFlagRequest$outboundSchema: z.ZodType<
   UpdateFeatureFlagRequest$Outbound,
   z.ZodTypeDef,
   UpdateFeatureFlagRequest
-> = z.object({
-  key: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  featureFlagUpdateRequest: components.FeatureFlagUpdateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagUpdateRequest: "FeatureFlagUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    featureFlagUpdateRequest:
+      components.FeatureFlagUpdateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagUpdateRequest: "FeatureFlagUpdateRequest",
+    });
+  })
+);
 
 export function updateFeatureFlagRequestToJSON(
   updateFeatureFlagRequest: UpdateFeatureFlagRequest,

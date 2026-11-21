@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -38,11 +38,13 @@ export const ResponseFormat$inboundSchema: z.ZodType<
   ResponseFormat,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  text: TextResponseFormat$inboundSchema,
-  json_schema: JSONSchemaResponseFormat$inboundSchema,
-  json_object: JSONObjectResponseFormat$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    text: TextResponseFormat$inboundSchema,
+    json_schema: JSONSchemaResponseFormat$inboundSchema,
+    json_object: JSONObjectResponseFormat$inboundSchema,
+  })
+);
 /** @internal */
 export type ResponseFormat$Outbound =
   | TextResponseFormat$Outbound
@@ -54,11 +56,13 @@ export const ResponseFormat$outboundSchema: z.ZodType<
   ResponseFormat$Outbound,
   z.ZodTypeDef,
   ResponseFormat
-> = z.union([
-  TextResponseFormat$outboundSchema,
-  JSONSchemaResponseFormat$outboundSchema,
-  JSONObjectResponseFormat$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    TextResponseFormat$outboundSchema,
+    JSONSchemaResponseFormat$outboundSchema,
+    JSONObjectResponseFormat$outboundSchema,
+  ])
+);
 
 export function responseFormatToJSON(responseFormat: ResponseFormat): string {
   return JSON.stringify(ResponseFormat$outboundSchema.parse(responseFormat));

@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,15 +31,17 @@ export const ListRepoTagsRequest$inboundSchema: z.ZodType<
   ListRepoTagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org: z.string(),
-  name: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    name: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListRepoTagsRequest$Outbound = {
   org: string;
@@ -49,15 +54,20 @@ export const ListRepoTagsRequest$outboundSchema: z.ZodType<
   ListRepoTagsRequest$Outbound,
   z.ZodTypeDef,
   ListRepoTagsRequest
-> = z.object({
-  org: z.string(),
-  name: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    name: z.string().refine(
+      matchesPattern$("^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"),
+      { message: "Value must match pattern ^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$" },
+    ),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listRepoTagsRequestToJSON(
   listRepoTagsRequest: ListRepoTagsRequest,

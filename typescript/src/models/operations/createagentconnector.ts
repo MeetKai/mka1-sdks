@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,17 +26,19 @@ export const CreateAgentConnectorRequest$inboundSchema: z.ZodType<
   CreateAgentConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateAgentConnectorRequest:
-    components.CreateAgentConnectorRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateAgentConnectorRequest": "createAgentConnectorRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateAgentConnectorRequest:
+      components.CreateAgentConnectorRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateAgentConnectorRequest": "createAgentConnectorRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentConnectorRequest$Outbound = {
   id: string;
@@ -49,17 +51,19 @@ export const CreateAgentConnectorRequest$outboundSchema: z.ZodType<
   CreateAgentConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentConnectorRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createAgentConnectorRequest:
-    components.CreateAgentConnectorRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createAgentConnectorRequest: "CreateAgentConnectorRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createAgentConnectorRequest:
+      components.CreateAgentConnectorRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createAgentConnectorRequest: "CreateAgentConnectorRequest",
+    });
+  })
+);
 
 export function createAgentConnectorRequestToJSON(
   createAgentConnectorRequest: CreateAgentConnectorRequest,

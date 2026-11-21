@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -241,8 +241,8 @@ export type Filter =
   | (Filter2 & { type: "or" });
 
 /** @internal */
-export const Filter2Type$inboundSchema: z.ZodNativeEnum<typeof Filter2Type> = z
-  .nativeEnum(Filter2Type);
+export const Filter2Type$inboundSchema: z.ZodNativeEnum<typeof Filter2Type> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Filter2Type));
 /** @internal */
 export const Filter2Type$outboundSchema: z.ZodNativeEnum<typeof Filter2Type> =
   Filter2Type$inboundSchema;
@@ -250,7 +250,7 @@ export const Filter2Type$outboundSchema: z.ZodNativeEnum<typeof Filter2Type> =
 /** @internal */
 export const FilterFilters2Type$inboundSchema: z.ZodNativeEnum<
   typeof FilterFilters2Type
-> = z.nativeEnum(FilterFilters2Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterFilters2Type));
 /** @internal */
 export const FilterFilters2Type$outboundSchema: z.ZodNativeEnum<
   typeof FilterFilters2Type
@@ -259,7 +259,7 @@ export const FilterFilters2Type$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const FilterFilters2FiltersType$inboundSchema: z.ZodNativeEnum<
   typeof FilterFilters2FiltersType
-> = z.nativeEnum(FilterFilters2FiltersType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterFilters2FiltersType));
 /** @internal */
 export const FilterFilters2FiltersType$outboundSchema: z.ZodNativeEnum<
   typeof FilterFilters2FiltersType
@@ -270,7 +270,9 @@ export const FilterValue24$inboundSchema: z.ZodType<
   FilterValue24,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type FilterValue24$Outbound = string | number | boolean;
 
@@ -279,7 +281,9 @@ export const FilterValue24$outboundSchema: z.ZodType<
   FilterValue24$Outbound,
   z.ZodTypeDef,
   FilterValue24
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function filterValue24ToJSON(filterValue24: FilterValue24): string {
   return JSON.stringify(FilterValue24$outboundSchema.parse(filterValue24));
@@ -299,12 +303,14 @@ export const FilterFiltersValue$inboundSchema: z.ZodType<
   FilterFiltersValue,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 /** @internal */
 export type FilterFiltersValue$Outbound =
   | string
@@ -317,12 +323,14 @@ export const FilterFiltersValue$outboundSchema: z.ZodType<
   FilterFiltersValue$Outbound,
   z.ZodTypeDef,
   FilterFiltersValue
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 
 export function filterFiltersValueToJSON(
   filterFiltersValue: FilterFiltersValue,
@@ -346,16 +354,18 @@ export const FilterFilters1$inboundSchema: z.ZodType<
   FilterFilters1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FilterFilters2FiltersType$inboundSchema,
-  key: z.string(),
-  value: z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.union([z.string(), z.number(), z.boolean()])),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFilters2FiltersType$inboundSchema,
+    key: z.string(),
+    value: z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.union([z.string(), z.number(), z.boolean()])),
+    ]),
+  })
+);
 /** @internal */
 export type FilterFilters1$Outbound = {
   type: string;
@@ -368,16 +378,18 @@ export const FilterFilters1$outboundSchema: z.ZodType<
   FilterFilters1$Outbound,
   z.ZodTypeDef,
   FilterFilters1
-> = z.object({
-  type: FilterFilters2FiltersType$outboundSchema,
-  key: z.string(),
-  value: z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.union([z.string(), z.number(), z.boolean()])),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFilters2FiltersType$outboundSchema,
+    key: z.string(),
+    value: z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.union([z.string(), z.number(), z.boolean()])),
+    ]),
+  })
+);
 
 export function filterFilters1ToJSON(filterFilters1: FilterFilters1): string {
   return JSON.stringify(FilterFilters1$outboundSchema.parse(filterFilters1));
@@ -397,7 +409,9 @@ export const FilterFiltersFilters$inboundSchema: z.ZodType<
   FilterFiltersFilters,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => FilterFilters1$inboundSchema), z.any()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => FilterFilters1$inboundSchema), z.any()])
+);
 /** @internal */
 export type FilterFiltersFilters$Outbound = FilterFilters1$Outbound | any;
 
@@ -406,7 +420,9 @@ export const FilterFiltersFilters$outboundSchema: z.ZodType<
   FilterFiltersFilters$Outbound,
   z.ZodTypeDef,
   FilterFiltersFilters
-> = z.union([z.lazy(() => FilterFilters1$outboundSchema), z.any()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => FilterFilters1$outboundSchema), z.any()])
+);
 
 export function filterFiltersFiltersToJSON(
   filterFiltersFilters: FilterFiltersFilters,
@@ -430,12 +446,14 @@ export const FilterFilters2$inboundSchema: z.ZodType<
   FilterFilters2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FilterFilters2Type$inboundSchema,
-  filters: z.array(
-    z.union([z.lazy(() => FilterFilters1$inboundSchema), z.any()]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFilters2Type$inboundSchema,
+    filters: z.array(
+      z.union([z.lazy(() => FilterFilters1$inboundSchema), z.any()]),
+    ),
+  })
+);
 /** @internal */
 export type FilterFilters2$Outbound = {
   type: string;
@@ -447,12 +465,14 @@ export const FilterFilters2$outboundSchema: z.ZodType<
   FilterFilters2$Outbound,
   z.ZodTypeDef,
   FilterFilters2
-> = z.object({
-  type: FilterFilters2Type$outboundSchema,
-  filters: z.array(
-    z.union([z.lazy(() => FilterFilters1$outboundSchema), z.any()]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFilters2Type$outboundSchema,
+    filters: z.array(
+      z.union([z.lazy(() => FilterFilters1$outboundSchema), z.any()]),
+    ),
+  })
+);
 
 export function filterFilters2ToJSON(filterFilters2: FilterFilters2): string {
   return JSON.stringify(FilterFilters2$outboundSchema.parse(filterFilters2));
@@ -470,7 +490,7 @@ export function filterFilters2FromJSON(
 /** @internal */
 export const FilterFiltersType$inboundSchema: z.ZodNativeEnum<
   typeof FilterFiltersType
-> = z.nativeEnum(FilterFiltersType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterFiltersType));
 /** @internal */
 export const FilterFiltersType$outboundSchema: z.ZodNativeEnum<
   typeof FilterFiltersType
@@ -481,7 +501,9 @@ export const FilterValue4$inboundSchema: z.ZodType<
   FilterValue4,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type FilterValue4$Outbound = string | number | boolean;
 
@@ -490,7 +512,9 @@ export const FilterValue4$outboundSchema: z.ZodType<
   FilterValue4$Outbound,
   z.ZodTypeDef,
   FilterValue4
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function filterValue4ToJSON(filterValue4: FilterValue4): string {
   return JSON.stringify(FilterValue4$outboundSchema.parse(filterValue4));
@@ -510,12 +534,14 @@ export const FiltersValue$inboundSchema: z.ZodType<
   FiltersValue,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 /** @internal */
 export type FiltersValue$Outbound =
   | string
@@ -528,12 +554,14 @@ export const FiltersValue$outboundSchema: z.ZodType<
   FiltersValue$Outbound,
   z.ZodTypeDef,
   FiltersValue
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 
 export function filtersValueToJSON(filtersValue: FiltersValue): string {
   return JSON.stringify(FiltersValue$outboundSchema.parse(filtersValue));
@@ -553,16 +581,18 @@ export const Filters1$inboundSchema: z.ZodType<
   Filters1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FilterFiltersType$inboundSchema,
-  key: z.string(),
-  value: z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.union([z.string(), z.number(), z.boolean()])),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFiltersType$inboundSchema,
+    key: z.string(),
+    value: z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.union([z.string(), z.number(), z.boolean()])),
+    ]),
+  })
+);
 /** @internal */
 export type Filters1$Outbound = {
   type: string;
@@ -575,16 +605,18 @@ export const Filters1$outboundSchema: z.ZodType<
   Filters1$Outbound,
   z.ZodTypeDef,
   Filters1
-> = z.object({
-  type: FilterFiltersType$outboundSchema,
-  key: z.string(),
-  value: z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.union([z.string(), z.number(), z.boolean()])),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterFiltersType$outboundSchema,
+    key: z.string(),
+    value: z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.union([z.string(), z.number(), z.boolean()])),
+    ]),
+  })
+);
 
 export function filters1ToJSON(filters1: Filters1): string {
   return JSON.stringify(Filters1$outboundSchema.parse(filters1));
@@ -604,28 +636,40 @@ export const FilterFilters$inboundSchema: z.ZodType<
   FilterFilters,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Filters1$inboundSchema).and(z.object({ type: z.literal("eq") })),
-  z.lazy(() => Filters1$inboundSchema).and(z.object({ type: z.literal("ne") })),
-  z.lazy(() => Filters1$inboundSchema).and(z.object({ type: z.literal("gt") })),
-  z.lazy(() => Filters1$inboundSchema).and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  z.lazy(() => Filters1$inboundSchema).and(z.object({ type: z.literal("lt") })),
-  z.lazy(() => Filters1$inboundSchema).and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  z.lazy(() => Filters1$inboundSchema).and(z.object({ type: z.literal("in") })),
-  z.lazy(() => Filters1$inboundSchema).and(
-    z.object({ type: z.literal("nin") }),
-  ),
-  z.lazy(() => FilterFilters2$inboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => FilterFilters2$inboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("in") }),
+    ),
+    z.lazy(() => Filters1$inboundSchema).and(
+      z.object({ type: z.literal("nin") }),
+    ),
+    z.lazy(() => FilterFilters2$inboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => FilterFilters2$inboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 /** @internal */
 export type FilterFilters$Outbound =
   | (Filters1$Outbound & { type: "eq" })
@@ -644,38 +688,40 @@ export const FilterFilters$outboundSchema: z.ZodType<
   FilterFilters$Outbound,
   z.ZodTypeDef,
   FilterFilters
-> = z.union([
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("eq") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("ne") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("gt") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("lt") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("in") }),
-  ),
-  z.lazy(() => Filters1$outboundSchema).and(
-    z.object({ type: z.literal("nin") }),
-  ),
-  z.lazy(() => FilterFilters2$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => FilterFilters2$outboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("in") }),
+    ),
+    z.lazy(() => Filters1$outboundSchema).and(
+      z.object({ type: z.literal("nin") }),
+    ),
+    z.lazy(() => FilterFilters2$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => FilterFilters2$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function filterFiltersToJSON(filterFilters: FilterFilters): string {
   return JSON.stringify(FilterFilters$outboundSchema.parse(filterFilters));
@@ -692,10 +738,10 @@ export function filterFiltersFromJSON(
 
 /** @internal */
 export const Filter2$inboundSchema: z.ZodType<Filter2, z.ZodTypeDef, unknown> =
-  z.object({
-    type: Filter2Type$inboundSchema,
-    filters: z.array(
-      z.union([
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: Filter2Type$inboundSchema,
+      filters: z.array(z.union([
         z.lazy(() => Filters1$inboundSchema).and(
           z.object({ type: z.literal("eq") }),
         ),
@@ -726,9 +772,9 @@ export const Filter2$inboundSchema: z.ZodType<Filter2, z.ZodTypeDef, unknown> =
         z.lazy(() => FilterFilters2$inboundSchema).and(
           z.object({ type: z.literal("or") }),
         ),
-      ]),
-    ),
-  });
+      ])),
+    })
+  );
 /** @internal */
 export type Filter2$Outbound = {
   type: string;
@@ -751,10 +797,10 @@ export const Filter2$outboundSchema: z.ZodType<
   Filter2$Outbound,
   z.ZodTypeDef,
   Filter2
-> = z.object({
-  type: Filter2Type$outboundSchema,
-  filters: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: Filter2Type$outboundSchema,
+    filters: z.array(z.union([
       z.lazy(() => Filters1$outboundSchema).and(
         z.object({ type: z.literal("eq") }),
       ),
@@ -785,9 +831,9 @@ export const Filter2$outboundSchema: z.ZodType<
       z.lazy(() => FilterFilters2$outboundSchema).and(
         z.object({ type: z.literal("or") }),
       ),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function filter2ToJSON(filter2: Filter2): string {
   return JSON.stringify(Filter2$outboundSchema.parse(filter2));
@@ -803,15 +849,17 @@ export function filter2FromJSON(
 }
 
 /** @internal */
-export const FilterType$inboundSchema: z.ZodNativeEnum<typeof FilterType> = z
-  .nativeEnum(FilterType);
+export const FilterType$inboundSchema: z.ZodNativeEnum<typeof FilterType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FilterType));
 /** @internal */
 export const FilterType$outboundSchema: z.ZodNativeEnum<typeof FilterType> =
   FilterType$inboundSchema;
 
 /** @internal */
-export const Value4$inboundSchema: z.ZodType<Value4, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Value4$inboundSchema: z.ZodType<Value4, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 /** @internal */
 export type Value4$Outbound = string | number | boolean;
 
@@ -820,7 +868,9 @@ export const Value4$outboundSchema: z.ZodType<
   Value4$Outbound,
   z.ZodTypeDef,
   Value4
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function value4ToJSON(value4: Value4): string {
   return JSON.stringify(Value4$outboundSchema.parse(value4));
@@ -840,12 +890,14 @@ export const FilterValue$inboundSchema: z.ZodType<
   FilterValue,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 /** @internal */
 export type FilterValue$Outbound =
   | string
@@ -858,12 +910,14 @@ export const FilterValue$outboundSchema: z.ZodType<
   FilterValue$Outbound,
   z.ZodTypeDef,
   FilterValue
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.union([z.string(), z.number(), z.boolean()])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.union([z.string(), z.number(), z.boolean()])),
+  ])
+);
 
 export function filterValueToJSON(filterValue: FilterValue): string {
   return JSON.stringify(FilterValue$outboundSchema.parse(filterValue));
@@ -880,16 +934,18 @@ export function filterValueFromJSON(
 
 /** @internal */
 export const Filter1$inboundSchema: z.ZodType<Filter1, z.ZodTypeDef, unknown> =
-  z.object({
-    type: FilterType$inboundSchema,
-    key: z.string(),
-    value: z.union([
-      z.string(),
-      z.number(),
-      z.boolean(),
-      z.array(z.union([z.string(), z.number(), z.boolean()])),
-    ]),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: FilterType$inboundSchema,
+      key: z.string(),
+      value: z.union([
+        z.string(),
+        z.number(),
+        z.boolean(),
+        z.array(z.union([z.string(), z.number(), z.boolean()])),
+      ]),
+    })
+  );
 /** @internal */
 export type Filter1$Outbound = {
   type: string;
@@ -902,16 +958,18 @@ export const Filter1$outboundSchema: z.ZodType<
   Filter1$Outbound,
   z.ZodTypeDef,
   Filter1
-> = z.object({
-  type: FilterType$outboundSchema,
-  key: z.string(),
-  value: z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.union([z.string(), z.number(), z.boolean()])),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FilterType$outboundSchema,
+    key: z.string(),
+    value: z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.union([z.string(), z.number(), z.boolean()])),
+    ]),
+  })
+);
 
 export function filter1ToJSON(filter1: Filter1): string {
   return JSON.stringify(Filter1$outboundSchema.parse(filter1));
@@ -927,39 +985,41 @@ export function filter1FromJSON(
 }
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> = z
-  .union([
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("eq") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("ne") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("gt") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("gte") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("lt") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("lte") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("in") }),
-    ),
-    z.lazy(() => Filter1$inboundSchema).and(
-      z.object({ type: z.literal("nin") }),
-    ),
-    z.lazy(() => Filter2$inboundSchema).and(
-      z.object({ type: z.literal("and") }),
-    ),
-    z.lazy(() => Filter2$inboundSchema).and(
-      z.object({ type: z.literal("or") }),
-    ),
-  ]);
+export const Filter$inboundSchema: z.ZodType<Filter, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("in") }),
+      ),
+      z.lazy(() => Filter1$inboundSchema).and(
+        z.object({ type: z.literal("nin") }),
+      ),
+      z.lazy(() => Filter2$inboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      z.lazy(() => Filter2$inboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    ])
+  );
 /** @internal */
 export type Filter$Outbound =
   | (Filter1$Outbound & { type: "eq" })
@@ -978,26 +1038,40 @@ export const Filter$outboundSchema: z.ZodType<
   Filter$Outbound,
   z.ZodTypeDef,
   Filter
-> = z.union([
-  z.lazy(() => Filter1$outboundSchema).and(z.object({ type: z.literal("eq") })),
-  z.lazy(() => Filter1$outboundSchema).and(z.object({ type: z.literal("ne") })),
-  z.lazy(() => Filter1$outboundSchema).and(z.object({ type: z.literal("gt") })),
-  z.lazy(() => Filter1$outboundSchema).and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  z.lazy(() => Filter1$outboundSchema).and(z.object({ type: z.literal("lt") })),
-  z.lazy(() => Filter1$outboundSchema).and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  z.lazy(() => Filter1$outboundSchema).and(z.object({ type: z.literal("in") })),
-  z.lazy(() => Filter1$outboundSchema).and(
-    z.object({ type: z.literal("nin") }),
-  ),
-  z.lazy(() => Filter2$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => Filter2$outboundSchema).and(z.object({ type: z.literal("or") })),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("in") }),
+    ),
+    z.lazy(() => Filter1$outboundSchema).and(
+      z.object({ type: z.literal("nin") }),
+    ),
+    z.lazy(() => Filter2$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => Filter2$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function filterToJSON(filter: Filter): string {
   return JSON.stringify(Filter$outboundSchema.parse(filter));

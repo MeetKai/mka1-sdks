@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,11 +35,13 @@ export const PatchRepoRequest$inboundSchema: z.ZodType<
   PatchRepoRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  description: z.string().optional(),
-  kind: RepoKind$inboundSchema.optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    kind: RepoKind$inboundSchema.optional(),
+    name: z.string().optional(),
+  })
+);
 /** @internal */
 export type PatchRepoRequest$Outbound = {
   description?: string | undefined;
@@ -52,11 +54,13 @@ export const PatchRepoRequest$outboundSchema: z.ZodType<
   PatchRepoRequest$Outbound,
   z.ZodTypeDef,
   PatchRepoRequest
-> = z.object({
-  description: z.string().optional(),
-  kind: RepoKind$outboundSchema.optional(),
-  name: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    description: z.string().optional(),
+    kind: RepoKind$outboundSchema.optional(),
+    name: z.string().optional(),
+  })
+);
 
 export function patchRepoRequestToJSON(
   patchRepoRequest: PatchRepoRequest,

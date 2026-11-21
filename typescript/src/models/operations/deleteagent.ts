@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,15 +36,17 @@ export const DeleteAgentRequest$inboundSchema: z.ZodType<
   DeleteAgentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteAgentRequest$Outbound = {
   agent_id: string;
@@ -56,15 +58,17 @@ export const DeleteAgentRequest$outboundSchema: z.ZodType<
   DeleteAgentRequest$Outbound,
   z.ZodTypeDef,
   DeleteAgentRequest
-> = z.object({
-  agentId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteAgentRequestToJSON(
   deleteAgentRequest: DeleteAgentRequest,
@@ -86,7 +90,7 @@ export function deleteAgentRequestFromJSON(
 /** @internal */
 export const DeleteAgentObject$inboundSchema: z.ZodNativeEnum<
   typeof DeleteAgentObject
-> = z.nativeEnum(DeleteAgentObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteAgentObject));
 /** @internal */
 export const DeleteAgentObject$outboundSchema: z.ZodNativeEnum<
   typeof DeleteAgentObject
@@ -97,11 +101,13 @@ export const DeleteAgentResponseBody$inboundSchema: z.ZodType<
   DeleteAgentResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: DeleteAgentObject$inboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteAgentObject$inboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteAgentResponseBody$Outbound = {
   object: string;
@@ -114,11 +120,13 @@ export const DeleteAgentResponseBody$outboundSchema: z.ZodType<
   DeleteAgentResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteAgentResponseBody
-> = z.object({
-  object: DeleteAgentObject$outboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteAgentObject$outboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteAgentResponseBodyToJSON(
   deleteAgentResponseBody: DeleteAgentResponseBody,

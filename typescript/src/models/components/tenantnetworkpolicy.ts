@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const TenantNetworkPolicy$inboundSchema: z.ZodType<
   TenantNetworkPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().default(false),
-  allowed_domains: z.array(z.string()).optional(),
-  revision: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_domains": "allowedDomains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(false),
+    allowed_domains: z.array(z.string()).optional(),
+    revision: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_domains": "allowedDomains",
+    });
+  })
+);
 /** @internal */
 export type TenantNetworkPolicy$Outbound = {
   enabled: boolean;
@@ -40,15 +42,17 @@ export const TenantNetworkPolicy$outboundSchema: z.ZodType<
   TenantNetworkPolicy$Outbound,
   z.ZodTypeDef,
   TenantNetworkPolicy
-> = z.object({
-  enabled: z.boolean().default(false),
-  allowedDomains: z.array(z.string()).optional(),
-  revision: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    allowedDomains: "allowed_domains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().default(false),
+    allowedDomains: z.array(z.string()).optional(),
+    revision: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedDomains: "allowed_domains",
+    });
+  })
+);
 
 export function tenantNetworkPolicyToJSON(
   tenantNetworkPolicy: TenantNetworkPolicy,

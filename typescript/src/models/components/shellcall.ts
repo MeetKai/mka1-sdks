@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,7 +36,7 @@ export type ShellCall = {
 /** @internal */
 export const ShellCallStatus$inboundSchema: z.ZodNativeEnum<
   typeof ShellCallStatus
-> = z.nativeEnum(ShellCallStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ShellCallStatus));
 /** @internal */
 export const ShellCallStatus$outboundSchema: z.ZodNativeEnum<
   typeof ShellCallStatus
@@ -47,17 +47,19 @@ export const ShellCall$inboundSchema: z.ZodType<
   ShellCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("shell_call"),
-  id: z.string(),
-  call_id: z.string(),
-  action: ShellCallAction$inboundSchema,
-  status: ShellCallStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call"),
+    id: z.string(),
+    call_id: z.string(),
+    action: ShellCallAction$inboundSchema,
+    status: ShellCallStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  })
+);
 /** @internal */
 export type ShellCall$Outbound = {
   type: "shell_call";
@@ -72,17 +74,19 @@ export const ShellCall$outboundSchema: z.ZodType<
   ShellCall$Outbound,
   z.ZodTypeDef,
   ShellCall
-> = z.object({
-  type: z.literal("shell_call"),
-  id: z.string(),
-  callId: z.string(),
-  action: ShellCallAction$outboundSchema,
-  status: ShellCallStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call"),
+    id: z.string(),
+    callId: z.string(),
+    action: ShellCallAction$outboundSchema,
+    status: ShellCallStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+    });
+  })
+);
 
 export function shellCallToJSON(shellCall: ShellCall): string {
   return JSON.stringify(ShellCall$outboundSchema.parse(shellCall));

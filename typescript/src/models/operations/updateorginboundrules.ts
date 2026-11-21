@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,9 +54,11 @@ export const UpdateOrgInboundRulesSecurity$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type UpdateOrgInboundRulesSecurity$Outbound = {
   sessionCookie: string;
@@ -67,9 +69,11 @@ export const UpdateOrgInboundRulesSecurity$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesSecurity$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesSecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function updateOrgInboundRulesSecurityToJSON(
   updateOrgInboundRulesSecurity: UpdateOrgInboundRulesSecurity,
@@ -91,11 +95,13 @@ export function updateOrgInboundRulesSecurityFromJSON(
 }
 
 /** @internal */
-export const Rules$inboundSchema: z.ZodType<Rules, z.ZodTypeDef, unknown> = z
-  .object({
-    cidr: z.string(),
-    description: z.nullable(z.string()).optional(),
-  });
+export const Rules$inboundSchema: z.ZodType<Rules, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      cidr: z.string(),
+      description: z.nullable(z.string()).optional(),
+    })
+  );
 /** @internal */
 export type Rules$Outbound = {
   cidr: string;
@@ -107,10 +113,12 @@ export const Rules$outboundSchema: z.ZodType<
   Rules$Outbound,
   z.ZodTypeDef,
   Rules
-> = z.object({
-  cidr: z.string(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cidr: z.string(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function rulesToJSON(rules: Rules): string {
   return JSON.stringify(Rules$outboundSchema.parse(rules));
@@ -130,10 +138,12 @@ export const UpdateOrgInboundRulesRequestBody$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => Rules$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => Rules$inboundSchema)),
+  })
+);
 /** @internal */
 export type UpdateOrgInboundRulesRequestBody$Outbound = {
   enabled: boolean;
@@ -145,10 +155,12 @@ export const UpdateOrgInboundRulesRequestBody$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesRequestBody
-> = z.object({
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => Rules$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => Rules$outboundSchema)),
+  })
+);
 
 export function updateOrgInboundRulesRequestBodyToJSON(
   updateOrgInboundRulesRequestBody: UpdateOrgInboundRulesRequestBody,
@@ -174,16 +186,18 @@ export const UpdateOrgInboundRulesRequest$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateOrgInboundRulesRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateOrgInboundRulesRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrgInboundRulesRequest$Outbound = {
   orgId: string;
@@ -196,16 +210,18 @@ export const UpdateOrgInboundRulesRequest$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesRequest$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateOrgInboundRulesRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateOrgInboundRulesRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateOrgInboundRulesRequestToJSON(
   updateOrgInboundRulesRequest: UpdateOrgInboundRulesRequest,
@@ -231,12 +247,14 @@ export const UpdateOrgInboundRulesRules$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  cidr: z.string(),
-  description: z.nullable(z.string()),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    cidr: z.string(),
+    description: z.nullable(z.string()),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type UpdateOrgInboundRulesRules$Outbound = {
   id: string;
@@ -250,12 +268,14 @@ export const UpdateOrgInboundRulesRules$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesRules$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesRules
-> = z.object({
-  id: z.string(),
-  cidr: z.string(),
-  description: z.nullable(z.string()),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    cidr: z.string(),
+    description: z.nullable(z.string()),
+    createdAt: z.string(),
+  })
+);
 
 export function updateOrgInboundRulesRulesToJSON(
   updateOrgInboundRulesRules: UpdateOrgInboundRulesRules,
@@ -279,13 +299,15 @@ export const UpdateOrgInboundRulesResponseBody$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  available: z.boolean(),
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => UpdateOrgInboundRulesRules$inboundSchema)),
-  updatedAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    available: z.boolean(),
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => UpdateOrgInboundRulesRules$inboundSchema)),
+    updatedAt: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type UpdateOrgInboundRulesResponseBody$Outbound = {
   id: string;
@@ -300,13 +322,15 @@ export const UpdateOrgInboundRulesResponseBody$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesResponseBody
-> = z.object({
-  id: z.string(),
-  available: z.boolean(),
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => UpdateOrgInboundRulesRules$outboundSchema)),
-  updatedAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    available: z.boolean(),
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => UpdateOrgInboundRulesRules$outboundSchema)),
+    updatedAt: z.nullable(z.string()),
+  })
+);
 
 export function updateOrgInboundRulesResponseBodyToJSON(
   updateOrgInboundRulesResponseBody: UpdateOrgInboundRulesResponseBody,

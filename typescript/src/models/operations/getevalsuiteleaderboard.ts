@@ -3,8 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+  withinMaxLength as withinMaxLength$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,21 +30,23 @@ export const GetEvalSuiteLeaderboardRequest$inboundSchema: z.ZodType<
   GetEvalSuiteLeaderboardRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  suite_version: z.number().int().optional(),
-  metric: z.string().default("reward"),
-  agent: z.string().optional(),
-  model: z.string().optional(),
-  limit: z.number().int().default(100),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    suite_version: z.number().int().optional(),
+    metric: z.string().default("reward"),
+    agent: z.string().optional(),
+    model: z.string().optional(),
+    limit: z.number().int().default(100),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetEvalSuiteLeaderboardRequest$Outbound = {
   suite_id: string;
@@ -57,21 +63,27 @@ export const GetEvalSuiteLeaderboardRequest$outboundSchema: z.ZodType<
   GetEvalSuiteLeaderboardRequest$Outbound,
   z.ZodTypeDef,
   GetEvalSuiteLeaderboardRequest
-> = z.object({
-  suiteId: z.string(),
-  suiteVersion: z.number().int().optional(),
-  metric: z.string().default("reward"),
-  agent: z.string().optional(),
-  model: z.string().optional(),
-  limit: z.number().int().default(100),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    suiteVersion: z.number().int().optional(),
+    metric: z.string().refine(withinMaxLength$(128), {
+      message: "Value must be at most 128 characters long",
+    }).refine(matchesPattern$("^[\\w.-]+$", 128), {
+      message: "Value must match pattern ^[\\w.-]+$",
+    }).default("reward"),
+    agent: z.string().optional(),
+    model: z.string().optional(),
+    limit: z.number().int().default(100),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getEvalSuiteLeaderboardRequestToJSON(
   getEvalSuiteLeaderboardRequest: GetEvalSuiteLeaderboardRequest,

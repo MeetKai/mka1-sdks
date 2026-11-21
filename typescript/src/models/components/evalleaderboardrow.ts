@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -90,11 +90,13 @@ export const AccuracyCi$inboundSchema: z.ZodType<
   AccuracyCi,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  low: z.number(),
-  high: z.number(),
-  margin: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    low: z.number(),
+    high: z.number(),
+    margin: z.number(),
+  })
+);
 /** @internal */
 export type AccuracyCi$Outbound = {
   low: number;
@@ -107,11 +109,13 @@ export const AccuracyCi$outboundSchema: z.ZodType<
   AccuracyCi$Outbound,
   z.ZodTypeDef,
   AccuracyCi
-> = z.object({
-  low: z.number(),
-  high: z.number(),
-  margin: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    low: z.number(),
+    high: z.number(),
+    margin: z.number(),
+  })
+);
 
 export function accuracyCiToJSON(accuracyCi: AccuracyCi): string {
   return JSON.stringify(AccuracyCi$outboundSchema.parse(accuracyCi));
@@ -131,47 +135,49 @@ export const EvalLeaderboardRow$inboundSchema: z.ZodType<
   EvalLeaderboardRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_name: z.string(),
-  agent_version: z.nullable(z.string()),
-  agent_effort: z.nullable(z.string()),
-  model: z.string(),
-  accuracy: z.nullable(z.number()),
-  accuracy_ci: z.nullable(z.lazy(() => AccuracyCi$inboundSchema)),
-  trials: z.number().int(),
-  scored_trials: z.number().int(),
-  failed_trials: z.number().int(),
-  cost_usd: z.nullable(z.number()),
-  solved_trials: z.number().int(),
-  input_tokens: z.nullable(z.number().int()),
-  output_tokens: z.nullable(z.number().int()),
-  cached_tokens: z.nullable(z.number().int()),
-  steps: z.nullable(z.number().int()),
-  agent_seconds: z.nullable(z.number()),
-  timed_trials: z.number().int(),
-  run_count: z.number().int(),
-  run_ids: z.array(z.string()),
-  last_run_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_name": "agentName",
-    "agent_version": "agentVersion",
-    "agent_effort": "agentEffort",
-    "accuracy_ci": "accuracyCi",
-    "scored_trials": "scoredTrials",
-    "failed_trials": "failedTrials",
-    "cost_usd": "costUsd",
-    "solved_trials": "solvedTrials",
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "cached_tokens": "cachedTokens",
-    "agent_seconds": "agentSeconds",
-    "timed_trials": "timedTrials",
-    "run_count": "runCount",
-    "run_ids": "runIds",
-    "last_run_at": "lastRunAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_name: z.string(),
+    agent_version: z.nullable(z.string()),
+    agent_effort: z.nullable(z.string()),
+    model: z.string(),
+    accuracy: z.nullable(z.number()),
+    accuracy_ci: z.nullable(z.lazy(() => AccuracyCi$inboundSchema)),
+    trials: z.number().int(),
+    scored_trials: z.number().int(),
+    failed_trials: z.number().int(),
+    cost_usd: z.nullable(z.number()),
+    solved_trials: z.number().int(),
+    input_tokens: z.nullable(z.number().int()),
+    output_tokens: z.nullable(z.number().int()),
+    cached_tokens: z.nullable(z.number().int()),
+    steps: z.nullable(z.number().int()),
+    agent_seconds: z.nullable(z.number()),
+    timed_trials: z.number().int(),
+    run_count: z.number().int(),
+    run_ids: z.array(z.string()),
+    last_run_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_name": "agentName",
+      "agent_version": "agentVersion",
+      "agent_effort": "agentEffort",
+      "accuracy_ci": "accuracyCi",
+      "scored_trials": "scoredTrials",
+      "failed_trials": "failedTrials",
+      "cost_usd": "costUsd",
+      "solved_trials": "solvedTrials",
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "cached_tokens": "cachedTokens",
+      "agent_seconds": "agentSeconds",
+      "timed_trials": "timedTrials",
+      "run_count": "runCount",
+      "run_ids": "runIds",
+      "last_run_at": "lastRunAt",
+    });
+  })
+);
 /** @internal */
 export type EvalLeaderboardRow$Outbound = {
   agent_name: string;
@@ -201,47 +207,49 @@ export const EvalLeaderboardRow$outboundSchema: z.ZodType<
   EvalLeaderboardRow$Outbound,
   z.ZodTypeDef,
   EvalLeaderboardRow
-> = z.object({
-  agentName: z.string(),
-  agentVersion: z.nullable(z.string()),
-  agentEffort: z.nullable(z.string()),
-  model: z.string(),
-  accuracy: z.nullable(z.number()),
-  accuracyCi: z.nullable(z.lazy(() => AccuracyCi$outboundSchema)),
-  trials: z.number().int(),
-  scoredTrials: z.number().int(),
-  failedTrials: z.number().int(),
-  costUsd: z.nullable(z.number()),
-  solvedTrials: z.number().int(),
-  inputTokens: z.nullable(z.number().int()),
-  outputTokens: z.nullable(z.number().int()),
-  cachedTokens: z.nullable(z.number().int()),
-  steps: z.nullable(z.number().int()),
-  agentSeconds: z.nullable(z.number()),
-  timedTrials: z.number().int(),
-  runCount: z.number().int(),
-  runIds: z.array(z.string()),
-  lastRunAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    agentName: "agent_name",
-    agentVersion: "agent_version",
-    agentEffort: "agent_effort",
-    accuracyCi: "accuracy_ci",
-    scoredTrials: "scored_trials",
-    failedTrials: "failed_trials",
-    costUsd: "cost_usd",
-    solvedTrials: "solved_trials",
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    agentSeconds: "agent_seconds",
-    timedTrials: "timed_trials",
-    runCount: "run_count",
-    runIds: "run_ids",
-    lastRunAt: "last_run_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentName: z.string(),
+    agentVersion: z.nullable(z.string()),
+    agentEffort: z.nullable(z.string()),
+    model: z.string(),
+    accuracy: z.nullable(z.number()),
+    accuracyCi: z.nullable(z.lazy(() => AccuracyCi$outboundSchema)),
+    trials: z.number().int(),
+    scoredTrials: z.number().int(),
+    failedTrials: z.number().int(),
+    costUsd: z.nullable(z.number()),
+    solvedTrials: z.number().int(),
+    inputTokens: z.nullable(z.number().int()),
+    outputTokens: z.nullable(z.number().int()),
+    cachedTokens: z.nullable(z.number().int()),
+    steps: z.nullable(z.number().int()),
+    agentSeconds: z.nullable(z.number()),
+    timedTrials: z.number().int(),
+    runCount: z.number().int(),
+    runIds: z.array(z.string()),
+    lastRunAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentName: "agent_name",
+      agentVersion: "agent_version",
+      agentEffort: "agent_effort",
+      accuracyCi: "accuracy_ci",
+      scoredTrials: "scored_trials",
+      failedTrials: "failed_trials",
+      costUsd: "cost_usd",
+      solvedTrials: "solved_trials",
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      agentSeconds: "agent_seconds",
+      timedTrials: "timed_trials",
+      runCount: "run_count",
+      runIds: "run_ids",
+      lastRunAt: "last_run_at",
+    });
+  })
+);
 
 export function evalLeaderboardRowToJSON(
   evalLeaderboardRow: EvalLeaderboardRow,

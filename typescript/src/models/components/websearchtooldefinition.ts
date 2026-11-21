@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,7 +49,9 @@ export type WebSearchToolDefinition = {
 /** @internal */
 export const WebSearchToolDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof WebSearchToolDefinitionType
-> = z.nativeEnum(WebSearchToolDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(WebSearchToolDefinitionType)
+);
 /** @internal */
 export const WebSearchToolDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof WebSearchToolDefinitionType
@@ -58,7 +60,7 @@ export const WebSearchToolDefinitionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SearchContextSize$inboundSchema: z.ZodNativeEnum<
   typeof SearchContextSize
-> = z.nativeEnum(SearchContextSize);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SearchContextSize));
 /** @internal */
 export const SearchContextSize$outboundSchema: z.ZodNativeEnum<
   typeof SearchContextSize
@@ -69,17 +71,19 @@ export const WebSearchToolDefinition$inboundSchema: z.ZodType<
   WebSearchToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: WebSearchToolDefinitionType$inboundSchema,
-  filters: WebSearchFilters$inboundSchema.optional(),
-  search_context_size: SearchContextSize$inboundSchema.default("medium"),
-  user_location: UserLocation$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "search_context_size": "searchContextSize",
-    "user_location": "userLocation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: WebSearchToolDefinitionType$inboundSchema,
+    filters: WebSearchFilters$inboundSchema.optional(),
+    search_context_size: SearchContextSize$inboundSchema.default("medium"),
+    user_location: UserLocation$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "search_context_size": "searchContextSize",
+      "user_location": "userLocation",
+    });
+  })
+);
 /** @internal */
 export type WebSearchToolDefinition$Outbound = {
   type: string;
@@ -93,17 +97,19 @@ export const WebSearchToolDefinition$outboundSchema: z.ZodType<
   WebSearchToolDefinition$Outbound,
   z.ZodTypeDef,
   WebSearchToolDefinition
-> = z.object({
-  type: WebSearchToolDefinitionType$outboundSchema,
-  filters: WebSearchFilters$outboundSchema.optional(),
-  searchContextSize: SearchContextSize$outboundSchema.default("medium"),
-  userLocation: UserLocation$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    searchContextSize: "search_context_size",
-    userLocation: "user_location",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: WebSearchToolDefinitionType$outboundSchema,
+    filters: WebSearchFilters$outboundSchema.optional(),
+    searchContextSize: SearchContextSize$outboundSchema.default("medium"),
+    userLocation: UserLocation$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      searchContextSize: "search_context_size",
+      userLocation: "user_location",
+    });
+  })
+);
 
 export function webSearchToolDefinitionToJSON(
   webSearchToolDefinition: WebSearchToolDefinition,

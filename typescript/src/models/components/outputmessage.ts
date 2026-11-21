@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -91,12 +91,16 @@ export const OutputMessageContent$inboundSchema: z.ZodType<
   OutputMessageContent,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  output_text: OutputText$inboundSchema.and(
-    z.object({ type: z.literal("output_text") }),
-  ),
-  refusal: Refusal$inboundSchema.and(z.object({ type: z.literal("refusal") })),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    output_text: OutputText$inboundSchema.and(
+      z.object({ type: z.literal("output_text") }),
+    ),
+    refusal: Refusal$inboundSchema.and(
+      z.object({ type: z.literal("refusal") }),
+    ),
+  })
+);
 /** @internal */
 export type OutputMessageContent$Outbound =
   | (OutputText$Outbound & { type: "output_text" })
@@ -107,10 +111,12 @@ export const OutputMessageContent$outboundSchema: z.ZodType<
   OutputMessageContent$Outbound,
   z.ZodTypeDef,
   OutputMessageContent
-> = z.union([
-  OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
-  Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
+    Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+  ])
+);
 
 export function outputMessageContentToJSON(
   outputMessageContent: OutputMessageContent,
@@ -132,16 +138,15 @@ export function outputMessageContentFromJSON(
 /** @internal */
 export const OutputMessageStatus$inboundSchema: z.ZodNativeEnum<
   typeof OutputMessageStatus
-> = z.nativeEnum(OutputMessageStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputMessageStatus));
 /** @internal */
 export const OutputMessageStatus$outboundSchema: z.ZodNativeEnum<
   typeof OutputMessageStatus
 > = OutputMessageStatus$inboundSchema;
 
 /** @internal */
-export const Phase$inboundSchema: z.ZodNativeEnum<typeof Phase> = z.nativeEnum(
-  Phase,
-);
+export const Phase$inboundSchema: z.ZodNativeEnum<typeof Phase> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Phase));
 /** @internal */
 export const Phase$outboundSchema: z.ZodNativeEnum<typeof Phase> =
   Phase$inboundSchema;
@@ -151,23 +156,25 @@ export const OutputMessage$inboundSchema: z.ZodType<
   OutputMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("message"),
-  id: z.string(),
-  role: z.literal("assistant"),
-  content: z.array(
-    discriminatedUnion("type", {
-      output_text: OutputText$inboundSchema.and(
-        z.object({ type: z.literal("output_text") }),
-      ),
-      refusal: Refusal$inboundSchema.and(
-        z.object({ type: z.literal("refusal") }),
-      ),
-    }),
-  ),
-  status: OutputMessageStatus$inboundSchema,
-  phase: Phase$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message"),
+    id: z.string(),
+    role: z.literal("assistant"),
+    content: z.array(
+      discriminatedUnion("type", {
+        output_text: OutputText$inboundSchema.and(
+          z.object({ type: z.literal("output_text") }),
+        ),
+        refusal: Refusal$inboundSchema.and(
+          z.object({ type: z.literal("refusal") }),
+        ),
+      }),
+    ),
+    status: OutputMessageStatus$inboundSchema,
+    phase: Phase$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type OutputMessage$Outbound = {
   type: "message";
@@ -186,21 +193,23 @@ export const OutputMessage$outboundSchema: z.ZodType<
   OutputMessage$Outbound,
   z.ZodTypeDef,
   OutputMessage
-> = z.object({
-  type: z.literal("message"),
-  id: z.string(),
-  role: z.literal("assistant"),
-  content: z.array(
-    z.union([
-      OutputText$outboundSchema.and(
-        z.object({ type: z.literal("output_text") }),
-      ),
-      Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-    ]),
-  ),
-  status: OutputMessageStatus$outboundSchema,
-  phase: Phase$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message"),
+    id: z.string(),
+    role: z.literal("assistant"),
+    content: z.array(
+      z.union([
+        OutputText$outboundSchema.and(
+          z.object({ type: z.literal("output_text") }),
+        ),
+        Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+      ]),
+    ),
+    status: OutputMessageStatus$outboundSchema,
+    phase: Phase$outboundSchema.optional(),
+  })
+);
 
 export function outputMessageToJSON(outputMessage: OutputMessage): string {
   return JSON.stringify(OutputMessage$outboundSchema.parse(outputMessage));

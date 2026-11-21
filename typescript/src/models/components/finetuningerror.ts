@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const FineTuningError$inboundSchema: z.ZodType<
   FineTuningError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  param: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    param: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type FineTuningError$Outbound = {
   code: string;
@@ -35,11 +37,13 @@ export const FineTuningError$outboundSchema: z.ZodType<
   FineTuningError$Outbound,
   z.ZodTypeDef,
   FineTuningError
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  param: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    param: z.nullable(z.string()).optional(),
+  })
+);
 
 export function fineTuningErrorToJSON(
   fineTuningError: FineTuningError,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,21 +22,23 @@ export const ResponseRefusalDoneEvent$inboundSchema: z.ZodType<
   ResponseRefusalDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.refusal.done"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  content_index: z.number().int(),
-  refusal: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "content_index": "contentIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.refusal.done"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    content_index: z.number().int(),
+    refusal: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "content_index": "contentIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseRefusalDoneEvent$Outbound = {
   type: "response.refusal.done";
@@ -52,21 +54,23 @@ export const ResponseRefusalDoneEvent$outboundSchema: z.ZodType<
   ResponseRefusalDoneEvent$Outbound,
   z.ZodTypeDef,
   ResponseRefusalDoneEvent
-> = z.object({
-  type: z.literal("response.refusal.done"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  contentIndex: z.number().int(),
-  refusal: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    contentIndex: "content_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.refusal.done"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    contentIndex: z.number().int(),
+    refusal: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      contentIndex: "content_index",
+    });
+  })
+);
 
 export function responseRefusalDoneEventToJSON(
   responseRefusalDoneEvent: ResponseRefusalDoneEvent,

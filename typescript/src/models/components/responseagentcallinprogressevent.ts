@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ResponseAgentCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseAgentCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.agent_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  agent_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "agent_id": "agentId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.agent_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    agent_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "agent_id": "agentId",
+    });
+  })
+);
 /** @internal */
 export type ResponseAgentCallInProgressEvent$Outbound = {
   type: "response.agent_call.in_progress";
@@ -49,20 +51,22 @@ export const ResponseAgentCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseAgentCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseAgentCallInProgressEvent
-> = z.object({
-  type: z.literal("response.agent_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  agentId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    agentId: "agent_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.agent_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    agentId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      agentId: "agent_id",
+    });
+  })
+);
 
 export function responseAgentCallInProgressEventToJSON(
   responseAgentCallInProgressEvent: ResponseAgentCallInProgressEvent,

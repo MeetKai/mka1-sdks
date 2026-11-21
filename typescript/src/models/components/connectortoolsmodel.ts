@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ConnectorToolsModel$inboundSchema: z.ZodType<
   ConnectorToolsModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tools: z.array(ConnectorToolModel$inboundSchema),
-  tool_allowlist: z.nullable(z.array(z.string())).optional(),
-  allowed: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_allowlist": "toolAllowlist",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tools: z.array(ConnectorToolModel$inboundSchema),
+    tool_allowlist: z.nullable(z.array(z.string())).optional(),
+    allowed: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_allowlist": "toolAllowlist",
+    });
+  })
+);
 /** @internal */
 export type ConnectorToolsModel$Outbound = {
   tools: Array<ConnectorToolModel$Outbound>;
@@ -46,15 +48,17 @@ export const ConnectorToolsModel$outboundSchema: z.ZodType<
   ConnectorToolsModel$Outbound,
   z.ZodTypeDef,
   ConnectorToolsModel
-> = z.object({
-  tools: z.array(ConnectorToolModel$outboundSchema),
-  toolAllowlist: z.nullable(z.array(z.string())).optional(),
-  allowed: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    toolAllowlist: "tool_allowlist",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tools: z.array(ConnectorToolModel$outboundSchema),
+    toolAllowlist: z.nullable(z.array(z.string())).optional(),
+    allowed: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      toolAllowlist: "tool_allowlist",
+    });
+  })
+);
 
 export function connectorToolsModelToJSON(
   connectorToolsModel: ConnectorToolsModel,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,10 +52,12 @@ export const VectorStoreConnectorBrowseListData$inboundSchema: z.ZodType<
   VectorStoreConnectorBrowseListData,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("kind", {
-  folder: VectorStoreConnectorBrowseFolder$inboundSchema,
-  object: VectorStoreConnectorBrowseObject$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("kind", {
+    folder: VectorStoreConnectorBrowseFolder$inboundSchema,
+    object: VectorStoreConnectorBrowseObject$inboundSchema,
+  })
+);
 /** @internal */
 export type VectorStoreConnectorBrowseListData$Outbound =
   | VectorStoreConnectorBrowseFolder$Outbound
@@ -66,10 +68,12 @@ export const VectorStoreConnectorBrowseListData$outboundSchema: z.ZodType<
   VectorStoreConnectorBrowseListData$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorBrowseListData
-> = z.union([
-  VectorStoreConnectorBrowseFolder$outboundSchema,
-  VectorStoreConnectorBrowseObject$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VectorStoreConnectorBrowseFolder$outboundSchema,
+    VectorStoreConnectorBrowseObject$outboundSchema,
+  ])
+);
 
 export function vectorStoreConnectorBrowseListDataToJSON(
   vectorStoreConnectorBrowseListData: VectorStoreConnectorBrowseListData,
@@ -96,22 +100,24 @@ export const VectorStoreConnectorBrowseList$inboundSchema: z.ZodType<
   VectorStoreConnectorBrowseList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(
-    discriminatedUnion("kind", {
-      folder: VectorStoreConnectorBrowseFolder$inboundSchema,
-      object: VectorStoreConnectorBrowseObject$inboundSchema,
-    }),
-  ),
-  has_more: z.boolean(),
-  next_cursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(
+      discriminatedUnion("kind", {
+        folder: VectorStoreConnectorBrowseFolder$inboundSchema,
+        object: VectorStoreConnectorBrowseObject$inboundSchema,
+      }),
+    ),
+    has_more: z.boolean(),
+    next_cursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorBrowseList$Outbound = {
   object: "list";
@@ -128,22 +134,24 @@ export const VectorStoreConnectorBrowseList$outboundSchema: z.ZodType<
   VectorStoreConnectorBrowseList$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorBrowseList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(
-    z.union([
-      VectorStoreConnectorBrowseFolder$outboundSchema,
-      VectorStoreConnectorBrowseObject$outboundSchema,
-    ]),
-  ),
-  hasMore: z.boolean(),
-  nextCursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(
+      z.union([
+        VectorStoreConnectorBrowseFolder$outboundSchema,
+        VectorStoreConnectorBrowseObject$outboundSchema,
+      ]),
+    ),
+    hasMore: z.boolean(),
+    nextCursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function vectorStoreConnectorBrowseListToJSON(
   vectorStoreConnectorBrowseList: VectorStoreConnectorBrowseList,

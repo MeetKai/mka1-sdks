@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const ClassifyTextRequest$inboundSchema: z.ZodType<
   ClassifyTextRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ClassificationRequest: components.ClassificationRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ClassificationRequest": "classificationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ClassificationRequest: components.ClassificationRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ClassificationRequest": "classificationRequest",
+    });
+  })
+);
 /** @internal */
 export type ClassifyTextRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const ClassifyTextRequest$outboundSchema: z.ZodType<
   ClassifyTextRequest$Outbound,
   z.ZodTypeDef,
   ClassifyTextRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  classificationRequest: components.ClassificationRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    classificationRequest: "ClassificationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    classificationRequest: components.ClassificationRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      classificationRequest: "ClassificationRequest",
+    });
+  })
+);
 
 export function classifyTextRequestToJSON(
   classifyTextRequest: ClassifyTextRequest,

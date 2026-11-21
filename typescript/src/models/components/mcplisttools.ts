@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,17 +30,19 @@ export const MCPListTools$inboundSchema: z.ZodType<
   MCPListTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_list_tools"),
-  id: z.string(),
-  server_label: z.string(),
-  tools: z.array(MCPTool$inboundSchema),
-  error: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_list_tools"),
+    id: z.string(),
+    server_label: z.string(),
+    tools: z.array(MCPTool$inboundSchema),
+    error: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type MCPListTools$Outbound = {
   type: "mcp_list_tools";
@@ -55,17 +57,19 @@ export const MCPListTools$outboundSchema: z.ZodType<
   MCPListTools$Outbound,
   z.ZodTypeDef,
   MCPListTools
-> = z.object({
-  type: z.literal("mcp_list_tools"),
-  id: z.string(),
-  serverLabel: z.string(),
-  tools: z.array(MCPTool$outboundSchema),
-  error: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_list_tools"),
+    id: z.string(),
+    serverLabel: z.string(),
+    tools: z.array(MCPTool$outboundSchema),
+    error: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function mcpListToolsToJSON(mcpListTools: MCPListTools): string {
   return JSON.stringify(MCPListTools$outboundSchema.parse(mcpListTools));

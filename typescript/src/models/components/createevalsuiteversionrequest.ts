@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const CreateEvalSuiteVersionRequest$inboundSchema: z.ZodType<
   CreateEvalSuiteVersionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  manifest: EvalSuiteManifest$inboundSchema,
-  metadata: z.record(z.string()).optional(),
-  make_active: z.boolean().default(true),
-}).transform((v) => {
-  return remap$(v, {
-    "make_active": "makeActive",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    manifest: EvalSuiteManifest$inboundSchema,
+    metadata: z.record(z.string()).optional(),
+    make_active: z.boolean().default(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "make_active": "makeActive",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalSuiteVersionRequest$Outbound = {
   manifest: EvalSuiteManifest$Outbound;
@@ -46,15 +48,17 @@ export const CreateEvalSuiteVersionRequest$outboundSchema: z.ZodType<
   CreateEvalSuiteVersionRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalSuiteVersionRequest
-> = z.object({
-  manifest: EvalSuiteManifest$outboundSchema,
-  metadata: z.record(z.string()).optional(),
-  makeActive: z.boolean().default(true),
-}).transform((v) => {
-  return remap$(v, {
-    makeActive: "make_active",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    manifest: EvalSuiteManifest$outboundSchema,
+    metadata: z.record(z.string()).optional(),
+    makeActive: z.boolean().default(true),
+  }).transform((v) => {
+    return remap$(v, {
+      makeActive: "make_active",
+    });
+  })
+);
 
 export function createEvalSuiteVersionRequestToJSON(
   createEvalSuiteVersionRequest: CreateEvalSuiteVersionRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,8 +46,8 @@ export type InputImage = {
 };
 
 /** @internal */
-export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> = z
-  .nativeEnum(Detail);
+export const Detail$inboundSchema: z.ZodNativeEnum<typeof Detail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Detail));
 /** @internal */
 export const Detail$outboundSchema: z.ZodNativeEnum<typeof Detail> =
   Detail$inboundSchema;
@@ -57,17 +57,19 @@ export const InputImage$inboundSchema: z.ZodType<
   InputImage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("input_image"),
-  detail: Detail$inboundSchema.default("auto"),
-  file_id: z.string().optional(),
-  image_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_image"),
+    detail: Detail$inboundSchema.default("auto"),
+    file_id: z.string().optional(),
+    image_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "image_url": "imageUrl",
+    });
+  })
+);
 /** @internal */
 export type InputImage$Outbound = {
   type: "input_image";
@@ -81,17 +83,19 @@ export const InputImage$outboundSchema: z.ZodType<
   InputImage$Outbound,
   z.ZodTypeDef,
   InputImage
-> = z.object({
-  type: z.literal("input_image"),
-  detail: Detail$outboundSchema.default("auto"),
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    imageUrl: "image_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_image"),
+    detail: Detail$outboundSchema.default("auto"),
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      imageUrl: "image_url",
+    });
+  })
+);
 
 export function inputImageToJSON(inputImage: InputImage): string {
   return JSON.stringify(InputImage$outboundSchema.parse(inputImage));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,7 +66,7 @@ export type AgentVersion = {
 /** @internal */
 export const AgentVersionObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentVersionObject
-> = z.nativeEnum(AgentVersionObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentVersionObject));
 /** @internal */
 export const AgentVersionObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentVersionObject
@@ -77,38 +77,42 @@ export const AgentVersion$inboundSchema: z.ZodType<
   AgentVersion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentVersionObject$inboundSchema,
-  id: z.string(),
-  agent_id: z.string(),
-  version: z.number().int(),
-  is_current: z.boolean(),
-  restored_from_version: z.nullable(z.number().int()),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  model: z.string(),
-  instructions: z.nullable(z.string()),
-  tools: z.array(ToolDefinition$inboundSchema),
-  tool_choice: z.any().optional(),
-  parallel_tool_calls: z.boolean(),
-  max_tool_calls: z.nullable(z.number().int()),
-  fallback_models: z.array(z.string()),
-  text: z.nullable(AgentTextConfiguration$inboundSchema),
-  reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
-  metadata: z.record(z.string()),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "is_current": "isCurrent",
-    "restored_from_version": "restoredFromVersion",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "max_tool_calls": "maxToolCalls",
-    "fallback_models": "fallbackModels",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentVersionObject$inboundSchema,
+    id: z.string(),
+    agent_id: z.string(),
+    version: z.number().int(),
+    is_current: z.boolean(),
+    restored_from_version: z.nullable(z.number().int()),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    model: z.string(),
+    instructions: z.nullable(z.string()),
+    tools: z.array(ToolDefinition$inboundSchema),
+    tool_choice: z.any().optional(),
+    parallel_tool_calls: z.boolean(),
+    max_tool_calls: z.nullable(z.number().int()),
+    fallback_models: z.array(z.string()),
+    text: z.nullable(AgentTextConfiguration$inboundSchema),
+    reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
+    metadata: z.record(z.string()),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "is_current": "isCurrent",
+      "restored_from_version": "restoredFromVersion",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "max_tool_calls": "maxToolCalls",
+      "fallback_models": "fallbackModels",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type AgentVersion$Outbound = {
   object: string;
@@ -137,38 +141,40 @@ export const AgentVersion$outboundSchema: z.ZodType<
   AgentVersion$Outbound,
   z.ZodTypeDef,
   AgentVersion
-> = z.object({
-  object: AgentVersionObject$outboundSchema,
-  id: z.string(),
-  agentId: z.string(),
-  version: z.number().int(),
-  isCurrent: z.boolean(),
-  restoredFromVersion: z.nullable(z.number().int()),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  model: z.string(),
-  instructions: z.nullable(z.string()),
-  tools: z.array(ToolDefinition$outboundSchema),
-  toolChoice: z.any().optional(),
-  parallelToolCalls: z.boolean(),
-  maxToolCalls: z.nullable(z.number().int()),
-  fallbackModels: z.array(z.string()),
-  text: z.nullable(AgentTextConfiguration$outboundSchema),
-  reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
-  metadata: z.record(z.string()),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    isCurrent: "is_current",
-    restoredFromVersion: "restored_from_version",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    maxToolCalls: "max_tool_calls",
-    fallbackModels: "fallback_models",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentVersionObject$outboundSchema,
+    id: z.string(),
+    agentId: z.string(),
+    version: z.number().int(),
+    isCurrent: z.boolean(),
+    restoredFromVersion: z.nullable(z.number().int()),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    model: z.string(),
+    instructions: z.nullable(z.string()),
+    tools: z.array(ToolDefinition$outboundSchema),
+    toolChoice: z.any().optional(),
+    parallelToolCalls: z.boolean(),
+    maxToolCalls: z.nullable(z.number().int()),
+    fallbackModels: z.array(z.string()),
+    text: z.nullable(AgentTextConfiguration$outboundSchema),
+    reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
+    metadata: z.record(z.string()),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      isCurrent: "is_current",
+      restoredFromVersion: "restored_from_version",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      maxToolCalls: "max_tool_calls",
+      fallbackModels: "fallback_models",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function agentVersionToJSON(agentVersion: AgentVersion): string {
   return JSON.stringify(AgentVersion$outboundSchema.parse(agentVersion));

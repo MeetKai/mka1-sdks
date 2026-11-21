@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const HistoryToolDefinition$inboundSchema: z.ZodType<
   HistoryToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("history"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("history"),
+  })
+);
 /** @internal */
 export type HistoryToolDefinition$Outbound = {
   type: "history";
@@ -32,9 +34,11 @@ export const HistoryToolDefinition$outboundSchema: z.ZodType<
   HistoryToolDefinition$Outbound,
   z.ZodTypeDef,
   HistoryToolDefinition
-> = z.object({
-  type: z.literal("history"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("history"),
+  })
+);
 
 export function historyToolDefinitionToJSON(
   historyToolDefinition: HistoryToolDefinition,

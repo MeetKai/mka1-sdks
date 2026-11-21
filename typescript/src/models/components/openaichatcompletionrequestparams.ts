@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -203,9 +203,11 @@ export const ToolChoiceFunction$inboundSchema: z.ZodType<
   ToolChoiceFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 /** @internal */
 export type ToolChoiceFunction$Outbound = {
   name: string;
@@ -216,9 +218,11 @@ export const ToolChoiceFunction$outboundSchema: z.ZodType<
   ToolChoiceFunction$Outbound,
   z.ZodTypeDef,
   ToolChoiceFunction
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function toolChoiceFunctionToJSON(
   toolChoiceFunction: ToolChoiceFunction,
@@ -238,11 +242,13 @@ export function toolChoiceFunctionFromJSON(
 }
 
 /** @internal */
-export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("function"),
-    function: z.lazy(() => ToolChoiceFunction$inboundSchema),
-  });
+export const Four$inboundSchema: z.ZodType<Four, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("function"),
+      function: z.lazy(() => ToolChoiceFunction$inboundSchema),
+    })
+  );
 /** @internal */
 export type Four$Outbound = {
   type: "function";
@@ -251,10 +257,12 @@ export type Four$Outbound = {
 
 /** @internal */
 export const Four$outboundSchema: z.ZodType<Four$Outbound, z.ZodTypeDef, Four> =
-  z.object({
-    type: z.literal("function"),
-    function: z.lazy(() => ToolChoiceFunction$outboundSchema),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("function"),
+      function: z.lazy(() => ToolChoiceFunction$outboundSchema),
+    })
+  );
 
 export function fourToJSON(four: Four): string {
   return JSON.stringify(Four$outboundSchema.parse(four));
@@ -270,14 +278,14 @@ export function fourFromJSON(
 }
 
 /** @internal */
-export const Stop$inboundSchema: z.ZodType<Stop, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+export const Stop$inboundSchema: z.ZodType<Stop, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 /** @internal */
 export type Stop$Outbound = string | Array<string>;
 
 /** @internal */
 export const Stop$outboundSchema: z.ZodType<Stop$Outbound, z.ZodTypeDef, Stop> =
-  z.union([z.string(), z.array(z.string())]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 
 export function stopToJSON(stop: Stop): string {
   return JSON.stringify(Stop$outboundSchema.parse(stop));
@@ -293,9 +301,8 @@ export function stopFromJSON(
 }
 
 /** @internal */
-export const Type2$inboundSchema: z.ZodNativeEnum<typeof Type2> = z.nativeEnum(
-  Type2,
-);
+export const Type2$inboundSchema: z.ZodNativeEnum<typeof Type2> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Type2));
 /** @internal */
 export const Type2$outboundSchema: z.ZodNativeEnum<typeof Type2> =
   Type2$inboundSchema;
@@ -305,7 +312,9 @@ export const OpenAIChatCompletionRequestParamsType$inboundSchema: z.ZodType<
   OpenAIChatCompletionRequestParamsType,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), Type2$inboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), Type2$inboundSchema])
+);
 /** @internal */
 export type OpenAIChatCompletionRequestParamsType$Outbound = string | string;
 
@@ -314,7 +323,9 @@ export const OpenAIChatCompletionRequestParamsType$outboundSchema: z.ZodType<
   OpenAIChatCompletionRequestParamsType$Outbound,
   z.ZodTypeDef,
   OpenAIChatCompletionRequestParamsType
-> = z.union([z.string(), Type2$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), Type2$outboundSchema])
+);
 
 export function openAIChatCompletionRequestParamsTypeToJSON(
   openAIChatCompletionRequestParamsType: OpenAIChatCompletionRequestParamsType,
@@ -341,12 +352,14 @@ export const JsonSchema$inboundSchema: z.ZodType<
   JsonSchema,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+    strict: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type JsonSchema$Outbound = {
   name: string;
@@ -360,12 +373,14 @@ export const JsonSchema$outboundSchema: z.ZodType<
   JsonSchema$Outbound,
   z.ZodTypeDef,
   JsonSchema
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function jsonSchemaToJSON(jsonSchema: JsonSchema): string {
   return JSON.stringify(JsonSchema$outboundSchema.parse(jsonSchema));
@@ -386,14 +401,16 @@ export const OpenAIChatCompletionRequestParamsResponseFormat$inboundSchema:
     OpenAIChatCompletionRequestParamsResponseFormat,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.union([z.string(), Type2$inboundSchema]),
-    json_schema: z.lazy(() => JsonSchema$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "json_schema": "jsonSchema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.union([z.string(), Type2$inboundSchema]),
+      json_schema: z.lazy(() => JsonSchema$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "json_schema": "jsonSchema",
+      });
+    })
+  );
 /** @internal */
 export type OpenAIChatCompletionRequestParamsResponseFormat$Outbound = {
   type: string | string;
@@ -406,14 +423,16 @@ export const OpenAIChatCompletionRequestParamsResponseFormat$outboundSchema:
     OpenAIChatCompletionRequestParamsResponseFormat$Outbound,
     z.ZodTypeDef,
     OpenAIChatCompletionRequestParamsResponseFormat
-  > = z.object({
-    type: z.union([z.string(), Type2$outboundSchema]),
-    jsonSchema: z.lazy(() => JsonSchema$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      jsonSchema: "json_schema",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.union([z.string(), Type2$outboundSchema]),
+      jsonSchema: z.lazy(() => JsonSchema$outboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        jsonSchema: "json_schema",
+      });
+    })
+  );
 
 export function openAIChatCompletionRequestParamsResponseFormatToJSON(
   openAIChatCompletionRequestParamsResponseFormat:
@@ -446,13 +465,15 @@ export const StreamOptions$inboundSchema: z.ZodType<
   StreamOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    include_usage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+    });
+  })
+);
 /** @internal */
 export type StreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -463,13 +484,15 @@ export const StreamOptions$outboundSchema: z.ZodType<
   StreamOptions$Outbound,
   z.ZodTypeDef,
   StreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeUsage: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+    });
+  })
+);
 
 export function streamOptionsToJSON(streamOptions: StreamOptions): string {
   return JSON.stringify(StreamOptions$outboundSchema.parse(streamOptions));
@@ -487,7 +510,7 @@ export function streamOptionsFromJSON(
 /** @internal */
 export const ReasoningEffort$inboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort
-> = z.nativeEnum(ReasoningEffort);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReasoningEffort));
 /** @internal */
 export const ReasoningEffort$outboundSchema: z.ZodNativeEnum<
   typeof ReasoningEffort
@@ -498,45 +521,47 @@ export const OpenAIChatCompletionRequestParams$inboundSchema: z.ZodType<
   OpenAIChatCompletionRequestParams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  messages: z.array(OpenAIRequestMessage$inboundSchema),
-  tools: z.array(OpenAIToolDefinition$inboundSchema).optional(),
-  tool_choice: z.any().optional(),
-  stream: z.boolean().optional(),
-  n: z.number().int().optional(),
-  max_tokens: z.nullable(z.number().int()).optional(),
-  max_completion_tokens: z.nullable(z.number().int()).optional(),
-  temperature: z.number().optional(),
-  top_p: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  presence_penalty: z.number().optional(),
-  seed: z.number().int().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  response_format: z.lazy(() =>
-    OpenAIChatCompletionRequestParamsResponseFormat$inboundSchema
-  ).optional(),
-  logprobs: z.boolean().optional(),
-  top_logprobs: z.number().int().optional(),
-  user: z.string().optional(),
-  stream_options: z.lazy(() => StreamOptions$inboundSchema).optional(),
-  parallel_tool_calls: z.boolean().default(true),
-  reasoning_effort: z.nullable(ReasoningEffort$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_choice": "toolChoice",
-    "max_tokens": "maxTokens",
-    "max_completion_tokens": "maxCompletionTokens",
-    "top_p": "topP",
-    "frequency_penalty": "frequencyPenalty",
-    "presence_penalty": "presencePenalty",
-    "response_format": "responseFormat",
-    "top_logprobs": "topLogprobs",
-    "stream_options": "streamOptions",
-    "parallel_tool_calls": "parallelToolCalls",
-    "reasoning_effort": "reasoningEffort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    messages: z.array(OpenAIRequestMessage$inboundSchema),
+    tools: z.array(OpenAIToolDefinition$inboundSchema).optional(),
+    tool_choice: z.any().optional(),
+    stream: z.boolean().optional(),
+    n: z.number().int().optional(),
+    max_tokens: z.nullable(z.number().int()).optional(),
+    max_completion_tokens: z.nullable(z.number().int()).optional(),
+    temperature: z.number().optional(),
+    top_p: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    presence_penalty: z.number().optional(),
+    seed: z.number().int().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    response_format: z.lazy(() =>
+      OpenAIChatCompletionRequestParamsResponseFormat$inboundSchema
+    ).optional(),
+    logprobs: z.boolean().optional(),
+    top_logprobs: z.number().int().optional(),
+    user: z.string().optional(),
+    stream_options: z.lazy(() => StreamOptions$inboundSchema).optional(),
+    parallel_tool_calls: z.boolean().default(true),
+    reasoning_effort: z.nullable(ReasoningEffort$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_choice": "toolChoice",
+      "max_tokens": "maxTokens",
+      "max_completion_tokens": "maxCompletionTokens",
+      "top_p": "topP",
+      "frequency_penalty": "frequencyPenalty",
+      "presence_penalty": "presencePenalty",
+      "response_format": "responseFormat",
+      "top_logprobs": "topLogprobs",
+      "stream_options": "streamOptions",
+      "parallel_tool_calls": "parallelToolCalls",
+      "reasoning_effort": "reasoningEffort",
+    });
+  })
+);
 /** @internal */
 export type OpenAIChatCompletionRequestParams$Outbound = {
   model: string;
@@ -569,45 +594,47 @@ export const OpenAIChatCompletionRequestParams$outboundSchema: z.ZodType<
   OpenAIChatCompletionRequestParams$Outbound,
   z.ZodTypeDef,
   OpenAIChatCompletionRequestParams
-> = z.object({
-  model: z.string(),
-  messages: z.array(OpenAIRequestMessage$outboundSchema),
-  tools: z.array(OpenAIToolDefinition$outboundSchema).optional(),
-  toolChoice: z.any().optional(),
-  stream: z.boolean().optional(),
-  n: z.number().int().optional(),
-  maxTokens: z.nullable(z.number().int()).optional(),
-  maxCompletionTokens: z.nullable(z.number().int()).optional(),
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  seed: z.number().int().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  responseFormat: z.lazy(() =>
-    OpenAIChatCompletionRequestParamsResponseFormat$outboundSchema
-  ).optional(),
-  logprobs: z.boolean().optional(),
-  topLogprobs: z.number().int().optional(),
-  user: z.string().optional(),
-  streamOptions: z.lazy(() => StreamOptions$outboundSchema).optional(),
-  parallelToolCalls: z.boolean().default(true),
-  reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolChoice: "tool_choice",
-    maxTokens: "max_tokens",
-    maxCompletionTokens: "max_completion_tokens",
-    topP: "top_p",
-    frequencyPenalty: "frequency_penalty",
-    presencePenalty: "presence_penalty",
-    responseFormat: "response_format",
-    topLogprobs: "top_logprobs",
-    streamOptions: "stream_options",
-    parallelToolCalls: "parallel_tool_calls",
-    reasoningEffort: "reasoning_effort",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    messages: z.array(OpenAIRequestMessage$outboundSchema),
+    tools: z.array(OpenAIToolDefinition$outboundSchema).optional(),
+    toolChoice: z.any().optional(),
+    stream: z.boolean().optional(),
+    n: z.number().int().optional(),
+    maxTokens: z.nullable(z.number().int()).optional(),
+    maxCompletionTokens: z.nullable(z.number().int()).optional(),
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    seed: z.number().int().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    responseFormat: z.lazy(() =>
+      OpenAIChatCompletionRequestParamsResponseFormat$outboundSchema
+    ).optional(),
+    logprobs: z.boolean().optional(),
+    topLogprobs: z.number().int().optional(),
+    user: z.string().optional(),
+    streamOptions: z.lazy(() => StreamOptions$outboundSchema).optional(),
+    parallelToolCalls: z.boolean().default(true),
+    reasoningEffort: z.nullable(ReasoningEffort$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolChoice: "tool_choice",
+      maxTokens: "max_tokens",
+      maxCompletionTokens: "max_completion_tokens",
+      topP: "top_p",
+      frequencyPenalty: "frequency_penalty",
+      presencePenalty: "presence_penalty",
+      responseFormat: "response_format",
+      topLogprobs: "top_logprobs",
+      streamOptions: "stream_options",
+      parallelToolCalls: "parallel_tool_calls",
+      reasoningEffort: "reasoning_effort",
+    });
+  })
+);
 
 export function openAIChatCompletionRequestParamsToJSON(
   openAIChatCompletionRequestParams: OpenAIChatCompletionRequestParams,

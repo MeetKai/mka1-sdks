@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const EvalArtifactsObject$inboundSchema: z.ZodType<
   EvalArtifactsObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.artifacts"),
-  run_id: z.string(),
-  result_file_id: z.nullable(z.string()),
-  samples_file_id: z.nullable(z.string()),
-  artifact_file_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "result_file_id": "resultFileId",
-    "samples_file_id": "samplesFileId",
-    "artifact_file_ids": "artifactFileIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.artifacts"),
+    run_id: z.string(),
+    result_file_id: z.nullable(z.string()),
+    samples_file_id: z.nullable(z.string()),
+    artifact_file_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "result_file_id": "resultFileId",
+      "samples_file_id": "samplesFileId",
+      "artifact_file_ids": "artifactFileIds",
+    });
+  })
+);
 /** @internal */
 export type EvalArtifactsObject$Outbound = {
   object: "eval.artifacts";
@@ -49,20 +51,22 @@ export const EvalArtifactsObject$outboundSchema: z.ZodType<
   EvalArtifactsObject$Outbound,
   z.ZodTypeDef,
   EvalArtifactsObject
-> = z.object({
-  object: z.literal("eval.artifacts"),
-  runId: z.string(),
-  resultFileId: z.nullable(z.string()),
-  samplesFileId: z.nullable(z.string()),
-  artifactFileIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    resultFileId: "result_file_id",
-    samplesFileId: "samples_file_id",
-    artifactFileIds: "artifact_file_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.artifacts"),
+    runId: z.string(),
+    resultFileId: z.nullable(z.string()),
+    samplesFileId: z.nullable(z.string()),
+    artifactFileIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      resultFileId: "result_file_id",
+      samplesFileId: "samples_file_id",
+      artifactFileIds: "artifact_file_ids",
+    });
+  })
+);
 
 export function evalArtifactsObjectToJSON(
   evalArtifactsObject: EvalArtifactsObject,

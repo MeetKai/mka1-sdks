@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,15 +24,17 @@ export const MemoryMount$inboundSchema: z.ZodType<
   MemoryMount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  store_id: z.string(),
-  label: z.string(),
-  access: MemoryMountAccess$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "store_id": "storeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    store_id: z.string(),
+    label: z.string(),
+    access: MemoryMountAccess$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "store_id": "storeId",
+    });
+  })
+);
 /** @internal */
 export type MemoryMount$Outbound = {
   store_id: string;
@@ -45,15 +47,17 @@ export const MemoryMount$outboundSchema: z.ZodType<
   MemoryMount$Outbound,
   z.ZodTypeDef,
   MemoryMount
-> = z.object({
-  storeId: z.string(),
-  label: z.string(),
-  access: MemoryMountAccess$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storeId: "store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    storeId: z.string(),
+    label: z.string(),
+    access: MemoryMountAccess$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storeId: "store_id",
+    });
+  })
+);
 
 export function memoryMountToJSON(memoryMount: MemoryMount): string {
   return JSON.stringify(MemoryMount$outboundSchema.parse(memoryMount));

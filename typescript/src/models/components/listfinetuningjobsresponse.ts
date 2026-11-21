@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ListFineTuningJobsResponse$inboundSchema: z.ZodType<
   ListFineTuningJobsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FineTuningJob$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FineTuningJob$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type ListFineTuningJobsResponse$Outbound = {
   object: "list";
@@ -46,15 +48,17 @@ export const ListFineTuningJobsResponse$outboundSchema: z.ZodType<
   ListFineTuningJobsResponse$Outbound,
   z.ZodTypeDef,
   ListFineTuningJobsResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FineTuningJob$outboundSchema),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FineTuningJob$outboundSchema),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function listFineTuningJobsResponseToJSON(
   listFineTuningJobsResponse: ListFineTuningJobsResponse,

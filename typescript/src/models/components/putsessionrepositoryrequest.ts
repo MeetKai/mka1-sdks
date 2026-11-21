@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const PutSessionRepositoryRequest$inboundSchema: z.ZodType<
   PutSessionRepositoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignment_generation: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "assignment_generation": "assignmentGeneration",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignment_generation: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "assignment_generation": "assignmentGeneration",
+    });
+  })
+);
 /** @internal */
 export type PutSessionRepositoryRequest$Outbound = {
   assignment_generation: number;
@@ -37,14 +39,16 @@ export const PutSessionRepositoryRequest$outboundSchema: z.ZodType<
   PutSessionRepositoryRequest$Outbound,
   z.ZodTypeDef,
   PutSessionRepositoryRequest
-> = z.object({
-  assignmentGeneration: z.number().int(),
-  ref: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    assignmentGeneration: "assignment_generation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignmentGeneration: z.number().int(),
+    ref: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      assignmentGeneration: "assignment_generation",
+    });
+  })
+);
 
 export function putSessionRepositoryRequestToJSON(
   putSessionRepositoryRequest: PutSessionRepositoryRequest,

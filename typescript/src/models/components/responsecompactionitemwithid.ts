@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,21 +44,23 @@ export const ResponseCompactionItemWithId$inboundSchema: z.ZodType<
   ResponseCompactionItemWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("compaction"),
-  id: z.string(),
-  content: z.string(),
-  encrypted_content: z.string().optional(),
-  created_by: z.string().optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encrypted_content": "encryptedContent",
-    "created_by": "createdBy",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("compaction"),
+    id: z.string(),
+    content: z.string(),
+    encrypted_content: z.string().optional(),
+    created_by: z.string().optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+      "created_by": "createdBy",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ResponseCompactionItemWithId$Outbound = {
   type: "compaction";
@@ -75,21 +77,23 @@ export const ResponseCompactionItemWithId$outboundSchema: z.ZodType<
   ResponseCompactionItemWithId$Outbound,
   z.ZodTypeDef,
   ResponseCompactionItemWithId
-> = z.object({
-  type: z.literal("compaction"),
-  id: z.string(),
-  content: z.string(),
-  encryptedContent: z.string().optional(),
-  createdBy: z.string().optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encryptedContent: "encrypted_content",
-    createdBy: "created_by",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("compaction"),
+    id: z.string(),
+    content: z.string(),
+    encryptedContent: z.string().optional(),
+    createdBy: z.string().optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encryptedContent: "encrypted_content",
+      createdBy: "created_by",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function responseCompactionItemWithIdToJSON(
   responseCompactionItemWithId: ResponseCompactionItemWithId,

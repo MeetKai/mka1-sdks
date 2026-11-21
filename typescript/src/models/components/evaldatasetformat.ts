@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const EvalDatasetFormat = {
@@ -14,7 +15,7 @@ export type EvalDatasetFormat = ClosedEnum<typeof EvalDatasetFormat>;
 /** @internal */
 export const EvalDatasetFormat$inboundSchema: z.ZodNativeEnum<
   typeof EvalDatasetFormat
-> = z.nativeEnum(EvalDatasetFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EvalDatasetFormat));
 /** @internal */
 export const EvalDatasetFormat$outboundSchema: z.ZodNativeEnum<
   typeof EvalDatasetFormat

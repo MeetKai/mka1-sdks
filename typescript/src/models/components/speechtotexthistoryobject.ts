@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -81,29 +81,31 @@ export const SpeechToTextHistoryObject$inboundSchema: z.ZodType<
   SpeechToTextHistoryObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("speech.transcription"),
-  text: z.string(),
-  language: z.nullable(z.string()),
-  confidence: z.nullable(z.number()),
-  model: z.string(),
-  provider_id: z.nullable(z.string()),
-  filename: z.nullable(z.string()),
-  audio_bytes: z.number().int(),
-  audio_mime_type: z.nullable(z.string()),
-  speakers: z.nullable(z.array(SpeakerSegment$inboundSchema)),
-  streaming: z.boolean(),
-  metadata: z.record(z.any()),
-  created_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "provider_id": "providerId",
-    "audio_bytes": "audioBytes",
-    "audio_mime_type": "audioMimeType",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("speech.transcription"),
+    text: z.string(),
+    language: z.nullable(z.string()),
+    confidence: z.nullable(z.number()),
+    model: z.string(),
+    provider_id: z.nullable(z.string()),
+    filename: z.nullable(z.string()),
+    audio_bytes: z.number().int(),
+    audio_mime_type: z.nullable(z.string()),
+    speakers: z.nullable(z.array(SpeakerSegment$inboundSchema)),
+    streaming: z.boolean(),
+    metadata: z.record(z.any()),
+    created_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "provider_id": "providerId",
+      "audio_bytes": "audioBytes",
+      "audio_mime_type": "audioMimeType",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type SpeechToTextHistoryObject$Outbound = {
   id: string;
@@ -127,29 +129,31 @@ export const SpeechToTextHistoryObject$outboundSchema: z.ZodType<
   SpeechToTextHistoryObject$Outbound,
   z.ZodTypeDef,
   SpeechToTextHistoryObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("speech.transcription"),
-  text: z.string(),
-  language: z.nullable(z.string()),
-  confidence: z.nullable(z.number()),
-  model: z.string(),
-  providerId: z.nullable(z.string()),
-  filename: z.nullable(z.string()),
-  audioBytes: z.number().int(),
-  audioMimeType: z.nullable(z.string()),
-  speakers: z.nullable(z.array(SpeakerSegment$outboundSchema)),
-  streaming: z.boolean(),
-  metadata: z.record(z.any()),
-  createdAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    providerId: "provider_id",
-    audioBytes: "audio_bytes",
-    audioMimeType: "audio_mime_type",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("speech.transcription"),
+    text: z.string(),
+    language: z.nullable(z.string()),
+    confidence: z.nullable(z.number()),
+    model: z.string(),
+    providerId: z.nullable(z.string()),
+    filename: z.nullable(z.string()),
+    audioBytes: z.number().int(),
+    audioMimeType: z.nullable(z.string()),
+    speakers: z.nullable(z.array(SpeakerSegment$outboundSchema)),
+    streaming: z.boolean(),
+    metadata: z.record(z.any()),
+    createdAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      providerId: "provider_id",
+      audioBytes: "audio_bytes",
+      audioMimeType: "audio_mime_type",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function speechToTextHistoryObjectToJSON(
   speechToTextHistoryObject: SpeechToTextHistoryObject,

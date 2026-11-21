@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,14 +28,16 @@ export const RevokeClusterInviteRequest$inboundSchema: z.ZodType<
   RevokeClusterInviteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RevokeClusterInviteRequest$Outbound = {
   id: string;
@@ -47,14 +49,16 @@ export const RevokeClusterInviteRequest$outboundSchema: z.ZodType<
   RevokeClusterInviteRequest$Outbound,
   z.ZodTypeDef,
   RevokeClusterInviteRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function revokeClusterInviteRequestToJSON(
   revokeClusterInviteRequest: RevokeClusterInviteRequest,
@@ -78,9 +82,11 @@ export const RevokeClusterInviteResponseBody$inboundSchema: z.ZodType<
   RevokeClusterInviteResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+  })
+);
 /** @internal */
 export type RevokeClusterInviteResponseBody$Outbound = {
   message: string;
@@ -91,9 +97,11 @@ export const RevokeClusterInviteResponseBody$outboundSchema: z.ZodType<
   RevokeClusterInviteResponseBody$Outbound,
   z.ZodTypeDef,
   RevokeClusterInviteResponseBody
-> = z.object({
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+  })
+);
 
 export function revokeClusterInviteResponseBodyToJSON(
   revokeClusterInviteResponseBody: RevokeClusterInviteResponseBody,

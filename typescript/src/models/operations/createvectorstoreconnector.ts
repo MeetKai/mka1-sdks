@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,10 +28,12 @@ export const CreateVectorStoreConnectorRequestBody$inboundSchema: z.ZodType<
   CreateVectorStoreConnectorRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.VectorStoreConnectorCreateS3$inboundSchema,
-  components.VectorStoreConnectorCreateSharePoint$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.VectorStoreConnectorCreateS3$inboundSchema,
+    components.VectorStoreConnectorCreateSharePoint$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateVectorStoreConnectorRequestBody$Outbound =
   | components.VectorStoreConnectorCreateS3$Outbound
@@ -42,10 +44,12 @@ export const CreateVectorStoreConnectorRequestBody$outboundSchema: z.ZodType<
   CreateVectorStoreConnectorRequestBody$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreConnectorRequestBody
-> = z.union([
-  components.VectorStoreConnectorCreateS3$outboundSchema,
-  components.VectorStoreConnectorCreateSharePoint$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.VectorStoreConnectorCreateS3$outboundSchema,
+    components.VectorStoreConnectorCreateSharePoint$outboundSchema,
+  ])
+);
 
 export function createVectorStoreConnectorRequestBodyToJSON(
   createVectorStoreConnectorRequestBody: CreateVectorStoreConnectorRequestBody,
@@ -72,18 +76,20 @@ export const CreateVectorStoreConnectorRequest$inboundSchema: z.ZodType<
   CreateVectorStoreConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.union([
-    components.VectorStoreConnectorCreateS3$inboundSchema,
-    components.VectorStoreConnectorCreateSharePoint$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.union([
+      components.VectorStoreConnectorCreateS3$inboundSchema,
+      components.VectorStoreConnectorCreateSharePoint$inboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStoreConnectorRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -97,18 +103,20 @@ export const CreateVectorStoreConnectorRequest$outboundSchema: z.ZodType<
   CreateVectorStoreConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreConnectorRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.union([
-    components.VectorStoreConnectorCreateS3$outboundSchema,
-    components.VectorStoreConnectorCreateSharePoint$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.union([
+      components.VectorStoreConnectorCreateS3$outboundSchema,
+      components.VectorStoreConnectorCreateSharePoint$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createVectorStoreConnectorRequestToJSON(
   createVectorStoreConnectorRequest: CreateVectorStoreConnectorRequest,

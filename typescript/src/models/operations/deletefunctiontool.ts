@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,15 +38,17 @@ export const DeleteFunctionToolRequest$inboundSchema: z.ZodType<
   DeleteFunctionToolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_id": "toolId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteFunctionToolRequest$Outbound = {
   tool_id: string;
@@ -58,15 +60,17 @@ export const DeleteFunctionToolRequest$outboundSchema: z.ZodType<
   DeleteFunctionToolRequest$Outbound,
   z.ZodTypeDef,
   DeleteFunctionToolRequest
-> = z.object({
-  toolId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteFunctionToolRequestToJSON(
   deleteFunctionToolRequest: DeleteFunctionToolRequest,
@@ -88,7 +92,7 @@ export function deleteFunctionToolRequestFromJSON(
 /** @internal */
 export const DeleteFunctionToolObject$inboundSchema: z.ZodNativeEnum<
   typeof DeleteFunctionToolObject
-> = z.nativeEnum(DeleteFunctionToolObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteFunctionToolObject));
 /** @internal */
 export const DeleteFunctionToolObject$outboundSchema: z.ZodNativeEnum<
   typeof DeleteFunctionToolObject
@@ -99,11 +103,13 @@ export const DeleteFunctionToolResponseBody$inboundSchema: z.ZodType<
   DeleteFunctionToolResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: DeleteFunctionToolObject$inboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteFunctionToolObject$inboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteFunctionToolResponseBody$Outbound = {
   object: string;
@@ -116,11 +122,13 @@ export const DeleteFunctionToolResponseBody$outboundSchema: z.ZodType<
   DeleteFunctionToolResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteFunctionToolResponseBody
-> = z.object({
-  object: DeleteFunctionToolObject$outboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteFunctionToolObject$outboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteFunctionToolResponseBodyToJSON(
   deleteFunctionToolResponseBody: DeleteFunctionToolResponseBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,22 +37,24 @@ export type Skill = {
 };
 
 /** @internal */
-export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    created_at: z.number().int(),
-    default_version: z.string(),
-    description: z.string(),
-    latest_version: z.string(),
-    name: z.string(),
-    object: z.literal("skill").default("skill"),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "default_version": "defaultVersion",
-      "latest_version": "latestVersion",
-    });
-  });
+export const Skill$inboundSchema: z.ZodType<Skill, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      created_at: z.number().int(),
+      default_version: z.string(),
+      description: z.string(),
+      latest_version: z.string(),
+      name: z.string(),
+      object: z.literal("skill").default("skill"),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+        "default_version": "defaultVersion",
+        "latest_version": "latestVersion",
+      });
+    })
+  );
 /** @internal */
 export type Skill$Outbound = {
   id: string;
@@ -69,21 +71,23 @@ export const Skill$outboundSchema: z.ZodType<
   Skill$Outbound,
   z.ZodTypeDef,
   Skill
-> = z.object({
-  id: z.string(),
-  createdAt: z.number().int(),
-  defaultVersion: z.string(),
-  description: z.string(),
-  latestVersion: z.string(),
-  name: z.string(),
-  object: z.literal("skill").default("skill" as const),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    defaultVersion: "default_version",
-    latestVersion: "latest_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    createdAt: z.number().int(),
+    defaultVersion: z.string(),
+    description: z.string(),
+    latestVersion: z.string(),
+    name: z.string(),
+    object: z.literal("skill").default("skill" as const),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      defaultVersion: "default_version",
+      latestVersion: "latest_version",
+    });
+  })
+);
 
 export function skillToJSON(skill: Skill): string {
   return JSON.stringify(Skill$outboundSchema.parse(skill));

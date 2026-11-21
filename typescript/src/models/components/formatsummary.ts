@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const FormatSummary$inboundSchema: z.ZodType<
   FormatSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  trains: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    trains: z.array(z.string()),
+  })
+);
 /** @internal */
 export type FormatSummary$Outbound = {
   id: string;
@@ -35,11 +37,13 @@ export const FormatSummary$outboundSchema: z.ZodType<
   FormatSummary$Outbound,
   z.ZodTypeDef,
   FormatSummary
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  trains: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    trains: z.array(z.string()),
+  })
+);
 
 export function formatSummaryToJSON(formatSummary: FormatSummary): string {
   return JSON.stringify(FormatSummary$outboundSchema.parse(formatSummary));

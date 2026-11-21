@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,16 +27,18 @@ export const RotateComputeSecretRequest$inboundSchema: z.ZodType<
   RotateComputeSecretRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeSecretRotate: components.ComputeSecretRotate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeSecretRotate": "computeSecretRotate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeSecretRotate: components.ComputeSecretRotate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeSecretRotate": "computeSecretRotate",
+    });
+  })
+);
 /** @internal */
 export type RotateComputeSecretRequest$Outbound = {
   id: string;
@@ -49,16 +51,18 @@ export const RotateComputeSecretRequest$outboundSchema: z.ZodType<
   RotateComputeSecretRequest$Outbound,
   z.ZodTypeDef,
   RotateComputeSecretRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  computeSecretRotate: components.ComputeSecretRotate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeSecretRotate: "ComputeSecretRotate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    computeSecretRotate: components.ComputeSecretRotate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeSecretRotate: "ComputeSecretRotate",
+    });
+  })
+);
 
 export function rotateComputeSecretRequestToJSON(
   rotateComputeSecretRequest: RotateComputeSecretRequest,
@@ -82,10 +86,12 @@ export const RotateComputeSecretResponse$inboundSchema: z.ZodType<
   RotateComputeSecretResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeSecret$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeSecret$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type RotateComputeSecretResponse$Outbound =
   | components.ComputeSecret$Outbound
@@ -96,10 +102,12 @@ export const RotateComputeSecretResponse$outboundSchema: z.ZodType<
   RotateComputeSecretResponse$Outbound,
   z.ZodTypeDef,
   RotateComputeSecretResponse
-> = z.union([
-  components.ComputeSecret$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeSecret$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function rotateComputeSecretResponseToJSON(
   rotateComputeSecretResponse: RotateComputeSecretResponse,

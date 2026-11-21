@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const RegistryManagementListResponse$inboundSchema: z.ZodType<
   RegistryManagementListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(CatalogEntry$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(CatalogEntry$inboundSchema),
+  })
+);
 /** @internal */
 export type RegistryManagementListResponse$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const RegistryManagementListResponse$outboundSchema: z.ZodType<
   RegistryManagementListResponse$Outbound,
   z.ZodTypeDef,
   RegistryManagementListResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(CatalogEntry$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(CatalogEntry$outboundSchema),
+  })
+);
 
 export function registryManagementListResponseToJSON(
   registryManagementListResponse: RegistryManagementListResponse,

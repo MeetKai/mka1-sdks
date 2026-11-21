@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -43,21 +43,23 @@ export const ContainerFileCitation$inboundSchema: z.ZodType<
   ContainerFileCitation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_file_citation"),
-  container_id: z.string(),
-  end_index: z.number().int(),
-  file_id: z.string(),
-  filename: z.string(),
-  start_index: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-    "end_index": "endIndex",
-    "file_id": "fileId",
-    "start_index": "startIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_file_citation"),
+    container_id: z.string(),
+    end_index: z.number().int(),
+    file_id: z.string(),
+    filename: z.string(),
+    start_index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+      "end_index": "endIndex",
+      "file_id": "fileId",
+      "start_index": "startIndex",
+    });
+  })
+);
 /** @internal */
 export type ContainerFileCitation$Outbound = {
   type: "container_file_citation";
@@ -73,21 +75,23 @@ export const ContainerFileCitation$outboundSchema: z.ZodType<
   ContainerFileCitation$Outbound,
   z.ZodTypeDef,
   ContainerFileCitation
-> = z.object({
-  type: z.literal("container_file_citation"),
-  containerId: z.string(),
-  endIndex: z.number().int(),
-  fileId: z.string(),
-  filename: z.string(),
-  startIndex: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-    endIndex: "end_index",
-    fileId: "file_id",
-    startIndex: "start_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_file_citation"),
+    containerId: z.string(),
+    endIndex: z.number().int(),
+    fileId: z.string(),
+    filename: z.string(),
+    startIndex: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+      endIndex: "end_index",
+      fileId: "file_id",
+      startIndex: "start_index",
+    });
+  })
+);
 
 export function containerFileCitationToJSON(
   containerFileCitation: ContainerFileCitation,

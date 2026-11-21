@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,16 +40,18 @@ export const ConnectorCatalogModel$inboundSchema: z.ZodType<
   ConnectorCatalogModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required_network_access: NetworkAccess$inboundSchema.optional(),
-  max_per_environment: z.number().int().default(8),
-  connectors: z.array(ConnectorModel$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "required_network_access": "requiredNetworkAccess",
-    "max_per_environment": "maxPerEnvironment",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required_network_access: NetworkAccess$inboundSchema.optional(),
+    max_per_environment: z.number().int().default(8),
+    connectors: z.array(ConnectorModel$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "required_network_access": "requiredNetworkAccess",
+      "max_per_environment": "maxPerEnvironment",
+    });
+  })
+);
 /** @internal */
 export type ConnectorCatalogModel$Outbound = {
   required_network_access?: string | undefined;
@@ -62,16 +64,18 @@ export const ConnectorCatalogModel$outboundSchema: z.ZodType<
   ConnectorCatalogModel$Outbound,
   z.ZodTypeDef,
   ConnectorCatalogModel
-> = z.object({
-  requiredNetworkAccess: NetworkAccess$outboundSchema.optional(),
-  maxPerEnvironment: z.number().int().default(8),
-  connectors: z.array(ConnectorModel$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    requiredNetworkAccess: "required_network_access",
-    maxPerEnvironment: "max_per_environment",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requiredNetworkAccess: NetworkAccess$outboundSchema.optional(),
+    maxPerEnvironment: z.number().int().default(8),
+    connectors: z.array(ConnectorModel$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      requiredNetworkAccess: "required_network_access",
+      maxPerEnvironment: "max_per_environment",
+    });
+  })
+);
 
 export function connectorCatalogModelToJSON(
   connectorCatalogModel: ConnectorCatalogModel,

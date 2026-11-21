@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,18 +33,20 @@ export const EvalSampleAudioObject$inboundSchema: z.ZodType<
   EvalSampleAudioObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.sample.audio"),
-  audio: z.string(),
-  sample_index: z.number().int(),
-  task_id: z.string(),
-  model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.audio"),
+    audio: z.string(),
+    sample_index: z.number().int(),
+    task_id: z.string(),
+    model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+    });
+  })
+);
 /** @internal */
 export type EvalSampleAudioObject$Outbound = {
   object: "eval.sample.audio";
@@ -59,18 +61,20 @@ export const EvalSampleAudioObject$outboundSchema: z.ZodType<
   EvalSampleAudioObject$Outbound,
   z.ZodTypeDef,
   EvalSampleAudioObject
-> = z.object({
-  object: z.literal("eval.sample.audio"),
-  audio: z.string(),
-  sampleIndex: z.number().int(),
-  taskId: z.string(),
-  model: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.audio"),
+    audio: z.string(),
+    sampleIndex: z.number().int(),
+    taskId: z.string(),
+    model: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+    });
+  })
+);
 
 export function evalSampleAudioObjectToJSON(
   evalSampleAudioObject: EvalSampleAudioObject,

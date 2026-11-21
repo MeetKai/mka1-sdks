@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,7 +31,7 @@ export type FunctionToolList = {
 /** @internal */
 export const FunctionToolListObject$inboundSchema: z.ZodNativeEnum<
   typeof FunctionToolListObject
-> = z.nativeEnum(FunctionToolListObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FunctionToolListObject));
 /** @internal */
 export const FunctionToolListObject$outboundSchema: z.ZodNativeEnum<
   typeof FunctionToolListObject
@@ -42,19 +42,21 @@ export const FunctionToolList$inboundSchema: z.ZodType<
   FunctionToolList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: FunctionToolListObject$inboundSchema,
-  data: z.array(FunctionTool$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: FunctionToolListObject$inboundSchema,
+    data: z.array(FunctionTool$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolList$Outbound = {
   object: string;
@@ -69,19 +71,21 @@ export const FunctionToolList$outboundSchema: z.ZodType<
   FunctionToolList$Outbound,
   z.ZodTypeDef,
   FunctionToolList
-> = z.object({
-  object: FunctionToolListObject$outboundSchema,
-  data: z.array(FunctionTool$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: FunctionToolListObject$outboundSchema,
+    data: z.array(FunctionTool$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function functionToolListToJSON(
   functionToolList: FunctionToolList,

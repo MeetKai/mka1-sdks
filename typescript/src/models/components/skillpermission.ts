@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,19 +49,21 @@ export const SkillPermission$inboundSchema: z.ZodType<
   SkillPermission,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("skill.permission"),
-  skill_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  role: ResourcePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("skill.permission"),
+    skill_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    role: ResourcePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type SkillPermission$Outbound = {
   object: "skill.permission";
@@ -76,19 +78,21 @@ export const SkillPermission$outboundSchema: z.ZodType<
   SkillPermission$Outbound,
   z.ZodTypeDef,
   SkillPermission
-> = z.object({
-  object: z.literal("skill.permission"),
-  skillId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  role: ResourcePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("skill.permission"),
+    skillId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    role: ResourcePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function skillPermissionToJSON(
   skillPermission: SkillPermission,

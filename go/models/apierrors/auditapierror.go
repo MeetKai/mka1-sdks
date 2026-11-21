@@ -16,6 +16,12 @@ type AuditAPIError struct {
 var _ error = &AuditAPIError{}
 
 func (e *AuditAPIError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

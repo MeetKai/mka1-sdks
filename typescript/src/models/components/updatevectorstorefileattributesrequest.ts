@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,7 +28,9 @@ export const UpdateVectorStoreFileAttributesRequestAttributes$inboundSchema:
     UpdateVectorStoreFileAttributesRequestAttributes,
     z.ZodTypeDef,
     unknown
-  > = z.union([z.string(), z.boolean(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.boolean(), z.number()])
+  );
 /** @internal */
 export type UpdateVectorStoreFileAttributesRequestAttributes$Outbound =
   | string
@@ -41,7 +43,9 @@ export const UpdateVectorStoreFileAttributesRequestAttributes$outboundSchema:
     UpdateVectorStoreFileAttributesRequestAttributes$Outbound,
     z.ZodTypeDef,
     UpdateVectorStoreFileAttributesRequestAttributes
-  > = z.union([z.string(), z.boolean(), z.number()]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.boolean(), z.number()])
+  );
 
 export function updateVectorStoreFileAttributesRequestAttributesToJSON(
   updateVectorStoreFileAttributesRequestAttributes:
@@ -74,9 +78,11 @@ export const UpdateVectorStoreFileAttributesRequest$inboundSchema: z.ZodType<
   UpdateVectorStoreFileAttributesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()])),
+  })
+);
 /** @internal */
 export type UpdateVectorStoreFileAttributesRequest$Outbound = {
   attributes: { [k: string]: string | boolean | number };
@@ -87,9 +93,11 @@ export const UpdateVectorStoreFileAttributesRequest$outboundSchema: z.ZodType<
   UpdateVectorStoreFileAttributesRequest$Outbound,
   z.ZodTypeDef,
   UpdateVectorStoreFileAttributesRequest
-> = z.object({
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()])),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()])),
+  })
+);
 
 export function updateVectorStoreFileAttributesRequestToJSON(
   updateVectorStoreFileAttributesRequest:

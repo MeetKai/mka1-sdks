@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,9 +29,11 @@ export const CreatePromptVersionRequestBody$inboundSchema: z.ZodType<
   CreatePromptVersionRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  template: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    template: z.string(),
+  })
+);
 /** @internal */
 export type CreatePromptVersionRequestBody$Outbound = {
   template: string;
@@ -42,9 +44,11 @@ export const CreatePromptVersionRequestBody$outboundSchema: z.ZodType<
   CreatePromptVersionRequestBody$Outbound,
   z.ZodTypeDef,
   CreatePromptVersionRequestBody
-> = z.object({
-  template: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    template: z.string(),
+  })
+);
 
 export function createPromptVersionRequestBodyToJSON(
   createPromptVersionRequestBody: CreatePromptVersionRequestBody,
@@ -70,16 +74,18 @@ export const CreatePromptVersionRequest$inboundSchema: z.ZodType<
   CreatePromptVersionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreatePromptVersionRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreatePromptVersionRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreatePromptVersionRequest$Outbound = {
   id: string;
@@ -92,16 +98,18 @@ export const CreatePromptVersionRequest$outboundSchema: z.ZodType<
   CreatePromptVersionRequest$Outbound,
   z.ZodTypeDef,
   CreatePromptVersionRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreatePromptVersionRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreatePromptVersionRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createPromptVersionRequestToJSON(
   createPromptVersionRequest: CreatePromptVersionRequest,

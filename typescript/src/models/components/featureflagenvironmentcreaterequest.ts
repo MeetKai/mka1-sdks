@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const FeatureFlagEnvironmentCreateRequest$inboundSchema: z.ZodType<
   FeatureFlagEnvironmentCreateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type FeatureFlagEnvironmentCreateRequest$Outbound = {
   key: string;
@@ -32,10 +34,12 @@ export const FeatureFlagEnvironmentCreateRequest$outboundSchema: z.ZodType<
   FeatureFlagEnvironmentCreateRequest$Outbound,
   z.ZodTypeDef,
   FeatureFlagEnvironmentCreateRequest
-> = z.object({
-  key: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    name: z.string(),
+  })
+);
 
 export function featureFlagEnvironmentCreateRequestToJSON(
   featureFlagEnvironmentCreateRequest: FeatureFlagEnvironmentCreateRequest,

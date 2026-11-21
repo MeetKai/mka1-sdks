@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,7 +31,7 @@ export type FunctionTool = {
 /** @internal */
 export const FunctionToolObject$inboundSchema: z.ZodNativeEnum<
   typeof FunctionToolObject
-> = z.nativeEnum(FunctionToolObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FunctionToolObject));
 /** @internal */
 export const FunctionToolObject$outboundSchema: z.ZodNativeEnum<
   typeof FunctionToolObject
@@ -42,18 +42,24 @@ export const FunctionTool$inboundSchema: z.ZodType<
   FunctionTool,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: FunctionToolObject$inboundSchema,
-  id: z.string(),
-  definition: AgentsFunctionToolDefinition$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: FunctionToolObject$inboundSchema,
+    id: z.string(),
+    definition: AgentsFunctionToolDefinition$inboundSchema,
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type FunctionTool$Outbound = {
   object: string;
@@ -68,18 +74,20 @@ export const FunctionTool$outboundSchema: z.ZodType<
   FunctionTool$Outbound,
   z.ZodTypeDef,
   FunctionTool
-> = z.object({
-  object: FunctionToolObject$outboundSchema,
-  id: z.string(),
-  definition: AgentsFunctionToolDefinition$outboundSchema,
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: FunctionToolObject$outboundSchema,
+    id: z.string(),
+    definition: AgentsFunctionToolDefinition$outboundSchema,
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function functionToolToJSON(functionTool: FunctionTool): string {
   return JSON.stringify(FunctionTool$outboundSchema.parse(functionTool));

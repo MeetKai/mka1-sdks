@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
@@ -402,7 +402,9 @@ export type UpdateCatalogModelRequest = {
 /** @internal */
 export const UpdateCatalogModelRequestApiFormat$inboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestApiFormat
-> = z.nativeEnum(UpdateCatalogModelRequestApiFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateCatalogModelRequestApiFormat)
+);
 /** @internal */
 export const UpdateCatalogModelRequestApiFormat$outboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestApiFormat
@@ -410,8 +412,10 @@ export const UpdateCatalogModelRequestApiFormat$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const UpdateCatalogModelRequestApiProviderType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateCatalogModelRequestApiProviderType> = z
-    .nativeEnum(UpdateCatalogModelRequestApiProviderType);
+  z.ZodNativeEnum<typeof UpdateCatalogModelRequestApiProviderType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateCatalogModelRequestApiProviderType)
+    );
 /** @internal */
 export const UpdateCatalogModelRequestApiProviderType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateCatalogModelRequestApiProviderType> =
@@ -422,10 +426,12 @@ export const UpdateCatalogModelRequestStrategiesAuth4$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.any().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategiesAuth4$Outbound = {
   type: "composite";
@@ -437,10 +443,12 @@ export const UpdateCatalogModelRequestStrategiesAuth4$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth4$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategiesAuth4
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.any().optional(),
+  })
+);
 
 export function updateCatalogModelRequestStrategiesAuth4ToJSON(
   updateCatalogModelRequestStrategiesAuth4:
@@ -473,9 +481,11 @@ export const UpdateCatalogModelRequestStrategiesAuth3$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategiesAuth3$Outbound = {
   type: "none";
@@ -486,9 +496,11 @@ export const UpdateCatalogModelRequestStrategiesAuth3$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth3$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategiesAuth3
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 
 export function updateCatalogModelRequestStrategiesAuth3ToJSON(
   updateCatalogModelRequestStrategiesAuth3:
@@ -521,11 +533,13 @@ export const UpdateCatalogModelRequestStrategiesAuth2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategiesAuth2$Outbound = {
   type: "custom-headers";
@@ -538,11 +552,13 @@ export const UpdateCatalogModelRequestStrategiesAuth2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategiesAuth2
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 
 export function updateCatalogModelRequestStrategiesAuth2ToJSON(
   updateCatalogModelRequestStrategiesAuth2:
@@ -575,12 +591,14 @@ export const UpdateCatalogModelRequestStrategiesAuth1$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategiesAuth1$Outbound = {
   type: "api-key";
@@ -594,12 +612,14 @@ export const UpdateCatalogModelRequestStrategiesAuth1$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategiesAuth1$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategiesAuth1
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 
 export function updateCatalogModelRequestStrategiesAuth1ToJSON(
   updateCatalogModelRequestStrategiesAuth1:
@@ -633,12 +653,14 @@ export const UpdateCatalogModelRequestStrategiesStrategies$inboundSchema:
     UpdateCatalogModelRequestStrategiesStrategies,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$inboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$inboundSchema),
+    ])
+  );
 /** @internal */
 export type UpdateCatalogModelRequestStrategiesStrategies$Outbound =
   | UpdateCatalogModelRequestStrategiesAuth1$Outbound
@@ -652,12 +674,14 @@ export const UpdateCatalogModelRequestStrategiesStrategies$outboundSchema:
     UpdateCatalogModelRequestStrategiesStrategies$Outbound,
     z.ZodTypeDef,
     UpdateCatalogModelRequestStrategiesStrategies
-  > = z.union([
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$outboundSchema),
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$outboundSchema),
+    ])
+  );
 
 export function updateCatalogModelRequestStrategiesStrategiesToJSON(
   updateCatalogModelRequestStrategiesStrategies:
@@ -690,17 +714,17 @@ export const UpdateCatalogModelRequestStrategies4$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.array(z.union([
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$inboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategies4$Outbound = {
   type: "composite";
@@ -717,17 +741,17 @@ export const UpdateCatalogModelRequestStrategies4$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies4$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategies4
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.array(z.union([
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth1$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth2$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth3$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategiesAuth4$outboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function updateCatalogModelRequestStrategies4ToJSON(
   updateCatalogModelRequestStrategies4: UpdateCatalogModelRequestStrategies4,
@@ -754,9 +778,11 @@ export const UpdateCatalogModelRequestStrategies3$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategies3$Outbound = {
   type: "none";
@@ -767,9 +793,11 @@ export const UpdateCatalogModelRequestStrategies3$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies3$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategies3
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 
 export function updateCatalogModelRequestStrategies3ToJSON(
   updateCatalogModelRequestStrategies3: UpdateCatalogModelRequestStrategies3,
@@ -796,11 +824,13 @@ export const UpdateCatalogModelRequestStrategies2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategies2$Outbound = {
   type: "custom-headers";
@@ -813,11 +843,13 @@ export const UpdateCatalogModelRequestStrategies2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategies2
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 
 export function updateCatalogModelRequestStrategies2ToJSON(
   updateCatalogModelRequestStrategies2: UpdateCatalogModelRequestStrategies2,
@@ -844,12 +876,14 @@ export const UpdateCatalogModelRequestStrategies1$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestStrategies1$Outbound = {
   type: "api-key";
@@ -863,12 +897,14 @@ export const UpdateCatalogModelRequestStrategies1$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestStrategies1$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestStrategies1
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 
 export function updateCatalogModelRequestStrategies1ToJSON(
   updateCatalogModelRequestStrategies1: UpdateCatalogModelRequestStrategies1,
@@ -895,12 +931,14 @@ export const AuthStrategies$inboundSchema: z.ZodType<
   AuthStrategies,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestStrategies1$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies2$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies3$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies4$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestStrategies1$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies2$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies3$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies4$inboundSchema),
+  ])
+);
 /** @internal */
 export type AuthStrategies$Outbound =
   | UpdateCatalogModelRequestStrategies1$Outbound
@@ -913,12 +951,14 @@ export const AuthStrategies$outboundSchema: z.ZodType<
   AuthStrategies$Outbound,
   z.ZodTypeDef,
   AuthStrategies
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestStrategies1$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies2$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies3$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestStrategies4$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestStrategies1$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies2$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies3$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestStrategies4$outboundSchema),
+  ])
+);
 
 export function authStrategiesToJSON(authStrategies: AuthStrategies): string {
   return JSON.stringify(AuthStrategies$outboundSchema.parse(authStrategies));
@@ -938,17 +978,17 @@ export const UpdateCatalogModelRequestAuth4$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.array(z.union([
       z.lazy(() => UpdateCatalogModelRequestStrategies1$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies2$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies3$inboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies4$inboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestAuth4$Outbound = {
   type: "composite";
@@ -965,17 +1005,17 @@ export const UpdateCatalogModelRequestAuth4$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth4$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestAuth4
-> = z.object({
-  type: z.literal("composite"),
-  strategies: z.array(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("composite"),
+    strategies: z.array(z.union([
       z.lazy(() => UpdateCatalogModelRequestStrategies1$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies2$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies3$outboundSchema),
       z.lazy(() => UpdateCatalogModelRequestStrategies4$outboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function updateCatalogModelRequestAuth4ToJSON(
   updateCatalogModelRequestAuth4: UpdateCatalogModelRequestAuth4,
@@ -1001,9 +1041,11 @@ export const UpdateCatalogModelRequestAuth3$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestAuth3$Outbound = {
   type: "none";
@@ -1014,9 +1056,11 @@ export const UpdateCatalogModelRequestAuth3$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth3$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestAuth3
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 
 export function updateCatalogModelRequestAuth3ToJSON(
   updateCatalogModelRequestAuth3: UpdateCatalogModelRequestAuth3,
@@ -1042,11 +1086,13 @@ export const UpdateCatalogModelRequestAuth2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestAuth2$Outbound = {
   type: "custom-headers";
@@ -1059,11 +1105,13 @@ export const UpdateCatalogModelRequestAuth2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestAuth2
-> = z.object({
-  type: z.literal("custom-headers"),
-  headers: z.record(z.string()),
-  envVars: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom-headers"),
+    headers: z.record(z.string()),
+    envVars: z.record(z.string()).optional(),
+  })
+);
 
 export function updateCatalogModelRequestAuth2ToJSON(
   updateCatalogModelRequestAuth2: UpdateCatalogModelRequestAuth2,
@@ -1089,12 +1137,14 @@ export const UpdateCatalogModelRequestAuth1$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestAuth1$Outbound = {
   type: "api-key";
@@ -1108,12 +1158,14 @@ export const UpdateCatalogModelRequestAuth1$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth1$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestAuth1
-> = z.object({
-  type: z.literal("api-key"),
-  value: z.string().optional(),
-  envVar: z.string().optional(),
-  headerName: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("api-key"),
+    value: z.string().optional(),
+    envVar: z.string().optional(),
+    headerName: z.string().optional(),
+  })
+);
 
 export function updateCatalogModelRequestAuth1ToJSON(
   updateCatalogModelRequestAuth1: UpdateCatalogModelRequestAuth1,
@@ -1139,12 +1191,14 @@ export const UpdateCatalogModelRequestAuth$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestAuth1$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth2$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth3$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth4$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestAuth1$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth2$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth3$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth4$inboundSchema),
+  ])
+);
 /** @internal */
 export type UpdateCatalogModelRequestAuth$Outbound =
   | UpdateCatalogModelRequestAuth1$Outbound
@@ -1157,12 +1211,14 @@ export const UpdateCatalogModelRequestAuth$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestAuth$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestAuth
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestAuth1$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth2$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth3$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestAuth4$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestAuth1$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth2$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth3$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestAuth4$outboundSchema),
+  ])
+);
 
 export function updateCatalogModelRequestAuthToJSON(
   updateCatalogModelRequestAuth: UpdateCatalogModelRequestAuth,
@@ -1186,7 +1242,9 @@ export function updateCatalogModelRequestAuthFromJSON(
 /** @internal */
 export const UpdateCatalogModelRequestInput$inboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestInput
-> = z.nativeEnum(UpdateCatalogModelRequestInput);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateCatalogModelRequestInput)
+);
 /** @internal */
 export const UpdateCatalogModelRequestInput$outboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestInput
@@ -1195,7 +1253,9 @@ export const UpdateCatalogModelRequestInput$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const UpdateCatalogModelRequestOutput$inboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestOutput
-> = z.nativeEnum(UpdateCatalogModelRequestOutput);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateCatalogModelRequestOutput)
+);
 /** @internal */
 export const UpdateCatalogModelRequestOutput$outboundSchema: z.ZodNativeEnum<
   typeof UpdateCatalogModelRequestOutput
@@ -1206,10 +1266,12 @@ export const UpdateCatalogModelRequestModalities$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestModalities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.array(UpdateCatalogModelRequestInput$inboundSchema),
-  output: z.array(UpdateCatalogModelRequestOutput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.array(UpdateCatalogModelRequestInput$inboundSchema),
+    output: z.array(UpdateCatalogModelRequestOutput$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestModalities$Outbound = {
   input: Array<string>;
@@ -1221,10 +1283,12 @@ export const UpdateCatalogModelRequestModalities$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestModalities$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestModalities
-> = z.object({
-  input: z.array(UpdateCatalogModelRequestInput$outboundSchema),
-  output: z.array(UpdateCatalogModelRequestOutput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.array(UpdateCatalogModelRequestInput$outboundSchema),
+    output: z.array(UpdateCatalogModelRequestOutput$outboundSchema),
+  })
+);
 
 export function updateCatalogModelRequestModalitiesToJSON(
   updateCatalogModelRequestModalities: UpdateCatalogModelRequestModalities,
@@ -1252,10 +1316,12 @@ export const UpdateCatalogModelRequestMaxImageResolution$inboundSchema:
     UpdateCatalogModelRequestMaxImageResolution,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    maxWidth: z.number().int(),
-    maxHeight: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      maxWidth: z.number().int(),
+      maxHeight: z.number().int(),
+    })
+  );
 /** @internal */
 export type UpdateCatalogModelRequestMaxImageResolution$Outbound = {
   maxWidth: number;
@@ -1268,10 +1334,12 @@ export const UpdateCatalogModelRequestMaxImageResolution$outboundSchema:
     UpdateCatalogModelRequestMaxImageResolution$Outbound,
     z.ZodTypeDef,
     UpdateCatalogModelRequestMaxImageResolution
-  > = z.object({
-    maxWidth: z.number().int(),
-    maxHeight: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      maxWidth: z.number().int(),
+      maxHeight: z.number().int(),
+    })
+  );
 
 export function updateCatalogModelRequestMaxImageResolutionToJSON(
   updateCatalogModelRequestMaxImageResolution:
@@ -1305,10 +1373,12 @@ export const UpdateCatalogModelRequestMinImageResolution$inboundSchema:
     UpdateCatalogModelRequestMinImageResolution,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    maxWidth: z.number().int(),
-    maxHeight: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      maxWidth: z.number().int(),
+      maxHeight: z.number().int(),
+    })
+  );
 /** @internal */
 export type UpdateCatalogModelRequestMinImageResolution$Outbound = {
   maxWidth: number;
@@ -1321,10 +1391,12 @@ export const UpdateCatalogModelRequestMinImageResolution$outboundSchema:
     UpdateCatalogModelRequestMinImageResolution$Outbound,
     z.ZodTypeDef,
     UpdateCatalogModelRequestMinImageResolution
-  > = z.object({
-    maxWidth: z.number().int(),
-    maxHeight: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      maxWidth: z.number().int(),
+      maxHeight: z.number().int(),
+    })
+  );
 
 export function updateCatalogModelRequestMinImageResolutionToJSON(
   updateCatalogModelRequestMinImageResolution:
@@ -1357,23 +1429,25 @@ export const UpdateCatalogModelRequestCapabilities$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestCapabilities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  modalities: z.lazy(() => UpdateCatalogModelRequestModalities$inboundSchema),
-  reasoning: z.boolean(),
-  supportsReasoningEffort: z.boolean().optional(),
-  supportedBase64Formats: z.array(z.string()).optional(),
-  supportsCompletionVideoUrlMessage: z.boolean().optional(),
-  supportsStructuredOutputs: z.boolean().optional(),
-  supportsTemperature: z.boolean().optional(),
-  supportsTopP: z.boolean().optional(),
-  supportsImageDetailOriginal: z.boolean().optional(),
-  maxImageResolution: z.lazy(() =>
-    UpdateCatalogModelRequestMaxImageResolution$inboundSchema
-  ).optional(),
-  minImageResolution: z.lazy(() =>
-    UpdateCatalogModelRequestMinImageResolution$inboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modalities: z.lazy(() => UpdateCatalogModelRequestModalities$inboundSchema),
+    reasoning: z.boolean(),
+    supportsReasoningEffort: z.boolean().optional(),
+    supportedBase64Formats: z.array(z.string()).optional(),
+    supportsCompletionVideoUrlMessage: z.boolean().optional(),
+    supportsStructuredOutputs: z.boolean().optional(),
+    supportsTemperature: z.boolean().optional(),
+    supportsTopP: z.boolean().optional(),
+    supportsImageDetailOriginal: z.boolean().optional(),
+    maxImageResolution: z.lazy(() =>
+      UpdateCatalogModelRequestMaxImageResolution$inboundSchema
+    ).optional(),
+    minImageResolution: z.lazy(() =>
+      UpdateCatalogModelRequestMinImageResolution$inboundSchema
+    ).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestCapabilities$Outbound = {
   modalities: UpdateCatalogModelRequestModalities$Outbound;
@@ -1398,23 +1472,27 @@ export const UpdateCatalogModelRequestCapabilities$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestCapabilities$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestCapabilities
-> = z.object({
-  modalities: z.lazy(() => UpdateCatalogModelRequestModalities$outboundSchema),
-  reasoning: z.boolean(),
-  supportsReasoningEffort: z.boolean().optional(),
-  supportedBase64Formats: z.array(z.string()).optional(),
-  supportsCompletionVideoUrlMessage: z.boolean().optional(),
-  supportsStructuredOutputs: z.boolean().optional(),
-  supportsTemperature: z.boolean().optional(),
-  supportsTopP: z.boolean().optional(),
-  supportsImageDetailOriginal: z.boolean().optional(),
-  maxImageResolution: z.lazy(() =>
-    UpdateCatalogModelRequestMaxImageResolution$outboundSchema
-  ).optional(),
-  minImageResolution: z.lazy(() =>
-    UpdateCatalogModelRequestMinImageResolution$outboundSchema
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modalities: z.lazy(() =>
+      UpdateCatalogModelRequestModalities$outboundSchema
+    ),
+    reasoning: z.boolean(),
+    supportsReasoningEffort: z.boolean().optional(),
+    supportedBase64Formats: z.array(z.string()).optional(),
+    supportsCompletionVideoUrlMessage: z.boolean().optional(),
+    supportsStructuredOutputs: z.boolean().optional(),
+    supportsTemperature: z.boolean().optional(),
+    supportsTopP: z.boolean().optional(),
+    supportsImageDetailOriginal: z.boolean().optional(),
+    maxImageResolution: z.lazy(() =>
+      UpdateCatalogModelRequestMaxImageResolution$outboundSchema
+    ).optional(),
+    minImageResolution: z.lazy(() =>
+      UpdateCatalogModelRequestMinImageResolution$outboundSchema
+    ).optional(),
+  })
+);
 
 export function updateCatalogModelRequestCapabilitiesToJSON(
   updateCatalogModelRequestCapabilities: UpdateCatalogModelRequestCapabilities,
@@ -1439,7 +1517,7 @@ export function updateCatalogModelRequestCapabilitiesFromJSON(
 /** @internal */
 export const RateLimitsScope$inboundSchema: z.ZodNativeEnum<
   typeof RateLimitsScope
-> = z.nativeEnum(RateLimitsScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RateLimitsScope));
 /** @internal */
 export const RateLimitsScope$outboundSchema: z.ZodNativeEnum<
   typeof RateLimitsScope
@@ -1450,10 +1528,12 @@ export const RateLimitsQueue$inboundSchema: z.ZodType<
   RateLimitsQueue,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  maxDepth: z.number().int(),
-  maxWaitMs: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxDepth: z.number().int(),
+    maxWaitMs: z.number().int(),
+  })
+);
 /** @internal */
 export type RateLimitsQueue$Outbound = {
   maxDepth: number;
@@ -1465,10 +1545,12 @@ export const RateLimitsQueue$outboundSchema: z.ZodType<
   RateLimitsQueue$Outbound,
   z.ZodTypeDef,
   RateLimitsQueue
-> = z.object({
-  maxDepth: z.number().int(),
-  maxWaitMs: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxDepth: z.number().int(),
+    maxWaitMs: z.number().int(),
+  })
+);
 
 export function rateLimitsQueueToJSON(
   rateLimitsQueue: RateLimitsQueue,
@@ -1490,13 +1572,15 @@ export const UpdateCatalogModelRequestRateLimits$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestRateLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: RateLimitsScope$inboundSchema,
-  rpm: z.number().int().optional(),
-  tpm: z.number().int().optional(),
-  duration: z.number().int().optional(),
-  queue: z.lazy(() => RateLimitsQueue$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: RateLimitsScope$inboundSchema,
+    rpm: z.number().int().optional(),
+    tpm: z.number().int().optional(),
+    duration: z.number().int().optional(),
+    queue: z.lazy(() => RateLimitsQueue$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestRateLimits$Outbound = {
   scope: string;
@@ -1511,13 +1595,15 @@ export const UpdateCatalogModelRequestRateLimits$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestRateLimits$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestRateLimits
-> = z.object({
-  scope: RateLimitsScope$outboundSchema,
-  rpm: z.number().int().optional(),
-  tpm: z.number().int().optional(),
-  duration: z.number().int().optional(),
-  queue: z.lazy(() => RateLimitsQueue$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: RateLimitsScope$outboundSchema,
+    rpm: z.number().int().optional(),
+    tpm: z.number().int().optional(),
+    duration: z.number().int().optional(),
+    queue: z.lazy(() => RateLimitsQueue$outboundSchema).optional(),
+  })
+);
 
 export function updateCatalogModelRequestRateLimitsToJSON(
   updateCatalogModelRequestRateLimits: UpdateCatalogModelRequestRateLimits,
@@ -1544,10 +1630,12 @@ export const UpdateCatalogModelRequestConcurrency$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestConcurrency,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max: z.number().int(),
-  maxWaitMs: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max: z.number().int(),
+    maxWaitMs: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestConcurrency$Outbound = {
   max: number;
@@ -1559,10 +1647,12 @@ export const UpdateCatalogModelRequestConcurrency$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestConcurrency$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestConcurrency
-> = z.object({
-  max: z.number().int(),
-  maxWaitMs: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max: z.number().int(),
+    maxWaitMs: z.number().int().optional(),
+  })
+);
 
 export function updateCatalogModelRequestConcurrencyToJSON(
   updateCatalogModelRequestConcurrency: UpdateCatalogModelRequestConcurrency,
@@ -1589,12 +1679,14 @@ export const UpdateCatalogModelRequestDefaultParams$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestDefaultParams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestDefaultParams$Outbound = {
   temperature?: number | undefined;
@@ -1608,12 +1700,14 @@ export const UpdateCatalogModelRequestDefaultParams$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestDefaultParams$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestDefaultParams
-> = z.object({
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+  })
+);
 
 export function updateCatalogModelRequestDefaultParamsToJSON(
   updateCatalogModelRequestDefaultParams:
@@ -1641,9 +1735,11 @@ export const UpdateCatalogModelRequestTrigger2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestTrigger2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("error-fallback"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("error-fallback"),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestTrigger2$Outbound = {
   type: "error-fallback";
@@ -1654,9 +1750,11 @@ export const UpdateCatalogModelRequestTrigger2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestTrigger2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestTrigger2
-> = z.object({
-  type: z.literal("error-fallback"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("error-fallback"),
+  })
+);
 
 export function updateCatalogModelRequestTrigger2ToJSON(
   updateCatalogModelRequestTrigger2: UpdateCatalogModelRequestTrigger2,
@@ -1680,7 +1778,7 @@ export function updateCatalogModelRequestTrigger2FromJSON(
 /** @internal */
 export const TriggerModality$inboundSchema: z.ZodNativeEnum<
   typeof TriggerModality
-> = z.nativeEnum(TriggerModality);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TriggerModality));
 /** @internal */
 export const TriggerModality$outboundSchema: z.ZodNativeEnum<
   typeof TriggerModality
@@ -1691,10 +1789,12 @@ export const UpdateCatalogModelRequestTrigger1$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestTrigger1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("input-modality"),
-  modality: TriggerModality$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input-modality"),
+    modality: TriggerModality$inboundSchema,
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestTrigger1$Outbound = {
   type: "input-modality";
@@ -1706,10 +1806,12 @@ export const UpdateCatalogModelRequestTrigger1$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestTrigger1$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestTrigger1
-> = z.object({
-  type: z.literal("input-modality"),
-  modality: TriggerModality$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input-modality"),
+    modality: TriggerModality$outboundSchema,
+  })
+);
 
 export function updateCatalogModelRequestTrigger1ToJSON(
   updateCatalogModelRequestTrigger1: UpdateCatalogModelRequestTrigger1,
@@ -1735,10 +1837,12 @@ export const RerouteRulesTrigger$inboundSchema: z.ZodType<
   RerouteRulesTrigger,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestTrigger1$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestTrigger2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestTrigger1$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestTrigger2$inboundSchema),
+  ])
+);
 /** @internal */
 export type RerouteRulesTrigger$Outbound =
   | UpdateCatalogModelRequestTrigger1$Outbound
@@ -1749,10 +1853,12 @@ export const RerouteRulesTrigger$outboundSchema: z.ZodType<
   RerouteRulesTrigger$Outbound,
   z.ZodTypeDef,
   RerouteRulesTrigger
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestTrigger1$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestTrigger2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestTrigger1$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestTrigger2$outboundSchema),
+  ])
+);
 
 export function rerouteRulesTriggerToJSON(
   rerouteRulesTrigger: RerouteRulesTrigger,
@@ -1776,15 +1882,17 @@ export const UpdateCatalogModelRequestRerouteRules$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestRerouteRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trigger: z.union([
-    z.lazy(() => UpdateCatalogModelRequestTrigger1$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestTrigger2$inboundSchema),
-  ]),
-  targetModelId: z.string(),
-  preserveParams: z.boolean().optional(),
-  log: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trigger: z.union([
+      z.lazy(() => UpdateCatalogModelRequestTrigger1$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestTrigger2$inboundSchema),
+    ]),
+    targetModelId: z.string(),
+    preserveParams: z.boolean().optional(),
+    log: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestRerouteRules$Outbound = {
   trigger:
@@ -1800,15 +1908,17 @@ export const UpdateCatalogModelRequestRerouteRules$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestRerouteRules$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestRerouteRules
-> = z.object({
-  trigger: z.union([
-    z.lazy(() => UpdateCatalogModelRequestTrigger1$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestTrigger2$outboundSchema),
-  ]),
-  targetModelId: z.string(),
-  preserveParams: z.boolean().optional(),
-  log: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trigger: z.union([
+      z.lazy(() => UpdateCatalogModelRequestTrigger1$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestTrigger2$outboundSchema),
+    ]),
+    targetModelId: z.string(),
+    preserveParams: z.boolean().optional(),
+    log: z.boolean().optional(),
+  })
+);
 
 export function updateCatalogModelRequestRerouteRulesToJSON(
   updateCatalogModelRequestRerouteRules: UpdateCatalogModelRequestRerouteRules,
@@ -1835,11 +1945,13 @@ export const UpdateCatalogModelRequestDimensions2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestDimensions2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestDimensions2$Outbound = {
   min: number;
@@ -1852,11 +1964,13 @@ export const UpdateCatalogModelRequestDimensions2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestDimensions2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestDimensions2
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 
 export function updateCatalogModelRequestDimensions2ToJSON(
   updateCatalogModelRequestDimensions2: UpdateCatalogModelRequestDimensions2,
@@ -1883,10 +1997,12 @@ export const EmbeddingLimitsDimensions$inboundSchema: z.ZodType<
   EmbeddingLimitsDimensions,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestDimensions2$inboundSchema),
-  z.number().int(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestDimensions2$inboundSchema),
+    z.number().int(),
+  ])
+);
 /** @internal */
 export type EmbeddingLimitsDimensions$Outbound =
   | UpdateCatalogModelRequestDimensions2$Outbound
@@ -1897,10 +2013,12 @@ export const EmbeddingLimitsDimensions$outboundSchema: z.ZodType<
   EmbeddingLimitsDimensions$Outbound,
   z.ZodTypeDef,
   EmbeddingLimitsDimensions
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestDimensions2$outboundSchema),
-  z.number().int(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestDimensions2$outboundSchema),
+    z.number().int(),
+  ])
+);
 
 export function embeddingLimitsDimensionsToJSON(
   embeddingLimitsDimensions: EmbeddingLimitsDimensions,
@@ -1924,14 +2042,16 @@ export const UpdateCatalogModelRequestEmbeddingLimits$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestEmbeddingLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  maxBatchSize: z.number().int().optional(),
-  maxBatchTokens: z.number().int().optional(),
-  dimensions: z.union([
-    z.lazy(() => UpdateCatalogModelRequestDimensions2$inboundSchema),
-    z.number().int(),
-  ]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxBatchSize: z.number().int().optional(),
+    maxBatchTokens: z.number().int().optional(),
+    dimensions: z.union([
+      z.lazy(() => UpdateCatalogModelRequestDimensions2$inboundSchema),
+      z.number().int(),
+    ]).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestEmbeddingLimits$Outbound = {
   maxBatchSize?: number | undefined;
@@ -1947,14 +2067,16 @@ export const UpdateCatalogModelRequestEmbeddingLimits$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestEmbeddingLimits$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestEmbeddingLimits
-> = z.object({
-  maxBatchSize: z.number().int().optional(),
-  maxBatchTokens: z.number().int().optional(),
-  dimensions: z.union([
-    z.lazy(() => UpdateCatalogModelRequestDimensions2$outboundSchema),
-    z.number().int(),
-  ]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxBatchSize: z.number().int().optional(),
+    maxBatchTokens: z.number().int().optional(),
+    dimensions: z.union([
+      z.lazy(() => UpdateCatalogModelRequestDimensions2$outboundSchema),
+      z.number().int(),
+    ]).optional(),
+  })
+);
 
 export function updateCatalogModelRequestEmbeddingLimitsToJSON(
   updateCatalogModelRequestEmbeddingLimits:
@@ -1985,7 +2107,9 @@ export function updateCatalogModelRequestEmbeddingLimitsFromJSON(
 /** @internal */
 export const DecisionCapabilitiesQuestionTypes$inboundSchema: z.ZodNativeEnum<
   typeof DecisionCapabilitiesQuestionTypes
-> = z.nativeEnum(DecisionCapabilitiesQuestionTypes);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DecisionCapabilitiesQuestionTypes)
+);
 /** @internal */
 export const DecisionCapabilitiesQuestionTypes$outboundSchema: z.ZodNativeEnum<
   typeof DecisionCapabilitiesQuestionTypes
@@ -1996,10 +2120,12 @@ export const DecisionCapabilitiesChoiceOptions$inboundSchema: z.ZodType<
   DecisionCapabilitiesChoiceOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int().optional(),
-  max: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int().optional(),
+    max: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type DecisionCapabilitiesChoiceOptions$Outbound = {
   min?: number | undefined;
@@ -2011,10 +2137,12 @@ export const DecisionCapabilitiesChoiceOptions$outboundSchema: z.ZodType<
   DecisionCapabilitiesChoiceOptions$Outbound,
   z.ZodTypeDef,
   DecisionCapabilitiesChoiceOptions
-> = z.object({
-  min: z.number().int().optional(),
-  max: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int().optional(),
+    max: z.number().int().optional(),
+  })
+);
 
 export function decisionCapabilitiesChoiceOptionsToJSON(
   decisionCapabilitiesChoiceOptions: DecisionCapabilitiesChoiceOptions,
@@ -2040,10 +2168,12 @@ export const DecisionCapabilitiesScoreLevels$inboundSchema: z.ZodType<
   DecisionCapabilitiesScoreLevels,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int().optional(),
-  max: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int().optional(),
+    max: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type DecisionCapabilitiesScoreLevels$Outbound = {
   min?: number | undefined;
@@ -2055,10 +2185,12 @@ export const DecisionCapabilitiesScoreLevels$outboundSchema: z.ZodType<
   DecisionCapabilitiesScoreLevels$Outbound,
   z.ZodTypeDef,
   DecisionCapabilitiesScoreLevels
-> = z.object({
-  min: z.number().int().optional(),
-  max: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int().optional(),
+    max: z.number().int().optional(),
+  })
+);
 
 export function decisionCapabilitiesScoreLevelsToJSON(
   decisionCapabilitiesScoreLevels: DecisionCapabilitiesScoreLevels,
@@ -2085,16 +2217,19 @@ export const UpdateCatalogModelRequestDecisionCapabilities$inboundSchema:
     UpdateCatalogModelRequestDecisionCapabilities,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    questionTypes: z.array(DecisionCapabilitiesQuestionTypes$inboundSchema),
-    supportsProbabilities: z.boolean(),
-    supportsRefusals: z.boolean().optional(),
-    maxQuestions: z.number().int().optional(),
-    choiceOptions: z.lazy(() => DecisionCapabilitiesChoiceOptions$inboundSchema)
-      .optional(),
-    scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$inboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      questionTypes: z.array(DecisionCapabilitiesQuestionTypes$inboundSchema),
+      supportsProbabilities: z.boolean(),
+      supportsRefusals: z.boolean().optional(),
+      maxQuestions: z.number().int().optional(),
+      choiceOptions: z.lazy(() =>
+        DecisionCapabilitiesChoiceOptions$inboundSchema
+      ).optional(),
+      scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$inboundSchema)
+        .optional(),
+    })
+  );
 /** @internal */
 export type UpdateCatalogModelRequestDecisionCapabilities$Outbound = {
   questionTypes: Array<string>;
@@ -2111,17 +2246,19 @@ export const UpdateCatalogModelRequestDecisionCapabilities$outboundSchema:
     UpdateCatalogModelRequestDecisionCapabilities$Outbound,
     z.ZodTypeDef,
     UpdateCatalogModelRequestDecisionCapabilities
-  > = z.object({
-    questionTypes: z.array(DecisionCapabilitiesQuestionTypes$outboundSchema),
-    supportsProbabilities: z.boolean(),
-    supportsRefusals: z.boolean().optional(),
-    maxQuestions: z.number().int().optional(),
-    choiceOptions: z.lazy(() =>
-      DecisionCapabilitiesChoiceOptions$outboundSchema
-    ).optional(),
-    scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$outboundSchema)
-      .optional(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      questionTypes: z.array(DecisionCapabilitiesQuestionTypes$outboundSchema),
+      supportsProbabilities: z.boolean(),
+      supportsRefusals: z.boolean().optional(),
+      maxQuestions: z.number().int().optional(),
+      choiceOptions: z.lazy(() =>
+        DecisionCapabilitiesChoiceOptions$outboundSchema
+      ).optional(),
+      scoreLevels: z.lazy(() => DecisionCapabilitiesScoreLevels$outboundSchema)
+        .optional(),
+    })
+  );
 
 export function updateCatalogModelRequestDecisionCapabilitiesToJSON(
   updateCatalogModelRequestDecisionCapabilities:
@@ -2151,8 +2288,10 @@ export function updateCatalogModelRequestDecisionCapabilitiesFromJSON(
 
 /** @internal */
 export const UpdateCatalogModelRequestHealthCheck3Method$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheck3Method> = z
-    .nativeEnum(UpdateCatalogModelRequestHealthCheck3Method);
+  z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheck3Method> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateCatalogModelRequestHealthCheck3Method)
+    );
 /** @internal */
 export const UpdateCatalogModelRequestHealthCheck3Method$outboundSchema:
   z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheck3Method> =
@@ -2163,14 +2302,17 @@ export const UpdateCatalogModelRequestHealthCheck3$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("periodic"),
-  intervalSeconds: z.number().int(),
-  path: z.string(),
-  method: UpdateCatalogModelRequestHealthCheck3Method$inboundSchema.optional(),
-  timeoutMs: z.number().int().optional(),
-  cacheTtlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("periodic"),
+    intervalSeconds: z.number().int(),
+    path: z.string(),
+    method: UpdateCatalogModelRequestHealthCheck3Method$inboundSchema
+      .optional(),
+    timeoutMs: z.number().int().optional(),
+    cacheTtlSeconds: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestHealthCheck3$Outbound = {
   mode: "periodic";
@@ -2186,14 +2328,17 @@ export const UpdateCatalogModelRequestHealthCheck3$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck3$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestHealthCheck3
-> = z.object({
-  mode: z.literal("periodic"),
-  intervalSeconds: z.number().int(),
-  path: z.string(),
-  method: UpdateCatalogModelRequestHealthCheck3Method$outboundSchema.optional(),
-  timeoutMs: z.number().int().optional(),
-  cacheTtlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("periodic"),
+    intervalSeconds: z.number().int(),
+    path: z.string(),
+    method: UpdateCatalogModelRequestHealthCheck3Method$outboundSchema
+      .optional(),
+    timeoutMs: z.number().int().optional(),
+    cacheTtlSeconds: z.number().int().optional(),
+  })
+);
 
 export function updateCatalogModelRequestHealthCheck3ToJSON(
   updateCatalogModelRequestHealthCheck3: UpdateCatalogModelRequestHealthCheck3,
@@ -2217,8 +2362,10 @@ export function updateCatalogModelRequestHealthCheck3FromJSON(
 
 /** @internal */
 export const UpdateCatalogModelRequestHealthCheckMethod$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheckMethod> = z
-    .nativeEnum(UpdateCatalogModelRequestHealthCheckMethod);
+  z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheckMethod> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateCatalogModelRequestHealthCheckMethod)
+    );
 /** @internal */
 export const UpdateCatalogModelRequestHealthCheckMethod$outboundSchema:
   z.ZodNativeEnum<typeof UpdateCatalogModelRequestHealthCheckMethod> =
@@ -2229,13 +2376,15 @@ export const UpdateCatalogModelRequestHealthCheck2$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("preflight"),
-  path: z.string(),
-  method: UpdateCatalogModelRequestHealthCheckMethod$inboundSchema.optional(),
-  timeoutMs: z.number().int().optional(),
-  cacheTtlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("preflight"),
+    path: z.string(),
+    method: UpdateCatalogModelRequestHealthCheckMethod$inboundSchema.optional(),
+    timeoutMs: z.number().int().optional(),
+    cacheTtlSeconds: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestHealthCheck2$Outbound = {
   mode: "preflight";
@@ -2250,13 +2399,16 @@ export const UpdateCatalogModelRequestHealthCheck2$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck2$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestHealthCheck2
-> = z.object({
-  mode: z.literal("preflight"),
-  path: z.string(),
-  method: UpdateCatalogModelRequestHealthCheckMethod$outboundSchema.optional(),
-  timeoutMs: z.number().int().optional(),
-  cacheTtlSeconds: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("preflight"),
+    path: z.string(),
+    method: UpdateCatalogModelRequestHealthCheckMethod$outboundSchema
+      .optional(),
+    timeoutMs: z.number().int().optional(),
+    cacheTtlSeconds: z.number().int().optional(),
+  })
+);
 
 export function updateCatalogModelRequestHealthCheck2ToJSON(
   updateCatalogModelRequestHealthCheck2: UpdateCatalogModelRequestHealthCheck2,
@@ -2283,9 +2435,11 @@ export const UpdateCatalogModelRequestHealthCheck1$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("off"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("off"),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestHealthCheck1$Outbound = {
   mode: "off";
@@ -2296,9 +2450,11 @@ export const UpdateCatalogModelRequestHealthCheck1$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck1$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestHealthCheck1
-> = z.object({
-  mode: z.literal("off"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("off"),
+  })
+);
 
 export function updateCatalogModelRequestHealthCheck1ToJSON(
   updateCatalogModelRequestHealthCheck1: UpdateCatalogModelRequestHealthCheck1,
@@ -2325,11 +2481,13 @@ export const UpdateCatalogModelRequestHealthCheck$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck1$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck2$inboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck3$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck1$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck2$inboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck3$inboundSchema),
+  ])
+);
 /** @internal */
 export type UpdateCatalogModelRequestHealthCheck$Outbound =
   | UpdateCatalogModelRequestHealthCheck1$Outbound
@@ -2341,11 +2499,13 @@ export const UpdateCatalogModelRequestHealthCheck$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestHealthCheck$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestHealthCheck
-> = z.union([
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck1$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck2$outboundSchema),
-  z.lazy(() => UpdateCatalogModelRequestHealthCheck3$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck1$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck2$outboundSchema),
+    z.lazy(() => UpdateCatalogModelRequestHealthCheck3$outboundSchema),
+  ])
+);
 
 export function updateCatalogModelRequestHealthCheckToJSON(
   updateCatalogModelRequestHealthCheck: UpdateCatalogModelRequestHealthCheck,
@@ -2370,7 +2530,7 @@ export function updateCatalogModelRequestHealthCheckFromJSON(
 /** @internal */
 export const ModelCardWeights$inboundSchema: z.ZodNativeEnum<
   typeof ModelCardWeights
-> = z.nativeEnum(ModelCardWeights);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelCardWeights));
 /** @internal */
 export const ModelCardWeights$outboundSchema: z.ZodNativeEnum<
   typeof ModelCardWeights
@@ -2381,18 +2541,20 @@ export const UpdateCatalogModelRequestModelCard$inboundSchema: z.ZodType<
   UpdateCatalogModelRequestModelCard,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  developer: z.string().optional(),
-  baseModel: z.string().optional(),
-  weights: ModelCardWeights$inboundSchema.optional(),
-  license: z.string().optional(),
-  languages: z.array(z.string()).optional(),
-  limitations: z.string().optional(),
-  parameterCount: z.number().int().optional(),
-  activeParameterCount: z.number().int().optional(),
-  releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
-  servingLocations: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    developer: z.string().optional(),
+    baseModel: z.string().optional(),
+    weights: ModelCardWeights$inboundSchema.optional(),
+    license: z.string().optional(),
+    languages: z.array(z.string()).optional(),
+    limitations: z.string().optional(),
+    parameterCount: z.number().int().optional(),
+    activeParameterCount: z.number().int().optional(),
+    releaseDate: z.string().transform(v => new RFCDate(v)).optional(),
+    servingLocations: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequestModelCard$Outbound = {
   developer?: string | undefined;
@@ -2412,18 +2574,20 @@ export const UpdateCatalogModelRequestModelCard$outboundSchema: z.ZodType<
   UpdateCatalogModelRequestModelCard$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequestModelCard
-> = z.object({
-  developer: z.string().optional(),
-  baseModel: z.string().optional(),
-  weights: ModelCardWeights$outboundSchema.optional(),
-  license: z.string().optional(),
-  languages: z.array(z.string()).optional(),
-  limitations: z.string().optional(),
-  parameterCount: z.number().int().optional(),
-  activeParameterCount: z.number().int().optional(),
-  releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  servingLocations: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    developer: z.string().optional(),
+    baseModel: z.string().optional(),
+    weights: ModelCardWeights$outboundSchema.optional(),
+    license: z.string().optional(),
+    languages: z.array(z.string()).optional(),
+    limitations: z.string().optional(),
+    parameterCount: z.number().int().optional(),
+    activeParameterCount: z.number().int().optional(),
+    releaseDate: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    servingLocations: z.array(z.string()).optional(),
+  })
+);
 
 export function updateCatalogModelRequestModelCardToJSON(
   updateCatalogModelRequestModelCard: UpdateCatalogModelRequestModelCard,
@@ -2450,60 +2614,64 @@ export const UpdateCatalogModelRequest$inboundSchema: z.ZodType<
   UpdateCatalogModelRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.string().optional(),
-  modelId: z.string().optional(),
-  displayName: z.nullable(z.string()).optional(),
-  baseUrl: z.nullable(z.string()).optional(),
-  apiFormat: UpdateCatalogModelRequestApiFormat$inboundSchema.optional(),
-  apiProviderType: UpdateCatalogModelRequestApiProviderType$inboundSchema
-    .optional(),
-  created: z.number().int().optional(),
-  auth: z.union([
-    z.lazy(() => UpdateCatalogModelRequestAuth1$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth2$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth3$inboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth4$inboundSchema),
-  ]).optional(),
-  capabilities: z.lazy(() =>
-    UpdateCatalogModelRequestCapabilities$inboundSchema
-  ).optional(),
-  contextWindow: z.nullable(z.number().int()).optional(),
-  rpm: z.nullable(z.number().int()).optional(),
-  rateLimits: z.nullable(
-    z.array(z.lazy(() => UpdateCatalogModelRequestRateLimits$inboundSchema)),
-  ).optional(),
-  concurrency: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestConcurrency$inboundSchema),
-  ).optional(),
-  requestTimeoutMs: z.nullable(z.number().int()).optional(),
-  maxRetries: z.nullable(z.number().int()).optional(),
-  defaultParams: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestDefaultParams$inboundSchema),
-  ).optional(),
-  rerouteRules: z.nullable(
-    z.array(z.lazy(() => UpdateCatalogModelRequestRerouteRules$inboundSchema)),
-  ).optional(),
-  hidden: z.nullable(z.boolean()).optional(),
-  embeddingLimits: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$inboundSchema),
-  ).optional(),
-  decisionCapabilities: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestDecisionCapabilities$inboundSchema),
-  ).optional(),
-  healthCheck: z.nullable(
-    z.union([
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck1$inboundSchema),
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck2$inboundSchema),
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck3$inboundSchema),
-    ]),
-  ).optional(),
-  modelCard: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestModelCard$inboundSchema),
-  ).optional(),
-  lifecycle: z.nullable(CatalogLifecycle$inboundSchema).optional(),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+    modelId: z.string().optional(),
+    displayName: z.nullable(z.string()).optional(),
+    baseUrl: z.nullable(z.string()).optional(),
+    apiFormat: UpdateCatalogModelRequestApiFormat$inboundSchema.optional(),
+    apiProviderType: UpdateCatalogModelRequestApiProviderType$inboundSchema
+      .optional(),
+    created: z.number().int().optional(),
+    auth: z.union([
+      z.lazy(() => UpdateCatalogModelRequestAuth1$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth2$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth3$inboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth4$inboundSchema),
+    ]).optional(),
+    capabilities: z.lazy(() =>
+      UpdateCatalogModelRequestCapabilities$inboundSchema
+    ).optional(),
+    contextWindow: z.nullable(z.number().int()).optional(),
+    rpm: z.nullable(z.number().int()).optional(),
+    rateLimits: z.nullable(
+      z.array(z.lazy(() => UpdateCatalogModelRequestRateLimits$inboundSchema)),
+    ).optional(),
+    concurrency: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestConcurrency$inboundSchema),
+    ).optional(),
+    requestTimeoutMs: z.nullable(z.number().int()).optional(),
+    maxRetries: z.nullable(z.number().int()).optional(),
+    defaultParams: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestDefaultParams$inboundSchema),
+    ).optional(),
+    rerouteRules: z.nullable(
+      z.array(
+        z.lazy(() => UpdateCatalogModelRequestRerouteRules$inboundSchema),
+      ),
+    ).optional(),
+    hidden: z.nullable(z.boolean()).optional(),
+    embeddingLimits: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$inboundSchema),
+    ).optional(),
+    decisionCapabilities: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestDecisionCapabilities$inboundSchema),
+    ).optional(),
+    healthCheck: z.nullable(
+      z.union([
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck1$inboundSchema),
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck2$inboundSchema),
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck3$inboundSchema),
+      ]),
+    ).optional(),
+    modelCard: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestModelCard$inboundSchema),
+    ).optional(),
+    lifecycle: z.nullable(CatalogLifecycle$inboundSchema).optional(),
+    id: z.string(),
+  })
+);
 /** @internal */
 export type UpdateCatalogModelRequest$Outbound = {
   provider?: string | undefined;
@@ -2565,60 +2733,66 @@ export const UpdateCatalogModelRequest$outboundSchema: z.ZodType<
   UpdateCatalogModelRequest$Outbound,
   z.ZodTypeDef,
   UpdateCatalogModelRequest
-> = z.object({
-  provider: z.string().optional(),
-  modelId: z.string().optional(),
-  displayName: z.nullable(z.string()).optional(),
-  baseUrl: z.nullable(z.string()).optional(),
-  apiFormat: UpdateCatalogModelRequestApiFormat$outboundSchema.optional(),
-  apiProviderType: UpdateCatalogModelRequestApiProviderType$outboundSchema
-    .optional(),
-  created: z.number().int().optional(),
-  auth: z.union([
-    z.lazy(() => UpdateCatalogModelRequestAuth1$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth2$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth3$outboundSchema),
-    z.lazy(() => UpdateCatalogModelRequestAuth4$outboundSchema),
-  ]).optional(),
-  capabilities: z.lazy(() =>
-    UpdateCatalogModelRequestCapabilities$outboundSchema
-  ).optional(),
-  contextWindow: z.nullable(z.number().int()).optional(),
-  rpm: z.nullable(z.number().int()).optional(),
-  rateLimits: z.nullable(
-    z.array(z.lazy(() => UpdateCatalogModelRequestRateLimits$outboundSchema)),
-  ).optional(),
-  concurrency: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestConcurrency$outboundSchema),
-  ).optional(),
-  requestTimeoutMs: z.nullable(z.number().int()).optional(),
-  maxRetries: z.nullable(z.number().int()).optional(),
-  defaultParams: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestDefaultParams$outboundSchema),
-  ).optional(),
-  rerouteRules: z.nullable(
-    z.array(z.lazy(() => UpdateCatalogModelRequestRerouteRules$outboundSchema)),
-  ).optional(),
-  hidden: z.nullable(z.boolean()).optional(),
-  embeddingLimits: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$outboundSchema),
-  ).optional(),
-  decisionCapabilities: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestDecisionCapabilities$outboundSchema),
-  ).optional(),
-  healthCheck: z.nullable(
-    z.union([
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck1$outboundSchema),
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck2$outboundSchema),
-      z.lazy(() => UpdateCatalogModelRequestHealthCheck3$outboundSchema),
-    ]),
-  ).optional(),
-  modelCard: z.nullable(
-    z.lazy(() => UpdateCatalogModelRequestModelCard$outboundSchema),
-  ).optional(),
-  lifecycle: z.nullable(CatalogLifecycle$outboundSchema).optional(),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.string().optional(),
+    modelId: z.string().optional(),
+    displayName: z.nullable(z.string()).optional(),
+    baseUrl: z.nullable(z.string()).optional(),
+    apiFormat: UpdateCatalogModelRequestApiFormat$outboundSchema.optional(),
+    apiProviderType: UpdateCatalogModelRequestApiProviderType$outboundSchema
+      .optional(),
+    created: z.number().int().optional(),
+    auth: z.union([
+      z.lazy(() => UpdateCatalogModelRequestAuth1$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth2$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth3$outboundSchema),
+      z.lazy(() => UpdateCatalogModelRequestAuth4$outboundSchema),
+    ]).optional(),
+    capabilities: z.lazy(() =>
+      UpdateCatalogModelRequestCapabilities$outboundSchema
+    ).optional(),
+    contextWindow: z.nullable(z.number().int()).optional(),
+    rpm: z.nullable(z.number().int()).optional(),
+    rateLimits: z.nullable(
+      z.array(z.lazy(() => UpdateCatalogModelRequestRateLimits$outboundSchema)),
+    ).optional(),
+    concurrency: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestConcurrency$outboundSchema),
+    ).optional(),
+    requestTimeoutMs: z.nullable(z.number().int()).optional(),
+    maxRetries: z.nullable(z.number().int()).optional(),
+    defaultParams: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestDefaultParams$outboundSchema),
+    ).optional(),
+    rerouteRules: z.nullable(
+      z.array(
+        z.lazy(() => UpdateCatalogModelRequestRerouteRules$outboundSchema),
+      ),
+    ).optional(),
+    hidden: z.nullable(z.boolean()).optional(),
+    embeddingLimits: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestEmbeddingLimits$outboundSchema),
+    ).optional(),
+    decisionCapabilities: z.nullable(
+      z.lazy(() =>
+        UpdateCatalogModelRequestDecisionCapabilities$outboundSchema
+      ),
+    ).optional(),
+    healthCheck: z.nullable(
+      z.union([
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck1$outboundSchema),
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck2$outboundSchema),
+        z.lazy(() => UpdateCatalogModelRequestHealthCheck3$outboundSchema),
+      ]),
+    ).optional(),
+    modelCard: z.nullable(
+      z.lazy(() => UpdateCatalogModelRequestModelCard$outboundSchema),
+    ).optional(),
+    lifecycle: z.nullable(CatalogLifecycle$outboundSchema).optional(),
+    id: z.string(),
+  })
+);
 
 export function updateCatalogModelRequestToJSON(
   updateCatalogModelRequest: UpdateCatalogModelRequest,

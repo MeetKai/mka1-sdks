@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const PageGeneration$inboundSchema: z.ZodType<
   PageGeneration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(Generation$inboundSchema),
-  next_cursor: z.nullable(z.string()).optional(),
-  total: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Generation$inboundSchema),
+    next_cursor: z.nullable(z.string()).optional(),
+    total: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type PageGeneration$Outbound = {
   data: Array<Generation$Outbound>;
@@ -46,15 +48,17 @@ export const PageGeneration$outboundSchema: z.ZodType<
   PageGeneration$Outbound,
   z.ZodTypeDef,
   PageGeneration
-> = z.object({
-  data: z.array(Generation$outboundSchema),
-  nextCursor: z.nullable(z.string()).optional(),
-  total: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Generation$outboundSchema),
+    nextCursor: z.nullable(z.string()).optional(),
+    total: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function pageGenerationToJSON(pageGeneration: PageGeneration): string {
   return JSON.stringify(PageGeneration$outboundSchema.parse(pageGeneration));

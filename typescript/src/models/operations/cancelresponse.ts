@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +24,17 @@ export const CancelResponseRequest$inboundSchema: z.ZodType<
   CancelResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type CancelResponseRequest$Outbound = {
   response_id: string;
@@ -41,15 +46,19 @@ export const CancelResponseRequest$outboundSchema: z.ZodType<
   CancelResponseRequest$Outbound,
   z.ZodTypeDef,
   CancelResponseRequest
-> = z.object({
-  responseId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string().refine(matchesPattern$("^resp[-_][a-zA-Z0-9]+$"), {
+      message: "Value must match pattern ^resp[-_][a-zA-Z0-9]+$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function cancelResponseRequestToJSON(
   cancelResponseRequest: CancelResponseRequest,

@@ -11,7 +11,10 @@ from meetkai_mka1.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
@@ -39,13 +42,20 @@ class OpenAIChatCompletionCompletionTokensDetails(BaseModel):
     r"""Number of tokens used for audio"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["reasoning_tokens", "audio_tokens"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -88,13 +98,20 @@ class OpenAIChatCompletionUsage1(BaseModel):
     r"""Breakdown of completion tokens by type"""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["completion_tokens_details"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -169,6 +186,9 @@ class OpenAIChatCompletion(BaseModel):
     r"""Where the completion was served, as reported by the serving upstream (the x-mka1-serving-location response header) or, failing that, the single location the model's registry card declares. Null when neither is known, which is the case for externally hosted models."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -179,11 +199,15 @@ class OpenAIChatCompletion(BaseModel):
             ]
         )
         nullable_fields = set(["resolved_serving_location"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

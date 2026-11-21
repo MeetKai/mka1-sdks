@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,14 +22,16 @@ export const ListEvalErrorAnalyzersRequest$inboundSchema: z.ZodType<
   ListEvalErrorAnalyzersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: components.EvalErrorAnalysisKind$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: components.EvalErrorAnalysisKind$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListEvalErrorAnalyzersRequest$Outbound = {
   kind?: string | undefined;
@@ -41,14 +43,16 @@ export const ListEvalErrorAnalyzersRequest$outboundSchema: z.ZodType<
   ListEvalErrorAnalyzersRequest$Outbound,
   z.ZodTypeDef,
   ListEvalErrorAnalyzersRequest
-> = z.object({
-  kind: components.EvalErrorAnalysisKind$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: components.EvalErrorAnalysisKind$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listEvalErrorAnalyzersRequestToJSON(
   listEvalErrorAnalyzersRequest: ListEvalErrorAnalyzersRequest,

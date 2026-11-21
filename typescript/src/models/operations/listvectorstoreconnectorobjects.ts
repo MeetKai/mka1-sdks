@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,18 +25,21 @@ export const ListVectorStoreConnectorObjectsRequest$inboundSchema: z.ZodType<
   ListVectorStoreConnectorObjectsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  status: components.VectorStoreConnectorObjectStatus$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    status: components.VectorStoreConnectorObjectStatus$inboundSchema
+      .optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListVectorStoreConnectorObjectsRequest$Outbound = {
   connector_id: string;
@@ -51,18 +54,21 @@ export const ListVectorStoreConnectorObjectsRequest$outboundSchema: z.ZodType<
   ListVectorStoreConnectorObjectsRequest$Outbound,
   z.ZodTypeDef,
   ListVectorStoreConnectorObjectsRequest
-> = z.object({
-  connectorId: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  status: components.VectorStoreConnectorObjectStatus$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    status: components.VectorStoreConnectorObjectStatus$outboundSchema
+      .optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listVectorStoreConnectorObjectsRequestToJSON(
   listVectorStoreConnectorObjectsRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,15 +27,17 @@ export const ListComputeProvidersRequest$inboundSchema: z.ZodType<
   ListComputeProvidersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListComputeProvidersRequest$Outbound = {
   cursor?: string | undefined;
@@ -48,15 +50,17 @@ export const ListComputeProvidersRequest$outboundSchema: z.ZodType<
   ListComputeProvidersRequest$Outbound,
   z.ZodTypeDef,
   ListComputeProvidersRequest
-> = z.object({
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listComputeProvidersRequestToJSON(
   listComputeProvidersRequest: ListComputeProvidersRequest,
@@ -82,10 +86,12 @@ export const ListComputeProvidersResponse$inboundSchema: z.ZodType<
   ListComputeProvidersResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeProviderHealthList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeProviderHealthList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListComputeProvidersResponse$Outbound =
   | components.ComputeProviderHealthList$Outbound
@@ -96,10 +102,12 @@ export const ListComputeProvidersResponse$outboundSchema: z.ZodType<
   ListComputeProvidersResponse$Outbound,
   z.ZodTypeDef,
   ListComputeProvidersResponse
-> = z.union([
-  components.ComputeProviderHealthList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeProviderHealthList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listComputeProvidersResponseToJSON(
   listComputeProvidersResponse: ListComputeProvidersResponse,

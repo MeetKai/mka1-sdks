@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ResponseApprovalCallCompletedEvent$inboundSchema: z.ZodType<
   ResponseApprovalCallCompletedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.approval_call.completed"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  function_call_output: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "function_call_output": "functionCallOutput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.approval_call.completed"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    function_call_output: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "function_call_output": "functionCallOutput",
+    });
+  })
+);
 /** @internal */
 export type ResponseApprovalCallCompletedEvent$Outbound = {
   type: "response.approval_call.completed";
@@ -49,20 +51,22 @@ export const ResponseApprovalCallCompletedEvent$outboundSchema: z.ZodType<
   ResponseApprovalCallCompletedEvent$Outbound,
   z.ZodTypeDef,
   ResponseApprovalCallCompletedEvent
-> = z.object({
-  type: z.literal("response.approval_call.completed"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  functionCallOutput: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    functionCallOutput: "function_call_output",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.approval_call.completed"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    functionCallOutput: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      functionCallOutput: "function_call_output",
+    });
+  })
+);
 
 export function responseApprovalCallCompletedEventToJSON(
   responseApprovalCallCompletedEvent: ResponseApprovalCallCompletedEvent,

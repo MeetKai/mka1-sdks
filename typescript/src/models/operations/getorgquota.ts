@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,14 +38,16 @@ export const GetOrgQuotaRequest$inboundSchema: z.ZodType<
   GetOrgQuotaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetOrgQuotaRequest$Outbound = {
   orgId: string;
@@ -57,14 +59,16 @@ export const GetOrgQuotaRequest$outboundSchema: z.ZodType<
   GetOrgQuotaRequest$Outbound,
   z.ZodTypeDef,
   GetOrgQuotaRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getOrgQuotaRequestToJSON(
   getOrgQuotaRequest: GetOrgQuotaRequest,
@@ -86,7 +90,7 @@ export function getOrgQuotaRequestFromJSON(
 /** @internal */
 export const GetOrgQuotaQuotaPeriod$inboundSchema: z.ZodNativeEnum<
   typeof GetOrgQuotaQuotaPeriod
-> = z.nativeEnum(GetOrgQuotaQuotaPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOrgQuotaQuotaPeriod));
 /** @internal */
 export const GetOrgQuotaQuotaPeriod$outboundSchema: z.ZodNativeEnum<
   typeof GetOrgQuotaQuotaPeriod
@@ -97,12 +101,14 @@ export const GetOrgQuotaResponseBody$inboundSchema: z.ZodType<
   GetOrgQuotaResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  quotaEnabled: z.boolean(),
-  quotaPeriod: z.nullable(GetOrgQuotaQuotaPeriod$inboundSchema),
-  quotaMax: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    quotaEnabled: z.boolean(),
+    quotaPeriod: z.nullable(GetOrgQuotaQuotaPeriod$inboundSchema),
+    quotaMax: z.nullable(z.number()),
+  })
+);
 /** @internal */
 export type GetOrgQuotaResponseBody$Outbound = {
   id: string;
@@ -116,12 +122,14 @@ export const GetOrgQuotaResponseBody$outboundSchema: z.ZodType<
   GetOrgQuotaResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgQuotaResponseBody
-> = z.object({
-  id: z.string(),
-  quotaEnabled: z.boolean(),
-  quotaPeriod: z.nullable(GetOrgQuotaQuotaPeriod$outboundSchema),
-  quotaMax: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    quotaEnabled: z.boolean(),
+    quotaPeriod: z.nullable(GetOrgQuotaQuotaPeriod$outboundSchema),
+    quotaMax: z.nullable(z.number()),
+  })
+);
 
 export function getOrgQuotaResponseBodyToJSON(
   getOrgQuotaResponseBody: GetOrgQuotaResponseBody,

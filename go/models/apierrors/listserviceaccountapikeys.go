@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListServiceAccountAPIKeysTooManyRequestsError struct {
 var _ error = &ListServiceAccountAPIKeysTooManyRequestsError{}
 
 func (e *ListServiceAccountAPIKeysTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListServiceAccountAPIKeysGoneError struct {
 var _ error = &ListServiceAccountAPIKeysGoneError{}
 
 func (e *ListServiceAccountAPIKeysGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListServiceAccountAPIKeysConflictError struct {
 var _ error = &ListServiceAccountAPIKeysConflictError{}
 
 func (e *ListServiceAccountAPIKeysConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListServiceAccountAPIKeysNotFoundError struct {
 var _ error = &ListServiceAccountAPIKeysNotFoundError{}
 
 func (e *ListServiceAccountAPIKeysNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListServiceAccountAPIKeysForbiddenError struct {
 var _ error = &ListServiceAccountAPIKeysForbiddenError{}
 
 func (e *ListServiceAccountAPIKeysForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListServiceAccountAPIKeysUnauthorizedError struct {
 var _ error = &ListServiceAccountAPIKeysUnauthorizedError{}
 
 func (e *ListServiceAccountAPIKeysUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListServiceAccountAPIKeysBadRequestError struct {
 var _ error = &ListServiceAccountAPIKeysBadRequestError{}
 
 func (e *ListServiceAccountAPIKeysBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

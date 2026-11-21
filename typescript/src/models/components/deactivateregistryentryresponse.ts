@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const DeactivateRegistryEntryResponse$inboundSchema: z.ZodType<
   DeactivateRegistryEntryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deactivated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deactivated: z.boolean(),
+  })
+);
 /** @internal */
 export type DeactivateRegistryEntryResponse$Outbound = {
   id: string;
@@ -32,10 +34,12 @@ export const DeactivateRegistryEntryResponse$outboundSchema: z.ZodType<
   DeactivateRegistryEntryResponse$Outbound,
   z.ZodTypeDef,
   DeactivateRegistryEntryResponse
-> = z.object({
-  id: z.string(),
-  deactivated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deactivated: z.boolean(),
+  })
+);
 
 export function deactivateRegistryEntryResponseToJSON(
   deactivateRegistryEntryResponse: DeactivateRegistryEntryResponse,

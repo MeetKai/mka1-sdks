@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -202,23 +202,24 @@ export type OpenAIRequestMessage = {
 };
 
 /** @internal */
-export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> = z.nativeEnum(
-  Role,
-);
+export const Role$inboundSchema: z.ZodNativeEnum<typeof Role> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Role));
 /** @internal */
 export const Role$outboundSchema: z.ZodNativeEnum<typeof Role> =
   Role$inboundSchema;
 
 /** @internal */
-export const File2$inboundSchema: z.ZodType<File2, z.ZodTypeDef, unknown> = z
-  .object({
-    file_id: z.string(),
-    filename: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_id": "fileId",
-    });
-  });
+export const File2$inboundSchema: z.ZodType<File2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      file_id: z.string(),
+      filename: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "file_id": "fileId",
+      });
+    })
+  );
 /** @internal */
 export type File2$Outbound = {
   file_id: string;
@@ -230,14 +231,16 @@ export const File2$outboundSchema: z.ZodType<
   File2$Outbound,
   z.ZodTypeDef,
   File2
-> = z.object({
-  fileId: z.string(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function file2ToJSON(file2: File2): string {
   return JSON.stringify(File2$outboundSchema.parse(file2));
@@ -253,15 +256,17 @@ export function file2FromJSON(
 }
 
 /** @internal */
-export const File1$inboundSchema: z.ZodType<File1, z.ZodTypeDef, unknown> = z
-  .object({
-    filename: z.string(),
-    file_data: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "file_data": "fileData",
-    });
-  });
+export const File1$inboundSchema: z.ZodType<File1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      filename: z.string(),
+      file_data: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "file_data": "fileData",
+      });
+    })
+  );
 /** @internal */
 export type File1$Outbound = {
   filename: string;
@@ -273,14 +278,16 @@ export const File1$outboundSchema: z.ZodType<
   File1$Outbound,
   z.ZodTypeDef,
   File1
-> = z.object({
-  filename: z.string(),
-  fileData: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    filename: z.string(),
+    fileData: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileData: "file_data",
+    });
+  })
+);
 
 export function file1ToJSON(file1: File1): string {
   return JSON.stringify(File1$outboundSchema.parse(file1));
@@ -297,10 +304,12 @@ export function file1FromJSON(
 
 /** @internal */
 export const TwoFile$inboundSchema: z.ZodType<TwoFile, z.ZodTypeDef, unknown> =
-  z.union([
-    z.lazy(() => File1$inboundSchema),
-    z.lazy(() => File2$inboundSchema),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => File1$inboundSchema),
+      z.lazy(() => File2$inboundSchema),
+    ])
+  );
 /** @internal */
 export type TwoFile$Outbound = File1$Outbound | File2$Outbound;
 
@@ -309,10 +318,12 @@ export const TwoFile$outboundSchema: z.ZodType<
   TwoFile$Outbound,
   z.ZodTypeDef,
   TwoFile
-> = z.union([
-  z.lazy(() => File1$outboundSchema),
-  z.lazy(() => File2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => File1$outboundSchema),
+    z.lazy(() => File2$outboundSchema),
+  ])
+);
 
 export function twoFileToJSON(twoFile: TwoFile): string {
   return JSON.stringify(TwoFile$outboundSchema.parse(twoFile));
@@ -328,14 +339,16 @@ export function twoFileFromJSON(
 }
 
 /** @internal */
-export const Two4$inboundSchema: z.ZodType<Two4, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("file"),
-    file: z.union([
-      z.lazy(() => File1$inboundSchema),
-      z.lazy(() => File2$inboundSchema),
-    ]),
-  });
+export const Two4$inboundSchema: z.ZodType<Two4, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("file"),
+      file: z.union([
+        z.lazy(() => File1$inboundSchema),
+        z.lazy(() => File2$inboundSchema),
+      ]),
+    })
+  );
 /** @internal */
 export type Two4$Outbound = {
   type: "file";
@@ -344,13 +357,15 @@ export type Two4$Outbound = {
 
 /** @internal */
 export const Two4$outboundSchema: z.ZodType<Two4$Outbound, z.ZodTypeDef, Two4> =
-  z.object({
-    type: z.literal("file"),
-    file: z.union([
-      z.lazy(() => File1$outboundSchema),
-      z.lazy(() => File2$outboundSchema),
-    ]),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("file"),
+      file: z.union([
+        z.lazy(() => File1$outboundSchema),
+        z.lazy(() => File2$outboundSchema),
+      ]),
+    })
+  );
 
 export function two4ToJSON(two4: Two4): string {
   return JSON.stringify(Two4$outboundSchema.parse(two4));
@@ -366,8 +381,8 @@ export function two4FromJSON(
 }
 
 /** @internal */
-export const TwoFormat$inboundSchema: z.ZodNativeEnum<typeof TwoFormat> = z
-  .nativeEnum(TwoFormat);
+export const TwoFormat$inboundSchema: z.ZodNativeEnum<typeof TwoFormat> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TwoFormat));
 /** @internal */
 export const TwoFormat$outboundSchema: z.ZodNativeEnum<typeof TwoFormat> =
   TwoFormat$inboundSchema;
@@ -377,10 +392,12 @@ export const TwoInputAudio$inboundSchema: z.ZodType<
   TwoInputAudio,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.string(),
-  format: TwoFormat$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.string(),
+    format: TwoFormat$inboundSchema,
+  })
+);
 /** @internal */
 export type TwoInputAudio$Outbound = {
   data: string;
@@ -392,10 +409,12 @@ export const TwoInputAudio$outboundSchema: z.ZodType<
   TwoInputAudio$Outbound,
   z.ZodTypeDef,
   TwoInputAudio
-> = z.object({
-  data: z.string(),
-  format: TwoFormat$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.string(),
+    format: TwoFormat$outboundSchema,
+  })
+);
 
 export function twoInputAudioToJSON(twoInputAudio: TwoInputAudio): string {
   return JSON.stringify(TwoInputAudio$outboundSchema.parse(twoInputAudio));
@@ -411,15 +430,17 @@ export function twoInputAudioFromJSON(
 }
 
 /** @internal */
-export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("input_audio"),
-    input_audio: z.lazy(() => TwoInputAudio$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_audio": "inputAudio",
-    });
-  });
+export const Two3$inboundSchema: z.ZodType<Two3, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("input_audio"),
+      input_audio: z.lazy(() => TwoInputAudio$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_audio": "inputAudio",
+      });
+    })
+  );
 /** @internal */
 export type Two3$Outbound = {
   type: "input_audio";
@@ -428,14 +449,16 @@ export type Two3$Outbound = {
 
 /** @internal */
 export const Two3$outboundSchema: z.ZodType<Two3$Outbound, z.ZodTypeDef, Two3> =
-  z.object({
-    type: z.literal("input_audio"),
-    inputAudio: z.lazy(() => TwoInputAudio$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      inputAudio: "input_audio",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("input_audio"),
+      inputAudio: z.lazy(() => TwoInputAudio$outboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        inputAudio: "input_audio",
+      });
+    })
+  );
 
 export function two3ToJSON(two3: Two3): string {
   return JSON.stringify(Two3$outboundSchema.parse(two3));
@@ -451,8 +474,8 @@ export function two3FromJSON(
 }
 
 /** @internal */
-export const TwoDetail$inboundSchema: z.ZodNativeEnum<typeof TwoDetail> = z
-  .nativeEnum(TwoDetail);
+export const TwoDetail$inboundSchema: z.ZodNativeEnum<typeof TwoDetail> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(TwoDetail));
 /** @internal */
 export const TwoDetail$outboundSchema: z.ZodNativeEnum<typeof TwoDetail> =
   TwoDetail$inboundSchema;
@@ -462,10 +485,12 @@ export const ImageUrl$inboundSchema: z.ZodType<
   ImageUrl,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  url: z.string(),
-  detail: TwoDetail$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    detail: TwoDetail$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ImageUrl$Outbound = {
   url: string;
@@ -477,10 +502,12 @@ export const ImageUrl$outboundSchema: z.ZodType<
   ImageUrl$Outbound,
   z.ZodTypeDef,
   ImageUrl
-> = z.object({
-  url: z.string(),
-  detail: TwoDetail$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    url: z.string(),
+    detail: TwoDetail$outboundSchema.optional(),
+  })
+);
 
 export function imageUrlToJSON(imageUrl: ImageUrl): string {
   return JSON.stringify(ImageUrl$outboundSchema.parse(imageUrl));
@@ -496,15 +523,17 @@ export function imageUrlFromJSON(
 }
 
 /** @internal */
-export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("image_url"),
-    image_url: z.lazy(() => ImageUrl$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "image_url": "imageUrl",
-    });
-  });
+export const Two2$inboundSchema: z.ZodType<Two2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("image_url"),
+      image_url: z.lazy(() => ImageUrl$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "image_url": "imageUrl",
+      });
+    })
+  );
 /** @internal */
 export type Two2$Outbound = {
   type: "image_url";
@@ -513,14 +542,16 @@ export type Two2$Outbound = {
 
 /** @internal */
 export const Two2$outboundSchema: z.ZodType<Two2$Outbound, z.ZodTypeDef, Two2> =
-  z.object({
-    type: z.literal("image_url"),
-    imageUrl: z.lazy(() => ImageUrl$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      imageUrl: "image_url",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("image_url"),
+      imageUrl: z.lazy(() => ImageUrl$outboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        imageUrl: "image_url",
+      });
+    })
+  );
 
 export function two2ToJSON(two2: Two2): string {
   return JSON.stringify(Two2$outboundSchema.parse(two2));
@@ -536,11 +567,13 @@ export function two2FromJSON(
 }
 
 /** @internal */
-export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("text"),
-    text: z.string(),
-  });
+export const Two1$inboundSchema: z.ZodType<Two1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text"),
+      text: z.string(),
+    })
+  );
 /** @internal */
 export type Two1$Outbound = {
   type: "text";
@@ -549,10 +582,12 @@ export type Two1$Outbound = {
 
 /** @internal */
 export const Two1$outboundSchema: z.ZodType<Two1$Outbound, z.ZodTypeDef, Two1> =
-  z.object({
-    type: z.literal("text"),
-    text: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("text"),
+      text: z.string(),
+    })
+  );
 
 export function two1ToJSON(two1: Two1): string {
   return JSON.stringify(Two1$outboundSchema.parse(two1));
@@ -568,14 +603,15 @@ export function two1FromJSON(
 }
 
 /** @internal */
-export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> = z.union(
-  [
-    z.lazy(() => Two1$inboundSchema),
-    z.lazy(() => Two2$inboundSchema),
-    z.lazy(() => Two3$inboundSchema),
-    z.lazy(() => Two4$inboundSchema),
-  ],
-);
+export const Two$inboundSchema: z.ZodType<Two, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Two1$inboundSchema),
+      z.lazy(() => Two2$inboundSchema),
+      z.lazy(() => Two3$inboundSchema),
+      z.lazy(() => Two4$inboundSchema),
+    ])
+  );
 /** @internal */
 export type Two$Outbound =
   | Two1$Outbound
@@ -584,13 +620,15 @@ export type Two$Outbound =
   | Two4$Outbound;
 
 /** @internal */
-export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> = z
-  .union([
-    z.lazy(() => Two1$outboundSchema),
-    z.lazy(() => Two2$outboundSchema),
-    z.lazy(() => Two3$outboundSchema),
-    z.lazy(() => Two4$outboundSchema),
-  ]);
+export const Two$outboundSchema: z.ZodType<Two$Outbound, z.ZodTypeDef, Two> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.lazy(() => Two1$outboundSchema),
+      z.lazy(() => Two2$outboundSchema),
+      z.lazy(() => Two3$outboundSchema),
+      z.lazy(() => Two4$outboundSchema),
+    ])
+  );
 
 export function twoToJSON(two: Two): string {
   return JSON.stringify(Two$outboundSchema.parse(two));
@@ -607,15 +645,17 @@ export function twoFromJSON(
 
 /** @internal */
 export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
-  z.union([
-    z.string(),
-    z.array(z.union([
-      z.lazy(() => Two1$inboundSchema),
-      z.lazy(() => Two2$inboundSchema),
-      z.lazy(() => Two3$inboundSchema),
-      z.lazy(() => Two4$inboundSchema),
-    ])),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.array(z.union([
+        z.lazy(() => Two1$inboundSchema),
+        z.lazy(() => Two2$inboundSchema),
+        z.lazy(() => Two3$inboundSchema),
+        z.lazy(() => Two4$inboundSchema),
+      ])),
+    ])
+  );
 /** @internal */
 export type Content$Outbound =
   | string
@@ -626,15 +666,17 @@ export const Content$outboundSchema: z.ZodType<
   Content$Outbound,
   z.ZodTypeDef,
   Content
-> = z.union([
-  z.string(),
-  z.array(z.union([
-    z.lazy(() => Two1$outboundSchema),
-    z.lazy(() => Two2$outboundSchema),
-    z.lazy(() => Two3$outboundSchema),
-    z.lazy(() => Two4$outboundSchema),
-  ])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.union([
+      z.lazy(() => Two1$outboundSchema),
+      z.lazy(() => Two2$outboundSchema),
+      z.lazy(() => Two3$outboundSchema),
+      z.lazy(() => Two4$outboundSchema),
+    ])),
+  ])
+);
 
 export function contentToJSON(content: Content): string {
   return JSON.stringify(Content$outboundSchema.parse(content));
@@ -654,10 +696,12 @@ export const OpenAIRequestMessageFunction$inboundSchema: z.ZodType<
   OpenAIRequestMessageFunction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 /** @internal */
 export type OpenAIRequestMessageFunction$Outbound = {
   name: string;
@@ -669,10 +713,12 @@ export const OpenAIRequestMessageFunction$outboundSchema: z.ZodType<
   OpenAIRequestMessageFunction$Outbound,
   z.ZodTypeDef,
   OpenAIRequestMessageFunction
-> = z.object({
-  name: z.string(),
-  arguments: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    arguments: z.string(),
+  })
+);
 
 export function openAIRequestMessageFunctionToJSON(
   openAIRequestMessageFunction: OpenAIRequestMessageFunction,
@@ -698,11 +744,13 @@ export const ToolCalls$inboundSchema: z.ZodType<
   ToolCalls,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  type: z.literal("function"),
-  function: z.lazy(() => OpenAIRequestMessageFunction$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: z.literal("function"),
+    function: z.lazy(() => OpenAIRequestMessageFunction$inboundSchema),
+  })
+);
 /** @internal */
 export type ToolCalls$Outbound = {
   id: string;
@@ -715,11 +763,13 @@ export const ToolCalls$outboundSchema: z.ZodType<
   ToolCalls$Outbound,
   z.ZodTypeDef,
   ToolCalls
-> = z.object({
-  id: z.string(),
-  type: z.literal("function"),
-  function: z.lazy(() => OpenAIRequestMessageFunction$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    type: z.literal("function"),
+    function: z.lazy(() => OpenAIRequestMessageFunction$outboundSchema),
+  })
+);
 
 export function toolCallsToJSON(toolCalls: ToolCalls): string {
   return JSON.stringify(ToolCalls$outboundSchema.parse(toolCalls));
@@ -739,12 +789,12 @@ export const OpenAIRequestMessage$inboundSchema: z.ZodType<
   OpenAIRequestMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: Role$inboundSchema,
-  name: z.string().optional(),
-  tool_call_id: z.string().optional(),
-  content: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: Role$inboundSchema,
+    name: z.string().optional(),
+    tool_call_id: z.string().optional(),
+    content: z.nullable(z.union([
       z.string(),
       z.array(z.union([
         z.lazy(() => Two1$inboundSchema),
@@ -752,15 +802,17 @@ export const OpenAIRequestMessage$inboundSchema: z.ZodType<
         z.lazy(() => Two3$inboundSchema),
         z.lazy(() => Two4$inboundSchema),
       ])),
-    ]),
-  ),
-  tool_calls: z.array(z.lazy(() => ToolCalls$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_call_id": "toolCallId",
-    "tool_calls": "toolCalls",
-  });
-});
+    ])),
+    tool_calls: z.array(z.lazy(() =>
+      ToolCalls$inboundSchema
+    )).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_call_id": "toolCallId",
+      "tool_calls": "toolCalls",
+    });
+  })
+);
 /** @internal */
 export type OpenAIRequestMessage$Outbound = {
   role: string;
@@ -778,12 +830,12 @@ export const OpenAIRequestMessage$outboundSchema: z.ZodType<
   OpenAIRequestMessage$Outbound,
   z.ZodTypeDef,
   OpenAIRequestMessage
-> = z.object({
-  role: Role$outboundSchema,
-  name: z.string().optional(),
-  toolCallId: z.string().optional(),
-  content: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: Role$outboundSchema,
+    name: z.string().optional(),
+    toolCallId: z.string().optional(),
+    content: z.nullable(z.union([
       z.string(),
       z.array(z.union([
         z.lazy(() => Two1$outboundSchema),
@@ -791,15 +843,17 @@ export const OpenAIRequestMessage$outboundSchema: z.ZodType<
         z.lazy(() => Two3$outboundSchema),
         z.lazy(() => Two4$outboundSchema),
       ])),
-    ]),
-  ),
-  toolCalls: z.array(z.lazy(() => ToolCalls$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolCallId: "tool_call_id",
-    toolCalls: "tool_calls",
-  });
-});
+    ])),
+    toolCalls: z.array(z.lazy(() =>
+      ToolCalls$outboundSchema
+    )).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolCallId: "tool_call_id",
+      toolCalls: "tool_calls",
+    });
+  })
+);
 
 export function openAIRequestMessageToJSON(
   openAIRequestMessage: OpenAIRequestMessage,

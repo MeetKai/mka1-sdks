@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,7 +40,7 @@ export const DpoHyperparametersBatchSize$inboundSchema: z.ZodType<
   DpoHyperparametersBatchSize,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type DpoHyperparametersBatchSize$Outbound = string | number;
 
@@ -49,7 +49,7 @@ export const DpoHyperparametersBatchSize$outboundSchema: z.ZodType<
   DpoHyperparametersBatchSize$Outbound,
   z.ZodTypeDef,
   DpoHyperparametersBatchSize
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function dpoHyperparametersBatchSizeToJSON(
   dpoHyperparametersBatchSize: DpoHyperparametersBatchSize,
@@ -71,14 +71,14 @@ export function dpoHyperparametersBatchSizeFromJSON(
 }
 
 /** @internal */
-export const Beta$inboundSchema: z.ZodType<Beta, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number()]);
+export const Beta$inboundSchema: z.ZodType<Beta, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type Beta$Outbound = string | number;
 
 /** @internal */
 export const Beta$outboundSchema: z.ZodType<Beta$Outbound, z.ZodTypeDef, Beta> =
-  z.union([z.string(), z.number()]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function betaToJSON(beta: Beta): string {
   return JSON.stringify(Beta$outboundSchema.parse(beta));
@@ -98,7 +98,7 @@ export const DpoHyperparametersLearningRateMultiplier$inboundSchema: z.ZodType<
   DpoHyperparametersLearningRateMultiplier,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 /** @internal */
 export type DpoHyperparametersLearningRateMultiplier$Outbound = string | number;
 
@@ -107,7 +107,7 @@ export const DpoHyperparametersLearningRateMultiplier$outboundSchema: z.ZodType<
   DpoHyperparametersLearningRateMultiplier$Outbound,
   z.ZodTypeDef,
   DpoHyperparametersLearningRateMultiplier
-> = z.union([z.string(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number()]));
 
 export function dpoHyperparametersLearningRateMultiplierToJSON(
   dpoHyperparametersLearningRateMultiplier:
@@ -140,7 +140,7 @@ export const DpoHyperparametersNEpochs$inboundSchema: z.ZodType<
   DpoHyperparametersNEpochs,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type DpoHyperparametersNEpochs$Outbound = string | number;
 
@@ -149,7 +149,7 @@ export const DpoHyperparametersNEpochs$outboundSchema: z.ZodType<
   DpoHyperparametersNEpochs$Outbound,
   z.ZodTypeDef,
   DpoHyperparametersNEpochs
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function dpoHyperparametersNEpochsToJSON(
   dpoHyperparametersNEpochs: DpoHyperparametersNEpochs,
@@ -173,19 +173,21 @@ export const DpoHyperparameters$inboundSchema: z.ZodType<
   DpoHyperparameters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  beta: z.nullable(z.union([z.string(), z.number()])).optional(),
-  learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_size": "batchSize",
-    "learning_rate_multiplier": "learningRateMultiplier",
-    "n_epochs": "nEpochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_size: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    beta: z.nullable(z.union([z.string(), z.number()])).optional(),
+    learning_rate_multiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    n_epochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_size": "batchSize",
+      "learning_rate_multiplier": "learningRateMultiplier",
+      "n_epochs": "nEpochs",
+    });
+  })
+);
 /** @internal */
 export type DpoHyperparameters$Outbound = {
   batch_size?: string | number | null | undefined;
@@ -199,19 +201,21 @@ export const DpoHyperparameters$outboundSchema: z.ZodType<
   DpoHyperparameters$Outbound,
   z.ZodTypeDef,
   DpoHyperparameters
-> = z.object({
-  batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-  beta: z.nullable(z.union([z.string(), z.number()])).optional(),
-  learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
-    .optional(),
-  nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    batchSize: "batch_size",
-    learningRateMultiplier: "learning_rate_multiplier",
-    nEpochs: "n_epochs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchSize: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+    beta: z.nullable(z.union([z.string(), z.number()])).optional(),
+    learningRateMultiplier: z.nullable(z.union([z.string(), z.number()]))
+      .optional(),
+    nEpochs: z.nullable(z.union([z.string(), z.number().int()])).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchSize: "batch_size",
+      learningRateMultiplier: "learning_rate_multiplier",
+      nEpochs: "n_epochs",
+    });
+  })
+);
 
 export function dpoHyperparametersToJSON(
   dpoHyperparameters: DpoHyperparameters,

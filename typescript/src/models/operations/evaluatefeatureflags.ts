@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,9 +38,11 @@ export const EvaluateFeatureFlagsSecurity$inboundSchema: z.ZodType<
   EvaluateFeatureFlagsSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  evaluationKeyAuth: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluationKeyAuth: z.string(),
+  })
+);
 /** @internal */
 export type EvaluateFeatureFlagsSecurity$Outbound = {
   evaluationKeyAuth: string;
@@ -48,9 +53,11 @@ export const EvaluateFeatureFlagsSecurity$outboundSchema: z.ZodType<
   EvaluateFeatureFlagsSecurity$Outbound,
   z.ZodTypeDef,
   EvaluateFeatureFlagsSecurity
-> = z.object({
-  evaluationKeyAuth: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluationKeyAuth: z.string(),
+  })
+);
 
 export function evaluateFeatureFlagsSecurityToJSON(
   evaluateFeatureFlagsSecurity: EvaluateFeatureFlagsSecurity,
@@ -76,15 +83,17 @@ export const EvaluateFeatureFlagsRequest$inboundSchema: z.ZodType<
   EvaluateFeatureFlagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  env: z.string(),
-  identity: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string(),
+    identity: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type EvaluateFeatureFlagsRequest$Outbound = {
   env: string;
@@ -97,15 +106,19 @@ export const EvaluateFeatureFlagsRequest$outboundSchema: z.ZodType<
   EvaluateFeatureFlagsRequest$Outbound,
   z.ZodTypeDef,
   EvaluateFeatureFlagsRequest
-> = z.object({
-  env: z.string(),
-  identity: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    identity: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function evaluateFeatureFlagsRequestToJSON(
   evaluateFeatureFlagsRequest: EvaluateFeatureFlagsRequest,
@@ -131,15 +144,17 @@ export const EvaluateFeatureFlagsResponse$inboundSchema: z.ZodType<
   EvaluateFeatureFlagsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: components.FeatureFlagEvaluateResponse$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: components.FeatureFlagEvaluateResponse$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type EvaluateFeatureFlagsResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -151,15 +166,17 @@ export const EvaluateFeatureFlagsResponse$outboundSchema: z.ZodType<
   EvaluateFeatureFlagsResponse$Outbound,
   z.ZodTypeDef,
   EvaluateFeatureFlagsResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: components.FeatureFlagEvaluateResponse$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: components.FeatureFlagEvaluateResponse$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function evaluateFeatureFlagsResponseToJSON(
   evaluateFeatureFlagsResponse: EvaluateFeatureFlagsResponse,

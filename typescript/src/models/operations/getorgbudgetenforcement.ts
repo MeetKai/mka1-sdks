@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,13 +60,15 @@ export const GetOrgBudgetEnforcementRequest$inboundSchema: z.ZodType<
   GetOrgBudgetEnforcementRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetOrgBudgetEnforcementRequest$Outbound = {
   org_id: string;
@@ -77,13 +79,15 @@ export const GetOrgBudgetEnforcementRequest$outboundSchema: z.ZodType<
   GetOrgBudgetEnforcementRequest$Outbound,
   z.ZodTypeDef,
   GetOrgBudgetEnforcementRequest
-> = z.object({
-  orgId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getOrgBudgetEnforcementRequestToJSON(
   getOrgBudgetEnforcementRequest: GetOrgBudgetEnforcementRequest,
@@ -106,9 +110,10 @@ export function getOrgBudgetEnforcementRequestFromJSON(
 
 /** @internal */
 export const GetOrgBudgetEnforcementOnCheckFailure$inboundSchema:
-  z.ZodNativeEnum<typeof GetOrgBudgetEnforcementOnCheckFailure> = z.nativeEnum(
-    GetOrgBudgetEnforcementOnCheckFailure,
-  );
+  z.ZodNativeEnum<typeof GetOrgBudgetEnforcementOnCheckFailure> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetOrgBudgetEnforcementOnCheckFailure)
+    );
 /** @internal */
 export const GetOrgBudgetEnforcementOnCheckFailure$outboundSchema:
   z.ZodNativeEnum<typeof GetOrgBudgetEnforcementOnCheckFailure> =
@@ -117,15 +122,15 @@ export const GetOrgBudgetEnforcementOnCheckFailure$outboundSchema:
 /** @internal */
 export const ClusterDefault$inboundSchema: z.ZodNativeEnum<
   typeof ClusterDefault
-> = z.nativeEnum(ClusterDefault);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ClusterDefault));
 /** @internal */
 export const ClusterDefault$outboundSchema: z.ZodNativeEnum<
   typeof ClusterDefault
 > = ClusterDefault$inboundSchema;
 
 /** @internal */
-export const Effective$inboundSchema: z.ZodNativeEnum<typeof Effective> = z
-  .nativeEnum(Effective);
+export const Effective$inboundSchema: z.ZodNativeEnum<typeof Effective> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effective));
 /** @internal */
 export const Effective$outboundSchema: z.ZodNativeEnum<typeof Effective> =
   Effective$inboundSchema;
@@ -135,20 +140,22 @@ export const GetOrgBudgetEnforcementResponseBody$inboundSchema: z.ZodType<
   GetOrgBudgetEnforcementResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  on_check_failure: z.nullable(
-    GetOrgBudgetEnforcementOnCheckFailure$inboundSchema,
-  ),
-  cluster_default: ClusterDefault$inboundSchema,
-  effective: Effective$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "on_check_failure": "onCheckFailure",
-    "cluster_default": "clusterDefault",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    on_check_failure: z.nullable(
+      GetOrgBudgetEnforcementOnCheckFailure$inboundSchema,
+    ),
+    cluster_default: ClusterDefault$inboundSchema,
+    effective: Effective$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "on_check_failure": "onCheckFailure",
+      "cluster_default": "clusterDefault",
+    });
+  })
+);
 /** @internal */
 export type GetOrgBudgetEnforcementResponseBody$Outbound = {
   org_id: string;
@@ -162,20 +169,22 @@ export const GetOrgBudgetEnforcementResponseBody$outboundSchema: z.ZodType<
   GetOrgBudgetEnforcementResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgBudgetEnforcementResponseBody
-> = z.object({
-  orgId: z.string(),
-  onCheckFailure: z.nullable(
-    GetOrgBudgetEnforcementOnCheckFailure$outboundSchema,
-  ),
-  clusterDefault: ClusterDefault$outboundSchema,
-  effective: Effective$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    onCheckFailure: "on_check_failure",
-    clusterDefault: "cluster_default",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    onCheckFailure: z.nullable(
+      GetOrgBudgetEnforcementOnCheckFailure$outboundSchema,
+    ),
+    clusterDefault: ClusterDefault$outboundSchema,
+    effective: Effective$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      onCheckFailure: "on_check_failure",
+      clusterDefault: "cluster_default",
+    });
+  })
+);
 
 export function getOrgBudgetEnforcementResponseBodyToJSON(
   getOrgBudgetEnforcementResponseBody: GetOrgBudgetEnforcementResponseBody,

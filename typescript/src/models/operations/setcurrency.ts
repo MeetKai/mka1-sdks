@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,9 +23,11 @@ export const SetCurrencyRequestBody$inboundSchema: z.ZodType<
   SetCurrencyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currency: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+  })
+);
 /** @internal */
 export type SetCurrencyRequestBody$Outbound = {
   currency: string;
@@ -36,9 +38,11 @@ export const SetCurrencyRequestBody$outboundSchema: z.ZodType<
   SetCurrencyRequestBody$Outbound,
   z.ZodTypeDef,
   SetCurrencyRequestBody
-> = z.object({
-  currency: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+  })
+);
 
 export function setCurrencyRequestBodyToJSON(
   setCurrencyRequestBody: SetCurrencyRequestBody,
@@ -62,9 +66,11 @@ export const SetCurrencyResponseBody$inboundSchema: z.ZodType<
   SetCurrencyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currency: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+  })
+);
 /** @internal */
 export type SetCurrencyResponseBody$Outbound = {
   currency: string;
@@ -75,9 +81,11 @@ export const SetCurrencyResponseBody$outboundSchema: z.ZodType<
   SetCurrencyResponseBody$Outbound,
   z.ZodTypeDef,
   SetCurrencyResponseBody
-> = z.object({
-  currency: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+  })
+);
 
 export function setCurrencyResponseBodyToJSON(
   setCurrencyResponseBody: SetCurrencyResponseBody,

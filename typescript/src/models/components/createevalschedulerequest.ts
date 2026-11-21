@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -61,30 +61,32 @@ export const CreateEvalScheduleRequest$inboundSchema: z.ZodType<
   CreateEvalScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  suite_id: z.string(),
-  suite_version: z.number().int().optional(),
-  cron: z.string().optional(),
-  interval_seconds: z.number().int().optional(),
-  timezone: z.string().default("UTC"),
-  overlap_policy: EvalScheduleOverlapPolicy$inboundSchema.optional(),
-  enabled: z.boolean().default(true),
-  webhook_url: z.string().optional(),
-  webhook_secret: z.string().optional(),
-  run: EvalScheduleRunRequestConfig$inboundSchema,
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "interval_seconds": "intervalSeconds",
-    "overlap_policy": "overlapPolicy",
-    "webhook_url": "webhookUrl",
-    "webhook_secret": "webhookSecret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    suite_id: z.string(),
+    suite_version: z.number().int().optional(),
+    cron: z.string().optional(),
+    interval_seconds: z.number().int().optional(),
+    timezone: z.string().default("UTC"),
+    overlap_policy: EvalScheduleOverlapPolicy$inboundSchema.optional(),
+    enabled: z.boolean().default(true),
+    webhook_url: z.string().optional(),
+    webhook_secret: z.string().optional(),
+    run: EvalScheduleRunRequestConfig$inboundSchema,
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "interval_seconds": "intervalSeconds",
+      "overlap_policy": "overlapPolicy",
+      "webhook_url": "webhookUrl",
+      "webhook_secret": "webhookSecret",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalScheduleRequest$Outbound = {
   name: string;
@@ -107,30 +109,32 @@ export const CreateEvalScheduleRequest$outboundSchema: z.ZodType<
   CreateEvalScheduleRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalScheduleRequest
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  suiteId: z.string(),
-  suiteVersion: z.number().int().optional(),
-  cron: z.string().optional(),
-  intervalSeconds: z.number().int().optional(),
-  timezone: z.string().default("UTC"),
-  overlapPolicy: EvalScheduleOverlapPolicy$outboundSchema.optional(),
-  enabled: z.boolean().default(true),
-  webhookUrl: z.string().optional(),
-  webhookSecret: z.string().optional(),
-  run: EvalScheduleRunRequestConfig$outboundSchema,
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    intervalSeconds: "interval_seconds",
-    overlapPolicy: "overlap_policy",
-    webhookUrl: "webhook_url",
-    webhookSecret: "webhook_secret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    suiteId: z.string(),
+    suiteVersion: z.number().int().optional(),
+    cron: z.string().optional(),
+    intervalSeconds: z.number().int().optional(),
+    timezone: z.string().default("UTC"),
+    overlapPolicy: EvalScheduleOverlapPolicy$outboundSchema.optional(),
+    enabled: z.boolean().default(true),
+    webhookUrl: z.string().optional(),
+    webhookSecret: z.string().optional(),
+    run: EvalScheduleRunRequestConfig$outboundSchema,
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      intervalSeconds: "interval_seconds",
+      overlapPolicy: "overlap_policy",
+      webhookUrl: "webhook_url",
+      webhookSecret: "webhook_secret",
+    });
+  })
+);
 
 export function createEvalScheduleRequestToJSON(
   createEvalScheduleRequest: CreateEvalScheduleRequest,

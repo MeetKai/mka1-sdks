@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,15 +30,17 @@ export const DeleteServiceAccountRequest$inboundSchema: z.ZodType<
   DeleteServiceAccountRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteServiceAccountRequest$Outbound = {
   orgId: string;
@@ -51,15 +53,17 @@ export const DeleteServiceAccountRequest$outboundSchema: z.ZodType<
   DeleteServiceAccountRequest$Outbound,
   z.ZodTypeDef,
   DeleteServiceAccountRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteServiceAccountRequestToJSON(
   deleteServiceAccountRequest: DeleteServiceAccountRequest,
@@ -85,10 +89,12 @@ export const DeleteServiceAccountResponseBody$inboundSchema: z.ZodType<
   DeleteServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteServiceAccountResponseBody$Outbound = {
   id: string;
@@ -100,10 +106,12 @@ export const DeleteServiceAccountResponseBody$outboundSchema: z.ZodType<
   DeleteServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteServiceAccountResponseBody
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteServiceAccountResponseBodyToJSON(
   deleteServiceAccountResponseBody: DeleteServiceAccountResponseBody,

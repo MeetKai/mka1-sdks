@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,9 +30,11 @@ export const EvaluateFeatureFlagsWithTraitsSecurity$inboundSchema: z.ZodType<
   EvaluateFeatureFlagsWithTraitsSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  evaluationKeyAuth: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluationKeyAuth: z.string(),
+  })
+);
 /** @internal */
 export type EvaluateFeatureFlagsWithTraitsSecurity$Outbound = {
   evaluationKeyAuth: string;
@@ -40,9 +45,11 @@ export const EvaluateFeatureFlagsWithTraitsSecurity$outboundSchema: z.ZodType<
   EvaluateFeatureFlagsWithTraitsSecurity$Outbound,
   z.ZodTypeDef,
   EvaluateFeatureFlagsWithTraitsSecurity
-> = z.object({
-  evaluationKeyAuth: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    evaluationKeyAuth: z.string(),
+  })
+);
 
 export function evaluateFeatureFlagsWithTraitsSecurityToJSON(
   evaluateFeatureFlagsWithTraitsSecurity:
@@ -70,17 +77,19 @@ export const EvaluateFeatureFlagsWithTraitsRequest$inboundSchema: z.ZodType<
   EvaluateFeatureFlagsWithTraitsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  env: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagEvaluateRequest:
-    components.FeatureFlagEvaluateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagEvaluateRequest": "featureFlagEvaluateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagEvaluateRequest:
+      components.FeatureFlagEvaluateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagEvaluateRequest": "featureFlagEvaluateRequest",
+    });
+  })
+);
 /** @internal */
 export type EvaluateFeatureFlagsWithTraitsRequest$Outbound = {
   env: string;
@@ -93,17 +102,21 @@ export const EvaluateFeatureFlagsWithTraitsRequest$outboundSchema: z.ZodType<
   EvaluateFeatureFlagsWithTraitsRequest$Outbound,
   z.ZodTypeDef,
   EvaluateFeatureFlagsWithTraitsRequest
-> = z.object({
-  env: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  featureFlagEvaluateRequest:
-    components.FeatureFlagEvaluateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagEvaluateRequest: "FeatureFlagEvaluateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    env: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    featureFlagEvaluateRequest:
+      components.FeatureFlagEvaluateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagEvaluateRequest: "FeatureFlagEvaluateRequest",
+    });
+  })
+);
 
 export function evaluateFeatureFlagsWithTraitsRequestToJSON(
   evaluateFeatureFlagsWithTraitsRequest: EvaluateFeatureFlagsWithTraitsRequest,

@@ -9,7 +9,13 @@ from .vectorstoreconnectorsharepointcredentials import (
     VectorStoreConnectorSharePointCredentials,
     VectorStoreConnectorSharePointCredentialsTypedDict,
 )
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -70,6 +76,9 @@ class UpdateVectorStoreConnectorRequestBody(BaseModel):
     r"""Minutes between syncs while auto_sync is on, from 15 to 10080. The default is the operator's, 60 unless changed."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -81,11 +90,15 @@ class UpdateVectorStoreConnectorRequestBody(BaseModel):
                 "sync_interval_minutes",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -120,13 +133,20 @@ class UpdateVectorStoreConnectorRequest(BaseModel):
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["X-On-Behalf-Of"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

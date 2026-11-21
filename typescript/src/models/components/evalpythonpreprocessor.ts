@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,8 +39,8 @@ export type EvalPythonPreprocessor = {
 };
 
 /** @internal */
-export const Contract$inboundSchema: z.ZodNativeEnum<typeof Contract> = z
-  .nativeEnum(Contract);
+export const Contract$inboundSchema: z.ZodNativeEnum<typeof Contract> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Contract));
 /** @internal */
 export const Contract$outboundSchema: z.ZodNativeEnum<typeof Contract> =
   Contract$inboundSchema;
@@ -50,18 +50,20 @@ export const EvalPythonPreprocessor$inboundSchema: z.ZodType<
   EvalPythonPreprocessor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("python"),
-  contract: Contract$inboundSchema.default("row"),
-  source: z.string().optional(),
-  file_id: z.string().optional(),
-  timeout_seconds: z.number().int().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "timeout_seconds": "timeoutSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    contract: Contract$inboundSchema.default("row"),
+    source: z.string().optional(),
+    file_id: z.string().optional(),
+    timeout_seconds: z.number().int().default(120),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "timeout_seconds": "timeoutSeconds",
+    });
+  })
+);
 /** @internal */
 export type EvalPythonPreprocessor$Outbound = {
   type: "python";
@@ -76,18 +78,20 @@ export const EvalPythonPreprocessor$outboundSchema: z.ZodType<
   EvalPythonPreprocessor$Outbound,
   z.ZodTypeDef,
   EvalPythonPreprocessor
-> = z.object({
-  type: z.literal("python"),
-  contract: Contract$outboundSchema.default("row"),
-  source: z.string().optional(),
-  fileId: z.string().optional(),
-  timeoutSeconds: z.number().int().default(120),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    timeoutSeconds: "timeout_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    contract: Contract$outboundSchema.default("row"),
+    source: z.string().optional(),
+    fileId: z.string().optional(),
+    timeoutSeconds: z.number().int().default(120),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      timeoutSeconds: "timeout_seconds",
+    });
+  })
+);
 
 export function evalPythonPreprocessorToJSON(
   evalPythonPreprocessor: EvalPythonPreprocessor,

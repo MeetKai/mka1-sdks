@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const EvalSuiteManifest$inboundSchema: z.ZodType<
   EvalSuiteManifest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schema_version: z.string().default("2026-05-27"),
-  tasks: z.array(EvalTask$inboundSchema),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "schema_version": "schemaVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schema_version: z.string().default("2026-05-27"),
+    tasks: z.array(EvalTask$inboundSchema),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema_version": "schemaVersion",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteManifest$Outbound = {
   schema_version: string;
@@ -46,15 +48,17 @@ export const EvalSuiteManifest$outboundSchema: z.ZodType<
   EvalSuiteManifest$Outbound,
   z.ZodTypeDef,
   EvalSuiteManifest
-> = z.object({
-  schemaVersion: z.string().default("2026-05-27"),
-  tasks: z.array(EvalTask$outboundSchema),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    schemaVersion: "schema_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaVersion: z.string().default("2026-05-27"),
+    tasks: z.array(EvalTask$outboundSchema),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      schemaVersion: "schema_version",
+    });
+  })
+);
 
 export function evalSuiteManifestToJSON(
   evalSuiteManifest: EvalSuiteManifest,

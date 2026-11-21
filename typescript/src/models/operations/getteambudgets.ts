@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -96,14 +96,16 @@ export const GetTeamBudgetsRequest$inboundSchema: z.ZodType<
   GetTeamBudgetsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetTeamBudgetsRequest$Outbound = {
   id: string;
@@ -115,14 +117,16 @@ export const GetTeamBudgetsRequest$outboundSchema: z.ZodType<
   GetTeamBudgetsRequest$Outbound,
   z.ZodTypeDef,
   GetTeamBudgetsRequest
-> = z.object({
-  id: z.string(),
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getTeamBudgetsRequestToJSON(
   getTeamBudgetsRequest: GetTeamBudgetsRequest,
@@ -144,7 +148,7 @@ export function getTeamBudgetsRequestFromJSON(
 /** @internal */
 export const GetTeamBudgetsScope$inboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsScope
-> = z.nativeEnum(GetTeamBudgetsScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTeamBudgetsScope));
 /** @internal */
 export const GetTeamBudgetsScope$outboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsScope
@@ -153,7 +157,7 @@ export const GetTeamBudgetsScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const GetTeamBudgetsOwner$inboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsOwner
-> = z.nativeEnum(GetTeamBudgetsOwner);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTeamBudgetsOwner));
 /** @internal */
 export const GetTeamBudgetsOwner$outboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsOwner
@@ -162,7 +166,7 @@ export const GetTeamBudgetsOwner$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const GetTeamBudgetsPeriod$inboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsPeriod
-> = z.nativeEnum(GetTeamBudgetsPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTeamBudgetsPeriod));
 /** @internal */
 export const GetTeamBudgetsPeriod$outboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsPeriod
@@ -171,7 +175,7 @@ export const GetTeamBudgetsPeriod$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const GetTeamBudgetsAction$inboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsAction
-> = z.nativeEnum(GetTeamBudgetsAction);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTeamBudgetsAction));
 /** @internal */
 export const GetTeamBudgetsAction$outboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsAction
@@ -182,10 +186,12 @@ export const GetTeamBudgetsThresholds$inboundSchema: z.ZodType<
   GetTeamBudgetsThresholds,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  pct: z.number().int(),
-  action: GetTeamBudgetsAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: GetTeamBudgetsAction$inboundSchema,
+  })
+);
 /** @internal */
 export type GetTeamBudgetsThresholds$Outbound = {
   pct: number;
@@ -197,10 +203,12 @@ export const GetTeamBudgetsThresholds$outboundSchema: z.ZodType<
   GetTeamBudgetsThresholds$Outbound,
   z.ZodTypeDef,
   GetTeamBudgetsThresholds
-> = z.object({
-  pct: z.number().int(),
-  action: GetTeamBudgetsAction$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: GetTeamBudgetsAction$outboundSchema,
+  })
+);
 
 export function getTeamBudgetsThresholdsToJSON(
   getTeamBudgetsThresholds: GetTeamBudgetsThresholds,
@@ -222,7 +230,7 @@ export function getTeamBudgetsThresholdsFromJSON(
 /** @internal */
 export const GetTeamBudgetsStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsStatus
-> = z.nativeEnum(GetTeamBudgetsStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetTeamBudgetsStatus));
 /** @internal */
 export const GetTeamBudgetsStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetTeamBudgetsStatus
@@ -233,17 +241,19 @@ export const GetTeamBudgetsSpend$inboundSchema: z.ZodType<
   GetTeamBudgetsSpend,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  window: z.string(),
-  cost_spent: z.number(),
-  limit: z.number(),
-  pct: z.number().int(),
-  status: GetTeamBudgetsStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cost_spent": "costSpent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z.string(),
+    cost_spent: z.number(),
+    limit: z.number(),
+    pct: z.number().int(),
+    status: GetTeamBudgetsStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cost_spent": "costSpent",
+    });
+  })
+);
 /** @internal */
 export type GetTeamBudgetsSpend$Outbound = {
   window: string;
@@ -258,17 +268,19 @@ export const GetTeamBudgetsSpend$outboundSchema: z.ZodType<
   GetTeamBudgetsSpend$Outbound,
   z.ZodTypeDef,
   GetTeamBudgetsSpend
-> = z.object({
-  window: z.string(),
-  costSpent: z.number(),
-  limit: z.number(),
-  pct: z.number().int(),
-  status: GetTeamBudgetsStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    costSpent: "cost_spent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z.string(),
+    costSpent: z.number(),
+    limit: z.number(),
+    pct: z.number().int(),
+    status: GetTeamBudgetsStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      costSpent: "cost_spent",
+    });
+  })
+);
 
 export function getTeamBudgetsSpendToJSON(
   getTeamBudgetsSpend: GetTeamBudgetsSpend,
@@ -292,24 +304,26 @@ export const GetTeamBudgetsData$inboundSchema: z.ZodType<
   GetTeamBudgetsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  scope: GetTeamBudgetsScope$inboundSchema,
-  scope_id: z.string(),
-  scope_org_id: z.nullable(z.string()),
-  owner: GetTeamBudgetsOwner$inboundSchema,
-  period: GetTeamBudgetsPeriod$inboundSchema,
-  limit: z.number(),
-  thresholds: z.array(z.lazy(() => GetTeamBudgetsThresholds$inboundSchema)),
-  alert_webhook_url: z.nullable(z.string()),
-  spend: z.lazy(() => GetTeamBudgetsSpend$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "scope_id": "scopeId",
-    "scope_org_id": "scopeOrgId",
-    "alert_webhook_url": "alertWebhookUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scope: GetTeamBudgetsScope$inboundSchema,
+    scope_id: z.string(),
+    scope_org_id: z.nullable(z.string()),
+    owner: GetTeamBudgetsOwner$inboundSchema,
+    period: GetTeamBudgetsPeriod$inboundSchema,
+    limit: z.number(),
+    thresholds: z.array(z.lazy(() => GetTeamBudgetsThresholds$inboundSchema)),
+    alert_webhook_url: z.nullable(z.string()),
+    spend: z.lazy(() => GetTeamBudgetsSpend$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "scope_id": "scopeId",
+      "scope_org_id": "scopeOrgId",
+      "alert_webhook_url": "alertWebhookUrl",
+    });
+  })
+);
 /** @internal */
 export type GetTeamBudgetsData$Outbound = {
   id: string;
@@ -329,24 +343,26 @@ export const GetTeamBudgetsData$outboundSchema: z.ZodType<
   GetTeamBudgetsData$Outbound,
   z.ZodTypeDef,
   GetTeamBudgetsData
-> = z.object({
-  id: z.string(),
-  scope: GetTeamBudgetsScope$outboundSchema,
-  scopeId: z.string(),
-  scopeOrgId: z.nullable(z.string()),
-  owner: GetTeamBudgetsOwner$outboundSchema,
-  period: GetTeamBudgetsPeriod$outboundSchema,
-  limit: z.number(),
-  thresholds: z.array(z.lazy(() => GetTeamBudgetsThresholds$outboundSchema)),
-  alertWebhookUrl: z.nullable(z.string()),
-  spend: z.lazy(() => GetTeamBudgetsSpend$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    scopeId: "scope_id",
-    scopeOrgId: "scope_org_id",
-    alertWebhookUrl: "alert_webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scope: GetTeamBudgetsScope$outboundSchema,
+    scopeId: z.string(),
+    scopeOrgId: z.nullable(z.string()),
+    owner: GetTeamBudgetsOwner$outboundSchema,
+    period: GetTeamBudgetsPeriod$outboundSchema,
+    limit: z.number(),
+    thresholds: z.array(z.lazy(() => GetTeamBudgetsThresholds$outboundSchema)),
+    alertWebhookUrl: z.nullable(z.string()),
+    spend: z.lazy(() => GetTeamBudgetsSpend$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeId: "scope_id",
+      scopeOrgId: "scope_org_id",
+      alertWebhookUrl: "alert_webhook_url",
+    });
+  })
+);
 
 export function getTeamBudgetsDataToJSON(
   getTeamBudgetsData: GetTeamBudgetsData,
@@ -370,10 +386,12 @@ export const GetTeamBudgetsResponseBody$inboundSchema: z.ZodType<
   GetTeamBudgetsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => GetTeamBudgetsData$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => GetTeamBudgetsData$inboundSchema)),
+  })
+);
 /** @internal */
 export type GetTeamBudgetsResponseBody$Outbound = {
   object: "list";
@@ -385,10 +403,12 @@ export const GetTeamBudgetsResponseBody$outboundSchema: z.ZodType<
   GetTeamBudgetsResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamBudgetsResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => GetTeamBudgetsData$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => GetTeamBudgetsData$outboundSchema)),
+  })
+);
 
 export function getTeamBudgetsResponseBodyToJSON(
   getTeamBudgetsResponseBody: GetTeamBudgetsResponseBody,

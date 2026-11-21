@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,16 +22,18 @@ export const GetAgentVersionRequest$inboundSchema: z.ZodType<
   GetAgentVersionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  version: z.number().int(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    version: z.number().int(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetAgentVersionRequest$Outbound = {
   agent_id: string;
@@ -44,16 +46,18 @@ export const GetAgentVersionRequest$outboundSchema: z.ZodType<
   GetAgentVersionRequest$Outbound,
   z.ZodTypeDef,
   GetAgentVersionRequest
-> = z.object({
-  agentId: z.string(),
-  version: z.number().int(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    version: z.number().int(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getAgentVersionRequestToJSON(
   getAgentVersionRequest: GetAgentVersionRequest,

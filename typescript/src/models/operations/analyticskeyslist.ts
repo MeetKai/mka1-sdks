@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const AnalyticsKeysListRequest$inboundSchema: z.ZodType<
   AnalyticsKeysListRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(50),
-  after: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(50),
+    after: z.string().optional(),
+  })
+);
 /** @internal */
 export type AnalyticsKeysListRequest$Outbound = {
   id: string;
@@ -38,11 +40,13 @@ export const AnalyticsKeysListRequest$outboundSchema: z.ZodType<
   AnalyticsKeysListRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsKeysListRequest
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(50),
-  after: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(50),
+    after: z.string().optional(),
+  })
+);
 
 export function analyticsKeysListRequestToJSON(
   analyticsKeysListRequest: AnalyticsKeysListRequest,

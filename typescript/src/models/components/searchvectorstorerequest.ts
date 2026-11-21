@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -57,8 +57,8 @@ export type SearchVectorStoreRequest = {
 };
 
 /** @internal */
-export const Query$inboundSchema: z.ZodType<Query, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+export const Query$inboundSchema: z.ZodType<Query, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 /** @internal */
 export type Query$Outbound = string | Array<string>;
 
@@ -67,7 +67,9 @@ export const Query$outboundSchema: z.ZodType<
   Query$Outbound,
   z.ZodTypeDef,
   Query
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function queryToJSON(query: Query): string {
   return JSON.stringify(Query$outboundSchema.parse(query));
@@ -87,14 +89,16 @@ export const SearchVectorStoreRequestRankingOptions$inboundSchema: z.ZodType<
   SearchVectorStoreRequestRankingOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ranker: z.string().default("auto"),
-  score_threshold: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "score_threshold": "scoreThreshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().default("auto"),
+    score_threshold: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "score_threshold": "scoreThreshold",
+    });
+  })
+);
 /** @internal */
 export type SearchVectorStoreRequestRankingOptions$Outbound = {
   ranker: string;
@@ -106,14 +110,16 @@ export const SearchVectorStoreRequestRankingOptions$outboundSchema: z.ZodType<
   SearchVectorStoreRequestRankingOptions$Outbound,
   z.ZodTypeDef,
   SearchVectorStoreRequestRankingOptions
-> = z.object({
-  ranker: z.string().default("auto"),
-  scoreThreshold: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    scoreThreshold: "score_threshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().default("auto"),
+    scoreThreshold: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      scoreThreshold: "score_threshold",
+    });
+  })
+);
 
 export function searchVectorStoreRequestRankingOptionsToJSON(
   searchVectorStoreRequestRankingOptions:
@@ -141,21 +147,23 @@ export const SearchVectorStoreRequest$inboundSchema: z.ZodType<
   SearchVectorStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  query: z.union([z.string(), z.array(z.string())]),
-  filters: Filter$inboundSchema.optional(),
-  max_num_results: z.number().int().default(10),
-  ranking_options: z.lazy(() =>
-    SearchVectorStoreRequestRankingOptions$inboundSchema
-  ).optional(),
-  rewrite_query: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "max_num_results": "maxNumResults",
-    "ranking_options": "rankingOptions",
-    "rewrite_query": "rewriteQuery",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.union([z.string(), z.array(z.string())]),
+    filters: Filter$inboundSchema.optional(),
+    max_num_results: z.number().int().default(10),
+    ranking_options: z.lazy(() =>
+      SearchVectorStoreRequestRankingOptions$inboundSchema
+    ).optional(),
+    rewrite_query: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_num_results": "maxNumResults",
+      "ranking_options": "rankingOptions",
+      "rewrite_query": "rewriteQuery",
+    });
+  })
+);
 /** @internal */
 export type SearchVectorStoreRequest$Outbound = {
   query: string | Array<string>;
@@ -170,21 +178,23 @@ export const SearchVectorStoreRequest$outboundSchema: z.ZodType<
   SearchVectorStoreRequest$Outbound,
   z.ZodTypeDef,
   SearchVectorStoreRequest
-> = z.object({
-  query: z.union([z.string(), z.array(z.string())]),
-  filters: Filter$outboundSchema.optional(),
-  maxNumResults: z.number().int().default(10),
-  rankingOptions: z.lazy(() =>
-    SearchVectorStoreRequestRankingOptions$outboundSchema
-  ).optional(),
-  rewriteQuery: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    maxNumResults: "max_num_results",
-    rankingOptions: "ranking_options",
-    rewriteQuery: "rewrite_query",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.union([z.string(), z.array(z.string())]),
+    filters: Filter$outboundSchema.optional(),
+    maxNumResults: z.number().int().default(10),
+    rankingOptions: z.lazy(() =>
+      SearchVectorStoreRequestRankingOptions$outboundSchema
+    ).optional(),
+    rewriteQuery: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      maxNumResults: "max_num_results",
+      rankingOptions: "ranking_options",
+      rewriteQuery: "rewrite_query",
+    });
+  })
+);
 
 export function searchVectorStoreRequestToJSON(
   searchVectorStoreRequest: SearchVectorStoreRequest,

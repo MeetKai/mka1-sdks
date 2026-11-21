@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,11 +30,13 @@ export const VectorStoreFileDeletionStatus$inboundSchema: z.ZodType<
   VectorStoreFileDeletionStatus,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file.deleted"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file.deleted"),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type VectorStoreFileDeletionStatus$Outbound = {
   id: string;
@@ -47,11 +49,13 @@ export const VectorStoreFileDeletionStatus$outboundSchema: z.ZodType<
   VectorStoreFileDeletionStatus$Outbound,
   z.ZodTypeDef,
   VectorStoreFileDeletionStatus
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file.deleted"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file.deleted"),
+    deleted: z.boolean(),
+  })
+);
 
 export function vectorStoreFileDeletionStatusToJSON(
   vectorStoreFileDeletionStatus: VectorStoreFileDeletionStatus,

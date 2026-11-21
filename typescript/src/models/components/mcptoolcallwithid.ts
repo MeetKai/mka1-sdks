@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,24 +38,26 @@ export const MCPToolCallWithId$inboundSchema: z.ZodType<
   MCPToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_call"),
-  id: z.string(),
-  approval_request_id: z.nullable(z.string()).optional(),
-  arguments: z.string(),
-  name: z.string(),
-  server_label: z.string(),
-  error: z.string().optional(),
-  output: z.string().optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-    "server_label": "serverLabel",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_call"),
+    id: z.string(),
+    approval_request_id: z.nullable(z.string()).optional(),
+    arguments: z.string(),
+    name: z.string(),
+    server_label: z.string(),
+    error: z.string().optional(),
+    output: z.string().optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+      "server_label": "serverLabel",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type MCPToolCallWithId$Outbound = {
   type: "mcp_call";
@@ -75,24 +77,26 @@ export const MCPToolCallWithId$outboundSchema: z.ZodType<
   MCPToolCallWithId$Outbound,
   z.ZodTypeDef,
   MCPToolCallWithId
-> = z.object({
-  type: z.literal("mcp_call"),
-  id: z.string(),
-  approvalRequestId: z.nullable(z.string()).optional(),
-  arguments: z.string(),
-  name: z.string(),
-  serverLabel: z.string(),
-  error: z.string().optional(),
-  output: z.string().optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-    serverLabel: "server_label",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_call"),
+    id: z.string(),
+    approvalRequestId: z.nullable(z.string()).optional(),
+    arguments: z.string(),
+    name: z.string(),
+    serverLabel: z.string(),
+    error: z.string().optional(),
+    output: z.string().optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+      serverLabel: "server_label",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function mcpToolCallWithIdToJSON(
   mcpToolCallWithId: MCPToolCallWithId,

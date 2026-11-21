@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,22 +29,24 @@ export type Usage = {
 };
 
 /** @internal */
-export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> = z
-  .object({
-    input_tokens: z.number().int(),
-    input_tokens_details: InputTokensDetails$inboundSchema,
-    output_tokens: z.number().int(),
-    output_tokens_details: OutputTokensDetails$inboundSchema,
-    total_tokens: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_tokens": "inputTokens",
-      "input_tokens_details": "inputTokensDetails",
-      "output_tokens": "outputTokens",
-      "output_tokens_details": "outputTokensDetails",
-      "total_tokens": "totalTokens",
-    });
-  });
+export const Usage$inboundSchema: z.ZodType<Usage, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input_tokens: z.number().int(),
+      input_tokens_details: InputTokensDetails$inboundSchema,
+      output_tokens: z.number().int(),
+      output_tokens_details: OutputTokensDetails$inboundSchema,
+      total_tokens: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_tokens": "inputTokens",
+        "input_tokens_details": "inputTokensDetails",
+        "output_tokens": "outputTokens",
+        "output_tokens_details": "outputTokensDetails",
+        "total_tokens": "totalTokens",
+      });
+    })
+  );
 /** @internal */
 export type Usage$Outbound = {
   input_tokens: number;
@@ -59,21 +61,23 @@ export const Usage$outboundSchema: z.ZodType<
   Usage$Outbound,
   z.ZodTypeDef,
   Usage
-> = z.object({
-  inputTokens: z.number().int(),
-  inputTokensDetails: InputTokensDetails$outboundSchema,
-  outputTokens: z.number().int(),
-  outputTokensDetails: OutputTokensDetails$outboundSchema,
-  totalTokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    inputTokensDetails: "input_tokens_details",
-    outputTokens: "output_tokens",
-    outputTokensDetails: "output_tokens_details",
-    totalTokens: "total_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTokens: z.number().int(),
+    inputTokensDetails: InputTokensDetails$outboundSchema,
+    outputTokens: z.number().int(),
+    outputTokensDetails: OutputTokensDetails$outboundSchema,
+    totalTokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      inputTokensDetails: "input_tokens_details",
+      outputTokens: "output_tokens",
+      outputTokensDetails: "output_tokens_details",
+      totalTokens: "total_tokens",
+    });
+  })
+);
 
 export function usageToJSON(usage: Usage): string {
   return JSON.stringify(Usage$outboundSchema.parse(usage));

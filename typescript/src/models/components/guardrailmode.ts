@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const GuardrailMode = {
@@ -17,7 +18,7 @@ export type GuardrailMode = ClosedEnum<typeof GuardrailMode>;
 /** @internal */
 export const GuardrailMode$inboundSchema: z.ZodNativeEnum<
   typeof GuardrailMode
-> = z.nativeEnum(GuardrailMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GuardrailMode));
 /** @internal */
 export const GuardrailMode$outboundSchema: z.ZodNativeEnum<
   typeof GuardrailMode

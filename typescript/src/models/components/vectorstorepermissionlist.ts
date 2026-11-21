@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const VectorStorePermissionList$inboundSchema: z.ZodType<
   VectorStorePermissionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(VectorStorePermission$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(VectorStorePermission$inboundSchema),
+  })
+);
 /** @internal */
 export type VectorStorePermissionList$Outbound = {
   object: "list";
@@ -47,10 +49,12 @@ export const VectorStorePermissionList$outboundSchema: z.ZodType<
   VectorStorePermissionList$Outbound,
   z.ZodTypeDef,
   VectorStorePermissionList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(VectorStorePermission$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(VectorStorePermission$outboundSchema),
+  })
+);
 
 export function vectorStorePermissionListToJSON(
   vectorStorePermissionList: VectorStorePermissionList,

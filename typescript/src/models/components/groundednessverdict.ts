@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,7 +68,7 @@ export type GroundednessVerdict = {
 /** @internal */
 export const GroundednessVerdictAction$inboundSchema: z.ZodNativeEnum<
   typeof GroundednessVerdictAction
-> = z.nativeEnum(GroundednessVerdictAction);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GroundednessVerdictAction));
 /** @internal */
 export const GroundednessVerdictAction$outboundSchema: z.ZodNativeEnum<
   typeof GroundednessVerdictAction
@@ -79,15 +79,17 @@ export const GroundednessVerdict$inboundSchema: z.ZodType<
   GroundednessVerdict,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  score: z.number(),
-  threshold: z.number(),
-  action: GroundednessVerdictAction$inboundSchema,
-  passed: z.boolean(),
-  model: z.string(),
-  claims: z.array(GroundednessClaim$inboundSchema),
-  sources: z.array(GroundednessSource$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    score: z.number(),
+    threshold: z.number(),
+    action: GroundednessVerdictAction$inboundSchema,
+    passed: z.boolean(),
+    model: z.string(),
+    claims: z.array(GroundednessClaim$inboundSchema),
+    sources: z.array(GroundednessSource$inboundSchema),
+  })
+);
 /** @internal */
 export type GroundednessVerdict$Outbound = {
   score: number;
@@ -104,15 +106,17 @@ export const GroundednessVerdict$outboundSchema: z.ZodType<
   GroundednessVerdict$Outbound,
   z.ZodTypeDef,
   GroundednessVerdict
-> = z.object({
-  score: z.number(),
-  threshold: z.number(),
-  action: GroundednessVerdictAction$outboundSchema,
-  passed: z.boolean(),
-  model: z.string(),
-  claims: z.array(GroundednessClaim$outboundSchema),
-  sources: z.array(GroundednessSource$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    score: z.number(),
+    threshold: z.number(),
+    action: GroundednessVerdictAction$outboundSchema,
+    passed: z.boolean(),
+    model: z.string(),
+    claims: z.array(GroundednessClaim$outboundSchema),
+    sources: z.array(GroundednessSource$outboundSchema),
+  })
+);
 
 export function groundednessVerdictToJSON(
   groundednessVerdict: GroundednessVerdict,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,25 +49,27 @@ export const EvalPythonGrader$inboundSchema: z.ZodType<
   EvalPythonGrader,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("python"),
-  contract: EvalPythonGraderContract$inboundSchema.optional(),
-  execution: EvalPythonGraderExecution$inboundSchema.optional(),
-  model_access: EvalPythonGraderModelAccess$inboundSchema.optional(),
-  metric_id: z.string().default("score"),
-  source: z.string().optional(),
-  file_id: z.string().optional(),
-  timeout_seconds: z.number().int().default(120),
-  max_model_calls: z.number().int().default(64),
-}).transform((v) => {
-  return remap$(v, {
-    "model_access": "modelAccess",
-    "metric_id": "metricId",
-    "file_id": "fileId",
-    "timeout_seconds": "timeoutSeconds",
-    "max_model_calls": "maxModelCalls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    contract: EvalPythonGraderContract$inboundSchema.optional(),
+    execution: EvalPythonGraderExecution$inboundSchema.optional(),
+    model_access: EvalPythonGraderModelAccess$inboundSchema.optional(),
+    metric_id: z.string().default("score"),
+    source: z.string().optional(),
+    file_id: z.string().optional(),
+    timeout_seconds: z.number().int().default(120),
+    max_model_calls: z.number().int().default(64),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_access": "modelAccess",
+      "metric_id": "metricId",
+      "file_id": "fileId",
+      "timeout_seconds": "timeoutSeconds",
+      "max_model_calls": "maxModelCalls",
+    });
+  })
+);
 /** @internal */
 export type EvalPythonGrader$Outbound = {
   type: "python";
@@ -86,25 +88,27 @@ export const EvalPythonGrader$outboundSchema: z.ZodType<
   EvalPythonGrader$Outbound,
   z.ZodTypeDef,
   EvalPythonGrader
-> = z.object({
-  type: z.literal("python"),
-  contract: EvalPythonGraderContract$outboundSchema.optional(),
-  execution: EvalPythonGraderExecution$outboundSchema.optional(),
-  modelAccess: EvalPythonGraderModelAccess$outboundSchema.optional(),
-  metricId: z.string().default("score"),
-  source: z.string().optional(),
-  fileId: z.string().optional(),
-  timeoutSeconds: z.number().int().default(120),
-  maxModelCalls: z.number().int().default(64),
-}).transform((v) => {
-  return remap$(v, {
-    modelAccess: "model_access",
-    metricId: "metric_id",
-    fileId: "file_id",
-    timeoutSeconds: "timeout_seconds",
-    maxModelCalls: "max_model_calls",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("python"),
+    contract: EvalPythonGraderContract$outboundSchema.optional(),
+    execution: EvalPythonGraderExecution$outboundSchema.optional(),
+    modelAccess: EvalPythonGraderModelAccess$outboundSchema.optional(),
+    metricId: z.string().default("score"),
+    source: z.string().optional(),
+    fileId: z.string().optional(),
+    timeoutSeconds: z.number().int().default(120),
+    maxModelCalls: z.number().int().default(64),
+  }).transform((v) => {
+    return remap$(v, {
+      modelAccess: "model_access",
+      metricId: "metric_id",
+      fileId: "file_id",
+      timeoutSeconds: "timeout_seconds",
+      maxModelCalls: "max_model_calls",
+    });
+  })
+);
 
 export function evalPythonGraderToJSON(
   evalPythonGrader: EvalPythonGrader,

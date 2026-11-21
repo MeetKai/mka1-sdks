@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const DecisionsGroupBy = {
@@ -16,7 +17,7 @@ export type DecisionsGroupBy = ClosedEnum<typeof DecisionsGroupBy>;
 /** @internal */
 export const DecisionsGroupBy$inboundSchema: z.ZodNativeEnum<
   typeof DecisionsGroupBy
-> = z.nativeEnum(DecisionsGroupBy);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DecisionsGroupBy));
 /** @internal */
 export const DecisionsGroupBy$outboundSchema: z.ZodNativeEnum<
   typeof DecisionsGroupBy

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,10 +22,12 @@ export const DeleteOrgAutoModelResponse$inboundSchema: z.ZodType<
   DeleteOrgAutoModelResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endpoint: AutoEndpoint$inboundSchema,
-  cleared: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$inboundSchema,
+    cleared: z.literal(true),
+  })
+);
 /** @internal */
 export type DeleteOrgAutoModelResponse$Outbound = {
   endpoint: string;
@@ -37,10 +39,12 @@ export const DeleteOrgAutoModelResponse$outboundSchema: z.ZodType<
   DeleteOrgAutoModelResponse$Outbound,
   z.ZodTypeDef,
   DeleteOrgAutoModelResponse
-> = z.object({
-  endpoint: AutoEndpoint$outboundSchema,
-  cleared: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$outboundSchema,
+    cleared: z.literal(true),
+  })
+);
 
 export function deleteOrgAutoModelResponseToJSON(
   deleteOrgAutoModelResponse: DeleteOrgAutoModelResponse,

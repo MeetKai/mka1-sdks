@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,18 @@ export const GenerationModelUsage$inboundSchema: z.ZodType<
   GenerationModelUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  calls: z.number().int().default(0),
-  input_tokens: z.number().int().default(0),
-  output_tokens: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int().default(0),
+    input_tokens: z.number().int().default(0),
+    output_tokens: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+    });
+  })
+);
 /** @internal */
 export type GenerationModelUsage$Outbound = {
   calls: number;
@@ -41,16 +43,18 @@ export const GenerationModelUsage$outboundSchema: z.ZodType<
   GenerationModelUsage$Outbound,
   z.ZodTypeDef,
   GenerationModelUsage
-> = z.object({
-  calls: z.number().int().default(0),
-  inputTokens: z.number().int().default(0),
-  outputTokens: z.number().int().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int().default(0),
+    inputTokens: z.number().int().default(0),
+    outputTokens: z.number().int().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+    });
+  })
+);
 
 export function generationModelUsageToJSON(
   generationModelUsage: GenerationModelUsage,

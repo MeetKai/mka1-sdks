@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,17 +20,19 @@ export const ComputeHardware$inboundSchema: z.ZodType<
   ComputeHardware,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accelerator: z.string(),
-  gpu_count: z.number().int(),
-  gpu_memory_gb: z.number().int(),
-  interconnect: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "gpu_count": "gpuCount",
-    "gpu_memory_gb": "gpuMemoryGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string(),
+    gpu_count: z.number().int(),
+    gpu_memory_gb: z.number().int(),
+    interconnect: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "gpu_count": "gpuCount",
+      "gpu_memory_gb": "gpuMemoryGb",
+    });
+  })
+);
 /** @internal */
 export type ComputeHardware$Outbound = {
   accelerator: string;
@@ -44,17 +46,19 @@ export const ComputeHardware$outboundSchema: z.ZodType<
   ComputeHardware$Outbound,
   z.ZodTypeDef,
   ComputeHardware
-> = z.object({
-  accelerator: z.string(),
-  gpuCount: z.number().int(),
-  gpuMemoryGb: z.number().int(),
-  interconnect: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    gpuCount: "gpu_count",
-    gpuMemoryGb: "gpu_memory_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string(),
+    gpuCount: z.number().int(),
+    gpuMemoryGb: z.number().int(),
+    interconnect: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      gpuCount: "gpu_count",
+      gpuMemoryGb: "gpu_memory_gb",
+    });
+  })
+);
 
 export function computeHardwareToJSON(
   computeHardware: ComputeHardware,

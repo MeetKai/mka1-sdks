@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,16 +28,18 @@ export const ListJobsRequest$inboundSchema: z.ZodType<
   ListJobsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  state: components.ComputeResourceState$inboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: components.ComputeResourceState$inboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListJobsRequest$Outbound = {
   state?: string | undefined;
@@ -51,16 +53,18 @@ export const ListJobsRequest$outboundSchema: z.ZodType<
   ListJobsRequest$Outbound,
   z.ZodTypeDef,
   ListJobsRequest
-> = z.object({
-  state: components.ComputeResourceState$outboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: components.ComputeResourceState$outboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listJobsRequestToJSON(
   listJobsRequest: ListJobsRequest,
@@ -82,10 +86,12 @@ export const ListJobsResponse$inboundSchema: z.ZodType<
   ListJobsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeJobList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJobList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListJobsResponse$Outbound =
   | components.ComputeJobList$Outbound
@@ -96,10 +102,12 @@ export const ListJobsResponse$outboundSchema: z.ZodType<
   ListJobsResponse$Outbound,
   z.ZodTypeDef,
   ListJobsResponse
-> = z.union([
-  components.ComputeJobList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJobList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listJobsResponseToJSON(
   listJobsResponse: ListJobsResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,7 +39,9 @@ export type ListPromptVersionsRequest = {
 /** @internal */
 export const ListPromptVersionsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListPromptVersionsQueryParamOrder
-> = z.nativeEnum(ListPromptVersionsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListPromptVersionsQueryParamOrder)
+);
 /** @internal */
 export const ListPromptVersionsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListPromptVersionsQueryParamOrder
@@ -50,16 +52,18 @@ export const ListPromptVersionsRequest$inboundSchema: z.ZodType<
   ListPromptVersionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListPromptVersionsQueryParamOrder$inboundSchema.default("desc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListPromptVersionsQueryParamOrder$inboundSchema.default("desc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListPromptVersionsRequest$Outbound = {
   id: string;
@@ -73,16 +77,18 @@ export const ListPromptVersionsRequest$outboundSchema: z.ZodType<
   ListPromptVersionsRequest$Outbound,
   z.ZodTypeDef,
   ListPromptVersionsRequest
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListPromptVersionsQueryParamOrder$outboundSchema.default("desc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListPromptVersionsQueryParamOrder$outboundSchema.default("desc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listPromptVersionsRequestToJSON(
   listPromptVersionsRequest: ListPromptVersionsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const McpOAuthAuthorizeRequest$inboundSchema: z.ZodType<
   McpOAuthAuthorizeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  redirect_uri: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "redirect_uri": "redirectUri",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redirect_uri: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "redirect_uri": "redirectUri",
+    });
+  })
+);
 /** @internal */
 export type McpOAuthAuthorizeRequest$Outbound = {
   redirect_uri: string;
@@ -37,13 +39,15 @@ export const McpOAuthAuthorizeRequest$outboundSchema: z.ZodType<
   McpOAuthAuthorizeRequest$Outbound,
   z.ZodTypeDef,
   McpOAuthAuthorizeRequest
-> = z.object({
-  redirectUri: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    redirectUri: "redirect_uri",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    redirectUri: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      redirectUri: "redirect_uri",
+    });
+  })
+);
 
 export function mcpOAuthAuthorizeRequestToJSON(
   mcpOAuthAuthorizeRequest: McpOAuthAuthorizeRequest,

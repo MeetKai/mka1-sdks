@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,17 +30,19 @@ export const FeatureFlagRule$inboundSchema: z.ZodType<
   FeatureFlagRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conditions: z.array(FeatureFlagCondition$inboundSchema),
-  description: z.string().optional(),
-  enabled: z.boolean(),
-  rollout_percentage: z.number().int().default(100),
-  value: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "rollout_percentage": "rolloutPercentage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conditions: z.array(FeatureFlagCondition$inboundSchema),
+    description: z.string().optional(),
+    enabled: z.boolean(),
+    rollout_percentage: z.number().int().default(100),
+    value: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "rollout_percentage": "rolloutPercentage",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagRule$Outbound = {
   conditions: Array<FeatureFlagCondition$Outbound>;
@@ -55,17 +57,19 @@ export const FeatureFlagRule$outboundSchema: z.ZodType<
   FeatureFlagRule$Outbound,
   z.ZodTypeDef,
   FeatureFlagRule
-> = z.object({
-  conditions: z.array(FeatureFlagCondition$outboundSchema),
-  description: z.string().optional(),
-  enabled: z.boolean(),
-  rolloutPercentage: z.number().int().default(100),
-  value: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    rolloutPercentage: "rollout_percentage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conditions: z.array(FeatureFlagCondition$outboundSchema),
+    description: z.string().optional(),
+    enabled: z.boolean(),
+    rolloutPercentage: z.number().int().default(100),
+    value: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      rolloutPercentage: "rollout_percentage",
+    });
+  })
+);
 
 export function featureFlagRuleToJSON(
   featureFlagRule: FeatureFlagRule,

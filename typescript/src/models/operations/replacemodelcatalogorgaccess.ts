@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,15 +19,17 @@ export const ReplaceModelCatalogOrgAccessRequest$inboundSchema: z.ZodType<
   ReplaceModelCatalogOrgAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  AccessMutationRequest: components.AccessMutationRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "AccessMutationRequest": "accessMutationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    AccessMutationRequest: components.AccessMutationRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "AccessMutationRequest": "accessMutationRequest",
+    });
+  })
+);
 /** @internal */
 export type ReplaceModelCatalogOrgAccessRequest$Outbound = {
   org_id: string;
@@ -39,15 +41,17 @@ export const ReplaceModelCatalogOrgAccessRequest$outboundSchema: z.ZodType<
   ReplaceModelCatalogOrgAccessRequest$Outbound,
   z.ZodTypeDef,
   ReplaceModelCatalogOrgAccessRequest
-> = z.object({
-  orgId: z.string(),
-  accessMutationRequest: components.AccessMutationRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    accessMutationRequest: "AccessMutationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    accessMutationRequest: components.AccessMutationRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      accessMutationRequest: "AccessMutationRequest",
+    });
+  })
+);
 
 export function replaceModelCatalogOrgAccessRequestToJSON(
   replaceModelCatalogOrgAccessRequest: ReplaceModelCatalogOrgAccessRequest,

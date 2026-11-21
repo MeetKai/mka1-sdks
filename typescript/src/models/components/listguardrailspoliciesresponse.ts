@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,15 +34,17 @@ export const ListGuardrailsPoliciesResponse$inboundSchema: z.ZodType<
   ListGuardrailsPoliciesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(GuardrailsPolicy$inboundSchema),
-  cluster_default: z.nullable(AppliedClusterDefaultGuardrails$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_default": "clusterDefault",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(GuardrailsPolicy$inboundSchema),
+    cluster_default: z.nullable(AppliedClusterDefaultGuardrails$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_default": "clusterDefault",
+    });
+  })
+);
 /** @internal */
 export type ListGuardrailsPoliciesResponse$Outbound = {
   object: "list";
@@ -55,15 +57,17 @@ export const ListGuardrailsPoliciesResponse$outboundSchema: z.ZodType<
   ListGuardrailsPoliciesResponse$Outbound,
   z.ZodTypeDef,
   ListGuardrailsPoliciesResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(GuardrailsPolicy$outboundSchema),
-  clusterDefault: z.nullable(AppliedClusterDefaultGuardrails$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    clusterDefault: "cluster_default",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(GuardrailsPolicy$outboundSchema),
+    clusterDefault: z.nullable(AppliedClusterDefaultGuardrails$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      clusterDefault: "cluster_default",
+    });
+  })
+);
 
 export function listGuardrailsPoliciesResponseToJSON(
   listGuardrailsPoliciesResponse: ListGuardrailsPoliciesResponse,

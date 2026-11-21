@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const DeleteCatalogModelResponse$inboundSchema: z.ZodType<
   DeleteCatalogModelResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-  deactivated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+    deactivated: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteCatalogModelResponse$Outbound = {
   id: string;
@@ -35,11 +37,13 @@ export const DeleteCatalogModelResponse$outboundSchema: z.ZodType<
   DeleteCatalogModelResponse$Outbound,
   z.ZodTypeDef,
   DeleteCatalogModelResponse
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-  deactivated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+    deactivated: z.boolean(),
+  })
+);
 
 export function deleteCatalogModelResponseToJSON(
   deleteCatalogModelResponse: DeleteCatalogModelResponse,

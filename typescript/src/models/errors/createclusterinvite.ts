@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -207,19 +208,21 @@ export const CreateClusterInviteAuthClusterResponse429ResponseBody$inboundSchema
     CreateClusterInviteAuthClusterResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClusterInviteAuthClusterResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClusterInviteAuthClusterResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponse429ResponseBody$Outbound = {
@@ -232,11 +235,13 @@ export const CreateClusterInviteAuthClusterResponse429ResponseBody$outboundSchem
     CreateClusterInviteAuthClusterResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponse429ResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteAuthClusterResponse410ResponseBody$inboundSchema:
@@ -244,19 +249,21 @@ export const CreateClusterInviteAuthClusterResponse410ResponseBody$inboundSchema
     CreateClusterInviteAuthClusterResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClusterInviteAuthClusterResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClusterInviteAuthClusterResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponse410ResponseBody$Outbound = {
@@ -269,11 +276,13 @@ export const CreateClusterInviteAuthClusterResponse410ResponseBody$outboundSchem
     CreateClusterInviteAuthClusterResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponse410ResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteAuthClusterResponse409ResponseBody$inboundSchema:
@@ -281,19 +290,21 @@ export const CreateClusterInviteAuthClusterResponse409ResponseBody$inboundSchema
     CreateClusterInviteAuthClusterResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClusterInviteAuthClusterResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClusterInviteAuthClusterResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponse409ResponseBody$Outbound = {
@@ -306,11 +317,13 @@ export const CreateClusterInviteAuthClusterResponse409ResponseBody$outboundSchem
     CreateClusterInviteAuthClusterResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponse409ResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteAuthClusterResponse404ResponseBody$inboundSchema:
@@ -318,19 +331,21 @@ export const CreateClusterInviteAuthClusterResponse404ResponseBody$inboundSchema
     CreateClusterInviteAuthClusterResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClusterInviteAuthClusterResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClusterInviteAuthClusterResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponse404ResponseBody$Outbound = {
@@ -343,11 +358,13 @@ export const CreateClusterInviteAuthClusterResponse404ResponseBody$outboundSchem
     CreateClusterInviteAuthClusterResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponse404ResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteAuthClusterResponseResponseBody$inboundSchema:
@@ -355,20 +372,22 @@ export const CreateClusterInviteAuthClusterResponseResponseBody$inboundSchema:
     CreateClusterInviteAuthClusterResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new CreateClusterInviteAuthClusterResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new CreateClusterInviteAuthClusterResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponseResponseBody$Outbound = {
@@ -382,29 +401,33 @@ export const CreateClusterInviteAuthClusterResponseResponseBody$outboundSchema:
     CreateClusterInviteAuthClusterResponseResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponseResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteAuthClusterResponseBody$inboundSchema:
   z.ZodType<CreateClusterInviteAuthClusterResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new CreateClusterInviteAuthClusterResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new CreateClusterInviteAuthClusterResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type CreateClusterInviteAuthClusterResponseBody$Outbound = {
@@ -417,30 +440,34 @@ export const CreateClusterInviteAuthClusterResponseBody$outboundSchema:
     CreateClusterInviteAuthClusterResponseBody$Outbound,
     z.ZodTypeDef,
     CreateClusterInviteAuthClusterResponseBody
-  > = z.instanceof(CreateClusterInviteAuthClusterResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(CreateClusterInviteAuthClusterResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const CreateClusterInviteResponseBody$inboundSchema: z.ZodType<
   CreateClusterInviteResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new CreateClusterInviteResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new CreateClusterInviteResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type CreateClusterInviteResponseBody$Outbound = {
@@ -452,8 +479,10 @@ export const CreateClusterInviteResponseBody$outboundSchema: z.ZodType<
   CreateClusterInviteResponseBody$Outbound,
   z.ZodTypeDef,
   CreateClusterInviteResponseBody
-> = z.instanceof(CreateClusterInviteResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(CreateClusterInviteResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

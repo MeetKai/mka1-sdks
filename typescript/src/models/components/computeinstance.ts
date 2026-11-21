@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -74,62 +74,68 @@ export const ComputeInstance$inboundSchema: z.ZodType<
   ComputeInstance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allocated_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  confirmed_absent_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  draining_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  endpoints: z.array(ComputeEndpoint$inboundSchema),
-  exit_code: z.number().int().optional(),
-  hardware: ComputeHardware$inboundSchema,
-  host: z.string().optional(),
-  id: z.string(),
-  price_usd_hr: z.number().optional(),
-  private_host: z.string().optional(),
-  provider_id: z.string(),
-  provider_resource_type: z.string(),
-  rank: z.number().int().optional(),
-  ready: z.boolean().optional(),
-  ready_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  reason: ComputeReason$inboundSchema.optional(),
-  region: z.string().optional(),
-  replica_activation_generation: z.number().int().optional(),
-  replica_id: z.string().optional(),
-  replica_index: z.number().int().optional(),
-  replica_ordinal: z.number().int().optional(),
-  ssh: ComputeSSH$inboundSchema.optional(),
-  started_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  state: ComputeInstanceState$inboundSchema,
-  terminal_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allocated_at": "allocatedAt",
-    "confirmed_absent_at": "confirmedAbsentAt",
-    "created_at": "createdAt",
-    "draining_at": "drainingAt",
-    "exit_code": "exitCode",
-    "price_usd_hr": "priceUsdHr",
-    "private_host": "privateHost",
-    "provider_id": "providerId",
-    "provider_resource_type": "providerResourceType",
-    "ready_at": "readyAt",
-    "replica_activation_generation": "replicaActivationGeneration",
-    "replica_id": "replicaId",
-    "replica_index": "replicaIndex",
-    "replica_ordinal": "replicaOrdinal",
-    "started_at": "startedAt",
-    "terminal_at": "terminalAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allocated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    confirmed_absent_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    draining_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    endpoints: z.array(ComputeEndpoint$inboundSchema),
+    exit_code: z.number().int().optional(),
+    hardware: ComputeHardware$inboundSchema,
+    host: z.string().optional(),
+    id: z.string(),
+    price_usd_hr: z.number().optional(),
+    private_host: z.string().optional(),
+    provider_id: z.string(),
+    provider_resource_type: z.string(),
+    rank: z.number().int().optional(),
+    ready: z.boolean().optional(),
+    ready_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    reason: ComputeReason$inboundSchema.optional(),
+    region: z.string().optional(),
+    replica_activation_generation: z.number().int().optional(),
+    replica_id: z.string().optional(),
+    replica_index: z.number().int().optional(),
+    replica_ordinal: z.number().int().optional(),
+    ssh: ComputeSSH$inboundSchema.optional(),
+    started_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    state: ComputeInstanceState$inboundSchema,
+    terminal_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allocated_at": "allocatedAt",
+      "confirmed_absent_at": "confirmedAbsentAt",
+      "created_at": "createdAt",
+      "draining_at": "drainingAt",
+      "exit_code": "exitCode",
+      "price_usd_hr": "priceUsdHr",
+      "private_host": "privateHost",
+      "provider_id": "providerId",
+      "provider_resource_type": "providerResourceType",
+      "ready_at": "readyAt",
+      "replica_activation_generation": "replicaActivationGeneration",
+      "replica_id": "replicaId",
+      "replica_index": "replicaIndex",
+      "replica_ordinal": "replicaOrdinal",
+      "started_at": "startedAt",
+      "terminal_at": "terminalAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeInstance$Outbound = {
   allocated_at?: string | undefined;
@@ -165,53 +171,55 @@ export const ComputeInstance$outboundSchema: z.ZodType<
   ComputeInstance$Outbound,
   z.ZodTypeDef,
   ComputeInstance
-> = z.object({
-  allocatedAt: z.date().transform(v => v.toISOString()).optional(),
-  confirmedAbsentAt: z.date().transform(v => v.toISOString()).optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  drainingAt: z.date().transform(v => v.toISOString()).optional(),
-  endpoints: z.array(ComputeEndpoint$outboundSchema),
-  exitCode: z.number().int().optional(),
-  hardware: ComputeHardware$outboundSchema,
-  host: z.string().optional(),
-  id: z.string(),
-  priceUsdHr: z.number().optional(),
-  privateHost: z.string().optional(),
-  providerId: z.string(),
-  providerResourceType: z.string(),
-  rank: z.number().int().optional(),
-  ready: z.boolean().optional(),
-  readyAt: z.date().transform(v => v.toISOString()).optional(),
-  reason: ComputeReason$outboundSchema.optional(),
-  region: z.string().optional(),
-  replicaActivationGeneration: z.number().int().optional(),
-  replicaId: z.string().optional(),
-  replicaIndex: z.number().int().optional(),
-  replicaOrdinal: z.number().int().optional(),
-  ssh: ComputeSSH$outboundSchema.optional(),
-  startedAt: z.date().transform(v => v.toISOString()).optional(),
-  state: ComputeInstanceState$outboundSchema,
-  terminalAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allocatedAt: "allocated_at",
-    confirmedAbsentAt: "confirmed_absent_at",
-    createdAt: "created_at",
-    drainingAt: "draining_at",
-    exitCode: "exit_code",
-    priceUsdHr: "price_usd_hr",
-    privateHost: "private_host",
-    providerId: "provider_id",
-    providerResourceType: "provider_resource_type",
-    readyAt: "ready_at",
-    replicaActivationGeneration: "replica_activation_generation",
-    replicaId: "replica_id",
-    replicaIndex: "replica_index",
-    replicaOrdinal: "replica_ordinal",
-    startedAt: "started_at",
-    terminalAt: "terminal_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allocatedAt: z.date().transform(v => v.toISOString()).optional(),
+    confirmedAbsentAt: z.date().transform(v => v.toISOString()).optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    drainingAt: z.date().transform(v => v.toISOString()).optional(),
+    endpoints: z.array(ComputeEndpoint$outboundSchema),
+    exitCode: z.number().int().optional(),
+    hardware: ComputeHardware$outboundSchema,
+    host: z.string().optional(),
+    id: z.string(),
+    priceUsdHr: z.number().optional(),
+    privateHost: z.string().optional(),
+    providerId: z.string(),
+    providerResourceType: z.string(),
+    rank: z.number().int().optional(),
+    ready: z.boolean().optional(),
+    readyAt: z.date().transform(v => v.toISOString()).optional(),
+    reason: ComputeReason$outboundSchema.optional(),
+    region: z.string().optional(),
+    replicaActivationGeneration: z.number().int().optional(),
+    replicaId: z.string().optional(),
+    replicaIndex: z.number().int().optional(),
+    replicaOrdinal: z.number().int().optional(),
+    ssh: ComputeSSH$outboundSchema.optional(),
+    startedAt: z.date().transform(v => v.toISOString()).optional(),
+    state: ComputeInstanceState$outboundSchema,
+    terminalAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allocatedAt: "allocated_at",
+      confirmedAbsentAt: "confirmed_absent_at",
+      createdAt: "created_at",
+      drainingAt: "draining_at",
+      exitCode: "exit_code",
+      priceUsdHr: "price_usd_hr",
+      privateHost: "private_host",
+      providerId: "provider_id",
+      providerResourceType: "provider_resource_type",
+      readyAt: "ready_at",
+      replicaActivationGeneration: "replica_activation_generation",
+      replicaId: "replica_id",
+      replicaIndex: "replica_index",
+      replicaOrdinal: "replica_ordinal",
+      startedAt: "started_at",
+      terminalAt: "terminal_at",
+    });
+  })
+);
 
 export function computeInstanceToJSON(
   computeInstance: ComputeInstance,

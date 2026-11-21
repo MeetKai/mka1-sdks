@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,18 +18,20 @@ export type ResponseImageGenerationCallGeneratingEvent = {
 /** @internal */
 export const ResponseImageGenerationCallGeneratingEvent$inboundSchema:
   z.ZodType<ResponseImageGenerationCallGeneratingEvent, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("response.image_generation_call.generating"),
-      sequence_number: z.number().int(),
-      item_id: z.string(),
-      output_index: z.number().int(),
-    }).transform((v) => {
-      return remap$(v, {
-        "sequence_number": "sequenceNumber",
-        "item_id": "itemId",
-        "output_index": "outputIndex",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        type: z.literal("response.image_generation_call.generating"),
+        sequence_number: z.number().int(),
+        item_id: z.string(),
+        output_index: z.number().int(),
+      }).transform((v) => {
+        return remap$(v, {
+          "sequence_number": "sequenceNumber",
+          "item_id": "itemId",
+          "output_index": "outputIndex",
+        });
+      })
+    );
 /** @internal */
 export type ResponseImageGenerationCallGeneratingEvent$Outbound = {
   type: "response.image_generation_call.generating";
@@ -44,18 +46,20 @@ export const ResponseImageGenerationCallGeneratingEvent$outboundSchema:
     ResponseImageGenerationCallGeneratingEvent$Outbound,
     z.ZodTypeDef,
     ResponseImageGenerationCallGeneratingEvent
-  > = z.object({
-    type: z.literal("response.image_generation_call.generating"),
-    sequenceNumber: z.number().int(),
-    itemId: z.string(),
-    outputIndex: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      sequenceNumber: "sequence_number",
-      itemId: "item_id",
-      outputIndex: "output_index",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("response.image_generation_call.generating"),
+      sequenceNumber: z.number().int(),
+      itemId: z.string(),
+      outputIndex: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        sequenceNumber: "sequence_number",
+        itemId: "item_id",
+        outputIndex: "output_index",
+      });
+    })
+  );
 
 export function responseImageGenerationCallGeneratingEventToJSON(
   responseImageGenerationCallGeneratingEvent:

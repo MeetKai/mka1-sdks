@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,15 +30,17 @@ export const CreateSessionResponse$inboundSchema: z.ZodType<
   CreateSessionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session: SessionRecord$inboundSchema,
-  session_token: z.nullable(z.string()).optional(),
-  provider: z.nullable(SandboxProvider$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_token": "sessionToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session: SessionRecord$inboundSchema,
+    session_token: z.nullable(z.string()).optional(),
+    provider: z.nullable(SandboxProvider$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_token": "sessionToken",
+    });
+  })
+);
 /** @internal */
 export type CreateSessionResponse$Outbound = {
   session: SessionRecord$Outbound;
@@ -51,15 +53,17 @@ export const CreateSessionResponse$outboundSchema: z.ZodType<
   CreateSessionResponse$Outbound,
   z.ZodTypeDef,
   CreateSessionResponse
-> = z.object({
-  session: SessionRecord$outboundSchema,
-  sessionToken: z.nullable(z.string()).optional(),
-  provider: z.nullable(SandboxProvider$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionToken: "session_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session: SessionRecord$outboundSchema,
+    sessionToken: z.nullable(z.string()).optional(),
+    provider: z.nullable(SandboxProvider$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionToken: "session_token",
+    });
+  })
+);
 
 export function createSessionResponseToJSON(
   createSessionResponse: CreateSessionResponse,

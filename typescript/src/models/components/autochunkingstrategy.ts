@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,9 +22,11 @@ export const AutoChunkingStrategy$inboundSchema: z.ZodType<
   AutoChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("auto"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+  })
+);
 /** @internal */
 export type AutoChunkingStrategy$Outbound = {
   type: "auto";
@@ -35,9 +37,11 @@ export const AutoChunkingStrategy$outboundSchema: z.ZodType<
   AutoChunkingStrategy$Outbound,
   z.ZodTypeDef,
   AutoChunkingStrategy
-> = z.object({
-  type: z.literal("auto"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+  })
+);
 
 export function autoChunkingStrategyToJSON(
   autoChunkingStrategy: AutoChunkingStrategy,

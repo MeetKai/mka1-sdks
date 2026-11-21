@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -12,10 +12,12 @@ export type LlmRef = {
 };
 
 /** @internal */
-export const LlmRef$inboundSchema: z.ZodType<LlmRef, z.ZodTypeDef, unknown> = z
-  .object({
-    models: z.array(z.string()),
-  });
+export const LlmRef$inboundSchema: z.ZodType<LlmRef, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      models: z.array(z.string()),
+    })
+  );
 /** @internal */
 export type LlmRef$Outbound = {
   models: Array<string>;
@@ -26,9 +28,11 @@ export const LlmRef$outboundSchema: z.ZodType<
   LlmRef$Outbound,
   z.ZodTypeDef,
   LlmRef
-> = z.object({
-  models: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    models: z.array(z.string()),
+  })
+);
 
 export function llmRefToJSON(llmRef: LlmRef): string {
   return JSON.stringify(LlmRef$outboundSchema.parse(llmRef));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const CreateItemsRequest$inboundSchema: z.ZodType<
   CreateItemsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  items: z.array(Item$inboundSchema),
-  include: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Item$inboundSchema),
+    include: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CreateItemsRequest$Outbound = {
   items: Array<Item$Outbound>;
@@ -44,10 +46,12 @@ export const CreateItemsRequest$outboundSchema: z.ZodType<
   CreateItemsRequest$Outbound,
   z.ZodTypeDef,
   CreateItemsRequest
-> = z.object({
-  items: z.array(Item$outboundSchema),
-  include: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    items: z.array(Item$outboundSchema),
+    include: z.array(z.string()).optional(),
+  })
+);
 
 export function createItemsRequestToJSON(
   createItemsRequest: CreateItemsRequest,

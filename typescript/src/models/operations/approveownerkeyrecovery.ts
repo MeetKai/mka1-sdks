@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -83,9 +83,11 @@ export const ApproveOwnerKeyRecoveryRequestBody$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string().optional(),
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryRequestBody$Outbound = {
   token?: string | undefined;
@@ -96,9 +98,11 @@ export const ApproveOwnerKeyRecoveryRequestBody$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequestBody$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryRequestBody
-> = z.object({
-  token: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string().optional(),
+  })
+);
 
 export function approveOwnerKeyRecoveryRequestBodyToJSON(
   approveOwnerKeyRecoveryRequestBody: ApproveOwnerKeyRecoveryRequestBody,
@@ -125,17 +129,19 @@ export const ApproveOwnerKeyRecoveryRequest$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => ApproveOwnerKeyRecoveryRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => ApproveOwnerKeyRecoveryRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryRequest$Outbound = {
   id: string;
@@ -148,17 +154,19 @@ export const ApproveOwnerKeyRecoveryRequest$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequest$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => ApproveOwnerKeyRecoveryRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => ApproveOwnerKeyRecoveryRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function approveOwnerKeyRecoveryRequestToJSON(
   approveOwnerKeyRecoveryRequest: ApproveOwnerKeyRecoveryRequest,
@@ -182,7 +190,9 @@ export function approveOwnerKeyRecoveryRequestFromJSON(
 /** @internal */
 export const ApproveOwnerKeyRecoveryStatus$inboundSchema: z.ZodNativeEnum<
   typeof ApproveOwnerKeyRecoveryStatus
-> = z.nativeEnum(ApproveOwnerKeyRecoveryStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ApproveOwnerKeyRecoveryStatus)
+);
 /** @internal */
 export const ApproveOwnerKeyRecoveryStatus$outboundSchema: z.ZodNativeEnum<
   typeof ApproveOwnerKeyRecoveryStatus
@@ -193,11 +203,13 @@ export const ApproveOwnerKeyRecoveryRequestedBy$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequestedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryRequestedBy$Outbound = {
   id: string;
@@ -210,11 +222,13 @@ export const ApproveOwnerKeyRecoveryRequestedBy$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryRequestedBy$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryRequestedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function approveOwnerKeyRecoveryRequestedByToJSON(
   approveOwnerKeyRecoveryRequestedBy: ApproveOwnerKeyRecoveryRequestedBy,
@@ -241,11 +255,13 @@ export const ApproveOwnerKeyRecoveryDecidedBy$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryDecidedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryDecidedBy$Outbound = {
   id: string;
@@ -258,11 +274,13 @@ export const ApproveOwnerKeyRecoveryDecidedBy$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryDecidedBy$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryDecidedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function approveOwnerKeyRecoveryDecidedByToJSON(
   approveOwnerKeyRecoveryDecidedBy: ApproveOwnerKeyRecoveryDecidedBy,
@@ -288,25 +306,27 @@ export const ApproveOwnerKeyRecoveryAuthClusterRequest$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryAuthClusterRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: ApproveOwnerKeyRecoveryStatus$inboundSchema,
-  requestedBy: z.lazy(() => ApproveOwnerKeyRecoveryRequestedBy$inboundSchema),
-  decidedBy: z.nullable(
-    z.lazy(() => ApproveOwnerKeyRecoveryDecidedBy$inboundSchema),
-  ),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: ApproveOwnerKeyRecoveryStatus$inboundSchema,
+    requestedBy: z.lazy(() => ApproveOwnerKeyRecoveryRequestedBy$inboundSchema),
+    decidedBy: z.nullable(
+      z.lazy(() => ApproveOwnerKeyRecoveryDecidedBy$inboundSchema),
+    ),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryAuthClusterRequest$Outbound = {
   id: string;
@@ -332,27 +352,29 @@ export const ApproveOwnerKeyRecoveryAuthClusterRequest$outboundSchema:
     ApproveOwnerKeyRecoveryAuthClusterRequest$Outbound,
     z.ZodTypeDef,
     ApproveOwnerKeyRecoveryAuthClusterRequest
-  > = z.object({
-    id: z.string(),
-    orgId: z.string(),
-    orgName: z.string(),
-    orgSlug: z.string(),
-    targetUserId: z.string(),
-    targetUserEmail: z.nullable(z.string()),
-    teamId: z.string(),
-    reason: z.string(),
-    status: ApproveOwnerKeyRecoveryStatus$outboundSchema,
-    requestedBy: z.lazy(() =>
-      ApproveOwnerKeyRecoveryRequestedBy$outboundSchema
-    ),
-    decidedBy: z.nullable(
-      z.lazy(() => ApproveOwnerKeyRecoveryDecidedBy$outboundSchema),
-    ),
-    decidedAt: z.nullable(z.string()),
-    expiresAt: z.string(),
-    createdAt: z.string(),
-    mintedKeyId: z.nullable(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      orgId: z.string(),
+      orgName: z.string(),
+      orgSlug: z.string(),
+      targetUserId: z.string(),
+      targetUserEmail: z.nullable(z.string()),
+      teamId: z.string(),
+      reason: z.string(),
+      status: ApproveOwnerKeyRecoveryStatus$outboundSchema,
+      requestedBy: z.lazy(() =>
+        ApproveOwnerKeyRecoveryRequestedBy$outboundSchema
+      ),
+      decidedBy: z.nullable(
+        z.lazy(() => ApproveOwnerKeyRecoveryDecidedBy$outboundSchema),
+      ),
+      decidedAt: z.nullable(z.string()),
+      expiresAt: z.string(),
+      createdAt: z.string(),
+      mintedKeyId: z.nullable(z.string()),
+    })
+  );
 
 export function approveOwnerKeyRecoveryAuthClusterRequestToJSON(
   approveOwnerKeyRecoveryAuthClusterRequest:
@@ -381,14 +403,16 @@ export function approveOwnerKeyRecoveryAuthClusterRequestFromJSON(
 }
 
 /** @internal */
-export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    key: z.string(),
-    orgId: z.string(),
-    teamId: z.string(),
-    scopes: z.array(z.string()),
-  });
+export const ApiKey$inboundSchema: z.ZodType<ApiKey, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      key: z.string(),
+      orgId: z.string(),
+      teamId: z.string(),
+      scopes: z.array(z.string()),
+    })
+  );
 /** @internal */
 export type ApiKey$Outbound = {
   id: string;
@@ -403,13 +427,15 @@ export const ApiKey$outboundSchema: z.ZodType<
   ApiKey$Outbound,
   z.ZodTypeDef,
   ApiKey
-> = z.object({
-  id: z.string(),
-  key: z.string(),
-  orgId: z.string(),
-  teamId: z.string(),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    key: z.string(),
+    orgId: z.string(),
+    teamId: z.string(),
+    scopes: z.array(z.string()),
+  })
+);
 
 export function apiKeyToJSON(apiKey: ApiKey): string {
   return JSON.stringify(ApiKey$outboundSchema.parse(apiKey));
@@ -429,12 +455,14 @@ export const ApproveOwnerKeyRecoveryResponseBody$inboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  request: z.lazy(() =>
-    ApproveOwnerKeyRecoveryAuthClusterRequest$inboundSchema
-  ),
-  apiKey: z.lazy(() => ApiKey$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request: z.lazy(() =>
+      ApproveOwnerKeyRecoveryAuthClusterRequest$inboundSchema
+    ),
+    apiKey: z.lazy(() => ApiKey$inboundSchema),
+  })
+);
 /** @internal */
 export type ApproveOwnerKeyRecoveryResponseBody$Outbound = {
   request: ApproveOwnerKeyRecoveryAuthClusterRequest$Outbound;
@@ -446,12 +474,14 @@ export const ApproveOwnerKeyRecoveryResponseBody$outboundSchema: z.ZodType<
   ApproveOwnerKeyRecoveryResponseBody$Outbound,
   z.ZodTypeDef,
   ApproveOwnerKeyRecoveryResponseBody
-> = z.object({
-  request: z.lazy(() =>
-    ApproveOwnerKeyRecoveryAuthClusterRequest$outboundSchema
-  ),
-  apiKey: z.lazy(() => ApiKey$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request: z.lazy(() =>
+      ApproveOwnerKeyRecoveryAuthClusterRequest$outboundSchema
+    ),
+    apiKey: z.lazy(() => ApiKey$outboundSchema),
+  })
+);
 
 export function approveOwnerKeyRecoveryResponseBodyToJSON(
   approveOwnerKeyRecoveryResponseBody: ApproveOwnerKeyRecoveryResponseBody,

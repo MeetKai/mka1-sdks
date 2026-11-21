@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,22 +49,24 @@ export type Repo = {
 };
 
 /** @internal */
-export const Repo$inboundSchema: z.ZodType<Repo, z.ZodTypeDef, unknown> = z
-  .object({
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    creator: z.nullable(z.string()),
-    description: z.string(),
-    id: z.string(),
-    kind: z.nullable(RepoKind$inboundSchema),
-    name: z.string(),
-    org: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-    });
-  });
+export const Repo$inboundSchema: z.ZodType<Repo, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      creator: z.nullable(z.string()),
+      description: z.string(),
+      id: z.string(),
+      kind: z.nullable(RepoKind$inboundSchema),
+      name: z.string(),
+      org: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+      });
+    })
+  );
 /** @internal */
 export type Repo$Outbound = {
   created_at: string;
@@ -78,19 +80,21 @@ export type Repo$Outbound = {
 
 /** @internal */
 export const Repo$outboundSchema: z.ZodType<Repo$Outbound, z.ZodTypeDef, Repo> =
-  z.object({
-    createdAt: z.date().transform(v => v.toISOString()),
-    creator: z.nullable(z.string()),
-    description: z.string(),
-    id: z.string(),
-    kind: z.nullable(RepoKind$outboundSchema),
-    name: z.string(),
-    org: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      createdAt: "created_at",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      createdAt: z.date().transform(v => v.toISOString()),
+      creator: z.nullable(z.string()),
+      description: z.string(),
+      id: z.string(),
+      kind: z.nullable(RepoKind$outboundSchema),
+      name: z.string(),
+      org: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        createdAt: "created_at",
+      });
+    })
+  );
 
 export function repoToJSON(repo: Repo): string {
   return JSON.stringify(Repo$outboundSchema.parse(repo));

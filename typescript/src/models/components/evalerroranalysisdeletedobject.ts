@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const EvalErrorAnalysisDeletedObject$inboundSchema: z.ZodType<
   EvalErrorAnalysisDeletedObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.error_analysis.deleted"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.error_analysis.deleted"),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisDeletedObject$Outbound = {
   id: string;
@@ -35,11 +37,13 @@ export const EvalErrorAnalysisDeletedObject$outboundSchema: z.ZodType<
   EvalErrorAnalysisDeletedObject$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisDeletedObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.error_analysis.deleted"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.error_analysis.deleted"),
+    deleted: z.boolean(),
+  })
+);
 
 export function evalErrorAnalysisDeletedObjectToJSON(
   evalErrorAnalysisDeletedObject: EvalErrorAnalysisDeletedObject,

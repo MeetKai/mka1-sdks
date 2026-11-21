@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,15 +40,17 @@ export const ModelInferenceMetrics$inboundSchema: z.ZodType<
   ModelInferenceMetrics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  requests: z.number().int(),
-  failedRequests: z.number().int(),
-  errorRate: z.number(),
-  latencyMs: InferencePercentiles$inboundSchema,
-  ttftMs: InferencePercentiles$inboundSchema,
-  outputTokensPerSecond: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    requests: z.number().int(),
+    failedRequests: z.number().int(),
+    errorRate: z.number(),
+    latencyMs: InferencePercentiles$inboundSchema,
+    ttftMs: InferencePercentiles$inboundSchema,
+    outputTokensPerSecond: z.nullable(z.number()),
+  })
+);
 /** @internal */
 export type ModelInferenceMetrics$Outbound = {
   model: string;
@@ -65,15 +67,17 @@ export const ModelInferenceMetrics$outboundSchema: z.ZodType<
   ModelInferenceMetrics$Outbound,
   z.ZodTypeDef,
   ModelInferenceMetrics
-> = z.object({
-  model: z.string(),
-  requests: z.number().int(),
-  failedRequests: z.number().int(),
-  errorRate: z.number(),
-  latencyMs: InferencePercentiles$outboundSchema,
-  ttftMs: InferencePercentiles$outboundSchema,
-  outputTokensPerSecond: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    requests: z.number().int(),
+    failedRequests: z.number().int(),
+    errorRate: z.number(),
+    latencyMs: InferencePercentiles$outboundSchema,
+    ttftMs: InferencePercentiles$outboundSchema,
+    outputTokensPerSecond: z.nullable(z.number()),
+  })
+);
 
 export function modelInferenceMetricsToJSON(
   modelInferenceMetrics: ModelInferenceMetrics,

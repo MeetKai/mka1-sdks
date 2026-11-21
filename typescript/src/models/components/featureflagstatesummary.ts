@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,18 +20,20 @@ export const FeatureFlagStateSummary$inboundSchema: z.ZodType<
   FeatureFlagStateSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  override_count: z.number().int(),
-  rollout_percentage: z.number().int(),
-  rule_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "override_count": "overrideCount",
-    "rollout_percentage": "rolloutPercentage",
-    "rule_count": "ruleCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    override_count: z.number().int(),
+    rollout_percentage: z.number().int(),
+    rule_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "override_count": "overrideCount",
+      "rollout_percentage": "rolloutPercentage",
+      "rule_count": "ruleCount",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagStateSummary$Outbound = {
   enabled: boolean;
@@ -45,18 +47,20 @@ export const FeatureFlagStateSummary$outboundSchema: z.ZodType<
   FeatureFlagStateSummary$Outbound,
   z.ZodTypeDef,
   FeatureFlagStateSummary
-> = z.object({
-  enabled: z.boolean(),
-  overrideCount: z.number().int(),
-  rolloutPercentage: z.number().int(),
-  ruleCount: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    overrideCount: "override_count",
-    rolloutPercentage: "rollout_percentage",
-    ruleCount: "rule_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    overrideCount: z.number().int(),
+    rolloutPercentage: z.number().int(),
+    ruleCount: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      overrideCount: "override_count",
+      rolloutPercentage: "rollout_percentage",
+      ruleCount: "rule_count",
+    });
+  })
+);
 
 export function featureFlagStateSummaryToJSON(
   featureFlagStateSummary: FeatureFlagStateSummary,

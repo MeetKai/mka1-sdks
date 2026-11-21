@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -217,18 +218,20 @@ export const DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody$inbo
     DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody$Outbound =
@@ -242,13 +245,13 @@ export const DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody$outb
     DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody
-  > = z.instanceof(
-    DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody$inboundSchema:
@@ -256,18 +259,20 @@ export const DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody$inbo
     DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody$Outbound =
@@ -281,13 +286,13 @@ export const DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody$outb
     DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody
-  > = z.instanceof(
-    DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody$inboundSchema:
@@ -295,18 +300,20 @@ export const DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody$inbo
     DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody$Outbound =
@@ -320,13 +327,13 @@ export const DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody$outb
     DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody
-  > = z.instanceof(
-    DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody$inboundSchema:
@@ -334,18 +341,20 @@ export const DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody$inbo
     DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody$Outbound =
@@ -359,13 +368,13 @@ export const DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody$outb
     DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody
-  > = z.instanceof(
-    DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountAuthServiceAccountsResponseResponseBody$inboundSchema:
@@ -373,19 +382,21 @@ export const DeleteServiceAccountAuthServiceAccountsResponseResponseBody$inbound
     DeleteServiceAccountAuthServiceAccountsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponseResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponseResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponseResponseBody$Outbound =
@@ -400,12 +411,14 @@ export const DeleteServiceAccountAuthServiceAccountsResponseResponseBody$outboun
     DeleteServiceAccountAuthServiceAccountsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponseResponseBody
-  > = z.instanceof(DeleteServiceAccountAuthServiceAccountsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountAuthServiceAccountsResponseBody$inboundSchema:
@@ -413,19 +426,21 @@ export const DeleteServiceAccountAuthServiceAccountsResponseBody$inboundSchema:
     DeleteServiceAccountAuthServiceAccountsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new DeleteServiceAccountAuthServiceAccountsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new DeleteServiceAccountAuthServiceAccountsResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type DeleteServiceAccountAuthServiceAccountsResponseBody$Outbound = {
@@ -438,30 +453,34 @@ export const DeleteServiceAccountAuthServiceAccountsResponseBody$outboundSchema:
     DeleteServiceAccountAuthServiceAccountsResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteServiceAccountAuthServiceAccountsResponseBody
-  > = z.instanceof(DeleteServiceAccountAuthServiceAccountsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteServiceAccountAuthServiceAccountsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteServiceAccountResponseBody$inboundSchema: z.ZodType<
   DeleteServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new DeleteServiceAccountResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new DeleteServiceAccountResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type DeleteServiceAccountResponseBody$Outbound = {
@@ -473,8 +492,10 @@ export const DeleteServiceAccountResponseBody$outboundSchema: z.ZodType<
   DeleteServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteServiceAccountResponseBody
-> = z.instanceof(DeleteServiceAccountResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(DeleteServiceAccountResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

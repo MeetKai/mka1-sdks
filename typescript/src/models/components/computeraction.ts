@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -80,17 +80,19 @@ export const ComputerAction$inboundSchema: z.ZodType<
   ComputerAction,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  click: ClickAction$inboundSchema,
-  double_click: DoubleClickAction$inboundSchema,
-  drag: DragAction$inboundSchema,
-  keypress: KeyPressAction$inboundSchema,
-  move: MoveAction$inboundSchema,
-  screenshot: ScreenshotAction$inboundSchema,
-  scroll: ScrollAction$inboundSchema,
-  type: TypeAction$inboundSchema,
-  wait: WaitAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    click: ClickAction$inboundSchema,
+    double_click: DoubleClickAction$inboundSchema,
+    drag: DragAction$inboundSchema,
+    keypress: KeyPressAction$inboundSchema,
+    move: MoveAction$inboundSchema,
+    screenshot: ScreenshotAction$inboundSchema,
+    scroll: ScrollAction$inboundSchema,
+    type: TypeAction$inboundSchema,
+    wait: WaitAction$inboundSchema,
+  })
+);
 /** @internal */
 export type ComputerAction$Outbound =
   | ClickAction$Outbound
@@ -108,17 +110,19 @@ export const ComputerAction$outboundSchema: z.ZodType<
   ComputerAction$Outbound,
   z.ZodTypeDef,
   ComputerAction
-> = z.union([
-  ClickAction$outboundSchema,
-  DoubleClickAction$outboundSchema,
-  DragAction$outboundSchema,
-  KeyPressAction$outboundSchema,
-  MoveAction$outboundSchema,
-  ScreenshotAction$outboundSchema,
-  ScrollAction$outboundSchema,
-  TypeAction$outboundSchema,
-  WaitAction$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ClickAction$outboundSchema,
+    DoubleClickAction$outboundSchema,
+    DragAction$outboundSchema,
+    KeyPressAction$outboundSchema,
+    MoveAction$outboundSchema,
+    ScreenshotAction$outboundSchema,
+    ScrollAction$outboundSchema,
+    TypeAction$outboundSchema,
+    WaitAction$outboundSchema,
+  ])
+);
 
 export function computerActionToJSON(computerAction: ComputerAction): string {
   return JSON.stringify(ComputerAction$outboundSchema.parse(computerAction));

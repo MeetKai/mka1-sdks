@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -39,7 +40,7 @@ export type CodingHarnessStopReason = ClosedEnum<
 /** @internal */
 export const CodingHarnessStopReason$inboundSchema: z.ZodNativeEnum<
   typeof CodingHarnessStopReason
-> = z.nativeEnum(CodingHarnessStopReason);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CodingHarnessStopReason));
 /** @internal */
 export const CodingHarnessStopReason$outboundSchema: z.ZodNativeEnum<
   typeof CodingHarnessStopReason

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,14 +22,16 @@ export const AnalyticsProjectsUpdateRequest$inboundSchema: z.ZodType<
   AnalyticsProjectsUpdateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  AnalyticsProjectUpdate: components.AnalyticsProjectUpdate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AnalyticsProjectUpdate": "analyticsProjectUpdate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    AnalyticsProjectUpdate: components.AnalyticsProjectUpdate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "AnalyticsProjectUpdate": "analyticsProjectUpdate",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsProjectsUpdateRequest$Outbound = {
   id: string;
@@ -41,14 +43,16 @@ export const AnalyticsProjectsUpdateRequest$outboundSchema: z.ZodType<
   AnalyticsProjectsUpdateRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsProjectsUpdateRequest
-> = z.object({
-  id: z.string(),
-  analyticsProjectUpdate: components.AnalyticsProjectUpdate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    analyticsProjectUpdate: "AnalyticsProjectUpdate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    analyticsProjectUpdate: components.AnalyticsProjectUpdate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      analyticsProjectUpdate: "AnalyticsProjectUpdate",
+    });
+  })
+);
 
 export function analyticsProjectsUpdateRequestToJSON(
   analyticsProjectsUpdateRequest: AnalyticsProjectsUpdateRequest,

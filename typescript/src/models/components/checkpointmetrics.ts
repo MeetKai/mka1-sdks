@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,24 +23,26 @@ export const CheckpointMetrics$inboundSchema: z.ZodType<
   CheckpointMetrics,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  step: z.nullable(z.number()).optional(),
-  train_loss: z.nullable(z.number()).optional(),
-  train_mean_token_accuracy: z.nullable(z.number()).optional(),
-  valid_loss: z.nullable(z.number()).optional(),
-  valid_mean_token_accuracy: z.nullable(z.number()).optional(),
-  full_valid_loss: z.nullable(z.number()).optional(),
-  full_valid_mean_token_accuracy: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "train_loss": "trainLoss",
-    "train_mean_token_accuracy": "trainMeanTokenAccuracy",
-    "valid_loss": "validLoss",
-    "valid_mean_token_accuracy": "validMeanTokenAccuracy",
-    "full_valid_loss": "fullValidLoss",
-    "full_valid_mean_token_accuracy": "fullValidMeanTokenAccuracy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    step: z.nullable(z.number()).optional(),
+    train_loss: z.nullable(z.number()).optional(),
+    train_mean_token_accuracy: z.nullable(z.number()).optional(),
+    valid_loss: z.nullable(z.number()).optional(),
+    valid_mean_token_accuracy: z.nullable(z.number()).optional(),
+    full_valid_loss: z.nullable(z.number()).optional(),
+    full_valid_mean_token_accuracy: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "train_loss": "trainLoss",
+      "train_mean_token_accuracy": "trainMeanTokenAccuracy",
+      "valid_loss": "validLoss",
+      "valid_mean_token_accuracy": "validMeanTokenAccuracy",
+      "full_valid_loss": "fullValidLoss",
+      "full_valid_mean_token_accuracy": "fullValidMeanTokenAccuracy",
+    });
+  })
+);
 /** @internal */
 export type CheckpointMetrics$Outbound = {
   step?: number | null | undefined;
@@ -57,24 +59,26 @@ export const CheckpointMetrics$outboundSchema: z.ZodType<
   CheckpointMetrics$Outbound,
   z.ZodTypeDef,
   CheckpointMetrics
-> = z.object({
-  step: z.nullable(z.number()).optional(),
-  trainLoss: z.nullable(z.number()).optional(),
-  trainMeanTokenAccuracy: z.nullable(z.number()).optional(),
-  validLoss: z.nullable(z.number()).optional(),
-  validMeanTokenAccuracy: z.nullable(z.number()).optional(),
-  fullValidLoss: z.nullable(z.number()).optional(),
-  fullValidMeanTokenAccuracy: z.nullable(z.number()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    trainLoss: "train_loss",
-    trainMeanTokenAccuracy: "train_mean_token_accuracy",
-    validLoss: "valid_loss",
-    validMeanTokenAccuracy: "valid_mean_token_accuracy",
-    fullValidLoss: "full_valid_loss",
-    fullValidMeanTokenAccuracy: "full_valid_mean_token_accuracy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    step: z.nullable(z.number()).optional(),
+    trainLoss: z.nullable(z.number()).optional(),
+    trainMeanTokenAccuracy: z.nullable(z.number()).optional(),
+    validLoss: z.nullable(z.number()).optional(),
+    validMeanTokenAccuracy: z.nullable(z.number()).optional(),
+    fullValidLoss: z.nullable(z.number()).optional(),
+    fullValidMeanTokenAccuracy: z.nullable(z.number()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      trainLoss: "train_loss",
+      trainMeanTokenAccuracy: "train_mean_token_accuracy",
+      validLoss: "valid_loss",
+      validMeanTokenAccuracy: "valid_mean_token_accuracy",
+      fullValidLoss: "full_valid_loss",
+      fullValidMeanTokenAccuracy: "full_valid_mean_token_accuracy",
+    });
+  })
+);
 
 export function checkpointMetricsToJSON(
   checkpointMetrics: CheckpointMetrics,

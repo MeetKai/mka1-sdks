@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,14 +28,16 @@ export const UnsuspendClusterOrgRequest$inboundSchema: z.ZodType<
   UnsuspendClusterOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type UnsuspendClusterOrgRequest$Outbound = {
   id: string;
@@ -47,14 +49,16 @@ export const UnsuspendClusterOrgRequest$outboundSchema: z.ZodType<
   UnsuspendClusterOrgRequest$Outbound,
   z.ZodTypeDef,
   UnsuspendClusterOrgRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function unsuspendClusterOrgRequestToJSON(
   unsuspendClusterOrgRequest: UnsuspendClusterOrgRequest,
@@ -78,9 +82,11 @@ export const UnsuspendClusterOrgResponseBody$inboundSchema: z.ZodType<
   UnsuspendClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+  })
+);
 /** @internal */
 export type UnsuspendClusterOrgResponseBody$Outbound = {
   message: string;
@@ -91,9 +97,11 @@ export const UnsuspendClusterOrgResponseBody$outboundSchema: z.ZodType<
   UnsuspendClusterOrgResponseBody$Outbound,
   z.ZodTypeDef,
   UnsuspendClusterOrgResponseBody
-> = z.object({
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+  })
+);
 
 export function unsuspendClusterOrgResponseBodyToJSON(
   unsuspendClusterOrgResponseBody: UnsuspendClusterOrgResponseBody,

@@ -1,25 +1,25 @@
 lockVersion: 2.0.0
 id: ad10c794-49c9-4038-b1eb-c43f5735aee2
 management:
-  docChecksum: f1d2bce220a53243ea5ff363b261b7e7
+  docChecksum: 86225dd590438f58804b45b3f0f58009
   docVersion: 1.1.0
-  speakeasyVersion: 1.803.1
-  generationVersion: 2.950.2
-  releaseVersion: 0.11.227
-  configChecksum: ca624e435e4f1f941982f0230fee4b0c
+  speakeasyVersion: 1.811.0
+  generationVersion: 2.968.1
+  releaseVersion: 0.11.228
+  configChecksum: 68bdaf9abb82195b223d70fd5f26e28d
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: csharp
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 5b198fa3-3dab-40c2-aecf-0bc40a11a8aa
-  pristine_commit_hash: 80adc618a0309b022d5ef3bd1dd97f40d4ef628c
-  pristine_tree_hash: a1ff354833fc011432e574da6fd3ee6a7b76d819
+  generation_id: 7f0dbe33-33ed-453e-92b0-ff1dda921717
+  pristine_commit_hash: 340df62756ab72aa631214a1d8004a6297e220a2
+  pristine_tree_hash: 2adae02a1523de1f18fe5428eafd0a919f21c663
 features:
   csharp:
     additionalDependencies: 0.1.0
     additionalProperties: 0.0.2
     constsAndDefaults: 0.0.3
-    core: 3.15.29
+    core: 3.15.31
     deprecations: 2.81.2
     flattening: 2.81.3
     globalSecurity: 2.83.11
@@ -37,7 +37,7 @@ features:
     retries: 0.0.4
     sdkHooks: 0.3.0
     serverEvents: 0.3.0
-    unions: 1.2.3
+    unions: 1.2.5
 trackedFiles:
   .gitattributes:
     id: 24139dae6567
@@ -261,8 +261,8 @@ trackedFiles:
     pristine_git_object: c199dffa085870f2147de1b1bc0141dd1a9c1c60
   src/MeetKai/MKA1/MeetKai.MKA1.csproj:
     id: 0dad393ca1ed
-    last_write_checksum: sha1:3492703641198e319cc9973c88a8ce8f5a54069c
-    pristine_git_object: 62c0c78f41536f12073de618715be6c01986d9b3
+    last_write_checksum: sha1:1e5a715f3d615de30e07301a5507f25ed25ffaa9
+    pristine_git_object: 3d6a5cd8f2a202241544334dba23b684527d4c81
   src/MeetKai/MKA1/MemoryStores.cs:
     id: c9346fe480fe
     last_write_checksum: sha1:df19c83ca7dc4e526d472221f62c9e2056757ee9
@@ -317,8 +317,8 @@ trackedFiles:
     pristine_git_object: 274c2d55a9af93d843a49158da805a8c7487968a
   src/MeetKai/MKA1/SDKConfig.cs:
     id: 440419b53884
-    last_write_checksum: sha1:99a5c6836afe13fd02912ffa7fae564829e1a03e
-    pristine_git_object: 2105b0025fce9ccecfacd55565643ce197d494cf
+    last_write_checksum: sha1:532f14f8c9eb0ae873e3de4631883ce8d18392d8
+    pristine_git_object: ff02c0e2d53a09e18bba9dd9db8902c02bc4eb0f
   src/MeetKai/MKA1/Sandbox.cs:
     id: af2324fcb429
     last_write_checksum: sha1:e3f50e8c505ed4128ebdc87570d81bdd45b7992e
@@ -17161,8 +17161,8 @@ trackedFiles:
     pristine_git_object: fb25195627c2f9a09462b2f458b08ddb93adc41d
   src/MeetKai/MKA1/Utils/Constants.cs:
     id: 75bce3e6e069
-    last_write_checksum: sha1:bafca62c50eb997ee84a15e9d82ee056facdc7f8
-    pristine_git_object: 9ee095220d77e3d27369e5257f6b0d39a9fbed7f
+    last_write_checksum: sha1:eafc4e81507b9ba76f25b34602631b4f58c0298b
+    pristine_git_object: 08d73bb13047237c653aaccd149b5c039976c6b2
   src/MeetKai/MKA1/Utils/DecimalStrConverter.cs:
     id: bb421f012024
     last_write_checksum: sha1:a5d10940fde9723c5795aa200bcca1de32d4b1b6
@@ -25292,4 +25292,3 @@ examples:
         "400":
           application/json: {"message": "<value>"}
 examplesVersion: 1.0.2
-releaseNotes: "## Csharp SDK Changes:\n* `Sdk.AgentVersions.RollbackAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentVersions.ListAgentVersions()`:  `response.data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Responses.Cancel()`:  `response.tools[].union(ScheduleToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.Agents.RestoreAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.AgentSchedules.ListAgentSchedules()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response.data[].DeliverTo` **Added**\n* `Sdk.Agents.ListAgents()`:  `response.data[].Tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.CreateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Agents.GetAgent()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Responses.Update()`:  `response.tools[].union(ScheduleToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.Agents.UpdateAgent()`: \n  *  `request.body.Tools[]` **Changed** (Breaking ⚠️)\n  *  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Responses.List()`:  `response.data[].Tools[].union(ScheduleToolDefinition)` **Added** (Breaking ⚠️)\n* `Sdk.AgentVersions.GetAgentVersion()`:  `response.tools[]` **Changed** (Breaking ⚠️)\n* `Sdk.Llm.Speech.LivekitToken()`: \n  *  `request.body.Llm.Tools[].union(ScheduleToolDefinition)` **Added**\n* `Sdk.ToolPolicy.UpdateToolPolicy()`: \n  *  `request.Rules[].Type.Enum(schedule)` **Added**\n* `Sdk.AgentSchedules.CreateAgentSchedule()`: \n  *  `request.body.DeliverTo` **Added**\n  *  `response.deliverTo` **Added**\n* `Sdk.AgentSchedules.GetAgentSchedule()`:  `response.deliverTo` **Added**\n* `Sdk.AgentSchedules.UpdateAgentSchedule()`:  `response.deliverTo` **Added**\n* `Sdk.AgentSchedules.PauseAgentSchedule()`:  `response.deliverTo` **Added**\n* `Sdk.AgentSchedules.ResumeAgentSchedule()`:  `response.deliverTo` **Added**\n"

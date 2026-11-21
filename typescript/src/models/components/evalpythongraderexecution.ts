@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const EvalPythonGraderExecution = {
@@ -16,7 +17,7 @@ export type EvalPythonGraderExecution = ClosedEnum<
 /** @internal */
 export const EvalPythonGraderExecution$inboundSchema: z.ZodNativeEnum<
   typeof EvalPythonGraderExecution
-> = z.nativeEnum(EvalPythonGraderExecution);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EvalPythonGraderExecution));
 /** @internal */
 export const EvalPythonGraderExecution$outboundSchema: z.ZodNativeEnum<
   typeof EvalPythonGraderExecution

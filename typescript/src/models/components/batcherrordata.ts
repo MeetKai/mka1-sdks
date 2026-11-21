@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,12 +19,14 @@ export const BatchErrorData$inboundSchema: z.ZodType<
   BatchErrorData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  param: z.nullable(z.string()).optional(),
-  line: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    param: z.nullable(z.string()).optional(),
+    line: z.nullable(z.number().int()).optional(),
+  })
+);
 /** @internal */
 export type BatchErrorData$Outbound = {
   code: string;
@@ -38,12 +40,14 @@ export const BatchErrorData$outboundSchema: z.ZodType<
   BatchErrorData$Outbound,
   z.ZodTypeDef,
   BatchErrorData
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  param: z.nullable(z.string()).optional(),
-  line: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    param: z.nullable(z.string()).optional(),
+    line: z.nullable(z.number().int()).optional(),
+  })
+);
 
 export function batchErrorDataToJSON(batchErrorData: BatchErrorData): string {
   return JSON.stringify(BatchErrorData$outboundSchema.parse(batchErrorData));

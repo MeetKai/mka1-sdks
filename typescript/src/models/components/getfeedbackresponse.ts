@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,7 @@ export type GetFeedbackResponse = {
 /** @internal */
 export const GetFeedbackResponseRating$inboundSchema: z.ZodNativeEnum<
   typeof GetFeedbackResponseRating
-> = z.nativeEnum(GetFeedbackResponseRating);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetFeedbackResponseRating));
 /** @internal */
 export const GetFeedbackResponseRating$outboundSchema: z.ZodNativeEnum<
   typeof GetFeedbackResponseRating
@@ -63,20 +63,24 @@ export const GetFeedbackResponse$inboundSchema: z.ZodType<
   GetFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  rating: GetFeedbackResponseRating$inboundSchema.optional(),
-  description: z.string().optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: GetFeedbackResponseRating$inboundSchema.optional(),
+    description: z.string().optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type GetFeedbackResponse$Outbound = {
   id: string;
@@ -91,18 +95,20 @@ export const GetFeedbackResponse$outboundSchema: z.ZodType<
   GetFeedbackResponse$Outbound,
   z.ZodTypeDef,
   GetFeedbackResponse
-> = z.object({
-  id: z.string(),
-  rating: GetFeedbackResponseRating$outboundSchema.optional(),
-  description: z.string().optional(),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: GetFeedbackResponseRating$outboundSchema.optional(),
+    description: z.string().optional(),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function getFeedbackResponseToJSON(
   getFeedbackResponse: GetFeedbackResponse,

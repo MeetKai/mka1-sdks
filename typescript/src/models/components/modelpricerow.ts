@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,33 +50,35 @@ export const ModelPriceRowRates$inboundSchema: z.ZodType<
   ModelPriceRowRates,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_tokens: z.number().optional(),
-  output_tokens: z.number().optional(),
-  cached_tokens: z.number().optional(),
-  reasoning_tokens: z.number().optional(),
-  batch_input_tokens: z.number().optional(),
-  batch_output_tokens: z.number().optional(),
-  batch_cached_tokens: z.number().optional(),
-  batch_reasoning_tokens: z.number().optional(),
-  characters: z.number().optional(),
-  seconds: z.number().optional(),
-  image: z.number().optional(),
-  image_tiers: z.record(z.number()).optional(),
-  searches: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "cached_tokens": "cachedTokens",
-    "reasoning_tokens": "reasoningTokens",
-    "batch_input_tokens": "batchInputTokens",
-    "batch_output_tokens": "batchOutputTokens",
-    "batch_cached_tokens": "batchCachedTokens",
-    "batch_reasoning_tokens": "batchReasoningTokens",
-    "image_tiers": "imageTiers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_tokens: z.number().optional(),
+    output_tokens: z.number().optional(),
+    cached_tokens: z.number().optional(),
+    reasoning_tokens: z.number().optional(),
+    batch_input_tokens: z.number().optional(),
+    batch_output_tokens: z.number().optional(),
+    batch_cached_tokens: z.number().optional(),
+    batch_reasoning_tokens: z.number().optional(),
+    characters: z.number().optional(),
+    seconds: z.number().optional(),
+    image: z.number().optional(),
+    image_tiers: z.record(z.number()).optional(),
+    searches: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "cached_tokens": "cachedTokens",
+      "reasoning_tokens": "reasoningTokens",
+      "batch_input_tokens": "batchInputTokens",
+      "batch_output_tokens": "batchOutputTokens",
+      "batch_cached_tokens": "batchCachedTokens",
+      "batch_reasoning_tokens": "batchReasoningTokens",
+      "image_tiers": "imageTiers",
+    });
+  })
+);
 /** @internal */
 export type ModelPriceRowRates$Outbound = {
   input_tokens?: number | undefined;
@@ -99,33 +101,35 @@ export const ModelPriceRowRates$outboundSchema: z.ZodType<
   ModelPriceRowRates$Outbound,
   z.ZodTypeDef,
   ModelPriceRowRates
-> = z.object({
-  inputTokens: z.number().optional(),
-  outputTokens: z.number().optional(),
-  cachedTokens: z.number().optional(),
-  reasoningTokens: z.number().optional(),
-  batchInputTokens: z.number().optional(),
-  batchOutputTokens: z.number().optional(),
-  batchCachedTokens: z.number().optional(),
-  batchReasoningTokens: z.number().optional(),
-  characters: z.number().optional(),
-  seconds: z.number().optional(),
-  image: z.number().optional(),
-  imageTiers: z.record(z.number()).optional(),
-  searches: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    reasoningTokens: "reasoning_tokens",
-    batchInputTokens: "batch_input_tokens",
-    batchOutputTokens: "batch_output_tokens",
-    batchCachedTokens: "batch_cached_tokens",
-    batchReasoningTokens: "batch_reasoning_tokens",
-    imageTiers: "image_tiers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTokens: z.number().optional(),
+    outputTokens: z.number().optional(),
+    cachedTokens: z.number().optional(),
+    reasoningTokens: z.number().optional(),
+    batchInputTokens: z.number().optional(),
+    batchOutputTokens: z.number().optional(),
+    batchCachedTokens: z.number().optional(),
+    batchReasoningTokens: z.number().optional(),
+    characters: z.number().optional(),
+    seconds: z.number().optional(),
+    image: z.number().optional(),
+    imageTiers: z.record(z.number()).optional(),
+    searches: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      reasoningTokens: "reasoning_tokens",
+      batchInputTokens: "batch_input_tokens",
+      batchOutputTokens: "batch_output_tokens",
+      batchCachedTokens: "batch_cached_tokens",
+      batchReasoningTokens: "batch_reasoning_tokens",
+      imageTiers: "image_tiers",
+    });
+  })
+);
 
 export function modelPriceRowRatesToJSON(
   modelPriceRowRates: ModelPriceRowRates,
@@ -149,21 +153,23 @@ export const ModelPriceRow$inboundSchema: z.ZodType<
   ModelPriceRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  org_id: z.nullable(z.string()),
-  rates: z.lazy(() => ModelPriceRowRates$inboundSchema),
-  effective_from: z.string(),
-  effective_to: z.nullable(z.string()),
-  set_by: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "effective_from": "effectiveFrom",
-    "effective_to": "effectiveTo",
-    "set_by": "setBy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    org_id: z.nullable(z.string()),
+    rates: z.lazy(() => ModelPriceRowRates$inboundSchema),
+    effective_from: z.string(),
+    effective_to: z.nullable(z.string()),
+    set_by: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "effective_from": "effectiveFrom",
+      "effective_to": "effectiveTo",
+      "set_by": "setBy",
+    });
+  })
+);
 /** @internal */
 export type ModelPriceRow$Outbound = {
   model: string;
@@ -179,21 +185,23 @@ export const ModelPriceRow$outboundSchema: z.ZodType<
   ModelPriceRow$Outbound,
   z.ZodTypeDef,
   ModelPriceRow
-> = z.object({
-  model: z.string(),
-  orgId: z.nullable(z.string()),
-  rates: z.lazy(() => ModelPriceRowRates$outboundSchema),
-  effectiveFrom: z.string(),
-  effectiveTo: z.nullable(z.string()),
-  setBy: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    effectiveFrom: "effective_from",
-    effectiveTo: "effective_to",
-    setBy: "set_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    orgId: z.nullable(z.string()),
+    rates: z.lazy(() => ModelPriceRowRates$outboundSchema),
+    effectiveFrom: z.string(),
+    effectiveTo: z.nullable(z.string()),
+    setBy: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      effectiveFrom: "effective_from",
+      effectiveTo: "effective_to",
+      setBy: "set_by",
+    });
+  })
+);
 
 export function modelPriceRowToJSON(modelPriceRow: ModelPriceRow): string {
   return JSON.stringify(ModelPriceRow$outboundSchema.parse(modelPriceRow));

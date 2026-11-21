@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,14 +69,16 @@ export const ListOwnerKeyRecoveriesRequest$inboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListOwnerKeyRecoveriesRequest$Outbound = {
   status?: string | undefined;
@@ -88,14 +90,16 @@ export const ListOwnerKeyRecoveriesRequest$outboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesRequest$Outbound,
   z.ZodTypeDef,
   ListOwnerKeyRecoveriesRequest
-> = z.object({
-  status: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listOwnerKeyRecoveriesRequestToJSON(
   listOwnerKeyRecoveriesRequest: ListOwnerKeyRecoveriesRequest,
@@ -119,7 +123,9 @@ export function listOwnerKeyRecoveriesRequestFromJSON(
 /** @internal */
 export const ListOwnerKeyRecoveriesStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListOwnerKeyRecoveriesStatus
-> = z.nativeEnum(ListOwnerKeyRecoveriesStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListOwnerKeyRecoveriesStatus)
+);
 /** @internal */
 export const ListOwnerKeyRecoveriesStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListOwnerKeyRecoveriesStatus
@@ -130,11 +136,13 @@ export const ListOwnerKeyRecoveriesRequestedBy$inboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesRequestedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type ListOwnerKeyRecoveriesRequestedBy$Outbound = {
   id: string;
@@ -147,11 +155,13 @@ export const ListOwnerKeyRecoveriesRequestedBy$outboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesRequestedBy$Outbound,
   z.ZodTypeDef,
   ListOwnerKeyRecoveriesRequestedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function listOwnerKeyRecoveriesRequestedByToJSON(
   listOwnerKeyRecoveriesRequestedBy: ListOwnerKeyRecoveriesRequestedBy,
@@ -177,11 +187,13 @@ export const ListOwnerKeyRecoveriesDecidedBy$inboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesDecidedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type ListOwnerKeyRecoveriesDecidedBy$Outbound = {
   id: string;
@@ -194,11 +206,13 @@ export const ListOwnerKeyRecoveriesDecidedBy$outboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesDecidedBy$Outbound,
   z.ZodTypeDef,
   ListOwnerKeyRecoveriesDecidedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function listOwnerKeyRecoveriesDecidedByToJSON(
   listOwnerKeyRecoveriesDecidedBy: ListOwnerKeyRecoveriesDecidedBy,
@@ -224,25 +238,27 @@ export const Requests$inboundSchema: z.ZodType<
   Requests,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: ListOwnerKeyRecoveriesStatus$inboundSchema,
-  requestedBy: z.lazy(() => ListOwnerKeyRecoveriesRequestedBy$inboundSchema),
-  decidedBy: z.nullable(
-    z.lazy(() => ListOwnerKeyRecoveriesDecidedBy$inboundSchema),
-  ),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: ListOwnerKeyRecoveriesStatus$inboundSchema,
+    requestedBy: z.lazy(() => ListOwnerKeyRecoveriesRequestedBy$inboundSchema),
+    decidedBy: z.nullable(
+      z.lazy(() => ListOwnerKeyRecoveriesDecidedBy$inboundSchema),
+    ),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type Requests$Outbound = {
   id: string;
@@ -267,25 +283,27 @@ export const Requests$outboundSchema: z.ZodType<
   Requests$Outbound,
   z.ZodTypeDef,
   Requests
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: ListOwnerKeyRecoveriesStatus$outboundSchema,
-  requestedBy: z.lazy(() => ListOwnerKeyRecoveriesRequestedBy$outboundSchema),
-  decidedBy: z.nullable(
-    z.lazy(() => ListOwnerKeyRecoveriesDecidedBy$outboundSchema),
-  ),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: ListOwnerKeyRecoveriesStatus$outboundSchema,
+    requestedBy: z.lazy(() => ListOwnerKeyRecoveriesRequestedBy$outboundSchema),
+    decidedBy: z.nullable(
+      z.lazy(() => ListOwnerKeyRecoveriesDecidedBy$outboundSchema),
+    ),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 
 export function requestsToJSON(requests: Requests): string {
   return JSON.stringify(Requests$outboundSchema.parse(requests));
@@ -305,9 +323,11 @@ export const ListOwnerKeyRecoveriesResponseBody$inboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requests: z.array(z.lazy(() => Requests$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requests: z.array(z.lazy(() => Requests$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListOwnerKeyRecoveriesResponseBody$Outbound = {
   requests: Array<Requests$Outbound>;
@@ -318,9 +338,11 @@ export const ListOwnerKeyRecoveriesResponseBody$outboundSchema: z.ZodType<
   ListOwnerKeyRecoveriesResponseBody$Outbound,
   z.ZodTypeDef,
   ListOwnerKeyRecoveriesResponseBody
-> = z.object({
-  requests: z.array(z.lazy(() => Requests$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requests: z.array(z.lazy(() => Requests$outboundSchema)),
+  })
+);
 
 export function listOwnerKeyRecoveriesResponseBodyToJSON(
   listOwnerKeyRecoveriesResponseBody: ListOwnerKeyRecoveriesResponseBody,

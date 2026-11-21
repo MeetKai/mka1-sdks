@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,22 +23,24 @@ export const ResponseImageGenerationCallPartialImageEvent$inboundSchema:
     ResponseImageGenerationCallPartialImageEvent,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    type: z.literal("response.image_generation_call.partial_image"),
-    sequence_number: z.number().int(),
-    item_id: z.string(),
-    output_index: z.number().int(),
-    partial_image_index: z.number().int(),
-    partial_image_b64: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "sequence_number": "sequenceNumber",
-      "item_id": "itemId",
-      "output_index": "outputIndex",
-      "partial_image_index": "partialImageIndex",
-      "partial_image_b64": "partialImageB64",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("response.image_generation_call.partial_image"),
+      sequence_number: z.number().int(),
+      item_id: z.string(),
+      output_index: z.number().int(),
+      partial_image_index: z.number().int(),
+      partial_image_b64: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "sequence_number": "sequenceNumber",
+        "item_id": "itemId",
+        "output_index": "outputIndex",
+        "partial_image_index": "partialImageIndex",
+        "partial_image_b64": "partialImageB64",
+      });
+    })
+  );
 /** @internal */
 export type ResponseImageGenerationCallPartialImageEvent$Outbound = {
   type: "response.image_generation_call.partial_image";
@@ -55,22 +57,24 @@ export const ResponseImageGenerationCallPartialImageEvent$outboundSchema:
     ResponseImageGenerationCallPartialImageEvent$Outbound,
     z.ZodTypeDef,
     ResponseImageGenerationCallPartialImageEvent
-  > = z.object({
-    type: z.literal("response.image_generation_call.partial_image"),
-    sequenceNumber: z.number().int(),
-    itemId: z.string(),
-    outputIndex: z.number().int(),
-    partialImageIndex: z.number().int(),
-    partialImageB64: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      sequenceNumber: "sequence_number",
-      itemId: "item_id",
-      outputIndex: "output_index",
-      partialImageIndex: "partial_image_index",
-      partialImageB64: "partial_image_b64",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("response.image_generation_call.partial_image"),
+      sequenceNumber: z.number().int(),
+      itemId: z.string(),
+      outputIndex: z.number().int(),
+      partialImageIndex: z.number().int(),
+      partialImageB64: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        sequenceNumber: "sequence_number",
+        itemId: "item_id",
+        outputIndex: "output_index",
+        partialImageIndex: "partial_image_index",
+        partialImageB64: "partial_image_b64",
+      });
+    })
+  );
 
 export function responseImageGenerationCallPartialImageEventToJSON(
   responseImageGenerationCallPartialImageEvent:

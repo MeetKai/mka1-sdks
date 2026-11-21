@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const ListFineTuningJobsRequest$inboundSchema: z.ZodType<
   ListFineTuningJobsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.nullable(z.string()).optional(),
-  limit: z.number().int().default(20),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.nullable(z.string()).optional(),
+    limit: z.number().int().default(20),
+  })
+);
 /** @internal */
 export type ListFineTuningJobsRequest$Outbound = {
   after?: string | null | undefined;
@@ -32,10 +34,12 @@ export const ListFineTuningJobsRequest$outboundSchema: z.ZodType<
   ListFineTuningJobsRequest$Outbound,
   z.ZodTypeDef,
   ListFineTuningJobsRequest
-> = z.object({
-  after: z.nullable(z.string()).optional(),
-  limit: z.number().int().default(20),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.nullable(z.string()).optional(),
+    limit: z.number().int().default(20),
+  })
+);
 
 export function listFineTuningJobsRequestToJSON(
   listFineTuningJobsRequest: ListFineTuningJobsRequest,

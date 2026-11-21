@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -108,17 +108,19 @@ export const ConversationsItemsRetrieveRequest$inboundSchema: z.ZodType<
   ConversationsItemsRetrieveRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversation_id: z.string(),
-  item_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "item_id": "itemId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversation_id: z.string(),
+    item_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "conversation_id": "conversationId",
+      "item_id": "itemId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsRetrieveRequest$Outbound = {
   conversation_id: string;
@@ -131,17 +133,19 @@ export const ConversationsItemsRetrieveRequest$outboundSchema: z.ZodType<
   ConversationsItemsRetrieveRequest$Outbound,
   z.ZodTypeDef,
   ConversationsItemsRetrieveRequest
-> = z.object({
-  conversationId: z.string(),
-  itemId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    conversationId: "conversation_id",
-    itemId: "item_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string(),
+    itemId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      conversationId: "conversation_id",
+      itemId: "item_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function conversationsItemsRetrieveRequestToJSON(
   conversationsItemsRetrieveRequest: ConversationsItemsRetrieveRequest,
@@ -165,7 +169,7 @@ export function conversationsItemsRetrieveRequestFromJSON(
 /** @internal */
 export const ResponseBodyRole$inboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyRole
-> = z.nativeEnum(ResponseBodyRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResponseBodyRole));
 /** @internal */
 export const ResponseBodyRole$outboundSchema: z.ZodNativeEnum<
   typeof ResponseBodyRole
@@ -173,7 +177,9 @@ export const ResponseBodyRole$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const Content$inboundSchema: z.ZodType<Content, z.ZodTypeDef, unknown> =
-  z.union([z.string(), z.array(components.InputMessageContent$inboundSchema)]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.array(components.InputMessageContent$inboundSchema)])
+  );
 /** @internal */
 export type Content$Outbound =
   | string
@@ -184,10 +190,9 @@ export const Content$outboundSchema: z.ZodType<
   Content$Outbound,
   z.ZodTypeDef,
   Content
-> = z.union([
-  z.string(),
-  z.array(components.InputMessageContent$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(components.InputMessageContent$outboundSchema)])
+);
 
 export function contentToJSON(content: Content): string {
   return JSON.stringify(Content$outboundSchema.parse(content));
@@ -207,22 +212,24 @@ export const InputMessageItem$inboundSchema: z.ZodType<
   InputMessageItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("message").optional(),
-  role: ResponseBodyRole$inboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(components.InputMessageContent$inboundSchema),
-  ]),
-  status: components.Status$inboundSchema.optional(),
-  id: z.string(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message").optional(),
+    role: ResponseBodyRole$inboundSchema,
+    content: z.union([
+      z.string(),
+      z.array(components.InputMessageContent$inboundSchema),
+    ]),
+    status: components.Status$inboundSchema.optional(),
+    id: z.string(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type InputMessageItem$Outbound = {
   type?: "message" | undefined;
@@ -239,22 +246,24 @@ export const InputMessageItem$outboundSchema: z.ZodType<
   InputMessageItem$Outbound,
   z.ZodTypeDef,
   InputMessageItem
-> = z.object({
-  type: z.literal("message").optional(),
-  role: ResponseBodyRole$outboundSchema,
-  content: z.union([
-    z.string(),
-    z.array(components.InputMessageContent$outboundSchema),
-  ]),
-  status: components.Status$outboundSchema.optional(),
-  id: z.string(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message").optional(),
+    role: ResponseBodyRole$outboundSchema,
+    content: z.union([
+      z.string(),
+      z.array(components.InputMessageContent$outboundSchema),
+    ]),
+    status: components.Status$outboundSchema.optional(),
+    id: z.string(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function inputMessageItemToJSON(
   inputMessageItem: InputMessageItem,
@@ -278,34 +287,36 @@ export const ConversationsItemsRetrieveResponseBody$inboundSchema: z.ZodType<
   ConversationsItemsRetrieveResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputerToolCallWithId$inboundSchema,
-  components.CodeInterpreterToolCallWithId$inboundSchema,
-  components.OutputMessageWithId$inboundSchema,
-  components.OutputAudioItemWithId$inboundSchema,
-  components.FunctionToolCallWithId$inboundSchema,
-  components.LocalShellCallWithId$inboundSchema,
-  components.ShellCallWithId$inboundSchema,
-  components.MCPApprovalRequestWithId$inboundSchema,
-  components.ToolApprovalRequestWithId$inboundSchema,
-  components.MCPToolCallWithId$inboundSchema,
-  components.CustomToolCallWithId$inboundSchema,
-  components.FileSearchToolCallWithId$inboundSchema,
-  components.ComputerToolCallOutputWithId$inboundSchema,
-  components.WebSearchToolCallWithId$inboundSchema,
-  components.FunctionToolCallOutputWithId$inboundSchema,
-  components.ImageGenerationCallWithId$inboundSchema,
-  components.ShellCallOutputWithId$inboundSchema,
-  components.MCPListToolsWithId$inboundSchema,
-  components.MCPApprovalResponseWithId$inboundSchema,
-  components.ToolApprovalResponseWithId$inboundSchema,
-  components.CustomToolCallOutputWithId$inboundSchema,
-  z.lazy(() => InputMessageItem$inboundSchema),
-  components.ReasoningWithId$inboundSchema,
-  components.LocalShellCallOutputWithId$inboundSchema,
-  components.ResponseCompactionItemWithId$inboundSchema,
-  components.ItemReferenceWithId$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputerToolCallWithId$inboundSchema,
+    components.CodeInterpreterToolCallWithId$inboundSchema,
+    components.OutputMessageWithId$inboundSchema,
+    components.OutputAudioItemWithId$inboundSchema,
+    components.FunctionToolCallWithId$inboundSchema,
+    components.LocalShellCallWithId$inboundSchema,
+    components.ShellCallWithId$inboundSchema,
+    components.MCPApprovalRequestWithId$inboundSchema,
+    components.ToolApprovalRequestWithId$inboundSchema,
+    components.MCPToolCallWithId$inboundSchema,
+    components.CustomToolCallWithId$inboundSchema,
+    components.FileSearchToolCallWithId$inboundSchema,
+    components.ComputerToolCallOutputWithId$inboundSchema,
+    components.WebSearchToolCallWithId$inboundSchema,
+    components.FunctionToolCallOutputWithId$inboundSchema,
+    components.ImageGenerationCallWithId$inboundSchema,
+    components.ShellCallOutputWithId$inboundSchema,
+    components.MCPListToolsWithId$inboundSchema,
+    components.MCPApprovalResponseWithId$inboundSchema,
+    components.ToolApprovalResponseWithId$inboundSchema,
+    components.CustomToolCallOutputWithId$inboundSchema,
+    z.lazy(() => InputMessageItem$inboundSchema),
+    components.ReasoningWithId$inboundSchema,
+    components.LocalShellCallOutputWithId$inboundSchema,
+    components.ResponseCompactionItemWithId$inboundSchema,
+    components.ItemReferenceWithId$inboundSchema,
+  ])
+);
 /** @internal */
 export type ConversationsItemsRetrieveResponseBody$Outbound =
   | components.ComputerToolCallWithId$Outbound
@@ -340,34 +351,36 @@ export const ConversationsItemsRetrieveResponseBody$outboundSchema: z.ZodType<
   ConversationsItemsRetrieveResponseBody$Outbound,
   z.ZodTypeDef,
   ConversationsItemsRetrieveResponseBody
-> = z.union([
-  components.ComputerToolCallWithId$outboundSchema,
-  components.CodeInterpreterToolCallWithId$outboundSchema,
-  components.OutputMessageWithId$outboundSchema,
-  components.OutputAudioItemWithId$outboundSchema,
-  components.FunctionToolCallWithId$outboundSchema,
-  components.LocalShellCallWithId$outboundSchema,
-  components.ShellCallWithId$outboundSchema,
-  components.MCPApprovalRequestWithId$outboundSchema,
-  components.ToolApprovalRequestWithId$outboundSchema,
-  components.MCPToolCallWithId$outboundSchema,
-  components.CustomToolCallWithId$outboundSchema,
-  components.FileSearchToolCallWithId$outboundSchema,
-  components.ComputerToolCallOutputWithId$outboundSchema,
-  components.WebSearchToolCallWithId$outboundSchema,
-  components.FunctionToolCallOutputWithId$outboundSchema,
-  components.ImageGenerationCallWithId$outboundSchema,
-  components.ShellCallOutputWithId$outboundSchema,
-  components.MCPListToolsWithId$outboundSchema,
-  components.MCPApprovalResponseWithId$outboundSchema,
-  components.ToolApprovalResponseWithId$outboundSchema,
-  components.CustomToolCallOutputWithId$outboundSchema,
-  z.lazy(() => InputMessageItem$outboundSchema),
-  components.ReasoningWithId$outboundSchema,
-  components.LocalShellCallOutputWithId$outboundSchema,
-  components.ResponseCompactionItemWithId$outboundSchema,
-  components.ItemReferenceWithId$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputerToolCallWithId$outboundSchema,
+    components.CodeInterpreterToolCallWithId$outboundSchema,
+    components.OutputMessageWithId$outboundSchema,
+    components.OutputAudioItemWithId$outboundSchema,
+    components.FunctionToolCallWithId$outboundSchema,
+    components.LocalShellCallWithId$outboundSchema,
+    components.ShellCallWithId$outboundSchema,
+    components.MCPApprovalRequestWithId$outboundSchema,
+    components.ToolApprovalRequestWithId$outboundSchema,
+    components.MCPToolCallWithId$outboundSchema,
+    components.CustomToolCallWithId$outboundSchema,
+    components.FileSearchToolCallWithId$outboundSchema,
+    components.ComputerToolCallOutputWithId$outboundSchema,
+    components.WebSearchToolCallWithId$outboundSchema,
+    components.FunctionToolCallOutputWithId$outboundSchema,
+    components.ImageGenerationCallWithId$outboundSchema,
+    components.ShellCallOutputWithId$outboundSchema,
+    components.MCPListToolsWithId$outboundSchema,
+    components.MCPApprovalResponseWithId$outboundSchema,
+    components.ToolApprovalResponseWithId$outboundSchema,
+    components.CustomToolCallOutputWithId$outboundSchema,
+    z.lazy(() => InputMessageItem$outboundSchema),
+    components.ReasoningWithId$outboundSchema,
+    components.LocalShellCallOutputWithId$outboundSchema,
+    components.ResponseCompactionItemWithId$outboundSchema,
+    components.ItemReferenceWithId$outboundSchema,
+  ])
+);
 
 export function conversationsItemsRetrieveResponseBodyToJSON(
   conversationsItemsRetrieveResponseBody:

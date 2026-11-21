@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -66,8 +66,10 @@ export type ListOrgBudgetEnforcementsResponseBody = {
 
 /** @internal */
 export const ListOrgBudgetEnforcementsOnCheckFailure$inboundSchema:
-  z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsOnCheckFailure> = z
-    .nativeEnum(ListOrgBudgetEnforcementsOnCheckFailure);
+  z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsOnCheckFailure> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListOrgBudgetEnforcementsOnCheckFailure)
+    );
 /** @internal */
 export const ListOrgBudgetEnforcementsOnCheckFailure$outboundSchema:
   z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsOnCheckFailure> =
@@ -75,8 +77,10 @@ export const ListOrgBudgetEnforcementsOnCheckFailure$outboundSchema:
 
 /** @internal */
 export const ListOrgBudgetEnforcementsClusterDefault$inboundSchema:
-  z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsClusterDefault> = z
-    .nativeEnum(ListOrgBudgetEnforcementsClusterDefault);
+  z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsClusterDefault> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListOrgBudgetEnforcementsClusterDefault)
+    );
 /** @internal */
 export const ListOrgBudgetEnforcementsClusterDefault$outboundSchema:
   z.ZodNativeEnum<typeof ListOrgBudgetEnforcementsClusterDefault> =
@@ -85,7 +89,9 @@ export const ListOrgBudgetEnforcementsClusterDefault$outboundSchema:
 /** @internal */
 export const ListOrgBudgetEnforcementsEffective$inboundSchema: z.ZodNativeEnum<
   typeof ListOrgBudgetEnforcementsEffective
-> = z.nativeEnum(ListOrgBudgetEnforcementsEffective);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListOrgBudgetEnforcementsEffective)
+);
 /** @internal */
 export const ListOrgBudgetEnforcementsEffective$outboundSchema: z.ZodNativeEnum<
   typeof ListOrgBudgetEnforcementsEffective
@@ -96,20 +102,22 @@ export const ListOrgBudgetEnforcementsData$inboundSchema: z.ZodType<
   ListOrgBudgetEnforcementsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  on_check_failure: z.nullable(
-    ListOrgBudgetEnforcementsOnCheckFailure$inboundSchema,
-  ),
-  cluster_default: ListOrgBudgetEnforcementsClusterDefault$inboundSchema,
-  effective: ListOrgBudgetEnforcementsEffective$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "on_check_failure": "onCheckFailure",
-    "cluster_default": "clusterDefault",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    on_check_failure: z.nullable(
+      ListOrgBudgetEnforcementsOnCheckFailure$inboundSchema,
+    ),
+    cluster_default: ListOrgBudgetEnforcementsClusterDefault$inboundSchema,
+    effective: ListOrgBudgetEnforcementsEffective$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "on_check_failure": "onCheckFailure",
+      "cluster_default": "clusterDefault",
+    });
+  })
+);
 /** @internal */
 export type ListOrgBudgetEnforcementsData$Outbound = {
   org_id: string;
@@ -123,20 +131,22 @@ export const ListOrgBudgetEnforcementsData$outboundSchema: z.ZodType<
   ListOrgBudgetEnforcementsData$Outbound,
   z.ZodTypeDef,
   ListOrgBudgetEnforcementsData
-> = z.object({
-  orgId: z.string(),
-  onCheckFailure: z.nullable(
-    ListOrgBudgetEnforcementsOnCheckFailure$outboundSchema,
-  ),
-  clusterDefault: ListOrgBudgetEnforcementsClusterDefault$outboundSchema,
-  effective: ListOrgBudgetEnforcementsEffective$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    onCheckFailure: "on_check_failure",
-    clusterDefault: "cluster_default",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    onCheckFailure: z.nullable(
+      ListOrgBudgetEnforcementsOnCheckFailure$outboundSchema,
+    ),
+    clusterDefault: ListOrgBudgetEnforcementsClusterDefault$outboundSchema,
+    effective: ListOrgBudgetEnforcementsEffective$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      onCheckFailure: "on_check_failure",
+      clusterDefault: "cluster_default",
+    });
+  })
+);
 
 export function listOrgBudgetEnforcementsDataToJSON(
   listOrgBudgetEnforcementsData: ListOrgBudgetEnforcementsData,
@@ -162,15 +172,17 @@ export const ListOrgBudgetEnforcementsResponseBody$inboundSchema: z.ZodType<
   ListOrgBudgetEnforcementsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListOrgBudgetEnforcementsData$inboundSchema)),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListOrgBudgetEnforcementsData$inboundSchema)),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type ListOrgBudgetEnforcementsResponseBody$Outbound = {
   object: "list";
@@ -183,15 +195,17 @@ export const ListOrgBudgetEnforcementsResponseBody$outboundSchema: z.ZodType<
   ListOrgBudgetEnforcementsResponseBody$Outbound,
   z.ZodTypeDef,
   ListOrgBudgetEnforcementsResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListOrgBudgetEnforcementsData$outboundSchema)),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListOrgBudgetEnforcementsData$outboundSchema)),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function listOrgBudgetEnforcementsResponseBodyToJSON(
   listOrgBudgetEnforcementsResponseBody: ListOrgBudgetEnforcementsResponseBody,

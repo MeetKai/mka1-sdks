@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,7 +71,7 @@ export type BanWordsGuardrail = {
 
 /** @internal */
 export const OutputTiming$inboundSchema: z.ZodNativeEnum<typeof OutputTiming> =
-  z.nativeEnum(OutputTiming);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputTiming));
 /** @internal */
 export const OutputTiming$outboundSchema: z.ZodNativeEnum<typeof OutputTiming> =
   OutputTiming$inboundSchema;
@@ -81,22 +81,24 @@ export const BanWordsGuardrail$inboundSchema: z.ZodType<
   BanWordsGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("ban_words"),
-  enabled: z.boolean().default(true),
-  check_output: z.boolean().optional(),
-  output_timing: OutputTiming$inboundSchema.optional(),
-  output_window: OutputWindow$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
-  config: BanWordsConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "output_window": "outputWindow",
-    "input_sources": "inputSources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("ban_words"),
+    enabled: z.boolean().default(true),
+    check_output: z.boolean().optional(),
+    output_timing: OutputTiming$inboundSchema.optional(),
+    output_window: OutputWindow$inboundSchema.optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
+    config: BanWordsConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "output_window": "outputWindow",
+      "input_sources": "inputSources",
+    });
+  })
+);
 /** @internal */
 export type BanWordsGuardrail$Outbound = {
   mode: "ban_words";
@@ -113,22 +115,24 @@ export const BanWordsGuardrail$outboundSchema: z.ZodType<
   BanWordsGuardrail$Outbound,
   z.ZodTypeDef,
   BanWordsGuardrail
-> = z.object({
-  mode: z.literal("ban_words"),
-  enabled: z.boolean().default(true),
-  checkOutput: z.boolean().optional(),
-  outputTiming: OutputTiming$outboundSchema.optional(),
-  outputWindow: OutputWindow$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
-  config: BanWordsConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    outputWindow: "output_window",
-    inputSources: "input_sources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("ban_words"),
+    enabled: z.boolean().default(true),
+    checkOutput: z.boolean().optional(),
+    outputTiming: OutputTiming$outboundSchema.optional(),
+    outputWindow: OutputWindow$outboundSchema.optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
+    config: BanWordsConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      outputWindow: "output_window",
+      inputSources: "input_sources",
+    });
+  })
+);
 
 export function banWordsGuardrailToJSON(
   banWordsGuardrail: BanWordsGuardrail,

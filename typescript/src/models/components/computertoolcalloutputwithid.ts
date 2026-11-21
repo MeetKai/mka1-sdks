@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -56,23 +56,25 @@ export const ComputerToolCallOutputWithId$inboundSchema: z.ZodType<
   ComputerToolCallOutputWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("computer_call_output"),
-  call_id: z.string(),
-  output: ComputerScreenshot$inboundSchema,
-  acknowledged_safety_checks: z.array(AcknowledgedSafetyCheck$inboundSchema)
-    .optional(),
-  id: z.string(),
-  status: Status$inboundSchema.optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "acknowledged_safety_checks": "acknowledgedSafetyChecks",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_call_output"),
+    call_id: z.string(),
+    output: ComputerScreenshot$inboundSchema,
+    acknowledged_safety_checks: z.array(AcknowledgedSafetyCheck$inboundSchema)
+      .optional(),
+    id: z.string(),
+    status: Status$inboundSchema.optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "acknowledged_safety_checks": "acknowledgedSafetyChecks",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ComputerToolCallOutputWithId$Outbound = {
   type: "computer_call_output";
@@ -92,23 +94,25 @@ export const ComputerToolCallOutputWithId$outboundSchema: z.ZodType<
   ComputerToolCallOutputWithId$Outbound,
   z.ZodTypeDef,
   ComputerToolCallOutputWithId
-> = z.object({
-  type: z.literal("computer_call_output"),
-  callId: z.string(),
-  output: ComputerScreenshot$outboundSchema,
-  acknowledgedSafetyChecks: z.array(AcknowledgedSafetyCheck$outboundSchema)
-    .optional(),
-  id: z.string(),
-  status: Status$outboundSchema.optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    acknowledgedSafetyChecks: "acknowledged_safety_checks",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_call_output"),
+    callId: z.string(),
+    output: ComputerScreenshot$outboundSchema,
+    acknowledgedSafetyChecks: z.array(AcknowledgedSafetyCheck$outboundSchema)
+      .optional(),
+    id: z.string(),
+    status: Status$outboundSchema.optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      acknowledgedSafetyChecks: "acknowledged_safety_checks",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function computerToolCallOutputWithIdToJSON(
   computerToolCallOutputWithId: ComputerToolCallOutputWithId,

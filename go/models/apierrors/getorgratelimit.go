@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetOrgRateLimitTooManyRequestsError struct {
 var _ error = &GetOrgRateLimitTooManyRequestsError{}
 
 func (e *GetOrgRateLimitTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetOrgRateLimitGoneError struct {
 var _ error = &GetOrgRateLimitGoneError{}
 
 func (e *GetOrgRateLimitGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetOrgRateLimitConflictError struct {
 var _ error = &GetOrgRateLimitConflictError{}
 
 func (e *GetOrgRateLimitConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetOrgRateLimitNotFoundError struct {
 var _ error = &GetOrgRateLimitNotFoundError{}
 
 func (e *GetOrgRateLimitNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetOrgRateLimitForbiddenError struct {
 var _ error = &GetOrgRateLimitForbiddenError{}
 
 func (e *GetOrgRateLimitForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetOrgRateLimitUnauthorizedError struct {
 var _ error = &GetOrgRateLimitUnauthorizedError{}
 
 func (e *GetOrgRateLimitUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetOrgRateLimitBadRequestError struct {
 var _ error = &GetOrgRateLimitBadRequestError{}
 
 func (e *GetOrgRateLimitBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

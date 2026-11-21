@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +34,9 @@ export type ListMcpCredentialsRequest = {
 /** @internal */
 export const ListMcpCredentialsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListMcpCredentialsQueryParamOrder
-> = z.nativeEnum(ListMcpCredentialsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListMcpCredentialsQueryParamOrder)
+);
 /** @internal */
 export const ListMcpCredentialsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListMcpCredentialsQueryParamOrder
@@ -45,7 +47,7 @@ export const IncludeRevoked$inboundSchema: z.ZodType<
   IncludeRevoked,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 /** @internal */
 export type IncludeRevoked$Outbound = boolean | string;
 
@@ -54,7 +56,7 @@ export const IncludeRevoked$outboundSchema: z.ZodType<
   IncludeRevoked$Outbound,
   z.ZodTypeDef,
   IncludeRevoked
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 
 export function includeRevokedToJSON(includeRevoked: IncludeRevoked): string {
   return JSON.stringify(IncludeRevoked$outboundSchema.parse(includeRevoked));
@@ -74,20 +76,22 @@ export const ListMcpCredentialsRequest$inboundSchema: z.ZodType<
   ListMcpCredentialsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  order: ListMcpCredentialsQueryParamOrder$inboundSchema.default("desc"),
-  include_revoked: z.union([z.boolean(), z.string()]).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "include_revoked": "includeRevoked",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    order: ListMcpCredentialsQueryParamOrder$inboundSchema.default("desc"),
+    include_revoked: z.union([z.boolean(), z.string()]).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "include_revoked": "includeRevoked",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListMcpCredentialsRequest$Outbound = {
   server_id: string;
@@ -103,20 +107,22 @@ export const ListMcpCredentialsRequest$outboundSchema: z.ZodType<
   ListMcpCredentialsRequest$Outbound,
   z.ZodTypeDef,
   ListMcpCredentialsRequest
-> = z.object({
-  serverId: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-  order: ListMcpCredentialsQueryParamOrder$outboundSchema.default("desc"),
-  includeRevoked: z.union([z.boolean(), z.string()]).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    includeRevoked: "include_revoked",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+    order: ListMcpCredentialsQueryParamOrder$outboundSchema.default("desc"),
+    includeRevoked: z.union([z.boolean(), z.string()]).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      includeRevoked: "include_revoked",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listMcpCredentialsRequestToJSON(
   listMcpCredentialsRequest: ListMcpCredentialsRequest,

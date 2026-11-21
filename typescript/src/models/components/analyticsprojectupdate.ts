@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const AnalyticsProjectUpdate$inboundSchema: z.ZodType<
   AnalyticsProjectUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 /** @internal */
 export type AnalyticsProjectUpdate$Outbound = {
   name: string;
@@ -29,9 +31,11 @@ export const AnalyticsProjectUpdate$outboundSchema: z.ZodType<
   AnalyticsProjectUpdate$Outbound,
   z.ZodTypeDef,
   AnalyticsProjectUpdate
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function analyticsProjectUpdateToJSON(
   analyticsProjectUpdate: AnalyticsProjectUpdate,

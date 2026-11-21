@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const SupportCaseResolveRequest$inboundSchema: z.ZodType<
   SupportCaseResolveRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  body: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    body: z.string().optional(),
+  })
+);
 /** @internal */
 export type SupportCaseResolveRequest$Outbound = {
   body?: string | undefined;
@@ -29,9 +31,11 @@ export const SupportCaseResolveRequest$outboundSchema: z.ZodType<
   SupportCaseResolveRequest$Outbound,
   z.ZodTypeDef,
   SupportCaseResolveRequest
-> = z.object({
-  body: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    body: z.string().optional(),
+  })
+);
 
 export function supportCaseResolveRequestToJSON(
   supportCaseResolveRequest: SupportCaseResolveRequest,

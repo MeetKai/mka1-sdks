@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,14 +24,16 @@ export const EnvironmentList$inboundSchema: z.ZodType<
   EnvironmentList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_repositories: z.number().int().default(5),
-  environments: z.array(EnvironmentModel$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "max_repositories": "maxRepositories",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_repositories: z.number().int().default(5),
+    environments: z.array(EnvironmentModel$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_repositories": "maxRepositories",
+    });
+  })
+);
 /** @internal */
 export type EnvironmentList$Outbound = {
   max_repositories: number;
@@ -43,14 +45,16 @@ export const EnvironmentList$outboundSchema: z.ZodType<
   EnvironmentList$Outbound,
   z.ZodTypeDef,
   EnvironmentList
-> = z.object({
-  maxRepositories: z.number().int().default(5),
-  environments: z.array(EnvironmentModel$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    maxRepositories: "max_repositories",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxRepositories: z.number().int().default(5),
+    environments: z.array(EnvironmentModel$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      maxRepositories: "max_repositories",
+    });
+  })
+);
 
 export function environmentListToJSON(
   environmentList: EnvironmentList,

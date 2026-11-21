@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,10 +15,12 @@ export type Update = {
 };
 
 /** @internal */
-export const Update$inboundSchema: z.ZodType<Update, z.ZodTypeDef, unknown> = z
-  .object({
-    metadata: z.record(z.string()),
-  });
+export const Update$inboundSchema: z.ZodType<Update, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      metadata: z.record(z.string()),
+    })
+  );
 /** @internal */
 export type Update$Outbound = {
   metadata: { [k: string]: string };
@@ -29,9 +31,11 @@ export const Update$outboundSchema: z.ZodType<
   Update$Outbound,
   z.ZodTypeDef,
   Update
-> = z.object({
-  metadata: z.record(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: z.record(z.string()),
+  })
+);
 
 export function updateToJSON(update: Update): string {
   return JSON.stringify(Update$outboundSchema.parse(update));

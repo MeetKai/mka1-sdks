@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -81,7 +81,9 @@ export type AppendAgentTrialsRequest = {
 /** @internal */
 export const AppendAgentTrialsRequestStatus$inboundSchema: z.ZodNativeEnum<
   typeof AppendAgentTrialsRequestStatus
-> = z.nativeEnum(AppendAgentTrialsRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AppendAgentTrialsRequestStatus)
+);
 /** @internal */
 export const AppendAgentTrialsRequestStatus$outboundSchema: z.ZodNativeEnum<
   typeof AppendAgentTrialsRequestStatus
@@ -92,34 +94,36 @@ export const AppendAgentTrialsRequestTrials$inboundSchema: z.ZodType<
   AppendAgentTrialsRequestTrials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task_id: z.string(),
-  sample_index: z.number().int(),
-  status: AppendAgentTrialsRequestStatus$inboundSchema.default("completed"),
-  prompt: z.string().default(""),
-  target: z.nullable(z.string()).optional(),
-  output_text: z.nullable(z.string()).optional(),
-  scores: z.record(z.number()).optional(),
-  error: z.nullable(z.record(z.any())).optional(),
-  cost_usd: z.nullable(z.number()).optional(),
-  input_tokens: z.nullable(z.number().int()).optional(),
-  output_tokens: z.nullable(z.number().int()).optional(),
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  reasoning_tokens: z.nullable(z.number().int()).optional(),
-  phase_timings: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-    "sample_index": "sampleIndex",
-    "output_text": "outputText",
-    "cost_usd": "costUsd",
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "cached_tokens": "cachedTokens",
-    "reasoning_tokens": "reasoningTokens",
-    "phase_timings": "phaseTimings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task_id: z.string(),
+    sample_index: z.number().int(),
+    status: AppendAgentTrialsRequestStatus$inboundSchema.default("completed"),
+    prompt: z.string().default(""),
+    target: z.nullable(z.string()).optional(),
+    output_text: z.nullable(z.string()).optional(),
+    scores: z.record(z.number()).optional(),
+    error: z.nullable(z.record(z.any())).optional(),
+    cost_usd: z.nullable(z.number()).optional(),
+    input_tokens: z.nullable(z.number().int()).optional(),
+    output_tokens: z.nullable(z.number().int()).optional(),
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    reasoning_tokens: z.nullable(z.number().int()).optional(),
+    phase_timings: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "task_id": "taskId",
+      "sample_index": "sampleIndex",
+      "output_text": "outputText",
+      "cost_usd": "costUsd",
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "cached_tokens": "cachedTokens",
+      "reasoning_tokens": "reasoningTokens",
+      "phase_timings": "phaseTimings",
+    });
+  })
+);
 /** @internal */
 export type AppendAgentTrialsRequestTrials$Outbound = {
   task_id: string;
@@ -143,34 +147,36 @@ export const AppendAgentTrialsRequestTrials$outboundSchema: z.ZodType<
   AppendAgentTrialsRequestTrials$Outbound,
   z.ZodTypeDef,
   AppendAgentTrialsRequestTrials
-> = z.object({
-  taskId: z.string(),
-  sampleIndex: z.number().int(),
-  status: AppendAgentTrialsRequestStatus$outboundSchema.default("completed"),
-  prompt: z.string().default(""),
-  target: z.nullable(z.string()).optional(),
-  outputText: z.nullable(z.string()).optional(),
-  scores: z.record(z.number()).optional(),
-  error: z.nullable(z.record(z.any())).optional(),
-  costUsd: z.nullable(z.number()).optional(),
-  inputTokens: z.nullable(z.number().int()).optional(),
-  outputTokens: z.nullable(z.number().int()).optional(),
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  reasoningTokens: z.nullable(z.number().int()).optional(),
-  phaseTimings: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    sampleIndex: "sample_index",
-    outputText: "output_text",
-    costUsd: "cost_usd",
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    reasoningTokens: "reasoning_tokens",
-    phaseTimings: "phase_timings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string(),
+    sampleIndex: z.number().int(),
+    status: AppendAgentTrialsRequestStatus$outboundSchema.default("completed"),
+    prompt: z.string().default(""),
+    target: z.nullable(z.string()).optional(),
+    outputText: z.nullable(z.string()).optional(),
+    scores: z.record(z.number()).optional(),
+    error: z.nullable(z.record(z.any())).optional(),
+    costUsd: z.nullable(z.number()).optional(),
+    inputTokens: z.nullable(z.number().int()).optional(),
+    outputTokens: z.nullable(z.number().int()).optional(),
+    cachedTokens: z.nullable(z.number().int()).optional(),
+    reasoningTokens: z.nullable(z.number().int()).optional(),
+    phaseTimings: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      sampleIndex: "sample_index",
+      outputText: "output_text",
+      costUsd: "cost_usd",
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      reasoningTokens: "reasoning_tokens",
+      phaseTimings: "phase_timings",
+    });
+  })
+);
 
 export function appendAgentTrialsRequestTrialsToJSON(
   appendAgentTrialsRequestTrials: AppendAgentTrialsRequestTrials,
@@ -196,11 +202,13 @@ export const AppendAgentTrialsRequest$inboundSchema: z.ZodType<
   AppendAgentTrialsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  trials: z.array(z.lazy(() => AppendAgentTrialsRequestTrials$inboundSchema))
-    .optional(),
-  finalize: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trials: z.array(z.lazy(() => AppendAgentTrialsRequestTrials$inboundSchema))
+      .optional(),
+    finalize: z.boolean().default(false),
+  })
+);
 /** @internal */
 export type AppendAgentTrialsRequest$Outbound = {
   trials?: Array<AppendAgentTrialsRequestTrials$Outbound> | undefined;
@@ -212,11 +220,13 @@ export const AppendAgentTrialsRequest$outboundSchema: z.ZodType<
   AppendAgentTrialsRequest$Outbound,
   z.ZodTypeDef,
   AppendAgentTrialsRequest
-> = z.object({
-  trials: z.array(z.lazy(() => AppendAgentTrialsRequestTrials$outboundSchema))
-    .optional(),
-  finalize: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    trials: z.array(z.lazy(() => AppendAgentTrialsRequestTrials$outboundSchema))
+      .optional(),
+    finalize: z.boolean().default(false),
+  })
+);
 
 export function appendAgentTrialsRequestToJSON(
   appendAgentTrialsRequest: AppendAgentTrialsRequest,

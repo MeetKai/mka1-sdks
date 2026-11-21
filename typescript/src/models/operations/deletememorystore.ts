@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteMemoryStoreRequest$inboundSchema: z.ZodType<
   DeleteMemoryStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory_store_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_id": "memoryStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory_store_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_store_id": "memoryStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteMemoryStoreRequest$Outbound = {
   memory_store_id: string;
@@ -41,15 +43,17 @@ export const DeleteMemoryStoreRequest$outboundSchema: z.ZodType<
   DeleteMemoryStoreRequest$Outbound,
   z.ZodTypeDef,
   DeleteMemoryStoreRequest
-> = z.object({
-  memoryStoreId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreId: "memory_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryStoreId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreId: "memory_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteMemoryStoreRequestToJSON(
   deleteMemoryStoreRequest: DeleteMemoryStoreRequest,

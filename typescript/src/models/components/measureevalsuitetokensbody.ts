@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const MeasureEvalSuiteTokensBody$inboundSchema: z.ZodType<
   MeasureEvalSuiteTokensBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int().default(5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(5),
+  })
+);
 /** @internal */
 export type MeasureEvalSuiteTokensBody$Outbound = {
   limit: number;
@@ -32,9 +34,11 @@ export const MeasureEvalSuiteTokensBody$outboundSchema: z.ZodType<
   MeasureEvalSuiteTokensBody$Outbound,
   z.ZodTypeDef,
   MeasureEvalSuiteTokensBody
-> = z.object({
-  limit: z.number().int().default(5),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(5),
+  })
+);
 
 export function measureEvalSuiteTokensBodyToJSON(
   measureEvalSuiteTokensBody: MeasureEvalSuiteTokensBody,

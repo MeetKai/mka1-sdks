@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,20 +35,22 @@ export const CreateGeneration$inboundSchema: z.ZodType<
   CreateGeneration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  generator_id: z.string(),
-  params: z.record(z.any()),
-  output: OutputSpec$inboundSchema,
-  inputs: z.record(z.string()).optional(),
-  limits: z.nullable(LimitsRequest$inboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
-  derived_from: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "generator_id": "generatorId",
-    "derived_from": "derivedFrom",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generator_id: z.string(),
+    params: z.record(z.any()),
+    output: OutputSpec$inboundSchema,
+    inputs: z.record(z.string()).optional(),
+    limits: z.nullable(LimitsRequest$inboundSchema).optional(),
+    name: z.nullable(z.string()).optional(),
+    derived_from: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "generator_id": "generatorId",
+      "derived_from": "derivedFrom",
+    });
+  })
+);
 /** @internal */
 export type CreateGeneration$Outbound = {
   generator_id: string;
@@ -65,20 +67,22 @@ export const CreateGeneration$outboundSchema: z.ZodType<
   CreateGeneration$Outbound,
   z.ZodTypeDef,
   CreateGeneration
-> = z.object({
-  generatorId: z.string(),
-  params: z.record(z.any()),
-  output: OutputSpec$outboundSchema,
-  inputs: z.record(z.string()).optional(),
-  limits: z.nullable(LimitsRequest$outboundSchema).optional(),
-  name: z.nullable(z.string()).optional(),
-  derivedFrom: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    generatorId: "generator_id",
-    derivedFrom: "derived_from",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    generatorId: z.string(),
+    params: z.record(z.any()),
+    output: OutputSpec$outboundSchema,
+    inputs: z.record(z.string()).optional(),
+    limits: z.nullable(LimitsRequest$outboundSchema).optional(),
+    name: z.nullable(z.string()).optional(),
+    derivedFrom: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      generatorId: "generator_id",
+      derivedFrom: "derived_from",
+    });
+  })
+);
 
 export function createGenerationToJSON(
   createGeneration: CreateGeneration,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,7 @@ export type AgentRunWake = {
 /** @internal */
 export const AgentRunWakeObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunWakeObject
-> = z.nativeEnum(AgentRunWakeObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentRunWakeObject));
 /** @internal */
 export const AgentRunWakeObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunWakeObject
@@ -35,18 +35,20 @@ export const AgentRunWake$inboundSchema: z.ZodType<
   AgentRunWake,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentRunWakeObject$inboundSchema,
-  run_id: z.string(),
-  gateway_response_id: z.string(),
-  gateway_wake: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "gateway_response_id": "gatewayResponseId",
-    "gateway_wake": "gatewayWake",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunWakeObject$inboundSchema,
+    run_id: z.string(),
+    gateway_response_id: z.string(),
+    gateway_wake: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "gateway_response_id": "gatewayResponseId",
+      "gateway_wake": "gatewayWake",
+    });
+  })
+);
 /** @internal */
 export type AgentRunWake$Outbound = {
   object: string;
@@ -60,18 +62,20 @@ export const AgentRunWake$outboundSchema: z.ZodType<
   AgentRunWake$Outbound,
   z.ZodTypeDef,
   AgentRunWake
-> = z.object({
-  object: AgentRunWakeObject$outboundSchema,
-  runId: z.string(),
-  gatewayResponseId: z.string(),
-  gatewayWake: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    gatewayResponseId: "gateway_response_id",
-    gatewayWake: "gateway_wake",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunWakeObject$outboundSchema,
+    runId: z.string(),
+    gatewayResponseId: z.string(),
+    gatewayWake: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      gatewayResponseId: "gateway_response_id",
+      gatewayWake: "gateway_wake",
+    });
+  })
+);
 
 export function agentRunWakeToJSON(agentRunWake: AgentRunWake): string {
   return JSON.stringify(AgentRunWake$outboundSchema.parse(agentRunWake));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,17 +26,19 @@ export const SandboxUsageBucket$inboundSchema: z.ZodType<
   SandboxUsageBucket,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("bucket").default("bucket"),
-  start_time: z.number().int(),
-  end_time: z.number().int(),
-  results: z.array(SandboxUsageResult$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("bucket").default("bucket"),
+    start_time: z.number().int(),
+    end_time: z.number().int(),
+    results: z.array(SandboxUsageResult$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+    });
+  })
+);
 /** @internal */
 export type SandboxUsageBucket$Outbound = {
   object: "bucket";
@@ -50,17 +52,19 @@ export const SandboxUsageBucket$outboundSchema: z.ZodType<
   SandboxUsageBucket$Outbound,
   z.ZodTypeDef,
   SandboxUsageBucket
-> = z.object({
-  object: z.literal("bucket").default("bucket" as const),
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  results: z.array(SandboxUsageResult$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("bucket").default("bucket" as const),
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    results: z.array(SandboxUsageResult$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+    });
+  })
+);
 
 export function sandboxUsageBucketToJSON(
   sandboxUsageBucket: SandboxUsageBucket,

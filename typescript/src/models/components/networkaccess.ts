@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -35,7 +36,7 @@ export type NetworkAccess = ClosedEnum<typeof NetworkAccess>;
 /** @internal */
 export const NetworkAccess$inboundSchema: z.ZodNativeEnum<
   typeof NetworkAccess
-> = z.nativeEnum(NetworkAccess);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(NetworkAccess));
 /** @internal */
 export const NetworkAccess$outboundSchema: z.ZodNativeEnum<
   typeof NetworkAccess

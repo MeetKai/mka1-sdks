@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type CreateServiceAccountTooManyRequestsError struct {
 var _ error = &CreateServiceAccountTooManyRequestsError{}
 
 func (e *CreateServiceAccountTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type CreateServiceAccountGoneError struct {
 var _ error = &CreateServiceAccountGoneError{}
 
 func (e *CreateServiceAccountGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type CreateServiceAccountConflictError struct {
 var _ error = &CreateServiceAccountConflictError{}
 
 func (e *CreateServiceAccountConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type CreateServiceAccountNotFoundError struct {
 var _ error = &CreateServiceAccountNotFoundError{}
 
 func (e *CreateServiceAccountNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type CreateServiceAccountForbiddenError struct {
 var _ error = &CreateServiceAccountForbiddenError{}
 
 func (e *CreateServiceAccountForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type CreateServiceAccountUnauthorizedError struct {
 var _ error = &CreateServiceAccountUnauthorizedError{}
 
 func (e *CreateServiceAccountUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type CreateServiceAccountBadRequestError struct {
 var _ error = &CreateServiceAccountBadRequestError{}
 
 func (e *CreateServiceAccountBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

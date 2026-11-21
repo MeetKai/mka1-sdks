@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,10 +49,12 @@ export const ModifyVectorStoreRequestExpiresAfter$inboundSchema: z.ZodType<
   ModifyVectorStoreRequestExpiresAfter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 /** @internal */
 export type ModifyVectorStoreRequestExpiresAfter$Outbound = {
   anchor: "last_active_at";
@@ -64,10 +66,12 @@ export const ModifyVectorStoreRequestExpiresAfter$outboundSchema: z.ZodType<
   ModifyVectorStoreRequestExpiresAfter$Outbound,
   z.ZodTypeDef,
   ModifyVectorStoreRequestExpiresAfter
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 
 export function modifyVectorStoreRequestExpiresAfterToJSON(
   modifyVectorStoreRequestExpiresAfter: ModifyVectorStoreRequestExpiresAfter,
@@ -94,18 +98,20 @@ export const ModifyVectorStoreRequest$inboundSchema: z.ZodType<
   ModifyVectorStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  expires_after: z.nullable(
-    z.lazy(() => ModifyVectorStoreRequestExpiresAfter$inboundSchema),
-  ).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_after": "expiresAfter",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    expires_after: z.nullable(
+      z.lazy(() => ModifyVectorStoreRequestExpiresAfter$inboundSchema),
+    ).optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_after": "expiresAfter",
+    });
+  })
+);
 /** @internal */
 export type ModifyVectorStoreRequest$Outbound = {
   name?: string | null | undefined;
@@ -122,18 +128,20 @@ export const ModifyVectorStoreRequest$outboundSchema: z.ZodType<
   ModifyVectorStoreRequest$Outbound,
   z.ZodTypeDef,
   ModifyVectorStoreRequest
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  expiresAfter: z.nullable(
-    z.lazy(() => ModifyVectorStoreRequestExpiresAfter$outboundSchema),
-  ).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAfter: "expires_after",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    expiresAfter: z.nullable(
+      z.lazy(() => ModifyVectorStoreRequestExpiresAfter$outboundSchema),
+    ).optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expiresAfter: "expires_after",
+    });
+  })
+);
 
 export function modifyVectorStoreRequestToJSON(
   modifyVectorStoreRequest: ModifyVectorStoreRequest,

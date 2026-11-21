@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,7 +42,9 @@ export const CompactResponseRequestInput$inboundSchema: z.ZodType<
   CompactResponseRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(Item$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$inboundSchema)])
+);
 /** @internal */
 export type CompactResponseRequestInput$Outbound =
   | string
@@ -53,7 +55,9 @@ export const CompactResponseRequestInput$outboundSchema: z.ZodType<
   CompactResponseRequestInput$Outbound,
   z.ZodTypeDef,
   CompactResponseRequestInput
-> = z.union([z.string(), z.array(Item$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$outboundSchema)])
+);
 
 export function compactResponseRequestInputToJSON(
   compactResponseRequestInput: CompactResponseRequestInput,
@@ -79,15 +83,17 @@ export const CompactResponseRequest$inboundSchema: z.ZodType<
   CompactResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
-  previous_response_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "previous_response_id": "previousResponseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
+    previous_response_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "previous_response_id": "previousResponseId",
+    });
+  })
+);
 /** @internal */
 export type CompactResponseRequest$Outbound = {
   model: string;
@@ -100,15 +106,17 @@ export const CompactResponseRequest$outboundSchema: z.ZodType<
   CompactResponseRequest$Outbound,
   z.ZodTypeDef,
   CompactResponseRequest
-> = z.object({
-  model: z.string(),
-  input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
-  previousResponseId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previousResponseId: "previous_response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
+    previousResponseId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previousResponseId: "previous_response_id",
+    });
+  })
+);
 
 export function compactResponseRequestToJSON(
   compactResponseRequest: CompactResponseRequest,

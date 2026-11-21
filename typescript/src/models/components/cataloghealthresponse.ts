@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,17 +36,19 @@ export const CatalogHealthResponse$inboundSchema: z.ZodType<
   CatalogHealthResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: CatalogHealthStatus$inboundSchema,
-  is_available: z.boolean(),
-  error: z.string().optional(),
-  checked_at: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "is_available": "isAvailable",
-    "checked_at": "checkedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogHealthStatus$inboundSchema,
+    is_available: z.boolean(),
+    error: z.string().optional(),
+    checked_at: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "is_available": "isAvailable",
+      "checked_at": "checkedAt",
+    });
+  })
+);
 /** @internal */
 export type CatalogHealthResponse$Outbound = {
   status: string;
@@ -60,17 +62,19 @@ export const CatalogHealthResponse$outboundSchema: z.ZodType<
   CatalogHealthResponse$Outbound,
   z.ZodTypeDef,
   CatalogHealthResponse
-> = z.object({
-  status: CatalogHealthStatus$outboundSchema,
-  isAvailable: z.boolean(),
-  error: z.string().optional(),
-  checkedAt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    isAvailable: "is_available",
-    checkedAt: "checked_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogHealthStatus$outboundSchema,
+    isAvailable: z.boolean(),
+    error: z.string().optional(),
+    checkedAt: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      isAvailable: "is_available",
+      checkedAt: "checked_at",
+    });
+  })
+);
 
 export function catalogHealthResponseToJSON(
   catalogHealthResponse: CatalogHealthResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,9 @@ export type ComputeScalingReplicas = {
 /** @internal */
 export const ComputeScalingReplicasDecision$inboundSchema: z.ZodNativeEnum<
   typeof ComputeScalingReplicasDecision
-> = z.nativeEnum(ComputeScalingReplicasDecision);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ComputeScalingReplicasDecision)
+);
 /** @internal */
 export const ComputeScalingReplicasDecision$outboundSchema: z.ZodNativeEnum<
   typeof ComputeScalingReplicasDecision
@@ -44,23 +46,27 @@ export const ComputeScalingReplicas$inboundSchema: z.ZodType<
   ComputeScalingReplicas,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allocated: z.number().int(),
-  applied: z.number().int(),
-  applied_generation: z.number().int(),
-  decision: ComputeScalingReplicasDecision$inboundSchema,
-  desired: z.number().int(),
-  desired_generation: z.number().int(),
-  draining: z.number().int(),
-  ready: z.number().int(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "applied_generation": "appliedGeneration",
-    "desired_generation": "desiredGeneration",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allocated: z.number().int(),
+    applied: z.number().int(),
+    applied_generation: z.number().int(),
+    decision: ComputeScalingReplicasDecision$inboundSchema,
+    desired: z.number().int(),
+    desired_generation: z.number().int(),
+    draining: z.number().int(),
+    ready: z.number().int(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "applied_generation": "appliedGeneration",
+      "desired_generation": "desiredGeneration",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeScalingReplicas$Outbound = {
   allocated: number;
@@ -79,23 +85,25 @@ export const ComputeScalingReplicas$outboundSchema: z.ZodType<
   ComputeScalingReplicas$Outbound,
   z.ZodTypeDef,
   ComputeScalingReplicas
-> = z.object({
-  allocated: z.number().int(),
-  applied: z.number().int(),
-  appliedGeneration: z.number().int(),
-  decision: ComputeScalingReplicasDecision$outboundSchema,
-  desired: z.number().int(),
-  desiredGeneration: z.number().int(),
-  draining: z.number().int(),
-  ready: z.number().int(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    appliedGeneration: "applied_generation",
-    desiredGeneration: "desired_generation",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allocated: z.number().int(),
+    applied: z.number().int(),
+    appliedGeneration: z.number().int(),
+    decision: ComputeScalingReplicasDecision$outboundSchema,
+    desired: z.number().int(),
+    desiredGeneration: z.number().int(),
+    draining: z.number().int(),
+    ready: z.number().int(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      appliedGeneration: "applied_generation",
+      desiredGeneration: "desired_generation",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function computeScalingReplicasToJSON(
   computeScalingReplicas: ComputeScalingReplicas,

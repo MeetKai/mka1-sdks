@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,17 +32,19 @@ export const GitHubPushRequest$inboundSchema: z.ZodType<
   GitHubPushRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignment_generation: z.number().int(),
-  branch: z.string(),
-  checkout_path: z.string().default(""),
-  force: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "assignment_generation": "assignmentGeneration",
-    "checkout_path": "checkoutPath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignment_generation: z.number().int(),
+    branch: z.string(),
+    checkout_path: z.string().default(""),
+    force: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "assignment_generation": "assignmentGeneration",
+      "checkout_path": "checkoutPath",
+    });
+  })
+);
 /** @internal */
 export type GitHubPushRequest$Outbound = {
   assignment_generation: number;
@@ -56,17 +58,19 @@ export const GitHubPushRequest$outboundSchema: z.ZodType<
   GitHubPushRequest$Outbound,
   z.ZodTypeDef,
   GitHubPushRequest
-> = z.object({
-  assignmentGeneration: z.number().int(),
-  branch: z.string(),
-  checkoutPath: z.string().default(""),
-  force: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    assignmentGeneration: "assignment_generation",
-    checkoutPath: "checkout_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignmentGeneration: z.number().int(),
+    branch: z.string(),
+    checkoutPath: z.string().default(""),
+    force: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      assignmentGeneration: "assignment_generation",
+      checkoutPath: "checkout_path",
+    });
+  })
+);
 
 export function gitHubPushRequestToJSON(
   gitHubPushRequest: GitHubPushRequest,

@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,12 @@ type UpdateOrganizationInternalServerError struct {
 var _ error = &UpdateOrganizationInternalServerError{}
 
 func (e *UpdateOrganizationInternalServerError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +37,12 @@ type UpdateOrganizationTooManyRequestsError struct {
 var _ error = &UpdateOrganizationTooManyRequestsError{}
 
 func (e *UpdateOrganizationTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,12 @@ type UpdateOrganizationRequestEntityTooLargeError struct {
 var _ error = &UpdateOrganizationRequestEntityTooLargeError{}
 
 func (e *UpdateOrganizationRequestEntityTooLargeError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +75,12 @@ type UpdateOrganizationGoneError struct {
 var _ error = &UpdateOrganizationGoneError{}
 
 func (e *UpdateOrganizationGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,12 @@ type UpdateOrganizationConflictError struct {
 var _ error = &UpdateOrganizationConflictError{}
 
 func (e *UpdateOrganizationConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +113,12 @@ type UpdateOrganizationNotFoundError struct {
 var _ error = &UpdateOrganizationNotFoundError{}
 
 func (e *UpdateOrganizationNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -96,6 +133,15 @@ type UpdateOrganizationForbiddenError struct {
 var _ error = &UpdateOrganizationForbiddenError{}
 
 func (e *UpdateOrganizationForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -109,6 +155,12 @@ type UpdateOrganizationUnauthorizedError struct {
 var _ error = &UpdateOrganizationUnauthorizedError{}
 
 func (e *UpdateOrganizationUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -123,6 +175,12 @@ type UpdateOrganizationBadRequestError struct {
 var _ error = &UpdateOrganizationBadRequestError{}
 
 func (e *UpdateOrganizationBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

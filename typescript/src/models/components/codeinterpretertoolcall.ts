@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,7 +41,9 @@ export type CodeInterpreterToolCall = {
 /** @internal */
 export const CodeInterpreterToolCallStatus$inboundSchema: z.ZodNativeEnum<
   typeof CodeInterpreterToolCallStatus
-> = z.nativeEnum(CodeInterpreterToolCallStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CodeInterpreterToolCallStatus)
+);
 /** @internal */
 export const CodeInterpreterToolCallStatus$outboundSchema: z.ZodNativeEnum<
   typeof CodeInterpreterToolCallStatus
@@ -52,18 +54,20 @@ export const CodeInterpreterToolCall$inboundSchema: z.ZodType<
   CodeInterpreterToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("code_interpreter_call"),
-  id: z.string(),
-  code: z.nullable(z.string()),
-  container_id: z.string(),
-  outputs: z.nullable(z.array(CodeInterpreterOutput$inboundSchema)),
-  status: CodeInterpreterToolCallStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter_call"),
+    id: z.string(),
+    code: z.nullable(z.string()),
+    container_id: z.string(),
+    outputs: z.nullable(z.array(CodeInterpreterOutput$inboundSchema)),
+    status: CodeInterpreterToolCallStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+    });
+  })
+);
 /** @internal */
 export type CodeInterpreterToolCall$Outbound = {
   type: "code_interpreter_call";
@@ -79,18 +83,20 @@ export const CodeInterpreterToolCall$outboundSchema: z.ZodType<
   CodeInterpreterToolCall$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolCall
-> = z.object({
-  type: z.literal("code_interpreter_call"),
-  id: z.string(),
-  code: z.nullable(z.string()),
-  containerId: z.string(),
-  outputs: z.nullable(z.array(CodeInterpreterOutput$outboundSchema)),
-  status: CodeInterpreterToolCallStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter_call"),
+    id: z.string(),
+    code: z.nullable(z.string()),
+    containerId: z.string(),
+    outputs: z.nullable(z.array(CodeInterpreterOutput$outboundSchema)),
+    status: CodeInterpreterToolCallStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+    });
+  })
+);
 
 export function codeInterpreterToolCallToJSON(
   codeInterpreterToolCall: CodeInterpreterToolCall,

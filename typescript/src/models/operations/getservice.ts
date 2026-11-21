@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,14 +26,16 @@ export const GetServiceRequest$inboundSchema: z.ZodType<
   GetServiceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetServiceRequest$Outbound = {
   id: string;
@@ -45,14 +47,16 @@ export const GetServiceRequest$outboundSchema: z.ZodType<
   GetServiceRequest$Outbound,
   z.ZodTypeDef,
   GetServiceRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getServiceRequestToJSON(
   getServiceRequest: GetServiceRequest,
@@ -76,10 +80,12 @@ export const GetServiceResponse$inboundSchema: z.ZodType<
   GetServiceResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeService$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type GetServiceResponse$Outbound =
   | components.ComputeService$Outbound
@@ -90,10 +96,12 @@ export const GetServiceResponse$outboundSchema: z.ZodType<
   GetServiceResponse$Outbound,
   z.ZodTypeDef,
   GetServiceResponse
-> = z.union([
-  components.ComputeService$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function getServiceResponseToJSON(
   getServiceResponse: GetServiceResponse,

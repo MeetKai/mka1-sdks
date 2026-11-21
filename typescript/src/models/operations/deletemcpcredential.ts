@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteMcpCredentialRequest$inboundSchema: z.ZodType<
   DeleteMcpCredentialRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  credential_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "credential_id": "credentialId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credential_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "credential_id": "credentialId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteMcpCredentialRequest$Outbound = {
   credential_id: string;
@@ -41,15 +43,17 @@ export const DeleteMcpCredentialRequest$outboundSchema: z.ZodType<
   DeleteMcpCredentialRequest$Outbound,
   z.ZodTypeDef,
   DeleteMcpCredentialRequest
-> = z.object({
-  credentialId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    credentialId: "credential_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    credentialId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      credentialId: "credential_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteMcpCredentialRequestToJSON(
   deleteMcpCredentialRequest: DeleteMcpCredentialRequest,

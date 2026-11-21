@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,12 +29,14 @@ export const CreateSupportCaseRequest$inboundSchema: z.ZodType<
   CreateSupportCaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  subject: z.string(),
-  description: z.string(),
-  severity: SupportCaseSeverity$inboundSchema.optional(),
-  component: z.nullable(StatusComponentId$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subject: z.string(),
+    description: z.string(),
+    severity: SupportCaseSeverity$inboundSchema.optional(),
+    component: z.nullable(StatusComponentId$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateSupportCaseRequest$Outbound = {
   subject: string;
@@ -48,12 +50,14 @@ export const CreateSupportCaseRequest$outboundSchema: z.ZodType<
   CreateSupportCaseRequest$Outbound,
   z.ZodTypeDef,
   CreateSupportCaseRequest
-> = z.object({
-  subject: z.string(),
-  description: z.string(),
-  severity: SupportCaseSeverity$outboundSchema.optional(),
-  component: z.nullable(StatusComponentId$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    subject: z.string(),
+    description: z.string(),
+    severity: SupportCaseSeverity$outboundSchema.optional(),
+    component: z.nullable(StatusComponentId$outboundSchema).optional(),
+  })
+);
 
 export function createSupportCaseRequestToJSON(
   createSupportCaseRequest: CreateSupportCaseRequest,

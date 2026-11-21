@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,15 +38,17 @@ export const DeleteOpenApiToolSetRequest$inboundSchema: z.ZodType<
   DeleteOpenApiToolSetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_set_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_set_id": "toolSetId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_set_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_set_id": "toolSetId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteOpenApiToolSetRequest$Outbound = {
   tool_set_id: string;
@@ -58,15 +60,17 @@ export const DeleteOpenApiToolSetRequest$outboundSchema: z.ZodType<
   DeleteOpenApiToolSetRequest$Outbound,
   z.ZodTypeDef,
   DeleteOpenApiToolSetRequest
-> = z.object({
-  toolSetId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolSetId: "tool_set_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolSetId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolSetId: "tool_set_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteOpenApiToolSetRequestToJSON(
   deleteOpenApiToolSetRequest: DeleteOpenApiToolSetRequest,
@@ -90,7 +94,7 @@ export function deleteOpenApiToolSetRequestFromJSON(
 /** @internal */
 export const DeleteOpenApiToolSetObject$inboundSchema: z.ZodNativeEnum<
   typeof DeleteOpenApiToolSetObject
-> = z.nativeEnum(DeleteOpenApiToolSetObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteOpenApiToolSetObject));
 /** @internal */
 export const DeleteOpenApiToolSetObject$outboundSchema: z.ZodNativeEnum<
   typeof DeleteOpenApiToolSetObject
@@ -101,11 +105,13 @@ export const DeleteOpenApiToolSetResponseBody$inboundSchema: z.ZodType<
   DeleteOpenApiToolSetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: DeleteOpenApiToolSetObject$inboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteOpenApiToolSetObject$inboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteOpenApiToolSetResponseBody$Outbound = {
   object: string;
@@ -118,11 +124,13 @@ export const DeleteOpenApiToolSetResponseBody$outboundSchema: z.ZodType<
   DeleteOpenApiToolSetResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteOpenApiToolSetResponseBody
-> = z.object({
-  object: DeleteOpenApiToolSetObject$outboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteOpenApiToolSetObject$outboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteOpenApiToolSetResponseBodyToJSON(
   deleteOpenApiToolSetResponseBody: DeleteOpenApiToolSetResponseBody,

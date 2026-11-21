@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,17 +26,19 @@ export const ResponseOutputItemDoneEvent$inboundSchema: z.ZodType<
   ResponseOutputItemDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.output_item.done"),
-  sequence_number: z.number().int(),
-  output_index: z.number().int(),
-  item: Item$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_item.done"),
+    sequence_number: z.number().int(),
+    output_index: z.number().int(),
+    item: Item$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseOutputItemDoneEvent$Outbound = {
   type: "response.output_item.done";
@@ -50,17 +52,19 @@ export const ResponseOutputItemDoneEvent$outboundSchema: z.ZodType<
   ResponseOutputItemDoneEvent$Outbound,
   z.ZodTypeDef,
   ResponseOutputItemDoneEvent
-> = z.object({
-  type: z.literal("response.output_item.done"),
-  sequenceNumber: z.number().int(),
-  outputIndex: z.number().int(),
-  item: Item$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_item.done"),
+    sequenceNumber: z.number().int(),
+    outputIndex: z.number().int(),
+    item: Item$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseOutputItemDoneEventToJSON(
   responseOutputItemDoneEvent: ResponseOutputItemDoneEvent,

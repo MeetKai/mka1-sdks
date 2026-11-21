@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,44 +52,50 @@ export const ComputeStandaloneVolume$inboundSchema: z.ZodType<
   ComputeStandaloneVolume,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accrued_cost_usd: z.number(),
-  attachment_count: z.number().int(),
-  cleanup_failure: z.nullable(ComputeReason$inboundSchema),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  current_storage_price_usd_hr: z.number(),
-  data: z.array(ComputeVolumeData$inboundSchema),
-  deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  failure: z.nullable(ComputeReason$inboundSchema),
-  id: z.string(),
-  name: z.string(),
-  provisioned_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  status: ComputeStandaloneVolumeState$inboundSchema,
-  storage_rate_usd_per_gib_hour: z.number(),
-  stored_bytes: z.number().int(),
-  stored_bytes_observed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "accrued_cost_usd": "accruedCostUsd",
-    "attachment_count": "attachmentCount",
-    "cleanup_failure": "cleanupFailure",
-    "created_at": "createdAt",
-    "current_storage_price_usd_hr": "currentStoragePriceUsdHr",
-    "deleted_at": "deletedAt",
-    "provisioned_at": "provisionedAt",
-    "storage_rate_usd_per_gib_hour": "storageRateUsdPerGibHour",
-    "stored_bytes": "storedBytes",
-    "stored_bytes_observed_at": "storedBytesObservedAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accrued_cost_usd: z.number(),
+    attachment_count: z.number().int(),
+    cleanup_failure: z.nullable(ComputeReason$inboundSchema),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    current_storage_price_usd_hr: z.number(),
+    data: z.array(ComputeVolumeData$inboundSchema),
+    deleted_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    failure: z.nullable(ComputeReason$inboundSchema),
+    id: z.string(),
+    name: z.string(),
+    provisioned_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    status: ComputeStandaloneVolumeState$inboundSchema,
+    storage_rate_usd_per_gib_hour: z.number(),
+    stored_bytes: z.number().int(),
+    stored_bytes_observed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "accrued_cost_usd": "accruedCostUsd",
+      "attachment_count": "attachmentCount",
+      "cleanup_failure": "cleanupFailure",
+      "created_at": "createdAt",
+      "current_storage_price_usd_hr": "currentStoragePriceUsdHr",
+      "deleted_at": "deletedAt",
+      "provisioned_at": "provisionedAt",
+      "storage_rate_usd_per_gib_hour": "storageRateUsdPerGibHour",
+      "stored_bytes": "storedBytes",
+      "stored_bytes_observed_at": "storedBytesObservedAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeStandaloneVolume$Outbound = {
   accrued_cost_usd: number;
@@ -115,38 +121,40 @@ export const ComputeStandaloneVolume$outboundSchema: z.ZodType<
   ComputeStandaloneVolume$Outbound,
   z.ZodTypeDef,
   ComputeStandaloneVolume
-> = z.object({
-  accruedCostUsd: z.number(),
-  attachmentCount: z.number().int(),
-  cleanupFailure: z.nullable(ComputeReason$outboundSchema),
-  createdAt: z.date().transform(v => v.toISOString()),
-  currentStoragePriceUsdHr: z.number(),
-  data: z.array(ComputeVolumeData$outboundSchema),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  failure: z.nullable(ComputeReason$outboundSchema),
-  id: z.string(),
-  name: z.string(),
-  provisionedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  status: ComputeStandaloneVolumeState$outboundSchema,
-  storageRateUsdPerGibHour: z.number(),
-  storedBytes: z.number().int(),
-  storedBytesObservedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    accruedCostUsd: "accrued_cost_usd",
-    attachmentCount: "attachment_count",
-    cleanupFailure: "cleanup_failure",
-    createdAt: "created_at",
-    currentStoragePriceUsdHr: "current_storage_price_usd_hr",
-    deletedAt: "deleted_at",
-    provisionedAt: "provisioned_at",
-    storageRateUsdPerGibHour: "storage_rate_usd_per_gib_hour",
-    storedBytes: "stored_bytes",
-    storedBytesObservedAt: "stored_bytes_observed_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accruedCostUsd: z.number(),
+    attachmentCount: z.number().int(),
+    cleanupFailure: z.nullable(ComputeReason$outboundSchema),
+    createdAt: z.date().transform(v => v.toISOString()),
+    currentStoragePriceUsdHr: z.number(),
+    data: z.array(ComputeVolumeData$outboundSchema),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    failure: z.nullable(ComputeReason$outboundSchema),
+    id: z.string(),
+    name: z.string(),
+    provisionedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    status: ComputeStandaloneVolumeState$outboundSchema,
+    storageRateUsdPerGibHour: z.number(),
+    storedBytes: z.number().int(),
+    storedBytesObservedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      accruedCostUsd: "accrued_cost_usd",
+      attachmentCount: "attachment_count",
+      cleanupFailure: "cleanup_failure",
+      createdAt: "created_at",
+      currentStoragePriceUsdHr: "current_storage_price_usd_hr",
+      deletedAt: "deleted_at",
+      provisionedAt: "provisioned_at",
+      storageRateUsdPerGibHour: "storage_rate_usd_per_gib_hour",
+      storedBytes: "stored_bytes",
+      storedBytesObservedAt: "stored_bytes_observed_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function computeStandaloneVolumeToJSON(
   computeStandaloneVolume: ComputeStandaloneVolume,

@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type RemoveOrgMemberTooManyRequestsError struct {
 var _ error = &RemoveOrgMemberTooManyRequestsError{}
 
 func (e *RemoveOrgMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type RemoveOrgMemberGoneError struct {
 var _ error = &RemoveOrgMemberGoneError{}
 
 func (e *RemoveOrgMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type RemoveOrgMemberConflictError struct {
 var _ error = &RemoveOrgMemberConflictError{}
 
 func (e *RemoveOrgMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type RemoveOrgMemberNotFoundError struct {
 var _ error = &RemoveOrgMemberNotFoundError{}
 
 func (e *RemoveOrgMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type RemoveOrgMemberForbiddenError struct {
 var _ error = &RemoveOrgMemberForbiddenError{}
 
 func (e *RemoveOrgMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type RemoveOrgMemberUnauthorizedError struct {
 var _ error = &RemoveOrgMemberUnauthorizedError{}
 
 func (e *RemoveOrgMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type RemoveOrgMemberBadRequestError struct {
 var _ error = &RemoveOrgMemberBadRequestError{}
 
 func (e *RemoveOrgMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

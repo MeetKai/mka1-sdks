@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,15 +27,17 @@ export const OutputWindow$inboundSchema: z.ZodType<
   OutputWindow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_chars: z.number().int().optional(),
-  max_ms: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_chars": "maxChars",
-    "max_ms": "maxMs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_chars: z.number().int().optional(),
+    max_ms: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_chars": "maxChars",
+      "max_ms": "maxMs",
+    });
+  })
+);
 /** @internal */
 export type OutputWindow$Outbound = {
   max_chars?: number | undefined;
@@ -47,15 +49,17 @@ export const OutputWindow$outboundSchema: z.ZodType<
   OutputWindow$Outbound,
   z.ZodTypeDef,
   OutputWindow
-> = z.object({
-  maxChars: z.number().int().optional(),
-  maxMs: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxChars: "max_chars",
-    maxMs: "max_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxChars: z.number().int().optional(),
+    maxMs: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxChars: "max_chars",
+      maxMs: "max_ms",
+    });
+  })
+);
 
 export function outputWindowToJSON(outputWindow: OutputWindow): string {
   return JSON.stringify(OutputWindow$outboundSchema.parse(outputWindow));

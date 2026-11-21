@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const SetConnectorToolsRequest$inboundSchema: z.ZodType<
   SetConnectorToolsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_allowlist: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_allowlist": "toolAllowlist",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_allowlist: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_allowlist": "toolAllowlist",
+    });
+  })
+);
 /** @internal */
 export type SetConnectorToolsRequest$Outbound = {
   tool_allowlist: Array<string> | null;
@@ -34,13 +36,15 @@ export const SetConnectorToolsRequest$outboundSchema: z.ZodType<
   SetConnectorToolsRequest$Outbound,
   z.ZodTypeDef,
   SetConnectorToolsRequest
-> = z.object({
-  toolAllowlist: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    toolAllowlist: "tool_allowlist",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolAllowlist: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      toolAllowlist: "tool_allowlist",
+    });
+  })
+);
 
 export function setConnectorToolsRequestToJSON(
   setConnectorToolsRequest: SetConnectorToolsRequest,

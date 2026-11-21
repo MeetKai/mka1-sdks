@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,23 +26,25 @@ export const EvalSampleTrajectoryUploadedObject$inboundSchema: z.ZodType<
   EvalSampleTrajectoryUploadedObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.sample.trajectory.uploaded"),
-  run_id: z.string(),
-  sample_index: z.number().int(),
-  task_id: z.string(),
-  model: z.string(),
-  step_count: z.number().int(),
-  size_bytes: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-    "step_count": "stepCount",
-    "size_bytes": "sizeBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.trajectory.uploaded"),
+    run_id: z.string(),
+    sample_index: z.number().int(),
+    task_id: z.string(),
+    model: z.string(),
+    step_count: z.number().int(),
+    size_bytes: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+      "step_count": "stepCount",
+      "size_bytes": "sizeBytes",
+    });
+  })
+);
 /** @internal */
 export type EvalSampleTrajectoryUploadedObject$Outbound = {
   object: "eval.sample.trajectory.uploaded";
@@ -59,23 +61,25 @@ export const EvalSampleTrajectoryUploadedObject$outboundSchema: z.ZodType<
   EvalSampleTrajectoryUploadedObject$Outbound,
   z.ZodTypeDef,
   EvalSampleTrajectoryUploadedObject
-> = z.object({
-  object: z.literal("eval.sample.trajectory.uploaded"),
-  runId: z.string(),
-  sampleIndex: z.number().int(),
-  taskId: z.string(),
-  model: z.string(),
-  stepCount: z.number().int(),
-  sizeBytes: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-    stepCount: "step_count",
-    sizeBytes: "size_bytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.trajectory.uploaded"),
+    runId: z.string(),
+    sampleIndex: z.number().int(),
+    taskId: z.string(),
+    model: z.string(),
+    stepCount: z.number().int(),
+    sizeBytes: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+      stepCount: "step_count",
+      sizeBytes: "size_bytes",
+    });
+  })
+);
 
 export function evalSampleTrajectoryUploadedObjectToJSON(
   evalSampleTrajectoryUploadedObject: EvalSampleTrajectoryUploadedObject,

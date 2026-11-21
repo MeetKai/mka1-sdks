@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,20 @@ export const SessionRepositoryPush$inboundSchema: z.ZodType<
   SessionRepositoryPush,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  branch: z.string(),
-  head_sha: z.string(),
-  pushed_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "head_sha": "headSha",
-    "pushed_at": "pushedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    branch: z.string(),
+    head_sha: z.string(),
+    pushed_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "head_sha": "headSha",
+      "pushed_at": "pushedAt",
+    });
+  })
+);
 /** @internal */
 export type SessionRepositoryPush$Outbound = {
   branch: string;
@@ -41,16 +45,18 @@ export const SessionRepositoryPush$outboundSchema: z.ZodType<
   SessionRepositoryPush$Outbound,
   z.ZodTypeDef,
   SessionRepositoryPush
-> = z.object({
-  branch: z.string(),
-  headSha: z.string(),
-  pushedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    headSha: "head_sha",
-    pushedAt: "pushed_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    branch: z.string(),
+    headSha: z.string(),
+    pushedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      headSha: "head_sha",
+      pushedAt: "pushed_at",
+    });
+  })
+);
 
 export function sessionRepositoryPushToJSON(
   sessionRepositoryPush: SessionRepositoryPush,

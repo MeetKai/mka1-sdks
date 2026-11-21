@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,21 +28,23 @@ export const ResponseReasoningSummaryPartAddedEvent$inboundSchema: z.ZodType<
   ResponseReasoningSummaryPartAddedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.reasoning_summary_part.added"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  summary_index: z.number().int(),
-  part: SummaryText$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "summary_index": "summaryIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.reasoning_summary_part.added"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    summary_index: z.number().int(),
+    part: SummaryText$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "summary_index": "summaryIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseReasoningSummaryPartAddedEvent$Outbound = {
   type: "response.reasoning_summary_part.added";
@@ -58,21 +60,23 @@ export const ResponseReasoningSummaryPartAddedEvent$outboundSchema: z.ZodType<
   ResponseReasoningSummaryPartAddedEvent$Outbound,
   z.ZodTypeDef,
   ResponseReasoningSummaryPartAddedEvent
-> = z.object({
-  type: z.literal("response.reasoning_summary_part.added"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  summaryIndex: z.number().int(),
-  part: SummaryText$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    summaryIndex: "summary_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.reasoning_summary_part.added"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    summaryIndex: z.number().int(),
+    part: SummaryText$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      summaryIndex: "summary_index",
+    });
+  })
+);
 
 export function responseReasoningSummaryPartAddedEventToJSON(
   responseReasoningSummaryPartAddedEvent:

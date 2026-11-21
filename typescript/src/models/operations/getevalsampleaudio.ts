@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,20 +24,22 @@ export const GetEvalSampleAudioRequest$inboundSchema: z.ZodType<
   GetEvalSampleAudioRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  sample_index: z.number().int(),
-  model: z.string().optional(),
-  task_id: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    sample_index: z.number().int(),
+    model: z.string().optional(),
+    task_id: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetEvalSampleAudioRequest$Outbound = {
   run_id: string;
@@ -52,20 +54,22 @@ export const GetEvalSampleAudioRequest$outboundSchema: z.ZodType<
   GetEvalSampleAudioRequest$Outbound,
   z.ZodTypeDef,
   GetEvalSampleAudioRequest
-> = z.object({
-  runId: z.string(),
-  sampleIndex: z.number().int(),
-  model: z.string().optional(),
-  taskId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    sampleIndex: z.number().int(),
+    model: z.string().optional(),
+    taskId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getEvalSampleAudioRequestToJSON(
   getEvalSampleAudioRequest: GetEvalSampleAudioRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,19 +24,21 @@ export const WakeAgentRunRequest$inboundSchema: z.ZodType<
   WakeAgentRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  run_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  WakeAgentRunRequest: components.WakeAgentRunRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "run_id": "runId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "WakeAgentRunRequest": "wakeAgentRunRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    run_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    WakeAgentRunRequest: components.WakeAgentRunRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "run_id": "runId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "WakeAgentRunRequest": "wakeAgentRunRequest",
+    });
+  })
+);
 /** @internal */
 export type WakeAgentRunRequest$Outbound = {
   agent_id: string;
@@ -50,19 +52,21 @@ export const WakeAgentRunRequest$outboundSchema: z.ZodType<
   WakeAgentRunRequest$Outbound,
   z.ZodTypeDef,
   WakeAgentRunRequest
-> = z.object({
-  agentId: z.string(),
-  runId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  wakeAgentRunRequest: components.WakeAgentRunRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    runId: "run_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    wakeAgentRunRequest: "WakeAgentRunRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    runId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    wakeAgentRunRequest: components.WakeAgentRunRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      runId: "run_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      wakeAgentRunRequest: "WakeAgentRunRequest",
+    });
+  })
+);
 
 export function wakeAgentRunRequestToJSON(
   wakeAgentRunRequest: WakeAgentRunRequest,

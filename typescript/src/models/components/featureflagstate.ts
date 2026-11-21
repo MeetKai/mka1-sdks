@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,20 +41,24 @@ export const FeatureFlagState$inboundSchema: z.ZodType<
   FeatureFlagState,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  overrides: z.array(FeatureFlagOverride$inboundSchema),
-  rollout_percentage: z.number().int(),
-  rules: z.array(FeatureFlagRule$inboundSchema),
-  value: z.any().optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "rollout_percentage": "rolloutPercentage",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    overrides: z.array(FeatureFlagOverride$inboundSchema),
+    rollout_percentage: z.number().int(),
+    rules: z.array(FeatureFlagRule$inboundSchema),
+    value: z.any().optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "rollout_percentage": "rolloutPercentage",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagState$Outbound = {
   enabled: boolean;
@@ -71,20 +75,22 @@ export const FeatureFlagState$outboundSchema: z.ZodType<
   FeatureFlagState$Outbound,
   z.ZodTypeDef,
   FeatureFlagState
-> = z.object({
-  enabled: z.boolean(),
-  overrides: z.array(FeatureFlagOverride$outboundSchema),
-  rolloutPercentage: z.number().int(),
-  rules: z.array(FeatureFlagRule$outboundSchema),
-  value: z.any().optional(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    rolloutPercentage: "rollout_percentage",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    overrides: z.array(FeatureFlagOverride$outboundSchema),
+    rolloutPercentage: z.number().int(),
+    rules: z.array(FeatureFlagRule$outboundSchema),
+    value: z.any().optional(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      rolloutPercentage: "rollout_percentage",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function featureFlagStateToJSON(
   featureFlagState: FeatureFlagState,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,32 +49,38 @@ export const McpServer$inboundSchema: z.ZodType<
   McpServer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("mcp.server"),
-  name: z.string(),
-  server_label: z.string(),
-  server_url: z.string(),
-  server_description: z.nullable(z.string()),
-  allowed_tools: z.nullable(MCPAllowedTools$inboundSchema),
-  require_approval: MCPRequireApproval$inboundSchema,
-  metadata: z.record(z.any()),
-  shared_with_end_users: z.boolean(),
-  oauth: z.nullable(McpServerOAuthConfig$inboundSchema),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-    "server_url": "serverUrl",
-    "server_description": "serverDescription",
-    "allowed_tools": "allowedTools",
-    "require_approval": "requireApproval",
-    "shared_with_end_users": "sharedWithEndUsers",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("mcp.server"),
+    name: z.string(),
+    server_label: z.string(),
+    server_url: z.string(),
+    server_description: z.nullable(z.string()),
+    allowed_tools: z.nullable(MCPAllowedTools$inboundSchema),
+    require_approval: MCPRequireApproval$inboundSchema,
+    metadata: z.record(z.any()),
+    shared_with_end_users: z.boolean(),
+    oauth: z.nullable(McpServerOAuthConfig$inboundSchema),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+      "server_url": "serverUrl",
+      "server_description": "serverDescription",
+      "allowed_tools": "allowedTools",
+      "require_approval": "requireApproval",
+      "shared_with_end_users": "sharedWithEndUsers",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type McpServer$Outbound = {
   id: string;
@@ -97,32 +103,34 @@ export const McpServer$outboundSchema: z.ZodType<
   McpServer$Outbound,
   z.ZodTypeDef,
   McpServer
-> = z.object({
-  id: z.string(),
-  object: z.literal("mcp.server"),
-  name: z.string(),
-  serverLabel: z.string(),
-  serverUrl: z.string(),
-  serverDescription: z.nullable(z.string()),
-  allowedTools: z.nullable(MCPAllowedTools$outboundSchema),
-  requireApproval: MCPRequireApproval$outboundSchema,
-  metadata: z.record(z.any()),
-  sharedWithEndUsers: z.boolean(),
-  oauth: z.nullable(McpServerOAuthConfig$outboundSchema),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    serverUrl: "server_url",
-    serverDescription: "server_description",
-    allowedTools: "allowed_tools",
-    requireApproval: "require_approval",
-    sharedWithEndUsers: "shared_with_end_users",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("mcp.server"),
+    name: z.string(),
+    serverLabel: z.string(),
+    serverUrl: z.string(),
+    serverDescription: z.nullable(z.string()),
+    allowedTools: z.nullable(MCPAllowedTools$outboundSchema),
+    requireApproval: MCPRequireApproval$outboundSchema,
+    metadata: z.record(z.any()),
+    sharedWithEndUsers: z.boolean(),
+    oauth: z.nullable(McpServerOAuthConfig$outboundSchema),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      serverUrl: "server_url",
+      serverDescription: "server_description",
+      allowedTools: "allowed_tools",
+      requireApproval: "require_approval",
+      sharedWithEndUsers: "shared_with_end_users",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function mcpServerToJSON(mcpServer: McpServer): string {
   return JSON.stringify(McpServer$outboundSchema.parse(mcpServer));

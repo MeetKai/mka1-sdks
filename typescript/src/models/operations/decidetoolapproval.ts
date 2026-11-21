@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const DecideToolApprovalRequest$inboundSchema: z.ZodType<
   DecideToolApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approval_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ToolApprovalDecisionRequest:
-    components.ToolApprovalDecisionRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "approval_id": "approvalId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ToolApprovalDecisionRequest": "toolApprovalDecisionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approval_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ToolApprovalDecisionRequest:
+      components.ToolApprovalDecisionRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_id": "approvalId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ToolApprovalDecisionRequest": "toolApprovalDecisionRequest",
+    });
+  })
+);
 /** @internal */
 export type DecideToolApprovalRequest$Outbound = {
   approval_id: string;
@@ -47,18 +49,20 @@ export const DecideToolApprovalRequest$outboundSchema: z.ZodType<
   DecideToolApprovalRequest$Outbound,
   z.ZodTypeDef,
   DecideToolApprovalRequest
-> = z.object({
-  approvalId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  toolApprovalDecisionRequest:
-    components.ToolApprovalDecisionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    approvalId: "approval_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    toolApprovalDecisionRequest: "ToolApprovalDecisionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvalId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    toolApprovalDecisionRequest:
+      components.ToolApprovalDecisionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      approvalId: "approval_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      toolApprovalDecisionRequest: "ToolApprovalDecisionRequest",
+    });
+  })
+);
 
 export function decideToolApprovalRequestToJSON(
   decideToolApprovalRequest: DecideToolApprovalRequest,

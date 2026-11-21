@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,17 +39,19 @@ export const FileCounts$inboundSchema: z.ZodType<
   FileCounts,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  in_progress: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-  cancelled: z.number().int(),
-  total: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "in_progress": "inProgress",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    in_progress: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+    cancelled: z.number().int(),
+    total: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "in_progress": "inProgress",
+    });
+  })
+);
 /** @internal */
 export type FileCounts$Outbound = {
   in_progress: number;
@@ -64,17 +66,19 @@ export const FileCounts$outboundSchema: z.ZodType<
   FileCounts$Outbound,
   z.ZodTypeDef,
   FileCounts
-> = z.object({
-  inProgress: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-  cancelled: z.number().int(),
-  total: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    inProgress: "in_progress",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inProgress: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+    cancelled: z.number().int(),
+    total: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      inProgress: "in_progress",
+    });
+  })
+);
 
 export function fileCountsToJSON(fileCounts: FileCounts): string {
   return JSON.stringify(FileCounts$outboundSchema.parse(fileCounts));

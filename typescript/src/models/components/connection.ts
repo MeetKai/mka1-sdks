@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,23 +28,27 @@ export const Connection$inboundSchema: z.ZodType<
   Connection,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  github_login: z.string(),
-  github_user_id: z.number().int(),
-  scopes: z.string(),
-  synced_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  token_invalid_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  repositories: z.array(ConnectedRepository$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "github_login": "githubLogin",
-    "github_user_id": "githubUserId",
-    "synced_at": "syncedAt",
-    "token_invalid_at": "tokenInvalidAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    github_login: z.string(),
+    github_user_id: z.number().int(),
+    scopes: z.string(),
+    synced_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    token_invalid_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    repositories: z.array(ConnectedRepository$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "github_login": "githubLogin",
+      "github_user_id": "githubUserId",
+      "synced_at": "syncedAt",
+      "token_invalid_at": "tokenInvalidAt",
+    });
+  })
+);
 /** @internal */
 export type Connection$Outbound = {
   github_login: string;
@@ -60,22 +64,24 @@ export const Connection$outboundSchema: z.ZodType<
   Connection$Outbound,
   z.ZodTypeDef,
   Connection
-> = z.object({
-  githubLogin: z.string(),
-  githubUserId: z.number().int(),
-  scopes: z.string(),
-  syncedAt: z.date().transform(v => v.toISOString()),
-  tokenInvalidAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  repositories: z.array(ConnectedRepository$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    githubLogin: "github_login",
-    githubUserId: "github_user_id",
-    syncedAt: "synced_at",
-    tokenInvalidAt: "token_invalid_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    githubLogin: z.string(),
+    githubUserId: z.number().int(),
+    scopes: z.string(),
+    syncedAt: z.date().transform(v => v.toISOString()),
+    tokenInvalidAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    repositories: z.array(ConnectedRepository$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      githubLogin: "github_login",
+      githubUserId: "github_user_id",
+      syncedAt: "synced_at",
+      tokenInvalidAt: "token_invalid_at",
+    });
+  })
+);
 
 export function connectionToJSON(connection: Connection): string {
   return JSON.stringify(Connection$outboundSchema.parse(connection));

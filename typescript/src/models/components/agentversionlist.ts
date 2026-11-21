@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,7 +31,7 @@ export type AgentVersionList = {
 /** @internal */
 export const AgentVersionListObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentVersionListObject
-> = z.nativeEnum(AgentVersionListObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentVersionListObject));
 /** @internal */
 export const AgentVersionListObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentVersionListObject
@@ -42,19 +42,21 @@ export const AgentVersionList$inboundSchema: z.ZodType<
   AgentVersionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentVersionListObject$inboundSchema,
-  data: z.array(AgentVersion$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentVersionListObject$inboundSchema,
+    data: z.array(AgentVersion$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type AgentVersionList$Outbound = {
   object: string;
@@ -69,19 +71,21 @@ export const AgentVersionList$outboundSchema: z.ZodType<
   AgentVersionList$Outbound,
   z.ZodTypeDef,
   AgentVersionList
-> = z.object({
-  object: AgentVersionListObject$outboundSchema,
-  data: z.array(AgentVersion$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentVersionListObject$outboundSchema,
+    data: z.array(AgentVersion$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function agentVersionListToJSON(
   agentVersionList: AgentVersionList,

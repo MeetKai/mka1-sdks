@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -85,7 +85,7 @@ export type ShellCallOutputWithId = {
 /** @internal */
 export const ShellCallOutputWithIdType$inboundSchema: z.ZodNativeEnum<
   typeof ShellCallOutputWithIdType
-> = z.nativeEnum(ShellCallOutputWithIdType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ShellCallOutputWithIdType));
 /** @internal */
 export const ShellCallOutputWithIdType$outboundSchema: z.ZodNativeEnum<
   typeof ShellCallOutputWithIdType
@@ -96,14 +96,16 @@ export const ShellCallOutputWithIdOutcome$inboundSchema: z.ZodType<
   ShellCallOutputWithIdOutcome,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ShellCallOutputWithIdType$inboundSchema,
-  exit_code: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "exit_code": "exitCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ShellCallOutputWithIdType$inboundSchema,
+    exit_code: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "exit_code": "exitCode",
+    });
+  })
+);
 /** @internal */
 export type ShellCallOutputWithIdOutcome$Outbound = {
   type: string;
@@ -115,14 +117,16 @@ export const ShellCallOutputWithIdOutcome$outboundSchema: z.ZodType<
   ShellCallOutputWithIdOutcome$Outbound,
   z.ZodTypeDef,
   ShellCallOutputWithIdOutcome
-> = z.object({
-  type: ShellCallOutputWithIdType$outboundSchema,
-  exitCode: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    exitCode: "exit_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ShellCallOutputWithIdType$outboundSchema,
+    exitCode: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      exitCode: "exit_code",
+    });
+  })
+);
 
 export function shellCallOutputWithIdOutcomeToJSON(
   shellCallOutputWithIdOutcome: ShellCallOutputWithIdOutcome,
@@ -148,11 +152,13 @@ export const ShellCallOutputWithIdOutput$inboundSchema: z.ZodType<
   ShellCallOutputWithIdOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stdout: z.string(),
-  stderr: z.string(),
-  outcome: z.lazy(() => ShellCallOutputWithIdOutcome$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stdout: z.string(),
+    stderr: z.string(),
+    outcome: z.lazy(() => ShellCallOutputWithIdOutcome$inboundSchema),
+  })
+);
 /** @internal */
 export type ShellCallOutputWithIdOutput$Outbound = {
   stdout: string;
@@ -165,11 +171,13 @@ export const ShellCallOutputWithIdOutput$outboundSchema: z.ZodType<
   ShellCallOutputWithIdOutput$Outbound,
   z.ZodTypeDef,
   ShellCallOutputWithIdOutput
-> = z.object({
-  stdout: z.string(),
-  stderr: z.string(),
-  outcome: z.lazy(() => ShellCallOutputWithIdOutcome$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stdout: z.string(),
+    stderr: z.string(),
+    outcome: z.lazy(() => ShellCallOutputWithIdOutcome$outboundSchema),
+  })
+);
 
 export function shellCallOutputWithIdOutputToJSON(
   shellCallOutputWithIdOutput: ShellCallOutputWithIdOutput,
@@ -195,20 +203,22 @@ export const ShellCallOutputWithId$inboundSchema: z.ZodType<
   ShellCallOutputWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("shell_call_output"),
-  id: z.string(),
-  call_id: z.string(),
-  output: z.lazy(() => ShellCallOutputWithIdOutput$inboundSchema),
-  status: Status$inboundSchema.optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call_output"),
+    id: z.string(),
+    call_id: z.string(),
+    output: z.lazy(() => ShellCallOutputWithIdOutput$inboundSchema),
+    status: Status$inboundSchema.optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ShellCallOutputWithId$Outbound = {
   type: "shell_call_output";
@@ -225,20 +235,22 @@ export const ShellCallOutputWithId$outboundSchema: z.ZodType<
   ShellCallOutputWithId$Outbound,
   z.ZodTypeDef,
   ShellCallOutputWithId
-> = z.object({
-  type: z.literal("shell_call_output"),
-  id: z.string(),
-  callId: z.string(),
-  output: z.lazy(() => ShellCallOutputWithIdOutput$outboundSchema),
-  status: Status$outboundSchema.optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call_output"),
+    id: z.string(),
+    callId: z.string(),
+    output: z.lazy(() => ShellCallOutputWithIdOutput$outboundSchema),
+    status: Status$outboundSchema.optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function shellCallOutputWithIdToJSON(
   shellCallOutputWithId: ShellCallOutputWithId,

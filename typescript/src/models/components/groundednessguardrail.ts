@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,22 +55,24 @@ export const GroundednessGuardrail$inboundSchema: z.ZodType<
   GroundednessGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("groundedness"),
-  enabled: z.boolean().default(true),
-  check_output: z.literal(true),
-  output_timing: z.literal("final").optional(),
-  output_window: OutputWindow$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
-  config: GroundednessConfig$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "output_window": "outputWindow",
-    "input_sources": "inputSources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("groundedness"),
+    enabled: z.boolean().default(true),
+    check_output: z.literal(true),
+    output_timing: z.literal("final").optional(),
+    output_window: OutputWindow$inboundSchema.optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
+    config: GroundednessConfig$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "output_window": "outputWindow",
+      "input_sources": "inputSources",
+    });
+  })
+);
 /** @internal */
 export type GroundednessGuardrail$Outbound = {
   mode: "groundedness";
@@ -87,22 +89,24 @@ export const GroundednessGuardrail$outboundSchema: z.ZodType<
   GroundednessGuardrail$Outbound,
   z.ZodTypeDef,
   GroundednessGuardrail
-> = z.object({
-  mode: z.literal("groundedness"),
-  enabled: z.boolean().default(true),
-  checkOutput: z.literal(true),
-  outputTiming: z.literal("final").optional(),
-  outputWindow: OutputWindow$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
-  config: GroundednessConfig$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    outputWindow: "output_window",
-    inputSources: "input_sources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("groundedness"),
+    enabled: z.boolean().default(true),
+    checkOutput: z.literal(true),
+    outputTiming: z.literal("final").optional(),
+    outputWindow: OutputWindow$outboundSchema.optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
+    config: GroundednessConfig$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      outputWindow: "output_window",
+      inputSources: "input_sources",
+    });
+  })
+);
 
 export function groundednessGuardrailToJSON(
   groundednessGuardrail: GroundednessGuardrail,

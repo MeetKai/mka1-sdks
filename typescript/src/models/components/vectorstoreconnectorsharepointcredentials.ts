@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,17 +25,19 @@ export const VectorStoreConnectorSharePointCredentials$inboundSchema: z.ZodType<
   VectorStoreConnectorSharePointCredentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tenant_id: z.string(),
-  client_id: z.string(),
-  client_secret: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "tenant_id": "tenantId",
-    "client_id": "clientId",
-    "client_secret": "clientSecret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tenant_id: z.string(),
+    client_id: z.string(),
+    client_secret: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tenant_id": "tenantId",
+      "client_id": "clientId",
+      "client_secret": "clientSecret",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorSharePointCredentials$Outbound = {
   tenant_id: string;
@@ -49,17 +51,19 @@ export const VectorStoreConnectorSharePointCredentials$outboundSchema:
     VectorStoreConnectorSharePointCredentials$Outbound,
     z.ZodTypeDef,
     VectorStoreConnectorSharePointCredentials
-  > = z.object({
-    tenantId: z.string(),
-    clientId: z.string(),
-    clientSecret: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      tenantId: "tenant_id",
-      clientId: "client_id",
-      clientSecret: "client_secret",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      tenantId: z.string(),
+      clientId: z.string(),
+      clientSecret: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        tenantId: "tenant_id",
+        clientId: "client_id",
+        clientSecret: "client_secret",
+      });
+    })
+  );
 
 export function vectorStoreConnectorSharePointCredentialsToJSON(
   vectorStoreConnectorSharePointCredentials:

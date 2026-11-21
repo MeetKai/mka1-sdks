@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteSandboxEnvironmentRequest$inboundSchema: z.ZodType<
   DeleteSandboxEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environment_id: z.number().int(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "environment_id": "environmentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment_id: z.number().int(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "environment_id": "environmentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteSandboxEnvironmentRequest$Outbound = {
   environment_id: number;
@@ -41,15 +43,17 @@ export const DeleteSandboxEnvironmentRequest$outboundSchema: z.ZodType<
   DeleteSandboxEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   DeleteSandboxEnvironmentRequest
-> = z.object({
-  environmentId: z.number().int(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    environmentId: "environment_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.number().int(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      environmentId: "environment_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteSandboxEnvironmentRequestToJSON(
   deleteSandboxEnvironmentRequest: DeleteSandboxEnvironmentRequest,

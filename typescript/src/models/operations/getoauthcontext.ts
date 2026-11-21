@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,13 +48,15 @@ export const GetOAuthContextRequest$inboundSchema: z.ZodType<
   GetOAuthContextRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetOAuthContextRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -65,13 +67,15 @@ export const GetOAuthContextRequest$outboundSchema: z.ZodType<
   GetOAuthContextRequest$Outbound,
   z.ZodTypeDef,
   GetOAuthContextRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getOAuthContextRequestToJSON(
   getOAuthContextRequest: GetOAuthContextRequest,
@@ -95,11 +99,13 @@ export const GetOAuthContextUser$inboundSchema: z.ZodType<
   GetOAuthContextUser,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+  })
+);
 /** @internal */
 export type GetOAuthContextUser$Outbound = {
   id: string;
@@ -112,11 +118,13 @@ export const GetOAuthContextUser$outboundSchema: z.ZodType<
   GetOAuthContextUser$Outbound,
   z.ZodTypeDef,
   GetOAuthContextUser
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+  })
+);
 
 export function getOAuthContextUserToJSON(
   getOAuthContextUser: GetOAuthContextUser,
@@ -140,12 +148,14 @@ export const GetOAuthContextOrganization$inboundSchema: z.ZodType<
   GetOAuthContextOrganization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  role: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    role: z.string(),
+  })
+);
 /** @internal */
 export type GetOAuthContextOrganization$Outbound = {
   id: string;
@@ -159,12 +169,14 @@ export const GetOAuthContextOrganization$outboundSchema: z.ZodType<
   GetOAuthContextOrganization$Outbound,
   z.ZodTypeDef,
   GetOAuthContextOrganization
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  slug: z.string(),
-  role: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    slug: z.string(),
+    role: z.string(),
+  })
+);
 
 export function getOAuthContextOrganizationToJSON(
   getOAuthContextOrganization: GetOAuthContextOrganization,
@@ -190,10 +202,12 @@ export const GetOAuthContextTeam$inboundSchema: z.ZodType<
   GetOAuthContextTeam,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type GetOAuthContextTeam$Outbound = {
   id: string;
@@ -205,10 +219,12 @@ export const GetOAuthContextTeam$outboundSchema: z.ZodType<
   GetOAuthContextTeam$Outbound,
   z.ZodTypeDef,
   GetOAuthContextTeam
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+  })
+);
 
 export function getOAuthContextTeamToJSON(
   getOAuthContextTeam: GetOAuthContextTeam,
@@ -232,12 +248,14 @@ export const GetOAuthContextResponseBody$inboundSchema: z.ZodType<
   GetOAuthContextResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user: z.lazy(() => GetOAuthContextUser$inboundSchema),
-  organization: z.lazy(() => GetOAuthContextOrganization$inboundSchema),
-  team: z.lazy(() => GetOAuthContextTeam$inboundSchema),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user: z.lazy(() => GetOAuthContextUser$inboundSchema),
+    organization: z.lazy(() => GetOAuthContextOrganization$inboundSchema),
+    team: z.lazy(() => GetOAuthContextTeam$inboundSchema),
+    scopes: z.array(z.string()),
+  })
+);
 /** @internal */
 export type GetOAuthContextResponseBody$Outbound = {
   user: GetOAuthContextUser$Outbound;
@@ -251,12 +269,14 @@ export const GetOAuthContextResponseBody$outboundSchema: z.ZodType<
   GetOAuthContextResponseBody$Outbound,
   z.ZodTypeDef,
   GetOAuthContextResponseBody
-> = z.object({
-  user: z.lazy(() => GetOAuthContextUser$outboundSchema),
-  organization: z.lazy(() => GetOAuthContextOrganization$outboundSchema),
-  team: z.lazy(() => GetOAuthContextTeam$outboundSchema),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user: z.lazy(() => GetOAuthContextUser$outboundSchema),
+    organization: z.lazy(() => GetOAuthContextOrganization$outboundSchema),
+    team: z.lazy(() => GetOAuthContextTeam$outboundSchema),
+    scopes: z.array(z.string()),
+  })
+);
 
 export function getOAuthContextResponseBodyToJSON(
   getOAuthContextResponseBody: GetOAuthContextResponseBody,

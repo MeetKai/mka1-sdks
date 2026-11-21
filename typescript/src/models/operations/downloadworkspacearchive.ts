@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,19 +24,21 @@ export const DownloadWorkspaceArchiveRequest$inboundSchema: z.ZodType<
   DownloadWorkspaceArchiveRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  WorkspaceArchiveRequest: components.WorkspaceArchiveRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_token": "sessionToken",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "WorkspaceArchiveRequest": "workspaceArchiveRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    WorkspaceArchiveRequest: components.WorkspaceArchiveRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_token": "sessionToken",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "WorkspaceArchiveRequest": "workspaceArchiveRequest",
+    });
+  })
+);
 /** @internal */
 export type DownloadWorkspaceArchiveRequest$Outbound = {
   session_id: string;
@@ -50,19 +52,21 @@ export const DownloadWorkspaceArchiveRequest$outboundSchema: z.ZodType<
   DownloadWorkspaceArchiveRequest$Outbound,
   z.ZodTypeDef,
   DownloadWorkspaceArchiveRequest
-> = z.object({
-  sessionId: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  xOnBehalfOf: z.string().optional(),
-  workspaceArchiveRequest: components.WorkspaceArchiveRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionToken: "session_token",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    workspaceArchiveRequest: "WorkspaceArchiveRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    xOnBehalfOf: z.string().optional(),
+    workspaceArchiveRequest: components.WorkspaceArchiveRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionToken: "session_token",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      workspaceArchiveRequest: "WorkspaceArchiveRequest",
+    });
+  })
+);
 
 export function downloadWorkspaceArchiveRequestToJSON(
   downloadWorkspaceArchiveRequest: DownloadWorkspaceArchiveRequest,

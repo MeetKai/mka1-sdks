@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,7 +27,7 @@ export type HostedToolChoice = {
 /** @internal */
 export const HostedToolChoiceType$inboundSchema: z.ZodNativeEnum<
   typeof HostedToolChoiceType
-> = z.nativeEnum(HostedToolChoiceType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(HostedToolChoiceType));
 /** @internal */
 export const HostedToolChoiceType$outboundSchema: z.ZodNativeEnum<
   typeof HostedToolChoiceType
@@ -38,9 +38,11 @@ export const HostedToolChoice$inboundSchema: z.ZodType<
   HostedToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: HostedToolChoiceType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: HostedToolChoiceType$inboundSchema,
+  })
+);
 /** @internal */
 export type HostedToolChoice$Outbound = {
   type: string;
@@ -51,9 +53,11 @@ export const HostedToolChoice$outboundSchema: z.ZodType<
   HostedToolChoice$Outbound,
   z.ZodTypeDef,
   HostedToolChoice
-> = z.object({
-  type: HostedToolChoiceType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: HostedToolChoiceType$outboundSchema,
+  })
+);
 
 export function hostedToolChoiceToJSON(
   hostedToolChoice: HostedToolChoice,

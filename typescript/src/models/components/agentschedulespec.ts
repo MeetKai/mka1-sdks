@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -40,15 +40,17 @@ export const AgentScheduleSpec3$inboundSchema: z.ZodType<
   AgentScheduleSpec3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("cron"),
-  cron_expression: z.string(),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    "cron_expression": "cronExpression",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cron"),
+    cron_expression: z.string(),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      "cron_expression": "cronExpression",
+    });
+  })
+);
 /** @internal */
 export type AgentScheduleSpec3$Outbound = {
   type: "cron";
@@ -61,15 +63,17 @@ export const AgentScheduleSpec3$outboundSchema: z.ZodType<
   AgentScheduleSpec3$Outbound,
   z.ZodTypeDef,
   AgentScheduleSpec3
-> = z.object({
-  type: z.literal("cron"),
-  cronExpression: z.string(),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    cronExpression: "cron_expression",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cron"),
+    cronExpression: z.string(),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      cronExpression: "cron_expression",
+    });
+  })
+);
 
 export function agentScheduleSpec3ToJSON(
   agentScheduleSpec3: AgentScheduleSpec3,
@@ -93,18 +97,20 @@ export const AgentScheduleSpec2$inboundSchema: z.ZodType<
   AgentScheduleSpec2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("interval"),
-  interval_seconds: z.number().int(),
-  start_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    "interval_seconds": "intervalSeconds",
-    "start_at": "startAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("interval"),
+    interval_seconds: z.number().int(),
+    start_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      "interval_seconds": "intervalSeconds",
+      "start_at": "startAt",
+    });
+  })
+);
 /** @internal */
 export type AgentScheduleSpec2$Outbound = {
   type: "interval";
@@ -118,17 +124,19 @@ export const AgentScheduleSpec2$outboundSchema: z.ZodType<
   AgentScheduleSpec2$Outbound,
   z.ZodTypeDef,
   AgentScheduleSpec2
-> = z.object({
-  type: z.literal("interval"),
-  intervalSeconds: z.number().int(),
-  startAt: z.date().transform(v => v.toISOString()).optional(),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    intervalSeconds: "interval_seconds",
-    startAt: "start_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("interval"),
+    intervalSeconds: z.number().int(),
+    startAt: z.date().transform(v => v.toISOString()).optional(),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      intervalSeconds: "interval_seconds",
+      startAt: "start_at",
+    });
+  })
+);
 
 export function agentScheduleSpec2ToJSON(
   agentScheduleSpec2: AgentScheduleSpec2,
@@ -152,15 +160,17 @@ export const AgentScheduleSpec1$inboundSchema: z.ZodType<
   AgentScheduleSpec1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("once"),
-  run_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    "run_at": "runAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("once"),
+    run_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_at": "runAt",
+    });
+  })
+);
 /** @internal */
 export type AgentScheduleSpec1$Outbound = {
   type: "once";
@@ -173,15 +183,17 @@ export const AgentScheduleSpec1$outboundSchema: z.ZodType<
   AgentScheduleSpec1$Outbound,
   z.ZodTypeDef,
   AgentScheduleSpec1
-> = z.object({
-  type: z.literal("once"),
-  runAt: z.date().transform(v => v.toISOString()),
-  timezone: z.string().default("UTC"),
-}).transform((v) => {
-  return remap$(v, {
-    runAt: "run_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("once"),
+    runAt: z.date().transform(v => v.toISOString()),
+    timezone: z.string().default("UTC"),
+  }).transform((v) => {
+    return remap$(v, {
+      runAt: "run_at",
+    });
+  })
+);
 
 export function agentScheduleSpec1ToJSON(
   agentScheduleSpec1: AgentScheduleSpec1,
@@ -205,11 +217,13 @@ export const AgentScheduleSpec$inboundSchema: z.ZodType<
   AgentScheduleSpec,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  once: z.lazy(() => AgentScheduleSpec1$inboundSchema),
-  interval: z.lazy(() => AgentScheduleSpec2$inboundSchema),
-  cron: z.lazy(() => AgentScheduleSpec3$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    once: z.lazy(() => AgentScheduleSpec1$inboundSchema),
+    interval: z.lazy(() => AgentScheduleSpec2$inboundSchema),
+    cron: z.lazy(() => AgentScheduleSpec3$inboundSchema),
+  })
+);
 /** @internal */
 export type AgentScheduleSpec$Outbound =
   | AgentScheduleSpec1$Outbound
@@ -221,11 +235,13 @@ export const AgentScheduleSpec$outboundSchema: z.ZodType<
   AgentScheduleSpec$Outbound,
   z.ZodTypeDef,
   AgentScheduleSpec
-> = z.union([
-  z.lazy(() => AgentScheduleSpec1$outboundSchema),
-  z.lazy(() => AgentScheduleSpec2$outboundSchema),
-  z.lazy(() => AgentScheduleSpec3$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => AgentScheduleSpec1$outboundSchema),
+    z.lazy(() => AgentScheduleSpec2$outboundSchema),
+    z.lazy(() => AgentScheduleSpec3$outboundSchema),
+  ])
+);
 
 export function agentScheduleSpecToJSON(
   agentScheduleSpec: AgentScheduleSpec,

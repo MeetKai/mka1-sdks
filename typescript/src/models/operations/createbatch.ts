@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateBatchRequest$inboundSchema: z.ZodType<
   CreateBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateBatchRequest: components.CreateBatchRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateBatchRequest": "createBatchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateBatchRequest: components.CreateBatchRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateBatchRequest": "createBatchRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateBatchRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateBatchRequest$outboundSchema: z.ZodType<
   CreateBatchRequest$Outbound,
   z.ZodTypeDef,
   CreateBatchRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createBatchRequest: components.CreateBatchRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createBatchRequest: "CreateBatchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createBatchRequest: components.CreateBatchRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createBatchRequest: "CreateBatchRequest",
+    });
+  })
+);
 
 export function createBatchRequestToJSON(
   createBatchRequest: CreateBatchRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -33,17 +33,19 @@ export const CompactedResponse$inboundSchema: z.ZodType<
   CompactedResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  created_at: z.number().int(),
-  object: z.literal("response.compaction"),
-  output: z.array(Item$inboundSchema),
-  usage: Usage$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    created_at: z.number().int(),
+    object: z.literal("response.compaction"),
+    output: z.array(Item$inboundSchema),
+    usage: Usage$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type CompactedResponse$Outbound = {
   id: string;
@@ -58,17 +60,19 @@ export const CompactedResponse$outboundSchema: z.ZodType<
   CompactedResponse$Outbound,
   z.ZodTypeDef,
   CompactedResponse
-> = z.object({
-  id: z.string(),
-  createdAt: z.number().int(),
-  object: z.literal("response.compaction"),
-  output: z.array(Item$outboundSchema),
-  usage: Usage$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    createdAt: z.number().int(),
+    object: z.literal("response.compaction"),
+    output: z.array(Item$outboundSchema),
+    usage: Usage$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function compactedResponseToJSON(
   compactedResponse: CompactedResponse,

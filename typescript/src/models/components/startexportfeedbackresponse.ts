@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -99,7 +99,9 @@ export type StartExportFeedbackResponse = {
 /** @internal */
 export const StartExportFeedbackResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof StartExportFeedbackResponseStatus
-> = z.nativeEnum(StartExportFeedbackResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StartExportFeedbackResponseStatus)
+);
 /** @internal */
 export const StartExportFeedbackResponseStatus$outboundSchema: z.ZodNativeEnum<
   typeof StartExportFeedbackResponseStatus
@@ -108,7 +110,9 @@ export const StartExportFeedbackResponseStatus$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const StartExportFeedbackResponseStage$inboundSchema: z.ZodNativeEnum<
   typeof StartExportFeedbackResponseStage
-> = z.nativeEnum(StartExportFeedbackResponseStage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(StartExportFeedbackResponseStage)
+);
 /** @internal */
 export const StartExportFeedbackResponseStage$outboundSchema: z.ZodNativeEnum<
   typeof StartExportFeedbackResponseStage
@@ -119,21 +123,23 @@ export const Progress$inboundSchema: z.ZodType<
   Progress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stage: StartExportFeedbackResponseStage$inboundSchema,
-  record_count: z.number().int().optional(),
-  completion_count: z.number().int().optional(),
-  response_count: z.number().int().optional(),
-  parquet_bytes: z.number().int().optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "record_count": "recordCount",
-    "completion_count": "completionCount",
-    "response_count": "responseCount",
-    "parquet_bytes": "parquetBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: StartExportFeedbackResponseStage$inboundSchema,
+    record_count: z.number().int().optional(),
+    completion_count: z.number().int().optional(),
+    response_count: z.number().int().optional(),
+    parquet_bytes: z.number().int().optional(),
+    message: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "record_count": "recordCount",
+      "completion_count": "completionCount",
+      "response_count": "responseCount",
+      "parquet_bytes": "parquetBytes",
+    });
+  })
+);
 /** @internal */
 export type Progress$Outbound = {
   stage: string;
@@ -149,21 +155,23 @@ export const Progress$outboundSchema: z.ZodType<
   Progress$Outbound,
   z.ZodTypeDef,
   Progress
-> = z.object({
-  stage: StartExportFeedbackResponseStage$outboundSchema,
-  recordCount: z.number().int().optional(),
-  completionCount: z.number().int().optional(),
-  responseCount: z.number().int().optional(),
-  parquetBytes: z.number().int().optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    recordCount: "record_count",
-    completionCount: "completion_count",
-    responseCount: "response_count",
-    parquetBytes: "parquet_bytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: StartExportFeedbackResponseStage$outboundSchema,
+    recordCount: z.number().int().optional(),
+    completionCount: z.number().int().optional(),
+    responseCount: z.number().int().optional(),
+    parquetBytes: z.number().int().optional(),
+    message: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      recordCount: "record_count",
+      completionCount: "completion_count",
+      responseCount: "response_count",
+      parquetBytes: "parquet_bytes",
+    });
+  })
+);
 
 export function progressToJSON(progress: Progress): string {
   return JSON.stringify(Progress$outboundSchema.parse(progress));
@@ -183,11 +191,13 @@ export const StartExportFeedbackResponse$inboundSchema: z.ZodType<
   StartExportFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  started: z.boolean(),
-  status: StartExportFeedbackResponseStatus$inboundSchema,
-  progress: z.lazy(() => Progress$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    started: z.boolean(),
+    status: StartExportFeedbackResponseStatus$inboundSchema,
+    progress: z.lazy(() => Progress$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type StartExportFeedbackResponse$Outbound = {
   started: boolean;
@@ -200,11 +210,13 @@ export const StartExportFeedbackResponse$outboundSchema: z.ZodType<
   StartExportFeedbackResponse$Outbound,
   z.ZodTypeDef,
   StartExportFeedbackResponse
-> = z.object({
-  started: z.boolean(),
-  status: StartExportFeedbackResponseStatus$outboundSchema,
-  progress: z.lazy(() => Progress$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    started: z.boolean(),
+    status: StartExportFeedbackResponseStatus$outboundSchema,
+    progress: z.lazy(() => Progress$outboundSchema).optional(),
+  })
+);
 
 export function startExportFeedbackResponseToJSON(
   startExportFeedbackResponse: StartExportFeedbackResponse,

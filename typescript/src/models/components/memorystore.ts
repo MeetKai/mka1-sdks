@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,24 +31,26 @@ export const MemoryStore$inboundSchema: z.ZodType<
   MemoryStore,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("memory_store"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  instructions: z.nullable(z.string()),
-  visibility: MemoryStoreVisibility$inboundSchema,
-  metadata: z.record(z.string()).optional(),
-  created_at: z.number(),
-  updated_at: z.number(),
-  deleted_at: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "deleted_at": "deletedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("memory_store"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    instructions: z.nullable(z.string()),
+    visibility: MemoryStoreVisibility$inboundSchema,
+    metadata: z.record(z.string()).optional(),
+    created_at: z.number(),
+    updated_at: z.number(),
+    deleted_at: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "deleted_at": "deletedAt",
+    });
+  })
+);
 /** @internal */
 export type MemoryStore$Outbound = {
   id: string;
@@ -68,24 +70,26 @@ export const MemoryStore$outboundSchema: z.ZodType<
   MemoryStore$Outbound,
   z.ZodTypeDef,
   MemoryStore
-> = z.object({
-  id: z.string(),
-  object: z.literal("memory_store"),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  instructions: z.nullable(z.string()),
-  visibility: MemoryStoreVisibility$outboundSchema,
-  metadata: z.record(z.string()).optional(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-  deletedAt: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    deletedAt: "deleted_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("memory_store"),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    instructions: z.nullable(z.string()),
+    visibility: MemoryStoreVisibility$outboundSchema,
+    metadata: z.record(z.string()).optional(),
+    createdAt: z.number(),
+    updatedAt: z.number(),
+    deletedAt: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      deletedAt: "deleted_at",
+    });
+  })
+);
 
 export function memoryStoreToJSON(memoryStore: MemoryStore): string {
   return JSON.stringify(MemoryStore$outboundSchema.parse(memoryStore));

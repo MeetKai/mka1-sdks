@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateFilePermissionRequest$inboundSchema: z.ZodType<
   CreateFilePermissionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateResourcePermissionRequest:
-    components.CreateResourcePermissionRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateResourcePermissionRequest": "createResourcePermissionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateResourcePermissionRequest:
+      components.CreateResourcePermissionRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateResourcePermissionRequest": "createResourcePermissionRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateFilePermissionRequest$Outbound = {
   file_id: string;
@@ -48,18 +50,20 @@ export const CreateFilePermissionRequest$outboundSchema: z.ZodType<
   CreateFilePermissionRequest$Outbound,
   z.ZodTypeDef,
   CreateFilePermissionRequest
-> = z.object({
-  fileId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createResourcePermissionRequest:
-    components.CreateResourcePermissionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createResourcePermissionRequest: "CreateResourcePermissionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createResourcePermissionRequest:
+      components.CreateResourcePermissionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createResourcePermissionRequest: "CreateResourcePermissionRequest",
+    });
+  })
+);
 
 export function createFilePermissionRequestToJSON(
   createFilePermissionRequest: CreateFilePermissionRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -48,15 +48,17 @@ export const ListServiceAccountApiKeysRequest$inboundSchema: z.ZodType<
   ListServiceAccountApiKeysRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListServiceAccountApiKeysRequest$Outbound = {
   orgId: string;
@@ -69,15 +71,17 @@ export const ListServiceAccountApiKeysRequest$outboundSchema: z.ZodType<
   ListServiceAccountApiKeysRequest$Outbound,
   z.ZodTypeDef,
   ListServiceAccountApiKeysRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listServiceAccountApiKeysRequestToJSON(
   listServiceAccountApiKeysRequest: ListServiceAccountApiKeysRequest,
@@ -101,7 +105,9 @@ export function listServiceAccountApiKeysRequestFromJSON(
 /** @internal */
 export const ListServiceAccountApiKeysUserType$inboundSchema: z.ZodNativeEnum<
   typeof ListServiceAccountApiKeysUserType
-> = z.nativeEnum(ListServiceAccountApiKeysUserType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListServiceAccountApiKeysUserType)
+);
 /** @internal */
 export const ListServiceAccountApiKeysUserType$outboundSchema: z.ZodNativeEnum<
   typeof ListServiceAccountApiKeysUserType
@@ -112,22 +118,24 @@ export const ListServiceAccountApiKeysResponseBody$inboundSchema: z.ZodType<
   ListServiceAccountApiKeysResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: ListServiceAccountApiKeysUserType$inboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.nullable(z.string()).optional(),
+    key: z.string().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    start: z.nullable(z.string()).optional(),
+    userId: z.string(),
+    userType: ListServiceAccountApiKeysUserType$inboundSchema,
+    orgId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    scopes: z.array(z.string()),
+    rateLimitEnabled: z.nullable(z.boolean()).optional(),
+    rateLimitTimeWindow: z.nullable(z.number()).optional(),
+    rateLimitMax: z.nullable(z.number()).optional(),
+    expiresAt: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ListServiceAccountApiKeysResponseBody$Outbound = {
   id: string;
@@ -151,22 +159,24 @@ export const ListServiceAccountApiKeysResponseBody$outboundSchema: z.ZodType<
   ListServiceAccountApiKeysResponseBody$Outbound,
   z.ZodTypeDef,
   ListServiceAccountApiKeysResponseBody
-> = z.object({
-  id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: ListServiceAccountApiKeysUserType$outboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.nullable(z.string()).optional(),
+    key: z.string().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    start: z.nullable(z.string()).optional(),
+    userId: z.string(),
+    userType: ListServiceAccountApiKeysUserType$outboundSchema,
+    orgId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    scopes: z.array(z.string()),
+    rateLimitEnabled: z.nullable(z.boolean()).optional(),
+    rateLimitTimeWindow: z.nullable(z.number()).optional(),
+    rateLimitMax: z.nullable(z.number()).optional(),
+    expiresAt: z.nullable(z.string()).optional(),
+  })
+);
 
 export function listServiceAccountApiKeysResponseBodyToJSON(
   listServiceAccountApiKeysResponseBody: ListServiceAccountApiKeysResponseBody,

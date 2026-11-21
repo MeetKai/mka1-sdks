@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,13 +29,15 @@ export const LinkVectorStoreConnectorRequestBody$inboundSchema: z.ZodType<
   LinkVectorStoreConnectorRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+    });
+  })
+);
 /** @internal */
 export type LinkVectorStoreConnectorRequestBody$Outbound = {
   vector_store_id: string;
@@ -46,13 +48,15 @@ export const LinkVectorStoreConnectorRequestBody$outboundSchema: z.ZodType<
   LinkVectorStoreConnectorRequestBody$Outbound,
   z.ZodTypeDef,
   LinkVectorStoreConnectorRequestBody
-> = z.object({
-  vectorStoreId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+    });
+  })
+);
 
 export function linkVectorStoreConnectorRequestBodyToJSON(
   linkVectorStoreConnectorRequestBody: LinkVectorStoreConnectorRequestBody,
@@ -79,17 +83,21 @@ export const LinkVectorStoreConnectorRequest$inboundSchema: z.ZodType<
   LinkVectorStoreConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => LinkVectorStoreConnectorRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      LinkVectorStoreConnectorRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type LinkVectorStoreConnectorRequest$Outbound = {
   connector_id: string;
@@ -102,17 +110,21 @@ export const LinkVectorStoreConnectorRequest$outboundSchema: z.ZodType<
   LinkVectorStoreConnectorRequest$Outbound,
   z.ZodTypeDef,
   LinkVectorStoreConnectorRequest
-> = z.object({
-  connectorId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => LinkVectorStoreConnectorRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      LinkVectorStoreConnectorRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function linkVectorStoreConnectorRequestToJSON(
   linkVectorStoreConnectorRequest: LinkVectorStoreConnectorRequest,

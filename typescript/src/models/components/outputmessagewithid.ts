@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -104,12 +104,16 @@ export const OutputMessageWithIdContent$inboundSchema: z.ZodType<
   OutputMessageWithIdContent,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  output_text: OutputText$inboundSchema.and(
-    z.object({ type: z.literal("output_text") }),
-  ),
-  refusal: Refusal$inboundSchema.and(z.object({ type: z.literal("refusal") })),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    output_text: OutputText$inboundSchema.and(
+      z.object({ type: z.literal("output_text") }),
+    ),
+    refusal: Refusal$inboundSchema.and(
+      z.object({ type: z.literal("refusal") }),
+    ),
+  })
+);
 /** @internal */
 export type OutputMessageWithIdContent$Outbound =
   | (OutputText$Outbound & { type: "output_text" })
@@ -120,10 +124,12 @@ export const OutputMessageWithIdContent$outboundSchema: z.ZodType<
   OutputMessageWithIdContent$Outbound,
   z.ZodTypeDef,
   OutputMessageWithIdContent
-> = z.union([
-  OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
-  Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
+    Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+  ])
+);
 
 export function outputMessageWithIdContentToJSON(
   outputMessageWithIdContent: OutputMessageWithIdContent,
@@ -145,7 +151,7 @@ export function outputMessageWithIdContentFromJSON(
 /** @internal */
 export const OutputMessageWithIdStatus$inboundSchema: z.ZodNativeEnum<
   typeof OutputMessageWithIdStatus
-> = z.nativeEnum(OutputMessageWithIdStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputMessageWithIdStatus));
 /** @internal */
 export const OutputMessageWithIdStatus$outboundSchema: z.ZodNativeEnum<
   typeof OutputMessageWithIdStatus
@@ -154,7 +160,7 @@ export const OutputMessageWithIdStatus$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const OutputMessageWithIdPhase$inboundSchema: z.ZodNativeEnum<
   typeof OutputMessageWithIdPhase
-> = z.nativeEnum(OutputMessageWithIdPhase);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputMessageWithIdPhase));
 /** @internal */
 export const OutputMessageWithIdPhase$outboundSchema: z.ZodNativeEnum<
   typeof OutputMessageWithIdPhase
@@ -165,29 +171,31 @@ export const OutputMessageWithId$inboundSchema: z.ZodType<
   OutputMessageWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("message"),
-  id: z.string(),
-  role: z.literal("assistant"),
-  content: z.array(
-    discriminatedUnion("type", {
-      output_text: OutputText$inboundSchema.and(
-        z.object({ type: z.literal("output_text") }),
-      ),
-      refusal: Refusal$inboundSchema.and(
-        z.object({ type: z.literal("refusal") }),
-      ),
-    }),
-  ),
-  status: OutputMessageWithIdStatus$inboundSchema,
-  phase: OutputMessageWithIdPhase$inboundSchema.optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message"),
+    id: z.string(),
+    role: z.literal("assistant"),
+    content: z.array(
+      discriminatedUnion("type", {
+        output_text: OutputText$inboundSchema.and(
+          z.object({ type: z.literal("output_text") }),
+        ),
+        refusal: Refusal$inboundSchema.and(
+          z.object({ type: z.literal("refusal") }),
+        ),
+      }),
+    ),
+    status: OutputMessageWithIdStatus$inboundSchema,
+    phase: OutputMessageWithIdPhase$inboundSchema.optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type OutputMessageWithId$Outbound = {
   type: "message";
@@ -208,27 +216,29 @@ export const OutputMessageWithId$outboundSchema: z.ZodType<
   OutputMessageWithId$Outbound,
   z.ZodTypeDef,
   OutputMessageWithId
-> = z.object({
-  type: z.literal("message"),
-  id: z.string(),
-  role: z.literal("assistant"),
-  content: z.array(
-    z.union([
-      OutputText$outboundSchema.and(
-        z.object({ type: z.literal("output_text") }),
-      ),
-      Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-    ]),
-  ),
-  status: OutputMessageWithIdStatus$outboundSchema,
-  phase: OutputMessageWithIdPhase$outboundSchema.optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message"),
+    id: z.string(),
+    role: z.literal("assistant"),
+    content: z.array(
+      z.union([
+        OutputText$outboundSchema.and(
+          z.object({ type: z.literal("output_text") }),
+        ),
+        Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+      ]),
+    ),
+    status: OutputMessageWithIdStatus$outboundSchema,
+    phase: OutputMessageWithIdPhase$outboundSchema.optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function outputMessageWithIdToJSON(
   outputMessageWithId: OutputMessageWithId,

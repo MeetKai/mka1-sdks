@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const LivekitTokenRequest$inboundSchema: z.ZodType<
   LivekitTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  LivekitTokenRequest: components.LivekitTokenRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "LivekitTokenRequest": "livekitTokenRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    LivekitTokenRequest: components.LivekitTokenRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "LivekitTokenRequest": "livekitTokenRequest",
+    });
+  })
+);
 /** @internal */
 export type LivekitTokenRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const LivekitTokenRequest$outboundSchema: z.ZodType<
   LivekitTokenRequest$Outbound,
   z.ZodTypeDef,
   LivekitTokenRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  livekitTokenRequest: components.LivekitTokenRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    livekitTokenRequest: "LivekitTokenRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    livekitTokenRequest: components.LivekitTokenRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      livekitTokenRequest: "LivekitTokenRequest",
+    });
+  })
+);
 
 export function livekitTokenRequestToJSON(
   livekitTokenRequest: LivekitTokenRequest,

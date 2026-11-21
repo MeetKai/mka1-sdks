@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,15 +29,17 @@ export const TrackingExperimentsGetRequest$inboundSchema: z.ZodType<
   TrackingExperimentsGetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experiment_id": "experimentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "experiment_id": "experimentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type TrackingExperimentsGetRequest$Outbound = {
   experiment_id: string;
@@ -49,15 +51,17 @@ export const TrackingExperimentsGetRequest$outboundSchema: z.ZodType<
   TrackingExperimentsGetRequest$Outbound,
   z.ZodTypeDef,
   TrackingExperimentsGetRequest
-> = z.object({
-  experimentId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function trackingExperimentsGetRequestToJSON(
   trackingExperimentsGetRequest: TrackingExperimentsGetRequest,
@@ -83,9 +87,11 @@ export const TrackingExperimentsGetResponseBody$inboundSchema: z.ZodType<
   TrackingExperimentsGetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment: components.Experiment$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment: components.Experiment$inboundSchema,
+  })
+);
 /** @internal */
 export type TrackingExperimentsGetResponseBody$Outbound = {
   experiment: components.Experiment$Outbound;
@@ -96,9 +102,11 @@ export const TrackingExperimentsGetResponseBody$outboundSchema: z.ZodType<
   TrackingExperimentsGetResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingExperimentsGetResponseBody
-> = z.object({
-  experiment: components.Experiment$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment: components.Experiment$outboundSchema,
+  })
+);
 
 export function trackingExperimentsGetResponseBodyToJSON(
   trackingExperimentsGetResponseBody: TrackingExperimentsGetResponseBody,

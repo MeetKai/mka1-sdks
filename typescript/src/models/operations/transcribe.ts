@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,15 +53,17 @@ export const TranscribeFile$inboundSchema: z.ZodType<
   TranscribeFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 /** @internal */
 export type TranscribeFile$Outbound = {
   fileName: string;
@@ -73,15 +75,17 @@ export const TranscribeFile$outboundSchema: z.ZodType<
   TranscribeFile$Outbound,
   z.ZodTypeDef,
   TranscribeFile
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function transcribeFileToJSON(transcribeFile: TranscribeFile): string {
   return JSON.stringify(TranscribeFile$outboundSchema.parse(transcribeFile));
@@ -101,9 +105,11 @@ export const TranscribeRequestBody$inboundSchema: z.ZodType<
   TranscribeRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file: z.lazy(() => TranscribeFile$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file: z.lazy(() => TranscribeFile$inboundSchema),
+  })
+);
 /** @internal */
 export type TranscribeRequestBody$Outbound = {
   file: TranscribeFile$Outbound | Blob;
@@ -114,9 +120,11 @@ export const TranscribeRequestBody$outboundSchema: z.ZodType<
   TranscribeRequestBody$Outbound,
   z.ZodTypeDef,
   TranscribeRequestBody
-> = z.object({
-  file: z.lazy(() => TranscribeFile$outboundSchema).or(blobLikeSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file: z.lazy(() => TranscribeFile$outboundSchema).or(blobLikeSchema),
+  })
+);
 
 export function transcribeRequestBodyToJSON(
   transcribeRequestBody: TranscribeRequestBody,
@@ -140,22 +148,24 @@ export const TranscribeRequest$inboundSchema: z.ZodType<
   TranscribeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string().default("auto"),
-  language: z.string().optional(),
-  include_speaker_data: z.boolean().default(false),
-  prompt: z.string().optional(),
-  temperature: z.number().optional(),
-  store: z.boolean().default(false),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TranscribeRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "include_speaker_data": "includeSpeakerData",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().default("auto"),
+    language: z.string().optional(),
+    include_speaker_data: z.boolean().default(false),
+    prompt: z.string().optional(),
+    temperature: z.number().optional(),
+    store: z.boolean().default(false),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TranscribeRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_speaker_data": "includeSpeakerData",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TranscribeRequest$Outbound = {
   model: string;
@@ -173,22 +183,24 @@ export const TranscribeRequest$outboundSchema: z.ZodType<
   TranscribeRequest$Outbound,
   z.ZodTypeDef,
   TranscribeRequest
-> = z.object({
-  model: z.string().default("auto"),
-  language: z.string().optional(),
-  includeSpeakerData: z.boolean().default(false),
-  prompt: z.string().optional(),
-  temperature: z.number().optional(),
-  store: z.boolean().default(false),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TranscribeRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    includeSpeakerData: "include_speaker_data",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().default("auto"),
+    language: z.string().optional(),
+    includeSpeakerData: z.boolean().default(false),
+    prompt: z.string().optional(),
+    temperature: z.number().optional(),
+    store: z.boolean().default(false),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TranscribeRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      includeSpeakerData: "include_speaker_data",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function transcribeRequestToJSON(
   transcribeRequest: TranscribeRequest,

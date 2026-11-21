@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const AutoEndpoint = {
@@ -18,7 +19,7 @@ export type AutoEndpoint = ClosedEnum<typeof AutoEndpoint>;
 
 /** @internal */
 export const AutoEndpoint$inboundSchema: z.ZodNativeEnum<typeof AutoEndpoint> =
-  z.nativeEnum(AutoEndpoint);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AutoEndpoint));
 /** @internal */
 export const AutoEndpoint$outboundSchema: z.ZodNativeEnum<typeof AutoEndpoint> =
   AutoEndpoint$inboundSchema;

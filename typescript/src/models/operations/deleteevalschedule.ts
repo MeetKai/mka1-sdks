@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteEvalScheduleRequest$inboundSchema: z.ZodType<
   DeleteEvalScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schedule_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "schedule_id": "scheduleId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schedule_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schedule_id": "scheduleId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteEvalScheduleRequest$Outbound = {
   schedule_id: string;
@@ -41,15 +43,17 @@ export const DeleteEvalScheduleRequest$outboundSchema: z.ZodType<
   DeleteEvalScheduleRequest$Outbound,
   z.ZodTypeDef,
   DeleteEvalScheduleRequest
-> = z.object({
-  scheduleId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    scheduleId: "schedule_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheduleId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      scheduleId: "schedule_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteEvalScheduleRequestToJSON(
   deleteEvalScheduleRequest: DeleteEvalScheduleRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,15 +22,17 @@ export const MCPToolChoice$inboundSchema: z.ZodType<
   MCPToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp"),
-  server_label: z.string(),
-  name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    server_label: z.string(),
+    name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type MCPToolChoice$Outbound = {
   type: "mcp";
@@ -43,15 +45,17 @@ export const MCPToolChoice$outboundSchema: z.ZodType<
   MCPToolChoice$Outbound,
   z.ZodTypeDef,
   MCPToolChoice
-> = z.object({
-  type: z.literal("mcp"),
-  serverLabel: z.string(),
-  name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    serverLabel: z.string(),
+    name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function mcpToolChoiceToJSON(mcpToolChoice: MCPToolChoice): string {
   return JSON.stringify(MCPToolChoice$outboundSchema.parse(mcpToolChoice));

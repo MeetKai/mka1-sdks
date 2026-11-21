@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,10 +35,12 @@ export const RemoveOrgMemberSecurity$inboundSchema: z.ZodType<
   RemoveOrgMemberSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type RemoveOrgMemberSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -50,10 +52,12 @@ export const RemoveOrgMemberSecurity$outboundSchema: z.ZodType<
   RemoveOrgMemberSecurity$Outbound,
   z.ZodTypeDef,
   RemoveOrgMemberSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function removeOrgMemberSecurityToJSON(
   removeOrgMemberSecurity: RemoveOrgMemberSecurity,
@@ -77,15 +81,17 @@ export const RemoveOrgMemberRequest$inboundSchema: z.ZodType<
   RemoveOrgMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RemoveOrgMemberRequest$Outbound = {
   orgId: string;
@@ -98,15 +104,17 @@ export const RemoveOrgMemberRequest$outboundSchema: z.ZodType<
   RemoveOrgMemberRequest$Outbound,
   z.ZodTypeDef,
   RemoveOrgMemberRequest
-> = z.object({
-  orgId: z.string(),
-  memberId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    memberId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function removeOrgMemberRequestToJSON(
   removeOrgMemberRequest: RemoveOrgMemberRequest,
@@ -130,10 +138,12 @@ export const RemoveOrgMemberResponseBody$inboundSchema: z.ZodType<
   RemoveOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type RemoveOrgMemberResponseBody$Outbound = {
   id: string;
@@ -145,10 +155,12 @@ export const RemoveOrgMemberResponseBody$outboundSchema: z.ZodType<
   RemoveOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   RemoveOrgMemberResponseBody
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function removeOrgMemberResponseBodyToJSON(
   removeOrgMemberResponseBody: RemoveOrgMemberResponseBody,

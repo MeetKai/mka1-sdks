@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,18 +22,20 @@ export const ComputePricing$inboundSchema: z.ZodType<
   ComputePricing,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effective_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  version: z.number().int(),
-  volume_storage_usd_per_gib_hour: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "effective_at": "effectiveAt",
-    "volume_storage_usd_per_gib_hour": "volumeStorageUsdPerGibHour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effective_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    version: z.number().int(),
+    volume_storage_usd_per_gib_hour: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "effective_at": "effectiveAt",
+      "volume_storage_usd_per_gib_hour": "volumeStorageUsdPerGibHour",
+    });
+  })
+);
 /** @internal */
 export type ComputePricing$Outbound = {
   effective_at: string;
@@ -46,16 +48,18 @@ export const ComputePricing$outboundSchema: z.ZodType<
   ComputePricing$Outbound,
   z.ZodTypeDef,
   ComputePricing
-> = z.object({
-  effectiveAt: z.date().transform(v => v.toISOString()),
-  version: z.number().int(),
-  volumeStorageUsdPerGibHour: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    effectiveAt: "effective_at",
-    volumeStorageUsdPerGibHour: "volume_storage_usd_per_gib_hour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effectiveAt: z.date().transform(v => v.toISOString()),
+    version: z.number().int(),
+    volumeStorageUsdPerGibHour: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      effectiveAt: "effective_at",
+      volumeStorageUsdPerGibHour: "volume_storage_usd_per_gib_hour",
+    });
+  })
+);
 
 export function computePricingToJSON(computePricing: ComputePricing): string {
   return JSON.stringify(ComputePricing$outboundSchema.parse(computePricing));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,12 +28,14 @@ export const WebSearchToolCall$inboundSchema: z.ZodType<
   WebSearchToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("web_search_call"),
-  id: z.string(),
-  action: WebSearchAction$inboundSchema,
-  status: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("web_search_call"),
+    id: z.string(),
+    action: WebSearchAction$inboundSchema,
+    status: z.string(),
+  })
+);
 /** @internal */
 export type WebSearchToolCall$Outbound = {
   type: "web_search_call";
@@ -47,12 +49,14 @@ export const WebSearchToolCall$outboundSchema: z.ZodType<
   WebSearchToolCall$Outbound,
   z.ZodTypeDef,
   WebSearchToolCall
-> = z.object({
-  type: z.literal("web_search_call"),
-  id: z.string(),
-  action: WebSearchAction$outboundSchema,
-  status: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("web_search_call"),
+    id: z.string(),
+    action: WebSearchAction$outboundSchema,
+    status: z.string(),
+  })
+);
 
 export function webSearchToolCallToJSON(
   webSearchToolCall: WebSearchToolCall,

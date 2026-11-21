@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,19 +29,21 @@ export const FormatDetail$inboundSchema: z.ZodType<
   FormatDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  trains: z.array(z.string()),
-  row_schema: z.record(z.any()),
-  layout: z.record(z.any()),
-  semantics: z.array(SemanticRule$inboundSchema),
-  converters: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "row_schema": "rowSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    trains: z.array(z.string()),
+    row_schema: z.record(z.any()),
+    layout: z.record(z.any()),
+    semantics: z.array(SemanticRule$inboundSchema),
+    converters: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "row_schema": "rowSchema",
+    });
+  })
+);
 /** @internal */
 export type FormatDetail$Outbound = {
   id: string;
@@ -58,19 +60,21 @@ export const FormatDetail$outboundSchema: z.ZodType<
   FormatDetail$Outbound,
   z.ZodTypeDef,
   FormatDetail
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  trains: z.array(z.string()),
-  rowSchema: z.record(z.any()),
-  layout: z.record(z.any()),
-  semantics: z.array(SemanticRule$outboundSchema),
-  converters: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    rowSchema: "row_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    trains: z.array(z.string()),
+    rowSchema: z.record(z.any()),
+    layout: z.record(z.any()),
+    semantics: z.array(SemanticRule$outboundSchema),
+    converters: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      rowSchema: "row_schema",
+    });
+  })
+);
 
 export function formatDetailToJSON(formatDetail: FormatDetail): string {
   return JSON.stringify(FormatDetail$outboundSchema.parse(formatDetail));

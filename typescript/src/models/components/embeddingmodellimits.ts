@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,17 +31,19 @@ export const EmbeddingModelLimits$inboundSchema: z.ZodType<
   EmbeddingModelLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_batch_size: z.number().int(),
-  max_input_tokens: z.nullable(z.number().int()),
-  max_input_length: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_batch_size": "maxBatchSize",
-    "max_input_tokens": "maxInputTokens",
-    "max_input_length": "maxInputLength",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_batch_size: z.number().int(),
+    max_input_tokens: z.nullable(z.number().int()),
+    max_input_length: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_batch_size": "maxBatchSize",
+      "max_input_tokens": "maxInputTokens",
+      "max_input_length": "maxInputLength",
+    });
+  })
+);
 /** @internal */
 export type EmbeddingModelLimits$Outbound = {
   max_batch_size: number;
@@ -54,17 +56,19 @@ export const EmbeddingModelLimits$outboundSchema: z.ZodType<
   EmbeddingModelLimits$Outbound,
   z.ZodTypeDef,
   EmbeddingModelLimits
-> = z.object({
-  maxBatchSize: z.number().int(),
-  maxInputTokens: z.nullable(z.number().int()),
-  maxInputLength: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    maxBatchSize: "max_batch_size",
-    maxInputTokens: "max_input_tokens",
-    maxInputLength: "max_input_length",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxBatchSize: z.number().int(),
+    maxInputTokens: z.nullable(z.number().int()),
+    maxInputLength: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxBatchSize: "max_batch_size",
+      maxInputTokens: "max_input_tokens",
+      maxInputLength: "max_input_length",
+    });
+  })
+);
 
 export function embeddingModelLimitsToJSON(
   embeddingModelLimits: EmbeddingModelLimits,

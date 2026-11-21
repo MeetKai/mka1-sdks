@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,19 +27,21 @@ export const SkillVersionList$inboundSchema: z.ZodType<
   SkillVersionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list").default("list"),
-  data: z.array(SkillVersion$inboundSchema),
-  first_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-  last_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "has_more": "hasMore",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").default("list"),
+    data: z.array(SkillVersion$inboundSchema),
+    first_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+    last_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "has_more": "hasMore",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type SkillVersionList$Outbound = {
   object: "list";
@@ -54,19 +56,21 @@ export const SkillVersionList$outboundSchema: z.ZodType<
   SkillVersionList$Outbound,
   z.ZodTypeDef,
   SkillVersionList
-> = z.object({
-  object: z.literal("list").default("list" as const),
-  data: z.array(SkillVersion$outboundSchema),
-  firstId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-  lastId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    hasMore: "has_more",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").default("list" as const),
+    data: z.array(SkillVersion$outboundSchema),
+    firstId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+    lastId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      hasMore: "has_more",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function skillVersionListToJSON(
   skillVersionList: SkillVersionList,

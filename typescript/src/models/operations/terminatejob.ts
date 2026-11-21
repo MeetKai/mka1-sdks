@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,14 +26,16 @@ export const TerminateJobRequest$inboundSchema: z.ZodType<
   TerminateJobRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type TerminateJobRequest$Outbound = {
   id: string;
@@ -45,14 +47,16 @@ export const TerminateJobRequest$outboundSchema: z.ZodType<
   TerminateJobRequest$Outbound,
   z.ZodTypeDef,
   TerminateJobRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function terminateJobRequestToJSON(
   terminateJobRequest: TerminateJobRequest,
@@ -76,10 +80,12 @@ export const TerminateJobResponse$inboundSchema: z.ZodType<
   TerminateJobResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeJob$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJob$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type TerminateJobResponse$Outbound =
   | components.ComputeJob$Outbound
@@ -90,10 +96,12 @@ export const TerminateJobResponse$outboundSchema: z.ZodType<
   TerminateJobResponse$Outbound,
   z.ZodTypeDef,
   TerminateJobResponse
-> = z.union([
-  components.ComputeJob$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJob$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function terminateJobResponseToJSON(
   terminateJobResponse: TerminateJobResponse,

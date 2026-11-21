@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -22,7 +23,9 @@ export type ResourcePermissionGranteeType = ClosedEnum<
 /** @internal */
 export const ResourcePermissionGranteeType$inboundSchema: z.ZodNativeEnum<
   typeof ResourcePermissionGranteeType
-> = z.nativeEnum(ResourcePermissionGranteeType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResourcePermissionGranteeType)
+);
 /** @internal */
 export const ResourcePermissionGranteeType$outboundSchema: z.ZodNativeEnum<
   typeof ResourcePermissionGranteeType

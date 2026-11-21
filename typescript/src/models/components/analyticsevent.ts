@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,7 +38,9 @@ export const Properties$inboundSchema: z.ZodType<
   Properties,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type Properties$Outbound = string | number | boolean;
 
@@ -47,7 +49,9 @@ export const Properties$outboundSchema: z.ZodType<
   Properties$Outbound,
   z.ZodTypeDef,
   Properties
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function propertiesToJSON(properties: Properties): string {
   return JSON.stringify(Properties$outboundSchema.parse(properties));
@@ -67,21 +71,25 @@ export const AnalyticsEvent$inboundSchema: z.ZodType<
   AnalyticsEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event_id: z.string(),
-  event_name: z.string(),
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  distinct_id: z.string(),
-  properties: z.record(
-    z.nullable(z.union([z.string(), z.number(), z.boolean()])),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "event_id": "eventId",
-    "event_name": "eventName",
-    "distinct_id": "distinctId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event_id: z.string(),
+    event_name: z.string(),
+    timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    distinct_id: z.string(),
+    properties: z.record(
+      z.nullable(z.union([z.string(), z.number(), z.boolean()])),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "event_id": "eventId",
+      "event_name": "eventName",
+      "distinct_id": "distinctId",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsEvent$Outbound = {
   event_id: string;
@@ -96,21 +104,23 @@ export const AnalyticsEvent$outboundSchema: z.ZodType<
   AnalyticsEvent$Outbound,
   z.ZodTypeDef,
   AnalyticsEvent
-> = z.object({
-  eventId: z.string(),
-  eventName: z.string(),
-  timestamp: z.date().transform(v => v.toISOString()),
-  distinctId: z.string(),
-  properties: z.record(
-    z.nullable(z.union([z.string(), z.number(), z.boolean()])),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    eventId: "event_id",
-    eventName: "event_name",
-    distinctId: "distinct_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    eventId: z.string(),
+    eventName: z.string(),
+    timestamp: z.date().transform(v => v.toISOString()),
+    distinctId: z.string(),
+    properties: z.record(
+      z.nullable(z.union([z.string(), z.number(), z.boolean()])),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      eventId: "event_id",
+      eventName: "event_name",
+      distinctId: "distinct_id",
+    });
+  })
+);
 
 export function analyticsEventToJSON(analyticsEvent: AnalyticsEvent): string {
   return JSON.stringify(AnalyticsEvent$outboundSchema.parse(analyticsEvent));

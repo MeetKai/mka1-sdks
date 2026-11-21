@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -13,13 +13,15 @@ export type Schema0 = string | number | boolean | Array<Schema0 | null> | {
 
 /** @internal */
 export const Schema0$inboundSchema: z.ZodType<Schema0, z.ZodTypeDef, unknown> =
-  z.union([
-    z.string(),
-    z.number(),
-    z.boolean(),
-    z.array(z.nullable(z.lazy(() => Schema0$inboundSchema))),
-    z.record(z.nullable(z.lazy(() => Schema0$inboundSchema))),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      z.string(),
+      z.number(),
+      z.boolean(),
+      z.array(z.nullable(z.lazy(() => Schema0$inboundSchema))),
+      z.record(z.nullable(z.lazy(() => Schema0$inboundSchema))),
+    ])
+  );
 /** @internal */
 export type Schema0$Outbound =
   | string
@@ -33,13 +35,15 @@ export const Schema0$outboundSchema: z.ZodType<
   Schema0$Outbound,
   z.ZodTypeDef,
   Schema0
-> = z.union([
-  z.string(),
-  z.number(),
-  z.boolean(),
-  z.array(z.nullable(z.lazy(() => Schema0$outboundSchema))),
-  z.record(z.nullable(z.lazy(() => Schema0$outboundSchema))),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.array(z.nullable(z.lazy(() => Schema0$outboundSchema))),
+    z.record(z.nullable(z.lazy(() => Schema0$outboundSchema))),
+  ])
+);
 
 export function schema0ToJSON(schema0: Schema0): string {
   return JSON.stringify(Schema0$outboundSchema.parse(schema0));

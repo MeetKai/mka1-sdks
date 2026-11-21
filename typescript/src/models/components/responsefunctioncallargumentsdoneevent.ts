@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,20 +22,22 @@ export const ResponseFunctionCallArgumentsDoneEvent$inboundSchema: z.ZodType<
   ResponseFunctionCallArgumentsDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.function_call_arguments.done"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  name: z.string(),
-  arguments: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.function_call_arguments.done"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    name: z.string(),
+    arguments: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseFunctionCallArgumentsDoneEvent$Outbound = {
   type: "response.function_call_arguments.done";
@@ -51,20 +53,22 @@ export const ResponseFunctionCallArgumentsDoneEvent$outboundSchema: z.ZodType<
   ResponseFunctionCallArgumentsDoneEvent$Outbound,
   z.ZodTypeDef,
   ResponseFunctionCallArgumentsDoneEvent
-> = z.object({
-  type: z.literal("response.function_call_arguments.done"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  name: z.string(),
-  arguments: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.function_call_arguments.done"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    name: z.string(),
+    arguments: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseFunctionCallArgumentsDoneEventToJSON(
   responseFunctionCallArgumentsDoneEvent:

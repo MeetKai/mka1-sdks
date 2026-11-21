@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,23 +23,25 @@ export const GitHubReadCloneResult$inboundSchema: z.ZodType<
   GitHubReadCloneResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  assignment_generation: z.number().int(),
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  base_sha: z.string(),
-  checkout_path: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "assignment_generation": "assignmentGeneration",
-    "repository_id": "repositoryId",
-    "base_sha": "baseSha",
-    "checkout_path": "checkoutPath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    assignment_generation: z.number().int(),
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    base_sha: z.string(),
+    checkout_path: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "assignment_generation": "assignmentGeneration",
+      "repository_id": "repositoryId",
+      "base_sha": "baseSha",
+      "checkout_path": "checkoutPath",
+    });
+  })
+);
 /** @internal */
 export type GitHubReadCloneResult$Outbound = {
   session_id: string;
@@ -56,23 +58,25 @@ export const GitHubReadCloneResult$outboundSchema: z.ZodType<
   GitHubReadCloneResult$Outbound,
   z.ZodTypeDef,
   GitHubReadCloneResult
-> = z.object({
-  sessionId: z.string(),
-  assignmentGeneration: z.number().int(),
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  baseSha: z.string(),
-  checkoutPath: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    assignmentGeneration: "assignment_generation",
-    repositoryId: "repository_id",
-    baseSha: "base_sha",
-    checkoutPath: "checkout_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    assignmentGeneration: z.number().int(),
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    baseSha: z.string(),
+    checkoutPath: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      assignmentGeneration: "assignment_generation",
+      repositoryId: "repository_id",
+      baseSha: "base_sha",
+      checkoutPath: "checkout_path",
+    });
+  })
+);
 
 export function gitHubReadCloneResultToJSON(
   gitHubReadCloneResult: GitHubReadCloneResult,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,8 @@ export type GetTenantNetworkPolicyRequest = {
 };
 
 /** @internal */
-export const Scope$inboundSchema: z.ZodNativeEnum<typeof Scope> = z.nativeEnum(
-  Scope,
-);
+export const Scope$inboundSchema: z.ZodNativeEnum<typeof Scope> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Scope));
 /** @internal */
 export const Scope$outboundSchema: z.ZodNativeEnum<typeof Scope> =
   Scope$inboundSchema;
@@ -38,18 +37,20 @@ export const GetTenantNetworkPolicyRequest$inboundSchema: z.ZodType<
   GetTenantNetworkPolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: Scope$inboundSchema,
-  expected_organization_id: z.nullable(z.string()).optional(),
-  expected_team_id: z.nullable(z.string()).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expected_organization_id": "expectedOrganizationId",
-    "expected_team_id": "expectedTeamId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: Scope$inboundSchema,
+    expected_organization_id: z.nullable(z.string()).optional(),
+    expected_team_id: z.nullable(z.string()).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expected_organization_id": "expectedOrganizationId",
+      "expected_team_id": "expectedTeamId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetTenantNetworkPolicyRequest$Outbound = {
   scope: string;
@@ -63,18 +64,20 @@ export const GetTenantNetworkPolicyRequest$outboundSchema: z.ZodType<
   GetTenantNetworkPolicyRequest$Outbound,
   z.ZodTypeDef,
   GetTenantNetworkPolicyRequest
-> = z.object({
-  scope: Scope$outboundSchema,
-  expectedOrganizationId: z.nullable(z.string()).optional(),
-  expectedTeamId: z.nullable(z.string()).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expectedOrganizationId: "expected_organization_id",
-    expectedTeamId: "expected_team_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: Scope$outboundSchema,
+    expectedOrganizationId: z.nullable(z.string()).optional(),
+    expectedTeamId: z.nullable(z.string()).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expectedOrganizationId: "expected_organization_id",
+      expectedTeamId: "expected_team_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getTenantNetworkPolicyRequestToJSON(
   getTenantNetworkPolicyRequest: GetTenantNetworkPolicyRequest,

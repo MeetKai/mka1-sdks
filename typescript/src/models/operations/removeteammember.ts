@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,16 +31,18 @@ export const RemoveTeamMemberRequest$inboundSchema: z.ZodType<
   RemoveTeamMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  memberId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    memberId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RemoveTeamMemberRequest$Outbound = {
   orgId: string;
@@ -54,16 +56,18 @@ export const RemoveTeamMemberRequest$outboundSchema: z.ZodType<
   RemoveTeamMemberRequest$Outbound,
   z.ZodTypeDef,
   RemoveTeamMemberRequest
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  memberId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    memberId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function removeTeamMemberRequestToJSON(
   removeTeamMemberRequest: RemoveTeamMemberRequest,
@@ -87,10 +91,12 @@ export const RemoveTeamMemberResponseBody$inboundSchema: z.ZodType<
   RemoveTeamMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type RemoveTeamMemberResponseBody$Outbound = {
   id: string;
@@ -102,10 +108,12 @@ export const RemoveTeamMemberResponseBody$outboundSchema: z.ZodType<
   RemoveTeamMemberResponseBody$Outbound,
   z.ZodTypeDef,
   RemoveTeamMemberResponseBody
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function removeTeamMemberResponseBodyToJSON(
   removeTeamMemberResponseBody: RemoveTeamMemberResponseBody,

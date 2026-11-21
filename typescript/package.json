@@ -1,6 +1,6 @@
 {
   "name": "@meetkai/mka1",
-  "version": "0.55.102",
+  "version": "0.55.103",
   "author": "MeetKai",
   "homepage": "https://docs.mka1.com",
   "publishConfig": {
@@ -20,6 +20,7 @@
     "exports": {
       ".": "./src/index.ts",
       "./package.json": "./package.json",
+      "./node": "./src/node.ts",
       "./types": "./src/types/index.ts",
       "./models/errors": "./src/models/errors/index.ts",
       "./models/components": "./src/models/components/index.ts",
@@ -66,7 +67,7 @@
     "bun": "1.2.17",
     "bun-types": "1.2.17",
     "eslint": "^9.26.0",
-    "express": "^4.21.2",
+    "express": "^4.22.3",
     "globals": "^15.14.0",
     "tshy": "^3.3.2",
     "typescript": "~5.8.3",
@@ -92,6 +93,17 @@
       }
     },
     "./package.json": "./package.json",
+    "./node": {
+      "import": {
+        "@meetkai/mka1/source": "./src/node.ts",
+        "types": "./dist/esm/node.d.ts",
+        "default": "./dist/esm/node.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/node.d.ts",
+        "default": "./dist/commonjs/node.js"
+      }
+    },
     "./types": {
       "import": {
         "@meetkai/mka1/source": "./src/types/index.ts",

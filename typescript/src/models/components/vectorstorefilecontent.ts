@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,7 +43,9 @@ export const VectorStoreFileContentAttributes$inboundSchema: z.ZodType<
   VectorStoreFileContentAttributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type VectorStoreFileContentAttributes$Outbound =
   | string
@@ -55,7 +57,9 @@ export const VectorStoreFileContentAttributes$outboundSchema: z.ZodType<
   VectorStoreFileContentAttributes$Outbound,
   z.ZodTypeDef,
   VectorStoreFileContentAttributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function vectorStoreFileContentAttributesToJSON(
   vectorStoreFileContentAttributes: VectorStoreFileContentAttributes,
@@ -81,17 +85,19 @@ export const VectorStoreFileContent$inboundSchema: z.ZodType<
   VectorStoreFileContent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  filename: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  content: z.array(FileContentItem$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    filename: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    content: z.array(FileContentItem$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreFileContent$Outbound = {
   file_id: string;
@@ -105,17 +111,19 @@ export const VectorStoreFileContent$outboundSchema: z.ZodType<
   VectorStoreFileContent$Outbound,
   z.ZodTypeDef,
   VectorStoreFileContent
-> = z.object({
-  fileId: z.string(),
-  filename: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  content: z.array(FileContentItem$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    filename: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    content: z.array(FileContentItem$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function vectorStoreFileContentToJSON(
   vectorStoreFileContent: VectorStoreFileContent,

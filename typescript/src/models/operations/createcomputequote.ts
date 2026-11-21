@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,15 +26,17 @@ export const CreateComputeQuoteRequest$inboundSchema: z.ZodType<
   CreateComputeQuoteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeQuoteRequest: components.ComputeQuoteRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeQuoteRequest": "computeQuoteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeQuoteRequest: components.ComputeQuoteRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeQuoteRequest": "computeQuoteRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateComputeQuoteRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -46,15 +48,17 @@ export const CreateComputeQuoteRequest$outboundSchema: z.ZodType<
   CreateComputeQuoteRequest$Outbound,
   z.ZodTypeDef,
   CreateComputeQuoteRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  computeQuoteRequest: components.ComputeQuoteRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeQuoteRequest: "ComputeQuoteRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    computeQuoteRequest: components.ComputeQuoteRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeQuoteRequest: "ComputeQuoteRequest",
+    });
+  })
+);
 
 export function createComputeQuoteRequestToJSON(
   createComputeQuoteRequest: CreateComputeQuoteRequest,
@@ -78,10 +82,12 @@ export const CreateComputeQuoteResponse$inboundSchema: z.ZodType<
   CreateComputeQuoteResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeQuote$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeQuote$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateComputeQuoteResponse$Outbound =
   | components.ComputeQuote$Outbound
@@ -92,10 +98,12 @@ export const CreateComputeQuoteResponse$outboundSchema: z.ZodType<
   CreateComputeQuoteResponse$Outbound,
   z.ZodTypeDef,
   CreateComputeQuoteResponse
-> = z.union([
-  components.ComputeQuote$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeQuote$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function createComputeQuoteResponseToJSON(
   createComputeQuoteResponse: CreateComputeQuoteResponse,

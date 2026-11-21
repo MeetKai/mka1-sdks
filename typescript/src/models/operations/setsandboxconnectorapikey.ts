@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,20 @@ export const SetSandboxConnectorApiKeyRequest$inboundSchema: z.ZodType<
   SetSandboxConnectorApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_key: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SetConnectorApiKeyRequest: components.SetConnectorApiKeyRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "connector_key": "connectorKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SetConnectorApiKeyRequest": "setConnectorApiKeyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_key: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SetConnectorApiKeyRequest:
+      components.SetConnectorApiKeyRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_key": "connectorKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SetConnectorApiKeyRequest": "setConnectorApiKeyRequest",
+    });
+  })
+);
 /** @internal */
 export type SetSandboxConnectorApiKeyRequest$Outbound = {
   connector_key: string;
@@ -46,18 +49,20 @@ export const SetSandboxConnectorApiKeyRequest$outboundSchema: z.ZodType<
   SetSandboxConnectorApiKeyRequest$Outbound,
   z.ZodTypeDef,
   SetSandboxConnectorApiKeyRequest
-> = z.object({
-  connectorKey: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  setConnectorApiKeyRequest:
-    components.SetConnectorApiKeyRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    connectorKey: "connector_key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    setConnectorApiKeyRequest: "SetConnectorApiKeyRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorKey: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    setConnectorApiKeyRequest:
+      components.SetConnectorApiKeyRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      connectorKey: "connector_key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      setConnectorApiKeyRequest: "SetConnectorApiKeyRequest",
+    });
+  })
+);
 
 export function setSandboxConnectorApiKeyRequestToJSON(
   setSandboxConnectorApiKeyRequest: SetSandboxConnectorApiKeyRequest,

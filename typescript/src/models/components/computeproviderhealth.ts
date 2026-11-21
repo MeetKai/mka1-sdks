@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,23 +26,25 @@ export const ComputeProviderHealth$inboundSchema: z.ZodType<
   ComputeProviderHealth,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  degraded: z.boolean(),
-  error: z.nullable(z.string()),
-  healthy: z.boolean(),
-  last_poll_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  latency_ms: z.number().int(),
-  offer_count: z.number().int(),
-  provider: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "last_poll_at": "lastPollAt",
-    "latency_ms": "latencyMs",
-    "offer_count": "offerCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    degraded: z.boolean(),
+    error: z.nullable(z.string()),
+    healthy: z.boolean(),
+    last_poll_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    latency_ms: z.number().int(),
+    offer_count: z.number().int(),
+    provider: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "last_poll_at": "lastPollAt",
+      "latency_ms": "latencyMs",
+      "offer_count": "offerCount",
+    });
+  })
+);
 /** @internal */
 export type ComputeProviderHealth$Outbound = {
   degraded: boolean;
@@ -59,21 +61,23 @@ export const ComputeProviderHealth$outboundSchema: z.ZodType<
   ComputeProviderHealth$Outbound,
   z.ZodTypeDef,
   ComputeProviderHealth
-> = z.object({
-  degraded: z.boolean(),
-  error: z.nullable(z.string()),
-  healthy: z.boolean(),
-  lastPollAt: z.date().transform(v => v.toISOString()),
-  latencyMs: z.number().int(),
-  offerCount: z.number().int(),
-  provider: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    lastPollAt: "last_poll_at",
-    latencyMs: "latency_ms",
-    offerCount: "offer_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    degraded: z.boolean(),
+    error: z.nullable(z.string()),
+    healthy: z.boolean(),
+    lastPollAt: z.date().transform(v => v.toISOString()),
+    latencyMs: z.number().int(),
+    offerCount: z.number().int(),
+    provider: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      lastPollAt: "last_poll_at",
+      latencyMs: "latency_ms",
+      offerCount: "offer_count",
+    });
+  })
+);
 
 export function computeProviderHealthToJSON(
   computeProviderHealth: ComputeProviderHealth,

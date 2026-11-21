@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,18 +25,20 @@ export const FunctionToolDefinition$inboundSchema: z.ZodType<
   FunctionToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function"),
-  name: z.string(),
-  parameters: z.record(z.any()),
-  strict: z.boolean(),
-  description: z.string().optional(),
-  defer_loading: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "defer_loading": "deferLoading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    name: z.string(),
+    parameters: z.record(z.any()),
+    strict: z.boolean(),
+    description: z.string().optional(),
+    defer_loading: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "defer_loading": "deferLoading",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolDefinition$Outbound = {
   type: "function";
@@ -52,18 +54,20 @@ export const FunctionToolDefinition$outboundSchema: z.ZodType<
   FunctionToolDefinition$Outbound,
   z.ZodTypeDef,
   FunctionToolDefinition
-> = z.object({
-  type: z.literal("function"),
-  name: z.string(),
-  parameters: z.record(z.any()),
-  strict: z.boolean(),
-  description: z.string().optional(),
-  deferLoading: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deferLoading: "defer_loading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    name: z.string(),
+    parameters: z.record(z.any()),
+    strict: z.boolean(),
+    description: z.string().optional(),
+    deferLoading: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      deferLoading: "defer_loading",
+    });
+  })
+);
 
 export function functionToolDefinitionToJSON(
   functionToolDefinition: FunctionToolDefinition,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FeatureFlagValueType = {
@@ -16,7 +17,7 @@ export type FeatureFlagValueType = ClosedEnum<typeof FeatureFlagValueType>;
 /** @internal */
 export const FeatureFlagValueType$inboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagValueType
-> = z.nativeEnum(FeatureFlagValueType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FeatureFlagValueType));
 /** @internal */
 export const FeatureFlagValueType$outboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagValueType

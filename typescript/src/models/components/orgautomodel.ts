@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,13 +52,15 @@ export const OrgAutoModel$inboundSchema: z.ZodType<
   OrgAutoModel,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("mode", {
-  direct: DirectOrgAutoModel$inboundSchema,
-  balanced: BalancedOrgAutoModel$inboundSchema,
-  price: PriceOrgAutoModel$inboundSchema,
-  quality: QualityOrgAutoModel$inboundSchema,
-  speed: SpeedOrgAutoModel$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("mode", {
+    direct: DirectOrgAutoModel$inboundSchema,
+    balanced: BalancedOrgAutoModel$inboundSchema,
+    price: PriceOrgAutoModel$inboundSchema,
+    quality: QualityOrgAutoModel$inboundSchema,
+    speed: SpeedOrgAutoModel$inboundSchema,
+  })
+);
 /** @internal */
 export type OrgAutoModel$Outbound =
   | DirectOrgAutoModel$Outbound
@@ -72,13 +74,15 @@ export const OrgAutoModel$outboundSchema: z.ZodType<
   OrgAutoModel$Outbound,
   z.ZodTypeDef,
   OrgAutoModel
-> = z.union([
-  DirectOrgAutoModel$outboundSchema,
-  BalancedOrgAutoModel$outboundSchema,
-  PriceOrgAutoModel$outboundSchema,
-  QualityOrgAutoModel$outboundSchema,
-  SpeedOrgAutoModel$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    DirectOrgAutoModel$outboundSchema,
+    BalancedOrgAutoModel$outboundSchema,
+    PriceOrgAutoModel$outboundSchema,
+    QualityOrgAutoModel$outboundSchema,
+    SpeedOrgAutoModel$outboundSchema,
+  ])
+);
 
 export function orgAutoModelToJSON(orgAutoModel: OrgAutoModel): string {
   return JSON.stringify(OrgAutoModel$outboundSchema.parse(orgAutoModel));

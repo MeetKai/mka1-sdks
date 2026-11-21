@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const AccessMutationRequest$inboundSchema: z.ZodType<
   AccessMutationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "model_ids": "modelIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_ids": "modelIds",
+    });
+  })
+);
 /** @internal */
 export type AccessMutationRequest$Outbound = {
   model_ids: Array<string>;
@@ -34,13 +36,15 @@ export const AccessMutationRequest$outboundSchema: z.ZodType<
   AccessMutationRequest$Outbound,
   z.ZodTypeDef,
   AccessMutationRequest
-> = z.object({
-  modelIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    modelIds: "model_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      modelIds: "model_ids",
+    });
+  })
+);
 
 export function accessMutationRequestToJSON(
   accessMutationRequest: AccessMutationRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,19 +27,21 @@ export const MemoryStoreList$inboundSchema: z.ZodType<
   MemoryStoreList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(MemoryStore$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(MemoryStore$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type MemoryStoreList$Outbound = {
   object: "list";
@@ -54,19 +56,21 @@ export const MemoryStoreList$outboundSchema: z.ZodType<
   MemoryStoreList$Outbound,
   z.ZodTypeDef,
   MemoryStoreList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(MemoryStore$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(MemoryStore$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function memoryStoreListToJSON(
   memoryStoreList: MemoryStoreList,

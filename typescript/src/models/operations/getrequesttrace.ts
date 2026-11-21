@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -132,13 +132,15 @@ export const GetRequestTraceRequest$inboundSchema: z.ZodType<
   GetRequestTraceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  request_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_id": "requestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_id": "requestId",
+    });
+  })
+);
 /** @internal */
 export type GetRequestTraceRequest$Outbound = {
   request_id: string;
@@ -149,13 +151,15 @@ export const GetRequestTraceRequest$outboundSchema: z.ZodType<
   GetRequestTraceRequest$Outbound,
   z.ZodTypeDef,
   GetRequestTraceRequest
-> = z.object({
-  requestId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    requestId: "request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestId: "request_id",
+    });
+  })
+);
 
 export function getRequestTraceRequestToJSON(
   getRequestTraceRequest: GetRequestTraceRequest,
@@ -176,37 +180,39 @@ export function getRequestTraceRequestFromJSON(
 
 /** @internal */
 export const Gateway$inboundSchema: z.ZodType<Gateway, z.ZodTypeDef, unknown> =
-  z.object({
-    kong_request_id: z.string(),
-    request_id: z.nullable(z.string()),
-    correlation_id: z.nullable(z.string()),
-    trace_id: z.nullable(z.string()),
-    method: z.nullable(z.string()),
-    path: z.nullable(z.string()),
-    status_code: z.nullable(z.number()),
-    started_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    completed_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    latency_ms: z.nullable(z.number()),
-    gateway_latency_ms: z.nullable(z.number()),
-    upstream_latency_ms: z.nullable(z.number()),
-  }).transform((v) => {
-    return remap$(v, {
-      "kong_request_id": "kongRequestId",
-      "request_id": "requestId",
-      "correlation_id": "correlationId",
-      "trace_id": "traceId",
-      "status_code": "statusCode",
-      "started_at": "startedAt",
-      "completed_at": "completedAt",
-      "latency_ms": "latencyMs",
-      "gateway_latency_ms": "gatewayLatencyMs",
-      "upstream_latency_ms": "upstreamLatencyMs",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      kong_request_id: z.string(),
+      request_id: z.nullable(z.string()),
+      correlation_id: z.nullable(z.string()),
+      trace_id: z.nullable(z.string()),
+      method: z.nullable(z.string()),
+      path: z.nullable(z.string()),
+      status_code: z.nullable(z.number()),
+      started_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      completed_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      latency_ms: z.nullable(z.number()),
+      gateway_latency_ms: z.nullable(z.number()),
+      upstream_latency_ms: z.nullable(z.number()),
+    }).transform((v) => {
+      return remap$(v, {
+        "kong_request_id": "kongRequestId",
+        "request_id": "requestId",
+        "correlation_id": "correlationId",
+        "trace_id": "traceId",
+        "status_code": "statusCode",
+        "started_at": "startedAt",
+        "completed_at": "completedAt",
+        "latency_ms": "latencyMs",
+        "gateway_latency_ms": "gatewayLatencyMs",
+        "upstream_latency_ms": "upstreamLatencyMs",
+      });
+    })
+  );
 /** @internal */
 export type Gateway$Outbound = {
   kong_request_id: string;
@@ -228,33 +234,35 @@ export const Gateway$outboundSchema: z.ZodType<
   Gateway$Outbound,
   z.ZodTypeDef,
   Gateway
-> = z.object({
-  kongRequestId: z.string(),
-  requestId: z.nullable(z.string()),
-  correlationId: z.nullable(z.string()),
-  traceId: z.nullable(z.string()),
-  method: z.nullable(z.string()),
-  path: z.nullable(z.string()),
-  statusCode: z.nullable(z.number()),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  latencyMs: z.nullable(z.number()),
-  gatewayLatencyMs: z.nullable(z.number()),
-  upstreamLatencyMs: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    kongRequestId: "kong_request_id",
-    requestId: "request_id",
-    correlationId: "correlation_id",
-    traceId: "trace_id",
-    statusCode: "status_code",
-    startedAt: "started_at",
-    completedAt: "completed_at",
-    latencyMs: "latency_ms",
-    gatewayLatencyMs: "gateway_latency_ms",
-    upstreamLatencyMs: "upstream_latency_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kongRequestId: z.string(),
+    requestId: z.nullable(z.string()),
+    correlationId: z.nullable(z.string()),
+    traceId: z.nullable(z.string()),
+    method: z.nullable(z.string()),
+    path: z.nullable(z.string()),
+    statusCode: z.nullable(z.number()),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    latencyMs: z.nullable(z.number()),
+    gatewayLatencyMs: z.nullable(z.number()),
+    upstreamLatencyMs: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      kongRequestId: "kong_request_id",
+      requestId: "request_id",
+      correlationId: "correlation_id",
+      traceId: "trace_id",
+      statusCode: "status_code",
+      startedAt: "started_at",
+      completedAt: "completed_at",
+      latencyMs: "latency_ms",
+      gatewayLatencyMs: "gateway_latency_ms",
+      upstreamLatencyMs: "upstream_latency_ms",
+    });
+  })
+);
 
 export function gatewayToJSON(gateway: Gateway): string {
   return JSON.stringify(Gateway$outboundSchema.parse(gateway));
@@ -270,37 +278,38 @@ export function gatewayFromJSON(
 }
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
+export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Kind));
 /** @internal */
 export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
   Kind$inboundSchema;
 
 /** @internal */
-export const Spans$inboundSchema: z.ZodType<Spans, z.ZodTypeDef, unknown> = z
-  .object({
-    kind: Kind$inboundSchema,
-    name: z.nullable(z.string()),
-    call_id: z.nullable(z.string()),
-    step: z.nullable(z.number()),
-    attempt: z.nullable(z.number()),
-    status: z.nullable(z.string()),
-    started_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    completed_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    duration_ms: z.nullable(z.number()),
-  }).transform((v) => {
-    return remap$(v, {
-      "call_id": "callId",
-      "started_at": "startedAt",
-      "completed_at": "completedAt",
-      "duration_ms": "durationMs",
-    });
-  });
+export const Spans$inboundSchema: z.ZodType<Spans, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      kind: Kind$inboundSchema,
+      name: z.nullable(z.string()),
+      call_id: z.nullable(z.string()),
+      step: z.nullable(z.number()),
+      attempt: z.nullable(z.number()),
+      status: z.nullable(z.string()),
+      started_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      completed_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      duration_ms: z.nullable(z.number()),
+    }).transform((v) => {
+      return remap$(v, {
+        "call_id": "callId",
+        "started_at": "startedAt",
+        "completed_at": "completedAt",
+        "duration_ms": "durationMs",
+      });
+    })
+  );
 /** @internal */
 export type Spans$Outbound = {
   kind: string;
@@ -319,24 +328,26 @@ export const Spans$outboundSchema: z.ZodType<
   Spans$Outbound,
   z.ZodTypeDef,
   Spans
-> = z.object({
-  kind: Kind$outboundSchema,
-  name: z.nullable(z.string()),
-  callId: z.nullable(z.string()),
-  step: z.nullable(z.number()),
-  attempt: z.nullable(z.number()),
-  status: z.nullable(z.string()),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  durationMs: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    startedAt: "started_at",
-    completedAt: "completed_at",
-    durationMs: "duration_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: Kind$outboundSchema,
+    name: z.nullable(z.string()),
+    callId: z.nullable(z.string()),
+    step: z.nullable(z.number()),
+    attempt: z.nullable(z.number()),
+    status: z.nullable(z.string()),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    durationMs: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      startedAt: "started_at",
+      completedAt: "completed_at",
+      durationMs: "duration_ms",
+    });
+  })
+);
 
 export function spansToJSON(spans: Spans): string {
   return JSON.stringify(Spans$outboundSchema.parse(spans));
@@ -356,33 +367,35 @@ export const Responses$inboundSchema: z.ZodType<
   Responses,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  parent_response_id: z.nullable(z.string()),
-  conversation_id: z.nullable(z.string()),
-  status: z.nullable(z.string()),
-  requested_model: z.nullable(z.string()),
-  effective_model: z.nullable(z.string()),
-  started_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  completed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  duration_ms: z.nullable(z.number()),
-  spans: z.array(z.lazy(() => Spans$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "parent_response_id": "parentResponseId",
-    "conversation_id": "conversationId",
-    "requested_model": "requestedModel",
-    "effective_model": "effectiveModel",
-    "started_at": "startedAt",
-    "completed_at": "completedAt",
-    "duration_ms": "durationMs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    parent_response_id: z.nullable(z.string()),
+    conversation_id: z.nullable(z.string()),
+    status: z.nullable(z.string()),
+    requested_model: z.nullable(z.string()),
+    effective_model: z.nullable(z.string()),
+    started_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    completed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    duration_ms: z.nullable(z.number()),
+    spans: z.array(z.lazy(() => Spans$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "parent_response_id": "parentResponseId",
+      "conversation_id": "conversationId",
+      "requested_model": "requestedModel",
+      "effective_model": "effectiveModel",
+      "started_at": "startedAt",
+      "completed_at": "completedAt",
+      "duration_ms": "durationMs",
+    });
+  })
+);
 /** @internal */
 export type Responses$Outbound = {
   response_id: string;
@@ -402,29 +415,31 @@ export const Responses$outboundSchema: z.ZodType<
   Responses$Outbound,
   z.ZodTypeDef,
   Responses
-> = z.object({
-  responseId: z.string(),
-  parentResponseId: z.nullable(z.string()),
-  conversationId: z.nullable(z.string()),
-  status: z.nullable(z.string()),
-  requestedModel: z.nullable(z.string()),
-  effectiveModel: z.nullable(z.string()),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  completedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  durationMs: z.nullable(z.number()),
-  spans: z.array(z.lazy(() => Spans$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    parentResponseId: "parent_response_id",
-    conversationId: "conversation_id",
-    requestedModel: "requested_model",
-    effectiveModel: "effective_model",
-    startedAt: "started_at",
-    completedAt: "completed_at",
-    durationMs: "duration_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string(),
+    parentResponseId: z.nullable(z.string()),
+    conversationId: z.nullable(z.string()),
+    status: z.nullable(z.string()),
+    requestedModel: z.nullable(z.string()),
+    effectiveModel: z.nullable(z.string()),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    completedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    durationMs: z.nullable(z.number()),
+    spans: z.array(z.lazy(() => Spans$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      parentResponseId: "parent_response_id",
+      conversationId: "conversation_id",
+      requestedModel: "requested_model",
+      effectiveModel: "effective_model",
+      startedAt: "started_at",
+      completedAt: "completed_at",
+      durationMs: "duration_ms",
+    });
+  })
+);
 
 export function responsesToJSON(responses: Responses): string {
   return JSON.stringify(Responses$outboundSchema.parse(responses));
@@ -444,17 +459,19 @@ export const GetRequestTraceResponseBody$inboundSchema: z.ZodType<
   GetRequestTraceResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("audit.request_trace"),
-  request_id: z.string(),
-  truncated: z.boolean(),
-  gateway: z.array(z.lazy(() => Gateway$inboundSchema)),
-  responses: z.array(z.lazy(() => Responses$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "request_id": "requestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("audit.request_trace"),
+    request_id: z.string(),
+    truncated: z.boolean(),
+    gateway: z.array(z.lazy(() => Gateway$inboundSchema)),
+    responses: z.array(z.lazy(() => Responses$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_id": "requestId",
+    });
+  })
+);
 /** @internal */
 export type GetRequestTraceResponseBody$Outbound = {
   object: "audit.request_trace";
@@ -469,17 +486,19 @@ export const GetRequestTraceResponseBody$outboundSchema: z.ZodType<
   GetRequestTraceResponseBody$Outbound,
   z.ZodTypeDef,
   GetRequestTraceResponseBody
-> = z.object({
-  object: z.literal("audit.request_trace"),
-  requestId: z.string(),
-  truncated: z.boolean(),
-  gateway: z.array(z.lazy(() => Gateway$outboundSchema)),
-  responses: z.array(z.lazy(() => Responses$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    requestId: "request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("audit.request_trace"),
+    requestId: z.string(),
+    truncated: z.boolean(),
+    gateway: z.array(z.lazy(() => Gateway$outboundSchema)),
+    responses: z.array(z.lazy(() => Responses$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      requestId: "request_id",
+    });
+  })
+);
 
 export function getRequestTraceResponseBodyToJSON(
   getRequestTraceResponseBody: GetRequestTraceResponseBody,

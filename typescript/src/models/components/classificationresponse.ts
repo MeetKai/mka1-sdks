@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -67,11 +67,13 @@ export const ClassificationResponseData$inboundSchema: z.ZodType<
   ClassificationResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  label: z.string(),
-  confidence: z.number().optional(),
-  reasoning: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.string(),
+    confidence: z.number().optional(),
+    reasoning: z.string().optional(),
+  })
+);
 /** @internal */
 export type ClassificationResponseData$Outbound = {
   label: string;
@@ -84,11 +86,13 @@ export const ClassificationResponseData$outboundSchema: z.ZodType<
   ClassificationResponseData$Outbound,
   z.ZodTypeDef,
   ClassificationResponseData
-> = z.object({
-  label: z.string(),
-  confidence: z.number().optional(),
-  reasoning: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    label: z.string(),
+    confidence: z.number().optional(),
+    reasoning: z.string().optional(),
+  })
+);
 
 export function classificationResponseDataToJSON(
   classificationResponseData: ClassificationResponseData,
@@ -112,17 +116,19 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  labels: z.array(z.string()),
-  classified_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "classified_at": "classifiedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    labels: z.array(z.string()),
+    classified_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "classified_at": "classifiedAt",
+    });
+  })
+);
 /** @internal */
 export type Metadata$Outbound = {
   model: string;
@@ -135,15 +141,17 @@ export const Metadata$outboundSchema: z.ZodType<
   Metadata$Outbound,
   z.ZodTypeDef,
   Metadata
-> = z.object({
-  model: z.string(),
-  labels: z.array(z.string()),
-  classifiedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    classifiedAt: "classified_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    labels: z.array(z.string()),
+    classifiedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      classifiedAt: "classified_at",
+    });
+  })
+);
 
 export function metadataToJSON(metadata: Metadata): string {
   return JSON.stringify(Metadata$outboundSchema.parse(metadata));
@@ -163,11 +171,13 @@ export const ClassificationResponse$inboundSchema: z.ZodType<
   ClassificationResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  success: z.boolean(),
-  data: z.lazy(() => ClassificationResponseData$inboundSchema),
-  metadata: z.lazy(() => Metadata$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.lazy(() => ClassificationResponseData$inboundSchema),
+    metadata: z.lazy(() => Metadata$inboundSchema),
+  })
+);
 /** @internal */
 export type ClassificationResponse$Outbound = {
   success: boolean;
@@ -180,11 +190,13 @@ export const ClassificationResponse$outboundSchema: z.ZodType<
   ClassificationResponse$Outbound,
   z.ZodTypeDef,
   ClassificationResponse
-> = z.object({
-  success: z.boolean(),
-  data: z.lazy(() => ClassificationResponseData$outboundSchema),
-  metadata: z.lazy(() => Metadata$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.lazy(() => ClassificationResponseData$outboundSchema),
+    metadata: z.lazy(() => Metadata$outboundSchema),
+  })
+);
 
 export function classificationResponseToJSON(
   classificationResponse: ClassificationResponse,

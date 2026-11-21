@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -227,18 +228,20 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody$Outbound =
@@ -252,13 +255,15 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody
-  > = z.instanceof(
-    UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      UpdateServiceAccountApiKeyAuthServiceAccountsResponse429ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody$inboundSchema:
@@ -266,18 +271,20 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody$Outbound =
@@ -291,13 +298,15 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody
-  > = z.instanceof(
-    UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      UpdateServiceAccountApiKeyAuthServiceAccountsResponse410ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody$inboundSchema:
@@ -305,18 +314,20 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody$Outbound =
@@ -330,13 +341,15 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody
-  > = z.instanceof(
-    UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      UpdateServiceAccountApiKeyAuthServiceAccountsResponse409ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody$inboundSchema:
@@ -344,18 +357,20 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody$Outbound =
@@ -369,13 +384,15 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBod
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody
-  > = z.instanceof(
-    UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      UpdateServiceAccountApiKeyAuthServiceAccountsResponse404ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody$inboundSchema:
@@ -383,19 +400,21 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody$i
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody$Outbound =
@@ -410,14 +429,16 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody$o
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody
-  > = z.instanceof(
-    UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      UpdateServiceAccountApiKeyAuthServiceAccountsResponseResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody$inboundSchema:
@@ -425,19 +446,20 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody$inboundSc
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody$Outbound =
@@ -451,30 +473,34 @@ export const UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody$outboundS
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody
-  > = z.instanceof(UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateServiceAccountApiKeyAuthServiceAccountsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateServiceAccountApiKeyResponseBody$inboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new UpdateServiceAccountApiKeyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new UpdateServiceAccountApiKeyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type UpdateServiceAccountApiKeyResponseBody$Outbound = {
@@ -486,8 +512,10 @@ export const UpdateServiceAccountApiKeyResponseBody$outboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountApiKeyResponseBody
-> = z.instanceof(UpdateServiceAccountApiKeyResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(UpdateServiceAccountApiKeyResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -38,11 +38,13 @@ export const ChunkingStrategy$inboundSchema: z.ZodType<
   ChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  auto: AutoChunkingStrategy$inboundSchema,
-  static: StaticChunkingStrategy$inboundSchema,
-  other: OtherChunkingStrategy$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    auto: AutoChunkingStrategy$inboundSchema,
+    static: StaticChunkingStrategy$inboundSchema,
+    other: OtherChunkingStrategy$inboundSchema,
+  })
+);
 /** @internal */
 export type ChunkingStrategy$Outbound =
   | AutoChunkingStrategy$Outbound
@@ -54,11 +56,13 @@ export const ChunkingStrategy$outboundSchema: z.ZodType<
   ChunkingStrategy$Outbound,
   z.ZodTypeDef,
   ChunkingStrategy
-> = z.union([
-  AutoChunkingStrategy$outboundSchema,
-  StaticChunkingStrategy$outboundSchema,
-  OtherChunkingStrategy$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AutoChunkingStrategy$outboundSchema,
+    StaticChunkingStrategy$outboundSchema,
+    OtherChunkingStrategy$outboundSchema,
+  ])
+);
 
 export function chunkingStrategyToJSON(
   chunkingStrategy: ChunkingStrategy,

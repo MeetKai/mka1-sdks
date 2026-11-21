@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,16 +31,18 @@ export const GuardrailsPolicy$inboundSchema: z.ZodType<
   GuardrailsPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  team_id: z.nullable(z.string()),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-  updated_at: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "team_id": "teamId",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    team_id: z.nullable(z.string()),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+    updated_at: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "team_id": "teamId",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type GuardrailsPolicy$Outbound = {
   team_id: string | null;
@@ -53,16 +55,18 @@ export const GuardrailsPolicy$outboundSchema: z.ZodType<
   GuardrailsPolicy$Outbound,
   z.ZodTypeDef,
   GuardrailsPolicy
-> = z.object({
-  teamId: z.nullable(z.string()),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-  updatedAt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    teamId: "team_id",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    teamId: z.nullable(z.string()),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+    updatedAt: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      teamId: "team_id",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function guardrailsPolicyToJSON(
   guardrailsPolicy: GuardrailsPolicy,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,19 +40,21 @@ export const ConversationObject$inboundSchema: z.ZodType<
   ConversationObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("conversation"),
-  created_at: z.number(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  identity: z.string().optional(),
-  deleted_at: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "deleted_at": "deletedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("conversation"),
+    created_at: z.number(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    identity: z.string().optional(),
+    deleted_at: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "deleted_at": "deletedAt",
+    });
+  })
+);
 /** @internal */
 export type ConversationObject$Outbound = {
   id: string;
@@ -68,19 +70,21 @@ export const ConversationObject$outboundSchema: z.ZodType<
   ConversationObject$Outbound,
   z.ZodTypeDef,
   ConversationObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("conversation"),
-  createdAt: z.number(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  identity: z.string().optional(),
-  deletedAt: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    deletedAt: "deleted_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("conversation"),
+    createdAt: z.number(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    identity: z.string().optional(),
+    deletedAt: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      deletedAt: "deleted_at",
+    });
+  })
+);
 
 export function conversationObjectToJSON(
   conversationObject: ConversationObject,

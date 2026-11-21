@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SandboxUsageBucketWidth = {
@@ -17,7 +18,7 @@ export type SandboxUsageBucketWidth = ClosedEnum<
 /** @internal */
 export const SandboxUsageBucketWidth$inboundSchema: z.ZodNativeEnum<
   typeof SandboxUsageBucketWidth
-> = z.nativeEnum(SandboxUsageBucketWidth);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SandboxUsageBucketWidth));
 /** @internal */
 export const SandboxUsageBucketWidth$outboundSchema: z.ZodNativeEnum<
   typeof SandboxUsageBucketWidth

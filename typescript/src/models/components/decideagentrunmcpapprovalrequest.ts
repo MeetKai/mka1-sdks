@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const DecideAgentRunMcpApprovalRequest$inboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approval_request_id: z.string(),
-  approve: z.boolean(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approval_request_id: z.string(),
+    approve: z.boolean(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+    });
+  })
+);
 /** @internal */
 export type DecideAgentRunMcpApprovalRequest$Outbound = {
   approval_request_id: string;
@@ -40,15 +42,17 @@ export const DecideAgentRunMcpApprovalRequest$outboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequest$Outbound,
   z.ZodTypeDef,
   DecideAgentRunMcpApprovalRequest
-> = z.object({
-  approvalRequestId: z.string(),
-  approve: z.boolean(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvalRequestId: z.string(),
+    approve: z.boolean(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+    });
+  })
+);
 
 export function decideAgentRunMcpApprovalRequestToJSON(
   decideAgentRunMcpApprovalRequest: DecideAgentRunMcpApprovalRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,7 +61,9 @@ export type OutputAudioItemWithId = {
 /** @internal */
 export const OutputAudioItemWithIdStatus$inboundSchema: z.ZodNativeEnum<
   typeof OutputAudioItemWithIdStatus
-> = z.nativeEnum(OutputAudioItemWithIdStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OutputAudioItemWithIdStatus)
+);
 /** @internal */
 export const OutputAudioItemWithIdStatus$outboundSchema: z.ZodNativeEnum<
   typeof OutputAudioItemWithIdStatus
@@ -72,19 +74,21 @@ export const OutputAudioItemWithId$inboundSchema: z.ZodType<
   OutputAudioItemWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("output_audio"),
-  data: z.string(),
-  transcript: z.string(),
-  id: z.string(),
-  status: OutputAudioItemWithIdStatus$inboundSchema,
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_audio"),
+    data: z.string(),
+    transcript: z.string(),
+    id: z.string(),
+    status: OutputAudioItemWithIdStatus$inboundSchema,
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type OutputAudioItemWithId$Outbound = {
   type: "output_audio";
@@ -101,19 +105,21 @@ export const OutputAudioItemWithId$outboundSchema: z.ZodType<
   OutputAudioItemWithId$Outbound,
   z.ZodTypeDef,
   OutputAudioItemWithId
-> = z.object({
-  type: z.literal("output_audio"),
-  data: z.string(),
-  transcript: z.string(),
-  id: z.string(),
-  status: OutputAudioItemWithIdStatus$outboundSchema,
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("output_audio"),
+    data: z.string(),
+    transcript: z.string(),
+    id: z.string(),
+    status: OutputAudioItemWithIdStatus$outboundSchema,
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function outputAudioItemWithIdToJSON(
   outputAudioItemWithId: OutputAudioItemWithId,

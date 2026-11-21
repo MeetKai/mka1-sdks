@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,29 +36,31 @@ export const AuditCaseExportRow$inboundSchema: z.ZodType<
   AuditCaseExportRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  responseId: z.any().optional(),
-  conversationId: z.any().optional(),
-  userId: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  status: z.any().optional(),
-  outcome: z.any().optional(),
-  completeness: z.any().optional(),
-  requestedModel: z.any().optional(),
-  effectiveModel: z.any().optional(),
-  providerId: z.any().optional(),
-  servingLocation: z.any().optional(),
-  guardrailTriggered: z.any().optional(),
-  reviewRequired: z.any().optional(),
-  reviewReason: z.any().optional(),
-  feedbackRating: z.any().optional(),
-  requestPreview: z.any().optional(),
-  outputPreview: z.any().optional(),
-  createdAt: z.any().optional(),
-  updatedAt: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.any().optional(),
+    conversationId: z.any().optional(),
+    userId: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    status: z.any().optional(),
+    outcome: z.any().optional(),
+    completeness: z.any().optional(),
+    requestedModel: z.any().optional(),
+    effectiveModel: z.any().optional(),
+    providerId: z.any().optional(),
+    servingLocation: z.any().optional(),
+    guardrailTriggered: z.any().optional(),
+    reviewRequired: z.any().optional(),
+    reviewReason: z.any().optional(),
+    feedbackRating: z.any().optional(),
+    requestPreview: z.any().optional(),
+    outputPreview: z.any().optional(),
+    createdAt: z.any().optional(),
+    updatedAt: z.any().optional(),
+  })
+);
 /** @internal */
 export type AuditCaseExportRow$Outbound = {
   responseId?: any | undefined;
@@ -89,29 +91,31 @@ export const AuditCaseExportRow$outboundSchema: z.ZodType<
   AuditCaseExportRow$Outbound,
   z.ZodTypeDef,
   AuditCaseExportRow
-> = z.object({
-  responseId: z.any().optional(),
-  conversationId: z.any().optional(),
-  userId: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  status: z.any().optional(),
-  outcome: z.any().optional(),
-  completeness: z.any().optional(),
-  requestedModel: z.any().optional(),
-  effectiveModel: z.any().optional(),
-  providerId: z.any().optional(),
-  servingLocation: z.any().optional(),
-  guardrailTriggered: z.any().optional(),
-  reviewRequired: z.any().optional(),
-  reviewReason: z.any().optional(),
-  feedbackRating: z.any().optional(),
-  requestPreview: z.any().optional(),
-  outputPreview: z.any().optional(),
-  createdAt: z.any().optional(),
-  updatedAt: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.any().optional(),
+    conversationId: z.any().optional(),
+    userId: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    status: z.any().optional(),
+    outcome: z.any().optional(),
+    completeness: z.any().optional(),
+    requestedModel: z.any().optional(),
+    effectiveModel: z.any().optional(),
+    providerId: z.any().optional(),
+    servingLocation: z.any().optional(),
+    guardrailTriggered: z.any().optional(),
+    reviewRequired: z.any().optional(),
+    reviewReason: z.any().optional(),
+    feedbackRating: z.any().optional(),
+    requestPreview: z.any().optional(),
+    outputPreview: z.any().optional(),
+    createdAt: z.any().optional(),
+    updatedAt: z.any().optional(),
+  })
+);
 
 export function auditCaseExportRowToJSON(
   auditCaseExportRow: AuditCaseExportRow,

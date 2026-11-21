@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ModelQuote$inboundSchema: z.ZodType<
   ModelQuote,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  estimated_calls: z.number().int(),
-  estimated_input_tokens: z.number().int(),
-  estimated_output_tokens: z.number().int(),
-  estimated_cost: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    "estimated_calls": "estimatedCalls",
-    "estimated_input_tokens": "estimatedInputTokens",
-    "estimated_output_tokens": "estimatedOutputTokens",
-    "estimated_cost": "estimatedCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    estimated_calls: z.number().int(),
+    estimated_input_tokens: z.number().int(),
+    estimated_output_tokens: z.number().int(),
+    estimated_cost: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      "estimated_calls": "estimatedCalls",
+      "estimated_input_tokens": "estimatedInputTokens",
+      "estimated_output_tokens": "estimatedOutputTokens",
+      "estimated_cost": "estimatedCost",
+    });
+  })
+);
 /** @internal */
 export type ModelQuote$Outbound = {
   model: string;
@@ -49,20 +51,22 @@ export const ModelQuote$outboundSchema: z.ZodType<
   ModelQuote$Outbound,
   z.ZodTypeDef,
   ModelQuote
-> = z.object({
-  model: z.string(),
-  estimatedCalls: z.number().int(),
-  estimatedInputTokens: z.number().int(),
-  estimatedOutputTokens: z.number().int(),
-  estimatedCost: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    estimatedCalls: "estimated_calls",
-    estimatedInputTokens: "estimated_input_tokens",
-    estimatedOutputTokens: "estimated_output_tokens",
-    estimatedCost: "estimated_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    estimatedCalls: z.number().int(),
+    estimatedInputTokens: z.number().int(),
+    estimatedOutputTokens: z.number().int(),
+    estimatedCost: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      estimatedCalls: "estimated_calls",
+      estimatedInputTokens: "estimated_input_tokens",
+      estimatedOutputTokens: "estimated_output_tokens",
+      estimatedCost: "estimated_cost",
+    });
+  })
+);
 
 export function modelQuoteToJSON(modelQuote: ModelQuote): string {
   return JSON.stringify(ModelQuote$outboundSchema.parse(modelQuote));

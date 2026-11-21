@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -40,19 +40,23 @@ export const CreateVersionResponse$inboundSchema: z.ZodType<
   CreateVersionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  prompt_id: z.string(),
-  version: z.number().int(),
-  object: z.literal("prompt.version"),
-  template: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_id": "promptId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    prompt_id: z.string(),
+    version: z.number().int(),
+    object: z.literal("prompt.version"),
+    template: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_id": "promptId",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type CreateVersionResponse$Outbound = {
   id: string;
@@ -68,19 +72,21 @@ export const CreateVersionResponse$outboundSchema: z.ZodType<
   CreateVersionResponse$Outbound,
   z.ZodTypeDef,
   CreateVersionResponse
-> = z.object({
-  id: z.string(),
-  promptId: z.string(),
-  version: z.number().int(),
-  object: z.literal("prompt.version"),
-  template: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    promptId: "prompt_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    promptId: z.string(),
+    version: z.number().int(),
+    object: z.literal("prompt.version"),
+    template: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      promptId: "prompt_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function createVersionResponseToJSON(
   createVersionResponse: CreateVersionResponse,

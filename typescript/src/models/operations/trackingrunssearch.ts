@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -43,8 +43,8 @@ export type TrackingRunsSearchResponseBody = {
 };
 
 /** @internal */
-export const RunViewType$inboundSchema: z.ZodNativeEnum<typeof RunViewType> = z
-  .nativeEnum(RunViewType);
+export const RunViewType$inboundSchema: z.ZodNativeEnum<typeof RunViewType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RunViewType));
 /** @internal */
 export const RunViewType$outboundSchema: z.ZodNativeEnum<typeof RunViewType> =
   RunViewType$inboundSchema;
@@ -54,22 +54,24 @@ export const TrackingRunsSearchRequestBody$inboundSchema: z.ZodType<
   TrackingRunsSearchRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment_ids: z.array(z.string()),
-  filter: z.string().optional(),
-  max_results: z.number().int().optional(),
-  order_by: z.array(z.string()).optional(),
-  page_token: z.string().optional(),
-  run_view_type: RunViewType$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experiment_ids": "experimentIds",
-    "max_results": "maxResults",
-    "order_by": "orderBy",
-    "page_token": "pageToken",
-    "run_view_type": "runViewType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment_ids: z.array(z.string()),
+    filter: z.string().optional(),
+    max_results: z.number().int().optional(),
+    order_by: z.array(z.string()).optional(),
+    page_token: z.string().optional(),
+    run_view_type: RunViewType$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "experiment_ids": "experimentIds",
+      "max_results": "maxResults",
+      "order_by": "orderBy",
+      "page_token": "pageToken",
+      "run_view_type": "runViewType",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsSearchRequestBody$Outbound = {
   experiment_ids: Array<string>;
@@ -85,22 +87,24 @@ export const TrackingRunsSearchRequestBody$outboundSchema: z.ZodType<
   TrackingRunsSearchRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsSearchRequestBody
-> = z.object({
-  experimentIds: z.array(z.string()),
-  filter: z.string().optional(),
-  maxResults: z.number().int().optional(),
-  orderBy: z.array(z.string()).optional(),
-  pageToken: z.string().optional(),
-  runViewType: RunViewType$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    experimentIds: "experiment_ids",
-    maxResults: "max_results",
-    orderBy: "order_by",
-    pageToken: "page_token",
-    runViewType: "run_view_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentIds: z.array(z.string()),
+    filter: z.string().optional(),
+    maxResults: z.number().int().optional(),
+    orderBy: z.array(z.string()).optional(),
+    pageToken: z.string().optional(),
+    runViewType: RunViewType$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentIds: "experiment_ids",
+      maxResults: "max_results",
+      orderBy: "order_by",
+      pageToken: "page_token",
+      runViewType: "run_view_type",
+    });
+  })
+);
 
 export function trackingRunsSearchRequestBodyToJSON(
   trackingRunsSearchRequestBody: TrackingRunsSearchRequestBody,
@@ -126,15 +130,17 @@ export const TrackingRunsSearchRequest$inboundSchema: z.ZodType<
   TrackingRunsSearchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingRunsSearchRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TrackingRunsSearchRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsSearchRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -146,15 +152,17 @@ export const TrackingRunsSearchRequest$outboundSchema: z.ZodType<
   TrackingRunsSearchRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsSearchRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TrackingRunsSearchRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TrackingRunsSearchRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingRunsSearchRequestToJSON(
   trackingRunsSearchRequest: TrackingRunsSearchRequest,
@@ -178,14 +186,16 @@ export const TrackingRunsSearchResponseBody$inboundSchema: z.ZodType<
   TrackingRunsSearchResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  runs: z.array(components.Run$inboundSchema).optional(),
-  next_page_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runs: z.array(components.Run$inboundSchema).optional(),
+    next_page_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsSearchResponseBody$Outbound = {
   runs?: Array<components.Run$Outbound> | undefined;
@@ -197,14 +207,16 @@ export const TrackingRunsSearchResponseBody$outboundSchema: z.ZodType<
   TrackingRunsSearchResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsSearchResponseBody
-> = z.object({
-  runs: z.array(components.Run$outboundSchema).optional(),
-  nextPageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nextPageToken: "next_page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runs: z.array(components.Run$outboundSchema).optional(),
+    nextPageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextPageToken: "next_page_token",
+    });
+  })
+);
 
 export function trackingRunsSearchResponseBodyToJSON(
   trackingRunsSearchResponseBody: TrackingRunsSearchResponseBody,

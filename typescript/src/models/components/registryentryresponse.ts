@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,20 +25,22 @@ export const RegistryEntryResponse$inboundSchema: z.ZodType<
   RegistryEntryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  source: RegistrySource$inboundSchema,
-  activated_by: z.string(),
-  activated_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "activated_by": "activatedBy",
-    "activated_at": "activatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    source: RegistrySource$inboundSchema,
+    activated_by: z.string(),
+    activated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "activated_by": "activatedBy",
+      "activated_at": "activatedAt",
+    });
+  })
+);
 /** @internal */
 export type RegistryEntryResponse$Outbound = {
   model_id: string;
@@ -52,18 +54,20 @@ export const RegistryEntryResponse$outboundSchema: z.ZodType<
   RegistryEntryResponse$Outbound,
   z.ZodTypeDef,
   RegistryEntryResponse
-> = z.object({
-  modelId: z.string(),
-  source: RegistrySource$outboundSchema,
-  activatedBy: z.string(),
-  activatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    activatedBy: "activated_by",
-    activatedAt: "activated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    source: RegistrySource$outboundSchema,
+    activatedBy: z.string(),
+    activatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      activatedBy: "activated_by",
+      activatedAt: "activated_at",
+    });
+  })
+);
 
 export function registryEntryResponseToJSON(
   registryEntryResponse: RegistryEntryResponse,

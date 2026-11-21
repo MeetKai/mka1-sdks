@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,14 +22,16 @@ export const AnalyticsKeysCreateRequest$inboundSchema: z.ZodType<
   AnalyticsKeysCreateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  AnalyticsKeyCreate: components.AnalyticsKeyCreate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AnalyticsKeyCreate": "analyticsKeyCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    AnalyticsKeyCreate: components.AnalyticsKeyCreate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "AnalyticsKeyCreate": "analyticsKeyCreate",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsKeysCreateRequest$Outbound = {
   id: string;
@@ -41,14 +43,16 @@ export const AnalyticsKeysCreateRequest$outboundSchema: z.ZodType<
   AnalyticsKeysCreateRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsKeysCreateRequest
-> = z.object({
-  id: z.string(),
-  analyticsKeyCreate: components.AnalyticsKeyCreate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    analyticsKeyCreate: "AnalyticsKeyCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    analyticsKeyCreate: components.AnalyticsKeyCreate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      analyticsKeyCreate: "AnalyticsKeyCreate",
+    });
+  })
+);
 
 export function analyticsKeysCreateRequestToJSON(
   analyticsKeysCreateRequest: AnalyticsKeysCreateRequest,

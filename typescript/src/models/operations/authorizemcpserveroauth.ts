@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const AuthorizeMcpServerOAuthRequest$inboundSchema: z.ZodType<
   AuthorizeMcpServerOAuthRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  McpOAuthAuthorizeRequest: components.McpOAuthAuthorizeRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "McpOAuthAuthorizeRequest": "mcpOAuthAuthorizeRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    McpOAuthAuthorizeRequest: components.McpOAuthAuthorizeRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "McpOAuthAuthorizeRequest": "mcpOAuthAuthorizeRequest",
+    });
+  })
+);
 /** @internal */
 export type AuthorizeMcpServerOAuthRequest$Outbound = {
   server_id: string;
@@ -46,17 +48,20 @@ export const AuthorizeMcpServerOAuthRequest$outboundSchema: z.ZodType<
   AuthorizeMcpServerOAuthRequest$Outbound,
   z.ZodTypeDef,
   AuthorizeMcpServerOAuthRequest
-> = z.object({
-  serverId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  mcpOAuthAuthorizeRequest: components.McpOAuthAuthorizeRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    mcpOAuthAuthorizeRequest: "McpOAuthAuthorizeRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    mcpOAuthAuthorizeRequest:
+      components.McpOAuthAuthorizeRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      mcpOAuthAuthorizeRequest: "McpOAuthAuthorizeRequest",
+    });
+  })
+);
 
 export function authorizeMcpServerOAuthRequestToJSON(
   authorizeMcpServerOAuthRequest: AuthorizeMcpServerOAuthRequest,

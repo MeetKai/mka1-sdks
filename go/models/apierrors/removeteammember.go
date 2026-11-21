@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type RemoveTeamMemberTooManyRequestsError struct {
 var _ error = &RemoveTeamMemberTooManyRequestsError{}
 
 func (e *RemoveTeamMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type RemoveTeamMemberGoneError struct {
 var _ error = &RemoveTeamMemberGoneError{}
 
 func (e *RemoveTeamMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type RemoveTeamMemberConflictError struct {
 var _ error = &RemoveTeamMemberConflictError{}
 
 func (e *RemoveTeamMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type RemoveTeamMemberNotFoundError struct {
 var _ error = &RemoveTeamMemberNotFoundError{}
 
 func (e *RemoveTeamMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type RemoveTeamMemberForbiddenError struct {
 var _ error = &RemoveTeamMemberForbiddenError{}
 
 func (e *RemoveTeamMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type RemoveTeamMemberUnauthorizedError struct {
 var _ error = &RemoveTeamMemberUnauthorizedError{}
 
 func (e *RemoveTeamMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type RemoveTeamMemberBadRequestError struct {
 var _ error = &RemoveTeamMemberBadRequestError{}
 
 func (e *RemoveTeamMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

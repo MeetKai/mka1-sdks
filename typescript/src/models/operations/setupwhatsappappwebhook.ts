@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,17 +31,19 @@ export const SetupWhatsAppAppWebhookRequest$inboundSchema: z.ZodType<
   SetupWhatsAppAppWebhookRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  WhatsAppWebhookSetupRequest:
-    components.WhatsAppWebhookSetupRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "WhatsAppWebhookSetupRequest": "whatsAppWebhookSetupRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    WhatsAppWebhookSetupRequest:
+      components.WhatsAppWebhookSetupRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "WhatsAppWebhookSetupRequest": "whatsAppWebhookSetupRequest",
+    });
+  })
+);
 /** @internal */
 export type SetupWhatsAppAppWebhookRequest$Outbound = {
   id: string;
@@ -54,17 +56,19 @@ export const SetupWhatsAppAppWebhookRequest$outboundSchema: z.ZodType<
   SetupWhatsAppAppWebhookRequest$Outbound,
   z.ZodTypeDef,
   SetupWhatsAppAppWebhookRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  whatsAppWebhookSetupRequest:
-    components.WhatsAppWebhookSetupRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    whatsAppWebhookSetupRequest: "WhatsAppWebhookSetupRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    whatsAppWebhookSetupRequest:
+      components.WhatsAppWebhookSetupRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      whatsAppWebhookSetupRequest: "WhatsAppWebhookSetupRequest",
+    });
+  })
+);
 
 export function setupWhatsAppAppWebhookRequestToJSON(
   setupWhatsAppAppWebhookRequest: SetupWhatsAppAppWebhookRequest,
@@ -90,15 +94,17 @@ export const SetupWhatsAppAppWebhookResponse$inboundSchema: z.ZodType<
   SetupWhatsAppAppWebhookResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: components.WhatsAppWebhookSetup$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: components.WhatsAppWebhookSetup$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type SetupWhatsAppAppWebhookResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -110,15 +116,17 @@ export const SetupWhatsAppAppWebhookResponse$outboundSchema: z.ZodType<
   SetupWhatsAppAppWebhookResponse$Outbound,
   z.ZodTypeDef,
   SetupWhatsAppAppWebhookResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: components.WhatsAppWebhookSetup$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: components.WhatsAppWebhookSetup$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function setupWhatsAppAppWebhookResponseToJSON(
   setupWhatsAppAppWebhookResponse: SetupWhatsAppAppWebhookResponse,

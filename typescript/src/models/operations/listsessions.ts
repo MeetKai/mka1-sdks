@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const ListSessionsRequest$inboundSchema: z.ZodType<
   ListSessionsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_key: z.nullable(z.string()).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_key": "sessionKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_key: z.nullable(z.string()).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_key": "sessionKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListSessionsRequest$Outbound = {
   session_key?: string | null | undefined;
@@ -44,15 +46,17 @@ export const ListSessionsRequest$outboundSchema: z.ZodType<
   ListSessionsRequest$Outbound,
   z.ZodTypeDef,
   ListSessionsRequest
-> = z.object({
-  sessionKey: z.nullable(z.string()).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionKey: "session_key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionKey: z.nullable(z.string()).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionKey: "session_key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listSessionsRequestToJSON(
   listSessionsRequest: ListSessionsRequest,

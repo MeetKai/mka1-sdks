@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateMemoryStoreRequest$inboundSchema: z.ZodType<
   CreateMemoryStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateMemoryStoreRequest: components.CreateMemoryStoreRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateMemoryStoreRequest": "createMemoryStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateMemoryStoreRequest: components.CreateMemoryStoreRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateMemoryStoreRequest": "createMemoryStoreRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateMemoryStoreRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,18 @@ export const CreateMemoryStoreRequest$outboundSchema: z.ZodType<
   CreateMemoryStoreRequest$Outbound,
   z.ZodTypeDef,
   CreateMemoryStoreRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createMemoryStoreRequest: components.CreateMemoryStoreRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createMemoryStoreRequest: "CreateMemoryStoreRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createMemoryStoreRequest:
+      components.CreateMemoryStoreRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createMemoryStoreRequest: "CreateMemoryStoreRequest",
+    });
+  })
+);
 
 export function createMemoryStoreRequestToJSON(
   createMemoryStoreRequest: CreateMemoryStoreRequest,

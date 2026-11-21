@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -61,11 +61,13 @@ export type SupportCase = {
 };
 
 /** @internal */
-export const Itsm$inboundSchema: z.ZodType<Itsm, z.ZodTypeDef, unknown> = z
-  .object({
-    provider: z.string(),
-    reference: z.string(),
-  });
+export const Itsm$inboundSchema: z.ZodType<Itsm, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      provider: z.string(),
+      reference: z.string(),
+    })
+  );
 /** @internal */
 export type Itsm$Outbound = {
   provider: string;
@@ -74,10 +76,12 @@ export type Itsm$Outbound = {
 
 /** @internal */
 export const Itsm$outboundSchema: z.ZodType<Itsm$Outbound, z.ZodTypeDef, Itsm> =
-  z.object({
-    provider: z.string(),
-    reference: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      provider: z.string(),
+      reference: z.string(),
+    })
+  );
 
 export function itsmToJSON(itsm: Itsm): string {
   return JSON.stringify(Itsm$outboundSchema.parse(itsm));
@@ -97,32 +101,38 @@ export const SupportCase$inboundSchema: z.ZodType<
   SupportCase,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  number: z.number().int(),
-  team_id: z.nullable(z.string()),
-  created_by: z.string(),
-  subject: z.string(),
-  description: z.string(),
-  severity: SupportCaseSeverity$inboundSchema,
-  component: z.nullable(StatusComponentId$inboundSchema),
-  status: SupportCaseStatus$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  resolved_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  itsm: z.nullable(z.lazy(() => Itsm$inboundSchema)),
-  updates: z.array(SupportCaseUpdate$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "team_id": "teamId",
-    "created_by": "createdBy",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "resolved_at": "resolvedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    number: z.number().int(),
+    team_id: z.nullable(z.string()),
+    created_by: z.string(),
+    subject: z.string(),
+    description: z.string(),
+    severity: SupportCaseSeverity$inboundSchema,
+    component: z.nullable(StatusComponentId$inboundSchema),
+    status: SupportCaseStatus$inboundSchema,
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    resolved_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    itsm: z.nullable(z.lazy(() => Itsm$inboundSchema)),
+    updates: z.array(SupportCaseUpdate$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "team_id": "teamId",
+      "created_by": "createdBy",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "resolved_at": "resolvedAt",
+    });
+  })
+);
 /** @internal */
 export type SupportCase$Outbound = {
   id: string;
@@ -146,30 +156,32 @@ export const SupportCase$outboundSchema: z.ZodType<
   SupportCase$Outbound,
   z.ZodTypeDef,
   SupportCase
-> = z.object({
-  id: z.string(),
-  number: z.number().int(),
-  teamId: z.nullable(z.string()),
-  createdBy: z.string(),
-  subject: z.string(),
-  description: z.string(),
-  severity: SupportCaseSeverity$outboundSchema,
-  component: z.nullable(StatusComponentId$outboundSchema),
-  status: SupportCaseStatus$outboundSchema,
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  resolvedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  itsm: z.nullable(z.lazy(() => Itsm$outboundSchema)),
-  updates: z.array(SupportCaseUpdate$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    teamId: "team_id",
-    createdBy: "created_by",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    resolvedAt: "resolved_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    number: z.number().int(),
+    teamId: z.nullable(z.string()),
+    createdBy: z.string(),
+    subject: z.string(),
+    description: z.string(),
+    severity: SupportCaseSeverity$outboundSchema,
+    component: z.nullable(StatusComponentId$outboundSchema),
+    status: SupportCaseStatus$outboundSchema,
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    resolvedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    itsm: z.nullable(z.lazy(() => Itsm$outboundSchema)),
+    updates: z.array(SupportCaseUpdate$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      teamId: "team_id",
+      createdBy: "created_by",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      resolvedAt: "resolved_at",
+    });
+  })
+);
 
 export function supportCaseToJSON(supportCase: SupportCase): string {
   return JSON.stringify(SupportCase$outboundSchema.parse(supportCase));

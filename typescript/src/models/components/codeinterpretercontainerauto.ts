@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,8 +38,8 @@ export type CodeInterpreterContainerAuto = {
 };
 
 /** @internal */
-export const MemoryLimit$inboundSchema: z.ZodNativeEnum<typeof MemoryLimit> = z
-  .nativeEnum(MemoryLimit);
+export const MemoryLimit$inboundSchema: z.ZodNativeEnum<typeof MemoryLimit> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MemoryLimit));
 /** @internal */
 export const MemoryLimit$outboundSchema: z.ZodNativeEnum<typeof MemoryLimit> =
   MemoryLimit$inboundSchema;
@@ -49,18 +49,20 @@ export const CodeInterpreterContainerAuto$inboundSchema: z.ZodType<
   CodeInterpreterContainerAuto,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("auto"),
-  session_scope: SandboxSessionScope$inboundSchema.optional(),
-  file_ids: z.nullable(z.array(z.string())).optional(),
-  memory_limit: z.nullable(MemoryLimit$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_scope": "sessionScope",
-    "file_ids": "fileIds",
-    "memory_limit": "memoryLimit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+    session_scope: SandboxSessionScope$inboundSchema.optional(),
+    file_ids: z.nullable(z.array(z.string())).optional(),
+    memory_limit: z.nullable(MemoryLimit$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_scope": "sessionScope",
+      "file_ids": "fileIds",
+      "memory_limit": "memoryLimit",
+    });
+  })
+);
 /** @internal */
 export type CodeInterpreterContainerAuto$Outbound = {
   type: "auto";
@@ -74,18 +76,20 @@ export const CodeInterpreterContainerAuto$outboundSchema: z.ZodType<
   CodeInterpreterContainerAuto$Outbound,
   z.ZodTypeDef,
   CodeInterpreterContainerAuto
-> = z.object({
-  type: z.literal("auto"),
-  sessionScope: SandboxSessionScope$outboundSchema.optional(),
-  fileIds: z.nullable(z.array(z.string())).optional(),
-  memoryLimit: z.nullable(MemoryLimit$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionScope: "session_scope",
-    fileIds: "file_ids",
-    memoryLimit: "memory_limit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+    sessionScope: SandboxSessionScope$outboundSchema.optional(),
+    fileIds: z.nullable(z.array(z.string())).optional(),
+    memoryLimit: z.nullable(MemoryLimit$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionScope: "session_scope",
+      fileIds: "file_ids",
+      memoryLimit: "memory_limit",
+    });
+  })
+);
 
 export function codeInterpreterContainerAutoToJSON(
   codeInterpreterContainerAuto: CodeInterpreterContainerAuto,

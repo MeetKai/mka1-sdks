@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,7 +45,7 @@ export type ListFilesRequest = {
 /** @internal */
 export const ListFilesQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListFilesQueryParamOrder
-> = z.nativeEnum(ListFilesQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListFilesQueryParamOrder));
 /** @internal */
 export const ListFilesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListFilesQueryParamOrder
@@ -51,7 +54,7 @@ export const ListFilesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const QueryParamPurpose$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamPurpose
-> = z.nativeEnum(QueryParamPurpose);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamPurpose));
 /** @internal */
 export const QueryParamPurpose$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamPurpose
@@ -62,18 +65,20 @@ export const ListFilesRequest$inboundSchema: z.ZodType<
   ListFilesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(10000),
-  order: ListFilesQueryParamOrder$inboundSchema.default("desc"),
-  purpose: QueryParamPurpose$inboundSchema.optional(),
-  sha256: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(10000),
+    order: ListFilesQueryParamOrder$inboundSchema.default("desc"),
+    purpose: QueryParamPurpose$inboundSchema.optional(),
+    sha256: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListFilesRequest$Outbound = {
   after?: string | undefined;
@@ -89,18 +94,22 @@ export const ListFilesRequest$outboundSchema: z.ZodType<
   ListFilesRequest$Outbound,
   z.ZodTypeDef,
   ListFilesRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(10000),
-  order: ListFilesQueryParamOrder$outboundSchema.default("desc"),
-  purpose: QueryParamPurpose$outboundSchema.optional(),
-  sha256: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(10000),
+    order: ListFilesQueryParamOrder$outboundSchema.default("desc"),
+    purpose: QueryParamPurpose$outboundSchema.optional(),
+    sha256: z.string().refine(matchesPattern$("^[0-9a-f]{64}$"), {
+      message: "Value must match pattern ^[0-9a-f]{64}$",
+    }).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listFilesRequestToJSON(
   listFilesRequest: ListFilesRequest,

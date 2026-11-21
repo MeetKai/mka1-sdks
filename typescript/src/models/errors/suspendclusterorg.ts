@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -205,19 +206,21 @@ export const SuspendClusterOrgAuthClusterResponse429ResponseBody$inboundSchema:
     SuspendClusterOrgAuthClusterResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SuspendClusterOrgAuthClusterResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SuspendClusterOrgAuthClusterResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponse429ResponseBody$Outbound = {
@@ -230,11 +233,13 @@ export const SuspendClusterOrgAuthClusterResponse429ResponseBody$outboundSchema:
     SuspendClusterOrgAuthClusterResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     SuspendClusterOrgAuthClusterResponse429ResponseBody
-  > = z.instanceof(SuspendClusterOrgAuthClusterResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SuspendClusterOrgAuthClusterResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SuspendClusterOrgAuthClusterResponse410ResponseBody$inboundSchema:
@@ -242,19 +247,21 @@ export const SuspendClusterOrgAuthClusterResponse410ResponseBody$inboundSchema:
     SuspendClusterOrgAuthClusterResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SuspendClusterOrgAuthClusterResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SuspendClusterOrgAuthClusterResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponse410ResponseBody$Outbound = {
@@ -267,11 +274,13 @@ export const SuspendClusterOrgAuthClusterResponse410ResponseBody$outboundSchema:
     SuspendClusterOrgAuthClusterResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     SuspendClusterOrgAuthClusterResponse410ResponseBody
-  > = z.instanceof(SuspendClusterOrgAuthClusterResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SuspendClusterOrgAuthClusterResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SuspendClusterOrgAuthClusterResponse409ResponseBody$inboundSchema:
@@ -279,19 +288,21 @@ export const SuspendClusterOrgAuthClusterResponse409ResponseBody$inboundSchema:
     SuspendClusterOrgAuthClusterResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SuspendClusterOrgAuthClusterResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SuspendClusterOrgAuthClusterResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponse409ResponseBody$Outbound = {
@@ -304,11 +315,13 @@ export const SuspendClusterOrgAuthClusterResponse409ResponseBody$outboundSchema:
     SuspendClusterOrgAuthClusterResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     SuspendClusterOrgAuthClusterResponse409ResponseBody
-  > = z.instanceof(SuspendClusterOrgAuthClusterResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SuspendClusterOrgAuthClusterResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SuspendClusterOrgAuthClusterResponse404ResponseBody$inboundSchema:
@@ -316,19 +329,21 @@ export const SuspendClusterOrgAuthClusterResponse404ResponseBody$inboundSchema:
     SuspendClusterOrgAuthClusterResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SuspendClusterOrgAuthClusterResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SuspendClusterOrgAuthClusterResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponse404ResponseBody$Outbound = {
@@ -341,11 +356,13 @@ export const SuspendClusterOrgAuthClusterResponse404ResponseBody$outboundSchema:
     SuspendClusterOrgAuthClusterResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     SuspendClusterOrgAuthClusterResponse404ResponseBody
-  > = z.instanceof(SuspendClusterOrgAuthClusterResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SuspendClusterOrgAuthClusterResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SuspendClusterOrgAuthClusterResponseResponseBody$inboundSchema:
@@ -353,20 +370,22 @@ export const SuspendClusterOrgAuthClusterResponseResponseBody$inboundSchema:
     SuspendClusterOrgAuthClusterResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SuspendClusterOrgAuthClusterResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SuspendClusterOrgAuthClusterResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponseResponseBody$Outbound = {
@@ -380,31 +399,35 @@ export const SuspendClusterOrgAuthClusterResponseResponseBody$outboundSchema:
     SuspendClusterOrgAuthClusterResponseResponseBody$Outbound,
     z.ZodTypeDef,
     SuspendClusterOrgAuthClusterResponseResponseBody
-  > = z.instanceof(SuspendClusterOrgAuthClusterResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SuspendClusterOrgAuthClusterResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const SuspendClusterOrgAuthClusterResponseBody$inboundSchema: z.ZodType<
   SuspendClusterOrgAuthClusterResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new SuspendClusterOrgAuthClusterResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new SuspendClusterOrgAuthClusterResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type SuspendClusterOrgAuthClusterResponseBody$Outbound = {
@@ -416,30 +439,34 @@ export const SuspendClusterOrgAuthClusterResponseBody$outboundSchema: z.ZodType<
   SuspendClusterOrgAuthClusterResponseBody$Outbound,
   z.ZodTypeDef,
   SuspendClusterOrgAuthClusterResponseBody
-> = z.instanceof(SuspendClusterOrgAuthClusterResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(SuspendClusterOrgAuthClusterResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const SuspendClusterOrgResponseBody$inboundSchema: z.ZodType<
   SuspendClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new SuspendClusterOrgResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new SuspendClusterOrgResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type SuspendClusterOrgResponseBody$Outbound = {
@@ -451,8 +478,10 @@ export const SuspendClusterOrgResponseBody$outboundSchema: z.ZodType<
   SuspendClusterOrgResponseBody$Outbound,
   z.ZodTypeDef,
   SuspendClusterOrgResponseBody
-> = z.instanceof(SuspendClusterOrgResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(SuspendClusterOrgResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -82,47 +82,49 @@ export const EvalErrorAnalysisObject$inboundSchema: z.ZodType<
   EvalErrorAnalysisObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.error_analysis"),
-  suite_id: z.string(),
-  suite_version: z.number().int(),
-  model: z.string(),
-  metric_id: z.string(),
-  kind: EvalErrorAnalysisKind$inboundSchema,
-  status: EvalErrorAnalysisStatus$inboundSchema,
-  analyzer_model: z.string(),
-  prompt_version: z.string(),
-  cache_key: z.string(),
-  selection: z.record(z.any()),
-  samples_analysed: z.number().int(),
-  usage: z.nullable(EvalErrorAnalysisUsage$inboundSchema),
-  error: z.nullable(z.string()),
-  created_by: z.nullable(z.string()),
-  created_at: z.number().int(),
-  started_at: z.nullable(z.number().int()),
-  finished_at: z.nullable(z.number().int()),
-  sample_ids: z.array(EvalErrorAnalysisSampleRef$inboundSchema),
-  tags: z.array(EvalErrorAnalysisTag$inboundSchema),
-  report: z.nullable(EvalErrorAnalysisReport$inboundSchema),
-  report_markdown: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "metric_id": "metricId",
-    "analyzer_model": "analyzerModel",
-    "prompt_version": "promptVersion",
-    "cache_key": "cacheKey",
-    "samples_analysed": "samplesAnalysed",
-    "created_by": "createdBy",
-    "created_at": "createdAt",
-    "started_at": "startedAt",
-    "finished_at": "finishedAt",
-    "sample_ids": "sampleIds",
-    "report_markdown": "reportMarkdown",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.error_analysis"),
+    suite_id: z.string(),
+    suite_version: z.number().int(),
+    model: z.string(),
+    metric_id: z.string(),
+    kind: EvalErrorAnalysisKind$inboundSchema,
+    status: EvalErrorAnalysisStatus$inboundSchema,
+    analyzer_model: z.string(),
+    prompt_version: z.string(),
+    cache_key: z.string(),
+    selection: z.record(z.any()),
+    samples_analysed: z.number().int(),
+    usage: z.nullable(EvalErrorAnalysisUsage$inboundSchema),
+    error: z.nullable(z.string()),
+    created_by: z.nullable(z.string()),
+    created_at: z.number().int(),
+    started_at: z.nullable(z.number().int()),
+    finished_at: z.nullable(z.number().int()),
+    sample_ids: z.array(EvalErrorAnalysisSampleRef$inboundSchema),
+    tags: z.array(EvalErrorAnalysisTag$inboundSchema),
+    report: z.nullable(EvalErrorAnalysisReport$inboundSchema),
+    report_markdown: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "metric_id": "metricId",
+      "analyzer_model": "analyzerModel",
+      "prompt_version": "promptVersion",
+      "cache_key": "cacheKey",
+      "samples_analysed": "samplesAnalysed",
+      "created_by": "createdBy",
+      "created_at": "createdAt",
+      "started_at": "startedAt",
+      "finished_at": "finishedAt",
+      "sample_ids": "sampleIds",
+      "report_markdown": "reportMarkdown",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisObject$Outbound = {
   id: string;
@@ -155,47 +157,49 @@ export const EvalErrorAnalysisObject$outboundSchema: z.ZodType<
   EvalErrorAnalysisObject$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.error_analysis"),
-  suiteId: z.string(),
-  suiteVersion: z.number().int(),
-  model: z.string(),
-  metricId: z.string(),
-  kind: EvalErrorAnalysisKind$outboundSchema,
-  status: EvalErrorAnalysisStatus$outboundSchema,
-  analyzerModel: z.string(),
-  promptVersion: z.string(),
-  cacheKey: z.string(),
-  selection: z.record(z.any()),
-  samplesAnalysed: z.number().int(),
-  usage: z.nullable(EvalErrorAnalysisUsage$outboundSchema),
-  error: z.nullable(z.string()),
-  createdBy: z.nullable(z.string()),
-  createdAt: z.number().int(),
-  startedAt: z.nullable(z.number().int()),
-  finishedAt: z.nullable(z.number().int()),
-  sampleIds: z.array(EvalErrorAnalysisSampleRef$outboundSchema),
-  tags: z.array(EvalErrorAnalysisTag$outboundSchema),
-  report: z.nullable(EvalErrorAnalysisReport$outboundSchema),
-  reportMarkdown: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    metricId: "metric_id",
-    analyzerModel: "analyzer_model",
-    promptVersion: "prompt_version",
-    cacheKey: "cache_key",
-    samplesAnalysed: "samples_analysed",
-    createdBy: "created_by",
-    createdAt: "created_at",
-    startedAt: "started_at",
-    finishedAt: "finished_at",
-    sampleIds: "sample_ids",
-    reportMarkdown: "report_markdown",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.error_analysis"),
+    suiteId: z.string(),
+    suiteVersion: z.number().int(),
+    model: z.string(),
+    metricId: z.string(),
+    kind: EvalErrorAnalysisKind$outboundSchema,
+    status: EvalErrorAnalysisStatus$outboundSchema,
+    analyzerModel: z.string(),
+    promptVersion: z.string(),
+    cacheKey: z.string(),
+    selection: z.record(z.any()),
+    samplesAnalysed: z.number().int(),
+    usage: z.nullable(EvalErrorAnalysisUsage$outboundSchema),
+    error: z.nullable(z.string()),
+    createdBy: z.nullable(z.string()),
+    createdAt: z.number().int(),
+    startedAt: z.nullable(z.number().int()),
+    finishedAt: z.nullable(z.number().int()),
+    sampleIds: z.array(EvalErrorAnalysisSampleRef$outboundSchema),
+    tags: z.array(EvalErrorAnalysisTag$outboundSchema),
+    report: z.nullable(EvalErrorAnalysisReport$outboundSchema),
+    reportMarkdown: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      metricId: "metric_id",
+      analyzerModel: "analyzer_model",
+      promptVersion: "prompt_version",
+      cacheKey: "cache_key",
+      samplesAnalysed: "samples_analysed",
+      createdBy: "created_by",
+      createdAt: "created_at",
+      startedAt: "started_at",
+      finishedAt: "finished_at",
+      sampleIds: "sample_ids",
+      reportMarkdown: "report_markdown",
+    });
+  })
+);
 
 export function evalErrorAnalysisObjectToJSON(
   evalErrorAnalysisObject: EvalErrorAnalysisObject,

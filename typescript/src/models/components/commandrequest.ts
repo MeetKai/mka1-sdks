@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,25 +25,27 @@ export const CommandRequest$inboundSchema: z.ZodType<
   CommandRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  command_request_id: z.nullable(z.string()).optional(),
-  command: z.string(),
-  args: z.array(z.string()).optional(),
-  cwd: z.nullable(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  timeout_seconds: z.number().int().default(60),
-  domain_secrets_revision: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_token": "sessionToken",
-    "command_request_id": "commandRequestId",
-    "timeout_seconds": "timeoutSeconds",
-    "domain_secrets_revision": "domainSecretsRevision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    command_request_id: z.nullable(z.string()).optional(),
+    command: z.string(),
+    args: z.array(z.string()).optional(),
+    cwd: z.nullable(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    timeout_seconds: z.number().int().default(60),
+    domain_secrets_revision: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_token": "sessionToken",
+      "command_request_id": "commandRequestId",
+      "timeout_seconds": "timeoutSeconds",
+      "domain_secrets_revision": "domainSecretsRevision",
+    });
+  })
+);
 /** @internal */
 export type CommandRequest$Outbound = {
   session_id: string;
@@ -62,25 +64,27 @@ export const CommandRequest$outboundSchema: z.ZodType<
   CommandRequest$Outbound,
   z.ZodTypeDef,
   CommandRequest
-> = z.object({
-  sessionId: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  commandRequestId: z.nullable(z.string()).optional(),
-  command: z.string(),
-  args: z.array(z.string()).optional(),
-  cwd: z.nullable(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  timeoutSeconds: z.number().int().default(60),
-  domainSecretsRevision: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionToken: "session_token",
-    commandRequestId: "command_request_id",
-    timeoutSeconds: "timeout_seconds",
-    domainSecretsRevision: "domain_secrets_revision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    commandRequestId: z.nullable(z.string()).optional(),
+    command: z.string(),
+    args: z.array(z.string()).optional(),
+    cwd: z.nullable(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    timeoutSeconds: z.number().int().default(60),
+    domainSecretsRevision: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionToken: "session_token",
+      commandRequestId: "command_request_id",
+      timeoutSeconds: "timeout_seconds",
+      domainSecretsRevision: "domain_secrets_revision",
+    });
+  })
+);
 
 export function commandRequestToJSON(commandRequest: CommandRequest): string {
   return JSON.stringify(CommandRequest$outboundSchema.parse(commandRequest));

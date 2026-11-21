@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,8 +63,8 @@ export type McpCredential = {
 };
 
 /** @internal */
-export const AuthType$inboundSchema: z.ZodNativeEnum<typeof AuthType> = z
-  .nativeEnum(AuthType);
+export const AuthType$inboundSchema: z.ZodNativeEnum<typeof AuthType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuthType));
 /** @internal */
 export const AuthType$outboundSchema: z.ZodNativeEnum<typeof AuthType> =
   AuthType$inboundSchema;
@@ -72,7 +72,7 @@ export const AuthType$outboundSchema: z.ZodNativeEnum<typeof AuthType> =
 /** @internal */
 export const McpCredentialStatus$inboundSchema: z.ZodNativeEnum<
   typeof McpCredentialStatus
-> = z.nativeEnum(McpCredentialStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(McpCredentialStatus));
 /** @internal */
 export const McpCredentialStatus$outboundSchema: z.ZodNativeEnum<
   typeof McpCredentialStatus
@@ -83,40 +83,46 @@ export const McpCredential$inboundSchema: z.ZodType<
   McpCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("mcp.credential"),
-  server_id: z.string(),
-  name: z.nullable(z.string()),
-  auth_type: AuthType$inboundSchema,
-  authorization_preview: z.nullable(z.string()),
-  header_names: z.array(z.string()),
-  status: McpCredentialStatus$inboundSchema,
-  scopes: z.nullable(z.array(z.string())),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  last_used_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  revoked_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "auth_type": "authType",
-    "authorization_preview": "authorizationPreview",
-    "header_names": "headerNames",
-    "expires_at": "expiresAt",
-    "last_used_at": "lastUsedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "revoked_at": "revokedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("mcp.credential"),
+    server_id: z.string(),
+    name: z.nullable(z.string()),
+    auth_type: AuthType$inboundSchema,
+    authorization_preview: z.nullable(z.string()),
+    header_names: z.array(z.string()),
+    status: McpCredentialStatus$inboundSchema,
+    scopes: z.nullable(z.array(z.string())),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    last_used_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    revoked_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "auth_type": "authType",
+      "authorization_preview": "authorizationPreview",
+      "header_names": "headerNames",
+      "expires_at": "expiresAt",
+      "last_used_at": "lastUsedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "revoked_at": "revokedAt",
+    });
+  })
+);
 /** @internal */
 export type McpCredential$Outbound = {
   id: string;
@@ -140,34 +146,36 @@ export const McpCredential$outboundSchema: z.ZodType<
   McpCredential$Outbound,
   z.ZodTypeDef,
   McpCredential
-> = z.object({
-  id: z.string(),
-  object: z.literal("mcp.credential"),
-  serverId: z.string(),
-  name: z.nullable(z.string()),
-  authType: AuthType$outboundSchema,
-  authorizationPreview: z.nullable(z.string()),
-  headerNames: z.array(z.string()),
-  status: McpCredentialStatus$outboundSchema,
-  scopes: z.nullable(z.array(z.string())),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  revokedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    authType: "auth_type",
-    authorizationPreview: "authorization_preview",
-    headerNames: "header_names",
-    expiresAt: "expires_at",
-    lastUsedAt: "last_used_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    revokedAt: "revoked_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("mcp.credential"),
+    serverId: z.string(),
+    name: z.nullable(z.string()),
+    authType: AuthType$outboundSchema,
+    authorizationPreview: z.nullable(z.string()),
+    headerNames: z.array(z.string()),
+    status: McpCredentialStatus$outboundSchema,
+    scopes: z.nullable(z.array(z.string())),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    revokedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      authType: "auth_type",
+      authorizationPreview: "authorization_preview",
+      headerNames: "header_names",
+      expiresAt: "expires_at",
+      lastUsedAt: "last_used_at",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      revokedAt: "revoked_at",
+    });
+  })
+);
 
 export function mcpCredentialToJSON(mcpCredential: McpCredential): string {
   return JSON.stringify(McpCredential$outboundSchema.parse(mcpCredential));

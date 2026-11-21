@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,21 +36,23 @@ export const GetComputeUsageRequest$inboundSchema: z.ZodType<
   GetComputeUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  resource_type: components.ComputeUsageResourceType$inboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    resource_type: components.ComputeUsageResourceType$inboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetComputeUsageRequest$Outbound = {
   from?: string | undefined;
@@ -66,19 +68,21 @@ export const GetComputeUsageRequest$outboundSchema: z.ZodType<
   GetComputeUsageRequest$Outbound,
   z.ZodTypeDef,
   GetComputeUsageRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  resourceType: components.ComputeUsageResourceType$outboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    resourceType: components.ComputeUsageResourceType$outboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getComputeUsageRequestToJSON(
   getComputeUsageRequest: GetComputeUsageRequest,
@@ -102,10 +106,12 @@ export const GetComputeUsageResponse$inboundSchema: z.ZodType<
   GetComputeUsageResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeUsage$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeUsage$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type GetComputeUsageResponse$Outbound =
   | components.ComputeUsage$Outbound
@@ -116,10 +122,12 @@ export const GetComputeUsageResponse$outboundSchema: z.ZodType<
   GetComputeUsageResponse$Outbound,
   z.ZodTypeDef,
   GetComputeUsageResponse
-> = z.union([
-  components.ComputeUsage$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeUsage$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function getComputeUsageResponseToJSON(
   getComputeUsageResponse: GetComputeUsageResponse,

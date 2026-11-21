@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const UpdateToolPolicyRequest$inboundSchema: z.ZodType<
   UpdateToolPolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rules: z.array(ToolPolicyRule$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.array(ToolPolicyRule$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateToolPolicyRequest$Outbound = {
   rules: Array<ToolPolicyRule$Outbound>;
@@ -38,9 +40,11 @@ export const UpdateToolPolicyRequest$outboundSchema: z.ZodType<
   UpdateToolPolicyRequest$Outbound,
   z.ZodTypeDef,
   UpdateToolPolicyRequest
-> = z.object({
-  rules: z.array(ToolPolicyRule$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.array(ToolPolicyRule$outboundSchema),
+  })
+);
 
 export function updateToolPolicyRequestToJSON(
   updateToolPolicyRequest: UpdateToolPolicyRequest,

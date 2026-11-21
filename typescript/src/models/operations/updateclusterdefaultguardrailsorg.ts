@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -20,17 +20,19 @@ export const UpdateClusterDefaultGuardrailsOrgRequest$inboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  UpdateClusterDefaultGuardrailsOrgRequest:
-    components.UpdateClusterDefaultGuardrailsOrgRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "UpdateClusterDefaultGuardrailsOrgRequest":
-      "updateClusterDefaultGuardrailsOrgRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    UpdateClusterDefaultGuardrailsOrgRequest:
+      components.UpdateClusterDefaultGuardrailsOrgRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "UpdateClusterDefaultGuardrailsOrgRequest":
+        "updateClusterDefaultGuardrailsOrgRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateClusterDefaultGuardrailsOrgRequest$Outbound = {
   org_id: string;
@@ -43,17 +45,19 @@ export const UpdateClusterDefaultGuardrailsOrgRequest$outboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsOrgRequest$Outbound,
   z.ZodTypeDef,
   UpdateClusterDefaultGuardrailsOrgRequest
-> = z.object({
-  orgId: z.string(),
-  updateClusterDefaultGuardrailsOrgRequest:
-    components.UpdateClusterDefaultGuardrailsOrgRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
     updateClusterDefaultGuardrailsOrgRequest:
-      "UpdateClusterDefaultGuardrailsOrgRequest",
-  });
-});
+      components.UpdateClusterDefaultGuardrailsOrgRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      updateClusterDefaultGuardrailsOrgRequest:
+        "UpdateClusterDefaultGuardrailsOrgRequest",
+    });
+  })
+);
 
 export function updateClusterDefaultGuardrailsOrgRequestToJSON(
   updateClusterDefaultGuardrailsOrgRequest:

@@ -16,6 +16,12 @@ type SetTeamModelAccessNotFoundError struct {
 var _ error = &SetTeamModelAccessNotFoundError{}
 
 func (e *SetTeamModelAccessNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +35,12 @@ type SetTeamModelAccessForbiddenError struct {
 var _ error = &SetTeamModelAccessForbiddenError{}
 
 func (e *SetTeamModelAccessForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +54,12 @@ type SetTeamModelAccessUnauthorizedError struct {
 var _ error = &SetTeamModelAccessUnauthorizedError{}
 
 func (e *SetTeamModelAccessUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +73,12 @@ type SetTeamModelAccessBadRequestError struct {
 var _ error = &SetTeamModelAccessBadRequestError{}
 
 func (e *SetTeamModelAccessBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

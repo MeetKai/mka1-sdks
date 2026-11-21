@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const GetGuardrailsResourcePolicyResponse$inboundSchema: z.ZodType<
   GetGuardrailsResourcePolicyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_resource_policy"),
-  policy: z.nullable(GuardrailsResourcePolicy$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_resource_policy"),
+    policy: z.nullable(GuardrailsResourcePolicy$inboundSchema),
+  })
+);
 /** @internal */
 export type GetGuardrailsResourcePolicyResponse$Outbound = {
   object: "guardrails_resource_policy";
@@ -38,10 +40,12 @@ export const GetGuardrailsResourcePolicyResponse$outboundSchema: z.ZodType<
   GetGuardrailsResourcePolicyResponse$Outbound,
   z.ZodTypeDef,
   GetGuardrailsResourcePolicyResponse
-> = z.object({
-  object: z.literal("guardrails_resource_policy"),
-  policy: z.nullable(GuardrailsResourcePolicy$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_resource_policy"),
+    policy: z.nullable(GuardrailsResourcePolicy$outboundSchema),
+  })
+);
 
 export function getGuardrailsResourcePolicyResponseToJSON(
   getGuardrailsResourcePolicyResponse: GetGuardrailsResourcePolicyResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,18 +21,20 @@ export const ScrollAction$inboundSchema: z.ZodType<
   ScrollAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("scroll"),
-  scroll_x: z.number().int(),
-  scroll_y: z.number().int(),
-  x: z.number().int(),
-  y: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "scroll_x": "scrollX",
-    "scroll_y": "scrollY",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("scroll"),
+    scroll_x: z.number().int(),
+    scroll_y: z.number().int(),
+    x: z.number().int(),
+    y: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "scroll_x": "scrollX",
+      "scroll_y": "scrollY",
+    });
+  })
+);
 /** @internal */
 export type ScrollAction$Outbound = {
   type: "scroll";
@@ -47,18 +49,20 @@ export const ScrollAction$outboundSchema: z.ZodType<
   ScrollAction$Outbound,
   z.ZodTypeDef,
   ScrollAction
-> = z.object({
-  type: z.literal("scroll"),
-  scrollX: z.number().int(),
-  scrollY: z.number().int(),
-  x: z.number().int(),
-  y: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    scrollX: "scroll_x",
-    scrollY: "scroll_y",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("scroll"),
+    scrollX: z.number().int(),
+    scrollY: z.number().int(),
+    x: z.number().int(),
+    y: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      scrollX: "scroll_x",
+      scrollY: "scroll_y",
+    });
+  })
+);
 
 export function scrollActionToJSON(scrollAction: ScrollAction): string {
   return JSON.stringify(ScrollAction$outboundSchema.parse(scrollAction));

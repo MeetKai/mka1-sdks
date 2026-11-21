@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -58,20 +58,22 @@ export const ResponseEffectivePermission$inboundSchema: z.ZodType<
   ResponseEffectivePermission,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("response.permission"),
-  response_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  role: z.nullable(ResourcePermissionRole$inboundSchema),
-  source: ResourcePermissionSource$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("response.permission"),
+    response_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    role: z.nullable(ResourcePermissionRole$inboundSchema),
+    source: ResourcePermissionSource$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type ResponseEffectivePermission$Outbound = {
   object: "response.permission";
@@ -87,20 +89,22 @@ export const ResponseEffectivePermission$outboundSchema: z.ZodType<
   ResponseEffectivePermission$Outbound,
   z.ZodTypeDef,
   ResponseEffectivePermission
-> = z.object({
-  object: z.literal("response.permission"),
-  responseId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  role: z.nullable(ResourcePermissionRole$outboundSchema),
-  source: ResourcePermissionSource$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("response.permission"),
+    responseId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    role: z.nullable(ResourcePermissionRole$outboundSchema),
+    source: ResourcePermissionSource$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function responseEffectivePermissionToJSON(
   responseEffectivePermission: ResponseEffectivePermission,

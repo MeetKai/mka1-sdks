@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,7 +39,8 @@ export type OpenApiParameter = {
 };
 
 /** @internal */
-export const In$inboundSchema: z.ZodNativeEnum<typeof In> = z.nativeEnum(In);
+export const In$inboundSchema: z.ZodNativeEnum<typeof In> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(In));
 /** @internal */
 export const In$outboundSchema: z.ZodNativeEnum<typeof In> = In$inboundSchema;
 
@@ -48,13 +49,15 @@ export const OpenApiParameter$inboundSchema: z.ZodType<
   OpenApiParameter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  in: In$inboundSchema,
-  required: z.boolean().default(false),
-  description: z.string().optional(),
-  schema: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    in: In$inboundSchema,
+    required: z.boolean().default(false),
+    description: z.string().optional(),
+    schema: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type OpenApiParameter$Outbound = {
   name: string;
@@ -69,13 +72,15 @@ export const OpenApiParameter$outboundSchema: z.ZodType<
   OpenApiParameter$Outbound,
   z.ZodTypeDef,
   OpenApiParameter
-> = z.object({
-  name: z.string(),
-  in: In$outboundSchema,
-  required: z.boolean().default(false),
-  description: z.string().optional(),
-  schema: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    in: In$outboundSchema,
+    required: z.boolean().default(false),
+    description: z.string().optional(),
+    schema: z.record(z.any()).optional(),
+  })
+);
 
 export function openApiParameterToJSON(
   openApiParameter: OpenApiParameter,

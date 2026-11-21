@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,19 +23,21 @@ export const ComputeScalingInput$inboundSchema: z.ZodType<
   ComputeScalingInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  idle_timeout_seconds: z.number().int().optional(),
-  max_replicas: z.number().int(),
-  min_replicas: z.number().int(),
-  target_concurrency_per_replica: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "idle_timeout_seconds": "idleTimeoutSeconds",
-    "max_replicas": "maxReplicas",
-    "min_replicas": "minReplicas",
-    "target_concurrency_per_replica": "targetConcurrencyPerReplica",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idle_timeout_seconds: z.number().int().optional(),
+    max_replicas: z.number().int(),
+    min_replicas: z.number().int(),
+    target_concurrency_per_replica: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "idle_timeout_seconds": "idleTimeoutSeconds",
+      "max_replicas": "maxReplicas",
+      "min_replicas": "minReplicas",
+      "target_concurrency_per_replica": "targetConcurrencyPerReplica",
+    });
+  })
+);
 /** @internal */
 export type ComputeScalingInput$Outbound = {
   idle_timeout_seconds?: number | undefined;
@@ -49,19 +51,21 @@ export const ComputeScalingInput$outboundSchema: z.ZodType<
   ComputeScalingInput$Outbound,
   z.ZodTypeDef,
   ComputeScalingInput
-> = z.object({
-  idleTimeoutSeconds: z.number().int().optional(),
-  maxReplicas: z.number().int(),
-  minReplicas: z.number().int(),
-  targetConcurrencyPerReplica: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    idleTimeoutSeconds: "idle_timeout_seconds",
-    maxReplicas: "max_replicas",
-    minReplicas: "min_replicas",
-    targetConcurrencyPerReplica: "target_concurrency_per_replica",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idleTimeoutSeconds: z.number().int().optional(),
+    maxReplicas: z.number().int(),
+    minReplicas: z.number().int(),
+    targetConcurrencyPerReplica: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      idleTimeoutSeconds: "idle_timeout_seconds",
+      maxReplicas: "max_replicas",
+      minReplicas: "min_replicas",
+      targetConcurrencyPerReplica: "target_concurrency_per_replica",
+    });
+  })
+);
 
 export function computeScalingInputToJSON(
   computeScalingInput: ComputeScalingInput,

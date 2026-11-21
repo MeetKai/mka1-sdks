@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateSsoPolicyTooManyRequestsError struct {
 var _ error = &UpdateSsoPolicyTooManyRequestsError{}
 
 func (e *UpdateSsoPolicyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateSsoPolicyGoneError struct {
 var _ error = &UpdateSsoPolicyGoneError{}
 
 func (e *UpdateSsoPolicyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateSsoPolicyConflictError struct {
 var _ error = &UpdateSsoPolicyConflictError{}
 
 func (e *UpdateSsoPolicyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateSsoPolicyNotFoundError struct {
 var _ error = &UpdateSsoPolicyNotFoundError{}
 
 func (e *UpdateSsoPolicyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateSsoPolicyForbiddenError struct {
 var _ error = &UpdateSsoPolicyForbiddenError{}
 
 func (e *UpdateSsoPolicyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateSsoPolicyUnauthorizedError struct {
 var _ error = &UpdateSsoPolicyUnauthorizedError{}
 
 func (e *UpdateSsoPolicyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateSsoPolicyBadRequestError struct {
 var _ error = &UpdateSsoPolicyBadRequestError{}
 
 func (e *UpdateSsoPolicyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

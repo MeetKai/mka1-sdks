@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type Filters =
 /** @internal */
 export const CompoundFilterType$inboundSchema: z.ZodNativeEnum<
   typeof CompoundFilterType
-> = z.nativeEnum(CompoundFilterType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CompoundFilterType));
 /** @internal */
 export const CompoundFilterType$outboundSchema: z.ZodNativeEnum<
   typeof CompoundFilterType
@@ -58,25 +58,31 @@ export const CompoundFilter$inboundSchema: z.ZodType<
   CompoundFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: CompoundFilterType$inboundSchema,
-  filters: z.array(
-    z.union([
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-      z.lazy(() => CompoundFilter$inboundSchema).and(
-        z.object({ type: z.literal("and") }),
-      ),
-      z.lazy(() => CompoundFilter$inboundSchema).and(
-        z.object({ type: z.literal("or") }),
-      ),
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CompoundFilterType$inboundSchema,
+    filters: z.array(
+      z.union([
+        ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+        ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+        ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+        ComparisonFilter$inboundSchema.and(
+          z.object({ type: z.literal("gte") }),
+        ),
+        ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+        ComparisonFilter$inboundSchema.and(
+          z.object({ type: z.literal("lte") }),
+        ),
+        z.lazy(() => CompoundFilter$inboundSchema).and(
+          z.object({ type: z.literal("and") }),
+        ),
+        z.lazy(() => CompoundFilter$inboundSchema).and(
+          z.object({ type: z.literal("or") }),
+        ),
+      ]),
+    ),
+  })
+);
 /** @internal */
 export type CompoundFilter$Outbound = {
   type: string;
@@ -97,25 +103,39 @@ export const CompoundFilter$outboundSchema: z.ZodType<
   CompoundFilter$Outbound,
   z.ZodTypeDef,
   CompoundFilter
-> = z.object({
-  type: CompoundFilterType$outboundSchema,
-  filters: z.array(
-    z.union([
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-      z.lazy(() => CompoundFilter$outboundSchema).and(
-        z.object({ type: z.literal("and") }),
-      ),
-      z.lazy(() => CompoundFilter$outboundSchema).and(
-        z.object({ type: z.literal("or") }),
-      ),
-    ]),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: CompoundFilterType$outboundSchema,
+    filters: z.array(
+      z.union([
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("eq") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("ne") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gt") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gte") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lt") }),
+        ),
+        ComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lte") }),
+        ),
+        z.lazy(() => CompoundFilter$outboundSchema).and(
+          z.object({ type: z.literal("and") }),
+        ),
+        z.lazy(() => CompoundFilter$outboundSchema).and(
+          z.object({ type: z.literal("or") }),
+        ),
+      ]),
+    ),
+  })
+);
 
 export function compoundFilterToJSON(compoundFilter: CompoundFilter): string {
   return JSON.stringify(CompoundFilter$outboundSchema.parse(compoundFilter));
@@ -132,20 +152,22 @@ export function compoundFilterFromJSON(
 
 /** @internal */
 export const Filters$inboundSchema: z.ZodType<Filters, z.ZodTypeDef, unknown> =
-  z.union([
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-    z.lazy(() => CompoundFilter$inboundSchema).and(
-      z.object({ type: z.literal("and") }),
-    ),
-    z.lazy(() => CompoundFilter$inboundSchema).and(
-      z.object({ type: z.literal("or") }),
-    ),
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
+      z.lazy(() => CompoundFilter$inboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      z.lazy(() => CompoundFilter$inboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    ])
+  );
 /** @internal */
 export type Filters$Outbound =
   | (ComparisonFilter$Outbound & { type: "eq" })
@@ -162,20 +184,22 @@ export const Filters$outboundSchema: z.ZodType<
   Filters$Outbound,
   z.ZodTypeDef,
   Filters
-> = z.union([
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-  z.lazy(() => CompoundFilter$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => CompoundFilter$outboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+    z.lazy(() => CompoundFilter$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => CompoundFilter$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function filtersToJSON(filters: Filters): string {
   return JSON.stringify(Filters$outboundSchema.parse(filters));

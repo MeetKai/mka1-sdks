@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateSupportCaseRequest$inboundSchema: z.ZodType<
   CreateSupportCaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateSupportCaseRequest: components.CreateSupportCaseRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateSupportCaseRequest": "createSupportCaseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateSupportCaseRequest: components.CreateSupportCaseRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateSupportCaseRequest": "createSupportCaseRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateSupportCaseRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,18 @@ export const CreateSupportCaseRequest$outboundSchema: z.ZodType<
   CreateSupportCaseRequest$Outbound,
   z.ZodTypeDef,
   CreateSupportCaseRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createSupportCaseRequest: components.CreateSupportCaseRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createSupportCaseRequest: "CreateSupportCaseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createSupportCaseRequest:
+      components.CreateSupportCaseRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createSupportCaseRequest: "CreateSupportCaseRequest",
+    });
+  })
+);
 
 export function createSupportCaseRequestToJSON(
   createSupportCaseRequest: CreateSupportCaseRequest,

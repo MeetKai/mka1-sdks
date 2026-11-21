@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,18 +31,20 @@ export const GitHubPullRequestRequest$inboundSchema: z.ZodType<
   GitHubPullRequestRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  branch: z.string(),
-  title: z.string(),
-  body: z.string().default(""),
-  base: z.nullable(z.string()).optional(),
-  draft: z.boolean().default(false),
-  checkout_path: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    "checkout_path": "checkoutPath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    branch: z.string(),
+    title: z.string(),
+    body: z.string().default(""),
+    base: z.nullable(z.string()).optional(),
+    draft: z.boolean().default(false),
+    checkout_path: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      "checkout_path": "checkoutPath",
+    });
+  })
+);
 /** @internal */
 export type GitHubPullRequestRequest$Outbound = {
   branch: string;
@@ -58,18 +60,20 @@ export const GitHubPullRequestRequest$outboundSchema: z.ZodType<
   GitHubPullRequestRequest$Outbound,
   z.ZodTypeDef,
   GitHubPullRequestRequest
-> = z.object({
-  branch: z.string(),
-  title: z.string(),
-  body: z.string().default(""),
-  base: z.nullable(z.string()).optional(),
-  draft: z.boolean().default(false),
-  checkoutPath: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    checkoutPath: "checkout_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    branch: z.string(),
+    title: z.string(),
+    body: z.string().default(""),
+    base: z.nullable(z.string()).optional(),
+    draft: z.boolean().default(false),
+    checkoutPath: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      checkoutPath: "checkout_path",
+    });
+  })
+);
 
 export function gitHubPullRequestRequestToJSON(
   gitHubPullRequestRequest: GitHubPullRequestRequest,

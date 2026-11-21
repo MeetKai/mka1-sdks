@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -125,10 +125,12 @@ export const Location$inboundSchema: z.ZodType<
   Location,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  VectorStoreConnectorS3Location$inboundSchema,
-  VectorStoreConnectorSharePointLocation$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VectorStoreConnectorS3Location$inboundSchema,
+    VectorStoreConnectorSharePointLocation$inboundSchema,
+  ])
+);
 /** @internal */
 export type Location$Outbound =
   | VectorStoreConnectorS3Location$Outbound
@@ -139,10 +141,12 @@ export const Location$outboundSchema: z.ZodType<
   Location$Outbound,
   z.ZodTypeDef,
   Location
-> = z.union([
-  VectorStoreConnectorS3Location$outboundSchema,
-  VectorStoreConnectorSharePointLocation$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VectorStoreConnectorS3Location$outboundSchema,
+    VectorStoreConnectorSharePointLocation$outboundSchema,
+  ])
+);
 
 export function locationToJSON(location: Location): string {
   return JSON.stringify(Location$outboundSchema.parse(location));
@@ -162,10 +166,12 @@ export const VectorStoreConnectorChunkingStrategy$inboundSchema: z.ZodType<
   VectorStoreConnectorChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  auto: VectorStoreConnectorAutoChunking$inboundSchema,
-  static: VectorStoreConnectorStaticChunking$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    auto: VectorStoreConnectorAutoChunking$inboundSchema,
+    static: VectorStoreConnectorStaticChunking$inboundSchema,
+  })
+);
 /** @internal */
 export type VectorStoreConnectorChunkingStrategy$Outbound =
   | VectorStoreConnectorAutoChunking$Outbound
@@ -176,10 +182,12 @@ export const VectorStoreConnectorChunkingStrategy$outboundSchema: z.ZodType<
   VectorStoreConnectorChunkingStrategy$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorChunkingStrategy
-> = z.union([
-  VectorStoreConnectorAutoChunking$outboundSchema,
-  VectorStoreConnectorStaticChunking$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    VectorStoreConnectorAutoChunking$outboundSchema,
+    VectorStoreConnectorStaticChunking$outboundSchema,
+  ])
+);
 
 export function vectorStoreConnectorChunkingStrategyToJSON(
   vectorStoreConnectorChunkingStrategy: VectorStoreConnectorChunkingStrategy,
@@ -206,51 +214,53 @@ export const VectorStoreConnector$inboundSchema: z.ZodType<
   VectorStoreConnector,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector"),
-  type: VectorStoreConnectorType$inboundSchema,
-  name: z.string(),
-  location: z.union([
-    VectorStoreConnectorS3Location$inboundSchema,
-    VectorStoreConnectorSharePointLocation$inboundSchema,
-  ]),
-  credentials_configured: z.literal(true),
-  api_key_id: z.string(),
-  include_patterns: z.array(z.string()),
-  exclude_patterns: z.array(z.string()),
-  chunking_strategy: z.nullable(
-    discriminatedUnion("type", {
-      auto: VectorStoreConnectorAutoChunking$inboundSchema,
-      static: VectorStoreConnectorStaticChunking$inboundSchema,
-    }),
-  ),
-  auto_sync: z.boolean(),
-  sync_interval_minutes: z.number().int(),
-  next_sync_at: z.nullable(z.number().int()),
-  status: VectorStoreConnectorStatus$inboundSchema,
-  last_error: z.nullable(z.string()),
-  last_run: z.nullable(VectorStoreConnectorRunSummary$inboundSchema),
-  vector_store_ids: z.array(z.string()),
-  created_at: z.number().int(),
-  updated_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "credentials_configured": "credentialsConfigured",
-    "api_key_id": "apiKeyId",
-    "include_patterns": "includePatterns",
-    "exclude_patterns": "excludePatterns",
-    "chunking_strategy": "chunkingStrategy",
-    "auto_sync": "autoSync",
-    "sync_interval_minutes": "syncIntervalMinutes",
-    "next_sync_at": "nextSyncAt",
-    "last_error": "lastError",
-    "last_run": "lastRun",
-    "vector_store_ids": "vectorStoreIds",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector"),
+    type: VectorStoreConnectorType$inboundSchema,
+    name: z.string(),
+    location: z.union([
+      VectorStoreConnectorS3Location$inboundSchema,
+      VectorStoreConnectorSharePointLocation$inboundSchema,
+    ]),
+    credentials_configured: z.literal(true),
+    api_key_id: z.string(),
+    include_patterns: z.array(z.string()),
+    exclude_patterns: z.array(z.string()),
+    chunking_strategy: z.nullable(
+      discriminatedUnion("type", {
+        auto: VectorStoreConnectorAutoChunking$inboundSchema,
+        static: VectorStoreConnectorStaticChunking$inboundSchema,
+      }),
+    ),
+    auto_sync: z.boolean(),
+    sync_interval_minutes: z.number().int(),
+    next_sync_at: z.nullable(z.number().int()),
+    status: VectorStoreConnectorStatus$inboundSchema,
+    last_error: z.nullable(z.string()),
+    last_run: z.nullable(VectorStoreConnectorRunSummary$inboundSchema),
+    vector_store_ids: z.array(z.string()),
+    created_at: z.number().int(),
+    updated_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "credentials_configured": "credentialsConfigured",
+      "api_key_id": "apiKeyId",
+      "include_patterns": "includePatterns",
+      "exclude_patterns": "excludePatterns",
+      "chunking_strategy": "chunkingStrategy",
+      "auto_sync": "autoSync",
+      "sync_interval_minutes": "syncIntervalMinutes",
+      "next_sync_at": "nextSyncAt",
+      "last_error": "lastError",
+      "last_run": "lastRun",
+      "vector_store_ids": "vectorStoreIds",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnector$Outbound = {
   id: string;
@@ -284,51 +294,53 @@ export const VectorStoreConnector$outboundSchema: z.ZodType<
   VectorStoreConnector$Outbound,
   z.ZodTypeDef,
   VectorStoreConnector
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector"),
-  type: VectorStoreConnectorType$outboundSchema,
-  name: z.string(),
-  location: z.union([
-    VectorStoreConnectorS3Location$outboundSchema,
-    VectorStoreConnectorSharePointLocation$outboundSchema,
-  ]),
-  credentialsConfigured: z.literal(true),
-  apiKeyId: z.string(),
-  includePatterns: z.array(z.string()),
-  excludePatterns: z.array(z.string()),
-  chunkingStrategy: z.nullable(
-    z.union([
-      VectorStoreConnectorAutoChunking$outboundSchema,
-      VectorStoreConnectorStaticChunking$outboundSchema,
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector"),
+    type: VectorStoreConnectorType$outboundSchema,
+    name: z.string(),
+    location: z.union([
+      VectorStoreConnectorS3Location$outboundSchema,
+      VectorStoreConnectorSharePointLocation$outboundSchema,
     ]),
-  ),
-  autoSync: z.boolean(),
-  syncIntervalMinutes: z.number().int(),
-  nextSyncAt: z.nullable(z.number().int()),
-  status: VectorStoreConnectorStatus$outboundSchema,
-  lastError: z.nullable(z.string()),
-  lastRun: z.nullable(VectorStoreConnectorRunSummary$outboundSchema),
-  vectorStoreIds: z.array(z.string()),
-  createdAt: z.number().int(),
-  updatedAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    credentialsConfigured: "credentials_configured",
-    apiKeyId: "api_key_id",
-    includePatterns: "include_patterns",
-    excludePatterns: "exclude_patterns",
-    chunkingStrategy: "chunking_strategy",
-    autoSync: "auto_sync",
-    syncIntervalMinutes: "sync_interval_minutes",
-    nextSyncAt: "next_sync_at",
-    lastError: "last_error",
-    lastRun: "last_run",
-    vectorStoreIds: "vector_store_ids",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+    credentialsConfigured: z.literal(true),
+    apiKeyId: z.string(),
+    includePatterns: z.array(z.string()),
+    excludePatterns: z.array(z.string()),
+    chunkingStrategy: z.nullable(
+      z.union([
+        VectorStoreConnectorAutoChunking$outboundSchema,
+        VectorStoreConnectorStaticChunking$outboundSchema,
+      ]),
+    ),
+    autoSync: z.boolean(),
+    syncIntervalMinutes: z.number().int(),
+    nextSyncAt: z.nullable(z.number().int()),
+    status: VectorStoreConnectorStatus$outboundSchema,
+    lastError: z.nullable(z.string()),
+    lastRun: z.nullable(VectorStoreConnectorRunSummary$outboundSchema),
+    vectorStoreIds: z.array(z.string()),
+    createdAt: z.number().int(),
+    updatedAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      credentialsConfigured: "credentials_configured",
+      apiKeyId: "api_key_id",
+      includePatterns: "include_patterns",
+      excludePatterns: "exclude_patterns",
+      chunkingStrategy: "chunking_strategy",
+      autoSync: "auto_sync",
+      syncIntervalMinutes: "sync_interval_minutes",
+      nextSyncAt: "next_sync_at",
+      lastError: "last_error",
+      lastRun: "last_run",
+      vectorStoreIds: "vector_store_ids",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function vectorStoreConnectorToJSON(
   vectorStoreConnector: VectorStoreConnector,

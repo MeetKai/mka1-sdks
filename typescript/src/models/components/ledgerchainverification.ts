@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,15 +31,17 @@ export const LedgerChainVerification$inboundSchema: z.ZodType<
   LedgerChainVerification,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  chainId: z.string(),
-  totalEntries: z.number().int(),
-  prunedThroughSequence: z.nullable(z.number().int()),
-  lastSequence: z.nullable(z.number().int()),
-  lastHash: z.nullable(z.string()),
-  isValid: z.boolean(),
-  issues: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chainId: z.string(),
+    totalEntries: z.number().int(),
+    prunedThroughSequence: z.nullable(z.number().int()),
+    lastSequence: z.nullable(z.number().int()),
+    lastHash: z.nullable(z.string()),
+    isValid: z.boolean(),
+    issues: z.array(z.string()),
+  })
+);
 /** @internal */
 export type LedgerChainVerification$Outbound = {
   chainId: string;
@@ -56,15 +58,17 @@ export const LedgerChainVerification$outboundSchema: z.ZodType<
   LedgerChainVerification$Outbound,
   z.ZodTypeDef,
   LedgerChainVerification
-> = z.object({
-  chainId: z.string(),
-  totalEntries: z.number().int(),
-  prunedThroughSequence: z.nullable(z.number().int()),
-  lastSequence: z.nullable(z.number().int()),
-  lastHash: z.nullable(z.string()),
-  isValid: z.boolean(),
-  issues: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chainId: z.string(),
+    totalEntries: z.number().int(),
+    prunedThroughSequence: z.nullable(z.number().int()),
+    lastSequence: z.nullable(z.number().int()),
+    lastHash: z.nullable(z.string()),
+    isValid: z.boolean(),
+    issues: z.array(z.string()),
+  })
+);
 
 export function ledgerChainVerificationToJSON(
   ledgerChainVerification: LedgerChainVerification,

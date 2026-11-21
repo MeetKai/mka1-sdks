@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const DeletedSkill$inboundSchema: z.ZodType<
   DeletedSkill,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-  object: z.literal("skill.deleted").default("skill.deleted"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+    object: z.literal("skill.deleted").default("skill.deleted"),
+  })
+);
 /** @internal */
 export type DeletedSkill$Outbound = {
   id: string;
@@ -35,11 +37,13 @@ export const DeletedSkill$outboundSchema: z.ZodType<
   DeletedSkill$Outbound,
   z.ZodTypeDef,
   DeletedSkill
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-  object: z.literal("skill.deleted").default("skill.deleted" as const),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+    object: z.literal("skill.deleted").default("skill.deleted" as const),
+  })
+);
 
 export function deletedSkillToJSON(deletedSkill: DeletedSkill): string {
   return JSON.stringify(DeletedSkill$outboundSchema.parse(deletedSkill));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,15 +31,17 @@ export const GetOAuthClientConfigurationRequest$inboundSchema: z.ZodType<
   GetOAuthClientConfigurationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  client_id: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "client_id": "clientId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    client_id: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "client_id": "clientId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetOAuthClientConfigurationRequest$Outbound = {
   client_id?: string | undefined;
@@ -51,15 +53,17 @@ export const GetOAuthClientConfigurationRequest$outboundSchema: z.ZodType<
   GetOAuthClientConfigurationRequest$Outbound,
   z.ZodTypeDef,
   GetOAuthClientConfigurationRequest
-> = z.object({
-  clientId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    clientId: "client_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    clientId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      clientId: "client_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getOAuthClientConfigurationRequestToJSON(
   getOAuthClientConfigurationRequest: GetOAuthClientConfigurationRequest,
@@ -86,12 +90,14 @@ export const GetOAuthClientConfigurationResponseBody$inboundSchema: z.ZodType<
   GetOAuthClientConfigurationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  issuer: z.string(),
-  resource: z.string(),
-  clientId: z.string(),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    issuer: z.string(),
+    resource: z.string(),
+    clientId: z.string(),
+    scopes: z.array(z.string()),
+  })
+);
 /** @internal */
 export type GetOAuthClientConfigurationResponseBody$Outbound = {
   issuer: string;
@@ -105,12 +111,14 @@ export const GetOAuthClientConfigurationResponseBody$outboundSchema: z.ZodType<
   GetOAuthClientConfigurationResponseBody$Outbound,
   z.ZodTypeDef,
   GetOAuthClientConfigurationResponseBody
-> = z.object({
-  issuer: z.string(),
-  resource: z.string(),
-  clientId: z.string(),
-  scopes: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    issuer: z.string(),
+    resource: z.string(),
+    clientId: z.string(),
+    scopes: z.array(z.string()),
+  })
+);
 
 export function getOAuthClientConfigurationResponseBodyToJSON(
   getOAuthClientConfigurationResponseBody:

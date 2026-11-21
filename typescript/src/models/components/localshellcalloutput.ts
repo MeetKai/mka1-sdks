@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,12 +30,14 @@ export const LocalShellCallOutput$inboundSchema: z.ZodType<
   LocalShellCallOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("local_shell_call_output"),
-  id: z.string(),
-  output: z.string(),
-  status: Status$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell_call_output"),
+    id: z.string(),
+    output: z.string(),
+    status: Status$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type LocalShellCallOutput$Outbound = {
   type: "local_shell_call_output";
@@ -49,12 +51,14 @@ export const LocalShellCallOutput$outboundSchema: z.ZodType<
   LocalShellCallOutput$Outbound,
   z.ZodTypeDef,
   LocalShellCallOutput
-> = z.object({
-  type: z.literal("local_shell_call_output"),
-  id: z.string(),
-  output: z.string(),
-  status: Status$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell_call_output"),
+    id: z.string(),
+    output: z.string(),
+    status: Status$outboundSchema.optional(),
+  })
+);
 
 export function localShellCallOutputToJSON(
   localShellCallOutput: LocalShellCallOutput,

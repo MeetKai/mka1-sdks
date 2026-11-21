@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,7 +26,7 @@ export type ComputeVolumeData = {
 /** @internal */
 export const ComputeVolumeDataType$inboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeDataType
-> = z.nativeEnum(ComputeVolumeDataType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ComputeVolumeDataType));
 /** @internal */
 export const ComputeVolumeDataType$outboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeDataType
@@ -37,17 +37,19 @@ export const ComputeVolumeData$inboundSchema: z.ZodType<
   ComputeVolumeData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  resolved_revision: z.nullable(z.string()),
-  revision: z.nullable(z.string()),
-  type: ComputeVolumeDataType$inboundSchema,
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "resolved_revision": "resolvedRevision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    resolved_revision: z.nullable(z.string()),
+    revision: z.nullable(z.string()),
+    type: ComputeVolumeDataType$inboundSchema,
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resolved_revision": "resolvedRevision",
+    });
+  })
+);
 /** @internal */
 export type ComputeVolumeData$Outbound = {
   path: string;
@@ -62,17 +64,19 @@ export const ComputeVolumeData$outboundSchema: z.ZodType<
   ComputeVolumeData$Outbound,
   z.ZodTypeDef,
   ComputeVolumeData
-> = z.object({
-  path: z.string(),
-  resolvedRevision: z.nullable(z.string()),
-  revision: z.nullable(z.string()),
-  type: ComputeVolumeDataType$outboundSchema,
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    resolvedRevision: "resolved_revision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    resolvedRevision: z.nullable(z.string()),
+    revision: z.nullable(z.string()),
+    type: ComputeVolumeDataType$outboundSchema,
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      resolvedRevision: "resolved_revision",
+    });
+  })
+);
 
 export function computeVolumeDataToJSON(
   computeVolumeData: ComputeVolumeData,

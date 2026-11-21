@@ -10,7 +10,10 @@ from meetkai_mka1.types import (
     UNSET,
     UNSET_SENTINEL,
     UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
 )
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import validate_const
 import pydantic
 from pydantic import model_serializer
@@ -124,6 +127,9 @@ class VectorStoreFile(BaseModel):
     r"""Key-value pairs attached to the file: the caller's attributes, at most 16, and the gateway's own 'filename' and 'purpose'. Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 1024 characters, booleans, or numbers. The string limit is higher than the OpenAI API's 512."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -145,11 +151,15 @@ class VectorStoreFile(BaseModel):
                 "processed_page_count",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

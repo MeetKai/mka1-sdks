@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,10 +44,12 @@ export const GetOrgInboundRulesSecurity$inboundSchema: z.ZodType<
   GetOrgInboundRulesSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type GetOrgInboundRulesSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -59,10 +61,12 @@ export const GetOrgInboundRulesSecurity$outboundSchema: z.ZodType<
   GetOrgInboundRulesSecurity$Outbound,
   z.ZodTypeDef,
   GetOrgInboundRulesSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function getOrgInboundRulesSecurityToJSON(
   getOrgInboundRulesSecurity: GetOrgInboundRulesSecurity,
@@ -86,14 +90,16 @@ export const GetOrgInboundRulesRequest$inboundSchema: z.ZodType<
   GetOrgInboundRulesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetOrgInboundRulesRequest$Outbound = {
   orgId: string;
@@ -105,14 +111,16 @@ export const GetOrgInboundRulesRequest$outboundSchema: z.ZodType<
   GetOrgInboundRulesRequest$Outbound,
   z.ZodTypeDef,
   GetOrgInboundRulesRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getOrgInboundRulesRequestToJSON(
   getOrgInboundRulesRequest: GetOrgInboundRulesRequest,
@@ -136,12 +144,14 @@ export const GetOrgInboundRulesRules$inboundSchema: z.ZodType<
   GetOrgInboundRulesRules,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  cidr: z.string(),
-  description: z.nullable(z.string()),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    cidr: z.string(),
+    description: z.nullable(z.string()),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type GetOrgInboundRulesRules$Outbound = {
   id: string;
@@ -155,12 +165,14 @@ export const GetOrgInboundRulesRules$outboundSchema: z.ZodType<
   GetOrgInboundRulesRules$Outbound,
   z.ZodTypeDef,
   GetOrgInboundRulesRules
-> = z.object({
-  id: z.string(),
-  cidr: z.string(),
-  description: z.nullable(z.string()),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    cidr: z.string(),
+    description: z.nullable(z.string()),
+    createdAt: z.string(),
+  })
+);
 
 export function getOrgInboundRulesRulesToJSON(
   getOrgInboundRulesRules: GetOrgInboundRulesRules,
@@ -184,13 +196,15 @@ export const GetOrgInboundRulesResponseBody$inboundSchema: z.ZodType<
   GetOrgInboundRulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  available: z.boolean(),
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => GetOrgInboundRulesRules$inboundSchema)),
-  updatedAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    available: z.boolean(),
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => GetOrgInboundRulesRules$inboundSchema)),
+    updatedAt: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type GetOrgInboundRulesResponseBody$Outbound = {
   id: string;
@@ -205,13 +219,15 @@ export const GetOrgInboundRulesResponseBody$outboundSchema: z.ZodType<
   GetOrgInboundRulesResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgInboundRulesResponseBody
-> = z.object({
-  id: z.string(),
-  available: z.boolean(),
-  enabled: z.boolean(),
-  rules: z.array(z.lazy(() => GetOrgInboundRulesRules$outboundSchema)),
-  updatedAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    available: z.boolean(),
+    enabled: z.boolean(),
+    rules: z.array(z.lazy(() => GetOrgInboundRulesRules$outboundSchema)),
+    updatedAt: z.nullable(z.string()),
+  })
+);
 
 export function getOrgInboundRulesResponseBodyToJSON(
   getOrgInboundRulesResponseBody: GetOrgInboundRulesResponseBody,

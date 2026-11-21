@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,13 +38,15 @@ export const ScoreBreakdown$inboundSchema: z.ZodType<
   ScoreBreakdown,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector: z.nullable(z.number()),
-  keyword: z.nullable(z.number()),
-  fused: z.nullable(z.number()),
-  graph: z.nullable(z.number()),
-  rerank: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector: z.nullable(z.number()),
+    keyword: z.nullable(z.number()),
+    fused: z.nullable(z.number()),
+    graph: z.nullable(z.number()),
+    rerank: z.nullable(z.number()),
+  })
+);
 /** @internal */
 export type ScoreBreakdown$Outbound = {
   vector: number | null;
@@ -59,13 +61,15 @@ export const ScoreBreakdown$outboundSchema: z.ZodType<
   ScoreBreakdown$Outbound,
   z.ZodTypeDef,
   ScoreBreakdown
-> = z.object({
-  vector: z.nullable(z.number()),
-  keyword: z.nullable(z.number()),
-  fused: z.nullable(z.number()),
-  graph: z.nullable(z.number()),
-  rerank: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector: z.nullable(z.number()),
+    keyword: z.nullable(z.number()),
+    fused: z.nullable(z.number()),
+    graph: z.nullable(z.number()),
+    rerank: z.nullable(z.number()),
+  })
+);
 
 export function scoreBreakdownToJSON(scoreBreakdown: ScoreBreakdown): string {
   return JSON.stringify(ScoreBreakdown$outboundSchema.parse(scoreBreakdown));

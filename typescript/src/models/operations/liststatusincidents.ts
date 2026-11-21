@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -54,9 +54,8 @@ export type ListStatusIncidentsRequest = {
 };
 
 /** @internal */
-export const State$inboundSchema: z.ZodNativeEnum<typeof State> = z.nativeEnum(
-  State,
-);
+export const State$inboundSchema: z.ZodNativeEnum<typeof State> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(State));
 /** @internal */
 export const State$outboundSchema: z.ZodNativeEnum<typeof State> =
   State$inboundSchema;
@@ -66,21 +65,23 @@ export const ListStatusIncidentsRequest$inboundSchema: z.ZodType<
   ListStatusIncidentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  component: components.StatusComponentId$inboundSchema.optional(),
-  state: State$inboundSchema.optional(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  limit: z.number().int().default(20),
-  offset: z.number().int().default(0),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    component: components.StatusComponentId$inboundSchema.optional(),
+    state: State$inboundSchema.optional(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    limit: z.number().int().default(20),
+    offset: z.number().int().default(0),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListStatusIncidentsRequest$Outbound = {
   component?: string | undefined;
@@ -97,19 +98,21 @@ export const ListStatusIncidentsRequest$outboundSchema: z.ZodType<
   ListStatusIncidentsRequest$Outbound,
   z.ZodTypeDef,
   ListStatusIncidentsRequest
-> = z.object({
-  component: components.StatusComponentId$outboundSchema.optional(),
-  state: State$outboundSchema.optional(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  limit: z.number().int().default(20),
-  offset: z.number().int().default(0),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    component: components.StatusComponentId$outboundSchema.optional(),
+    state: State$outboundSchema.optional(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    limit: z.number().int().default(20),
+    offset: z.number().int().default(0),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listStatusIncidentsRequestToJSON(
   listStatusIncidentsRequest: ListStatusIncidentsRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
@@ -251,13 +251,15 @@ export const ListModelsRequest$inboundSchema: z.ZodType<
   ListModelsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListModelsRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -268,13 +270,15 @@ export const ListModelsRequest$outboundSchema: z.ZodType<
   ListModelsRequest$Outbound,
   z.ZodTypeDef,
   ListModelsRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listModelsRequestToJSON(
   listModelsRequest: ListModelsRequest,
@@ -296,7 +300,7 @@ export function listModelsRequestFromJSON(
 /** @internal */
 export const ListModelsModelType$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsModelType
-> = z.nativeEnum(ListModelsModelType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListModelsModelType));
 /** @internal */
 export const ListModelsModelType$outboundSchema: z.ZodNativeEnum<
   typeof ListModelsModelType
@@ -307,10 +311,12 @@ export const ListModelsMaxImageResolution$inboundSchema: z.ZodType<
   ListModelsMaxImageResolution,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 /** @internal */
 export type ListModelsMaxImageResolution$Outbound = {
   width: number;
@@ -322,10 +328,12 @@ export const ListModelsMaxImageResolution$outboundSchema: z.ZodType<
   ListModelsMaxImageResolution$Outbound,
   z.ZodTypeDef,
   ListModelsMaxImageResolution
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 
 export function listModelsMaxImageResolutionToJSON(
   listModelsMaxImageResolution: ListModelsMaxImageResolution,
@@ -351,10 +359,12 @@ export const ListModelsMinImageResolution$inboundSchema: z.ZodType<
   ListModelsMinImageResolution,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 /** @internal */
 export type ListModelsMinImageResolution$Outbound = {
   width: number;
@@ -366,10 +376,12 @@ export const ListModelsMinImageResolution$outboundSchema: z.ZodType<
   ListModelsMinImageResolution$Outbound,
   z.ZodTypeDef,
   ListModelsMinImageResolution
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 
 export function listModelsMinImageResolutionToJSON(
   listModelsMinImageResolution: ListModelsMinImageResolution,
@@ -395,11 +407,13 @@ export const ListModelsEmbeddingDimensionRange$inboundSchema: z.ZodType<
   ListModelsEmbeddingDimensionRange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 /** @internal */
 export type ListModelsEmbeddingDimensionRange$Outbound = {
   min: number;
@@ -412,11 +426,13 @@ export const ListModelsEmbeddingDimensionRange$outboundSchema: z.ZodType<
   ListModelsEmbeddingDimensionRange$Outbound,
   z.ZodTypeDef,
   ListModelsEmbeddingDimensionRange
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 
 export function listModelsEmbeddingDimensionRangeToJSON(
   listModelsEmbeddingDimensionRange: ListModelsEmbeddingDimensionRange,
@@ -440,7 +456,7 @@ export function listModelsEmbeddingDimensionRangeFromJSON(
 /** @internal */
 export const ListModelsWeights$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsWeights
-> = z.nativeEnum(ListModelsWeights);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListModelsWeights));
 /** @internal */
 export const ListModelsWeights$outboundSchema: z.ZodNativeEnum<
   typeof ListModelsWeights
@@ -451,11 +467,13 @@ export const TtsVoices$inboundSchema: z.ZodType<
   TtsVoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  language: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    language: z.string(),
+  })
+);
 /** @internal */
 export type TtsVoices$Outbound = {
   id: string;
@@ -468,11 +486,13 @@ export const TtsVoices$outboundSchema: z.ZodType<
   TtsVoices$Outbound,
   z.ZodTypeDef,
   TtsVoices
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  language: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    language: z.string(),
+  })
+);
 
 export function ttsVoicesToJSON(ttsVoices: TtsVoices): string {
   return JSON.stringify(TtsVoices$outboundSchema.parse(ttsVoices));
@@ -492,14 +512,16 @@ export const ListModelsTts$inboundSchema: z.ZodType<
   ListModelsTts,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  default_voice: z.record(z.string()),
-  voices: z.array(z.lazy(() => TtsVoices$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "default_voice": "defaultVoice",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    default_voice: z.record(z.string()),
+    voices: z.array(z.lazy(() => TtsVoices$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_voice": "defaultVoice",
+    });
+  })
+);
 /** @internal */
 export type ListModelsTts$Outbound = {
   default_voice: { [k: string]: string };
@@ -511,14 +533,16 @@ export const ListModelsTts$outboundSchema: z.ZodType<
   ListModelsTts$Outbound,
   z.ZodTypeDef,
   ListModelsTts
-> = z.object({
-  defaultVoice: z.record(z.string()),
-  voices: z.array(z.lazy(() => TtsVoices$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    defaultVoice: "default_voice",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultVoice: z.record(z.string()),
+    voices: z.array(z.lazy(() => TtsVoices$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      defaultVoice: "default_voice",
+    });
+  })
+);
 
 export function listModelsTtsToJSON(listModelsTts: ListModelsTts): string {
   return JSON.stringify(ListModelsTts$outboundSchema.parse(listModelsTts));
@@ -536,7 +560,7 @@ export function listModelsTtsFromJSON(
 /** @internal */
 export const ListModelsStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListModelsStatus
-> = z.nativeEnum(ListModelsStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListModelsStatus));
 /** @internal */
 export const ListModelsStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListModelsStatus
@@ -547,17 +571,19 @@ export const ListModelsLifecycle$inboundSchema: z.ZodType<
   ListModelsLifecycle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: ListModelsStatus$inboundSchema,
-  deprecated_at: z.nullable(z.string().transform(v => new RFCDate(v))),
-  retires_at: z.nullable(z.string().transform(v => new RFCDate(v))),
-  successor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "deprecated_at": "deprecatedAt",
-    "retires_at": "retiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: ListModelsStatus$inboundSchema,
+    deprecated_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+    retires_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+    successor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "deprecated_at": "deprecatedAt",
+      "retires_at": "retiresAt",
+    });
+  })
+);
 /** @internal */
 export type ListModelsLifecycle$Outbound = {
   status: string;
@@ -571,17 +597,21 @@ export const ListModelsLifecycle$outboundSchema: z.ZodType<
   ListModelsLifecycle$Outbound,
   z.ZodTypeDef,
   ListModelsLifecycle
-> = z.object({
-  status: ListModelsStatus$outboundSchema,
-  deprecatedAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  retiresAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  successor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    deprecatedAt: "deprecated_at",
-    retiresAt: "retires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: ListModelsStatus$outboundSchema,
+    deprecatedAt: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ),
+    retiresAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+    successor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      deprecatedAt: "deprecated_at",
+      retiresAt: "retires_at",
+    });
+  })
+);
 
 export function listModelsLifecycleToJSON(
   listModelsLifecycle: ListModelsLifecycle,
@@ -605,21 +635,23 @@ export const ListModelsCapabilities$inboundSchema: z.ZodType<
   ListModelsCapabilities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  supports_temperature: z.boolean(),
-  supports_top_p: z.boolean(),
-  supports_reasoning: z.boolean(),
-  supports_reasoning_effort: z.boolean(),
-  supports_structured_outputs: z.nullable(z.boolean()),
-}).transform((v) => {
-  return remap$(v, {
-    "supports_temperature": "supportsTemperature",
-    "supports_top_p": "supportsTopP",
-    "supports_reasoning": "supportsReasoning",
-    "supports_reasoning_effort": "supportsReasoningEffort",
-    "supports_structured_outputs": "supportsStructuredOutputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    supports_temperature: z.boolean(),
+    supports_top_p: z.boolean(),
+    supports_reasoning: z.boolean(),
+    supports_reasoning_effort: z.boolean(),
+    supports_structured_outputs: z.nullable(z.boolean()),
+  }).transform((v) => {
+    return remap$(v, {
+      "supports_temperature": "supportsTemperature",
+      "supports_top_p": "supportsTopP",
+      "supports_reasoning": "supportsReasoning",
+      "supports_reasoning_effort": "supportsReasoningEffort",
+      "supports_structured_outputs": "supportsStructuredOutputs",
+    });
+  })
+);
 /** @internal */
 export type ListModelsCapabilities$Outbound = {
   supports_temperature: boolean;
@@ -634,21 +666,23 @@ export const ListModelsCapabilities$outboundSchema: z.ZodType<
   ListModelsCapabilities$Outbound,
   z.ZodTypeDef,
   ListModelsCapabilities
-> = z.object({
-  supportsTemperature: z.boolean(),
-  supportsTopP: z.boolean(),
-  supportsReasoning: z.boolean(),
-  supportsReasoningEffort: z.boolean(),
-  supportsStructuredOutputs: z.nullable(z.boolean()),
-}).transform((v) => {
-  return remap$(v, {
-    supportsTemperature: "supports_temperature",
-    supportsTopP: "supports_top_p",
-    supportsReasoning: "supports_reasoning",
-    supportsReasoningEffort: "supports_reasoning_effort",
-    supportsStructuredOutputs: "supports_structured_outputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    supportsTemperature: z.boolean(),
+    supportsTopP: z.boolean(),
+    supportsReasoning: z.boolean(),
+    supportsReasoningEffort: z.boolean(),
+    supportsStructuredOutputs: z.nullable(z.boolean()),
+  }).transform((v) => {
+    return remap$(v, {
+      supportsTemperature: "supports_temperature",
+      supportsTopP: "supports_top_p",
+      supportsReasoning: "supports_reasoning",
+      supportsReasoningEffort: "supports_reasoning_effort",
+      supportsStructuredOutputs: "supports_structured_outputs",
+    });
+  })
+);
 
 export function listModelsCapabilitiesToJSON(
   listModelsCapabilities: ListModelsCapabilities,
@@ -672,13 +706,15 @@ export const ListModelsAlias$inboundSchema: z.ZodType<
   ListModelsAlias,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  served_model_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "served_model_id": "servedModelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    served_model_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "served_model_id": "servedModelId",
+    });
+  })
+);
 /** @internal */
 export type ListModelsAlias$Outbound = {
   served_model_id: string;
@@ -689,13 +725,15 @@ export const ListModelsAlias$outboundSchema: z.ZodType<
   ListModelsAlias$Outbound,
   z.ZodTypeDef,
   ListModelsAlias
-> = z.object({
-  servedModelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    servedModelId: "served_model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servedModelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      servedModelId: "served_model_id",
+    });
+  })
+);
 
 export function listModelsAliasToJSON(
   listModelsAlias: ListModelsAlias,
@@ -717,55 +755,57 @@ export const ListModelsData$inboundSchema: z.ZodType<
   ListModelsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("model"),
-  created: z.number().int(),
-  owned_by: z.string(),
-  model_type: ListModelsModelType$inboundSchema,
-  input_modalities: z.array(z.string()),
-  output_modalities: z.array(z.string()),
-  context_window: z.nullable(z.number().int()),
-  max_image_resolution: z.nullable(
-    z.lazy(() => ListModelsMaxImageResolution$inboundSchema),
-  ),
-  min_image_resolution: z.nullable(
-    z.lazy(() => ListModelsMinImageResolution$inboundSchema),
-  ),
-  embedding_dimension_range: z.nullable(
-    z.lazy(() => ListModelsEmbeddingDimensionRange$inboundSchema),
-  ),
-  parameter_count: z.nullable(z.number().int()),
-  active_parameter_count: z.nullable(z.number().int()),
-  release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
-  serving_locations: z.nullable(z.array(z.string())),
-  developer: z.nullable(z.string()),
-  base_model: z.nullable(z.string()),
-  weights: z.nullable(ListModelsWeights$inboundSchema),
-  license: z.nullable(z.string()),
-  languages: z.nullable(z.array(z.string())),
-  tts: z.nullable(z.lazy(() => ListModelsTts$inboundSchema)),
-  limitations: z.nullable(z.string()),
-  lifecycle: z.lazy(() => ListModelsLifecycle$inboundSchema),
-  capabilities: z.lazy(() => ListModelsCapabilities$inboundSchema),
-  alias: z.nullable(z.lazy(() => ListModelsAlias$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_by": "ownedBy",
-    "model_type": "modelType",
-    "input_modalities": "inputModalities",
-    "output_modalities": "outputModalities",
-    "context_window": "contextWindow",
-    "max_image_resolution": "maxImageResolution",
-    "min_image_resolution": "minImageResolution",
-    "embedding_dimension_range": "embeddingDimensionRange",
-    "parameter_count": "parameterCount",
-    "active_parameter_count": "activeParameterCount",
-    "release_date": "releaseDate",
-    "serving_locations": "servingLocations",
-    "base_model": "baseModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("model"),
+    created: z.number().int(),
+    owned_by: z.string(),
+    model_type: ListModelsModelType$inboundSchema,
+    input_modalities: z.array(z.string()),
+    output_modalities: z.array(z.string()),
+    context_window: z.nullable(z.number().int()),
+    max_image_resolution: z.nullable(
+      z.lazy(() => ListModelsMaxImageResolution$inboundSchema),
+    ),
+    min_image_resolution: z.nullable(
+      z.lazy(() => ListModelsMinImageResolution$inboundSchema),
+    ),
+    embedding_dimension_range: z.nullable(
+      z.lazy(() => ListModelsEmbeddingDimensionRange$inboundSchema),
+    ),
+    parameter_count: z.nullable(z.number().int()),
+    active_parameter_count: z.nullable(z.number().int()),
+    release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
+    serving_locations: z.nullable(z.array(z.string())),
+    developer: z.nullable(z.string()),
+    base_model: z.nullable(z.string()),
+    weights: z.nullable(ListModelsWeights$inboundSchema),
+    license: z.nullable(z.string()),
+    languages: z.nullable(z.array(z.string())),
+    tts: z.nullable(z.lazy(() => ListModelsTts$inboundSchema)),
+    limitations: z.nullable(z.string()),
+    lifecycle: z.lazy(() => ListModelsLifecycle$inboundSchema),
+    capabilities: z.lazy(() => ListModelsCapabilities$inboundSchema),
+    alias: z.nullable(z.lazy(() => ListModelsAlias$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_by": "ownedBy",
+      "model_type": "modelType",
+      "input_modalities": "inputModalities",
+      "output_modalities": "outputModalities",
+      "context_window": "contextWindow",
+      "max_image_resolution": "maxImageResolution",
+      "min_image_resolution": "minImageResolution",
+      "embedding_dimension_range": "embeddingDimensionRange",
+      "parameter_count": "parameterCount",
+      "active_parameter_count": "activeParameterCount",
+      "release_date": "releaseDate",
+      "serving_locations": "servingLocations",
+      "base_model": "baseModel",
+    });
+  })
+);
 /** @internal */
 export type ListModelsData$Outbound = {
   id: string;
@@ -800,55 +840,57 @@ export const ListModelsData$outboundSchema: z.ZodType<
   ListModelsData$Outbound,
   z.ZodTypeDef,
   ListModelsData
-> = z.object({
-  id: z.string(),
-  object: z.literal("model"),
-  created: z.number().int(),
-  ownedBy: z.string(),
-  modelType: ListModelsModelType$outboundSchema,
-  inputModalities: z.array(z.string()),
-  outputModalities: z.array(z.string()),
-  contextWindow: z.nullable(z.number().int()),
-  maxImageResolution: z.nullable(
-    z.lazy(() => ListModelsMaxImageResolution$outboundSchema),
-  ),
-  minImageResolution: z.nullable(
-    z.lazy(() => ListModelsMinImageResolution$outboundSchema),
-  ),
-  embeddingDimensionRange: z.nullable(
-    z.lazy(() => ListModelsEmbeddingDimensionRange$outboundSchema),
-  ),
-  parameterCount: z.nullable(z.number().int()),
-  activeParameterCount: z.nullable(z.number().int()),
-  releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  servingLocations: z.nullable(z.array(z.string())),
-  developer: z.nullable(z.string()),
-  baseModel: z.nullable(z.string()),
-  weights: z.nullable(ListModelsWeights$outboundSchema),
-  license: z.nullable(z.string()),
-  languages: z.nullable(z.array(z.string())),
-  tts: z.nullable(z.lazy(() => ListModelsTts$outboundSchema)),
-  limitations: z.nullable(z.string()),
-  lifecycle: z.lazy(() => ListModelsLifecycle$outboundSchema),
-  capabilities: z.lazy(() => ListModelsCapabilities$outboundSchema),
-  alias: z.nullable(z.lazy(() => ListModelsAlias$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    ownedBy: "owned_by",
-    modelType: "model_type",
-    inputModalities: "input_modalities",
-    outputModalities: "output_modalities",
-    contextWindow: "context_window",
-    maxImageResolution: "max_image_resolution",
-    minImageResolution: "min_image_resolution",
-    embeddingDimensionRange: "embedding_dimension_range",
-    parameterCount: "parameter_count",
-    activeParameterCount: "active_parameter_count",
-    releaseDate: "release_date",
-    servingLocations: "serving_locations",
-    baseModel: "base_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("model"),
+    created: z.number().int(),
+    ownedBy: z.string(),
+    modelType: ListModelsModelType$outboundSchema,
+    inputModalities: z.array(z.string()),
+    outputModalities: z.array(z.string()),
+    contextWindow: z.nullable(z.number().int()),
+    maxImageResolution: z.nullable(
+      z.lazy(() => ListModelsMaxImageResolution$outboundSchema),
+    ),
+    minImageResolution: z.nullable(
+      z.lazy(() => ListModelsMinImageResolution$outboundSchema),
+    ),
+    embeddingDimensionRange: z.nullable(
+      z.lazy(() => ListModelsEmbeddingDimensionRange$outboundSchema),
+    ),
+    parameterCount: z.nullable(z.number().int()),
+    activeParameterCount: z.nullable(z.number().int()),
+    releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+    servingLocations: z.nullable(z.array(z.string())),
+    developer: z.nullable(z.string()),
+    baseModel: z.nullable(z.string()),
+    weights: z.nullable(ListModelsWeights$outboundSchema),
+    license: z.nullable(z.string()),
+    languages: z.nullable(z.array(z.string())),
+    tts: z.nullable(z.lazy(() => ListModelsTts$outboundSchema)),
+    limitations: z.nullable(z.string()),
+    lifecycle: z.lazy(() => ListModelsLifecycle$outboundSchema),
+    capabilities: z.lazy(() => ListModelsCapabilities$outboundSchema),
+    alias: z.nullable(z.lazy(() => ListModelsAlias$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      ownedBy: "owned_by",
+      modelType: "model_type",
+      inputModalities: "input_modalities",
+      outputModalities: "output_modalities",
+      contextWindow: "context_window",
+      maxImageResolution: "max_image_resolution",
+      minImageResolution: "min_image_resolution",
+      embeddingDimensionRange: "embedding_dimension_range",
+      parameterCount: "parameter_count",
+      activeParameterCount: "active_parameter_count",
+      releaseDate: "release_date",
+      servingLocations: "serving_locations",
+      baseModel: "base_model",
+    });
+  })
+);
 
 export function listModelsDataToJSON(listModelsData: ListModelsData): string {
   return JSON.stringify(ListModelsData$outboundSchema.parse(listModelsData));
@@ -868,10 +910,12 @@ export const ListModelsResponseBody$inboundSchema: z.ZodType<
   ListModelsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListModelsData$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListModelsData$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListModelsResponseBody$Outbound = {
   object: "list";
@@ -883,10 +927,12 @@ export const ListModelsResponseBody$outboundSchema: z.ZodType<
   ListModelsResponseBody$Outbound,
   z.ZodTypeDef,
   ListModelsResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListModelsData$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListModelsData$outboundSchema)),
+  })
+);
 
 export function listModelsResponseBodyToJSON(
   listModelsResponseBody: ListModelsResponseBody,

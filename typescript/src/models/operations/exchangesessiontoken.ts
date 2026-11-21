@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -45,9 +45,11 @@ export const ExchangeSessionTokenSecurity$inboundSchema: z.ZodType<
   ExchangeSessionTokenSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenSecurity$Outbound = {
   sessionCookie: string;
@@ -58,9 +60,11 @@ export const ExchangeSessionTokenSecurity$outboundSchema: z.ZodType<
   ExchangeSessionTokenSecurity$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenSecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function exchangeSessionTokenSecurityToJSON(
   exchangeSessionTokenSecurity: ExchangeSessionTokenSecurity,
@@ -86,9 +90,11 @@ export const ExchangeSessionTokenRequestBody$inboundSchema: z.ZodType<
   ExchangeSessionTokenRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audience: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenRequestBody$Outbound = {
   audience: string;
@@ -99,9 +105,11 @@ export const ExchangeSessionTokenRequestBody$outboundSchema: z.ZodType<
   ExchangeSessionTokenRequestBody$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenRequestBody
-> = z.object({
-  audience: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+  })
+);
 
 export function exchangeSessionTokenRequestBodyToJSON(
   exchangeSessionTokenRequestBody: ExchangeSessionTokenRequestBody,
@@ -127,15 +135,17 @@ export const ExchangeSessionTokenRequest$inboundSchema: z.ZodType<
   ExchangeSessionTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => ExchangeSessionTokenRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => ExchangeSessionTokenRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -147,15 +157,17 @@ export const ExchangeSessionTokenRequest$outboundSchema: z.ZodType<
   ExchangeSessionTokenRequest$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => ExchangeSessionTokenRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => ExchangeSessionTokenRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function exchangeSessionTokenRequestToJSON(
   exchangeSessionTokenRequest: ExchangeSessionTokenRequest,
@@ -181,10 +193,14 @@ export const ExchangeSessionTokenResponseBody$inboundSchema: z.ZodType<
   ExchangeSessionTokenResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    expiresAt: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenResponseBody$Outbound = {
   token: string;
@@ -196,10 +212,12 @@ export const ExchangeSessionTokenResponseBody$outboundSchema: z.ZodType<
   ExchangeSessionTokenResponseBody$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenResponseBody
-> = z.object({
-  token: z.string(),
-  expiresAt: z.date().transform(v => v.toISOString()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    expiresAt: z.date().transform(v => v.toISOString()),
+  })
+);
 
 export function exchangeSessionTokenResponseBodyToJSON(
   exchangeSessionTokenResponseBody: ExchangeSessionTokenResponseBody,
@@ -225,15 +243,17 @@ export const ExchangeSessionTokenResponse$inboundSchema: z.ZodType<
   ExchangeSessionTokenResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.lazy(() => ExchangeSessionTokenResponseBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.lazy(() => ExchangeSessionTokenResponseBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -245,15 +265,17 @@ export const ExchangeSessionTokenResponse$outboundSchema: z.ZodType<
   ExchangeSessionTokenResponse$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.lazy(() => ExchangeSessionTokenResponseBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.lazy(() => ExchangeSessionTokenResponseBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function exchangeSessionTokenResponseToJSON(
   exchangeSessionTokenResponse: ExchangeSessionTokenResponse,

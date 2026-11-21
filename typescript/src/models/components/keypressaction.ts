@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const KeyPressAction$inboundSchema: z.ZodType<
   KeyPressAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("keypress"),
-  keys: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("keypress"),
+    keys: z.array(z.string()),
+  })
+);
 /** @internal */
 export type KeyPressAction$Outbound = {
   type: "keypress";
@@ -32,10 +34,12 @@ export const KeyPressAction$outboundSchema: z.ZodType<
   KeyPressAction$Outbound,
   z.ZodTypeDef,
   KeyPressAction
-> = z.object({
-  type: z.literal("keypress"),
-  keys: z.array(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("keypress"),
+    keys: z.array(z.string()),
+  })
+);
 
 export function keyPressActionToJSON(keyPressAction: KeyPressAction): string {
   return JSON.stringify(KeyPressAction$outboundSchema.parse(keyPressAction));

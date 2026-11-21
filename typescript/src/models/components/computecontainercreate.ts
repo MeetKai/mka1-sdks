@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -75,23 +75,25 @@ export const ComputeContainerCreate2$inboundSchema: z.ZodType<
   ComputeContainerCreate2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  command: z.array(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  image: z.string(),
-  image_pull_secret: z.string().optional(),
-  ports: z.array(ComputePort$inboundSchema).optional(),
-  registry_credential: ComputeRegistryCredential$inboundSchema.optional(),
-  script_b64: z.string(),
-  secret_env: z.record(ComputeSecretReference$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_pull_secret": "imagePullSecret",
-    "registry_credential": "registryCredential",
-    "script_b64": "scriptB64",
-    "secret_env": "secretEnv",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    image: z.string(),
+    image_pull_secret: z.string().optional(),
+    ports: z.array(ComputePort$inboundSchema).optional(),
+    registry_credential: ComputeRegistryCredential$inboundSchema.optional(),
+    script_b64: z.string(),
+    secret_env: z.record(ComputeSecretReference$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_pull_secret": "imagePullSecret",
+      "registry_credential": "registryCredential",
+      "script_b64": "scriptB64",
+      "secret_env": "secretEnv",
+    });
+  })
+);
 /** @internal */
 export type ComputeContainerCreate2$Outbound = {
   command?: Array<string> | undefined;
@@ -109,23 +111,25 @@ export const ComputeContainerCreate2$outboundSchema: z.ZodType<
   ComputeContainerCreate2$Outbound,
   z.ZodTypeDef,
   ComputeContainerCreate2
-> = z.object({
-  command: z.array(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  image: z.string(),
-  imagePullSecret: z.string().optional(),
-  ports: z.array(ComputePort$outboundSchema).optional(),
-  registryCredential: ComputeRegistryCredential$outboundSchema.optional(),
-  scriptB64: z.string(),
-  secretEnv: z.record(ComputeSecretReference$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imagePullSecret: "image_pull_secret",
-    registryCredential: "registry_credential",
-    scriptB64: "script_b64",
-    secretEnv: "secret_env",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    image: z.string(),
+    imagePullSecret: z.string().optional(),
+    ports: z.array(ComputePort$outboundSchema).optional(),
+    registryCredential: ComputeRegistryCredential$outboundSchema.optional(),
+    scriptB64: z.string(),
+    secretEnv: z.record(ComputeSecretReference$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      imagePullSecret: "image_pull_secret",
+      registryCredential: "registry_credential",
+      scriptB64: "script_b64",
+      secretEnv: "secret_env",
+    });
+  })
+);
 
 export function computeContainerCreate2ToJSON(
   computeContainerCreate2: ComputeContainerCreate2,
@@ -149,23 +153,25 @@ export const ComputeContainerCreate1$inboundSchema: z.ZodType<
   ComputeContainerCreate1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  command: z.array(z.string()),
-  env: z.record(z.string()).optional(),
-  image: z.string(),
-  image_pull_secret: z.string().optional(),
-  ports: z.array(ComputePort$inboundSchema).optional(),
-  registry_credential: ComputeRegistryCredential$inboundSchema.optional(),
-  script_b64: z.string().optional(),
-  secret_env: z.record(ComputeSecretReference$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_pull_secret": "imagePullSecret",
-    "registry_credential": "registryCredential",
-    "script_b64": "scriptB64",
-    "secret_env": "secretEnv",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()),
+    env: z.record(z.string()).optional(),
+    image: z.string(),
+    image_pull_secret: z.string().optional(),
+    ports: z.array(ComputePort$inboundSchema).optional(),
+    registry_credential: ComputeRegistryCredential$inboundSchema.optional(),
+    script_b64: z.string().optional(),
+    secret_env: z.record(ComputeSecretReference$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_pull_secret": "imagePullSecret",
+      "registry_credential": "registryCredential",
+      "script_b64": "scriptB64",
+      "secret_env": "secretEnv",
+    });
+  })
+);
 /** @internal */
 export type ComputeContainerCreate1$Outbound = {
   command: Array<string>;
@@ -183,23 +189,25 @@ export const ComputeContainerCreate1$outboundSchema: z.ZodType<
   ComputeContainerCreate1$Outbound,
   z.ZodTypeDef,
   ComputeContainerCreate1
-> = z.object({
-  command: z.array(z.string()),
-  env: z.record(z.string()).optional(),
-  image: z.string(),
-  imagePullSecret: z.string().optional(),
-  ports: z.array(ComputePort$outboundSchema).optional(),
-  registryCredential: ComputeRegistryCredential$outboundSchema.optional(),
-  scriptB64: z.string().optional(),
-  secretEnv: z.record(ComputeSecretReference$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imagePullSecret: "image_pull_secret",
-    registryCredential: "registry_credential",
-    scriptB64: "script_b64",
-    secretEnv: "secret_env",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.array(z.string()),
+    env: z.record(z.string()).optional(),
+    image: z.string(),
+    imagePullSecret: z.string().optional(),
+    ports: z.array(ComputePort$outboundSchema).optional(),
+    registryCredential: ComputeRegistryCredential$outboundSchema.optional(),
+    scriptB64: z.string().optional(),
+    secretEnv: z.record(ComputeSecretReference$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      imagePullSecret: "image_pull_secret",
+      registryCredential: "registry_credential",
+      scriptB64: "script_b64",
+      secretEnv: "secret_env",
+    });
+  })
+);
 
 export function computeContainerCreate1ToJSON(
   computeContainerCreate1: ComputeContainerCreate1,
@@ -223,10 +231,12 @@ export const ComputeContainerCreate$inboundSchema: z.ZodType<
   ComputeContainerCreate,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ComputeContainerCreate1$inboundSchema),
-  z.lazy(() => ComputeContainerCreate2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ComputeContainerCreate1$inboundSchema),
+    z.lazy(() => ComputeContainerCreate2$inboundSchema),
+  ])
+);
 /** @internal */
 export type ComputeContainerCreate$Outbound =
   | ComputeContainerCreate1$Outbound
@@ -237,10 +247,12 @@ export const ComputeContainerCreate$outboundSchema: z.ZodType<
   ComputeContainerCreate$Outbound,
   z.ZodTypeDef,
   ComputeContainerCreate
-> = z.union([
-  z.lazy(() => ComputeContainerCreate1$outboundSchema),
-  z.lazy(() => ComputeContainerCreate2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => ComputeContainerCreate1$outboundSchema),
+    z.lazy(() => ComputeContainerCreate2$outboundSchema),
+  ])
+);
 
 export function computeContainerCreateToJSON(
   computeContainerCreate: ComputeContainerCreate,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,7 +31,9 @@ export type FileSearchComparisonFilter = {
 /** @internal */
 export const FileSearchComparisonFilterType$inboundSchema: z.ZodNativeEnum<
   typeof FileSearchComparisonFilterType
-> = z.nativeEnum(FileSearchComparisonFilterType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FileSearchComparisonFilterType)
+);
 /** @internal */
 export const FileSearchComparisonFilterType$outboundSchema: z.ZodNativeEnum<
   typeof FileSearchComparisonFilterType
@@ -42,7 +44,9 @@ export const FileSearchComparisonFilterValue$inboundSchema: z.ZodType<
   FileSearchComparisonFilterValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type FileSearchComparisonFilterValue$Outbound =
   | string
@@ -54,7 +58,9 @@ export const FileSearchComparisonFilterValue$outboundSchema: z.ZodType<
   FileSearchComparisonFilterValue$Outbound,
   z.ZodTypeDef,
   FileSearchComparisonFilterValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function fileSearchComparisonFilterValueToJSON(
   fileSearchComparisonFilterValue: FileSearchComparisonFilterValue,
@@ -80,11 +86,13 @@ export const FileSearchComparisonFilter$inboundSchema: z.ZodType<
   FileSearchComparisonFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FileSearchComparisonFilterType$inboundSchema,
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FileSearchComparisonFilterType$inboundSchema,
+    key: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 /** @internal */
 export type FileSearchComparisonFilter$Outbound = {
   type: string;
@@ -97,11 +105,13 @@ export const FileSearchComparisonFilter$outboundSchema: z.ZodType<
   FileSearchComparisonFilter$Outbound,
   z.ZodTypeDef,
   FileSearchComparisonFilter
-> = z.object({
-  type: FileSearchComparisonFilterType$outboundSchema,
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FileSearchComparisonFilterType$outboundSchema,
+    key: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function fileSearchComparisonFilterToJSON(
   fileSearchComparisonFilter: FileSearchComparisonFilter,

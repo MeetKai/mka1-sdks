@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -60,7 +60,9 @@ export type AgentRunPendingApproval = {
 /** @internal */
 export const AgentRunPendingApprovalKind$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunPendingApprovalKind
-> = z.nativeEnum(AgentRunPendingApprovalKind);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentRunPendingApprovalKind)
+);
 /** @internal */
 export const AgentRunPendingApprovalKind$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunPendingApprovalKind
@@ -71,20 +73,22 @@ export const AgentRunPendingApproval$inboundSchema: z.ZodType<
   AgentRunPendingApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  kind: AgentRunPendingApprovalKind$inboundSchema,
-  tool_type: z.string(),
-  name: z.string(),
-  server_label: z.nullable(z.string()),
-  arguments: z.string(),
-  reason: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_type": "toolType",
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    kind: AgentRunPendingApprovalKind$inboundSchema,
+    tool_type: z.string(),
+    name: z.string(),
+    server_label: z.nullable(z.string()),
+    arguments: z.string(),
+    reason: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_type": "toolType",
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type AgentRunPendingApproval$Outbound = {
   id: string;
@@ -101,20 +105,22 @@ export const AgentRunPendingApproval$outboundSchema: z.ZodType<
   AgentRunPendingApproval$Outbound,
   z.ZodTypeDef,
   AgentRunPendingApproval
-> = z.object({
-  id: z.string(),
-  kind: AgentRunPendingApprovalKind$outboundSchema,
-  toolType: z.string(),
-  name: z.string(),
-  serverLabel: z.nullable(z.string()),
-  arguments: z.string(),
-  reason: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    toolType: "tool_type",
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    kind: AgentRunPendingApprovalKind$outboundSchema,
+    toolType: z.string(),
+    name: z.string(),
+    serverLabel: z.nullable(z.string()),
+    arguments: z.string(),
+    reason: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      toolType: "tool_type",
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function agentRunPendingApprovalToJSON(
   agentRunPendingApproval: AgentRunPendingApproval,

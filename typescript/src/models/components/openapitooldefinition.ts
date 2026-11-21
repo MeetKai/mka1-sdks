@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,20 +43,22 @@ export const OpenApiToolDefinition$inboundSchema: z.ZodType<
   OpenApiToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("openapi"),
-  name: z.string(),
-  server_url: z.string(),
-  mcp_server_id: z.string().optional(),
-  mcp_credential_id: z.string().optional(),
-  operations: z.array(OpenApiOperation$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "mcp_server_id": "mcpServerId",
-    "mcp_credential_id": "mcpCredentialId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("openapi"),
+    name: z.string(),
+    server_url: z.string(),
+    mcp_server_id: z.string().optional(),
+    mcp_credential_id: z.string().optional(),
+    operations: z.array(OpenApiOperation$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_url": "serverUrl",
+      "mcp_server_id": "mcpServerId",
+      "mcp_credential_id": "mcpCredentialId",
+    });
+  })
+);
 /** @internal */
 export type OpenApiToolDefinition$Outbound = {
   type: "openapi";
@@ -72,20 +74,22 @@ export const OpenApiToolDefinition$outboundSchema: z.ZodType<
   OpenApiToolDefinition$Outbound,
   z.ZodTypeDef,
   OpenApiToolDefinition
-> = z.object({
-  type: z.literal("openapi"),
-  name: z.string(),
-  serverUrl: z.string(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-  operations: z.array(OpenApiOperation$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("openapi"),
+    name: z.string(),
+    serverUrl: z.string(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+    operations: z.array(OpenApiOperation$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      serverUrl: "server_url",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+    });
+  })
+);
 
 export function openApiToolDefinitionToJSON(
   openApiToolDefinition: OpenApiToolDefinition,

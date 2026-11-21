@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const FilePermissionList$inboundSchema: z.ZodType<
   FilePermissionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FilePermission$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FilePermission$inboundSchema),
+  })
+);
 /** @internal */
 export type FilePermissionList$Outbound = {
   object: "list";
@@ -47,10 +49,12 @@ export const FilePermissionList$outboundSchema: z.ZodType<
   FilePermissionList$Outbound,
   z.ZodTypeDef,
   FilePermissionList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FilePermission$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FilePermission$outboundSchema),
+  })
+);
 
 export function filePermissionListToJSON(
   filePermissionList: FilePermissionList,

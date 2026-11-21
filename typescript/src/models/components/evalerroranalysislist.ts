@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const EvalErrorAnalysisList$inboundSchema: z.ZodType<
   EvalErrorAnalysisList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(EvalErrorAnalysisSummaryObject$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(EvalErrorAnalysisSummaryObject$inboundSchema),
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisList$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const EvalErrorAnalysisList$outboundSchema: z.ZodType<
   EvalErrorAnalysisList$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(EvalErrorAnalysisSummaryObject$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(EvalErrorAnalysisSummaryObject$outboundSchema),
+  })
+);
 
 export function evalErrorAnalysisListToJSON(
   evalErrorAnalysisList: EvalErrorAnalysisList,

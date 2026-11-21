@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,25 +48,27 @@ export const CreateEvalErrorAnalysisRequest$inboundSchema: z.ZodType<
   CreateEvalErrorAnalysisRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  suite_version: z.number().int().optional(),
-  metric_id: z.string().optional(),
-  failure_threshold: z.number().optional(),
-  sample_size: z.number().int().optional(),
-  task_ids: z.array(z.string()).optional(),
-  force: z.boolean().optional(),
-  analyzer_model: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_version": "suiteVersion",
-    "metric_id": "metricId",
-    "failure_threshold": "failureThreshold",
-    "sample_size": "sampleSize",
-    "task_ids": "taskIds",
-    "analyzer_model": "analyzerModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    suite_version: z.number().int().optional(),
+    metric_id: z.string().optional(),
+    failure_threshold: z.number().optional(),
+    sample_size: z.number().int().optional(),
+    task_ids: z.array(z.string()).optional(),
+    force: z.boolean().optional(),
+    analyzer_model: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_version": "suiteVersion",
+      "metric_id": "metricId",
+      "failure_threshold": "failureThreshold",
+      "sample_size": "sampleSize",
+      "task_ids": "taskIds",
+      "analyzer_model": "analyzerModel",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalErrorAnalysisRequest$Outbound = {
   model: string;
@@ -84,25 +86,27 @@ export const CreateEvalErrorAnalysisRequest$outboundSchema: z.ZodType<
   CreateEvalErrorAnalysisRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalErrorAnalysisRequest
-> = z.object({
-  model: z.string(),
-  suiteVersion: z.number().int().optional(),
-  metricId: z.string().optional(),
-  failureThreshold: z.number().optional(),
-  sampleSize: z.number().int().optional(),
-  taskIds: z.array(z.string()).optional(),
-  force: z.boolean().optional(),
-  analyzerModel: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteVersion: "suite_version",
-    metricId: "metric_id",
-    failureThreshold: "failure_threshold",
-    sampleSize: "sample_size",
-    taskIds: "task_ids",
-    analyzerModel: "analyzer_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    suiteVersion: z.number().int().optional(),
+    metricId: z.string().optional(),
+    failureThreshold: z.number().optional(),
+    sampleSize: z.number().int().optional(),
+    taskIds: z.array(z.string()).optional(),
+    force: z.boolean().optional(),
+    analyzerModel: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteVersion: "suite_version",
+      metricId: "metric_id",
+      failureThreshold: "failure_threshold",
+      sampleSize: "sample_size",
+      taskIds: "task_ids",
+      analyzerModel: "analyzer_model",
+    });
+  })
+);
 
 export function createEvalErrorAnalysisRequestToJSON(
   createEvalErrorAnalysisRequest: CreateEvalErrorAnalysisRequest,

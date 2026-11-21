@@ -3,7 +3,13 @@
 from __future__ import annotations
 from .policytooltype import PolicyToolType
 from .toolpolicyaction import ToolPolicyAction
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -43,13 +49,20 @@ class ToolPolicyRule(BaseModel):
     r"""require_approval rules only. User IDs of the people who decide the calls this rule holds, in the approval queue (/tool_approvals). The caller cannot decide such a call. When several matching rules name approvers, any of them may decide. Omit to let the caller decide with an approval response, as without a policy."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["server_domains", "tool_names", "approvers"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListOrganizationInvitationHistoryTooManyRequestsError struct {
 var _ error = &ListOrganizationInvitationHistoryTooManyRequestsError{}
 
 func (e *ListOrganizationInvitationHistoryTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListOrganizationInvitationHistoryGoneError struct {
 var _ error = &ListOrganizationInvitationHistoryGoneError{}
 
 func (e *ListOrganizationInvitationHistoryGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListOrganizationInvitationHistoryConflictError struct {
 var _ error = &ListOrganizationInvitationHistoryConflictError{}
 
 func (e *ListOrganizationInvitationHistoryConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListOrganizationInvitationHistoryNotFoundError struct {
 var _ error = &ListOrganizationInvitationHistoryNotFoundError{}
 
 func (e *ListOrganizationInvitationHistoryNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListOrganizationInvitationHistoryForbiddenError struct {
 var _ error = &ListOrganizationInvitationHistoryForbiddenError{}
 
 func (e *ListOrganizationInvitationHistoryForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListOrganizationInvitationHistoryUnauthorizedError struct {
 var _ error = &ListOrganizationInvitationHistoryUnauthorizedError{}
 
 func (e *ListOrganizationInvitationHistoryUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListOrganizationInvitationHistoryBadRequestError struct {
 var _ error = &ListOrganizationInvitationHistoryBadRequestError{}
 
 func (e *ListOrganizationInvitationHistoryBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

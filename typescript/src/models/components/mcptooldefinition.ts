@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,7 +57,9 @@ export const MCPToolDefinitionAllowedTools$inboundSchema: z.ZodType<
   MCPToolDefinitionAllowedTools,
   z.ZodTypeDef,
   unknown
-> = z.union([z.array(z.string()), MCPToolFilter$inboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+);
 /** @internal */
 export type MCPToolDefinitionAllowedTools$Outbound =
   | Array<string>
@@ -68,7 +70,9 @@ export const MCPToolDefinitionAllowedTools$outboundSchema: z.ZodType<
   MCPToolDefinitionAllowedTools$Outbound,
   z.ZodTypeDef,
   MCPToolDefinitionAllowedTools
-> = z.union([z.array(z.string()), MCPToolFilter$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+);
 
 export function mcpToolDefinitionAllowedToolsToJSON(
   mcpToolDefinitionAllowedTools: MCPToolDefinitionAllowedTools,
@@ -90,8 +94,8 @@ export function mcpToolDefinitionAllowedToolsFromJSON(
 }
 
 /** @internal */
-export const ConnectorId$inboundSchema: z.ZodNativeEnum<typeof ConnectorId> = z
-  .nativeEnum(ConnectorId);
+export const ConnectorId$inboundSchema: z.ZodNativeEnum<typeof ConnectorId> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ConnectorId));
 /** @internal */
 export const ConnectorId$outboundSchema: z.ZodNativeEnum<typeof ConnectorId> =
   ConnectorId$inboundSchema;
@@ -101,31 +105,33 @@ export const MCPToolDefinition$inboundSchema: z.ZodType<
   MCPToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp"),
-  server_label: z.string().optional(),
-  mcp_server_id: z.string().optional(),
-  mcp_credential_id: z.string().optional(),
-  allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
-    .optional(),
-  authorization: z.string().optional(),
-  connector_id: ConnectorId$inboundSchema.optional(),
-  headers: z.record(z.string()).optional(),
-  require_approval: z.any().optional(),
-  server_description: z.string().optional(),
-  server_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-    "mcp_server_id": "mcpServerId",
-    "mcp_credential_id": "mcpCredentialId",
-    "allowed_tools": "allowedTools",
-    "connector_id": "connectorId",
-    "require_approval": "requireApproval",
-    "server_description": "serverDescription",
-    "server_url": "serverUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    server_label: z.string().optional(),
+    mcp_server_id: z.string().optional(),
+    mcp_credential_id: z.string().optional(),
+    allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+      .optional(),
+    authorization: z.string().optional(),
+    connector_id: ConnectorId$inboundSchema.optional(),
+    headers: z.record(z.string()).optional(),
+    require_approval: z.any().optional(),
+    server_description: z.string().optional(),
+    server_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+      "mcp_server_id": "mcpServerId",
+      "mcp_credential_id": "mcpCredentialId",
+      "allowed_tools": "allowedTools",
+      "connector_id": "connectorId",
+      "require_approval": "requireApproval",
+      "server_description": "serverDescription",
+      "server_url": "serverUrl",
+    });
+  })
+);
 /** @internal */
 export type MCPToolDefinition$Outbound = {
   type: "mcp";
@@ -146,31 +152,33 @@ export const MCPToolDefinition$outboundSchema: z.ZodType<
   MCPToolDefinition$Outbound,
   z.ZodTypeDef,
   MCPToolDefinition
-> = z.object({
-  type: z.literal("mcp"),
-  serverLabel: z.string().optional(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-  allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
-    .optional(),
-  authorization: z.string().optional(),
-  connectorId: ConnectorId$outboundSchema.optional(),
-  headers: z.record(z.string()).optional(),
-  requireApproval: z.any().optional(),
-  serverDescription: z.string().optional(),
-  serverUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-    allowedTools: "allowed_tools",
-    connectorId: "connector_id",
-    requireApproval: "require_approval",
-    serverDescription: "server_description",
-    serverUrl: "server_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp"),
+    serverLabel: z.string().optional(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+    allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+      .optional(),
+    authorization: z.string().optional(),
+    connectorId: ConnectorId$outboundSchema.optional(),
+    headers: z.record(z.string()).optional(),
+    requireApproval: z.any().optional(),
+    serverDescription: z.string().optional(),
+    serverUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+      allowedTools: "allowed_tools",
+      connectorId: "connector_id",
+      requireApproval: "require_approval",
+      serverDescription: "server_description",
+      serverUrl: "server_url",
+    });
+  })
+);
 
 export function mcpToolDefinitionToJSON(
   mcpToolDefinition: MCPToolDefinition,

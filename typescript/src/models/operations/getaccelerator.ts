@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,14 +26,16 @@ export const GetAcceleratorRequest$inboundSchema: z.ZodType<
   GetAcceleratorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetAcceleratorRequest$Outbound = {
   name: string;
@@ -45,14 +47,16 @@ export const GetAcceleratorRequest$outboundSchema: z.ZodType<
   GetAcceleratorRequest$Outbound,
   z.ZodTypeDef,
   GetAcceleratorRequest
-> = z.object({
-  name: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getAcceleratorRequestToJSON(
   getAcceleratorRequest: GetAcceleratorRequest,
@@ -76,10 +80,12 @@ export const GetAcceleratorResponse$inboundSchema: z.ZodType<
   GetAcceleratorResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeAccelerator$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeAccelerator$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type GetAcceleratorResponse$Outbound =
   | components.ComputeAccelerator$Outbound
@@ -90,10 +96,12 @@ export const GetAcceleratorResponse$outboundSchema: z.ZodType<
   GetAcceleratorResponse$Outbound,
   z.ZodTypeDef,
   GetAcceleratorResponse
-> = z.union([
-  components.ComputeAccelerator$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeAccelerator$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function getAcceleratorResponseToJSON(
   getAcceleratorResponse: GetAcceleratorResponse,

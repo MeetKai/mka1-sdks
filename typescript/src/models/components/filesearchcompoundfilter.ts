@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -53,7 +53,9 @@ export type FileSearchCompoundFilterFilters =
 /** @internal */
 export const FileSearchCompoundFilterType$inboundSchema: z.ZodNativeEnum<
   typeof FileSearchCompoundFilterType
-> = z.nativeEnum(FileSearchCompoundFilterType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(FileSearchCompoundFilterType)
+);
 /** @internal */
 export const FileSearchCompoundFilterType$outboundSchema: z.ZodNativeEnum<
   typeof FileSearchCompoundFilterType
@@ -64,9 +66,115 @@ export const FileSearchCompoundFilter$inboundSchema: z.ZodType<
   FileSearchCompoundFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FileSearchCompoundFilterType$inboundSchema,
-  filters: z.array(discriminatedUnion("type", {
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FileSearchCompoundFilterType$inboundSchema,
+    filters: z.array(discriminatedUnion("type", {
+      eq: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      ne: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      gt: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      gte: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      lt: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      lte: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      and: z.lazy(() => FileSearchCompoundFilter$inboundSchema).and(
+        z.object({ type: z.literal("and") }),
+      ),
+      or: z.lazy(() => FileSearchCompoundFilter$inboundSchema).and(
+        z.object({ type: z.literal("or") }),
+      ),
+    })),
+  })
+);
+/** @internal */
+export type FileSearchCompoundFilter$Outbound = {
+  type: string;
+  filters: Array<
+    | (FileSearchComparisonFilter$Outbound & { type: "eq" })
+    | (FileSearchComparisonFilter$Outbound & { type: "ne" })
+    | (FileSearchComparisonFilter$Outbound & { type: "gt" })
+    | (FileSearchComparisonFilter$Outbound & { type: "gte" })
+    | (FileSearchComparisonFilter$Outbound & { type: "lt" })
+    | (FileSearchComparisonFilter$Outbound & { type: "lte" })
+    | (FileSearchCompoundFilter$Outbound & { type: "and" })
+    | (FileSearchCompoundFilter$Outbound & { type: "or" })
+  >;
+};
+
+/** @internal */
+export const FileSearchCompoundFilter$outboundSchema: z.ZodType<
+  FileSearchCompoundFilter$Outbound,
+  z.ZodTypeDef,
+  FileSearchCompoundFilter
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FileSearchCompoundFilterType$outboundSchema,
+    filters: z.array(
+      z.union([
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("eq") }),
+        ),
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("ne") }),
+        ),
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gt") }),
+        ),
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("gte") }),
+        ),
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lt") }),
+        ),
+        FileSearchComparisonFilter$outboundSchema.and(
+          z.object({ type: z.literal("lte") }),
+        ),
+        z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
+          z.object({ type: z.literal("and") }),
+        ),
+        z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
+          z.object({ type: z.literal("or") }),
+        ),
+      ]),
+    ),
+  })
+);
+
+export function fileSearchCompoundFilterToJSON(
+  fileSearchCompoundFilter: FileSearchCompoundFilter,
+): string {
+  return JSON.stringify(
+    FileSearchCompoundFilter$outboundSchema.parse(fileSearchCompoundFilter),
+  );
+}
+export function fileSearchCompoundFilterFromJSON(
+  jsonString: string,
+): SafeParseResult<FileSearchCompoundFilter, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => FileSearchCompoundFilter$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'FileSearchCompoundFilter' from JSON`,
+  );
+}
+
+/** @internal */
+export const FileSearchCompoundFilterFilters$inboundSchema: z.ZodType<
+  FileSearchCompoundFilterFilters,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
     eq: FileSearchComparisonFilter$inboundSchema.and(
       z.object({ type: z.literal("eq") }),
     ),
@@ -91,108 +199,8 @@ export const FileSearchCompoundFilter$inboundSchema: z.ZodType<
     or: z.lazy(() => FileSearchCompoundFilter$inboundSchema).and(
       z.object({ type: z.literal("or") }),
     ),
-  })),
-});
-/** @internal */
-export type FileSearchCompoundFilter$Outbound = {
-  type: string;
-  filters: Array<
-    | (FileSearchComparisonFilter$Outbound & { type: "eq" })
-    | (FileSearchComparisonFilter$Outbound & { type: "ne" })
-    | (FileSearchComparisonFilter$Outbound & { type: "gt" })
-    | (FileSearchComparisonFilter$Outbound & { type: "gte" })
-    | (FileSearchComparisonFilter$Outbound & { type: "lt" })
-    | (FileSearchComparisonFilter$Outbound & { type: "lte" })
-    | (FileSearchCompoundFilter$Outbound & { type: "and" })
-    | (FileSearchCompoundFilter$Outbound & { type: "or" })
-  >;
-};
-
-/** @internal */
-export const FileSearchCompoundFilter$outboundSchema: z.ZodType<
-  FileSearchCompoundFilter$Outbound,
-  z.ZodTypeDef,
-  FileSearchCompoundFilter
-> = z.object({
-  type: FileSearchCompoundFilterType$outboundSchema,
-  filters: z.array(
-    z.union([
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("eq") }),
-      ),
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("ne") }),
-      ),
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("gt") }),
-      ),
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("gte") }),
-      ),
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("lt") }),
-      ),
-      FileSearchComparisonFilter$outboundSchema.and(
-        z.object({ type: z.literal("lte") }),
-      ),
-      z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
-        z.object({ type: z.literal("and") }),
-      ),
-      z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
-        z.object({ type: z.literal("or") }),
-      ),
-    ]),
-  ),
-});
-
-export function fileSearchCompoundFilterToJSON(
-  fileSearchCompoundFilter: FileSearchCompoundFilter,
-): string {
-  return JSON.stringify(
-    FileSearchCompoundFilter$outboundSchema.parse(fileSearchCompoundFilter),
-  );
-}
-export function fileSearchCompoundFilterFromJSON(
-  jsonString: string,
-): SafeParseResult<FileSearchCompoundFilter, SDKValidationError> {
-  return safeParse(
-    jsonString,
-    (x) => FileSearchCompoundFilter$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'FileSearchCompoundFilter' from JSON`,
-  );
-}
-
-/** @internal */
-export const FileSearchCompoundFilterFilters$inboundSchema: z.ZodType<
-  FileSearchCompoundFilterFilters,
-  z.ZodTypeDef,
-  unknown
-> = discriminatedUnion("type", {
-  eq: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("eq") }),
-  ),
-  ne: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("ne") }),
-  ),
-  gt: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("gt") }),
-  ),
-  gte: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  lt: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("lt") }),
-  ),
-  lte: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  and: z.lazy(() => FileSearchCompoundFilter$inboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  or: z.lazy(() => FileSearchCompoundFilter$inboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-});
+  })
+);
 /** @internal */
 export type FileSearchCompoundFilterFilters$Outbound =
   | (FileSearchComparisonFilter$Outbound & { type: "eq" })
@@ -209,32 +217,34 @@ export const FileSearchCompoundFilterFilters$outboundSchema: z.ZodType<
   FileSearchCompoundFilterFilters$Outbound,
   z.ZodTypeDef,
   FileSearchCompoundFilterFilters
-> = z.union([
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("eq") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("ne") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("gt") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("lt") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
-    z.object({ type: z.literal("and") }),
-  ),
-  z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
+      z.object({ type: z.literal("and") }),
+    ),
+    z.lazy(() => FileSearchCompoundFilter$outboundSchema).and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function fileSearchCompoundFilterFiltersToJSON(
   fileSearchCompoundFilterFilters: FileSearchCompoundFilterFilters,

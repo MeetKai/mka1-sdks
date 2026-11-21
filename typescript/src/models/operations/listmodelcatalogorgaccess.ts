@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ListModelCatalogOrgAccessRequest$inboundSchema: z.ZodType<
   ListModelCatalogOrgAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type ListModelCatalogOrgAccessRequest$Outbound = {
   org_id: string;
@@ -34,13 +36,15 @@ export const ListModelCatalogOrgAccessRequest$outboundSchema: z.ZodType<
   ListModelCatalogOrgAccessRequest$Outbound,
   z.ZodTypeDef,
   ListModelCatalogOrgAccessRequest
-> = z.object({
-  orgId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function listModelCatalogOrgAccessRequestToJSON(
   listModelCatalogOrgAccessRequest: ListModelCatalogOrgAccessRequest,

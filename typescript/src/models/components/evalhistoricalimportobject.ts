@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,11 +33,13 @@ export const EvalHistoricalImportObjectSource$inboundSchema: z.ZodType<
   EvalHistoricalImportObjectSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("huggingface"),
-  repo: z.string(),
-  revision: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("huggingface"),
+    repo: z.string(),
+    revision: z.string(),
+  })
+);
 /** @internal */
 export type EvalHistoricalImportObjectSource$Outbound = {
   type: "huggingface";
@@ -50,11 +52,13 @@ export const EvalHistoricalImportObjectSource$outboundSchema: z.ZodType<
   EvalHistoricalImportObjectSource$Outbound,
   z.ZodTypeDef,
   EvalHistoricalImportObjectSource
-> = z.object({
-  type: z.literal("huggingface"),
-  repo: z.string(),
-  revision: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("huggingface"),
+    repo: z.string(),
+    revision: z.string(),
+  })
+);
 
 export function evalHistoricalImportObjectSourceToJSON(
   evalHistoricalImportObjectSource: EvalHistoricalImportObjectSource,
@@ -80,31 +84,33 @@ export const EvalHistoricalImportObject$inboundSchema: z.ZodType<
   EvalHistoricalImportObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.import"),
-  source: z.lazy(() => EvalHistoricalImportObjectSource$inboundSchema),
-  suite_id: z.string(),
-  suite_version: z.number().int(),
-  created_suite: z.boolean(),
-  created_suite_version: z.boolean(),
-  dry_run: z.boolean(),
-  discovered_files: z.number().int(),
-  imported_runs: z.number().int(),
-  skipped_runs: z.number().int(),
-  imported_samples: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "created_suite": "createdSuite",
-    "created_suite_version": "createdSuiteVersion",
-    "dry_run": "dryRun",
-    "discovered_files": "discoveredFiles",
-    "imported_runs": "importedRuns",
-    "skipped_runs": "skippedRuns",
-    "imported_samples": "importedSamples",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.import"),
+    source: z.lazy(() => EvalHistoricalImportObjectSource$inboundSchema),
+    suite_id: z.string(),
+    suite_version: z.number().int(),
+    created_suite: z.boolean(),
+    created_suite_version: z.boolean(),
+    dry_run: z.boolean(),
+    discovered_files: z.number().int(),
+    imported_runs: z.number().int(),
+    skipped_runs: z.number().int(),
+    imported_samples: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "created_suite": "createdSuite",
+      "created_suite_version": "createdSuiteVersion",
+      "dry_run": "dryRun",
+      "discovered_files": "discoveredFiles",
+      "imported_runs": "importedRuns",
+      "skipped_runs": "skippedRuns",
+      "imported_samples": "importedSamples",
+    });
+  })
+);
 /** @internal */
 export type EvalHistoricalImportObject$Outbound = {
   object: "eval.import";
@@ -125,31 +131,33 @@ export const EvalHistoricalImportObject$outboundSchema: z.ZodType<
   EvalHistoricalImportObject$Outbound,
   z.ZodTypeDef,
   EvalHistoricalImportObject
-> = z.object({
-  object: z.literal("eval.import"),
-  source: z.lazy(() => EvalHistoricalImportObjectSource$outboundSchema),
-  suiteId: z.string(),
-  suiteVersion: z.number().int(),
-  createdSuite: z.boolean(),
-  createdSuiteVersion: z.boolean(),
-  dryRun: z.boolean(),
-  discoveredFiles: z.number().int(),
-  importedRuns: z.number().int(),
-  skippedRuns: z.number().int(),
-  importedSamples: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    createdSuite: "created_suite",
-    createdSuiteVersion: "created_suite_version",
-    dryRun: "dry_run",
-    discoveredFiles: "discovered_files",
-    importedRuns: "imported_runs",
-    skippedRuns: "skipped_runs",
-    importedSamples: "imported_samples",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.import"),
+    source: z.lazy(() => EvalHistoricalImportObjectSource$outboundSchema),
+    suiteId: z.string(),
+    suiteVersion: z.number().int(),
+    createdSuite: z.boolean(),
+    createdSuiteVersion: z.boolean(),
+    dryRun: z.boolean(),
+    discoveredFiles: z.number().int(),
+    importedRuns: z.number().int(),
+    skippedRuns: z.number().int(),
+    importedSamples: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      createdSuite: "created_suite",
+      createdSuiteVersion: "created_suite_version",
+      dryRun: "dry_run",
+      discoveredFiles: "discovered_files",
+      importedRuns: "imported_runs",
+      skippedRuns: "skipped_runs",
+      importedSamples: "imported_samples",
+    });
+  })
+);
 
 export function evalHistoricalImportObjectToJSON(
   evalHistoricalImportObject: EvalHistoricalImportObject,

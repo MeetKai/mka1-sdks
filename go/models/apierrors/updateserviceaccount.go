@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateServiceAccountTooManyRequestsError struct {
 var _ error = &UpdateServiceAccountTooManyRequestsError{}
 
 func (e *UpdateServiceAccountTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateServiceAccountGoneError struct {
 var _ error = &UpdateServiceAccountGoneError{}
 
 func (e *UpdateServiceAccountGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateServiceAccountConflictError struct {
 var _ error = &UpdateServiceAccountConflictError{}
 
 func (e *UpdateServiceAccountConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateServiceAccountNotFoundError struct {
 var _ error = &UpdateServiceAccountNotFoundError{}
 
 func (e *UpdateServiceAccountNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateServiceAccountForbiddenError struct {
 var _ error = &UpdateServiceAccountForbiddenError{}
 
 func (e *UpdateServiceAccountForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateServiceAccountUnauthorizedError struct {
 var _ error = &UpdateServiceAccountUnauthorizedError{}
 
 func (e *UpdateServiceAccountUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateServiceAccountBadRequestError struct {
 var _ error = &UpdateServiceAccountBadRequestError{}
 
 func (e *UpdateServiceAccountBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

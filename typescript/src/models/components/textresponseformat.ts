@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const TextResponseFormat$inboundSchema: z.ZodType<
   TextResponseFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 /** @internal */
 export type TextResponseFormat$Outbound = {
   type: "text";
@@ -29,9 +31,11 @@ export const TextResponseFormat$outboundSchema: z.ZodType<
   TextResponseFormat$Outbound,
   z.ZodTypeDef,
   TextResponseFormat
-> = z.object({
-  type: z.literal("text"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("text"),
+  })
+);
 
 export function textResponseFormatToJSON(
   textResponseFormat: TextResponseFormat,

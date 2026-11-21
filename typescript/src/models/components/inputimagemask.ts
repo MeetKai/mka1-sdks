@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const InputImageMask$inboundSchema: z.ZodType<
   InputImageMask,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string().optional(),
-  image_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string().optional(),
+    image_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "image_url": "imageUrl",
+    });
+  })
+);
 /** @internal */
 export type InputImageMask$Outbound = {
   file_id?: string | undefined;
@@ -38,15 +40,17 @@ export const InputImageMask$outboundSchema: z.ZodType<
   InputImageMask$Outbound,
   z.ZodTypeDef,
   InputImageMask
-> = z.object({
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    imageUrl: "image_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      imageUrl: "image_url",
+    });
+  })
+);
 
 export function inputImageMaskToJSON(inputImageMask: InputImageMask): string {
   return JSON.stringify(InputImageMask$outboundSchema.parse(inputImageMask));

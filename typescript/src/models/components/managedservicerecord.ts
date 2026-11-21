@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,19 +31,21 @@ export const ManagedServiceRecord$inboundSchema: z.ZodType<
   ManagedServiceRecord,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: ManagedServiceName$inboundSchema,
-  container_port: z.number().int(),
-  assignment_generation: z.number().int(),
-  status: ManagedServiceStatus$inboundSchema.optional(),
-  failure_reason: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_port": "containerPort",
-    "assignment_generation": "assignmentGeneration",
-    "failure_reason": "failureReason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: ManagedServiceName$inboundSchema,
+    container_port: z.number().int(),
+    assignment_generation: z.number().int(),
+    status: ManagedServiceStatus$inboundSchema.optional(),
+    failure_reason: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_port": "containerPort",
+      "assignment_generation": "assignmentGeneration",
+      "failure_reason": "failureReason",
+    });
+  })
+);
 /** @internal */
 export type ManagedServiceRecord$Outbound = {
   name: string;
@@ -58,19 +60,21 @@ export const ManagedServiceRecord$outboundSchema: z.ZodType<
   ManagedServiceRecord$Outbound,
   z.ZodTypeDef,
   ManagedServiceRecord
-> = z.object({
-  name: ManagedServiceName$outboundSchema,
-  containerPort: z.number().int(),
-  assignmentGeneration: z.number().int(),
-  status: ManagedServiceStatus$outboundSchema.optional(),
-  failureReason: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    containerPort: "container_port",
-    assignmentGeneration: "assignment_generation",
-    failureReason: "failure_reason",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: ManagedServiceName$outboundSchema,
+    containerPort: z.number().int(),
+    assignmentGeneration: z.number().int(),
+    status: ManagedServiceStatus$outboundSchema.optional(),
+    failureReason: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerPort: "container_port",
+      assignmentGeneration: "assignment_generation",
+      failureReason: "failure_reason",
+    });
+  })
+);
 
 export function managedServiceRecordToJSON(
   managedServiceRecord: ManagedServiceRecord,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,14 +41,14 @@ export type ImportOpenApiToolSetRequest = {
 };
 
 /** @internal */
-export const Spec$inboundSchema: z.ZodType<Spec, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.record(z.any())]);
+export const Spec$inboundSchema: z.ZodType<Spec, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.record(z.any())]));
 /** @internal */
 export type Spec$Outbound = string | { [k: string]: any };
 
 /** @internal */
 export const Spec$outboundSchema: z.ZodType<Spec$Outbound, z.ZodTypeDef, Spec> =
-  z.union([z.string(), z.record(z.any())]);
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.record(z.any())]));
 
 export function specToJSON(spec: Spec): string {
   return JSON.stringify(Spec$outboundSchema.parse(spec));
@@ -68,20 +68,22 @@ export const ImportOpenApiToolSetRequest$inboundSchema: z.ZodType<
   ImportOpenApiToolSetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  spec: z.union([z.string(), z.record(z.any())]),
-  server_url: z.string().optional(),
-  operations: z.array(z.string()).optional(),
-  mcp_server_id: z.string().optional(),
-  mcp_credential_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_url": "serverUrl",
-    "mcp_server_id": "mcpServerId",
-    "mcp_credential_id": "mcpCredentialId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    spec: z.union([z.string(), z.record(z.any())]),
+    server_url: z.string().optional(),
+    operations: z.array(z.string()).optional(),
+    mcp_server_id: z.string().optional(),
+    mcp_credential_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_url": "serverUrl",
+      "mcp_server_id": "mcpServerId",
+      "mcp_credential_id": "mcpCredentialId",
+    });
+  })
+);
 /** @internal */
 export type ImportOpenApiToolSetRequest$Outbound = {
   name?: string | undefined;
@@ -97,20 +99,22 @@ export const ImportOpenApiToolSetRequest$outboundSchema: z.ZodType<
   ImportOpenApiToolSetRequest$Outbound,
   z.ZodTypeDef,
   ImportOpenApiToolSetRequest
-> = z.object({
-  name: z.string().optional(),
-  spec: z.union([z.string(), z.record(z.any())]),
-  serverUrl: z.string().optional(),
-  operations: z.array(z.string()).optional(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverUrl: "server_url",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    spec: z.union([z.string(), z.record(z.any())]),
+    serverUrl: z.string().optional(),
+    operations: z.array(z.string()).optional(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverUrl: "server_url",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+    });
+  })
+);
 
 export function importOpenApiToolSetRequestToJSON(
   importOpenApiToolSetRequest: ImportOpenApiToolSetRequest,

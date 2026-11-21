@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,28 +39,30 @@ export const UpdateEvalScheduleRequest$inboundSchema: z.ZodType<
   UpdateEvalScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  suite_version: z.nullable(z.number().int()).optional(),
-  cron: z.nullable(z.string()).optional(),
-  interval_seconds: z.nullable(z.number().int()).optional(),
-  timezone: z.string().optional(),
-  overlap_policy: EvalScheduleOverlapPolicy$inboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  webhook_url: z.nullable(z.string()).optional(),
-  webhook_secret: z.nullable(z.string()).optional(),
-  run: EvalScheduleRunRequestConfig$inboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_version": "suiteVersion",
-    "interval_seconds": "intervalSeconds",
-    "overlap_policy": "overlapPolicy",
-    "webhook_url": "webhookUrl",
-    "webhook_secret": "webhookSecret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    suite_version: z.nullable(z.number().int()).optional(),
+    cron: z.nullable(z.string()).optional(),
+    interval_seconds: z.nullable(z.number().int()).optional(),
+    timezone: z.string().optional(),
+    overlap_policy: EvalScheduleOverlapPolicy$inboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    webhook_url: z.nullable(z.string()).optional(),
+    webhook_secret: z.nullable(z.string()).optional(),
+    run: EvalScheduleRunRequestConfig$inboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_version": "suiteVersion",
+      "interval_seconds": "intervalSeconds",
+      "overlap_policy": "overlapPolicy",
+      "webhook_url": "webhookUrl",
+      "webhook_secret": "webhookSecret",
+    });
+  })
+);
 /** @internal */
 export type UpdateEvalScheduleRequest$Outbound = {
   name?: string | undefined;
@@ -82,28 +84,30 @@ export const UpdateEvalScheduleRequest$outboundSchema: z.ZodType<
   UpdateEvalScheduleRequest$Outbound,
   z.ZodTypeDef,
   UpdateEvalScheduleRequest
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  suiteVersion: z.nullable(z.number().int()).optional(),
-  cron: z.nullable(z.string()).optional(),
-  intervalSeconds: z.nullable(z.number().int()).optional(),
-  timezone: z.string().optional(),
-  overlapPolicy: EvalScheduleOverlapPolicy$outboundSchema.optional(),
-  enabled: z.boolean().optional(),
-  webhookUrl: z.nullable(z.string()).optional(),
-  webhookSecret: z.nullable(z.string()).optional(),
-  run: EvalScheduleRunRequestConfig$outboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteVersion: "suite_version",
-    intervalSeconds: "interval_seconds",
-    overlapPolicy: "overlap_policy",
-    webhookUrl: "webhook_url",
-    webhookSecret: "webhook_secret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    suiteVersion: z.nullable(z.number().int()).optional(),
+    cron: z.nullable(z.string()).optional(),
+    intervalSeconds: z.nullable(z.number().int()).optional(),
+    timezone: z.string().optional(),
+    overlapPolicy: EvalScheduleOverlapPolicy$outboundSchema.optional(),
+    enabled: z.boolean().optional(),
+    webhookUrl: z.nullable(z.string()).optional(),
+    webhookSecret: z.nullable(z.string()).optional(),
+    run: EvalScheduleRunRequestConfig$outboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteVersion: "suite_version",
+      intervalSeconds: "interval_seconds",
+      overlapPolicy: "overlap_policy",
+      webhookUrl: "webhook_url",
+      webhookSecret: "webhook_secret",
+    });
+  })
+);
 
 export function updateEvalScheduleRequestToJSON(
   updateEvalScheduleRequest: UpdateEvalScheduleRequest,

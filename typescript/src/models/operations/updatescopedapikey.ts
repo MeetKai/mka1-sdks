@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -51,17 +51,19 @@ export const UpdateScopedApiKeyRequestBody$inboundSchema: z.ZodType<
   UpdateScopedApiKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string(),
-  scopes: z.array(z.string()),
-  name: z.string().optional(),
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    scopes: z.array(z.string()),
+    name: z.string().optional(),
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type UpdateScopedApiKeyRequestBody$Outbound = {
   keyId: string;
@@ -78,15 +80,17 @@ export const UpdateScopedApiKeyRequestBody$outboundSchema: z.ZodType<
   UpdateScopedApiKeyRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateScopedApiKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-  scopes: z.array(z.string()),
-  name: z.string().optional(),
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+    scopes: z.array(z.string()),
+    name: z.string().optional(),
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function updateScopedApiKeyRequestBodyToJSON(
   updateScopedApiKeyRequestBody: UpdateScopedApiKeyRequestBody,
@@ -112,16 +116,18 @@ export const UpdateScopedApiKeyRequest$inboundSchema: z.ZodType<
   UpdateScopedApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateScopedApiKeyRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateScopedApiKeyRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateScopedApiKeyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -133,16 +139,18 @@ export const UpdateScopedApiKeyRequest$outboundSchema: z.ZodType<
   UpdateScopedApiKeyRequest$Outbound,
   z.ZodTypeDef,
   UpdateScopedApiKeyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateScopedApiKeyRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateScopedApiKeyRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateScopedApiKeyRequestToJSON(
   updateScopedApiKeyRequest: UpdateScopedApiKeyRequest,
@@ -164,7 +172,7 @@ export function updateScopedApiKeyRequestFromJSON(
 /** @internal */
 export const UpdateScopedApiKeyUserType$inboundSchema: z.ZodNativeEnum<
   typeof UpdateScopedApiKeyUserType
-> = z.nativeEnum(UpdateScopedApiKeyUserType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UpdateScopedApiKeyUserType));
 /** @internal */
 export const UpdateScopedApiKeyUserType$outboundSchema: z.ZodNativeEnum<
   typeof UpdateScopedApiKeyUserType
@@ -175,13 +183,15 @@ export const UpdateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   UpdateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  scopes: z.array(z.string()),
-  userType: UpdateScopedApiKeyUserType$inboundSchema,
-  orgId: z.string(),
-  expiresAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scopes: z.array(z.string()),
+    userType: UpdateScopedApiKeyUserType$inboundSchema,
+    orgId: z.string(),
+    expiresAt: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type UpdateScopedApiKeyResponseBody$Outbound = {
   id: string;
@@ -196,13 +206,15 @@ export const UpdateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   UpdateScopedApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateScopedApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  scopes: z.array(z.string()),
-  userType: UpdateScopedApiKeyUserType$outboundSchema,
-  orgId: z.string(),
-  expiresAt: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scopes: z.array(z.string()),
+    userType: UpdateScopedApiKeyUserType$outboundSchema,
+    orgId: z.string(),
+    expiresAt: z.nullable(z.string()),
+  })
+);
 
 export function updateScopedApiKeyResponseBodyToJSON(
   updateScopedApiKeyResponseBody: UpdateScopedApiKeyResponseBody,

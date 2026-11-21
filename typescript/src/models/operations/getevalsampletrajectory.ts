@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,20 +49,22 @@ export const GetEvalSampleTrajectoryRequest$inboundSchema: z.ZodType<
   GetEvalSampleTrajectoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  sample_index: z.number().int(),
-  task_id: z.string().optional(),
-  model: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    sample_index: z.number().int(),
+    task_id: z.string().optional(),
+    model: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetEvalSampleTrajectoryRequest$Outbound = {
   run_id: string;
@@ -77,20 +79,22 @@ export const GetEvalSampleTrajectoryRequest$outboundSchema: z.ZodType<
   GetEvalSampleTrajectoryRequest$Outbound,
   z.ZodTypeDef,
   GetEvalSampleTrajectoryRequest
-> = z.object({
-  runId: z.string(),
-  sampleIndex: z.number().int(),
-  taskId: z.string().optional(),
-  model: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    sampleIndex: z.number().int(),
+    taskId: z.string().optional(),
+    model: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getEvalSampleTrajectoryRequestToJSON(
   getEvalSampleTrajectoryRequest: GetEvalSampleTrajectoryRequest,
@@ -116,27 +120,29 @@ export const GetEvalSampleTrajectoryResponseBody$inboundSchema: z.ZodType<
   GetEvalSampleTrajectoryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.sample.trajectory"),
-  run_id: z.string(),
-  sample_index: z.number().int(),
-  task_id: z.string(),
-  model: z.string(),
-  schema_version: z.string(),
-  step_count: z.number().int(),
-  size_bytes: z.number().int(),
-  steps: z.array(z.nullable(z.any())),
-  logs: z.nullable(z.record(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "sample_index": "sampleIndex",
-    "task_id": "taskId",
-    "schema_version": "schemaVersion",
-    "step_count": "stepCount",
-    "size_bytes": "sizeBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.trajectory"),
+    run_id: z.string(),
+    sample_index: z.number().int(),
+    task_id: z.string(),
+    model: z.string(),
+    schema_version: z.string(),
+    step_count: z.number().int(),
+    size_bytes: z.number().int(),
+    steps: z.array(z.nullable(z.any())),
+    logs: z.nullable(z.record(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "sample_index": "sampleIndex",
+      "task_id": "taskId",
+      "schema_version": "schemaVersion",
+      "step_count": "stepCount",
+      "size_bytes": "sizeBytes",
+    });
+  })
+);
 /** @internal */
 export type GetEvalSampleTrajectoryResponseBody$Outbound = {
   object: "eval.sample.trajectory";
@@ -156,27 +162,29 @@ export const GetEvalSampleTrajectoryResponseBody$outboundSchema: z.ZodType<
   GetEvalSampleTrajectoryResponseBody$Outbound,
   z.ZodTypeDef,
   GetEvalSampleTrajectoryResponseBody
-> = z.object({
-  object: z.literal("eval.sample.trajectory"),
-  runId: z.string(),
-  sampleIndex: z.number().int(),
-  taskId: z.string(),
-  model: z.string(),
-  schemaVersion: z.string(),
-  stepCount: z.number().int(),
-  sizeBytes: z.number().int(),
-  steps: z.array(z.nullable(z.any())),
-  logs: z.nullable(z.record(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    sampleIndex: "sample_index",
-    taskId: "task_id",
-    schemaVersion: "schema_version",
-    stepCount: "step_count",
-    sizeBytes: "size_bytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.sample.trajectory"),
+    runId: z.string(),
+    sampleIndex: z.number().int(),
+    taskId: z.string(),
+    model: z.string(),
+    schemaVersion: z.string(),
+    stepCount: z.number().int(),
+    sizeBytes: z.number().int(),
+    steps: z.array(z.nullable(z.any())),
+    logs: z.nullable(z.record(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      sampleIndex: "sample_index",
+      taskId: "task_id",
+      schemaVersion: "schema_version",
+      stepCount: "step_count",
+      sizeBytes: "size_bytes",
+    });
+  })
+);
 
 export function getEvalSampleTrajectoryResponseBodyToJSON(
   getEvalSampleTrajectoryResponseBody: GetEvalSampleTrajectoryResponseBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,20 +30,22 @@ export const EvalSuiteTokenMeasurement$inboundSchema: z.ZodType<
   EvalSuiteTokenMeasurement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.suite.token_measurement"),
-  suite_id: z.string(),
-  measured_runs: z.number().int(),
-  measured_samples: z.number().int(),
-  remaining_runs: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "measured_runs": "measuredRuns",
-    "measured_samples": "measuredSamples",
-    "remaining_runs": "remainingRuns",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.suite.token_measurement"),
+    suite_id: z.string(),
+    measured_runs: z.number().int(),
+    measured_samples: z.number().int(),
+    remaining_runs: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "measured_runs": "measuredRuns",
+      "measured_samples": "measuredSamples",
+      "remaining_runs": "remainingRuns",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteTokenMeasurement$Outbound = {
   object: "eval.suite.token_measurement";
@@ -58,20 +60,22 @@ export const EvalSuiteTokenMeasurement$outboundSchema: z.ZodType<
   EvalSuiteTokenMeasurement$Outbound,
   z.ZodTypeDef,
   EvalSuiteTokenMeasurement
-> = z.object({
-  object: z.literal("eval.suite.token_measurement"),
-  suiteId: z.string(),
-  measuredRuns: z.number().int(),
-  measuredSamples: z.number().int(),
-  remainingRuns: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    measuredRuns: "measured_runs",
-    measuredSamples: "measured_samples",
-    remainingRuns: "remaining_runs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.suite.token_measurement"),
+    suiteId: z.string(),
+    measuredRuns: z.number().int(),
+    measuredSamples: z.number().int(),
+    remainingRuns: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      measuredRuns: "measured_runs",
+      measuredSamples: "measured_samples",
+      remainingRuns: "remaining_runs",
+    });
+  })
+);
 
 export function evalSuiteTokenMeasurementToJSON(
   evalSuiteTokenMeasurement: EvalSuiteTokenMeasurement,

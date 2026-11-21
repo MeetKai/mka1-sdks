@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -41,9 +44,11 @@ export const WakeResponseRequestBody$inboundSchema: z.ZodType<
   WakeResponseRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.string(),
+  })
+);
 /** @internal */
 export type WakeResponseRequestBody$Outbound = {
   input: string;
@@ -54,9 +59,11 @@ export const WakeResponseRequestBody$outboundSchema: z.ZodType<
   WakeResponseRequestBody$Outbound,
   z.ZodTypeDef,
   WakeResponseRequestBody
-> = z.object({
-  input: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.string(),
+  })
+);
 
 export function wakeResponseRequestBodyToJSON(
   wakeResponseRequestBody: WakeResponseRequestBody,
@@ -80,17 +87,19 @@ export const WakeResponseRequest$inboundSchema: z.ZodType<
   WakeResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => WakeResponseRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => WakeResponseRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type WakeResponseRequest$Outbound = {
   response_id: string;
@@ -103,17 +112,21 @@ export const WakeResponseRequest$outboundSchema: z.ZodType<
   WakeResponseRequest$Outbound,
   z.ZodTypeDef,
   WakeResponseRequest
-> = z.object({
-  responseId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => WakeResponseRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string().refine(matchesPattern$("^resp[-_][a-zA-Z0-9]+$"), {
+      message: "Value must match pattern ^resp[-_][a-zA-Z0-9]+$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => WakeResponseRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function wakeResponseRequestToJSON(
   wakeResponseRequest: WakeResponseRequest,
@@ -133,8 +146,8 @@ export function wakeResponseRequestFromJSON(
 }
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ObjectT));
 /** @internal */
 export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
   ObjectT$inboundSchema;
@@ -144,16 +157,20 @@ export const WakeResponseResponseBody$inboundSchema: z.ZodType<
   WakeResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: ObjectT$inboundSchema,
-  response_id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: ObjectT$inboundSchema,
+    response_id: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type WakeResponseResponseBody$Outbound = {
   object: string;
@@ -166,16 +183,18 @@ export const WakeResponseResponseBody$outboundSchema: z.ZodType<
   WakeResponseResponseBody$Outbound,
   z.ZodTypeDef,
   WakeResponseResponseBody
-> = z.object({
-  object: ObjectT$outboundSchema,
-  responseId: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: ObjectT$outboundSchema,
+    responseId: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function wakeResponseResponseBodyToJSON(
   wakeResponseResponseBody: WakeResponseResponseBody,

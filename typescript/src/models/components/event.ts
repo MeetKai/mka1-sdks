@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -14,14 +14,16 @@ export type Event = {
 };
 
 /** @internal */
-export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.string(),
-    timestamp: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    data: z.nullable(z.record(z.any())).optional(),
-  });
+export const Event$inboundSchema: z.ZodType<Event, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.string(),
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      data: z.nullable(z.record(z.any())).optional(),
+    })
+  );
 /** @internal */
 export type Event$Outbound = {
   type: string;
@@ -34,11 +36,13 @@ export const Event$outboundSchema: z.ZodType<
   Event$Outbound,
   z.ZodTypeDef,
   Event
-> = z.object({
-  type: z.string(),
-  timestamp: z.date().transform(v => v.toISOString()),
-  data: z.nullable(z.record(z.any())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    timestamp: z.date().transform(v => v.toISOString()),
+    data: z.nullable(z.record(z.any())).optional(),
+  })
+);
 
 export function eventToJSON(event: Event): string {
   return JSON.stringify(Event$outboundSchema.parse(event));

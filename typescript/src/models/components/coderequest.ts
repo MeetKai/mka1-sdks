@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,23 +29,25 @@ export const CodeRequest$inboundSchema: z.ZodType<
   CodeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  runtime: CodeRuntime$inboundSchema.optional(),
-  code: z.string(),
-  cwd: z.nullable(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  timeout_seconds: z.number().int().default(60),
-  domain_secrets_revision: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_token": "sessionToken",
-    "timeout_seconds": "timeoutSeconds",
-    "domain_secrets_revision": "domainSecretsRevision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    runtime: CodeRuntime$inboundSchema.optional(),
+    code: z.string(),
+    cwd: z.nullable(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    timeout_seconds: z.number().int().default(60),
+    domain_secrets_revision: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_token": "sessionToken",
+      "timeout_seconds": "timeoutSeconds",
+      "domain_secrets_revision": "domainSecretsRevision",
+    });
+  })
+);
 /** @internal */
 export type CodeRequest$Outbound = {
   session_id: string;
@@ -63,23 +65,25 @@ export const CodeRequest$outboundSchema: z.ZodType<
   CodeRequest$Outbound,
   z.ZodTypeDef,
   CodeRequest
-> = z.object({
-  sessionId: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  runtime: CodeRuntime$outboundSchema.optional(),
-  code: z.string(),
-  cwd: z.nullable(z.string()).optional(),
-  env: z.record(z.string()).optional(),
-  timeoutSeconds: z.number().int().default(60),
-  domainSecretsRevision: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionToken: "session_token",
-    timeoutSeconds: "timeout_seconds",
-    domainSecretsRevision: "domain_secrets_revision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    runtime: CodeRuntime$outboundSchema.optional(),
+    code: z.string(),
+    cwd: z.nullable(z.string()).optional(),
+    env: z.record(z.string()).optional(),
+    timeoutSeconds: z.number().int().default(60),
+    domainSecretsRevision: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionToken: "session_token",
+      timeoutSeconds: "timeout_seconds",
+      domainSecretsRevision: "domain_secrets_revision",
+    });
+  })
+);
 
 export function codeRequestToJSON(codeRequest: CodeRequest): string {
   return JSON.stringify(CodeRequest$outboundSchema.parse(codeRequest));

@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetOwnerKeyRecoveryTooManyRequestsError struct {
 var _ error = &GetOwnerKeyRecoveryTooManyRequestsError{}
 
 func (e *GetOwnerKeyRecoveryTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetOwnerKeyRecoveryGoneError struct {
 var _ error = &GetOwnerKeyRecoveryGoneError{}
 
 func (e *GetOwnerKeyRecoveryGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetOwnerKeyRecoveryConflictError struct {
 var _ error = &GetOwnerKeyRecoveryConflictError{}
 
 func (e *GetOwnerKeyRecoveryConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetOwnerKeyRecoveryNotFoundError struct {
 var _ error = &GetOwnerKeyRecoveryNotFoundError{}
 
 func (e *GetOwnerKeyRecoveryNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetOwnerKeyRecoveryForbiddenError struct {
 var _ error = &GetOwnerKeyRecoveryForbiddenError{}
 
 func (e *GetOwnerKeyRecoveryForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetOwnerKeyRecoveryUnauthorizedError struct {
 var _ error = &GetOwnerKeyRecoveryUnauthorizedError{}
 
 func (e *GetOwnerKeyRecoveryUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetOwnerKeyRecoveryBadRequestError struct {
 var _ error = &GetOwnerKeyRecoveryBadRequestError{}
 
 func (e *GetOwnerKeyRecoveryBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

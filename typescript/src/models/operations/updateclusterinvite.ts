@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -95,18 +95,20 @@ export const UpdateClusterInviteRequestBody$inboundSchema: z.ZodType<
   UpdateClusterInviteRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  modelIds: z.array(z.string()).optional(),
-  seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
-  seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
-  seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
-  seedTokenQuota: components.ClusterInviteSeedTokenQuota$inboundSchema
-    .optional(),
-  seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    modelIds: z.array(z.string()).optional(),
+    seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
+    seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
+    seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
+    seedTokenQuota: components.ClusterInviteSeedTokenQuota$inboundSchema
+      .optional(),
+    seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
+      .optional(),
+  })
+);
 /** @internal */
 export type UpdateClusterInviteRequestBody$Outbound = {
   expiresAt?: string | undefined;
@@ -123,17 +125,19 @@ export const UpdateClusterInviteRequestBody$outboundSchema: z.ZodType<
   UpdateClusterInviteRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateClusterInviteRequestBody
-> = z.object({
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-  modelIds: z.array(z.string()).optional(),
-  seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
-  seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
-  seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
-  seedTokenQuota: components.ClusterInviteSeedTokenQuota$outboundSchema
-    .optional(),
-  seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
-    .optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+    modelIds: z.array(z.string()).optional(),
+    seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
+    seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
+    seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
+    seedTokenQuota: components.ClusterInviteSeedTokenQuota$outboundSchema
+      .optional(),
+    seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
+      .optional(),
+  })
+);
 
 export function updateClusterInviteRequestBodyToJSON(
   updateClusterInviteRequestBody: UpdateClusterInviteRequestBody,
@@ -159,16 +163,18 @@ export const UpdateClusterInviteRequest$inboundSchema: z.ZodType<
   UpdateClusterInviteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateClusterInviteRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateClusterInviteRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateClusterInviteRequest$Outbound = {
   id: string;
@@ -181,16 +187,18 @@ export const UpdateClusterInviteRequest$outboundSchema: z.ZodType<
   UpdateClusterInviteRequest$Outbound,
   z.ZodTypeDef,
   UpdateClusterInviteRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateClusterInviteRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateClusterInviteRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateClusterInviteRequestToJSON(
   updateClusterInviteRequest: UpdateClusterInviteRequest,
@@ -214,26 +222,28 @@ export const UpdateClusterInviteInvitation$inboundSchema: z.ZodType<
   UpdateClusterInviteInvitation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  token: z.string().optional(),
-  email: z.nullable(z.string()),
-  suggestedOrgName: z.nullable(z.string()),
-  seedAvailableModels: z.array(z.string()),
-  seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
-  seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
-  seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
-  seedTokenQuota: components.ClusterInviteSeedTokenQuota$inboundSchema
-    .optional(),
-  seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
-    .optional(),
-  provisioningConfiguredByUserId: z.string().optional(),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  claimedAt: z.nullable(z.string()).optional(),
-  createdOrgId: z.nullable(z.string()).optional(),
-  emailSent: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    token: z.string().optional(),
+    email: z.nullable(z.string()),
+    suggestedOrgName: z.nullable(z.string()),
+    seedAvailableModels: z.array(z.string()),
+    seedQuota: components.ClusterInviteSeedQuota$inboundSchema.optional(),
+    seedCompute: components.ClusterInviteSeedCompute$inboundSchema.optional(),
+    seedBudget: components.ClusterInviteSeedBudget$inboundSchema.optional(),
+    seedTokenQuota: components.ClusterInviteSeedTokenQuota$inboundSchema
+      .optional(),
+    seedGuardrails: components.ClusterInviteSeedGuardrails$inboundSchema
+      .optional(),
+    provisioningConfiguredByUserId: z.string().optional(),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    claimedAt: z.nullable(z.string()).optional(),
+    createdOrgId: z.nullable(z.string()).optional(),
+    emailSent: z.nullable(z.boolean()).optional(),
+  })
+);
 /** @internal */
 export type UpdateClusterInviteInvitation$Outbound = {
   id: string;
@@ -259,26 +269,28 @@ export const UpdateClusterInviteInvitation$outboundSchema: z.ZodType<
   UpdateClusterInviteInvitation$Outbound,
   z.ZodTypeDef,
   UpdateClusterInviteInvitation
-> = z.object({
-  id: z.string(),
-  token: z.string().optional(),
-  email: z.nullable(z.string()),
-  suggestedOrgName: z.nullable(z.string()),
-  seedAvailableModels: z.array(z.string()),
-  seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
-  seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
-  seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
-  seedTokenQuota: components.ClusterInviteSeedTokenQuota$outboundSchema
-    .optional(),
-  seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
-    .optional(),
-  provisioningConfiguredByUserId: z.string().optional(),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  claimedAt: z.nullable(z.string()).optional(),
-  createdOrgId: z.nullable(z.string()).optional(),
-  emailSent: z.nullable(z.boolean()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    token: z.string().optional(),
+    email: z.nullable(z.string()),
+    suggestedOrgName: z.nullable(z.string()),
+    seedAvailableModels: z.array(z.string()),
+    seedQuota: components.ClusterInviteSeedQuota$outboundSchema.optional(),
+    seedCompute: components.ClusterInviteSeedCompute$outboundSchema.optional(),
+    seedBudget: components.ClusterInviteSeedBudget$outboundSchema.optional(),
+    seedTokenQuota: components.ClusterInviteSeedTokenQuota$outboundSchema
+      .optional(),
+    seedGuardrails: components.ClusterInviteSeedGuardrails$outboundSchema
+      .optional(),
+    provisioningConfiguredByUserId: z.string().optional(),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    claimedAt: z.nullable(z.string()).optional(),
+    createdOrgId: z.nullable(z.string()).optional(),
+    emailSent: z.nullable(z.boolean()).optional(),
+  })
+);
 
 export function updateClusterInviteInvitationToJSON(
   updateClusterInviteInvitation: UpdateClusterInviteInvitation,
@@ -304,9 +316,11 @@ export const UpdateClusterInviteResponseBody$inboundSchema: z.ZodType<
   UpdateClusterInviteResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invitation: z.lazy(() => UpdateClusterInviteInvitation$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.lazy(() => UpdateClusterInviteInvitation$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateClusterInviteResponseBody$Outbound = {
   invitation: UpdateClusterInviteInvitation$Outbound;
@@ -317,9 +331,11 @@ export const UpdateClusterInviteResponseBody$outboundSchema: z.ZodType<
   UpdateClusterInviteResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateClusterInviteResponseBody
-> = z.object({
-  invitation: z.lazy(() => UpdateClusterInviteInvitation$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.lazy(() => UpdateClusterInviteInvitation$outboundSchema),
+  })
+);
 
 export function updateClusterInviteResponseBodyToJSON(
   updateClusterInviteResponseBody: UpdateClusterInviteResponseBody,

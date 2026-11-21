@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -194,19 +195,21 @@ export class GetOrgQuotaResponseBody extends SDKError {
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponse429ResponseBody$inboundSchema:
   z.ZodType<GetOrgQuotaAuthOrgsResponse429ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new GetOrgQuotaAuthOrgsResponse429ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new GetOrgQuotaAuthOrgsResponse429ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponse429ResponseBody$Outbound = {
@@ -219,28 +222,32 @@ export const GetOrgQuotaAuthOrgsResponse429ResponseBody$outboundSchema:
     GetOrgQuotaAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgQuotaAuthOrgsResponse429ResponseBody
-  > = z.instanceof(GetOrgQuotaAuthOrgsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgQuotaAuthOrgsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponse410ResponseBody$inboundSchema:
   z.ZodType<GetOrgQuotaAuthOrgsResponse410ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new GetOrgQuotaAuthOrgsResponse410ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new GetOrgQuotaAuthOrgsResponse410ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponse410ResponseBody$Outbound = {
@@ -253,28 +260,32 @@ export const GetOrgQuotaAuthOrgsResponse410ResponseBody$outboundSchema:
     GetOrgQuotaAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgQuotaAuthOrgsResponse410ResponseBody
-  > = z.instanceof(GetOrgQuotaAuthOrgsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgQuotaAuthOrgsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponse409ResponseBody$inboundSchema:
   z.ZodType<GetOrgQuotaAuthOrgsResponse409ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new GetOrgQuotaAuthOrgsResponse409ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new GetOrgQuotaAuthOrgsResponse409ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponse409ResponseBody$Outbound = {
@@ -287,28 +298,32 @@ export const GetOrgQuotaAuthOrgsResponse409ResponseBody$outboundSchema:
     GetOrgQuotaAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgQuotaAuthOrgsResponse409ResponseBody
-  > = z.instanceof(GetOrgQuotaAuthOrgsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgQuotaAuthOrgsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponse404ResponseBody$inboundSchema:
   z.ZodType<GetOrgQuotaAuthOrgsResponse404ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new GetOrgQuotaAuthOrgsResponse404ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new GetOrgQuotaAuthOrgsResponse404ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponse404ResponseBody$Outbound = {
@@ -321,31 +336,35 @@ export const GetOrgQuotaAuthOrgsResponse404ResponseBody$outboundSchema:
     GetOrgQuotaAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgQuotaAuthOrgsResponse404ResponseBody
-  > = z.instanceof(GetOrgQuotaAuthOrgsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgQuotaAuthOrgsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponseResponseBody$inboundSchema: z.ZodType<
   GetOrgQuotaAuthOrgsResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  code: z.string().optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetOrgQuotaAuthOrgsResponseResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    code: z.string().optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetOrgQuotaAuthOrgsResponseResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponseResponseBody$Outbound = {
@@ -358,31 +377,35 @@ export const GetOrgQuotaAuthOrgsResponseResponseBody$outboundSchema: z.ZodType<
   GetOrgQuotaAuthOrgsResponseResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgQuotaAuthOrgsResponseResponseBody
-> = z.instanceof(GetOrgQuotaAuthOrgsResponseResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    code: z.string().optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetOrgQuotaAuthOrgsResponseResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      code: z.string().optional(),
+    }))
+);
 
 /** @internal */
 export const GetOrgQuotaAuthOrgsResponseBody$inboundSchema: z.ZodType<
   GetOrgQuotaAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetOrgQuotaAuthOrgsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetOrgQuotaAuthOrgsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetOrgQuotaAuthOrgsResponseBody$Outbound = {
@@ -394,30 +417,34 @@ export const GetOrgQuotaAuthOrgsResponseBody$outboundSchema: z.ZodType<
   GetOrgQuotaAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgQuotaAuthOrgsResponseBody
-> = z.instanceof(GetOrgQuotaAuthOrgsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetOrgQuotaAuthOrgsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetOrgQuotaResponseBody$inboundSchema: z.ZodType<
   GetOrgQuotaResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetOrgQuotaResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetOrgQuotaResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetOrgQuotaResponseBody$Outbound = {
@@ -429,8 +456,10 @@ export const GetOrgQuotaResponseBody$outboundSchema: z.ZodType<
   GetOrgQuotaResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgQuotaResponseBody
-> = z.instanceof(GetOrgQuotaResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetOrgQuotaResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

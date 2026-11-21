@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,7 +30,9 @@ export const CodeInterpreterToolDefinitionContainer$inboundSchema: z.ZodType<
   CodeInterpreterToolDefinitionContainer,
   z.ZodTypeDef,
   unknown
-> = z.union([CodeInterpreterContainerAuto$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([CodeInterpreterContainerAuto$inboundSchema, z.string()])
+);
 /** @internal */
 export type CodeInterpreterToolDefinitionContainer$Outbound =
   | CodeInterpreterContainerAuto$Outbound
@@ -41,7 +43,9 @@ export const CodeInterpreterToolDefinitionContainer$outboundSchema: z.ZodType<
   CodeInterpreterToolDefinitionContainer$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolDefinitionContainer
-> = z.union([CodeInterpreterContainerAuto$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([CodeInterpreterContainerAuto$outboundSchema, z.string()])
+);
 
 export function codeInterpreterToolDefinitionContainerToJSON(
   codeInterpreterToolDefinitionContainer:
@@ -69,10 +73,15 @@ export const CodeInterpreterToolDefinition$inboundSchema: z.ZodType<
   CodeInterpreterToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("code_interpreter"),
-  container: z.union([CodeInterpreterContainerAuto$inboundSchema, z.string()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter"),
+    container: z.union([
+      CodeInterpreterContainerAuto$inboundSchema,
+      z.string(),
+    ]),
+  })
+);
 /** @internal */
 export type CodeInterpreterToolDefinition$Outbound = {
   type: "code_interpreter";
@@ -84,10 +93,15 @@ export const CodeInterpreterToolDefinition$outboundSchema: z.ZodType<
   CodeInterpreterToolDefinition$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolDefinition
-> = z.object({
-  type: z.literal("code_interpreter"),
-  container: z.union([CodeInterpreterContainerAuto$outboundSchema, z.string()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter"),
+    container: z.union([
+      CodeInterpreterContainerAuto$outboundSchema,
+      z.string(),
+    ]),
+  })
+);
 
 export function codeInterpreterToolDefinitionToJSON(
   codeInterpreterToolDefinition: CodeInterpreterToolDefinition,

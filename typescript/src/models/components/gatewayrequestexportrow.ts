@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,27 +34,29 @@ export const GatewayRequestExportRow$inboundSchema: z.ZodType<
   GatewayRequestExportRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  requestId: z.any().optional(),
-  apiKeyId: z.any().optional(),
-  userId: z.any().optional(),
-  userRole: z.any().optional(),
-  userType: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  routeName: z.any().optional(),
-  serviceName: z.any().optional(),
-  host: z.any().optional(),
-  method: z.any().optional(),
-  path: z.any().optional(),
-  statusCode: z.any().optional(),
-  startedAt: z.any().optional(),
-  completedAt: z.any().optional(),
-  requestLatencyMs: z.any().optional(),
-  traceId: z.any().optional(),
-  correlationId: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestId: z.any().optional(),
+    apiKeyId: z.any().optional(),
+    userId: z.any().optional(),
+    userRole: z.any().optional(),
+    userType: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    routeName: z.any().optional(),
+    serviceName: z.any().optional(),
+    host: z.any().optional(),
+    method: z.any().optional(),
+    path: z.any().optional(),
+    statusCode: z.any().optional(),
+    startedAt: z.any().optional(),
+    completedAt: z.any().optional(),
+    requestLatencyMs: z.any().optional(),
+    traceId: z.any().optional(),
+    correlationId: z.any().optional(),
+  })
+);
 /** @internal */
 export type GatewayRequestExportRow$Outbound = {
   requestId?: any | undefined;
@@ -83,27 +85,29 @@ export const GatewayRequestExportRow$outboundSchema: z.ZodType<
   GatewayRequestExportRow$Outbound,
   z.ZodTypeDef,
   GatewayRequestExportRow
-> = z.object({
-  requestId: z.any().optional(),
-  apiKeyId: z.any().optional(),
-  userId: z.any().optional(),
-  userRole: z.any().optional(),
-  userType: z.any().optional(),
-  orgId: z.any().optional(),
-  teamId: z.any().optional(),
-  externalUserId: z.any().optional(),
-  routeName: z.any().optional(),
-  serviceName: z.any().optional(),
-  host: z.any().optional(),
-  method: z.any().optional(),
-  path: z.any().optional(),
-  statusCode: z.any().optional(),
-  startedAt: z.any().optional(),
-  completedAt: z.any().optional(),
-  requestLatencyMs: z.any().optional(),
-  traceId: z.any().optional(),
-  correlationId: z.any().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    requestId: z.any().optional(),
+    apiKeyId: z.any().optional(),
+    userId: z.any().optional(),
+    userRole: z.any().optional(),
+    userType: z.any().optional(),
+    orgId: z.any().optional(),
+    teamId: z.any().optional(),
+    externalUserId: z.any().optional(),
+    routeName: z.any().optional(),
+    serviceName: z.any().optional(),
+    host: z.any().optional(),
+    method: z.any().optional(),
+    path: z.any().optional(),
+    statusCode: z.any().optional(),
+    startedAt: z.any().optional(),
+    completedAt: z.any().optional(),
+    requestLatencyMs: z.any().optional(),
+    traceId: z.any().optional(),
+    correlationId: z.any().optional(),
+  })
+);
 
 export function gatewayRequestExportRowToJSON(
   gatewayRequestExportRow: GatewayRequestExportRow,

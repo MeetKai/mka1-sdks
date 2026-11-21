@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const OutputRef$inboundSchema: z.ZodType<
   OutputRef,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repo: z.string(),
-  revision: z.string(),
-  commit: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repo: z.string(),
+    revision: z.string(),
+    commit: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type OutputRef$Outbound = {
   repo: string;
@@ -35,11 +37,13 @@ export const OutputRef$outboundSchema: z.ZodType<
   OutputRef$Outbound,
   z.ZodTypeDef,
   OutputRef
-> = z.object({
-  repo: z.string(),
-  revision: z.string(),
-  commit: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repo: z.string(),
+    revision: z.string(),
+    commit: z.nullable(z.string()).optional(),
+  })
+);
 
 export function outputRefToJSON(outputRef: OutputRef): string {
   return JSON.stringify(OutputRef$outboundSchema.parse(outputRef));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateSandboxEnvironmentRequest$inboundSchema: z.ZodType<
   CreateSandboxEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  SaveEnvironmentRequest: components.SaveEnvironmentRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SaveEnvironmentRequest": "saveEnvironmentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    SaveEnvironmentRequest: components.SaveEnvironmentRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SaveEnvironmentRequest": "saveEnvironmentRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateSandboxEnvironmentRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateSandboxEnvironmentRequest$outboundSchema: z.ZodType<
   CreateSandboxEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   CreateSandboxEnvironmentRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  saveEnvironmentRequest: components.SaveEnvironmentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    saveEnvironmentRequest: "SaveEnvironmentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    saveEnvironmentRequest: components.SaveEnvironmentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      saveEnvironmentRequest: "SaveEnvironmentRequest",
+    });
+  })
+);
 
 export function createSandboxEnvironmentRequestToJSON(
   createSandboxEnvironmentRequest: CreateSandboxEnvironmentRequest,

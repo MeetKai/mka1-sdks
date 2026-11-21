@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -121,9 +121,8 @@ export type EvalEmbeddingConfig = {
 };
 
 /** @internal */
-export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> = z.nativeEnum(
-  Kind,
-);
+export const Kind$inboundSchema: z.ZodNativeEnum<typeof Kind> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Kind));
 /** @internal */
 export const Kind$outboundSchema: z.ZodNativeEnum<typeof Kind> =
   Kind$inboundSchema;
@@ -133,51 +132,53 @@ export const EvalEmbeddingConfig$inboundSchema: z.ZodType<
   EvalEmbeddingConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: Kind$inboundSchema,
-  text_column: z.string().default("text"),
-  text1_column: z.string().default("sentence1"),
-  text2_column: z.string().default("sentence2"),
-  score_column: z.string().default("score"),
-  label_column: z.string().default("label"),
-  id_column: z.string().default("_id"),
-  title_column: z.string().default("title"),
-  query_id_column: z.string().default("query-id"),
-  corpus_id_column: z.string().default("corpus-id"),
-  corpus_ids_column: z.string().default("corpus-ids"),
-  train_dataset: EvalDataset$inboundSchema.optional(),
-  corpus_dataset: EvalDataset$inboundSchema.optional(),
-  qrels_dataset: EvalDataset$inboundSchema.optional(),
-  top_ranked_dataset: EvalDataset$inboundSchema.optional(),
-  samples_per_label: z.number().int().default(8),
-  n_experiments: z.number().int().default(10),
-  seed: z.number().int().default(42),
-  k_values: z.array(z.number().int()).optional(),
-  max_chars: z.number().int().default(60000),
-  max_texts: z.number().int().default(50000),
-}).transform((v) => {
-  return remap$(v, {
-    "text_column": "textColumn",
-    "text1_column": "text1Column",
-    "text2_column": "text2Column",
-    "score_column": "scoreColumn",
-    "label_column": "labelColumn",
-    "id_column": "idColumn",
-    "title_column": "titleColumn",
-    "query_id_column": "queryIdColumn",
-    "corpus_id_column": "corpusIdColumn",
-    "corpus_ids_column": "corpusIdsColumn",
-    "train_dataset": "trainDataset",
-    "corpus_dataset": "corpusDataset",
-    "qrels_dataset": "qrelsDataset",
-    "top_ranked_dataset": "topRankedDataset",
-    "samples_per_label": "samplesPerLabel",
-    "n_experiments": "nExperiments",
-    "k_values": "kValues",
-    "max_chars": "maxChars",
-    "max_texts": "maxTexts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: Kind$inboundSchema,
+    text_column: z.string().default("text"),
+    text1_column: z.string().default("sentence1"),
+    text2_column: z.string().default("sentence2"),
+    score_column: z.string().default("score"),
+    label_column: z.string().default("label"),
+    id_column: z.string().default("_id"),
+    title_column: z.string().default("title"),
+    query_id_column: z.string().default("query-id"),
+    corpus_id_column: z.string().default("corpus-id"),
+    corpus_ids_column: z.string().default("corpus-ids"),
+    train_dataset: EvalDataset$inboundSchema.optional(),
+    corpus_dataset: EvalDataset$inboundSchema.optional(),
+    qrels_dataset: EvalDataset$inboundSchema.optional(),
+    top_ranked_dataset: EvalDataset$inboundSchema.optional(),
+    samples_per_label: z.number().int().default(8),
+    n_experiments: z.number().int().default(10),
+    seed: z.number().int().default(42),
+    k_values: z.array(z.number().int()).optional(),
+    max_chars: z.number().int().default(60000),
+    max_texts: z.number().int().default(50000),
+  }).transform((v) => {
+    return remap$(v, {
+      "text_column": "textColumn",
+      "text1_column": "text1Column",
+      "text2_column": "text2Column",
+      "score_column": "scoreColumn",
+      "label_column": "labelColumn",
+      "id_column": "idColumn",
+      "title_column": "titleColumn",
+      "query_id_column": "queryIdColumn",
+      "corpus_id_column": "corpusIdColumn",
+      "corpus_ids_column": "corpusIdsColumn",
+      "train_dataset": "trainDataset",
+      "corpus_dataset": "corpusDataset",
+      "qrels_dataset": "qrelsDataset",
+      "top_ranked_dataset": "topRankedDataset",
+      "samples_per_label": "samplesPerLabel",
+      "n_experiments": "nExperiments",
+      "k_values": "kValues",
+      "max_chars": "maxChars",
+      "max_texts": "maxTexts",
+    });
+  })
+);
 /** @internal */
 export type EvalEmbeddingConfig$Outbound = {
   kind: string;
@@ -208,51 +209,53 @@ export const EvalEmbeddingConfig$outboundSchema: z.ZodType<
   EvalEmbeddingConfig$Outbound,
   z.ZodTypeDef,
   EvalEmbeddingConfig
-> = z.object({
-  kind: Kind$outboundSchema,
-  textColumn: z.string().default("text"),
-  text1Column: z.string().default("sentence1"),
-  text2Column: z.string().default("sentence2"),
-  scoreColumn: z.string().default("score"),
-  labelColumn: z.string().default("label"),
-  idColumn: z.string().default("_id"),
-  titleColumn: z.string().default("title"),
-  queryIdColumn: z.string().default("query-id"),
-  corpusIdColumn: z.string().default("corpus-id"),
-  corpusIdsColumn: z.string().default("corpus-ids"),
-  trainDataset: EvalDataset$outboundSchema.optional(),
-  corpusDataset: EvalDataset$outboundSchema.optional(),
-  qrelsDataset: EvalDataset$outboundSchema.optional(),
-  topRankedDataset: EvalDataset$outboundSchema.optional(),
-  samplesPerLabel: z.number().int().default(8),
-  nExperiments: z.number().int().default(10),
-  seed: z.number().int().default(42),
-  kValues: z.array(z.number().int()).optional(),
-  maxChars: z.number().int().default(60000),
-  maxTexts: z.number().int().default(50000),
-}).transform((v) => {
-  return remap$(v, {
-    textColumn: "text_column",
-    text1Column: "text1_column",
-    text2Column: "text2_column",
-    scoreColumn: "score_column",
-    labelColumn: "label_column",
-    idColumn: "id_column",
-    titleColumn: "title_column",
-    queryIdColumn: "query_id_column",
-    corpusIdColumn: "corpus_id_column",
-    corpusIdsColumn: "corpus_ids_column",
-    trainDataset: "train_dataset",
-    corpusDataset: "corpus_dataset",
-    qrelsDataset: "qrels_dataset",
-    topRankedDataset: "top_ranked_dataset",
-    samplesPerLabel: "samples_per_label",
-    nExperiments: "n_experiments",
-    kValues: "k_values",
-    maxChars: "max_chars",
-    maxTexts: "max_texts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: Kind$outboundSchema,
+    textColumn: z.string().default("text"),
+    text1Column: z.string().default("sentence1"),
+    text2Column: z.string().default("sentence2"),
+    scoreColumn: z.string().default("score"),
+    labelColumn: z.string().default("label"),
+    idColumn: z.string().default("_id"),
+    titleColumn: z.string().default("title"),
+    queryIdColumn: z.string().default("query-id"),
+    corpusIdColumn: z.string().default("corpus-id"),
+    corpusIdsColumn: z.string().default("corpus-ids"),
+    trainDataset: EvalDataset$outboundSchema.optional(),
+    corpusDataset: EvalDataset$outboundSchema.optional(),
+    qrelsDataset: EvalDataset$outboundSchema.optional(),
+    topRankedDataset: EvalDataset$outboundSchema.optional(),
+    samplesPerLabel: z.number().int().default(8),
+    nExperiments: z.number().int().default(10),
+    seed: z.number().int().default(42),
+    kValues: z.array(z.number().int()).optional(),
+    maxChars: z.number().int().default(60000),
+    maxTexts: z.number().int().default(50000),
+  }).transform((v) => {
+    return remap$(v, {
+      textColumn: "text_column",
+      text1Column: "text1_column",
+      text2Column: "text2_column",
+      scoreColumn: "score_column",
+      labelColumn: "label_column",
+      idColumn: "id_column",
+      titleColumn: "title_column",
+      queryIdColumn: "query_id_column",
+      corpusIdColumn: "corpus_id_column",
+      corpusIdsColumn: "corpus_ids_column",
+      trainDataset: "train_dataset",
+      corpusDataset: "corpus_dataset",
+      qrelsDataset: "qrels_dataset",
+      topRankedDataset: "top_ranked_dataset",
+      samplesPerLabel: "samples_per_label",
+      nExperiments: "n_experiments",
+      kValues: "k_values",
+      maxChars: "max_chars",
+      maxTexts: "max_texts",
+    });
+  })
+);
 
 export function evalEmbeddingConfigToJSON(
   evalEmbeddingConfig: EvalEmbeddingConfig,

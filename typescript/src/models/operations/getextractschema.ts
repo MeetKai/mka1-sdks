@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const GetExtractSchemaRequest$inboundSchema: z.ZodType<
   GetExtractSchemaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schema_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "schema_id": "schemaId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schema_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema_id": "schemaId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetExtractSchemaRequest$Outbound = {
   schema_id: string;
@@ -41,15 +43,17 @@ export const GetExtractSchemaRequest$outboundSchema: z.ZodType<
   GetExtractSchemaRequest$Outbound,
   z.ZodTypeDef,
   GetExtractSchemaRequest
-> = z.object({
-  schemaId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    schemaId: "schema_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      schemaId: "schema_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getExtractSchemaRequestToJSON(
   getExtractSchemaRequest: GetExtractSchemaRequest,

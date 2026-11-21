@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,26 +45,28 @@ export const UpdateMcpServerRequest$inboundSchema: z.ZodType<
   UpdateMcpServerRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  server_label: z.string().optional(),
-  server_url: z.string().optional(),
-  server_description: z.nullable(z.string()).optional(),
-  allowed_tools: z.nullable(MCPAllowedTools$inboundSchema).optional(),
-  require_approval: MCPRequireApproval$inboundSchema.optional(),
-  metadata: z.record(z.any()).optional(),
-  shared_with_end_users: z.boolean().optional(),
-  oauth: z.nullable(McpServerOAuthConfigRequest$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-    "server_url": "serverUrl",
-    "server_description": "serverDescription",
-    "allowed_tools": "allowedTools",
-    "require_approval": "requireApproval",
-    "shared_with_end_users": "sharedWithEndUsers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    server_label: z.string().optional(),
+    server_url: z.string().optional(),
+    server_description: z.nullable(z.string()).optional(),
+    allowed_tools: z.nullable(MCPAllowedTools$inboundSchema).optional(),
+    require_approval: MCPRequireApproval$inboundSchema.optional(),
+    metadata: z.record(z.any()).optional(),
+    shared_with_end_users: z.boolean().optional(),
+    oauth: z.nullable(McpServerOAuthConfigRequest$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+      "server_url": "serverUrl",
+      "server_description": "serverDescription",
+      "allowed_tools": "allowedTools",
+      "require_approval": "requireApproval",
+      "shared_with_end_users": "sharedWithEndUsers",
+    });
+  })
+);
 /** @internal */
 export type UpdateMcpServerRequest$Outbound = {
   name?: string | undefined;
@@ -83,26 +85,28 @@ export const UpdateMcpServerRequest$outboundSchema: z.ZodType<
   UpdateMcpServerRequest$Outbound,
   z.ZodTypeDef,
   UpdateMcpServerRequest
-> = z.object({
-  name: z.string().optional(),
-  serverLabel: z.string().optional(),
-  serverUrl: z.string().optional(),
-  serverDescription: z.nullable(z.string()).optional(),
-  allowedTools: z.nullable(MCPAllowedTools$outboundSchema).optional(),
-  requireApproval: MCPRequireApproval$outboundSchema.optional(),
-  metadata: z.record(z.any()).optional(),
-  sharedWithEndUsers: z.boolean().optional(),
-  oauth: z.nullable(McpServerOAuthConfigRequest$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    serverUrl: "server_url",
-    serverDescription: "server_description",
-    allowedTools: "allowed_tools",
-    requireApproval: "require_approval",
-    sharedWithEndUsers: "shared_with_end_users",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    serverLabel: z.string().optional(),
+    serverUrl: z.string().optional(),
+    serverDescription: z.nullable(z.string()).optional(),
+    allowedTools: z.nullable(MCPAllowedTools$outboundSchema).optional(),
+    requireApproval: MCPRequireApproval$outboundSchema.optional(),
+    metadata: z.record(z.any()).optional(),
+    sharedWithEndUsers: z.boolean().optional(),
+    oauth: z.nullable(McpServerOAuthConfigRequest$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      serverUrl: "server_url",
+      serverDescription: "server_description",
+      allowedTools: "allowed_tools",
+      requireApproval: "require_approval",
+      sharedWithEndUsers: "shared_with_end_users",
+    });
+  })
+);
 
 export function updateMcpServerRequestToJSON(
   updateMcpServerRequest: UpdateMcpServerRequest,

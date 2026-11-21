@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListTeamMembersTooManyRequestsError struct {
 var _ error = &ListTeamMembersTooManyRequestsError{}
 
 func (e *ListTeamMembersTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListTeamMembersGoneError struct {
 var _ error = &ListTeamMembersGoneError{}
 
 func (e *ListTeamMembersGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListTeamMembersConflictError struct {
 var _ error = &ListTeamMembersConflictError{}
 
 func (e *ListTeamMembersConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListTeamMembersNotFoundError struct {
 var _ error = &ListTeamMembersNotFoundError{}
 
 func (e *ListTeamMembersNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListTeamMembersForbiddenError struct {
 var _ error = &ListTeamMembersForbiddenError{}
 
 func (e *ListTeamMembersForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListTeamMembersUnauthorizedError struct {
 var _ error = &ListTeamMembersUnauthorizedError{}
 
 func (e *ListTeamMembersUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListTeamMembersBadRequestError struct {
 var _ error = &ListTeamMembersBadRequestError{}
 
 func (e *ListTeamMembersBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

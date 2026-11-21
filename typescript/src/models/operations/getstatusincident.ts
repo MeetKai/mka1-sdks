@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const GetStatusIncidentRequest$inboundSchema: z.ZodType<
   GetStatusIncidentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  incident_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "incident_id": "incidentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    incident_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "incident_id": "incidentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetStatusIncidentRequest$Outbound = {
   incident_id: string;
@@ -44,15 +46,17 @@ export const GetStatusIncidentRequest$outboundSchema: z.ZodType<
   GetStatusIncidentRequest$Outbound,
   z.ZodTypeDef,
   GetStatusIncidentRequest
-> = z.object({
-  incidentId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    incidentId: "incident_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    incidentId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      incidentId: "incident_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getStatusIncidentRequestToJSON(
   getStatusIncidentRequest: GetStatusIncidentRequest,

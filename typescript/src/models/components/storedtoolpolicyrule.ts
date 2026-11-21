@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -44,18 +44,20 @@ export const StoredToolPolicyRule$inboundSchema: z.ZodType<
   StoredToolPolicyRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string(),
-  action: ToolPolicyAction$inboundSchema,
-  server_domains: z.array(z.string()).optional(),
-  tool_names: z.array(z.string()).optional(),
-  approvers: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_domains": "serverDomains",
-    "tool_names": "toolNames",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    action: ToolPolicyAction$inboundSchema,
+    server_domains: z.array(z.string()).optional(),
+    tool_names: z.array(z.string()).optional(),
+    approvers: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_domains": "serverDomains",
+      "tool_names": "toolNames",
+    });
+  })
+);
 /** @internal */
 export type StoredToolPolicyRule$Outbound = {
   type: string;
@@ -70,18 +72,20 @@ export const StoredToolPolicyRule$outboundSchema: z.ZodType<
   StoredToolPolicyRule$Outbound,
   z.ZodTypeDef,
   StoredToolPolicyRule
-> = z.object({
-  type: z.string(),
-  action: ToolPolicyAction$outboundSchema,
-  serverDomains: z.array(z.string()).optional(),
-  toolNames: z.array(z.string()).optional(),
-  approvers: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverDomains: "server_domains",
-    toolNames: "tool_names",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    action: ToolPolicyAction$outboundSchema,
+    serverDomains: z.array(z.string()).optional(),
+    toolNames: z.array(z.string()).optional(),
+    approvers: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverDomains: "server_domains",
+      toolNames: "tool_names",
+    });
+  })
+);
 
 export function storedToolPolicyRuleToJSON(
   storedToolPolicyRule: StoredToolPolicyRule,

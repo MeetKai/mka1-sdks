@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const EvalScheduleOverlapPolicy = {
@@ -17,7 +18,7 @@ export type EvalScheduleOverlapPolicy = ClosedEnum<
 /** @internal */
 export const EvalScheduleOverlapPolicy$inboundSchema: z.ZodNativeEnum<
   typeof EvalScheduleOverlapPolicy
-> = z.nativeEnum(EvalScheduleOverlapPolicy);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EvalScheduleOverlapPolicy));
 /** @internal */
 export const EvalScheduleOverlapPolicy$outboundSchema: z.ZodNativeEnum<
   typeof EvalScheduleOverlapPolicy

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,18 @@ export const AnalyticsCaptureResponse$inboundSchema: z.ZodType<
   AnalyticsCaptureResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  batch_id: z.string(),
-  duplicate: z.boolean(),
-  event_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "batch_id": "batchId",
-    "event_count": "eventCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batch_id: z.string(),
+    duplicate: z.boolean(),
+    event_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "batch_id": "batchId",
+      "event_count": "eventCount",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsCaptureResponse$Outbound = {
   batch_id: string;
@@ -41,16 +43,18 @@ export const AnalyticsCaptureResponse$outboundSchema: z.ZodType<
   AnalyticsCaptureResponse$Outbound,
   z.ZodTypeDef,
   AnalyticsCaptureResponse
-> = z.object({
-  batchId: z.string(),
-  duplicate: z.boolean(),
-  eventCount: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    batchId: "batch_id",
-    eventCount: "event_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    batchId: z.string(),
+    duplicate: z.boolean(),
+    eventCount: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      batchId: "batch_id",
+      eventCount: "event_count",
+    });
+  })
+);
 
 export function analyticsCaptureResponseToJSON(
   analyticsCaptureResponse: AnalyticsCaptureResponse,

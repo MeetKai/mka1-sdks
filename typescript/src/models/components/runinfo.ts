@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +34,7 @@ export type RunInfo = {
 /** @internal */
 export const RunInfoStatus$inboundSchema: z.ZodNativeEnum<
   typeof RunInfoStatus
-> = z.nativeEnum(RunInfoStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RunInfoStatus));
 /** @internal */
 export const RunInfoStatus$outboundSchema: z.ZodNativeEnum<
   typeof RunInfoStatus
@@ -42,30 +42,32 @@ export const RunInfoStatus$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const RunInfo$inboundSchema: z.ZodType<RunInfo, z.ZodTypeDef, unknown> =
-  z.object({
-    run_id: z.string(),
-    run_uuid: z.string().optional(),
-    run_name: z.string().optional(),
-    experiment_id: z.string(),
-    user_id: z.string().optional(),
-    status: RunInfoStatus$inboundSchema.optional(),
-    start_time: z.number().int().optional(),
-    end_time: z.number().int().optional(),
-    artifact_uri: z.string().optional(),
-    lifecycle_stage: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "run_id": "runId",
-      "run_uuid": "runUuid",
-      "run_name": "runName",
-      "experiment_id": "experimentId",
-      "user_id": "userId",
-      "start_time": "startTime",
-      "end_time": "endTime",
-      "artifact_uri": "artifactUri",
-      "lifecycle_stage": "lifecycleStage",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      run_id: z.string(),
+      run_uuid: z.string().optional(),
+      run_name: z.string().optional(),
+      experiment_id: z.string(),
+      user_id: z.string().optional(),
+      status: RunInfoStatus$inboundSchema.optional(),
+      start_time: z.number().int().optional(),
+      end_time: z.number().int().optional(),
+      artifact_uri: z.string().optional(),
+      lifecycle_stage: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "run_id": "runId",
+        "run_uuid": "runUuid",
+        "run_name": "runName",
+        "experiment_id": "experimentId",
+        "user_id": "userId",
+        "start_time": "startTime",
+        "end_time": "endTime",
+        "artifact_uri": "artifactUri",
+        "lifecycle_stage": "lifecycleStage",
+      });
+    })
+  );
 /** @internal */
 export type RunInfo$Outbound = {
   run_id: string;
@@ -85,30 +87,32 @@ export const RunInfo$outboundSchema: z.ZodType<
   RunInfo$Outbound,
   z.ZodTypeDef,
   RunInfo
-> = z.object({
-  runId: z.string(),
-  runUuid: z.string().optional(),
-  runName: z.string().optional(),
-  experimentId: z.string(),
-  userId: z.string().optional(),
-  status: RunInfoStatus$outboundSchema.optional(),
-  startTime: z.number().int().optional(),
-  endTime: z.number().int().optional(),
-  artifactUri: z.string().optional(),
-  lifecycleStage: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    runUuid: "run_uuid",
-    runName: "run_name",
-    experimentId: "experiment_id",
-    userId: "user_id",
-    startTime: "start_time",
-    endTime: "end_time",
-    artifactUri: "artifact_uri",
-    lifecycleStage: "lifecycle_stage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    runUuid: z.string().optional(),
+    runName: z.string().optional(),
+    experimentId: z.string(),
+    userId: z.string().optional(),
+    status: RunInfoStatus$outboundSchema.optional(),
+    startTime: z.number().int().optional(),
+    endTime: z.number().int().optional(),
+    artifactUri: z.string().optional(),
+    lifecycleStage: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      runUuid: "run_uuid",
+      runName: "run_name",
+      experimentId: "experiment_id",
+      userId: "user_id",
+      startTime: "start_time",
+      endTime: "end_time",
+      artifactUri: "artifact_uri",
+      lifecycleStage: "lifecycle_stage",
+    });
+  })
+);
 
 export function runInfoToJSON(runInfo: RunInfo): string {
   return JSON.stringify(RunInfo$outboundSchema.parse(runInfo));

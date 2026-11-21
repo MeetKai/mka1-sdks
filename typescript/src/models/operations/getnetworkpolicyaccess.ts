@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,9 +37,11 @@ export const GetNetworkPolicyAccessSecurity$inboundSchema: z.ZodType<
   GetNetworkPolicyAccessSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type GetNetworkPolicyAccessSecurity$Outbound = {
   sessionCookie: string;
@@ -50,9 +52,11 @@ export const GetNetworkPolicyAccessSecurity$outboundSchema: z.ZodType<
   GetNetworkPolicyAccessSecurity$Outbound,
   z.ZodTypeDef,
   GetNetworkPolicyAccessSecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function getNetworkPolicyAccessSecurityToJSON(
   getNetworkPolicyAccessSecurity: GetNetworkPolicyAccessSecurity,
@@ -78,17 +82,19 @@ export const GetNetworkPolicyAccessRequest$inboundSchema: z.ZodType<
   GetNetworkPolicyAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organization_id: z.string(),
-  team_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "organization_id": "organizationId",
-    "team_id": "teamId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization_id: z.string(),
+    team_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "organization_id": "organizationId",
+      "team_id": "teamId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetNetworkPolicyAccessRequest$Outbound = {
   organization_id: string;
@@ -101,17 +107,19 @@ export const GetNetworkPolicyAccessRequest$outboundSchema: z.ZodType<
   GetNetworkPolicyAccessRequest$Outbound,
   z.ZodTypeDef,
   GetNetworkPolicyAccessRequest
-> = z.object({
-  organizationId: z.string(),
-  teamId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    organizationId: "organization_id",
-    teamId: "team_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizationId: z.string(),
+    teamId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      organizationId: "organization_id",
+      teamId: "team_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getNetworkPolicyAccessRequestToJSON(
   getNetworkPolicyAccessRequest: GetNetworkPolicyAccessRequest,
@@ -137,21 +145,23 @@ export const GetNetworkPolicyAccessResponseBody$inboundSchema: z.ZodType<
   GetNetworkPolicyAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_id: z.string(),
-  organization_id: z.string(),
-  team_id: z.string(),
-  can_manage_organization: z.boolean(),
-  can_manage_team: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-    "organization_id": "organizationId",
-    "team_id": "teamId",
-    "can_manage_organization": "canManageOrganization",
-    "can_manage_team": "canManageTeam",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_id: z.string(),
+    organization_id: z.string(),
+    team_id: z.string(),
+    can_manage_organization: z.boolean(),
+    can_manage_team: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_id": "userId",
+      "organization_id": "organizationId",
+      "team_id": "teamId",
+      "can_manage_organization": "canManageOrganization",
+      "can_manage_team": "canManageTeam",
+    });
+  })
+);
 /** @internal */
 export type GetNetworkPolicyAccessResponseBody$Outbound = {
   user_id: string;
@@ -166,21 +176,23 @@ export const GetNetworkPolicyAccessResponseBody$outboundSchema: z.ZodType<
   GetNetworkPolicyAccessResponseBody$Outbound,
   z.ZodTypeDef,
   GetNetworkPolicyAccessResponseBody
-> = z.object({
-  userId: z.string(),
-  organizationId: z.string(),
-  teamId: z.string(),
-  canManageOrganization: z.boolean(),
-  canManageTeam: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-    organizationId: "organization_id",
-    teamId: "team_id",
-    canManageOrganization: "can_manage_organization",
-    canManageTeam: "can_manage_team",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+    organizationId: z.string(),
+    teamId: z.string(),
+    canManageOrganization: z.boolean(),
+    canManageTeam: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+      organizationId: "organization_id",
+      teamId: "team_id",
+      canManageOrganization: "can_manage_organization",
+      canManageTeam: "can_manage_team",
+    });
+  })
+);
 
 export function getNetworkPolicyAccessResponseBodyToJSON(
   getNetworkPolicyAccessResponseBody: GetNetworkPolicyAccessResponseBody,

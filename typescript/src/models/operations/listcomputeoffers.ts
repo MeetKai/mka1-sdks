@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -38,7 +38,7 @@ export type ListComputeOffersResponse =
 
 /** @internal */
 export const Interconnect$inboundSchema: z.ZodNativeEnum<typeof Interconnect> =
-  z.nativeEnum(Interconnect);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Interconnect));
 /** @internal */
 export const Interconnect$outboundSchema: z.ZodNativeEnum<typeof Interconnect> =
   Interconnect$inboundSchema;
@@ -48,22 +48,24 @@ export const ListComputeOffersRequest$inboundSchema: z.ZodType<
   ListComputeOffersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accelerator: z.string().optional(),
-  gpu_count: z.number().int().optional(),
-  interconnect: Interconnect$inboundSchema.optional(),
-  provider: z.string().optional(),
-  region: z.string().optional(),
-  available: z.boolean().optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "gpu_count": "gpuCount",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string().optional(),
+    gpu_count: z.number().int().optional(),
+    interconnect: Interconnect$inboundSchema.optional(),
+    provider: z.string().optional(),
+    region: z.string().optional(),
+    available: z.boolean().optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "gpu_count": "gpuCount",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListComputeOffersRequest$Outbound = {
   accelerator?: string | undefined;
@@ -82,22 +84,24 @@ export const ListComputeOffersRequest$outboundSchema: z.ZodType<
   ListComputeOffersRequest$Outbound,
   z.ZodTypeDef,
   ListComputeOffersRequest
-> = z.object({
-  accelerator: z.string().optional(),
-  gpuCount: z.number().int().optional(),
-  interconnect: Interconnect$outboundSchema.optional(),
-  provider: z.string().optional(),
-  region: z.string().optional(),
-  available: z.boolean().optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    gpuCount: "gpu_count",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string().optional(),
+    gpuCount: z.number().int().optional(),
+    interconnect: Interconnect$outboundSchema.optional(),
+    provider: z.string().optional(),
+    region: z.string().optional(),
+    available: z.boolean().optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      gpuCount: "gpu_count",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listComputeOffersRequestToJSON(
   listComputeOffersRequest: ListComputeOffersRequest,
@@ -121,10 +125,12 @@ export const ListComputeOffersResponse$inboundSchema: z.ZodType<
   ListComputeOffersResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeOfferList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeOfferList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListComputeOffersResponse$Outbound =
   | components.ComputeOfferList$Outbound
@@ -135,10 +141,12 @@ export const ListComputeOffersResponse$outboundSchema: z.ZodType<
   ListComputeOffersResponse$Outbound,
   z.ZodTypeDef,
   ListComputeOffersResponse
-> = z.union([
-  components.ComputeOfferList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeOfferList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listComputeOffersResponseToJSON(
   listComputeOffersResponse: ListComputeOffersResponse,

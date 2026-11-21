@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetServiceAccountTooManyRequestsError struct {
 var _ error = &GetServiceAccountTooManyRequestsError{}
 
 func (e *GetServiceAccountTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetServiceAccountGoneError struct {
 var _ error = &GetServiceAccountGoneError{}
 
 func (e *GetServiceAccountGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetServiceAccountConflictError struct {
 var _ error = &GetServiceAccountConflictError{}
 
 func (e *GetServiceAccountConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetServiceAccountNotFoundError struct {
 var _ error = &GetServiceAccountNotFoundError{}
 
 func (e *GetServiceAccountNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetServiceAccountForbiddenError struct {
 var _ error = &GetServiceAccountForbiddenError{}
 
 func (e *GetServiceAccountForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetServiceAccountUnauthorizedError struct {
 var _ error = &GetServiceAccountUnauthorizedError{}
 
 func (e *GetServiceAccountUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetServiceAccountBadRequestError struct {
 var _ error = &GetServiceAccountBadRequestError{}
 
 func (e *GetServiceAccountBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

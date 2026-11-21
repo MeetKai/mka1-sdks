@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const ListOrgPricesRequest$inboundSchema: z.ZodType<
   ListOrgPricesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  model: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    model: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type ListOrgPricesRequest$Outbound = {
   org_id: string;
@@ -37,14 +39,16 @@ export const ListOrgPricesRequest$outboundSchema: z.ZodType<
   ListOrgPricesRequest$Outbound,
   z.ZodTypeDef,
   ListOrgPricesRequest
-> = z.object({
-  orgId: z.string(),
-  model: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    model: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function listOrgPricesRequestToJSON(
   listOrgPricesRequest: ListOrgPricesRequest,

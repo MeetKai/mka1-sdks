@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -211,19 +212,21 @@ export const UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody$inboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody$Outbound = {
@@ -236,11 +239,13 @@ export const UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody$outboundSchema
     UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody$inboundSchema:
@@ -248,19 +253,21 @@ export const UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody$inboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody$Outbound = {
@@ -273,11 +280,13 @@ export const UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody$outboundSchema
     UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody$inboundSchema:
@@ -285,20 +294,22 @@ export const UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody$inboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody$Outbound = {
@@ -312,12 +323,14 @@ export const UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody$outboundSchema
     UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody$inboundSchema:
@@ -325,19 +338,21 @@ export const UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody$inboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody$Outbound = {
@@ -350,11 +365,13 @@ export const UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody$outboundSchema
     UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesAuthOrgsResponseResponseBody$inboundSchema:
@@ -362,20 +379,22 @@ export const UpdateOrgInboundRulesAuthOrgsResponseResponseBody$inboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateOrgInboundRulesAuthOrgsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateOrgInboundRulesAuthOrgsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponseResponseBody$Outbound = {
@@ -389,31 +408,35 @@ export const UpdateOrgInboundRulesAuthOrgsResponseResponseBody$outboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponseResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesAuthOrgsResponseBody$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new UpdateOrgInboundRulesAuthOrgsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new UpdateOrgInboundRulesAuthOrgsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type UpdateOrgInboundRulesAuthOrgsResponseBody$Outbound = {
@@ -426,30 +449,34 @@ export const UpdateOrgInboundRulesAuthOrgsResponseBody$outboundSchema:
     UpdateOrgInboundRulesAuthOrgsResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrgInboundRulesAuthOrgsResponseBody
-  > = z.instanceof(UpdateOrgInboundRulesAuthOrgsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateOrgInboundRulesAuthOrgsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateOrgInboundRulesResponseBody$inboundSchema: z.ZodType<
   UpdateOrgInboundRulesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new UpdateOrgInboundRulesResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new UpdateOrgInboundRulesResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type UpdateOrgInboundRulesResponseBody$Outbound = {
@@ -461,8 +488,10 @@ export const UpdateOrgInboundRulesResponseBody$outboundSchema: z.ZodType<
   UpdateOrgInboundRulesResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgInboundRulesResponseBody
-> = z.instanceof(UpdateOrgInboundRulesResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(UpdateOrgInboundRulesResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

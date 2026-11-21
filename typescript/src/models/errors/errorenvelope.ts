@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -42,12 +42,14 @@ export class ErrorEnvelope extends SDKError {
 }
 
 /** @internal */
-export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
-  .object({
-    message: z.string(),
-    code: z.string().optional(),
-    details: z.nullable(z.any()).optional(),
-  });
+export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      details: z.nullable(z.any()).optional(),
+    })
+  );
 /** @internal */
 export type ErrorT$Outbound = {
   message: string;
@@ -60,11 +62,13 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT$Outbound,
   z.ZodTypeDef,
   ErrorT
-> = z.object({
-  message: z.string(),
-  code: z.string().optional(),
-  details: z.nullable(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    code: z.string().optional(),
+    details: z.nullable(z.any()).optional(),
+  })
+);
 
 export function errorToJSON(errorT: ErrorT): string {
   return JSON.stringify(ErrorT$outboundSchema.parse(errorT));
@@ -84,19 +88,21 @@ export const ErrorEnvelope$inboundSchema: z.ZodType<
   ErrorEnvelope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.lazy(() => ErrorT$inboundSchema),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ErrorEnvelope(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.lazy(() => ErrorT$inboundSchema),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ErrorEnvelope(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type ErrorEnvelope$Outbound = {
@@ -108,8 +114,10 @@ export const ErrorEnvelope$outboundSchema: z.ZodType<
   ErrorEnvelope$Outbound,
   z.ZodTypeDef,
   ErrorEnvelope
-> = z.instanceof(ErrorEnvelope)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.lazy(() => ErrorT$outboundSchema),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ErrorEnvelope)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      error: z.lazy(() => ErrorT$outboundSchema),
+    }))
+);

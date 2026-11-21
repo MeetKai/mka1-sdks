@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,13 +52,15 @@ export const GuardrailConfig$inboundSchema: z.ZodType<
   GuardrailConfig,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("mode", {
-  ban_words: BanWordsGuardrail$inboundSchema,
-  prompt_injection: PromptInjectionGuardrail$inboundSchema,
-  leakage: LeakageGuardrail$inboundSchema,
-  classifier: ClassifierGuardrail$inboundSchema,
-  groundedness: GroundednessGuardrail$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("mode", {
+    ban_words: BanWordsGuardrail$inboundSchema,
+    prompt_injection: PromptInjectionGuardrail$inboundSchema,
+    leakage: LeakageGuardrail$inboundSchema,
+    classifier: ClassifierGuardrail$inboundSchema,
+    groundedness: GroundednessGuardrail$inboundSchema,
+  })
+);
 /** @internal */
 export type GuardrailConfig$Outbound =
   | BanWordsGuardrail$Outbound
@@ -72,13 +74,15 @@ export const GuardrailConfig$outboundSchema: z.ZodType<
   GuardrailConfig$Outbound,
   z.ZodTypeDef,
   GuardrailConfig
-> = z.union([
-  BanWordsGuardrail$outboundSchema,
-  PromptInjectionGuardrail$outboundSchema,
-  LeakageGuardrail$outboundSchema,
-  ClassifierGuardrail$outboundSchema,
-  GroundednessGuardrail$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    BanWordsGuardrail$outboundSchema,
+    PromptInjectionGuardrail$outboundSchema,
+    LeakageGuardrail$outboundSchema,
+    ClassifierGuardrail$outboundSchema,
+    GroundednessGuardrail$outboundSchema,
+  ])
+);
 
 export function guardrailConfigToJSON(
   guardrailConfig: GuardrailConfig,

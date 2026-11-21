@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,16 +20,18 @@ export const ConnectorToolModel$inboundSchema: z.ZodType<
   ConnectorToolModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  title: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  read_only: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    title: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    read_only: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+    });
+  })
+);
 /** @internal */
 export type ConnectorToolModel$Outbound = {
   name: string;
@@ -43,16 +45,18 @@ export const ConnectorToolModel$outboundSchema: z.ZodType<
   ConnectorToolModel$Outbound,
   z.ZodTypeDef,
   ConnectorToolModel
-> = z.object({
-  name: z.string(),
-  title: z.nullable(z.string()).optional(),
-  description: z.nullable(z.string()).optional(),
-  readOnly: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    title: z.nullable(z.string()).optional(),
+    description: z.nullable(z.string()).optional(),
+    readOnly: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+    });
+  })
+);
 
 export function connectorToolModelToJSON(
   connectorToolModel: ConnectorToolModel,

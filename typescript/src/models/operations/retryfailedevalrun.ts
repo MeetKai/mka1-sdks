@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -170,15 +171,17 @@ export const RetryFailedEvalRunRequest$inboundSchema: z.ZodType<
   RetryFailedEvalRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RetryFailedEvalRunRequest$Outbound = {
   run_id: string;
@@ -190,15 +193,17 @@ export const RetryFailedEvalRunRequest$outboundSchema: z.ZodType<
   RetryFailedEvalRunRequest$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunRequest
-> = z.object({
-  runId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function retryFailedEvalRunRequestToJSON(
   retryFailedEvalRunRequest: RetryFailedEvalRunRequest,
@@ -222,7 +227,9 @@ export const RetryFailedEvalRunStop$inboundSchema: z.ZodType<
   RetryFailedEvalRunStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 /** @internal */
 export type RetryFailedEvalRunStop$Outbound = string | Array<string>;
 
@@ -231,7 +238,9 @@ export const RetryFailedEvalRunStop$outboundSchema: z.ZodType<
   RetryFailedEvalRunStop$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function retryFailedEvalRunStopToJSON(
   retryFailedEvalRunStop: RetryFailedEvalRunStop,
@@ -253,7 +262,9 @@ export function retryFailedEvalRunStopFromJSON(
 /** @internal */
 export const RetryFailedEvalRunTruncation$inboundSchema: z.ZodNativeEnum<
   typeof RetryFailedEvalRunTruncation
-> = z.nativeEnum(RetryFailedEvalRunTruncation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetryFailedEvalRunTruncation)
+);
 /** @internal */
 export const RetryFailedEvalRunTruncation$outboundSchema: z.ZodNativeEnum<
   typeof RetryFailedEvalRunTruncation
@@ -262,7 +273,9 @@ export const RetryFailedEvalRunTruncation$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const RetryFailedEvalRunServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof RetryFailedEvalRunServiceTier
-> = z.nativeEnum(RetryFailedEvalRunServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RetryFailedEvalRunServiceTier)
+);
 /** @internal */
 export const RetryFailedEvalRunServiceTier$outboundSchema: z.ZodNativeEnum<
   typeof RetryFailedEvalRunServiceTier
@@ -273,7 +286,7 @@ export const RetryFailedEvalRunPrefillThink$inboundSchema: z.ZodType<
   RetryFailedEvalRunPrefillThink,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 /** @internal */
 export type RetryFailedEvalRunPrefillThink$Outbound = boolean | string;
 
@@ -282,7 +295,7 @@ export const RetryFailedEvalRunPrefillThink$outboundSchema: z.ZodType<
   RetryFailedEvalRunPrefillThink$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunPrefillThink
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 
 export function retryFailedEvalRunPrefillThinkToJSON(
   retryFailedEvalRunPrefillThink: RetryFailedEvalRunPrefillThink,
@@ -308,63 +321,65 @@ export const RetryFailedEvalRunGeneration$inboundSchema: z.ZodType<
   RetryFailedEvalRunGeneration,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    instructions: z.string().optional(),
-    temperature: z.number().optional(),
-    top_p: z.number().optional(),
-    max_output_tokens: z.number().int().optional(),
-    max_gen_toks: z.number().int().optional(),
-    stop: z.union([z.string(), z.array(z.string())]).optional(),
-    until: z.array(z.string()).optional(),
-    max_tool_calls: z.number().int().optional(),
-    reasoning: z.any().optional(),
-    text: z.any().optional(),
-    tools: z.array(z.nullable(z.any())).optional(),
-    tool_choice: z.any().optional(),
-    parallel_tool_calls: z.boolean().optional(),
-    truncation: RetryFailedEvalRunTruncation$inboundSchema.optional(),
-    service_tier: RetryFailedEvalRunServiceTier$inboundSchema.optional(),
-    presence_penalty: z.number().optional(),
-    frequency_penalty: z.number().optional(),
-    top_k: z.number().int().optional(),
-    min_p: z.number().optional(),
-    repetition_penalty: z.number().optional(),
-    do_sample: z.boolean().optional(),
-    extra_body: z.record(z.any()).optional(),
-    chat_template_kwargs: z.record(z.any()).optional(),
-    prefill_think: z.union([z.boolean(), z.string()]).optional(),
-    use_cache: z.boolean().optional(),
-    timeout_seconds: z.number().int().optional(),
-    max_retries: z.number().int().optional(),
-    max_empty_retries: z.number().int().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "top_p": "topP",
-    "max_output_tokens": "maxOutputTokens",
-    "max_gen_toks": "maxGenToks",
-    "max_tool_calls": "maxToolCalls",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "service_tier": "serviceTier",
-    "presence_penalty": "presencePenalty",
-    "frequency_penalty": "frequencyPenalty",
-    "top_k": "topK",
-    "min_p": "minP",
-    "repetition_penalty": "repetitionPenalty",
-    "do_sample": "doSample",
-    "extra_body": "extraBody",
-    "chat_template_kwargs": "chatTemplateKwargs",
-    "prefill_think": "prefillThink",
-    "use_cache": "useCache",
-    "timeout_seconds": "timeoutSeconds",
-    "max_retries": "maxRetries",
-    "max_empty_retries": "maxEmptyRetries",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      instructions: z.string().optional(),
+      temperature: z.number().optional(),
+      top_p: z.number().optional(),
+      max_output_tokens: z.number().int().optional(),
+      max_gen_toks: z.number().int().optional(),
+      stop: z.union([z.string(), z.array(z.string())]).optional(),
+      until: z.array(z.string()).optional(),
+      max_tool_calls: z.number().int().optional(),
+      reasoning: z.any().optional(),
+      text: z.any().optional(),
+      tools: z.array(z.nullable(z.any())).optional(),
+      tool_choice: z.any().optional(),
+      parallel_tool_calls: z.boolean().optional(),
+      truncation: RetryFailedEvalRunTruncation$inboundSchema.optional(),
+      service_tier: RetryFailedEvalRunServiceTier$inboundSchema.optional(),
+      presence_penalty: z.number().optional(),
+      frequency_penalty: z.number().optional(),
+      top_k: z.number().int().optional(),
+      min_p: z.number().optional(),
+      repetition_penalty: z.number().optional(),
+      do_sample: z.boolean().optional(),
+      extra_body: z.record(z.any()).optional(),
+      chat_template_kwargs: z.record(z.any()).optional(),
+      prefill_think: z.union([z.boolean(), z.string()]).optional(),
+      use_cache: z.boolean().optional(),
+      timeout_seconds: z.number().int().optional(),
+      max_retries: z.number().int().optional(),
+      max_empty_retries: z.number().int().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "top_p": "topP",
+      "max_output_tokens": "maxOutputTokens",
+      "max_gen_toks": "maxGenToks",
+      "max_tool_calls": "maxToolCalls",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "service_tier": "serviceTier",
+      "presence_penalty": "presencePenalty",
+      "frequency_penalty": "frequencyPenalty",
+      "top_k": "topK",
+      "min_p": "minP",
+      "repetition_penalty": "repetitionPenalty",
+      "do_sample": "doSample",
+      "extra_body": "extraBody",
+      "chat_template_kwargs": "chatTemplateKwargs",
+      "prefill_think": "prefillThink",
+      "use_cache": "useCache",
+      "timeout_seconds": "timeoutSeconds",
+      "max_retries": "maxRetries",
+      "max_empty_retries": "maxEmptyRetries",
+    });
+  })
+);
 /** @internal */
 export type RetryFailedEvalRunGeneration$Outbound = {
   instructions?: string | undefined;
@@ -403,64 +418,66 @@ export const RetryFailedEvalRunGeneration$outboundSchema: z.ZodType<
   RetryFailedEvalRunGeneration$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunGeneration
-> = z.object({
-  instructions: z.string().optional(),
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  maxOutputTokens: z.number().int().optional(),
-  maxGenToks: z.number().int().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  until: z.array(z.string()).optional(),
-  maxToolCalls: z.number().int().optional(),
-  reasoning: z.any().optional(),
-  text: z.any().optional(),
-  tools: z.array(z.nullable(z.any())).optional(),
-  toolChoice: z.any().optional(),
-  parallelToolCalls: z.boolean().optional(),
-  truncation: RetryFailedEvalRunTruncation$outboundSchema.optional(),
-  serviceTier: RetryFailedEvalRunServiceTier$outboundSchema.optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  topK: z.number().int().optional(),
-  minP: z.number().optional(),
-  repetitionPenalty: z.number().optional(),
-  doSample: z.boolean().optional(),
-  extraBody: z.record(z.any()).optional(),
-  chatTemplateKwargs: z.record(z.any()).optional(),
-  prefillThink: z.union([z.boolean(), z.string()]).optional(),
-  useCache: z.boolean().optional(),
-  timeoutSeconds: z.number().int().optional(),
-  maxRetries: z.number().int().optional(),
-  maxEmptyRetries: z.number().int().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      topP: "top_p",
-      maxOutputTokens: "max_output_tokens",
-      maxGenToks: "max_gen_toks",
-      maxToolCalls: "max_tool_calls",
-      toolChoice: "tool_choice",
-      parallelToolCalls: "parallel_tool_calls",
-      serviceTier: "service_tier",
-      presencePenalty: "presence_penalty",
-      frequencyPenalty: "frequency_penalty",
-      topK: "top_k",
-      minP: "min_p",
-      repetitionPenalty: "repetition_penalty",
-      doSample: "do_sample",
-      extraBody: "extra_body",
-      chatTemplateKwargs: "chat_template_kwargs",
-      prefillThink: "prefill_think",
-      useCache: "use_cache",
-      timeoutSeconds: "timeout_seconds",
-      maxRetries: "max_retries",
-      maxEmptyRetries: "max_empty_retries",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    instructions: z.string().optional(),
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    maxOutputTokens: z.number().int().optional(),
+    maxGenToks: z.number().int().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    until: z.array(z.string()).optional(),
+    maxToolCalls: z.number().int().optional(),
+    reasoning: z.any().optional(),
+    text: z.any().optional(),
+    tools: z.array(z.nullable(z.any())).optional(),
+    toolChoice: z.any().optional(),
+    parallelToolCalls: z.boolean().optional(),
+    truncation: RetryFailedEvalRunTruncation$outboundSchema.optional(),
+    serviceTier: RetryFailedEvalRunServiceTier$outboundSchema.optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    topK: z.number().int().optional(),
+    minP: z.number().optional(),
+    repetitionPenalty: z.number().optional(),
+    doSample: z.boolean().optional(),
+    extraBody: z.record(z.any()).optional(),
+    chatTemplateKwargs: z.record(z.any()).optional(),
+    prefillThink: z.union([z.boolean(), z.string()]).optional(),
+    useCache: z.boolean().optional(),
+    timeoutSeconds: z.number().int().optional(),
+    maxRetries: z.number().int().optional(),
+    maxEmptyRetries: z.number().int().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        topP: "top_p",
+        maxOutputTokens: "max_output_tokens",
+        maxGenToks: "max_gen_toks",
+        maxToolCalls: "max_tool_calls",
+        toolChoice: "tool_choice",
+        parallelToolCalls: "parallel_tool_calls",
+        serviceTier: "service_tier",
+        presencePenalty: "presence_penalty",
+        frequencyPenalty: "frequency_penalty",
+        topK: "top_k",
+        minP: "min_p",
+        repetitionPenalty: "repetition_penalty",
+        doSample: "do_sample",
+        extraBody: "extra_body",
+        chatTemplateKwargs: "chat_template_kwargs",
+        prefillThink: "prefill_think",
+        useCache: "use_cache",
+        timeoutSeconds: "timeout_seconds",
+        maxRetries: "max_retries",
+        maxEmptyRetries: "max_empty_retries",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function retryFailedEvalRunGenerationToJSON(
   retryFailedEvalRunGeneration: RetryFailedEvalRunGeneration,
@@ -486,11 +503,13 @@ export const RetryFailedEvalRunRequestCounts$inboundSchema: z.ZodType<
   RetryFailedEvalRunRequestCounts,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+  })
+);
 /** @internal */
 export type RetryFailedEvalRunRequestCounts$Outbound = {
   total: number;
@@ -503,11 +522,13 @@ export const RetryFailedEvalRunRequestCounts$outboundSchema: z.ZodType<
   RetryFailedEvalRunRequestCounts$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunRequestCounts
-> = z.object({
-  total: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+  })
+);
 
 export function retryFailedEvalRunRequestCountsToJSON(
   retryFailedEvalRunRequestCounts: RetryFailedEvalRunRequestCounts,
@@ -533,12 +554,14 @@ export const RetryFailedEvalRunTokens$inboundSchema: z.ZodType<
   RetryFailedEvalRunTokens,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.nullable(z.number().int()),
-  output: z.nullable(z.number().int()),
-  cached: z.nullable(z.number().int()),
-  reasoning: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.nullable(z.number().int()),
+    output: z.nullable(z.number().int()),
+    cached: z.nullable(z.number().int()),
+    reasoning: z.nullable(z.number().int()),
+  })
+);
 /** @internal */
 export type RetryFailedEvalRunTokens$Outbound = {
   input: number | null;
@@ -552,12 +575,14 @@ export const RetryFailedEvalRunTokens$outboundSchema: z.ZodType<
   RetryFailedEvalRunTokens$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunTokens
-> = z.object({
-  input: z.nullable(z.number().int()),
-  output: z.nullable(z.number().int()),
-  cached: z.nullable(z.number().int()),
-  reasoning: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.nullable(z.number().int()),
+    output: z.nullable(z.number().int()),
+    cached: z.nullable(z.number().int()),
+    reasoning: z.nullable(z.number().int()),
+  })
+);
 
 export function retryFailedEvalRunTokensToJSON(
   retryFailedEvalRunTokens: RetryFailedEvalRunTokens,
@@ -581,59 +606,62 @@ export const RetryFailedEvalRunResponseBody$inboundSchema: z.ZodType<
   RetryFailedEvalRunResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.run"),
-  suite_id: z.string(),
-  suite_version: z.number().int(),
-  suite_version_id: z.string(),
-  org_id: z.string(),
-  team_id: z.string(),
-  status: components.EvalRunStatus$inboundSchema,
-  models: z.array(z.string()),
-  candidates: z.array(components.EvalCandidateObject$inboundSchema).optional(),
-  task_ids: z.nullable(z.array(z.string())),
-  judge_model: z.nullable(z.string()),
-  embedding_model: z.nullable(z.string()),
-  generation: z.lazy(() => RetryFailedEvalRunGeneration$inboundSchema),
-  request_counts: z.lazy(() => RetryFailedEvalRunRequestCounts$inboundSchema),
-  metrics: z.nullable(z.record(z.any())),
-  error: z.nullable(z.record(z.any())),
-  artifact_file_ids: z.array(z.string()),
-  metadata: z.record(z.string()),
-  agent_name: z.nullable(z.string()),
-  agent_version: z.nullable(z.string()),
-  agent_effort: z.nullable(z.string()),
-  cost_usd: z.nullable(z.number()),
-  tokens: z.lazy(() => RetryFailedEvalRunTokens$inboundSchema),
-  created_at: z.number().int(),
-  started_at: z.nullable(z.number().int()),
-  completed_at: z.nullable(z.number().int()),
-  cancelled_at: z.nullable(z.number().int()),
-  failed_at: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "suite_version_id": "suiteVersionId",
-    "org_id": "orgId",
-    "team_id": "teamId",
-    "task_ids": "taskIds",
-    "judge_model": "judgeModel",
-    "embedding_model": "embeddingModel",
-    "request_counts": "requestCounts",
-    "artifact_file_ids": "artifactFileIds",
-    "agent_name": "agentName",
-    "agent_version": "agentVersion",
-    "agent_effort": "agentEffort",
-    "cost_usd": "costUsd",
-    "created_at": "createdAt",
-    "started_at": "startedAt",
-    "completed_at": "completedAt",
-    "cancelled_at": "cancelledAt",
-    "failed_at": "failedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.run"),
+    suite_id: z.string(),
+    suite_version: z.number().int(),
+    suite_version_id: z.string(),
+    org_id: z.string(),
+    team_id: z.string(),
+    status: components.EvalRunStatus$inboundSchema,
+    models: z.array(z.string()),
+    candidates: z.array(components.EvalCandidateObject$inboundSchema)
+      .optional(),
+    task_ids: z.nullable(z.array(z.string())),
+    judge_model: z.nullable(z.string()),
+    embedding_model: z.nullable(z.string()),
+    generation: z.lazy(() => RetryFailedEvalRunGeneration$inboundSchema),
+    request_counts: z.lazy(() => RetryFailedEvalRunRequestCounts$inboundSchema),
+    metrics: z.nullable(z.record(z.any())),
+    error: z.nullable(z.record(z.any())),
+    artifact_file_ids: z.array(z.string()),
+    metadata: z.record(z.string()),
+    agent_name: z.nullable(z.string()),
+    agent_version: z.nullable(z.string()),
+    agent_effort: z.nullable(z.string()),
+    cost_usd: z.nullable(z.number()),
+    tokens: z.lazy(() => RetryFailedEvalRunTokens$inboundSchema),
+    created_at: z.number().int(),
+    started_at: z.nullable(z.number().int()),
+    completed_at: z.nullable(z.number().int()),
+    cancelled_at: z.nullable(z.number().int()),
+    failed_at: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "suite_version_id": "suiteVersionId",
+      "org_id": "orgId",
+      "team_id": "teamId",
+      "task_ids": "taskIds",
+      "judge_model": "judgeModel",
+      "embedding_model": "embeddingModel",
+      "request_counts": "requestCounts",
+      "artifact_file_ids": "artifactFileIds",
+      "agent_name": "agentName",
+      "agent_version": "agentVersion",
+      "agent_effort": "agentEffort",
+      "cost_usd": "costUsd",
+      "created_at": "createdAt",
+      "started_at": "startedAt",
+      "completed_at": "completedAt",
+      "cancelled_at": "cancelledAt",
+      "failed_at": "failedAt",
+    });
+  })
+);
 /** @internal */
 export type RetryFailedEvalRunResponseBody$Outbound = {
   id: string;
@@ -672,59 +700,62 @@ export const RetryFailedEvalRunResponseBody$outboundSchema: z.ZodType<
   RetryFailedEvalRunResponseBody$Outbound,
   z.ZodTypeDef,
   RetryFailedEvalRunResponseBody
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.run"),
-  suiteId: z.string(),
-  suiteVersion: z.number().int(),
-  suiteVersionId: z.string(),
-  orgId: z.string(),
-  teamId: z.string(),
-  status: components.EvalRunStatus$outboundSchema,
-  models: z.array(z.string()),
-  candidates: z.array(components.EvalCandidateObject$outboundSchema).optional(),
-  taskIds: z.nullable(z.array(z.string())),
-  judgeModel: z.nullable(z.string()),
-  embeddingModel: z.nullable(z.string()),
-  generation: z.lazy(() => RetryFailedEvalRunGeneration$outboundSchema),
-  requestCounts: z.lazy(() => RetryFailedEvalRunRequestCounts$outboundSchema),
-  metrics: z.nullable(z.record(z.any())),
-  error: z.nullable(z.record(z.any())),
-  artifactFileIds: z.array(z.string()),
-  metadata: z.record(z.string()),
-  agentName: z.nullable(z.string()),
-  agentVersion: z.nullable(z.string()),
-  agentEffort: z.nullable(z.string()),
-  costUsd: z.nullable(z.number()),
-  tokens: z.lazy(() => RetryFailedEvalRunTokens$outboundSchema),
-  createdAt: z.number().int(),
-  startedAt: z.nullable(z.number().int()),
-  completedAt: z.nullable(z.number().int()),
-  cancelledAt: z.nullable(z.number().int()),
-  failedAt: z.nullable(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    suiteVersionId: "suite_version_id",
-    orgId: "org_id",
-    teamId: "team_id",
-    taskIds: "task_ids",
-    judgeModel: "judge_model",
-    embeddingModel: "embedding_model",
-    requestCounts: "request_counts",
-    artifactFileIds: "artifact_file_ids",
-    agentName: "agent_name",
-    agentVersion: "agent_version",
-    agentEffort: "agent_effort",
-    costUsd: "cost_usd",
-    createdAt: "created_at",
-    startedAt: "started_at",
-    completedAt: "completed_at",
-    cancelledAt: "cancelled_at",
-    failedAt: "failed_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.run"),
+    suiteId: z.string(),
+    suiteVersion: z.number().int(),
+    suiteVersionId: z.string(),
+    orgId: z.string(),
+    teamId: z.string(),
+    status: components.EvalRunStatus$outboundSchema,
+    models: z.array(z.string()),
+    candidates: z.array(components.EvalCandidateObject$outboundSchema)
+      .optional(),
+    taskIds: z.nullable(z.array(z.string())),
+    judgeModel: z.nullable(z.string()),
+    embeddingModel: z.nullable(z.string()),
+    generation: z.lazy(() => RetryFailedEvalRunGeneration$outboundSchema),
+    requestCounts: z.lazy(() => RetryFailedEvalRunRequestCounts$outboundSchema),
+    metrics: z.nullable(z.record(z.any())),
+    error: z.nullable(z.record(z.any())),
+    artifactFileIds: z.array(z.string()),
+    metadata: z.record(z.string()),
+    agentName: z.nullable(z.string()),
+    agentVersion: z.nullable(z.string()),
+    agentEffort: z.nullable(z.string()),
+    costUsd: z.nullable(z.number()),
+    tokens: z.lazy(() => RetryFailedEvalRunTokens$outboundSchema),
+    createdAt: z.number().int(),
+    startedAt: z.nullable(z.number().int()),
+    completedAt: z.nullable(z.number().int()),
+    cancelledAt: z.nullable(z.number().int()),
+    failedAt: z.nullable(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      suiteVersionId: "suite_version_id",
+      orgId: "org_id",
+      teamId: "team_id",
+      taskIds: "task_ids",
+      judgeModel: "judge_model",
+      embeddingModel: "embedding_model",
+      requestCounts: "request_counts",
+      artifactFileIds: "artifact_file_ids",
+      agentName: "agent_name",
+      agentVersion: "agent_version",
+      agentEffort: "agent_effort",
+      costUsd: "cost_usd",
+      createdAt: "created_at",
+      startedAt: "started_at",
+      completedAt: "completed_at",
+      cancelledAt: "cancelled_at",
+      failedAt: "failed_at",
+    });
+  })
+);
 
 export function retryFailedEvalRunResponseBodyToJSON(
   retryFailedEvalRunResponseBody: RetryFailedEvalRunResponseBody,

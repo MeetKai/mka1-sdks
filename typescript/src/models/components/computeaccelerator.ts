@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,18 +71,20 @@ export type ComputeAccelerator = {
 /** @internal */
 export const HardwareClass$inboundSchema: z.ZodNativeEnum<
   typeof HardwareClass
-> = z.nativeEnum(HardwareClass);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(HardwareClass));
 /** @internal */
 export const HardwareClass$outboundSchema: z.ZodNativeEnum<
   typeof HardwareClass
 > = HardwareClass$inboundSchema;
 
 /** @internal */
-export const Vcpu$inboundSchema: z.ZodType<Vcpu, z.ZodTypeDef, unknown> = z
-  .object({
-    max: z.number().int(),
-    min: z.number().int(),
-  });
+export const Vcpu$inboundSchema: z.ZodType<Vcpu, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      max: z.number().int(),
+      min: z.number().int(),
+    })
+  );
 /** @internal */
 export type Vcpu$Outbound = {
   max: number;
@@ -91,10 +93,12 @@ export type Vcpu$Outbound = {
 
 /** @internal */
 export const Vcpu$outboundSchema: z.ZodType<Vcpu$Outbound, z.ZodTypeDef, Vcpu> =
-  z.object({
-    max: z.number().int(),
-    min: z.number().int(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      max: z.number().int(),
+      min: z.number().int(),
+    })
+  );
 
 export function vcpuToJSON(vcpu: Vcpu): string {
   return JSON.stringify(Vcpu$outboundSchema.parse(vcpu));
@@ -110,8 +114,8 @@ export function vcpuFromJSON(
 }
 
 /** @internal */
-export const Vendor$inboundSchema: z.ZodNativeEnum<typeof Vendor> = z
-  .nativeEnum(Vendor);
+export const Vendor$inboundSchema: z.ZodNativeEnum<typeof Vendor> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Vendor));
 /** @internal */
 export const Vendor$outboundSchema: z.ZodNativeEnum<typeof Vendor> =
   Vendor$inboundSchema;
@@ -121,25 +125,27 @@ export const ComputeAccelerator$inboundSchema: z.ZodType<
   ComputeAccelerator,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  display_name: z.string(),
-  gpu_counts: z.array(z.number().int()).optional(),
-  hardware_class: HardwareClass$inboundSchema,
-  interconnects: z.array(z.string()).optional(),
-  memory_gb: z.number().int().optional(),
-  memory_gb_per_vcpu: z.number().int().optional(),
-  name: z.string(),
-  vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
-  vendor: Vendor$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_name": "displayName",
-    "gpu_counts": "gpuCounts",
-    "hardware_class": "hardwareClass",
-    "memory_gb": "memoryGb",
-    "memory_gb_per_vcpu": "memoryGbPerVcpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    display_name: z.string(),
+    gpu_counts: z.array(z.number().int()).optional(),
+    hardware_class: HardwareClass$inboundSchema,
+    interconnects: z.array(z.string()).optional(),
+    memory_gb: z.number().int().optional(),
+    memory_gb_per_vcpu: z.number().int().optional(),
+    name: z.string(),
+    vcpu: z.lazy(() => Vcpu$inboundSchema).optional(),
+    vendor: Vendor$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_name": "displayName",
+      "gpu_counts": "gpuCounts",
+      "hardware_class": "hardwareClass",
+      "memory_gb": "memoryGb",
+      "memory_gb_per_vcpu": "memoryGbPerVcpu",
+    });
+  })
+);
 /** @internal */
 export type ComputeAccelerator$Outbound = {
   display_name: string;
@@ -158,25 +164,27 @@ export const ComputeAccelerator$outboundSchema: z.ZodType<
   ComputeAccelerator$Outbound,
   z.ZodTypeDef,
   ComputeAccelerator
-> = z.object({
-  displayName: z.string(),
-  gpuCounts: z.array(z.number().int()).optional(),
-  hardwareClass: HardwareClass$outboundSchema,
-  interconnects: z.array(z.string()).optional(),
-  memoryGb: z.number().int().optional(),
-  memoryGbPerVcpu: z.number().int().optional(),
-  name: z.string(),
-  vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
-  vendor: Vendor$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    displayName: "display_name",
-    gpuCounts: "gpu_counts",
-    hardwareClass: "hardware_class",
-    memoryGb: "memory_gb",
-    memoryGbPerVcpu: "memory_gb_per_vcpu",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    displayName: z.string(),
+    gpuCounts: z.array(z.number().int()).optional(),
+    hardwareClass: HardwareClass$outboundSchema,
+    interconnects: z.array(z.string()).optional(),
+    memoryGb: z.number().int().optional(),
+    memoryGbPerVcpu: z.number().int().optional(),
+    name: z.string(),
+    vcpu: z.lazy(() => Vcpu$outboundSchema).optional(),
+    vendor: Vendor$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayName: "display_name",
+      gpuCounts: "gpu_counts",
+      hardwareClass: "hardware_class",
+      memoryGb: "memory_gb",
+      memoryGbPerVcpu: "memory_gb_per_vcpu",
+    });
+  })
+);
 
 export function computeAcceleratorToJSON(
   computeAccelerator: ComputeAccelerator,

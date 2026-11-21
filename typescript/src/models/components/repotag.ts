@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,20 +35,22 @@ export type RepoTag = {
 
 /** @internal */
 export const RepoTag$inboundSchema: z.ZodType<RepoTag, z.ZodTypeDef, unknown> =
-  z.object({
-    digest: z.string(),
-    media_type: z.string(),
-    size: z.nullable(z.number().int()),
-    tag: z.string(),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "media_type": "mediaType",
-      "updated_at": "updatedAt",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      digest: z.string(),
+      media_type: z.string(),
+      size: z.nullable(z.number().int()),
+      tag: z.string(),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "media_type": "mediaType",
+        "updated_at": "updatedAt",
+      });
+    })
+  );
 /** @internal */
 export type RepoTag$Outbound = {
   digest: string;
@@ -63,18 +65,20 @@ export const RepoTag$outboundSchema: z.ZodType<
   RepoTag$Outbound,
   z.ZodTypeDef,
   RepoTag
-> = z.object({
-  digest: z.string(),
-  mediaType: z.string(),
-  size: z.nullable(z.number().int()),
-  tag: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    mediaType: "media_type",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    digest: z.string(),
+    mediaType: z.string(),
+    size: z.nullable(z.number().int()),
+    tag: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      mediaType: "media_type",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function repoTagToJSON(repoTag: RepoTag): string {
   return JSON.stringify(RepoTag$outboundSchema.parse(repoTag));

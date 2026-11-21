@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateImageRequest$inboundSchema: z.ZodType<
   CreateImageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ImageGenerationRequest: components.ImageGenerationRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ImageGenerationRequest": "imageGenerationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ImageGenerationRequest: components.ImageGenerationRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ImageGenerationRequest": "imageGenerationRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateImageRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateImageRequest$outboundSchema: z.ZodType<
   CreateImageRequest$Outbound,
   z.ZodTypeDef,
   CreateImageRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  imageGenerationRequest: components.ImageGenerationRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    imageGenerationRequest: "ImageGenerationRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    imageGenerationRequest: components.ImageGenerationRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      imageGenerationRequest: "ImageGenerationRequest",
+    });
+  })
+);
 
 export function createImageRequestToJSON(
   createImageRequest: CreateImageRequest,

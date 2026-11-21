@@ -43,7 +43,7 @@ class McpVault(BaseSDK):
 
         :param name:
         :param server_label:
-        :param server_url:
+        :param server_url_:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param server_description:
         :param allowed_tools:
@@ -183,7 +183,7 @@ class McpVault(BaseSDK):
 
         :param name:
         :param server_label:
-        :param server_url:
+        :param server_url_:
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param server_description:
         :param allowed_tools:
@@ -738,7 +738,7 @@ class McpVault(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name:
         :param server_label:
-        :param server_url:
+        :param server_url_:
         :param server_description:
         :param allowed_tools:
         :param require_approval:
@@ -881,7 +881,7 @@ class McpVault(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name:
         :param server_label:
-        :param server_url:
+        :param server_url_:
         :param server_description:
         :param allowed_tools:
         :param require_approval:

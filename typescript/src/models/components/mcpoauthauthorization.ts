@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,18 +26,22 @@ export const McpOAuthAuthorization$inboundSchema: z.ZodType<
   McpOAuthAuthorization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("mcp.oauth.authorization"),
-  server_id: z.string(),
-  authorization_url: z.string(),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "authorization_url": "authorizationUrl",
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("mcp.oauth.authorization"),
+    server_id: z.string(),
+    authorization_url: z.string(),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "authorization_url": "authorizationUrl",
+      "expires_at": "expiresAt",
+    });
+  })
+);
 /** @internal */
 export type McpOAuthAuthorization$Outbound = {
   object: "mcp.oauth.authorization";
@@ -51,18 +55,20 @@ export const McpOAuthAuthorization$outboundSchema: z.ZodType<
   McpOAuthAuthorization$Outbound,
   z.ZodTypeDef,
   McpOAuthAuthorization
-> = z.object({
-  object: z.literal("mcp.oauth.authorization"),
-  serverId: z.string(),
-  authorizationUrl: z.string(),
-  expiresAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    authorizationUrl: "authorization_url",
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("mcp.oauth.authorization"),
+    serverId: z.string(),
+    authorizationUrl: z.string(),
+    expiresAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      authorizationUrl: "authorization_url",
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function mcpOAuthAuthorizationToJSON(
   mcpOAuthAuthorization: McpOAuthAuthorization,

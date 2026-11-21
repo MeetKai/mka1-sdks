@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,15 +27,17 @@ export const SttConfig$inboundSchema: z.ZodType<
   SttConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  silence_timeout_ms: z.number().int().optional(),
-  initial_silence_timeout_ms: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "silence_timeout_ms": "silenceTimeoutMs",
-    "initial_silence_timeout_ms": "initialSilenceTimeoutMs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    silence_timeout_ms: z.number().int().optional(),
+    initial_silence_timeout_ms: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "silence_timeout_ms": "silenceTimeoutMs",
+      "initial_silence_timeout_ms": "initialSilenceTimeoutMs",
+    });
+  })
+);
 /** @internal */
 export type SttConfig$Outbound = {
   silence_timeout_ms?: number | undefined;
@@ -47,15 +49,17 @@ export const SttConfig$outboundSchema: z.ZodType<
   SttConfig$Outbound,
   z.ZodTypeDef,
   SttConfig
-> = z.object({
-  silenceTimeoutMs: z.number().int().optional(),
-  initialSilenceTimeoutMs: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    silenceTimeoutMs: "silence_timeout_ms",
-    initialSilenceTimeoutMs: "initial_silence_timeout_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    silenceTimeoutMs: z.number().int().optional(),
+    initialSilenceTimeoutMs: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      silenceTimeoutMs: "silence_timeout_ms",
+      initialSilenceTimeoutMs: "initial_silence_timeout_ms",
+    });
+  })
+);
 
 export function sttConfigToJSON(sttConfig: SttConfig): string {
   return JSON.stringify(SttConfig$outboundSchema.parse(sttConfig));

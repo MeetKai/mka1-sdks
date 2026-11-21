@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,8 +30,10 @@ export type ListVectorStoreConnectorRunsRequest = {
 
 /** @internal */
 export const ListVectorStoreConnectorRunsQueryParamOrder$inboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreConnectorRunsQueryParamOrder> = z
-    .nativeEnum(ListVectorStoreConnectorRunsQueryParamOrder);
+  z.ZodNativeEnum<typeof ListVectorStoreConnectorRunsQueryParamOrder> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListVectorStoreConnectorRunsQueryParamOrder)
+    );
 /** @internal */
 export const ListVectorStoreConnectorRunsQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListVectorStoreConnectorRunsQueryParamOrder> =
@@ -42,20 +44,22 @@ export const ListVectorStoreConnectorRunsRequest$inboundSchema: z.ZodType<
   ListVectorStoreConnectorRunsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreConnectorRunsQueryParamOrder$inboundSchema.default(
-    "desc",
-  ),
-  after: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreConnectorRunsQueryParamOrder$inboundSchema.default(
+      "desc",
+    ),
+    after: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListVectorStoreConnectorRunsRequest$Outbound = {
   connector_id: string;
@@ -70,20 +74,22 @@ export const ListVectorStoreConnectorRunsRequest$outboundSchema: z.ZodType<
   ListVectorStoreConnectorRunsRequest$Outbound,
   z.ZodTypeDef,
   ListVectorStoreConnectorRunsRequest
-> = z.object({
-  connectorId: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreConnectorRunsQueryParamOrder$outboundSchema.default(
-    "desc",
-  ),
-  after: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreConnectorRunsQueryParamOrder$outboundSchema.default(
+      "desc",
+    ),
+    after: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listVectorStoreConnectorRunsRequestToJSON(
   listVectorStoreConnectorRunsRequest: ListVectorStoreConnectorRunsRequest,

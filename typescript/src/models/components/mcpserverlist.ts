@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,19 +27,21 @@ export const McpServerList$inboundSchema: z.ZodType<
   McpServerList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(McpServer$inboundSchema),
-  first_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-  last_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "has_more": "hasMore",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(McpServer$inboundSchema),
+    first_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+    last_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "has_more": "hasMore",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type McpServerList$Outbound = {
   object: "list";
@@ -54,19 +56,21 @@ export const McpServerList$outboundSchema: z.ZodType<
   McpServerList$Outbound,
   z.ZodTypeDef,
   McpServerList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(McpServer$outboundSchema),
-  firstId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-  lastId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    hasMore: "has_more",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(McpServer$outboundSchema),
+    firstId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+    lastId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      hasMore: "has_more",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function mcpServerListToJSON(mcpServerList: McpServerList): string {
   return JSON.stringify(McpServerList$outboundSchema.parse(mcpServerList));

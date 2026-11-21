@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -42,9 +42,11 @@ export const UpdateServiceAccountRequestBody$inboundSchema: z.ZodType<
   UpdateServiceAccountRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  admin: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    admin: z.boolean(),
+  })
+);
 /** @internal */
 export type UpdateServiceAccountRequestBody$Outbound = {
   admin: boolean;
@@ -55,9 +57,11 @@ export const UpdateServiceAccountRequestBody$outboundSchema: z.ZodType<
   UpdateServiceAccountRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountRequestBody
-> = z.object({
-  admin: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    admin: z.boolean(),
+  })
+);
 
 export function updateServiceAccountRequestBodyToJSON(
   updateServiceAccountRequestBody: UpdateServiceAccountRequestBody,
@@ -83,17 +87,19 @@ export const UpdateServiceAccountRequest$inboundSchema: z.ZodType<
   UpdateServiceAccountRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateServiceAccountRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateServiceAccountRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateServiceAccountRequest$Outbound = {
   orgId: string;
@@ -107,17 +113,19 @@ export const UpdateServiceAccountRequest$outboundSchema: z.ZodType<
   UpdateServiceAccountRequest$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateServiceAccountRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateServiceAccountRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateServiceAccountRequestToJSON(
   updateServiceAccountRequest: UpdateServiceAccountRequest,
@@ -143,13 +151,15 @@ export const UpdateServiceAccountServiceAccount$inboundSchema: z.ZodType<
   UpdateServiceAccountServiceAccount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type UpdateServiceAccountServiceAccount$Outbound = {
   id: string;
@@ -164,13 +174,15 @@ export const UpdateServiceAccountServiceAccount$outboundSchema: z.ZodType<
   UpdateServiceAccountServiceAccount$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountServiceAccount
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 
 export function updateServiceAccountServiceAccountToJSON(
   updateServiceAccountServiceAccount: UpdateServiceAccountServiceAccount,
@@ -197,11 +209,13 @@ export const UpdateServiceAccountResponseBody$inboundSchema: z.ZodType<
   UpdateServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  serviceAccount: z.lazy(() =>
-    UpdateServiceAccountServiceAccount$inboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() =>
+      UpdateServiceAccountServiceAccount$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type UpdateServiceAccountResponseBody$Outbound = {
   serviceAccount: UpdateServiceAccountServiceAccount$Outbound;
@@ -212,11 +226,13 @@ export const UpdateServiceAccountResponseBody$outboundSchema: z.ZodType<
   UpdateServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountResponseBody
-> = z.object({
-  serviceAccount: z.lazy(() =>
-    UpdateServiceAccountServiceAccount$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() =>
+      UpdateServiceAccountServiceAccount$outboundSchema
+    ),
+  })
+);
 
 export function updateServiceAccountResponseBodyToJSON(
   updateServiceAccountResponseBody: UpdateServiceAccountResponseBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -73,7 +73,7 @@ export type SetOrgBudgetEnforcementResponseBody = {
 /** @internal */
 export const OnCheckFailure$inboundSchema: z.ZodNativeEnum<
   typeof OnCheckFailure
-> = z.nativeEnum(OnCheckFailure);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OnCheckFailure));
 /** @internal */
 export const OnCheckFailure$outboundSchema: z.ZodNativeEnum<
   typeof OnCheckFailure
@@ -84,13 +84,15 @@ export const SetOrgBudgetEnforcementRequestBody$inboundSchema: z.ZodType<
   SetOrgBudgetEnforcementRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  on_check_failure: z.nullable(OnCheckFailure$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "on_check_failure": "onCheckFailure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    on_check_failure: z.nullable(OnCheckFailure$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_check_failure": "onCheckFailure",
+    });
+  })
+);
 /** @internal */
 export type SetOrgBudgetEnforcementRequestBody$Outbound = {
   on_check_failure: string | null;
@@ -101,13 +103,15 @@ export const SetOrgBudgetEnforcementRequestBody$outboundSchema: z.ZodType<
   SetOrgBudgetEnforcementRequestBody$Outbound,
   z.ZodTypeDef,
   SetOrgBudgetEnforcementRequestBody
-> = z.object({
-  onCheckFailure: z.nullable(OnCheckFailure$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    onCheckFailure: "on_check_failure",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    onCheckFailure: z.nullable(OnCheckFailure$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      onCheckFailure: "on_check_failure",
+    });
+  })
+);
 
 export function setOrgBudgetEnforcementRequestBodyToJSON(
   setOrgBudgetEnforcementRequestBody: SetOrgBudgetEnforcementRequestBody,
@@ -134,15 +138,17 @@ export const SetOrgBudgetEnforcementRequest$inboundSchema: z.ZodType<
   SetOrgBudgetEnforcementRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  RequestBody: z.lazy(() => SetOrgBudgetEnforcementRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    RequestBody: z.lazy(() => SetOrgBudgetEnforcementRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type SetOrgBudgetEnforcementRequest$Outbound = {
   org_id: string;
@@ -154,15 +160,19 @@ export const SetOrgBudgetEnforcementRequest$outboundSchema: z.ZodType<
   SetOrgBudgetEnforcementRequest$Outbound,
   z.ZodTypeDef,
   SetOrgBudgetEnforcementRequest
-> = z.object({
-  orgId: z.string(),
-  requestBody: z.lazy(() => SetOrgBudgetEnforcementRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    requestBody: z.lazy(() =>
+      SetOrgBudgetEnforcementRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function setOrgBudgetEnforcementRequestToJSON(
   setOrgBudgetEnforcementRequest: SetOrgBudgetEnforcementRequest,
@@ -185,9 +195,10 @@ export function setOrgBudgetEnforcementRequestFromJSON(
 
 /** @internal */
 export const SetOrgBudgetEnforcementOnCheckFailure$inboundSchema:
-  z.ZodNativeEnum<typeof SetOrgBudgetEnforcementOnCheckFailure> = z.nativeEnum(
-    SetOrgBudgetEnforcementOnCheckFailure,
-  );
+  z.ZodNativeEnum<typeof SetOrgBudgetEnforcementOnCheckFailure> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(SetOrgBudgetEnforcementOnCheckFailure)
+    );
 /** @internal */
 export const SetOrgBudgetEnforcementOnCheckFailure$outboundSchema:
   z.ZodNativeEnum<typeof SetOrgBudgetEnforcementOnCheckFailure> =
@@ -195,9 +206,10 @@ export const SetOrgBudgetEnforcementOnCheckFailure$outboundSchema:
 
 /** @internal */
 export const SetOrgBudgetEnforcementClusterDefault$inboundSchema:
-  z.ZodNativeEnum<typeof SetOrgBudgetEnforcementClusterDefault> = z.nativeEnum(
-    SetOrgBudgetEnforcementClusterDefault,
-  );
+  z.ZodNativeEnum<typeof SetOrgBudgetEnforcementClusterDefault> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(SetOrgBudgetEnforcementClusterDefault)
+    );
 /** @internal */
 export const SetOrgBudgetEnforcementClusterDefault$outboundSchema:
   z.ZodNativeEnum<typeof SetOrgBudgetEnforcementClusterDefault> =
@@ -206,7 +218,9 @@ export const SetOrgBudgetEnforcementClusterDefault$outboundSchema:
 /** @internal */
 export const SetOrgBudgetEnforcementEffective$inboundSchema: z.ZodNativeEnum<
   typeof SetOrgBudgetEnforcementEffective
-> = z.nativeEnum(SetOrgBudgetEnforcementEffective);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetOrgBudgetEnforcementEffective)
+);
 /** @internal */
 export const SetOrgBudgetEnforcementEffective$outboundSchema: z.ZodNativeEnum<
   typeof SetOrgBudgetEnforcementEffective
@@ -217,20 +231,22 @@ export const SetOrgBudgetEnforcementResponseBody$inboundSchema: z.ZodType<
   SetOrgBudgetEnforcementResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  on_check_failure: z.nullable(
-    SetOrgBudgetEnforcementOnCheckFailure$inboundSchema,
-  ),
-  cluster_default: SetOrgBudgetEnforcementClusterDefault$inboundSchema,
-  effective: SetOrgBudgetEnforcementEffective$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "on_check_failure": "onCheckFailure",
-    "cluster_default": "clusterDefault",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    on_check_failure: z.nullable(
+      SetOrgBudgetEnforcementOnCheckFailure$inboundSchema,
+    ),
+    cluster_default: SetOrgBudgetEnforcementClusterDefault$inboundSchema,
+    effective: SetOrgBudgetEnforcementEffective$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "on_check_failure": "onCheckFailure",
+      "cluster_default": "clusterDefault",
+    });
+  })
+);
 /** @internal */
 export type SetOrgBudgetEnforcementResponseBody$Outbound = {
   org_id: string;
@@ -244,20 +260,22 @@ export const SetOrgBudgetEnforcementResponseBody$outboundSchema: z.ZodType<
   SetOrgBudgetEnforcementResponseBody$Outbound,
   z.ZodTypeDef,
   SetOrgBudgetEnforcementResponseBody
-> = z.object({
-  orgId: z.string(),
-  onCheckFailure: z.nullable(
-    SetOrgBudgetEnforcementOnCheckFailure$outboundSchema,
-  ),
-  clusterDefault: SetOrgBudgetEnforcementClusterDefault$outboundSchema,
-  effective: SetOrgBudgetEnforcementEffective$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    onCheckFailure: "on_check_failure",
-    clusterDefault: "cluster_default",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    onCheckFailure: z.nullable(
+      SetOrgBudgetEnforcementOnCheckFailure$outboundSchema,
+    ),
+    clusterDefault: SetOrgBudgetEnforcementClusterDefault$outboundSchema,
+    effective: SetOrgBudgetEnforcementEffective$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      onCheckFailure: "on_check_failure",
+      clusterDefault: "cluster_default",
+    });
+  })
+);
 
 export function setOrgBudgetEnforcementResponseBodyToJSON(
   setOrgBudgetEnforcementResponseBody: SetOrgBudgetEnforcementResponseBody,

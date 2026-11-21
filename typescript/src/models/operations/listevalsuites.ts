@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,17 +23,19 @@ export const ListEvalSuitesRequest$inboundSchema: z.ZodType<
   ListEvalSuitesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  owned_only: z.boolean().default(false),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_only": "ownedOnly",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    owned_only: z.boolean().default(false),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_only": "ownedOnly",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSuitesRequest$Outbound = {
   after?: string | undefined;
@@ -47,17 +49,19 @@ export const ListEvalSuitesRequest$outboundSchema: z.ZodType<
   ListEvalSuitesRequest$Outbound,
   z.ZodTypeDef,
   ListEvalSuitesRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  ownedOnly: z.boolean().default(false),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ownedOnly: "owned_only",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    ownedOnly: z.boolean().default(false),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ownedOnly: "owned_only",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listEvalSuitesRequestToJSON(
   listEvalSuitesRequest: ListEvalSuitesRequest,

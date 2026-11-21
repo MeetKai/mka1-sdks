@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,15 +52,15 @@ export type ComputeLog = {
 /** @internal */
 export const ComputeLogSource1$inboundSchema: z.ZodNativeEnum<
   typeof ComputeLogSource1
-> = z.nativeEnum(ComputeLogSource1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ComputeLogSource1));
 /** @internal */
 export const ComputeLogSource1$outboundSchema: z.ZodNativeEnum<
   typeof ComputeLogSource1
 > = ComputeLogSource1$inboundSchema;
 
 /** @internal */
-export const Stream$inboundSchema: z.ZodNativeEnum<typeof Stream> = z
-  .nativeEnum(Stream);
+export const Stream$inboundSchema: z.ZodNativeEnum<typeof Stream> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Stream));
 /** @internal */
 export const Stream$outboundSchema: z.ZodNativeEnum<typeof Stream> =
   Stream$inboundSchema;
@@ -70,19 +70,23 @@ export const ComputeLog$inboundSchema: z.ZodType<
   ComputeLog,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  instance_rank: z.number().int().optional(),
-  message: z.string(),
-  replica: z.string().optional(),
-  source: ComputeLogSource1$inboundSchema,
-  stream: Stream$inboundSchema,
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "instance_rank": "instanceRank",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    instance_rank: z.number().int().optional(),
+    message: z.string(),
+    replica: z.string().optional(),
+    source: ComputeLogSource1$inboundSchema,
+    stream: Stream$inboundSchema,
+    timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "instance_rank": "instanceRank",
+    });
+  })
+);
 /** @internal */
 export type ComputeLog$Outbound = {
   id: string;
@@ -99,19 +103,21 @@ export const ComputeLog$outboundSchema: z.ZodType<
   ComputeLog$Outbound,
   z.ZodTypeDef,
   ComputeLog
-> = z.object({
-  id: z.string(),
-  instanceRank: z.number().int().optional(),
-  message: z.string(),
-  replica: z.string().optional(),
-  source: ComputeLogSource1$outboundSchema,
-  stream: Stream$outboundSchema,
-  timestamp: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    instanceRank: "instance_rank",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    instanceRank: z.number().int().optional(),
+    message: z.string(),
+    replica: z.string().optional(),
+    source: ComputeLogSource1$outboundSchema,
+    stream: Stream$outboundSchema,
+    timestamp: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      instanceRank: "instance_rank",
+    });
+  })
+);
 
 export function computeLogToJSON(computeLog: ComputeLog): string {
   return JSON.stringify(ComputeLog$outboundSchema.parse(computeLog));

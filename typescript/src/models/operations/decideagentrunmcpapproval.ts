@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,10 +30,12 @@ export const DecideAgentRunMcpApprovalRequestBody$inboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.DecideAgentRunMcpApprovalRequest$inboundSchema,
-  components.DecideAgentRunApprovalsRequest$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.DecideAgentRunMcpApprovalRequest$inboundSchema,
+    components.DecideAgentRunApprovalsRequest$inboundSchema,
+  ])
+);
 /** @internal */
 export type DecideAgentRunMcpApprovalRequestBody$Outbound =
   | components.DecideAgentRunMcpApprovalRequest$Outbound
@@ -44,10 +46,12 @@ export const DecideAgentRunMcpApprovalRequestBody$outboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequestBody$Outbound,
   z.ZodTypeDef,
   DecideAgentRunMcpApprovalRequestBody
-> = z.union([
-  components.DecideAgentRunMcpApprovalRequest$outboundSchema,
-  components.DecideAgentRunApprovalsRequest$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.DecideAgentRunMcpApprovalRequest$outboundSchema,
+    components.DecideAgentRunApprovalsRequest$outboundSchema,
+  ])
+);
 
 export function decideAgentRunMcpApprovalRequestBodyToJSON(
   decideAgentRunMcpApprovalRequestBody: DecideAgentRunMcpApprovalRequestBody,
@@ -74,22 +78,24 @@ export const DecideAgentRunMcpApprovalRequest$inboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  run_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.union([
-    components.DecideAgentRunMcpApprovalRequest$inboundSchema,
-    components.DecideAgentRunApprovalsRequest$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "run_id": "runId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    run_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.union([
+      components.DecideAgentRunMcpApprovalRequest$inboundSchema,
+      components.DecideAgentRunApprovalsRequest$inboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "run_id": "runId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type DecideAgentRunMcpApprovalRequest$Outbound = {
   agent_id: string;
@@ -105,22 +111,24 @@ export const DecideAgentRunMcpApprovalRequest$outboundSchema: z.ZodType<
   DecideAgentRunMcpApprovalRequest$Outbound,
   z.ZodTypeDef,
   DecideAgentRunMcpApprovalRequest
-> = z.object({
-  agentId: z.string(),
-  runId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.union([
-    components.DecideAgentRunMcpApprovalRequest$outboundSchema,
-    components.DecideAgentRunApprovalsRequest$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    runId: "run_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    runId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.union([
+      components.DecideAgentRunMcpApprovalRequest$outboundSchema,
+      components.DecideAgentRunApprovalsRequest$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      runId: "run_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function decideAgentRunMcpApprovalRequestToJSON(
   decideAgentRunMcpApprovalRequest: DecideAgentRunMcpApprovalRequest,

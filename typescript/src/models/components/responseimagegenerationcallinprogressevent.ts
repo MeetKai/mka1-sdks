@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,9 +26,11 @@ export const ResponseImageGenerationCallInProgressEventArgs$inboundSchema:
     ResponseImageGenerationCallInProgressEventArgs,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    prompt: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      prompt: z.string(),
+    })
+  );
 /** @internal */
 export type ResponseImageGenerationCallInProgressEventArgs$Outbound = {
   prompt: string;
@@ -40,9 +42,11 @@ export const ResponseImageGenerationCallInProgressEventArgs$outboundSchema:
     ResponseImageGenerationCallInProgressEventArgs$Outbound,
     z.ZodTypeDef,
     ResponseImageGenerationCallInProgressEventArgs
-  > = z.object({
-    prompt: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      prompt: z.string(),
+    })
+  );
 
 export function responseImageGenerationCallInProgressEventArgsToJSON(
   responseImageGenerationCallInProgressEventArgs:
@@ -73,21 +77,23 @@ export function responseImageGenerationCallInProgressEventArgsFromJSON(
 /** @internal */
 export const ResponseImageGenerationCallInProgressEvent$inboundSchema:
   z.ZodType<ResponseImageGenerationCallInProgressEvent, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("response.image_generation_call.in_progress"),
-      sequence_number: z.number().int(),
-      item_id: z.string(),
-      output_index: z.number().int(),
-      args: z.lazy(() =>
-        ResponseImageGenerationCallInProgressEventArgs$inboundSchema
-      ).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "sequence_number": "sequenceNumber",
-        "item_id": "itemId",
-        "output_index": "outputIndex",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        type: z.literal("response.image_generation_call.in_progress"),
+        sequence_number: z.number().int(),
+        item_id: z.string(),
+        output_index: z.number().int(),
+        args: z.lazy(() =>
+          ResponseImageGenerationCallInProgressEventArgs$inboundSchema
+        ).optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "sequence_number": "sequenceNumber",
+          "item_id": "itemId",
+          "output_index": "outputIndex",
+        });
+      })
+    );
 /** @internal */
 export type ResponseImageGenerationCallInProgressEvent$Outbound = {
   type: "response.image_generation_call.in_progress";
@@ -103,21 +109,23 @@ export const ResponseImageGenerationCallInProgressEvent$outboundSchema:
     ResponseImageGenerationCallInProgressEvent$Outbound,
     z.ZodTypeDef,
     ResponseImageGenerationCallInProgressEvent
-  > = z.object({
-    type: z.literal("response.image_generation_call.in_progress"),
-    sequenceNumber: z.number().int(),
-    itemId: z.string(),
-    outputIndex: z.number().int(),
-    args: z.lazy(() =>
-      ResponseImageGenerationCallInProgressEventArgs$outboundSchema
-    ).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      sequenceNumber: "sequence_number",
-      itemId: "item_id",
-      outputIndex: "output_index",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("response.image_generation_call.in_progress"),
+      sequenceNumber: z.number().int(),
+      itemId: z.string(),
+      outputIndex: z.number().int(),
+      args: z.lazy(() =>
+        ResponseImageGenerationCallInProgressEventArgs$outboundSchema
+      ).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        sequenceNumber: "sequence_number",
+        itemId: "item_id",
+        outputIndex: "output_index",
+      });
+    })
+  );
 
 export function responseImageGenerationCallInProgressEventToJSON(
   responseImageGenerationCallInProgressEvent:

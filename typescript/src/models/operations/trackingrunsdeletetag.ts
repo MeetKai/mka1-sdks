@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,14 +31,16 @@ export const TrackingRunsDeleteTagRequestBody$inboundSchema: z.ZodType<
   TrackingRunsDeleteTagRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsDeleteTagRequestBody$Outbound = {
   run_id: string;
@@ -50,14 +52,16 @@ export const TrackingRunsDeleteTagRequestBody$outboundSchema: z.ZodType<
   TrackingRunsDeleteTagRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsDeleteTagRequestBody
-> = z.object({
-  runId: z.string(),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+    });
+  })
+);
 
 export function trackingRunsDeleteTagRequestBodyToJSON(
   trackingRunsDeleteTagRequestBody: TrackingRunsDeleteTagRequestBody,
@@ -83,15 +87,17 @@ export const TrackingRunsDeleteTagRequest$inboundSchema: z.ZodType<
   TrackingRunsDeleteTagRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingRunsDeleteTagRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TrackingRunsDeleteTagRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsDeleteTagRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -103,15 +109,17 @@ export const TrackingRunsDeleteTagRequest$outboundSchema: z.ZodType<
   TrackingRunsDeleteTagRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsDeleteTagRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TrackingRunsDeleteTagRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TrackingRunsDeleteTagRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingRunsDeleteTagRequestToJSON(
   trackingRunsDeleteTagRequest: TrackingRunsDeleteTagRequest,
@@ -137,7 +145,7 @@ export const TrackingRunsDeleteTagResponseBody$inboundSchema: z.ZodType<
   TrackingRunsDeleteTagResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type TrackingRunsDeleteTagResponseBody$Outbound = {};
 
@@ -146,7 +154,7 @@ export const TrackingRunsDeleteTagResponseBody$outboundSchema: z.ZodType<
   TrackingRunsDeleteTagResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsDeleteTagResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function trackingRunsDeleteTagResponseBodyToJSON(
   trackingRunsDeleteTagResponseBody: TrackingRunsDeleteTagResponseBody,

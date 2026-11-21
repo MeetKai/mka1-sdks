@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,12 @@ type RegenerateScopedAPIKeyTooManyRequestsError struct {
 var _ error = &RegenerateScopedAPIKeyTooManyRequestsError{}
 
 func (e *RegenerateScopedAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +37,12 @@ type RegenerateScopedAPIKeyGoneError struct {
 var _ error = &RegenerateScopedAPIKeyGoneError{}
 
 func (e *RegenerateScopedAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,12 @@ type RegenerateScopedAPIKeyConflictError struct {
 var _ error = &RegenerateScopedAPIKeyConflictError{}
 
 func (e *RegenerateScopedAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +75,12 @@ type RegenerateScopedAPIKeyNotFoundError struct {
 var _ error = &RegenerateScopedAPIKeyNotFoundError{}
 
 func (e *RegenerateScopedAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -70,6 +95,15 @@ type RegenerateScopedAPIKeyForbiddenError struct {
 var _ error = &RegenerateScopedAPIKeyForbiddenError{}
 
 func (e *RegenerateScopedAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -83,6 +117,12 @@ type RegenerateScopedAPIKeyUnauthorizedError struct {
 var _ error = &RegenerateScopedAPIKeyUnauthorizedError{}
 
 func (e *RegenerateScopedAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -97,6 +137,12 @@ type RegenerateScopedAPIKeyBadRequestError struct {
 var _ error = &RegenerateScopedAPIKeyBadRequestError{}
 
 func (e *RegenerateScopedAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

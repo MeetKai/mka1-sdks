@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,20 +24,22 @@ export const UpdateAgentScheduleRequest$inboundSchema: z.ZodType<
   UpdateAgentScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  schedule_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateAgentScheduleRequest:
-    components.UpdateAgentScheduleRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "schedule_id": "scheduleId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateAgentScheduleRequest": "updateAgentScheduleRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    schedule_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateAgentScheduleRequest:
+      components.UpdateAgentScheduleRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "schedule_id": "scheduleId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateAgentScheduleRequest": "updateAgentScheduleRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateAgentScheduleRequest$Outbound = {
   agent_id: string;
@@ -51,20 +53,22 @@ export const UpdateAgentScheduleRequest$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequest
-> = z.object({
-  agentId: z.string(),
-  scheduleId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateAgentScheduleRequest:
-    components.UpdateAgentScheduleRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    scheduleId: "schedule_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateAgentScheduleRequest: "UpdateAgentScheduleRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    scheduleId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    updateAgentScheduleRequest:
+      components.UpdateAgentScheduleRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      scheduleId: "schedule_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateAgentScheduleRequest: "UpdateAgentScheduleRequest",
+    });
+  })
+);
 
 export function updateAgentScheduleRequestToJSON(
   updateAgentScheduleRequest: UpdateAgentScheduleRequest,

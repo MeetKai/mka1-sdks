@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const TypeAction$inboundSchema: z.ZodType<
   TypeAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("type"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("type"),
+    text: z.string(),
+  })
+);
 /** @internal */
 export type TypeAction$Outbound = {
   type: "type";
@@ -32,10 +34,12 @@ export const TypeAction$outboundSchema: z.ZodType<
   TypeAction$Outbound,
   z.ZodTypeDef,
   TypeAction
-> = z.object({
-  type: z.literal("type"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("type"),
+    text: z.string(),
+  })
+);
 
 export function typeActionToJSON(typeAction: TypeAction): string {
   return JSON.stringify(TypeAction$outboundSchema.parse(typeAction));

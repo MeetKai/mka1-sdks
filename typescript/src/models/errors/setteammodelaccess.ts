@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -119,19 +120,21 @@ export const SetTeamModelAccessAuthModelAccessResponse404ResponseBody$inboundSch
     SetTeamModelAccessAuthModelAccessResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SetTeamModelAccessAuthModelAccessResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SetTeamModelAccessAuthModelAccessResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SetTeamModelAccessAuthModelAccessResponse404ResponseBody$Outbound =
@@ -145,11 +148,13 @@ export const SetTeamModelAccessAuthModelAccessResponse404ResponseBody$outboundSc
     SetTeamModelAccessAuthModelAccessResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     SetTeamModelAccessAuthModelAccessResponse404ResponseBody
-  > = z.instanceof(SetTeamModelAccessAuthModelAccessResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SetTeamModelAccessAuthModelAccessResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SetTeamModelAccessAuthModelAccessResponseResponseBody$inboundSchema:
@@ -157,19 +162,21 @@ export const SetTeamModelAccessAuthModelAccessResponseResponseBody$inboundSchema
     SetTeamModelAccessAuthModelAccessResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SetTeamModelAccessAuthModelAccessResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SetTeamModelAccessAuthModelAccessResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SetTeamModelAccessAuthModelAccessResponseResponseBody$Outbound = {
@@ -182,11 +189,13 @@ export const SetTeamModelAccessAuthModelAccessResponseResponseBody$outboundSchem
     SetTeamModelAccessAuthModelAccessResponseResponseBody$Outbound,
     z.ZodTypeDef,
     SetTeamModelAccessAuthModelAccessResponseResponseBody
-  > = z.instanceof(SetTeamModelAccessAuthModelAccessResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SetTeamModelAccessAuthModelAccessResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SetTeamModelAccessAuthModelAccessResponseBody$inboundSchema:
@@ -194,19 +203,21 @@ export const SetTeamModelAccessAuthModelAccessResponseBody$inboundSchema:
     SetTeamModelAccessAuthModelAccessResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new SetTeamModelAccessAuthModelAccessResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new SetTeamModelAccessAuthModelAccessResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type SetTeamModelAccessAuthModelAccessResponseBody$Outbound = {
@@ -219,30 +230,34 @@ export const SetTeamModelAccessAuthModelAccessResponseBody$outboundSchema:
     SetTeamModelAccessAuthModelAccessResponseBody$Outbound,
     z.ZodTypeDef,
     SetTeamModelAccessAuthModelAccessResponseBody
-  > = z.instanceof(SetTeamModelAccessAuthModelAccessResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(SetTeamModelAccessAuthModelAccessResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const SetTeamModelAccessResponseBody$inboundSchema: z.ZodType<
   SetTeamModelAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new SetTeamModelAccessResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new SetTeamModelAccessResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type SetTeamModelAccessResponseBody$Outbound = {
@@ -254,8 +269,10 @@ export const SetTeamModelAccessResponseBody$outboundSchema: z.ZodType<
   SetTeamModelAccessResponseBody$Outbound,
   z.ZodTypeDef,
   SetTeamModelAccessResponseBody
-> = z.instanceof(SetTeamModelAccessResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(SetTeamModelAccessResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

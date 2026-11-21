@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,23 +29,25 @@ export const Experiment$inboundSchema: z.ZodType<
   Experiment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  experiment_id: z.string(),
-  name: z.string(),
-  artifact_location: z.string().optional(),
-  lifecycle_stage: z.string().optional(),
-  tags: z.array(Tag$inboundSchema).optional(),
-  creation_time: z.number().int().optional(),
-  last_update_time: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "experiment_id": "experimentId",
-    "artifact_location": "artifactLocation",
-    "lifecycle_stage": "lifecycleStage",
-    "creation_time": "creationTime",
-    "last_update_time": "lastUpdateTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experiment_id: z.string(),
+    name: z.string(),
+    artifact_location: z.string().optional(),
+    lifecycle_stage: z.string().optional(),
+    tags: z.array(Tag$inboundSchema).optional(),
+    creation_time: z.number().int().optional(),
+    last_update_time: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "experiment_id": "experimentId",
+      "artifact_location": "artifactLocation",
+      "lifecycle_stage": "lifecycleStage",
+      "creation_time": "creationTime",
+      "last_update_time": "lastUpdateTime",
+    });
+  })
+);
 /** @internal */
 export type Experiment$Outbound = {
   experiment_id: string;
@@ -62,23 +64,25 @@ export const Experiment$outboundSchema: z.ZodType<
   Experiment$Outbound,
   z.ZodTypeDef,
   Experiment
-> = z.object({
-  experimentId: z.string(),
-  name: z.string(),
-  artifactLocation: z.string().optional(),
-  lifecycleStage: z.string().optional(),
-  tags: z.array(Tag$outboundSchema).optional(),
-  creationTime: z.number().int().optional(),
-  lastUpdateTime: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    experimentId: "experiment_id",
-    artifactLocation: "artifact_location",
-    lifecycleStage: "lifecycle_stage",
-    creationTime: "creation_time",
-    lastUpdateTime: "last_update_time",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    experimentId: z.string(),
+    name: z.string(),
+    artifactLocation: z.string().optional(),
+    lifecycleStage: z.string().optional(),
+    tags: z.array(Tag$outboundSchema).optional(),
+    creationTime: z.number().int().optional(),
+    lastUpdateTime: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      experimentId: "experiment_id",
+      artifactLocation: "artifact_location",
+      lifecycleStage: "lifecycle_stage",
+      creationTime: "creation_time",
+      lastUpdateTime: "last_update_time",
+    });
+  })
+);
 
 export function experimentToJSON(experiment: Experiment): string {
   return JSON.stringify(Experiment$outboundSchema.parse(experiment));

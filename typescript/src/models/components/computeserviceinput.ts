@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,11 +36,13 @@ export const ComputeServiceInput$inboundSchema: z.ZodType<
   ComputeServiceInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  readiness: ComputeReadiness$inboundSchema.optional(),
-  scaling: ComputeScalingInput$inboundSchema.optional(),
-  volume: ComputeVolumeInput$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readiness: ComputeReadiness$inboundSchema.optional(),
+    scaling: ComputeScalingInput$inboundSchema.optional(),
+    volume: ComputeVolumeInput$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ComputeServiceInput$Outbound = {
   readiness?: ComputeReadiness$Outbound | undefined;
@@ -53,11 +55,13 @@ export const ComputeServiceInput$outboundSchema: z.ZodType<
   ComputeServiceInput$Outbound,
   z.ZodTypeDef,
   ComputeServiceInput
-> = z.object({
-  readiness: ComputeReadiness$outboundSchema.optional(),
-  scaling: ComputeScalingInput$outboundSchema.optional(),
-  volume: ComputeVolumeInput$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readiness: ComputeReadiness$outboundSchema.optional(),
+    scaling: ComputeScalingInput$outboundSchema.optional(),
+    volume: ComputeVolumeInput$outboundSchema.optional(),
+  })
+);
 
 export function computeServiceInputToJSON(
   computeServiceInput: ComputeServiceInput,

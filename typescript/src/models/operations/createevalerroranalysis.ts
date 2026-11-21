@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateEvalErrorAnalysisRequest$inboundSchema: z.ZodType<
   CreateEvalErrorAnalysisRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateEvalErrorAnalysisRequest:
-    components.CreateEvalErrorAnalysisRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateEvalErrorAnalysisRequest": "createEvalErrorAnalysisRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateEvalErrorAnalysisRequest:
+      components.CreateEvalErrorAnalysisRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateEvalErrorAnalysisRequest": "createEvalErrorAnalysisRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalErrorAnalysisRequest$Outbound = {
   suite_id: string;
@@ -48,18 +50,20 @@ export const CreateEvalErrorAnalysisRequest$outboundSchema: z.ZodType<
   CreateEvalErrorAnalysisRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalErrorAnalysisRequest
-> = z.object({
-  suiteId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createEvalErrorAnalysisRequest:
-    components.CreateEvalErrorAnalysisRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createEvalErrorAnalysisRequest: "CreateEvalErrorAnalysisRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createEvalErrorAnalysisRequest:
+      components.CreateEvalErrorAnalysisRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createEvalErrorAnalysisRequest: "CreateEvalErrorAnalysisRequest",
+    });
+  })
+);
 
 export function createEvalErrorAnalysisRequestToJSON(
   createEvalErrorAnalysisRequest: CreateEvalErrorAnalysisRequest,

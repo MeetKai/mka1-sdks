@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,7 +36,9 @@ export type SaveTenantResourcePolicy = {
 /** @internal */
 export const SaveTenantResourcePolicyCpuCores$inboundSchema: z.ZodNativeEnum<
   typeof SaveTenantResourcePolicyCpuCores
-> = z.nativeEnum(SaveTenantResourcePolicyCpuCores);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SaveTenantResourcePolicyCpuCores)
+);
 /** @internal */
 export const SaveTenantResourcePolicyCpuCores$outboundSchema: z.ZodNativeEnum<
   typeof SaveTenantResourcePolicyCpuCores
@@ -45,7 +47,9 @@ export const SaveTenantResourcePolicyCpuCores$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SaveTenantResourcePolicyMemoryMib$inboundSchema: z.ZodNativeEnum<
   typeof SaveTenantResourcePolicyMemoryMib
-> = z.nativeEnum(SaveTenantResourcePolicyMemoryMib);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SaveTenantResourcePolicyMemoryMib)
+);
 /** @internal */
 export const SaveTenantResourcePolicyMemoryMib$outboundSchema: z.ZodNativeEnum<
   typeof SaveTenantResourcePolicyMemoryMib
@@ -56,21 +60,23 @@ export const SaveTenantResourcePolicy$inboundSchema: z.ZodType<
   SaveTenantResourcePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu_cores: z.nullable(SaveTenantResourcePolicyCpuCores$inboundSchema)
-    .optional(),
-  memory_mib: z.nullable(SaveTenantResourcePolicyMemoryMib$inboundSchema)
-    .optional(),
-  timeout_seconds: z.nullable(z.number().int()).optional(),
-  expected_revision: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "cpu_cores": "cpuCores",
-    "memory_mib": "memoryMib",
-    "timeout_seconds": "timeoutSeconds",
-    "expected_revision": "expectedRevision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu_cores: z.nullable(SaveTenantResourcePolicyCpuCores$inboundSchema)
+      .optional(),
+    memory_mib: z.nullable(SaveTenantResourcePolicyMemoryMib$inboundSchema)
+      .optional(),
+    timeout_seconds: z.nullable(z.number().int()).optional(),
+    expected_revision: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cpu_cores": "cpuCores",
+      "memory_mib": "memoryMib",
+      "timeout_seconds": "timeoutSeconds",
+      "expected_revision": "expectedRevision",
+    });
+  })
+);
 /** @internal */
 export type SaveTenantResourcePolicy$Outbound = {
   cpu_cores?: number | null | undefined;
@@ -84,21 +90,23 @@ export const SaveTenantResourcePolicy$outboundSchema: z.ZodType<
   SaveTenantResourcePolicy$Outbound,
   z.ZodTypeDef,
   SaveTenantResourcePolicy
-> = z.object({
-  cpuCores: z.nullable(SaveTenantResourcePolicyCpuCores$outboundSchema)
-    .optional(),
-  memoryMib: z.nullable(SaveTenantResourcePolicyMemoryMib$outboundSchema)
-    .optional(),
-  timeoutSeconds: z.nullable(z.number().int()).optional(),
-  expectedRevision: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    cpuCores: "cpu_cores",
-    memoryMib: "memory_mib",
-    timeoutSeconds: "timeout_seconds",
-    expectedRevision: "expected_revision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpuCores: z.nullable(SaveTenantResourcePolicyCpuCores$outboundSchema)
+      .optional(),
+    memoryMib: z.nullable(SaveTenantResourcePolicyMemoryMib$outboundSchema)
+      .optional(),
+    timeoutSeconds: z.nullable(z.number().int()).optional(),
+    expectedRevision: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      cpuCores: "cpu_cores",
+      memoryMib: "memory_mib",
+      timeoutSeconds: "timeout_seconds",
+      expectedRevision: "expected_revision",
+    });
+  })
+);
 
 export function saveTenantResourcePolicyToJSON(
   saveTenantResourcePolicy: SaveTenantResourcePolicy,

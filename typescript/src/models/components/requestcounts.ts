@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const RequestCounts$inboundSchema: z.ZodType<
   RequestCounts,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  total: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+  })
+);
 /** @internal */
 export type RequestCounts$Outbound = {
   total: number;
@@ -35,11 +37,13 @@ export const RequestCounts$outboundSchema: z.ZodType<
   RequestCounts$Outbound,
   z.ZodTypeDef,
   RequestCounts
-> = z.object({
-  total: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+  })
+);
 
 export function requestCountsToJSON(requestCounts: RequestCounts): string {
   return JSON.stringify(RequestCounts$outboundSchema.parse(requestCounts));

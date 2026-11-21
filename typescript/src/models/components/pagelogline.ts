@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const PageLogLine$inboundSchema: z.ZodType<
   PageLogLine,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(LogLine$inboundSchema),
-  next_cursor: z.nullable(z.string()).optional(),
-  total: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LogLine$inboundSchema),
+    next_cursor: z.nullable(z.string()).optional(),
+    total: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type PageLogLine$Outbound = {
   data: Array<LogLine$Outbound>;
@@ -46,15 +48,17 @@ export const PageLogLine$outboundSchema: z.ZodType<
   PageLogLine$Outbound,
   z.ZodTypeDef,
   PageLogLine
-> = z.object({
-  data: z.array(LogLine$outboundSchema),
-  nextCursor: z.nullable(z.string()).optional(),
-  total: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(LogLine$outboundSchema),
+    nextCursor: z.nullable(z.string()).optional(),
+    total: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function pageLogLineToJSON(pageLogLine: PageLogLine): string {
   return JSON.stringify(PageLogLine$outboundSchema.parse(pageLogLine));

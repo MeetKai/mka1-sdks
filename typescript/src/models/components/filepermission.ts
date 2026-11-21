@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -49,19 +49,21 @@ export const FilePermission$inboundSchema: z.ZodType<
   FilePermission,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("file.permission"),
-  file_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  role: ResourcePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("file.permission"),
+    file_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    role: ResourcePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type FilePermission$Outbound = {
   object: "file.permission";
@@ -76,19 +78,21 @@ export const FilePermission$outboundSchema: z.ZodType<
   FilePermission$Outbound,
   z.ZodTypeDef,
   FilePermission
-> = z.object({
-  object: z.literal("file.permission"),
-  fileId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  role: ResourcePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("file.permission"),
+    fileId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    role: ResourcePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function filePermissionToJSON(filePermission: FilePermission): string {
   return JSON.stringify(FilePermission$outboundSchema.parse(filePermission));

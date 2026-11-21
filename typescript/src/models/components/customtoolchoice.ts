@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const CustomToolChoice$inboundSchema: z.ZodType<
   CustomToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom"),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type CustomToolChoice$Outbound = {
   type: "custom";
@@ -35,10 +37,12 @@ export const CustomToolChoice$outboundSchema: z.ZodType<
   CustomToolChoice$Outbound,
   z.ZodTypeDef,
   CustomToolChoice
-> = z.object({
-  type: z.literal("custom"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom"),
+    name: z.string(),
+  })
+);
 
 export function customToolChoiceToJSON(
   customToolChoice: CustomToolChoice,

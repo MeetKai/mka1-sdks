@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,16 +23,18 @@ export const CustomToolCallOutput$inboundSchema: z.ZodType<
   CustomToolCallOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("custom_tool_call_output"),
-  call_id: z.string(),
-  output: z.string(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom_tool_call_output"),
+    call_id: z.string(),
+    output: z.string(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  })
+);
 /** @internal */
 export type CustomToolCallOutput$Outbound = {
   type: "custom_tool_call_output";
@@ -46,16 +48,18 @@ export const CustomToolCallOutput$outboundSchema: z.ZodType<
   CustomToolCallOutput$Outbound,
   z.ZodTypeDef,
   CustomToolCallOutput
-> = z.object({
-  type: z.literal("custom_tool_call_output"),
-  callId: z.string(),
-  output: z.string(),
-  id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("custom_tool_call_output"),
+    callId: z.string(),
+    output: z.string(),
+    id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+    });
+  })
+);
 
 export function customToolCallOutputToJSON(
   customToolCallOutput: CustomToolCallOutput,

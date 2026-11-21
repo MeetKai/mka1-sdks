@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,13 +37,15 @@ export const ListOrganizationBillingInvoicesRequest$inboundSchema: z.ZodType<
   ListOrganizationBillingInvoicesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type ListOrganizationBillingInvoicesRequest$Outbound = {
   org_id?: string | undefined;
@@ -54,13 +56,15 @@ export const ListOrganizationBillingInvoicesRequest$outboundSchema: z.ZodType<
   ListOrganizationBillingInvoicesRequest$Outbound,
   z.ZodTypeDef,
   ListOrganizationBillingInvoicesRequest
-> = z.object({
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function listOrganizationBillingInvoicesRequestToJSON(
   listOrganizationBillingInvoicesRequest:
@@ -88,26 +92,28 @@ export const ListOrganizationBillingInvoicesInvoices$inboundSchema: z.ZodType<
   ListOrganizationBillingInvoicesInvoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  period_start: z.string(),
-  period_end: z.string(),
-  currency: z.string(),
-  amount_due_minor: z.number().int(),
-  amount_paid_minor: z.number().int(),
-  status: z.string(),
-  hosted_invoice_url: z.nullable(z.string()),
-  pdf_url: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "period_start": "periodStart",
-    "period_end": "periodEnd",
-    "amount_due_minor": "amountDueMinor",
-    "amount_paid_minor": "amountPaidMinor",
-    "hosted_invoice_url": "hostedInvoiceUrl",
-    "pdf_url": "pdfUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    period_start: z.string(),
+    period_end: z.string(),
+    currency: z.string(),
+    amount_due_minor: z.number().int(),
+    amount_paid_minor: z.number().int(),
+    status: z.string(),
+    hosted_invoice_url: z.nullable(z.string()),
+    pdf_url: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "period_start": "periodStart",
+      "period_end": "periodEnd",
+      "amount_due_minor": "amountDueMinor",
+      "amount_paid_minor": "amountPaidMinor",
+      "hosted_invoice_url": "hostedInvoiceUrl",
+      "pdf_url": "pdfUrl",
+    });
+  })
+);
 /** @internal */
 export type ListOrganizationBillingInvoicesInvoices$Outbound = {
   id: string;
@@ -126,26 +132,28 @@ export const ListOrganizationBillingInvoicesInvoices$outboundSchema: z.ZodType<
   ListOrganizationBillingInvoicesInvoices$Outbound,
   z.ZodTypeDef,
   ListOrganizationBillingInvoicesInvoices
-> = z.object({
-  id: z.string(),
-  periodStart: z.string(),
-  periodEnd: z.string(),
-  currency: z.string(),
-  amountDueMinor: z.number().int(),
-  amountPaidMinor: z.number().int(),
-  status: z.string(),
-  hostedInvoiceUrl: z.nullable(z.string()),
-  pdfUrl: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    periodStart: "period_start",
-    periodEnd: "period_end",
-    amountDueMinor: "amount_due_minor",
-    amountPaidMinor: "amount_paid_minor",
-    hostedInvoiceUrl: "hosted_invoice_url",
-    pdfUrl: "pdf_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    periodStart: z.string(),
+    periodEnd: z.string(),
+    currency: z.string(),
+    amountDueMinor: z.number().int(),
+    amountPaidMinor: z.number().int(),
+    status: z.string(),
+    hostedInvoiceUrl: z.nullable(z.string()),
+    pdfUrl: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      periodStart: "period_start",
+      periodEnd: "period_end",
+      amountDueMinor: "amount_due_minor",
+      amountPaidMinor: "amount_paid_minor",
+      hostedInvoiceUrl: "hosted_invoice_url",
+      pdfUrl: "pdf_url",
+    });
+  })
+);
 
 export function listOrganizationBillingInvoicesInvoicesToJSON(
   listOrganizationBillingInvoicesInvoices:
@@ -179,16 +187,18 @@ export const ListOrganizationBillingInvoicesResponseBody$inboundSchema:
     ListOrganizationBillingInvoicesResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    invoices: z.array(
-      z.lazy(() => ListOrganizationBillingInvoicesInvoices$inboundSchema),
-    ),
-    has_more: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "has_more": "hasMore",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      invoices: z.array(
+        z.lazy(() => ListOrganizationBillingInvoicesInvoices$inboundSchema),
+      ),
+      has_more: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "has_more": "hasMore",
+      });
+    })
+  );
 /** @internal */
 export type ListOrganizationBillingInvoicesResponseBody$Outbound = {
   invoices: Array<ListOrganizationBillingInvoicesInvoices$Outbound>;
@@ -201,16 +211,18 @@ export const ListOrganizationBillingInvoicesResponseBody$outboundSchema:
     ListOrganizationBillingInvoicesResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationBillingInvoicesResponseBody
-  > = z.object({
-    invoices: z.array(
-      z.lazy(() => ListOrganizationBillingInvoicesInvoices$outboundSchema),
-    ),
-    hasMore: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      hasMore: "has_more",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      invoices: z.array(
+        z.lazy(() => ListOrganizationBillingInvoicesInvoices$outboundSchema),
+      ),
+      hasMore: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        hasMore: "has_more",
+      });
+    })
+  );
 
 export function listOrganizationBillingInvoicesResponseBodyToJSON(
   listOrganizationBillingInvoicesResponseBody:

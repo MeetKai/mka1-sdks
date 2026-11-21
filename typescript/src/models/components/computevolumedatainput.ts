@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,7 +26,7 @@ export type ComputeVolumeDataInput = {
 /** @internal */
 export const ComputeVolumeDataInputType$inboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeDataInputType
-> = z.nativeEnum(ComputeVolumeDataInputType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ComputeVolumeDataInputType));
 /** @internal */
 export const ComputeVolumeDataInputType$outboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeDataInputType
@@ -37,12 +37,14 @@ export const ComputeVolumeDataInput$inboundSchema: z.ZodType<
   ComputeVolumeDataInput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  revision: z.string().optional(),
-  type: ComputeVolumeDataInputType$inboundSchema,
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    revision: z.string().optional(),
+    type: ComputeVolumeDataInputType$inboundSchema,
+    url: z.string(),
+  })
+);
 /** @internal */
 export type ComputeVolumeDataInput$Outbound = {
   path: string;
@@ -56,12 +58,14 @@ export const ComputeVolumeDataInput$outboundSchema: z.ZodType<
   ComputeVolumeDataInput$Outbound,
   z.ZodTypeDef,
   ComputeVolumeDataInput
-> = z.object({
-  path: z.string(),
-  revision: z.string().optional(),
-  type: ComputeVolumeDataInputType$outboundSchema,
-  url: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    revision: z.string().optional(),
+    type: ComputeVolumeDataInputType$outboundSchema,
+    url: z.string(),
+  })
+);
 
 export function computeVolumeDataInputToJSON(
   computeVolumeDataInput: ComputeVolumeDataInput,

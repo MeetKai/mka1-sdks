@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,9 +25,11 @@ export const ResponseHistoryCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseHistoryCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+  })
+);
 /** @internal */
 export type ResponseHistoryCallInProgressEventArgs$Outbound = {
   query: string;
@@ -38,9 +40,11 @@ export const ResponseHistoryCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseHistoryCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseHistoryCallInProgressEventArgs
-> = z.object({
-  query: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+  })
+);
 
 export function responseHistoryCallInProgressEventArgsToJSON(
   responseHistoryCallInProgressEventArgs:
@@ -68,20 +72,22 @@ export const ResponseHistoryCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseHistoryCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.history_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseHistoryCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.history_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseHistoryCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseHistoryCallInProgressEvent$Outbound = {
   type: "response.history_call.in_progress";
@@ -96,20 +102,22 @@ export const ResponseHistoryCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseHistoryCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseHistoryCallInProgressEvent
-> = z.object({
-  type: z.literal("response.history_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseHistoryCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.history_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseHistoryCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseHistoryCallInProgressEventToJSON(
   responseHistoryCallInProgressEvent: ResponseHistoryCallInProgressEvent,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const ComputeSecretReference$inboundSchema: z.ZodType<
   ComputeSecretReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  secret_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "secret_id": "secretId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    secret_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "secret_id": "secretId",
+    });
+  })
+);
 /** @internal */
 export type ComputeSecretReference$Outbound = {
   key: string;
@@ -37,14 +39,16 @@ export const ComputeSecretReference$outboundSchema: z.ZodType<
   ComputeSecretReference$Outbound,
   z.ZodTypeDef,
   ComputeSecretReference
-> = z.object({
-  key: z.string(),
-  secretId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    secretId: "secret_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    secretId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      secretId: "secret_id",
+    });
+  })
+);
 
 export function computeSecretReferenceToJSON(
   computeSecretReference: ComputeSecretReference,

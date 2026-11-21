@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -194,19 +195,21 @@ export class DeleteTeamResponseBody extends SDKError {
 /** @internal */
 export const DeleteTeamAuthTeamsResponse429ResponseBody$inboundSchema:
   z.ZodType<DeleteTeamAuthTeamsResponse429ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new DeleteTeamAuthTeamsResponse429ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new DeleteTeamAuthTeamsResponse429ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponse429ResponseBody$Outbound = {
@@ -219,28 +222,32 @@ export const DeleteTeamAuthTeamsResponse429ResponseBody$outboundSchema:
     DeleteTeamAuthTeamsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteTeamAuthTeamsResponse429ResponseBody
-  > = z.instanceof(DeleteTeamAuthTeamsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteTeamAuthTeamsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteTeamAuthTeamsResponse410ResponseBody$inboundSchema:
   z.ZodType<DeleteTeamAuthTeamsResponse410ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new DeleteTeamAuthTeamsResponse410ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new DeleteTeamAuthTeamsResponse410ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponse410ResponseBody$Outbound = {
@@ -253,28 +260,32 @@ export const DeleteTeamAuthTeamsResponse410ResponseBody$outboundSchema:
     DeleteTeamAuthTeamsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteTeamAuthTeamsResponse410ResponseBody
-  > = z.instanceof(DeleteTeamAuthTeamsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteTeamAuthTeamsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteTeamAuthTeamsResponse409ResponseBody$inboundSchema:
   z.ZodType<DeleteTeamAuthTeamsResponse409ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new DeleteTeamAuthTeamsResponse409ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new DeleteTeamAuthTeamsResponse409ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponse409ResponseBody$Outbound = {
@@ -287,28 +298,32 @@ export const DeleteTeamAuthTeamsResponse409ResponseBody$outboundSchema:
     DeleteTeamAuthTeamsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteTeamAuthTeamsResponse409ResponseBody
-  > = z.instanceof(DeleteTeamAuthTeamsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteTeamAuthTeamsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteTeamAuthTeamsResponse404ResponseBody$inboundSchema:
   z.ZodType<DeleteTeamAuthTeamsResponse404ResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      message: z.string(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new DeleteTeamAuthTeamsResponse404ResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        message: z.string(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new DeleteTeamAuthTeamsResponse404ResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponse404ResponseBody$Outbound = {
@@ -321,31 +336,35 @@ export const DeleteTeamAuthTeamsResponse404ResponseBody$outboundSchema:
     DeleteTeamAuthTeamsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     DeleteTeamAuthTeamsResponse404ResponseBody
-  > = z.instanceof(DeleteTeamAuthTeamsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(DeleteTeamAuthTeamsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const DeleteTeamAuthTeamsResponseResponseBody$inboundSchema: z.ZodType<
   DeleteTeamAuthTeamsResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  code: z.string().optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new DeleteTeamAuthTeamsResponseResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    code: z.string().optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new DeleteTeamAuthTeamsResponseResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponseResponseBody$Outbound = {
@@ -358,31 +377,35 @@ export const DeleteTeamAuthTeamsResponseResponseBody$outboundSchema: z.ZodType<
   DeleteTeamAuthTeamsResponseResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteTeamAuthTeamsResponseResponseBody
-> = z.instanceof(DeleteTeamAuthTeamsResponseResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    code: z.string().optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(DeleteTeamAuthTeamsResponseResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      code: z.string().optional(),
+    }))
+);
 
 /** @internal */
 export const DeleteTeamAuthTeamsResponseBody$inboundSchema: z.ZodType<
   DeleteTeamAuthTeamsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new DeleteTeamAuthTeamsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new DeleteTeamAuthTeamsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type DeleteTeamAuthTeamsResponseBody$Outbound = {
@@ -394,30 +417,34 @@ export const DeleteTeamAuthTeamsResponseBody$outboundSchema: z.ZodType<
   DeleteTeamAuthTeamsResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteTeamAuthTeamsResponseBody
-> = z.instanceof(DeleteTeamAuthTeamsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(DeleteTeamAuthTeamsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const DeleteTeamResponseBody$inboundSchema: z.ZodType<
   DeleteTeamResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new DeleteTeamResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new DeleteTeamResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type DeleteTeamResponseBody$Outbound = {
@@ -429,8 +456,10 @@ export const DeleteTeamResponseBody$outboundSchema: z.ZodType<
   DeleteTeamResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteTeamResponseBody
-> = z.instanceof(DeleteTeamResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(DeleteTeamResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

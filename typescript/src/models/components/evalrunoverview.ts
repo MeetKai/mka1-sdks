@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -69,14 +69,16 @@ export type EvalRunOverview = {
 };
 
 /** @internal */
-export const Trials$inboundSchema: z.ZodType<Trials, z.ZodTypeDef, unknown> = z
-  .object({
-    total: z.number().int(),
-    completed: z.number().int(),
-    failed: z.number().int(),
-    errored: z.number().int(),
-    retried: z.number().int(),
-  });
+export const Trials$inboundSchema: z.ZodType<Trials, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      total: z.number().int(),
+      completed: z.number().int(),
+      failed: z.number().int(),
+      errored: z.number().int(),
+      retried: z.number().int(),
+    })
+  );
 /** @internal */
 export type Trials$Outbound = {
   total: number;
@@ -91,13 +93,15 @@ export const Trials$outboundSchema: z.ZodType<
   Trials$Outbound,
   z.ZodTypeDef,
   Trials
-> = z.object({
-  total: z.number().int(),
-  completed: z.number().int(),
-  failed: z.number().int(),
-  errored: z.number().int(),
-  retried: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    total: z.number().int(),
+    completed: z.number().int(),
+    failed: z.number().int(),
+    errored: z.number().int(),
+    retried: z.number().int(),
+  })
+);
 
 export function trialsToJSON(trials: Trials): string {
   return JSON.stringify(Trials$outboundSchema.parse(trials));
@@ -113,13 +117,15 @@ export function trialsFromJSON(
 }
 
 /** @internal */
-export const Tokens$inboundSchema: z.ZodType<Tokens, z.ZodTypeDef, unknown> = z
-  .object({
-    input: z.nullable(z.number().int()),
-    output: z.nullable(z.number().int()),
-    cached: z.nullable(z.number().int()),
-    reasoning: z.nullable(z.number().int()),
-  });
+export const Tokens$inboundSchema: z.ZodType<Tokens, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input: z.nullable(z.number().int()),
+      output: z.nullable(z.number().int()),
+      cached: z.nullable(z.number().int()),
+      reasoning: z.nullable(z.number().int()),
+    })
+  );
 /** @internal */
 export type Tokens$Outbound = {
   input: number | null;
@@ -133,12 +139,14 @@ export const Tokens$outboundSchema: z.ZodType<
   Tokens$Outbound,
   z.ZodTypeDef,
   Tokens
-> = z.object({
-  input: z.nullable(z.number().int()),
-  output: z.nullable(z.number().int()),
-  cached: z.nullable(z.number().int()),
-  reasoning: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.nullable(z.number().int()),
+    output: z.nullable(z.number().int()),
+    cached: z.nullable(z.number().int()),
+    reasoning: z.nullable(z.number().int()),
+  })
+);
 
 export function tokensToJSON(tokens: Tokens): string {
   return JSON.stringify(Tokens$outboundSchema.parse(tokens));
@@ -158,31 +166,33 @@ export const EvalRunOverview$inboundSchema: z.ZodType<
   EvalRunOverview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.run.overview"),
-  run_id: z.string(),
-  suite_id: z.string(),
-  status: EvalRunStatus$inboundSchema,
-  agent_name: z.nullable(z.string()),
-  agent_version: z.nullable(z.string()),
-  agent_effort: z.nullable(z.string()),
-  models: z.array(z.string()),
-  metric: z.string(),
-  avg_reward: z.nullable(z.number()),
-  trials: z.lazy(() => Trials$inboundSchema),
-  cost_usd: z.nullable(z.number()),
-  tokens: z.lazy(() => Tokens$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "suite_id": "suiteId",
-    "agent_name": "agentName",
-    "agent_version": "agentVersion",
-    "agent_effort": "agentEffort",
-    "avg_reward": "avgReward",
-    "cost_usd": "costUsd",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.run.overview"),
+    run_id: z.string(),
+    suite_id: z.string(),
+    status: EvalRunStatus$inboundSchema,
+    agent_name: z.nullable(z.string()),
+    agent_version: z.nullable(z.string()),
+    agent_effort: z.nullable(z.string()),
+    models: z.array(z.string()),
+    metric: z.string(),
+    avg_reward: z.nullable(z.number()),
+    trials: z.lazy(() => Trials$inboundSchema),
+    cost_usd: z.nullable(z.number()),
+    tokens: z.lazy(() => Tokens$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "suite_id": "suiteId",
+      "agent_name": "agentName",
+      "agent_version": "agentVersion",
+      "agent_effort": "agentEffort",
+      "avg_reward": "avgReward",
+      "cost_usd": "costUsd",
+    });
+  })
+);
 /** @internal */
 export type EvalRunOverview$Outbound = {
   object: "eval.run.overview";
@@ -205,31 +215,33 @@ export const EvalRunOverview$outboundSchema: z.ZodType<
   EvalRunOverview$Outbound,
   z.ZodTypeDef,
   EvalRunOverview
-> = z.object({
-  object: z.literal("eval.run.overview"),
-  runId: z.string(),
-  suiteId: z.string(),
-  status: EvalRunStatus$outboundSchema,
-  agentName: z.nullable(z.string()),
-  agentVersion: z.nullable(z.string()),
-  agentEffort: z.nullable(z.string()),
-  models: z.array(z.string()),
-  metric: z.string(),
-  avgReward: z.nullable(z.number()),
-  trials: z.lazy(() => Trials$outboundSchema),
-  costUsd: z.nullable(z.number()),
-  tokens: z.lazy(() => Tokens$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    suiteId: "suite_id",
-    agentName: "agent_name",
-    agentVersion: "agent_version",
-    agentEffort: "agent_effort",
-    avgReward: "avg_reward",
-    costUsd: "cost_usd",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.run.overview"),
+    runId: z.string(),
+    suiteId: z.string(),
+    status: EvalRunStatus$outboundSchema,
+    agentName: z.nullable(z.string()),
+    agentVersion: z.nullable(z.string()),
+    agentEffort: z.nullable(z.string()),
+    models: z.array(z.string()),
+    metric: z.string(),
+    avgReward: z.nullable(z.number()),
+    trials: z.lazy(() => Trials$outboundSchema),
+    costUsd: z.nullable(z.number()),
+    tokens: z.lazy(() => Tokens$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      suiteId: "suite_id",
+      agentName: "agent_name",
+      agentVersion: "agent_version",
+      agentEffort: "agent_effort",
+      avgReward: "avg_reward",
+      costUsd: "cost_usd",
+    });
+  })
+);
 
 export function evalRunOverviewToJSON(
   evalRunOverview: EvalRunOverview,

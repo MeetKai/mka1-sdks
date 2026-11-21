@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,7 +57,9 @@ export const EmbeddingsRequestInput$inboundSchema: z.ZodType<
   EmbeddingsRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 /** @internal */
 export type EmbeddingsRequestInput$Outbound = string | Array<string>;
 
@@ -66,7 +68,9 @@ export const EmbeddingsRequestInput$outboundSchema: z.ZodType<
   EmbeddingsRequestInput$Outbound,
   z.ZodTypeDef,
   EmbeddingsRequestInput
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function embeddingsRequestInputToJSON(
   embeddingsRequestInput: EmbeddingsRequestInput,
@@ -88,7 +92,7 @@ export function embeddingsRequestInputFromJSON(
 /** @internal */
 export const EncodingFormat$inboundSchema: z.ZodNativeEnum<
   typeof EncodingFormat
-> = z.nativeEnum(EncodingFormat);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EncodingFormat));
 /** @internal */
 export const EncodingFormat$outboundSchema: z.ZodNativeEnum<
   typeof EncodingFormat
@@ -99,17 +103,19 @@ export const EmbeddingsRequest$inboundSchema: z.ZodType<
   EmbeddingsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
-  model: z.string(),
-  dimensions: z.number().int().optional(),
-  encoding_format: EncodingFormat$inboundSchema.default("float"),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encoding_format": "encodingFormat",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([z.string(), z.array(z.string())]),
+    model: z.string(),
+    dimensions: z.number().int().optional(),
+    encoding_format: EncodingFormat$inboundSchema.default("float"),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encoding_format": "encodingFormat",
+    });
+  })
+);
 /** @internal */
 export type EmbeddingsRequest$Outbound = {
   input: string | Array<string>;
@@ -124,17 +130,19 @@ export const EmbeddingsRequest$outboundSchema: z.ZodType<
   EmbeddingsRequest$Outbound,
   z.ZodTypeDef,
   EmbeddingsRequest
-> = z.object({
-  input: z.union([z.string(), z.array(z.string())]),
-  model: z.string(),
-  dimensions: z.number().int().optional(),
-  encodingFormat: EncodingFormat$outboundSchema.default("float"),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encodingFormat: "encoding_format",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([z.string(), z.array(z.string())]),
+    model: z.string(),
+    dimensions: z.number().int().optional(),
+    encodingFormat: EncodingFormat$outboundSchema.default("float"),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encodingFormat: "encoding_format",
+    });
+  })
+);
 
 export function embeddingsRequestToJSON(
   embeddingsRequest: EmbeddingsRequest,

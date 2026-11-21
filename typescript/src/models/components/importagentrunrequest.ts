@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -119,7 +119,9 @@ export type ImportAgentRunRequest = {
 /** @internal */
 export const ImportAgentRunRequestStatus$inboundSchema: z.ZodNativeEnum<
   typeof ImportAgentRunRequestStatus
-> = z.nativeEnum(ImportAgentRunRequestStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ImportAgentRunRequestStatus)
+);
 /** @internal */
 export const ImportAgentRunRequestStatus$outboundSchema: z.ZodNativeEnum<
   typeof ImportAgentRunRequestStatus
@@ -130,34 +132,36 @@ export const ImportAgentRunRequestTrials$inboundSchema: z.ZodType<
   ImportAgentRunRequestTrials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task_id: z.string(),
-  sample_index: z.number().int().optional(),
-  status: ImportAgentRunRequestStatus$inboundSchema.default("completed"),
-  prompt: z.string().default(""),
-  target: z.nullable(z.string()).optional(),
-  output_text: z.nullable(z.string()).optional(),
-  scores: z.record(z.number()).optional(),
-  error: z.nullable(z.record(z.any())).optional(),
-  cost_usd: z.nullable(z.number()).optional(),
-  input_tokens: z.nullable(z.number().int()).optional(),
-  output_tokens: z.nullable(z.number().int()).optional(),
-  cached_tokens: z.nullable(z.number().int()).optional(),
-  reasoning_tokens: z.nullable(z.number().int()).optional(),
-  phase_timings: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_id": "taskId",
-    "sample_index": "sampleIndex",
-    "output_text": "outputText",
-    "cost_usd": "costUsd",
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "cached_tokens": "cachedTokens",
-    "reasoning_tokens": "reasoningTokens",
-    "phase_timings": "phaseTimings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task_id: z.string(),
+    sample_index: z.number().int().optional(),
+    status: ImportAgentRunRequestStatus$inboundSchema.default("completed"),
+    prompt: z.string().default(""),
+    target: z.nullable(z.string()).optional(),
+    output_text: z.nullable(z.string()).optional(),
+    scores: z.record(z.number()).optional(),
+    error: z.nullable(z.record(z.any())).optional(),
+    cost_usd: z.nullable(z.number()).optional(),
+    input_tokens: z.nullable(z.number().int()).optional(),
+    output_tokens: z.nullable(z.number().int()).optional(),
+    cached_tokens: z.nullable(z.number().int()).optional(),
+    reasoning_tokens: z.nullable(z.number().int()).optional(),
+    phase_timings: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "task_id": "taskId",
+      "sample_index": "sampleIndex",
+      "output_text": "outputText",
+      "cost_usd": "costUsd",
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "cached_tokens": "cachedTokens",
+      "reasoning_tokens": "reasoningTokens",
+      "phase_timings": "phaseTimings",
+    });
+  })
+);
 /** @internal */
 export type ImportAgentRunRequestTrials$Outbound = {
   task_id: string;
@@ -181,34 +185,36 @@ export const ImportAgentRunRequestTrials$outboundSchema: z.ZodType<
   ImportAgentRunRequestTrials$Outbound,
   z.ZodTypeDef,
   ImportAgentRunRequestTrials
-> = z.object({
-  taskId: z.string(),
-  sampleIndex: z.number().int().optional(),
-  status: ImportAgentRunRequestStatus$outboundSchema.default("completed"),
-  prompt: z.string().default(""),
-  target: z.nullable(z.string()).optional(),
-  outputText: z.nullable(z.string()).optional(),
-  scores: z.record(z.number()).optional(),
-  error: z.nullable(z.record(z.any())).optional(),
-  costUsd: z.nullable(z.number()).optional(),
-  inputTokens: z.nullable(z.number().int()).optional(),
-  outputTokens: z.nullable(z.number().int()).optional(),
-  cachedTokens: z.nullable(z.number().int()).optional(),
-  reasoningTokens: z.nullable(z.number().int()).optional(),
-  phaseTimings: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    taskId: "task_id",
-    sampleIndex: "sample_index",
-    outputText: "output_text",
-    costUsd: "cost_usd",
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    reasoningTokens: "reasoning_tokens",
-    phaseTimings: "phase_timings",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    taskId: z.string(),
+    sampleIndex: z.number().int().optional(),
+    status: ImportAgentRunRequestStatus$outboundSchema.default("completed"),
+    prompt: z.string().default(""),
+    target: z.nullable(z.string()).optional(),
+    outputText: z.nullable(z.string()).optional(),
+    scores: z.record(z.number()).optional(),
+    error: z.nullable(z.record(z.any())).optional(),
+    costUsd: z.nullable(z.number()).optional(),
+    inputTokens: z.nullable(z.number().int()).optional(),
+    outputTokens: z.nullable(z.number().int()).optional(),
+    cachedTokens: z.nullable(z.number().int()).optional(),
+    reasoningTokens: z.nullable(z.number().int()).optional(),
+    phaseTimings: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskId: "task_id",
+      sampleIndex: "sample_index",
+      outputText: "output_text",
+      costUsd: "cost_usd",
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      reasoningTokens: "reasoning_tokens",
+      phaseTimings: "phase_timings",
+    });
+  })
+);
 
 export function importAgentRunRequestTrialsToJSON(
   importAgentRunRequestTrials: ImportAgentRunRequestTrials,
@@ -234,34 +240,36 @@ export const ImportAgentRunRequest$inboundSchema: z.ZodType<
   ImportAgentRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  suite_version: z.number().int().optional(),
-  agent_name: z.string(),
-  agent_version: z.nullable(z.string()).optional(),
-  agent_effort: z.nullable(z.string()).optional(),
-  model: z.string(),
-  cost_usd: z.nullable(z.number()).optional(),
-  created_at: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-  idempotency_key: z.string().optional(),
-  trials: z.array(z.lazy(() => ImportAgentRunRequestTrials$inboundSchema))
-    .optional(),
-  expected_trials: z.number().int().optional(),
-  finalize: z.boolean().default(true),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "agent_name": "agentName",
-    "agent_version": "agentVersion",
-    "agent_effort": "agentEffort",
-    "cost_usd": "costUsd",
-    "created_at": "createdAt",
-    "idempotency_key": "idempotencyKey",
-    "expected_trials": "expectedTrials",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    suite_version: z.number().int().optional(),
+    agent_name: z.string(),
+    agent_version: z.nullable(z.string()).optional(),
+    agent_effort: z.nullable(z.string()).optional(),
+    model: z.string(),
+    cost_usd: z.nullable(z.number()).optional(),
+    created_at: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+    idempotency_key: z.string().optional(),
+    trials: z.array(z.lazy(() => ImportAgentRunRequestTrials$inboundSchema))
+      .optional(),
+    expected_trials: z.number().int().optional(),
+    finalize: z.boolean().default(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "agent_name": "agentName",
+      "agent_version": "agentVersion",
+      "agent_effort": "agentEffort",
+      "cost_usd": "costUsd",
+      "created_at": "createdAt",
+      "idempotency_key": "idempotencyKey",
+      "expected_trials": "expectedTrials",
+    });
+  })
+);
 /** @internal */
 export type ImportAgentRunRequest$Outbound = {
   suite_id: string;
@@ -284,34 +292,36 @@ export const ImportAgentRunRequest$outboundSchema: z.ZodType<
   ImportAgentRunRequest$Outbound,
   z.ZodTypeDef,
   ImportAgentRunRequest
-> = z.object({
-  suiteId: z.string(),
-  suiteVersion: z.number().int().optional(),
-  agentName: z.string(),
-  agentVersion: z.nullable(z.string()).optional(),
-  agentEffort: z.nullable(z.string()).optional(),
-  model: z.string(),
-  costUsd: z.nullable(z.number()).optional(),
-  createdAt: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-  idempotencyKey: z.string().optional(),
-  trials: z.array(z.lazy(() => ImportAgentRunRequestTrials$outboundSchema))
-    .optional(),
-  expectedTrials: z.number().int().optional(),
-  finalize: z.boolean().default(true),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    agentName: "agent_name",
-    agentVersion: "agent_version",
-    agentEffort: "agent_effort",
-    costUsd: "cost_usd",
-    createdAt: "created_at",
-    idempotencyKey: "idempotency_key",
-    expectedTrials: "expected_trials",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    suiteVersion: z.number().int().optional(),
+    agentName: z.string(),
+    agentVersion: z.nullable(z.string()).optional(),
+    agentEffort: z.nullable(z.string()).optional(),
+    model: z.string(),
+    costUsd: z.nullable(z.number()).optional(),
+    createdAt: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+    idempotencyKey: z.string().optional(),
+    trials: z.array(z.lazy(() => ImportAgentRunRequestTrials$outboundSchema))
+      .optional(),
+    expectedTrials: z.number().int().optional(),
+    finalize: z.boolean().default(true),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      agentName: "agent_name",
+      agentVersion: "agent_version",
+      agentEffort: "agent_effort",
+      costUsd: "cost_usd",
+      createdAt: "created_at",
+      idempotencyKey: "idempotency_key",
+      expectedTrials: "expected_trials",
+    });
+  })
+);
 
 export function importAgentRunRequestToJSON(
   importAgentRunRequest: ImportAgentRunRequest,

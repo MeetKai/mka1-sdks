@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,7 @@ export type AgentScheduleList = {
 /** @internal */
 export const AgentScheduleListObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleListObject
-> = z.nativeEnum(AgentScheduleListObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentScheduleListObject));
 /** @internal */
 export const AgentScheduleListObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleListObject
@@ -44,19 +44,21 @@ export const AgentScheduleList$inboundSchema: z.ZodType<
   AgentScheduleList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentScheduleListObject$inboundSchema,
-  data: z.array(AgentSchedule$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentScheduleListObject$inboundSchema,
+    data: z.array(AgentSchedule$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type AgentScheduleList$Outbound = {
   object: string;
@@ -71,19 +73,21 @@ export const AgentScheduleList$outboundSchema: z.ZodType<
   AgentScheduleList$Outbound,
   z.ZodTypeDef,
   AgentScheduleList
-> = z.object({
-  object: AgentScheduleListObject$outboundSchema,
-  data: z.array(AgentSchedule$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentScheduleListObject$outboundSchema,
+    data: z.array(AgentSchedule$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function agentScheduleListToJSON(
   agentScheduleList: AgentScheduleList,

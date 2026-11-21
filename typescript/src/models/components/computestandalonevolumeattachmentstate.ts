@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ComputeStandaloneVolumeAttachmentState = {
@@ -19,9 +20,10 @@ export type ComputeStandaloneVolumeAttachmentState = ClosedEnum<
 
 /** @internal */
 export const ComputeStandaloneVolumeAttachmentState$inboundSchema:
-  z.ZodNativeEnum<typeof ComputeStandaloneVolumeAttachmentState> = z.nativeEnum(
-    ComputeStandaloneVolumeAttachmentState,
-  );
+  z.ZodNativeEnum<typeof ComputeStandaloneVolumeAttachmentState> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ComputeStandaloneVolumeAttachmentState)
+    );
 /** @internal */
 export const ComputeStandaloneVolumeAttachmentState$outboundSchema:
   z.ZodNativeEnum<typeof ComputeStandaloneVolumeAttachmentState> =

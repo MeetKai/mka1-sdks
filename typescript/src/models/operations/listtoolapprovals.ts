@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,9 +36,8 @@ export type ListToolApprovalsRequest = {
 };
 
 /** @internal */
-export const Which$inboundSchema: z.ZodNativeEnum<typeof Which> = z.nativeEnum(
-  Which,
-);
+export const Which$inboundSchema: z.ZodNativeEnum<typeof Which> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Which));
 /** @internal */
 export const Which$outboundSchema: z.ZodNativeEnum<typeof Which> =
   Which$inboundSchema;
@@ -48,18 +47,20 @@ export const ListToolApprovalsRequest$inboundSchema: z.ZodType<
   ListToolApprovalsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  which: Which$inboundSchema.optional(),
-  response_id: z.string().optional(),
-  limit: z.number().int().default(100),
-  after: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    which: Which$inboundSchema.optional(),
+    response_id: z.string().optional(),
+    limit: z.number().int().default(100),
+    after: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListToolApprovalsRequest$Outbound = {
   which?: string | undefined;
@@ -74,18 +75,20 @@ export const ListToolApprovalsRequest$outboundSchema: z.ZodType<
   ListToolApprovalsRequest$Outbound,
   z.ZodTypeDef,
   ListToolApprovalsRequest
-> = z.object({
-  which: Which$outboundSchema.optional(),
-  responseId: z.string().optional(),
-  limit: z.number().int().default(100),
-  after: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    which: Which$outboundSchema.optional(),
+    responseId: z.string().optional(),
+    limit: z.number().int().default(100),
+    after: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listToolApprovalsRequestToJSON(
   listToolApprovalsRequest: ListToolApprovalsRequest,

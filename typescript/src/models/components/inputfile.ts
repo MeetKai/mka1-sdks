@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,19 +39,21 @@ export const InputFile$inboundSchema: z.ZodType<
   InputFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("input_file"),
-  file_data: z.string().optional(),
-  file_id: z.string().optional(),
-  file_url: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_data": "fileData",
-    "file_id": "fileId",
-    "file_url": "fileUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_file"),
+    file_data: z.string().optional(),
+    file_id: z.string().optional(),
+    file_url: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_data": "fileData",
+      "file_id": "fileId",
+      "file_url": "fileUrl",
+    });
+  })
+);
 /** @internal */
 export type InputFile$Outbound = {
   type: "input_file";
@@ -66,19 +68,21 @@ export const InputFile$outboundSchema: z.ZodType<
   InputFile$Outbound,
   z.ZodTypeDef,
   InputFile
-> = z.object({
-  type: z.literal("input_file"),
-  fileData: z.string().optional(),
-  fileId: z.string().optional(),
-  fileUrl: z.string().optional(),
-  filename: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileData: "file_data",
-    fileId: "file_id",
-    fileUrl: "file_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_file"),
+    fileData: z.string().optional(),
+    fileId: z.string().optional(),
+    fileUrl: z.string().optional(),
+    filename: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileData: "file_data",
+      fileId: "file_id",
+      fileUrl: "file_url",
+    });
+  })
+);
 
 export function inputFileToJSON(inputFile: InputFile): string {
   return JSON.stringify(InputFile$outboundSchema.parse(inputFile));

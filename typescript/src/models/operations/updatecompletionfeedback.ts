@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,8 +45,8 @@ export type UpdateCompletionFeedbackRequest = {
 };
 
 /** @internal */
-export const Rating$inboundSchema: z.ZodNativeEnum<typeof Rating> = z
-  .nativeEnum(Rating);
+export const Rating$inboundSchema: z.ZodNativeEnum<typeof Rating> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Rating));
 /** @internal */
 export const Rating$outboundSchema: z.ZodNativeEnum<typeof Rating> =
   Rating$inboundSchema;
@@ -56,10 +56,12 @@ export const UpdateCompletionFeedbackRequestBody$inboundSchema: z.ZodType<
   UpdateCompletionFeedbackRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rating: z.nullable(Rating$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rating: z.nullable(Rating$inboundSchema).optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateCompletionFeedbackRequestBody$Outbound = {
   rating?: string | null | undefined;
@@ -71,10 +73,12 @@ export const UpdateCompletionFeedbackRequestBody$outboundSchema: z.ZodType<
   UpdateCompletionFeedbackRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateCompletionFeedbackRequestBody
-> = z.object({
-  rating: z.nullable(Rating$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rating: z.nullable(Rating$outboundSchema).optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateCompletionFeedbackRequestBodyToJSON(
   updateCompletionFeedbackRequestBody: UpdateCompletionFeedbackRequestBody,
@@ -101,16 +105,20 @@ export const UpdateCompletionFeedbackRequest$inboundSchema: z.ZodType<
   UpdateCompletionFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateCompletionFeedbackRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      UpdateCompletionFeedbackRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateCompletionFeedbackRequest$Outbound = {
   id: string;
@@ -123,16 +131,20 @@ export const UpdateCompletionFeedbackRequest$outboundSchema: z.ZodType<
   UpdateCompletionFeedbackRequest$Outbound,
   z.ZodTypeDef,
   UpdateCompletionFeedbackRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateCompletionFeedbackRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      UpdateCompletionFeedbackRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateCompletionFeedbackRequestToJSON(
   updateCompletionFeedbackRequest: UpdateCompletionFeedbackRequest,

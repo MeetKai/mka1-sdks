@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,24 +54,26 @@ export const GeneratorDetail$inboundSchema: z.ZodType<
   GeneratorDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-  title: z.string(),
-  description: z.string(),
-  emits: z.string(),
-  inputs: z.record(Input$inboundSchema).optional(),
-  resources: Resources$inboundSchema.optional(),
-  default_limits: Limits$inboundSchema,
-  params_schema: z.record(z.any()),
-  example_params: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "default_limits": "defaultLimits",
-    "params_schema": "paramsSchema",
-    "example_params": "exampleParams",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+    title: z.string(),
+    description: z.string(),
+    emits: z.string(),
+    inputs: z.record(Input$inboundSchema).optional(),
+    resources: Resources$inboundSchema.optional(),
+    default_limits: Limits$inboundSchema,
+    params_schema: z.record(z.any()),
+    example_params: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_limits": "defaultLimits",
+      "params_schema": "paramsSchema",
+      "example_params": "exampleParams",
+    });
+  })
+);
 /** @internal */
 export type GeneratorDetail$Outbound = {
   id: string;
@@ -91,24 +93,26 @@ export const GeneratorDetail$outboundSchema: z.ZodType<
   GeneratorDetail$Outbound,
   z.ZodTypeDef,
   GeneratorDetail
-> = z.object({
-  id: z.string(),
-  version: z.string(),
-  title: z.string(),
-  description: z.string(),
-  emits: z.string(),
-  inputs: z.record(Input$outboundSchema).optional(),
-  resources: Resources$outboundSchema.optional(),
-  defaultLimits: Limits$outboundSchema,
-  paramsSchema: z.record(z.any()),
-  exampleParams: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    defaultLimits: "default_limits",
-    paramsSchema: "params_schema",
-    exampleParams: "example_params",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    version: z.string(),
+    title: z.string(),
+    description: z.string(),
+    emits: z.string(),
+    inputs: z.record(Input$outboundSchema).optional(),
+    resources: Resources$outboundSchema.optional(),
+    defaultLimits: Limits$outboundSchema,
+    paramsSchema: z.record(z.any()),
+    exampleParams: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      defaultLimits: "default_limits",
+      paramsSchema: "params_schema",
+      exampleParams: "example_params",
+    });
+  })
+);
 
 export function generatorDetailToJSON(
   generatorDetail: GeneratorDetail,

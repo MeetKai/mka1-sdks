@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const FeatureFlagOperator = {
@@ -24,7 +25,7 @@ export type FeatureFlagOperator = ClosedEnum<typeof FeatureFlagOperator>;
 /** @internal */
 export const FeatureFlagOperator$inboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagOperator
-> = z.nativeEnum(FeatureFlagOperator);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FeatureFlagOperator));
 /** @internal */
 export const FeatureFlagOperator$outboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagOperator

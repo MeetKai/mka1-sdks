@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const ComputeLimits$inboundSchema: z.ZodType<
   ComputeLimits,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_cost_usd: z.number().optional(),
-  max_runtime_hours: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_cost_usd": "maxCostUsd",
-    "max_runtime_hours": "maxRuntimeHours",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_cost_usd: z.number().optional(),
+    max_runtime_hours: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_cost_usd": "maxCostUsd",
+      "max_runtime_hours": "maxRuntimeHours",
+    });
+  })
+);
 /** @internal */
 export type ComputeLimits$Outbound = {
   max_cost_usd?: number | undefined;
@@ -38,15 +40,17 @@ export const ComputeLimits$outboundSchema: z.ZodType<
   ComputeLimits$Outbound,
   z.ZodTypeDef,
   ComputeLimits
-> = z.object({
-  maxCostUsd: z.number().optional(),
-  maxRuntimeHours: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxCostUsd: "max_cost_usd",
-    maxRuntimeHours: "max_runtime_hours",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxCostUsd: z.number().optional(),
+    maxRuntimeHours: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxCostUsd: "max_cost_usd",
+      maxRuntimeHours: "max_runtime_hours",
+    });
+  })
+);
 
 export function computeLimitsToJSON(computeLimits: ComputeLimits): string {
   return JSON.stringify(ComputeLimits$outboundSchema.parse(computeLimits));

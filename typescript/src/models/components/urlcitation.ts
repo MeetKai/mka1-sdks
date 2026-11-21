@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,18 +39,20 @@ export const URLCitation$inboundSchema: z.ZodType<
   URLCitation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("url_citation"),
-  end_index: z.number().int(),
-  start_index: z.number().int(),
-  title: z.string(),
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "end_index": "endIndex",
-    "start_index": "startIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("url_citation"),
+    end_index: z.number().int(),
+    start_index: z.number().int(),
+    title: z.string(),
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "end_index": "endIndex",
+      "start_index": "startIndex",
+    });
+  })
+);
 /** @internal */
 export type URLCitation$Outbound = {
   type: "url_citation";
@@ -65,18 +67,20 @@ export const URLCitation$outboundSchema: z.ZodType<
   URLCitation$Outbound,
   z.ZodTypeDef,
   URLCitation
-> = z.object({
-  type: z.literal("url_citation"),
-  endIndex: z.number().int(),
-  startIndex: z.number().int(),
-  title: z.string(),
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    endIndex: "end_index",
-    startIndex: "start_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("url_citation"),
+    endIndex: z.number().int(),
+    startIndex: z.number().int(),
+    title: z.string(),
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      endIndex: "end_index",
+      startIndex: "start_index",
+    });
+  })
+);
 
 export function urlCitationToJSON(urlCitation: URLCitation): string {
   return JSON.stringify(URLCitation$outboundSchema.parse(urlCitation));

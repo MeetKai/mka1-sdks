@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +26,19 @@ export const UpdateResponseRequest$inboundSchema: z.ZodType<
   UpdateResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateResponseRequest: components.UpdateResponseRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateResponseRequest": "updateResponseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateResponseRequest: components.UpdateResponseRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateResponseRequest": "updateResponseRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateResponseRequest$Outbound = {
   response_id: string;
@@ -46,17 +51,21 @@ export const UpdateResponseRequest$outboundSchema: z.ZodType<
   UpdateResponseRequest$Outbound,
   z.ZodTypeDef,
   UpdateResponseRequest
-> = z.object({
-  responseId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateResponseRequest: components.UpdateResponseRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateResponseRequest: "UpdateResponseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string().refine(matchesPattern$("^resp[-_][a-zA-Z0-9]+$"), {
+      message: "Value must match pattern ^resp[-_][a-zA-Z0-9]+$",
+    }),
+    xOnBehalfOf: z.string().optional(),
+    updateResponseRequest: components.UpdateResponseRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateResponseRequest: "UpdateResponseRequest",
+    });
+  })
+);
 
 export function updateResponseRequestToJSON(
   updateResponseRequest: UpdateResponseRequest,

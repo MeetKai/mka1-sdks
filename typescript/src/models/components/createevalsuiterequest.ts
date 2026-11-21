@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,12 +25,14 @@ export const CreateEvalSuiteRequest$inboundSchema: z.ZodType<
   CreateEvalSuiteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  manifest: EvalSuiteManifest$inboundSchema,
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    manifest: EvalSuiteManifest$inboundSchema,
+    metadata: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CreateEvalSuiteRequest$Outbound = {
   name: string;
@@ -44,12 +46,14 @@ export const CreateEvalSuiteRequest$outboundSchema: z.ZodType<
   CreateEvalSuiteRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalSuiteRequest
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  manifest: EvalSuiteManifest$outboundSchema,
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    manifest: EvalSuiteManifest$outboundSchema,
+    metadata: z.record(z.string()).optional(),
+  })
+);
 
 export function createEvalSuiteRequestToJSON(
   createEvalSuiteRequest: CreateEvalSuiteRequest,

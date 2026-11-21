@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,19 +41,21 @@ export const ConversationPermissionDeleted$inboundSchema: z.ZodType<
   ConversationPermissionDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("conversation.permission.deleted"),
-  conversation_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("conversation.permission.deleted"),
+    conversation_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "conversation_id": "conversationId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type ConversationPermissionDeleted$Outbound = {
   object: "conversation.permission.deleted";
@@ -68,19 +70,21 @@ export const ConversationPermissionDeleted$outboundSchema: z.ZodType<
   ConversationPermissionDeleted$Outbound,
   z.ZodTypeDef,
   ConversationPermissionDeleted
-> = z.object({
-  object: z.literal("conversation.permission.deleted"),
-  conversationId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    conversationId: "conversation_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("conversation.permission.deleted"),
+    conversationId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      conversationId: "conversation_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function conversationPermissionDeletedToJSON(
   conversationPermissionDeleted: ConversationPermissionDeleted,

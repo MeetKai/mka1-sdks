@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 export type AnalyticsErrorData = {
@@ -34,20 +35,22 @@ export const AnalyticsError$inboundSchema: z.ZodType<
   AnalyticsError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new AnalyticsError(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new AnalyticsError(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type AnalyticsError$Outbound = {
@@ -60,9 +63,11 @@ export const AnalyticsError$outboundSchema: z.ZodType<
   AnalyticsError$Outbound,
   z.ZodTypeDef,
   AnalyticsError
-> = z.instanceof(AnalyticsError)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    code: z.string(),
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(AnalyticsError)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      code: z.string(),
+      message: z.string(),
+    }))
+);

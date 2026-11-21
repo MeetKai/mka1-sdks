@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const ConversationsItemsDeleteRequest$inboundSchema: z.ZodType<
   ConversationsItemsDeleteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversation_id: z.string(),
-  item_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "item_id": "itemId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversation_id: z.string(),
+    item_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "conversation_id": "conversationId",
+      "item_id": "itemId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsDeleteRequest$Outbound = {
   conversation_id: string;
@@ -45,17 +47,19 @@ export const ConversationsItemsDeleteRequest$outboundSchema: z.ZodType<
   ConversationsItemsDeleteRequest$Outbound,
   z.ZodTypeDef,
   ConversationsItemsDeleteRequest
-> = z.object({
-  conversationId: z.string(),
-  itemId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    conversationId: "conversation_id",
-    itemId: "item_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string(),
+    itemId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      conversationId: "conversation_id",
+      itemId: "item_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function conversationsItemsDeleteRequestToJSON(
   conversationsItemsDeleteRequest: ConversationsItemsDeleteRequest,

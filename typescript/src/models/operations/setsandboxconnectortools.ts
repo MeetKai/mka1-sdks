@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const SetSandboxConnectorToolsRequest$inboundSchema: z.ZodType<
   SetSandboxConnectorToolsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_key: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SetConnectorToolsRequest: components.SetConnectorToolsRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "connector_key": "connectorKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SetConnectorToolsRequest": "setConnectorToolsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_key: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SetConnectorToolsRequest: components.SetConnectorToolsRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_key": "connectorKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SetConnectorToolsRequest": "setConnectorToolsRequest",
+    });
+  })
+);
 /** @internal */
 export type SetSandboxConnectorToolsRequest$Outbound = {
   connector_key: string;
@@ -46,17 +48,20 @@ export const SetSandboxConnectorToolsRequest$outboundSchema: z.ZodType<
   SetSandboxConnectorToolsRequest$Outbound,
   z.ZodTypeDef,
   SetSandboxConnectorToolsRequest
-> = z.object({
-  connectorKey: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  setConnectorToolsRequest: components.SetConnectorToolsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    connectorKey: "connector_key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    setConnectorToolsRequest: "SetConnectorToolsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorKey: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    setConnectorToolsRequest:
+      components.SetConnectorToolsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      connectorKey: "connector_key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      setConnectorToolsRequest: "SetConnectorToolsRequest",
+    });
+  })
+);
 
 export function setSandboxConnectorToolsRequestToJSON(
   setSandboxConnectorToolsRequest: SetSandboxConnectorToolsRequest,

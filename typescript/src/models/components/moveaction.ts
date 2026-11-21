@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const MoveAction$inboundSchema: z.ZodType<
   MoveAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("move"),
-  x: z.number().int(),
-  y: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("move"),
+    x: z.number().int(),
+    y: z.number().int(),
+  })
+);
 /** @internal */
 export type MoveAction$Outbound = {
   type: "move";
@@ -35,11 +37,13 @@ export const MoveAction$outboundSchema: z.ZodType<
   MoveAction$Outbound,
   z.ZodTypeDef,
   MoveAction
-> = z.object({
-  type: z.literal("move"),
-  x: z.number().int(),
-  y: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("move"),
+    x: z.number().int(),
+    y: z.number().int(),
+  })
+);
 
 export function moveActionToJSON(moveAction: MoveAction): string {
   return JSON.stringify(MoveAction$outboundSchema.parse(moveAction));

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -207,19 +208,21 @@ export const GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody$inboundSchem
     GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody$Outbound = {
@@ -232,11 +235,13 @@ export const GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody$outboundSche
     GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody$inboundSchema:
@@ -244,19 +249,21 @@ export const GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody$inboundSchem
     GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody$Outbound = {
@@ -269,11 +276,13 @@ export const GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody$outboundSche
     GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody$inboundSchema:
@@ -281,19 +290,21 @@ export const GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody$inboundSchem
     GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody$Outbound = {
@@ -306,11 +317,13 @@ export const GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody$outboundSche
     GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody$inboundSchema:
@@ -318,19 +331,21 @@ export const GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody$inboundSchem
     GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody$Outbound = {
@@ -343,11 +358,13 @@ export const GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody$outboundSche
     GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessAuthTeamsResponseResponseBody$inboundSchema:
@@ -355,20 +372,22 @@ export const GetNetworkPolicyAccessAuthTeamsResponseResponseBody$inboundSchema:
     GetNetworkPolicyAccessAuthTeamsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponseResponseBody$Outbound = {
@@ -382,12 +401,14 @@ export const GetNetworkPolicyAccessAuthTeamsResponseResponseBody$outboundSchema:
     GetNetworkPolicyAccessAuthTeamsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponseResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessAuthTeamsResponseBody$inboundSchema:
@@ -395,19 +416,21 @@ export const GetNetworkPolicyAccessAuthTeamsResponseBody$inboundSchema:
     GetNetworkPolicyAccessAuthTeamsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetNetworkPolicyAccessAuthTeamsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetNetworkPolicyAccessAuthTeamsResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetNetworkPolicyAccessAuthTeamsResponseBody$Outbound = {
@@ -420,30 +443,34 @@ export const GetNetworkPolicyAccessAuthTeamsResponseBody$outboundSchema:
     GetNetworkPolicyAccessAuthTeamsResponseBody$Outbound,
     z.ZodTypeDef,
     GetNetworkPolicyAccessAuthTeamsResponseBody
-  > = z.instanceof(GetNetworkPolicyAccessAuthTeamsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetNetworkPolicyAccessAuthTeamsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetNetworkPolicyAccessResponseBody$inboundSchema: z.ZodType<
   GetNetworkPolicyAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetNetworkPolicyAccessResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetNetworkPolicyAccessResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetNetworkPolicyAccessResponseBody$Outbound = {
@@ -455,8 +482,10 @@ export const GetNetworkPolicyAccessResponseBody$outboundSchema: z.ZodType<
   GetNetworkPolicyAccessResponseBody$Outbound,
   z.ZodTypeDef,
   GetNetworkPolicyAccessResponseBody
-> = z.instanceof(GetNetworkPolicyAccessResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetNetworkPolicyAccessResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

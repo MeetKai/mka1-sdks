@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,9 @@ export type AgentConnectorDeleted = {
 /** @internal */
 export const AgentConnectorDeletedObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorDeletedObject
-> = z.nativeEnum(AgentConnectorDeletedObject);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentConnectorDeletedObject)
+);
 /** @internal */
 export const AgentConnectorDeletedObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorDeletedObject
@@ -35,11 +37,13 @@ export const AgentConnectorDeleted$inboundSchema: z.ZodType<
   AgentConnectorDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentConnectorDeletedObject$inboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorDeletedObject$inboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type AgentConnectorDeleted$Outbound = {
   object: string;
@@ -52,11 +56,13 @@ export const AgentConnectorDeleted$outboundSchema: z.ZodType<
   AgentConnectorDeleted$Outbound,
   z.ZodTypeDef,
   AgentConnectorDeleted
-> = z.object({
-  object: AgentConnectorDeletedObject$outboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorDeletedObject$outboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function agentConnectorDeletedToJSON(
   agentConnectorDeleted: AgentConnectorDeleted,

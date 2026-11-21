@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,17 +27,19 @@ export const CreateJobRequest$inboundSchema: z.ZodType<
   CreateJobRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "Idempotency-Key": z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeJobCreate: components.ComputeJobCreate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Idempotency-Key": "idempotencyKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeJobCreate": "computeJobCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "Idempotency-Key": z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeJobCreate: components.ComputeJobCreate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Idempotency-Key": "idempotencyKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeJobCreate": "computeJobCreate",
+    });
+  })
+);
 /** @internal */
 export type CreateJobRequest$Outbound = {
   "Idempotency-Key": string;
@@ -50,17 +52,19 @@ export const CreateJobRequest$outboundSchema: z.ZodType<
   CreateJobRequest$Outbound,
   z.ZodTypeDef,
   CreateJobRequest
-> = z.object({
-  idempotencyKey: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  computeJobCreate: components.ComputeJobCreate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "Idempotency-Key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeJobCreate: "ComputeJobCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    computeJobCreate: components.ComputeJobCreate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "Idempotency-Key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeJobCreate: "ComputeJobCreate",
+    });
+  })
+);
 
 export function createJobRequestToJSON(
   createJobRequest: CreateJobRequest,
@@ -84,10 +88,12 @@ export const CreateJobResponse$inboundSchema: z.ZodType<
   CreateJobResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeJob$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJob$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateJobResponse$Outbound =
   | components.ComputeJob$Outbound
@@ -98,10 +104,12 @@ export const CreateJobResponse$outboundSchema: z.ZodType<
   CreateJobResponse$Outbound,
   z.ZodTypeDef,
   CreateJobResponse
-> = z.union([
-  components.ComputeJob$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeJob$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function createJobResponseToJSON(
   createJobResponse: CreateJobResponse,

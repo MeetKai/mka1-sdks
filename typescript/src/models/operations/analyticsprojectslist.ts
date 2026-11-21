@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,15 +44,15 @@ export type AnalyticsProjectsListRequest = {
 /** @internal */
 export const IncludeArchived$inboundSchema: z.ZodNativeEnum<
   typeof IncludeArchived
-> = z.nativeEnum(IncludeArchived);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(IncludeArchived));
 /** @internal */
 export const IncludeArchived$outboundSchema: z.ZodNativeEnum<
   typeof IncludeArchived
 > = IncludeArchived$inboundSchema;
 
 /** @internal */
-export const Ownership$inboundSchema: z.ZodNativeEnum<typeof Ownership> = z
-  .nativeEnum(Ownership);
+export const Ownership$inboundSchema: z.ZodNativeEnum<typeof Ownership> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Ownership));
 /** @internal */
 export const Ownership$outboundSchema: z.ZodNativeEnum<typeof Ownership> =
   Ownership$inboundSchema;
@@ -62,18 +62,20 @@ export const AnalyticsProjectsListRequest$inboundSchema: z.ZodType<
   AnalyticsProjectsListRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  limit: z.number().int().default(50),
-  after: z.string().optional(),
-  include_archived: IncludeArchived$inboundSchema.default("false"),
-  team_id: z.string().optional(),
-  ownership: Ownership$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_archived": "includeArchived",
-    "team_id": "teamId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(50),
+    after: z.string().optional(),
+    include_archived: IncludeArchived$inboundSchema.default("false"),
+    team_id: z.string().optional(),
+    ownership: Ownership$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_archived": "includeArchived",
+      "team_id": "teamId",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsProjectsListRequest$Outbound = {
   limit: number;
@@ -88,18 +90,20 @@ export const AnalyticsProjectsListRequest$outboundSchema: z.ZodType<
   AnalyticsProjectsListRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsProjectsListRequest
-> = z.object({
-  limit: z.number().int().default(50),
-  after: z.string().optional(),
-  includeArchived: IncludeArchived$outboundSchema.default("false"),
-  teamId: z.string().optional(),
-  ownership: Ownership$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeArchived: "include_archived",
-    teamId: "team_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z.number().int().default(50),
+    after: z.string().optional(),
+    includeArchived: IncludeArchived$outboundSchema.default("false"),
+    teamId: z.string().optional(),
+    ownership: Ownership$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeArchived: "include_archived",
+      teamId: "team_id",
+    });
+  })
+);
 
 export function analyticsProjectsListRequestToJSON(
   analyticsProjectsListRequest: AnalyticsProjectsListRequest,

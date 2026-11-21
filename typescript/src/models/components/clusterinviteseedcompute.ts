@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const ClusterInviteSeedCompute$inboundSchema: z.ZodType<
   ClusterInviteSeedCompute,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  maxLiveJobs: z.nullable(z.number().int()),
-  maxLiveServices: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    maxLiveJobs: z.nullable(z.number().int()),
+    maxLiveServices: z.nullable(z.number().int()),
+  })
+);
 /** @internal */
 export type ClusterInviteSeedCompute$Outbound = {
   enabled: boolean;
@@ -38,11 +40,13 @@ export const ClusterInviteSeedCompute$outboundSchema: z.ZodType<
   ClusterInviteSeedCompute$Outbound,
   z.ZodTypeDef,
   ClusterInviteSeedCompute
-> = z.object({
-  enabled: z.boolean(),
-  maxLiveJobs: z.nullable(z.number().int()),
-  maxLiveServices: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    maxLiveJobs: z.nullable(z.number().int()),
+    maxLiveServices: z.nullable(z.number().int()),
+  })
+);
 
 export function clusterInviteSeedComputeToJSON(
   clusterInviteSeedCompute: ClusterInviteSeedCompute,

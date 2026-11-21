@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -51,15 +51,17 @@ export const GetFileContentRequest$inboundSchema: z.ZodType<
   GetFileContentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetFileContentRequest$Outbound = {
   file_id: string;
@@ -71,15 +73,17 @@ export const GetFileContentRequest$outboundSchema: z.ZodType<
   GetFileContentRequest$Outbound,
   z.ZodTypeDef,
   GetFileContentRequest
-> = z.object({
-  fileId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getFileContentRequestToJSON(
   getFileContentRequest: GetFileContentRequest,
@@ -103,36 +107,38 @@ export const GetFileContentResponse$inboundSchema: z.ZodType<
   GetFileContentResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+  ])
+);
 /** @internal */
 export type GetFileContentResponse$Outbound =
   | ReadableStream<Uint8Array>
@@ -169,36 +175,38 @@ export const GetFileContentResponse$outboundSchema: z.ZodType<
   GetFileContentResponse$Outbound,
   z.ZodTypeDef,
   GetFileContentResponse
-> = z.union([
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-  z.instanceof(ReadableStream<Uint8Array>),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+    z.instanceof(ReadableStream<Uint8Array>),
+  ])
+);
 
 export function getFileContentResponseToJSON(
   getFileContentResponse: GetFileContentResponse,

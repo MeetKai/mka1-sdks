@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const AgentConnectorEmbed$inboundSchema: z.ZodType<
   AgentConnectorEmbed,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  embed_id: z.string(),
-  iframe_url: z.string(),
-  iframe_snippet: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "embed_id": "embedId",
-    "iframe_url": "iframeUrl",
-    "iframe_snippet": "iframeSnippet",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    embed_id: z.string(),
+    iframe_url: z.string(),
+    iframe_snippet: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "embed_id": "embedId",
+      "iframe_url": "iframeUrl",
+      "iframe_snippet": "iframeSnippet",
+    });
+  })
+);
 /** @internal */
 export type AgentConnectorEmbed$Outbound = {
   embed_id: string;
@@ -45,17 +47,19 @@ export const AgentConnectorEmbed$outboundSchema: z.ZodType<
   AgentConnectorEmbed$Outbound,
   z.ZodTypeDef,
   AgentConnectorEmbed
-> = z.object({
-  embedId: z.string(),
-  iframeUrl: z.string(),
-  iframeSnippet: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    embedId: "embed_id",
-    iframeUrl: "iframe_url",
-    iframeSnippet: "iframe_snippet",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    embedId: z.string(),
+    iframeUrl: z.string(),
+    iframeSnippet: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      embedId: "embed_id",
+      iframeUrl: "iframe_url",
+      iframeSnippet: "iframe_snippet",
+    });
+  })
+);
 
 export function agentConnectorEmbedToJSON(
   agentConnectorEmbed: AgentConnectorEmbed,

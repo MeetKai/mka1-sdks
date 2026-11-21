@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,15 +25,17 @@ export const DeleteGuardrailsResponse$inboundSchema: z.ZodType<
   DeleteGuardrailsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  deleted: z.boolean(),
-  team_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "team_id": "teamId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    deleted: z.boolean(),
+    team_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "team_id": "teamId",
+    });
+  })
+);
 /** @internal */
 export type DeleteGuardrailsResponse$Outbound = {
   object: "guardrails_settings";
@@ -46,15 +48,17 @@ export const DeleteGuardrailsResponse$outboundSchema: z.ZodType<
   DeleteGuardrailsResponse$Outbound,
   z.ZodTypeDef,
   DeleteGuardrailsResponse
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  deleted: z.boolean(),
-  teamId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    teamId: "team_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    deleted: z.boolean(),
+    teamId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      teamId: "team_id",
+    });
+  })
+);
 
 export function deleteGuardrailsResponseToJSON(
   deleteGuardrailsResponse: DeleteGuardrailsResponse,

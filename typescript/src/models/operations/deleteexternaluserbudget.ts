@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,8 +57,10 @@ export type DeleteExternalUserBudgetResponseBody = {
 
 /** @internal */
 export const DeleteExternalUserBudgetQueryParamOwner$inboundSchema:
-  z.ZodNativeEnum<typeof DeleteExternalUserBudgetQueryParamOwner> = z
-    .nativeEnum(DeleteExternalUserBudgetQueryParamOwner);
+  z.ZodNativeEnum<typeof DeleteExternalUserBudgetQueryParamOwner> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(DeleteExternalUserBudgetQueryParamOwner)
+    );
 /** @internal */
 export const DeleteExternalUserBudgetQueryParamOwner$outboundSchema:
   z.ZodNativeEnum<typeof DeleteExternalUserBudgetQueryParamOwner> =
@@ -69,15 +71,17 @@ export const DeleteExternalUserBudgetRequest$inboundSchema: z.ZodType<
   DeleteExternalUserBudgetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  owner: DeleteExternalUserBudgetQueryParamOwner$inboundSchema,
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    owner: DeleteExternalUserBudgetQueryParamOwner$inboundSchema,
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type DeleteExternalUserBudgetRequest$Outbound = {
   id: string;
@@ -90,15 +94,17 @@ export const DeleteExternalUserBudgetRequest$outboundSchema: z.ZodType<
   DeleteExternalUserBudgetRequest$Outbound,
   z.ZodTypeDef,
   DeleteExternalUserBudgetRequest
-> = z.object({
-  id: z.string(),
-  owner: DeleteExternalUserBudgetQueryParamOwner$outboundSchema,
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    owner: DeleteExternalUserBudgetQueryParamOwner$outboundSchema,
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function deleteExternalUserBudgetRequestToJSON(
   deleteExternalUserBudgetRequest: DeleteExternalUserBudgetRequest,
@@ -122,7 +128,9 @@ export function deleteExternalUserBudgetRequestFromJSON(
 /** @internal */
 export const DeleteExternalUserBudgetScope$inboundSchema: z.ZodNativeEnum<
   typeof DeleteExternalUserBudgetScope
-> = z.nativeEnum(DeleteExternalUserBudgetScope);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeleteExternalUserBudgetScope)
+);
 /** @internal */
 export const DeleteExternalUserBudgetScope$outboundSchema: z.ZodNativeEnum<
   typeof DeleteExternalUserBudgetScope
@@ -131,7 +139,9 @@ export const DeleteExternalUserBudgetScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const DeleteExternalUserBudgetOwner$inboundSchema: z.ZodNativeEnum<
   typeof DeleteExternalUserBudgetOwner
-> = z.nativeEnum(DeleteExternalUserBudgetOwner);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeleteExternalUserBudgetOwner)
+);
 /** @internal */
 export const DeleteExternalUserBudgetOwner$outboundSchema: z.ZodNativeEnum<
   typeof DeleteExternalUserBudgetOwner
@@ -142,16 +152,18 @@ export const DeleteExternalUserBudgetResponseBody$inboundSchema: z.ZodType<
   DeleteExternalUserBudgetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: DeleteExternalUserBudgetScope$inboundSchema,
-  scope_id: z.string(),
-  owner: DeleteExternalUserBudgetOwner$inboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "scope_id": "scopeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteExternalUserBudgetScope$inboundSchema,
+    scope_id: z.string(),
+    owner: DeleteExternalUserBudgetOwner$inboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "scope_id": "scopeId",
+    });
+  })
+);
 /** @internal */
 export type DeleteExternalUserBudgetResponseBody$Outbound = {
   scope: string;
@@ -165,16 +177,18 @@ export const DeleteExternalUserBudgetResponseBody$outboundSchema: z.ZodType<
   DeleteExternalUserBudgetResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteExternalUserBudgetResponseBody
-> = z.object({
-  scope: DeleteExternalUserBudgetScope$outboundSchema,
-  scopeId: z.string(),
-  owner: DeleteExternalUserBudgetOwner$outboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    scopeId: "scope_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteExternalUserBudgetScope$outboundSchema,
+    scopeId: z.string(),
+    owner: DeleteExternalUserBudgetOwner$outboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeId: "scope_id",
+    });
+  })
+);
 
 export function deleteExternalUserBudgetResponseBodyToJSON(
   deleteExternalUserBudgetResponseBody: DeleteExternalUserBudgetResponseBody,

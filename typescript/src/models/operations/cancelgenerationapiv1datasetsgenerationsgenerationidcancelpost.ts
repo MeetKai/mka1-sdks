@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,15 +23,17 @@ export const CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostReque
     CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    generation_id: z.string(),
-    "X-On-Behalf-Of": z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "generation_id": "generationId",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generation_id: z.string(),
+      "X-On-Behalf-Of": z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "generation_id": "generationId",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+      });
+    })
+  );
 /** @internal */
 export type CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequest$Outbound =
   {
@@ -45,15 +47,17 @@ export const CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostReque
     CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequest$Outbound,
     z.ZodTypeDef,
     CancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequest
-  > = z.object({
-    generationId: z.string(),
-    xOnBehalfOf: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      generationId: "generation_id",
-      xOnBehalfOf: "X-On-Behalf-Of",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generationId: z.string(),
+      xOnBehalfOf: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        generationId: "generation_id",
+        xOnBehalfOf: "X-On-Behalf-Of",
+      });
+    })
+  );
 
 export function cancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequestToJSON(
   cancelGenerationApiV1DatasetsGenerationsGenerationIdCancelPostRequest:

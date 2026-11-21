@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const CreateOrUpdateSessionPullRequestRequest$inboundSchema: z.ZodType<
   CreateOrUpdateSessionPullRequestRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  GitHubPullRequestRequest: components.GitHubPullRequestRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "GitHubPullRequestRequest": "gitHubPullRequestRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    GitHubPullRequestRequest: components.GitHubPullRequestRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "GitHubPullRequestRequest": "gitHubPullRequestRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateOrUpdateSessionPullRequestRequest$Outbound = {
   session_id: string;
@@ -46,17 +48,20 @@ export const CreateOrUpdateSessionPullRequestRequest$outboundSchema: z.ZodType<
   CreateOrUpdateSessionPullRequestRequest$Outbound,
   z.ZodTypeDef,
   CreateOrUpdateSessionPullRequestRequest
-> = z.object({
-  sessionId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  gitHubPullRequestRequest: components.GitHubPullRequestRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    gitHubPullRequestRequest: "GitHubPullRequestRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    gitHubPullRequestRequest:
+      components.GitHubPullRequestRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      gitHubPullRequestRequest: "GitHubPullRequestRequest",
+    });
+  })
+);
 
 export function createOrUpdateSessionPullRequestRequestToJSON(
   createOrUpdateSessionPullRequestRequest:

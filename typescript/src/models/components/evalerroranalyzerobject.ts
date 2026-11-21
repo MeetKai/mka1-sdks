@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,10 +37,12 @@ export const EvalErrorAnalyzerObjectRateCardUsdPer1m$inboundSchema: z.ZodType<
   EvalErrorAnalyzerObjectRateCardUsdPer1m,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.number(),
-  output: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.number(),
+    output: z.number(),
+  })
+);
 /** @internal */
 export type EvalErrorAnalyzerObjectRateCardUsdPer1m$Outbound = {
   input: number;
@@ -52,10 +54,12 @@ export const EvalErrorAnalyzerObjectRateCardUsdPer1m$outboundSchema: z.ZodType<
   EvalErrorAnalyzerObjectRateCardUsdPer1m$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalyzerObjectRateCardUsdPer1m
-> = z.object({
-  input: z.number(),
-  output: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.number(),
+    output: z.number(),
+  })
+);
 
 export function evalErrorAnalyzerObjectRateCardUsdPer1mToJSON(
   evalErrorAnalyzerObjectRateCardUsdPer1m:
@@ -88,19 +92,21 @@ export const EvalErrorAnalyzerObject$inboundSchema: z.ZodType<
   EvalErrorAnalyzerObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  default: z.boolean(),
-  supports_audio: z.boolean(),
-  rate_card_usd_per_1m: z.nullable(
-    z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$inboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "supports_audio": "supportsAudio",
-    "rate_card_usd_per_1m": "rateCardUsdPer1m",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    default: z.boolean(),
+    supports_audio: z.boolean(),
+    rate_card_usd_per_1m: z.nullable(
+      z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$inboundSchema),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "supports_audio": "supportsAudio",
+      "rate_card_usd_per_1m": "rateCardUsdPer1m",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalyzerObject$Outbound = {
   id: string;
@@ -114,19 +120,21 @@ export const EvalErrorAnalyzerObject$outboundSchema: z.ZodType<
   EvalErrorAnalyzerObject$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalyzerObject
-> = z.object({
-  id: z.string(),
-  default: z.boolean(),
-  supportsAudio: z.boolean(),
-  rateCardUsdPer1m: z.nullable(
-    z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$outboundSchema),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    supportsAudio: "supports_audio",
-    rateCardUsdPer1m: "rate_card_usd_per_1m",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    default: z.boolean(),
+    supportsAudio: z.boolean(),
+    rateCardUsdPer1m: z.nullable(
+      z.lazy(() => EvalErrorAnalyzerObjectRateCardUsdPer1m$outboundSchema),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      supportsAudio: "supports_audio",
+      rateCardUsdPer1m: "rate_card_usd_per_1m",
+    });
+  })
+);
 
 export function evalErrorAnalyzerObjectToJSON(
   evalErrorAnalyzerObject: EvalErrorAnalyzerObject,

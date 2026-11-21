@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -37,18 +37,20 @@ export const ToolApprovalRequest$inboundSchema: z.ZodType<
   ToolApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("tool_approval_request"),
-  id: z.string(),
-  tool_type: z.string(),
-  name: z.string(),
-  arguments: z.string(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_type": "toolType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool_approval_request"),
+    id: z.string(),
+    tool_type: z.string(),
+    name: z.string(),
+    arguments: z.string(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_type": "toolType",
+    });
+  })
+);
 /** @internal */
 export type ToolApprovalRequest$Outbound = {
   type: "tool_approval_request";
@@ -64,18 +66,20 @@ export const ToolApprovalRequest$outboundSchema: z.ZodType<
   ToolApprovalRequest$Outbound,
   z.ZodTypeDef,
   ToolApprovalRequest
-> = z.object({
-  type: z.literal("tool_approval_request"),
-  id: z.string(),
-  toolType: z.string(),
-  name: z.string(),
-  arguments: z.string(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolType: "tool_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("tool_approval_request"),
+    id: z.string(),
+    toolType: z.string(),
+    name: z.string(),
+    arguments: z.string(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolType: "tool_type",
+    });
+  })
+);
 
 export function toolApprovalRequestToJSON(
   toolApprovalRequest: ToolApprovalRequest,

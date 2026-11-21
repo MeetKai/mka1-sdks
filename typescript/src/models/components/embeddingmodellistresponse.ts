@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const EmbeddingModelListResponse$inboundSchema: z.ZodType<
   EmbeddingModelListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list").default("list"),
-  data: z.array(EmbeddingModel$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").default("list"),
+    data: z.array(EmbeddingModel$inboundSchema),
+  })
+);
 /** @internal */
 export type EmbeddingModelListResponse$Outbound = {
   object: "list";
@@ -44,10 +46,12 @@ export const EmbeddingModelListResponse$outboundSchema: z.ZodType<
   EmbeddingModelListResponse$Outbound,
   z.ZodTypeDef,
   EmbeddingModelListResponse
-> = z.object({
-  object: z.literal("list").default("list" as const),
-  data: z.array(EmbeddingModel$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").default("list" as const),
+    data: z.array(EmbeddingModel$outboundSchema),
+  })
+);
 
 export function embeddingModelListResponseToJSON(
   embeddingModelListResponse: EmbeddingModelListResponse,

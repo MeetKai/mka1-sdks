@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const ConnectionEnvelope$inboundSchema: z.ZodType<
   ConnectionEnvelope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connection: z.nullable(Connection$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connection: z.nullable(Connection$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ConnectionEnvelope$Outbound = {
   connection?: Connection$Outbound | null | undefined;
@@ -38,9 +40,11 @@ export const ConnectionEnvelope$outboundSchema: z.ZodType<
   ConnectionEnvelope$Outbound,
   z.ZodTypeDef,
   ConnectionEnvelope
-> = z.object({
-  connection: z.nullable(Connection$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connection: z.nullable(Connection$outboundSchema).optional(),
+  })
+);
 
 export function connectionEnvelopeToJSON(
   connectionEnvelope: ConnectionEnvelope,

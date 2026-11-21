@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const PutModelPriceBody$inboundSchema: z.ZodType<
   PutModelPriceBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  rates: WritablePriceRates$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    rates: WritablePriceRates$inboundSchema,
+  })
+);
 /** @internal */
 export type PutModelPriceBody$Outbound = {
   model: string;
@@ -38,10 +40,12 @@ export const PutModelPriceBody$outboundSchema: z.ZodType<
   PutModelPriceBody$Outbound,
   z.ZodTypeDef,
   PutModelPriceBody
-> = z.object({
-  model: z.string(),
-  rates: WritablePriceRates$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    rates: WritablePriceRates$outboundSchema,
+  })
+);
 
 export function putModelPriceBodyToJSON(
   putModelPriceBody: PutModelPriceBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,36 +62,38 @@ export const CatalogEntry$inboundSchema: z.ZodType<
   CatalogEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  source: RegistrySource$inboundSchema,
-  origin: z.nullable(RegistryModelOrigin$inboundSchema),
-  activation_state: CatalogActivationState$inboundSchema,
-  blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
-  activated_by: z.nullable(z.string()),
-  activated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  provider: z.string(),
-  provider_model_id: z.string(),
-  definition: z.record(z.any()),
-  health: CatalogHealth$inboundSchema,
-  created_at: z.nullable(z.number()),
-  updated_at: z.nullable(z.number()),
-  effective_price: CatalogPricePreview$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "activation_state": "activationState",
-    "blocker_source": "blockerSource",
-    "activated_by": "activatedBy",
-    "activated_at": "activatedAt",
-    "provider_model_id": "providerModelId",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "effective_price": "effectivePrice",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    source: RegistrySource$inboundSchema,
+    origin: z.nullable(RegistryModelOrigin$inboundSchema),
+    activation_state: CatalogActivationState$inboundSchema,
+    blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
+    activated_by: z.nullable(z.string()),
+    activated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    provider: z.string(),
+    provider_model_id: z.string(),
+    definition: z.record(z.any()),
+    health: CatalogHealth$inboundSchema,
+    created_at: z.nullable(z.number()),
+    updated_at: z.nullable(z.number()),
+    effective_price: CatalogPricePreview$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "activation_state": "activationState",
+      "blocker_source": "blockerSource",
+      "activated_by": "activatedBy",
+      "activated_at": "activatedAt",
+      "provider_model_id": "providerModelId",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "effective_price": "effectivePrice",
+    });
+  })
+);
 /** @internal */
 export type CatalogEntry$Outbound = {
   model_id: string;
@@ -115,34 +117,36 @@ export const CatalogEntry$outboundSchema: z.ZodType<
   CatalogEntry$Outbound,
   z.ZodTypeDef,
   CatalogEntry
-> = z.object({
-  modelId: z.string(),
-  source: RegistrySource$outboundSchema,
-  origin: z.nullable(RegistryModelOrigin$outboundSchema),
-  activationState: CatalogActivationState$outboundSchema,
-  blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
-  activatedBy: z.nullable(z.string()),
-  activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  provider: z.string(),
-  providerModelId: z.string(),
-  definition: z.record(z.any()),
-  health: CatalogHealth$outboundSchema,
-  createdAt: z.nullable(z.number()),
-  updatedAt: z.nullable(z.number()),
-  effectivePrice: CatalogPricePreview$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    activationState: "activation_state",
-    blockerSource: "blocker_source",
-    activatedBy: "activated_by",
-    activatedAt: "activated_at",
-    providerModelId: "provider_model_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    effectivePrice: "effective_price",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    source: RegistrySource$outboundSchema,
+    origin: z.nullable(RegistryModelOrigin$outboundSchema),
+    activationState: CatalogActivationState$outboundSchema,
+    blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
+    activatedBy: z.nullable(z.string()),
+    activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    provider: z.string(),
+    providerModelId: z.string(),
+    definition: z.record(z.any()),
+    health: CatalogHealth$outboundSchema,
+    createdAt: z.nullable(z.number()),
+    updatedAt: z.nullable(z.number()),
+    effectivePrice: CatalogPricePreview$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      activationState: "activation_state",
+      blockerSource: "blocker_source",
+      activatedBy: "activated_by",
+      activatedAt: "activated_at",
+      providerModelId: "provider_model_id",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      effectivePrice: "effective_price",
+    });
+  })
+);
 
 export function catalogEntryToJSON(catalogEntry: CatalogEntry): string {
   return JSON.stringify(CatalogEntry$outboundSchema.parse(catalogEntry));

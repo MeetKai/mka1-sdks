@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,15 +31,15 @@ export type ReasoningConfiguration = {
 };
 
 /** @internal */
-export const Effort$inboundSchema: z.ZodNativeEnum<typeof Effort> = z
-  .nativeEnum(Effort);
+export const Effort$inboundSchema: z.ZodNativeEnum<typeof Effort> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Effort));
 /** @internal */
 export const Effort$outboundSchema: z.ZodNativeEnum<typeof Effort> =
   Effort$inboundSchema;
 
 /** @internal */
-export const Summary$inboundSchema: z.ZodNativeEnum<typeof Summary> = z
-  .nativeEnum(Summary);
+export const Summary$inboundSchema: z.ZodNativeEnum<typeof Summary> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Summary));
 /** @internal */
 export const Summary$outboundSchema: z.ZodNativeEnum<typeof Summary> =
   Summary$inboundSchema;
@@ -49,10 +49,12 @@ export const ReasoningConfiguration$inboundSchema: z.ZodType<
   ReasoningConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effort: z.nullable(Effort$inboundSchema).optional(),
-  summary: z.nullable(Summary$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effort: z.nullable(Effort$inboundSchema).optional(),
+    summary: z.nullable(Summary$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ReasoningConfiguration$Outbound = {
   effort?: string | null | undefined;
@@ -64,10 +66,12 @@ export const ReasoningConfiguration$outboundSchema: z.ZodType<
   ReasoningConfiguration$Outbound,
   z.ZodTypeDef,
   ReasoningConfiguration
-> = z.object({
-  effort: z.nullable(Effort$outboundSchema).optional(),
-  summary: z.nullable(Summary$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effort: z.nullable(Effort$outboundSchema).optional(),
+    summary: z.nullable(Summary$outboundSchema).optional(),
+  })
+);
 
 export function reasoningConfigurationToJSON(
   reasoningConfiguration: ReasoningConfiguration,

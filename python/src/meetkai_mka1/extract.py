@@ -30,7 +30,7 @@ class Extract(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param model: ID of the model to use for extraction
-        :param schema_: JSON Schema object or JSON string defining the structure of data to extract
+        :param schema: JSON Schema object or JSON string defining the structure of data to extract
         :param file: The file to extract structured data from
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param metadata: Optional metadata as JSON object or JSON string
@@ -147,7 +147,7 @@ class Extract(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param model: ID of the model to use for extraction
-        :param schema_: JSON Schema object or JSON string defining the structure of data to extract
+        :param schema: JSON Schema object or JSON string defining the structure of data to extract
         :param file: The file to extract structured data from
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param metadata: Optional metadata as JSON object or JSON string
@@ -263,7 +263,7 @@ class Extract(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param name: Name of the extraction schema. Must be between 1 and 100 characters. Used to identify and reference the schema.
-        :param schema_: JSON Schema object defining the structure of data to extract. Specifies the fields, types, and validation rules for the extracted data.
+        :param schema: JSON Schema object defining the structure of data to extract. Specifies the fields, types, and validation rules for the extracted data.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param description: Optional description of the schema. Maximum 500 characters. Helps document the purpose and usage of the schema.
         :param metadata: Optional metadata for the schema. Can store additional information like version, author, or custom properties.
@@ -377,7 +377,7 @@ class Extract(BaseSDK):
         If set, this operation will use `bearer_auth` from the global security.
 
         :param name: Name of the extraction schema. Must be between 1 and 100 characters. Used to identify and reference the schema.
-        :param schema_: JSON Schema object defining the structure of data to extract. Specifies the fields, types, and validation rules for the extracted data.
+        :param schema: JSON Schema object defining the structure of data to extract. Specifies the fields, types, and validation rules for the extracted data.
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param description: Optional description of the schema. Maximum 500 characters. Helps document the purpose and usage of the schema.
         :param metadata: Optional metadata for the schema. Can store additional information like version, author, or custom properties.
@@ -695,7 +695,7 @@ class Extract(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Optional new name for the extraction schema
         :param description: Optional new description for the schema
-        :param schema_: Optional updated JSON Schema definition
+        :param schema: Optional updated JSON Schema definition
         :param metadata: Optional updated metadata
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -816,7 +816,7 @@ class Extract(BaseSDK):
         :param x_on_behalf_of: Optional external end-user identifier forwarded by the API gateway.
         :param name: Optional new name for the extraction schema
         :param description: Optional new description for the schema
-        :param schema_: Optional updated JSON Schema definition
+        :param schema: Optional updated JSON Schema definition
         :param metadata: Optional updated metadata
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

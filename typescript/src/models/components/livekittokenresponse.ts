@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,15 +31,17 @@ export const LivekitTokenResponse$inboundSchema: z.ZodType<
   LivekitTokenResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  url: z.string(),
-  room_name: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "room_name": "roomName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    url: z.string(),
+    room_name: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "room_name": "roomName",
+    });
+  })
+);
 /** @internal */
 export type LivekitTokenResponse$Outbound = {
   token: string;
@@ -52,15 +54,17 @@ export const LivekitTokenResponse$outboundSchema: z.ZodType<
   LivekitTokenResponse$Outbound,
   z.ZodTypeDef,
   LivekitTokenResponse
-> = z.object({
-  token: z.string(),
-  url: z.string(),
-  roomName: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    roomName: "room_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    url: z.string(),
+    roomName: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      roomName: "room_name",
+    });
+  })
+);
 
 export function livekitTokenResponseToJSON(
   livekitTokenResponse: LivekitTokenResponse,

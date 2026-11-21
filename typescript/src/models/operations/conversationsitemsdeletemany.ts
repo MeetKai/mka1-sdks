@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,13 +29,15 @@ export const ConversationsItemsDeleteManyRequestBody$inboundSchema: z.ZodType<
   ConversationsItemsDeleteManyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  item_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "item_ids": "itemIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    item_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "item_ids": "itemIds",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsDeleteManyRequestBody$Outbound = {
   item_ids: Array<string>;
@@ -46,13 +48,15 @@ export const ConversationsItemsDeleteManyRequestBody$outboundSchema: z.ZodType<
   ConversationsItemsDeleteManyRequestBody$Outbound,
   z.ZodTypeDef,
   ConversationsItemsDeleteManyRequestBody
-> = z.object({
-  itemIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    itemIds: "item_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    itemIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      itemIds: "item_ids",
+    });
+  })
+);
 
 export function conversationsItemsDeleteManyRequestBodyToJSON(
   conversationsItemsDeleteManyRequestBody:
@@ -85,19 +89,21 @@ export const ConversationsItemsDeleteManyRequest$inboundSchema: z.ZodType<
   ConversationsItemsDeleteManyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversation_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() =>
-    ConversationsItemsDeleteManyRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversation_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      ConversationsItemsDeleteManyRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "conversation_id": "conversationId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsDeleteManyRequest$Outbound = {
   conversation_id: string;
@@ -110,19 +116,21 @@ export const ConversationsItemsDeleteManyRequest$outboundSchema: z.ZodType<
   ConversationsItemsDeleteManyRequest$Outbound,
   z.ZodTypeDef,
   ConversationsItemsDeleteManyRequest
-> = z.object({
-  conversationId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() =>
-    ConversationsItemsDeleteManyRequestBody$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    conversationId: "conversation_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      ConversationsItemsDeleteManyRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      conversationId: "conversation_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function conversationsItemsDeleteManyRequestToJSON(
   conversationsItemsDeleteManyRequest: ConversationsItemsDeleteManyRequest,

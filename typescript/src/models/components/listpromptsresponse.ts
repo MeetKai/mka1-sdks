@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,19 +42,21 @@ export const ListPromptsResponse$inboundSchema: z.ZodType<
   ListPromptsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(UpdatePromptResponse$inboundSchema),
-  has_more: z.boolean(),
-  first_id: z.string().optional(),
-  last_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "first_id": "firstId",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(UpdatePromptResponse$inboundSchema),
+    has_more: z.boolean(),
+    first_id: z.string().optional(),
+    last_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "first_id": "firstId",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type ListPromptsResponse$Outbound = {
   object: "list";
@@ -69,19 +71,21 @@ export const ListPromptsResponse$outboundSchema: z.ZodType<
   ListPromptsResponse$Outbound,
   z.ZodTypeDef,
   ListPromptsResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(UpdatePromptResponse$outboundSchema),
-  hasMore: z.boolean(),
-  firstId: z.string().optional(),
-  lastId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    firstId: "first_id",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(UpdatePromptResponse$outboundSchema),
+    hasMore: z.boolean(),
+    firstId: z.string().optional(),
+    lastId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      firstId: "first_id",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function listPromptsResponseToJSON(
   listPromptsResponse: ListPromptsResponse,

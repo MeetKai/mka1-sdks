@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,18 +32,20 @@ export const GetInferenceMetricsRequest$inboundSchema: z.ZodType<
   GetInferenceMetricsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string().optional(),
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string().optional(),
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetInferenceMetricsRequest$Outbound = {
   orgId?: string | undefined;
@@ -57,16 +59,18 @@ export const GetInferenceMetricsRequest$outboundSchema: z.ZodType<
   GetInferenceMetricsRequest$Outbound,
   z.ZodTypeDef,
   GetInferenceMetricsRequest
-> = z.object({
-  orgId: z.string().optional(),
-  from: z.date().transform(v => v.toISOString()).optional(),
-  to: z.date().transform(v => v.toISOString()).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string().optional(),
+    from: z.date().transform(v => v.toISOString()).optional(),
+    to: z.date().transform(v => v.toISOString()).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getInferenceMetricsRequestToJSON(
   getInferenceMetricsRequest: GetInferenceMetricsRequest,

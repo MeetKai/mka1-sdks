@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const VectorStoreConnectorS3Location$inboundSchema: z.ZodType<
   VectorStoreConnectorS3Location,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bucket: z.string(),
-  prefix: z.string().default(""),
-  region: z.string(),
-  endpoint: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket: z.string(),
+    prefix: z.string().default(""),
+    region: z.string(),
+    endpoint: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type VectorStoreConnectorS3Location$Outbound = {
   bucket: string;
@@ -50,12 +52,14 @@ export const VectorStoreConnectorS3Location$outboundSchema: z.ZodType<
   VectorStoreConnectorS3Location$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorS3Location
-> = z.object({
-  bucket: z.string(),
-  prefix: z.string().default(""),
-  region: z.string(),
-  endpoint: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bucket: z.string(),
+    prefix: z.string().default(""),
+    region: z.string(),
+    endpoint: z.nullable(z.string()).optional(),
+  })
+);
 
 export function vectorStoreConnectorS3LocationToJSON(
   vectorStoreConnectorS3Location: VectorStoreConnectorS3Location,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -55,14 +55,16 @@ export const ToolChoice$inboundSchema: z.ZodType<
   ToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  AllowedTools$inboundSchema,
-  FunctionToolChoice$inboundSchema,
-  MCPToolChoice$inboundSchema,
-  CustomToolChoice$inboundSchema,
-  HostedToolChoice$inboundSchema,
-  ToolChoiceMode$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AllowedTools$inboundSchema,
+    FunctionToolChoice$inboundSchema,
+    MCPToolChoice$inboundSchema,
+    CustomToolChoice$inboundSchema,
+    HostedToolChoice$inboundSchema,
+    ToolChoiceMode$inboundSchema,
+  ])
+);
 /** @internal */
 export type ToolChoice$Outbound =
   | AllowedTools$Outbound
@@ -77,14 +79,16 @@ export const ToolChoice$outboundSchema: z.ZodType<
   ToolChoice$Outbound,
   z.ZodTypeDef,
   ToolChoice
-> = z.union([
-  AllowedTools$outboundSchema,
-  FunctionToolChoice$outboundSchema,
-  MCPToolChoice$outboundSchema,
-  CustomToolChoice$outboundSchema,
-  HostedToolChoice$outboundSchema,
-  ToolChoiceMode$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AllowedTools$outboundSchema,
+    FunctionToolChoice$outboundSchema,
+    MCPToolChoice$outboundSchema,
+    CustomToolChoice$outboundSchema,
+    HostedToolChoice$outboundSchema,
+    ToolChoiceMode$outboundSchema,
+  ])
+);
 
 export function toolChoiceToJSON(toolChoice: ToolChoice): string {
   return JSON.stringify(ToolChoice$outboundSchema.parse(toolChoice));

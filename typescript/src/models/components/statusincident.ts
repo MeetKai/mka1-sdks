@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -70,7 +70,7 @@ export type StatusIncident = {
 /** @internal */
 export const StatusIncidentSource$inboundSchema: z.ZodNativeEnum<
   typeof StatusIncidentSource
-> = z.nativeEnum(StatusIncidentSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(StatusIncidentSource));
 /** @internal */
 export const StatusIncidentSource$outboundSchema: z.ZodNativeEnum<
   typeof StatusIncidentSource
@@ -81,31 +81,39 @@ export const StatusIncident$inboundSchema: z.ZodType<
   StatusIncident,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  impact: StatusIncidentImpact$inboundSchema,
-  status: StatusIncidentStatus$inboundSchema,
-  components: z.array(StatusComponentId$inboundSchema),
-  region: z.string(),
-  source: StatusIncidentSource$inboundSchema,
-  started_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  resolved_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  latest_update: z.nullable(StatusIncidentUpdate$inboundSchema).optional(),
-  updates: z.array(StatusIncidentUpdate$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "resolved_at": "resolvedAt",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "latest_update": "latestUpdate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    impact: StatusIncidentImpact$inboundSchema,
+    status: StatusIncidentStatus$inboundSchema,
+    components: z.array(StatusComponentId$inboundSchema),
+    region: z.string(),
+    source: StatusIncidentSource$inboundSchema,
+    started_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    resolved_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    latest_update: z.nullable(StatusIncidentUpdate$inboundSchema).optional(),
+    updates: z.array(StatusIncidentUpdate$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "started_at": "startedAt",
+      "resolved_at": "resolvedAt",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "latest_update": "latestUpdate",
+    });
+  })
+);
 /** @internal */
 export type StatusIncident$Outbound = {
   id: string;
@@ -128,29 +136,31 @@ export const StatusIncident$outboundSchema: z.ZodType<
   StatusIncident$Outbound,
   z.ZodTypeDef,
   StatusIncident
-> = z.object({
-  id: z.string(),
-  title: z.string(),
-  impact: StatusIncidentImpact$outboundSchema,
-  status: StatusIncidentStatus$outboundSchema,
-  components: z.array(StatusComponentId$outboundSchema),
-  region: z.string(),
-  source: StatusIncidentSource$outboundSchema,
-  startedAt: z.date().transform(v => v.toISOString()),
-  resolvedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  latestUpdate: z.nullable(StatusIncidentUpdate$outboundSchema).optional(),
-  updates: z.array(StatusIncidentUpdate$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startedAt: "started_at",
-    resolvedAt: "resolved_at",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    latestUpdate: "latest_update",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    title: z.string(),
+    impact: StatusIncidentImpact$outboundSchema,
+    status: StatusIncidentStatus$outboundSchema,
+    components: z.array(StatusComponentId$outboundSchema),
+    region: z.string(),
+    source: StatusIncidentSource$outboundSchema,
+    startedAt: z.date().transform(v => v.toISOString()),
+    resolvedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    latestUpdate: z.nullable(StatusIncidentUpdate$outboundSchema).optional(),
+    updates: z.array(StatusIncidentUpdate$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startedAt: "started_at",
+      resolvedAt: "resolved_at",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      latestUpdate: "latest_update",
+    });
+  })
+);
 
 export function statusIncidentToJSON(statusIncident: StatusIncident): string {
   return JSON.stringify(StatusIncident$outboundSchema.parse(statusIncident));

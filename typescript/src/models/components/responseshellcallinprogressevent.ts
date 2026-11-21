@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,15 +38,17 @@ export const FileIdsToUpload$inboundSchema: z.ZodType<
   FileIdsToUpload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  dest_path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "dest_path": "destPath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    dest_path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "dest_path": "destPath",
+    });
+  })
+);
 /** @internal */
 export type FileIdsToUpload$Outbound = {
   file_id: string;
@@ -58,15 +60,17 @@ export const FileIdsToUpload$outboundSchema: z.ZodType<
   FileIdsToUpload$Outbound,
   z.ZodTypeDef,
   FileIdsToUpload
-> = z.object({
-  fileId: z.string(),
-  destPath: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    destPath: "dest_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    destPath: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      destPath: "dest_path",
+    });
+  })
+);
 
 export function fileIdsToUploadToJSON(
   fileIdsToUpload: FileIdsToUpload,
@@ -88,15 +92,17 @@ export const FileNamesToUpload$inboundSchema: z.ZodType<
   FileNamesToUpload,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_name: z.string(),
-  dest_path: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_name": "fileName",
-    "dest_path": "destPath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_name: z.string(),
+    dest_path: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_name": "fileName",
+      "dest_path": "destPath",
+    });
+  })
+);
 /** @internal */
 export type FileNamesToUpload$Outbound = {
   file_name: string;
@@ -108,15 +114,17 @@ export const FileNamesToUpload$outboundSchema: z.ZodType<
   FileNamesToUpload$Outbound,
   z.ZodTypeDef,
   FileNamesToUpload
-> = z.object({
-  fileName: z.string(),
-  destPath: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileName: "file_name",
-    destPath: "dest_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    destPath: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileName: "file_name",
+      destPath: "dest_path",
+    });
+  })
+);
 
 export function fileNamesToUploadToJSON(
   fileNamesToUpload: FileNamesToUpload,
@@ -140,20 +148,22 @@ export const ResponseShellCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseShellCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  command: z.string().optional(),
-  file_ids_to_upload: z.array(z.lazy(() => FileIdsToUpload$inboundSchema))
-    .optional(),
-  file_names_to_upload: z.array(z.lazy(() => FileNamesToUpload$inboundSchema))
-    .optional(),
-  file_paths_to_download: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_ids_to_upload": "fileIdsToUpload",
-    "file_names_to_upload": "fileNamesToUpload",
-    "file_paths_to_download": "filePathsToDownload",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.string().optional(),
+    file_ids_to_upload: z.array(z.lazy(() => FileIdsToUpload$inboundSchema))
+      .optional(),
+    file_names_to_upload: z.array(z.lazy(() => FileNamesToUpload$inboundSchema))
+      .optional(),
+    file_paths_to_download: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_ids_to_upload": "fileIdsToUpload",
+      "file_names_to_upload": "fileNamesToUpload",
+      "file_paths_to_download": "filePathsToDownload",
+    });
+  })
+);
 /** @internal */
 export type ResponseShellCallInProgressEventArgs$Outbound = {
   command?: string | undefined;
@@ -167,20 +177,22 @@ export const ResponseShellCallInProgressEventArgs$outboundSchema: z.ZodType<
   ResponseShellCallInProgressEventArgs$Outbound,
   z.ZodTypeDef,
   ResponseShellCallInProgressEventArgs
-> = z.object({
-  command: z.string().optional(),
-  fileIdsToUpload: z.array(z.lazy(() => FileIdsToUpload$outboundSchema))
-    .optional(),
-  fileNamesToUpload: z.array(z.lazy(() => FileNamesToUpload$outboundSchema))
-    .optional(),
-  filePathsToDownload: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileIdsToUpload: "file_ids_to_upload",
-    fileNamesToUpload: "file_names_to_upload",
-    filePathsToDownload: "file_paths_to_download",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.string().optional(),
+    fileIdsToUpload: z.array(z.lazy(() => FileIdsToUpload$outboundSchema))
+      .optional(),
+    fileNamesToUpload: z.array(z.lazy(() => FileNamesToUpload$outboundSchema))
+      .optional(),
+    filePathsToDownload: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileIdsToUpload: "file_ids_to_upload",
+      fileNamesToUpload: "file_names_to_upload",
+      filePathsToDownload: "file_paths_to_download",
+    });
+  })
+);
 
 export function responseShellCallInProgressEventArgsToJSON(
   responseShellCallInProgressEventArgs: ResponseShellCallInProgressEventArgs,
@@ -207,20 +219,22 @@ export const ResponseShellCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseShellCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.shell_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseShellCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.shell_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseShellCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseShellCallInProgressEvent$Outbound = {
   type: "response.shell_call.in_progress";
@@ -235,20 +249,22 @@ export const ResponseShellCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseShellCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseShellCallInProgressEvent
-> = z.object({
-  type: z.literal("response.shell_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseShellCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.shell_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseShellCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseShellCallInProgressEventToJSON(
   responseShellCallInProgressEvent: ResponseShellCallInProgressEvent,

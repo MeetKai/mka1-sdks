@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,22 +34,24 @@ export const ClusterDefaultGuardrailsOrgResponse$inboundSchema: z.ZodType<
   ClusterDefaultGuardrailsOrgResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_cluster_default_org"),
-  org_id: z.string(),
-  enabled: z.boolean(),
-  applies: z.boolean(),
-  updated_by: z.nullable(z.string()),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "updated_by": "updatedBy",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_cluster_default_org"),
+    org_id: z.string(),
+    enabled: z.boolean(),
+    applies: z.boolean(),
+    updated_by: z.nullable(z.string()),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "updated_by": "updatedBy",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ClusterDefaultGuardrailsOrgResponse$Outbound = {
   object: "guardrails_cluster_default_org";
@@ -65,20 +67,22 @@ export const ClusterDefaultGuardrailsOrgResponse$outboundSchema: z.ZodType<
   ClusterDefaultGuardrailsOrgResponse$Outbound,
   z.ZodTypeDef,
   ClusterDefaultGuardrailsOrgResponse
-> = z.object({
-  object: z.literal("guardrails_cluster_default_org"),
-  orgId: z.string(),
-  enabled: z.boolean(),
-  applies: z.boolean(),
-  updatedBy: z.nullable(z.string()),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    updatedBy: "updated_by",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_cluster_default_org"),
+    orgId: z.string(),
+    enabled: z.boolean(),
+    applies: z.boolean(),
+    updatedBy: z.nullable(z.string()),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      updatedBy: "updated_by",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function clusterDefaultGuardrailsOrgResponseToJSON(
   clusterDefaultGuardrailsOrgResponse: ClusterDefaultGuardrailsOrgResponse,

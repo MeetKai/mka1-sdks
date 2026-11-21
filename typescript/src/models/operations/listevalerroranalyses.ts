@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,18 +23,20 @@ export const ListEvalErrorAnalysesRequest$inboundSchema: z.ZodType<
   ListEvalErrorAnalysesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  model: z.string().optional(),
-  suite_version: z.number().int().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    model: z.string().optional(),
+    suite_version: z.number().int().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListEvalErrorAnalysesRequest$Outbound = {
   suite_id: string;
@@ -48,18 +50,20 @@ export const ListEvalErrorAnalysesRequest$outboundSchema: z.ZodType<
   ListEvalErrorAnalysesRequest$Outbound,
   z.ZodTypeDef,
   ListEvalErrorAnalysesRequest
-> = z.object({
-  suiteId: z.string(),
-  model: z.string().optional(),
-  suiteVersion: z.number().int().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    model: z.string().optional(),
+    suiteVersion: z.number().int().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listEvalErrorAnalysesRequestToJSON(
   listEvalErrorAnalysesRequest: ListEvalErrorAnalysesRequest,

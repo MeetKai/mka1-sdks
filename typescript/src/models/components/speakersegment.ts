@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -36,18 +36,20 @@ export const SpeakerSegment$inboundSchema: z.ZodType<
   SpeakerSegment,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  speaker: z.string(),
-  text: z.string(),
-  confidence: z.number().optional(),
-  offset_ms: z.number().int().optional(),
-  duration_ms: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "offset_ms": "offsetMs",
-    "duration_ms": "durationMs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    speaker: z.string(),
+    text: z.string(),
+    confidence: z.number().optional(),
+    offset_ms: z.number().int().optional(),
+    duration_ms: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "offset_ms": "offsetMs",
+      "duration_ms": "durationMs",
+    });
+  })
+);
 /** @internal */
 export type SpeakerSegment$Outbound = {
   speaker: string;
@@ -62,18 +64,20 @@ export const SpeakerSegment$outboundSchema: z.ZodType<
   SpeakerSegment$Outbound,
   z.ZodTypeDef,
   SpeakerSegment
-> = z.object({
-  speaker: z.string(),
-  text: z.string(),
-  confidence: z.number().optional(),
-  offsetMs: z.number().int().optional(),
-  durationMs: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    offsetMs: "offset_ms",
-    durationMs: "duration_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    speaker: z.string(),
+    text: z.string(),
+    confidence: z.number().optional(),
+    offsetMs: z.number().int().optional(),
+    durationMs: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      offsetMs: "offset_ms",
+      durationMs: "duration_ms",
+    });
+  })
+);
 
 export function speakerSegmentToJSON(speakerSegment: SpeakerSegment): string {
   return JSON.stringify(SpeakerSegment$outboundSchema.parse(speakerSegment));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const TestGuardrailsRequest$inboundSchema: z.ZodType<
   TestGuardrailsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  TestGuardrailsRequest: components.TestGuardrailsRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "TestGuardrailsRequest": "testGuardrailsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    TestGuardrailsRequest: components.TestGuardrailsRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "TestGuardrailsRequest": "testGuardrailsRequest",
+    });
+  })
+);
 /** @internal */
 export type TestGuardrailsRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const TestGuardrailsRequest$outboundSchema: z.ZodType<
   TestGuardrailsRequest$Outbound,
   z.ZodTypeDef,
   TestGuardrailsRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  testGuardrailsRequest: components.TestGuardrailsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    testGuardrailsRequest: "TestGuardrailsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    testGuardrailsRequest: components.TestGuardrailsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      testGuardrailsRequest: "TestGuardrailsRequest",
+    });
+  })
+);
 
 export function testGuardrailsRequestToJSON(
   testGuardrailsRequest: TestGuardrailsRequest,

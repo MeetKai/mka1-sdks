@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -52,7 +52,9 @@ export const CreateVectorStoreFileRequestAttributes$inboundSchema: z.ZodType<
   CreateVectorStoreFileRequestAttributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type CreateVectorStoreFileRequestAttributes$Outbound =
   | string
@@ -64,7 +66,9 @@ export const CreateVectorStoreFileRequestAttributes$outboundSchema: z.ZodType<
   CreateVectorStoreFileRequestAttributes$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreFileRequestAttributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function createVectorStoreFileRequestAttributesToJSON(
   createVectorStoreFileRequestAttributes:
@@ -93,10 +97,12 @@ export const CreateVectorStoreFileRequestChunkingStrategy$inboundSchema:
     CreateVectorStoreFileRequestChunkingStrategy,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ])
+  );
 /** @internal */
 export type CreateVectorStoreFileRequestChunkingStrategy$Outbound =
   | AutoChunkingStrategy$Outbound
@@ -108,10 +114,12 @@ export const CreateVectorStoreFileRequestChunkingStrategy$outboundSchema:
     CreateVectorStoreFileRequestChunkingStrategy$Outbound,
     z.ZodTypeDef,
     CreateVectorStoreFileRequestChunkingStrategy
-  > = z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ])
+  );
 
 export function createVectorStoreFileRequestChunkingStrategyToJSON(
   createVectorStoreFileRequestChunkingStrategy:
@@ -144,20 +152,22 @@ export const CreateVectorStoreFileRequest$inboundSchema: z.ZodType<
   CreateVectorStoreFileRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunking_strategy: z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "chunking_strategy": "chunkingStrategy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunking_strategy: z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "chunking_strategy": "chunkingStrategy",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStoreFileRequest$Outbound = {
   file_id: string;
@@ -173,20 +183,22 @@ export const CreateVectorStoreFileRequest$outboundSchema: z.ZodType<
   CreateVectorStoreFileRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreFileRequest
-> = z.object({
-  fileId: z.string(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  chunkingStrategy: z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    chunkingStrategy: "chunking_strategy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    chunkingStrategy: z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      chunkingStrategy: "chunking_strategy",
+    });
+  })
+);
 
 export function createVectorStoreFileRequestToJSON(
   createVectorStoreFileRequest: CreateVectorStoreFileRequest,

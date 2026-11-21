@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,23 +29,27 @@ export const AnalyticsCreatedCaptureKey$inboundSchema: z.ZodType<
   AnalyticsCreatedCaptureKey,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  project_id: z.string(),
-  name: z.string(),
-  prefix: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  revoked_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "project_id": "projectId",
-    "created_at": "createdAt",
-    "revoked_at": "revokedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    project_id: z.string(),
+    name: z.string(),
+    prefix: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    revoked_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "project_id": "projectId",
+      "created_at": "createdAt",
+      "revoked_at": "revokedAt",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsCreatedCaptureKey$Outbound = {
   id: string;
@@ -62,21 +66,23 @@ export const AnalyticsCreatedCaptureKey$outboundSchema: z.ZodType<
   AnalyticsCreatedCaptureKey$Outbound,
   z.ZodTypeDef,
   AnalyticsCreatedCaptureKey
-> = z.object({
-  id: z.string(),
-  projectId: z.string(),
-  name: z.string(),
-  prefix: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  revokedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    projectId: "project_id",
-    createdAt: "created_at",
-    revokedAt: "revoked_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    projectId: z.string(),
+    name: z.string(),
+    prefix: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    revokedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      projectId: "project_id",
+      createdAt: "created_at",
+      revokedAt: "revoked_at",
+    });
+  })
+);
 
 export function analyticsCreatedCaptureKeyToJSON(
   analyticsCreatedCaptureKey: AnalyticsCreatedCaptureKey,

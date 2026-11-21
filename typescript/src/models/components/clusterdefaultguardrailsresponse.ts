@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,24 +47,26 @@ export const ClusterDefaultGuardrailsResponse$inboundSchema: z.ZodType<
   ClusterDefaultGuardrailsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_cluster_default"),
-  enabled: z.boolean(),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-  built_in: z.boolean(),
-  settings_unreadable: z.boolean(),
-  updated_by: z.nullable(z.string()),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "built_in": "builtIn",
-    "settings_unreadable": "settingsUnreadable",
-    "updated_by": "updatedBy",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_cluster_default"),
+    enabled: z.boolean(),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+    built_in: z.boolean(),
+    settings_unreadable: z.boolean(),
+    updated_by: z.nullable(z.string()),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "built_in": "builtIn",
+      "settings_unreadable": "settingsUnreadable",
+      "updated_by": "updatedBy",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ClusterDefaultGuardrailsResponse$Outbound = {
   object: "guardrails_cluster_default";
@@ -81,22 +83,24 @@ export const ClusterDefaultGuardrailsResponse$outboundSchema: z.ZodType<
   ClusterDefaultGuardrailsResponse$Outbound,
   z.ZodTypeDef,
   ClusterDefaultGuardrailsResponse
-> = z.object({
-  object: z.literal("guardrails_cluster_default"),
-  enabled: z.boolean(),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-  builtIn: z.boolean(),
-  settingsUnreadable: z.boolean(),
-  updatedBy: z.nullable(z.string()),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    builtIn: "built_in",
-    settingsUnreadable: "settings_unreadable",
-    updatedBy: "updated_by",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_cluster_default"),
+    enabled: z.boolean(),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+    builtIn: z.boolean(),
+    settingsUnreadable: z.boolean(),
+    updatedBy: z.nullable(z.string()),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      builtIn: "built_in",
+      settingsUnreadable: "settings_unreadable",
+      updatedBy: "updated_by",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function clusterDefaultGuardrailsResponseToJSON(
   clusterDefaultGuardrailsResponse: ClusterDefaultGuardrailsResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const ReimportOpenApiToolSetRequest$inboundSchema: z.ZodType<
   ReimportOpenApiToolSetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_set_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ImportOpenApiToolSetRequest:
-    components.ImportOpenApiToolSetRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "tool_set_id": "toolSetId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ImportOpenApiToolSetRequest": "importOpenApiToolSetRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_set_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ImportOpenApiToolSetRequest:
+      components.ImportOpenApiToolSetRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_set_id": "toolSetId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ImportOpenApiToolSetRequest": "importOpenApiToolSetRequest",
+    });
+  })
+);
 /** @internal */
 export type ReimportOpenApiToolSetRequest$Outbound = {
   tool_set_id: string;
@@ -47,18 +49,20 @@ export const ReimportOpenApiToolSetRequest$outboundSchema: z.ZodType<
   ReimportOpenApiToolSetRequest$Outbound,
   z.ZodTypeDef,
   ReimportOpenApiToolSetRequest
-> = z.object({
-  toolSetId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  importOpenApiToolSetRequest:
-    components.ImportOpenApiToolSetRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    toolSetId: "tool_set_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    importOpenApiToolSetRequest: "ImportOpenApiToolSetRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolSetId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    importOpenApiToolSetRequest:
+      components.ImportOpenApiToolSetRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      toolSetId: "tool_set_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      importOpenApiToolSetRequest: "ImportOpenApiToolSetRequest",
+    });
+  })
+);
 
 export function reimportOpenApiToolSetRequestToJSON(
   reimportOpenApiToolSetRequest: ReimportOpenApiToolSetRequest,

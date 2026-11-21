@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,12 +54,14 @@ export const UpdateAgentScheduleRequestInput2$inboundSchema: z.ZodType<
   UpdateAgentScheduleRequestInput2,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 /** @internal */
 export type UpdateAgentScheduleRequestInput2$Outbound = {
@@ -71,17 +74,19 @@ export const UpdateAgentScheduleRequestInput2$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequestInput2$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequestInput2
-> = z.object({
-  type: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function updateAgentScheduleRequestInput2ToJSON(
   updateAgentScheduleRequestInput2: UpdateAgentScheduleRequestInput2,
@@ -107,10 +112,12 @@ export const UpdateAgentScheduleRequestInput$inboundSchema: z.ZodType<
   UpdateAgentScheduleRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$inboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$inboundSchema)),
+  ])
+);
 /** @internal */
 export type UpdateAgentScheduleRequestInput$Outbound =
   | string
@@ -121,10 +128,12 @@ export const UpdateAgentScheduleRequestInput$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequestInput$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequestInput
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$outboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$outboundSchema)),
+  ])
+);
 
 export function updateAgentScheduleRequestInputToJSON(
   updateAgentScheduleRequestInput: UpdateAgentScheduleRequestInput,
@@ -150,25 +159,27 @@ export const UpdateAgentScheduleRequest$inboundSchema: z.ZodType<
   UpdateAgentScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  schedule: AgentScheduleSpec$inboundSchema.optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$inboundSchema)),
-  ]).optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previous_response_id: z.nullable(z.string()).optional(),
-  context_management: z.nullable(
-    z.array(AgentCompactionContextManagement$inboundSchema),
-  ).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "previous_response_id": "previousResponseId",
-    "context_management": "contextManagement",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    schedule: AgentScheduleSpec$inboundSchema.optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$inboundSchema)),
+    ]).optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previous_response_id: z.nullable(z.string()).optional(),
+    context_management: z.nullable(
+      z.array(AgentCompactionContextManagement$inboundSchema),
+    ).optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "previous_response_id": "previousResponseId",
+      "context_management": "contextManagement",
+    });
+  })
+);
 /** @internal */
 export type UpdateAgentScheduleRequest$Outbound = {
   name?: string | null | undefined;
@@ -188,25 +199,27 @@ export const UpdateAgentScheduleRequest$outboundSchema: z.ZodType<
   UpdateAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   UpdateAgentScheduleRequest
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  schedule: AgentScheduleSpec$outboundSchema.optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$outboundSchema)),
-  ]).optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previousResponseId: z.nullable(z.string()).optional(),
-  contextManagement: z.nullable(
-    z.array(AgentCompactionContextManagement$outboundSchema),
-  ).optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previousResponseId: "previous_response_id",
-    contextManagement: "context_management",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    schedule: AgentScheduleSpec$outboundSchema.optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => UpdateAgentScheduleRequestInput2$outboundSchema)),
+    ]).optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previousResponseId: z.nullable(z.string()).optional(),
+    contextManagement: z.nullable(
+      z.array(AgentCompactionContextManagement$outboundSchema),
+    ).optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previousResponseId: "previous_response_id",
+      contextManagement: "context_management",
+    });
+  })
+);
 
 export function updateAgentScheduleRequestToJSON(
   updateAgentScheduleRequest: UpdateAgentScheduleRequest,

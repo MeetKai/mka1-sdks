@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const ComputeErrorEnvelope$inboundSchema: z.ZodType<
   ComputeErrorEnvelope,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: ComputeError$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: ComputeError$inboundSchema,
+  })
+);
 /** @internal */
 export type ComputeErrorEnvelope$Outbound = {
   error: ComputeError$Outbound;
@@ -38,9 +40,11 @@ export const ComputeErrorEnvelope$outboundSchema: z.ZodType<
   ComputeErrorEnvelope$Outbound,
   z.ZodTypeDef,
   ComputeErrorEnvelope
-> = z.object({
-  error: ComputeError$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: ComputeError$outboundSchema,
+  })
+);
 
 export function computeErrorEnvelopeToJSON(
   computeErrorEnvelope: ComputeErrorEnvelope,

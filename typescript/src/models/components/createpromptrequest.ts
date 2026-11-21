@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,12 +31,14 @@ export const CreatePromptRequest$inboundSchema: z.ZodType<
   CreatePromptRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  template: z.string(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    template: z.string(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type CreatePromptRequest$Outbound = {
   name: string;
@@ -50,12 +52,14 @@ export const CreatePromptRequest$outboundSchema: z.ZodType<
   CreatePromptRequest$Outbound,
   z.ZodTypeDef,
   CreatePromptRequest
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  template: z.string(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    template: z.string(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function createPromptRequestToJSON(
   createPromptRequest: CreatePromptRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,23 +29,25 @@ export const CostGroupRow$inboundSchema: z.ZodType<
   CostGroupRow,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.nullable(z.string()),
-  api_key_id: z.nullable(z.string()),
-  team_id: z.nullable(z.string()),
-  external_user_id: z.nullable(z.string()),
-  org_id: z.nullable(z.string()),
-  cost: z.number(),
-  cost_nano: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_key_id": "apiKeyId",
-    "team_id": "teamId",
-    "external_user_id": "externalUserId",
-    "org_id": "orgId",
-    "cost_nano": "costNano",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.nullable(z.string()),
+    api_key_id: z.nullable(z.string()),
+    team_id: z.nullable(z.string()),
+    external_user_id: z.nullable(z.string()),
+    org_id: z.nullable(z.string()),
+    cost: z.number(),
+    cost_nano: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key_id": "apiKeyId",
+      "team_id": "teamId",
+      "external_user_id": "externalUserId",
+      "org_id": "orgId",
+      "cost_nano": "costNano",
+    });
+  })
+);
 /** @internal */
 export type CostGroupRow$Outbound = {
   model: string | null;
@@ -62,23 +64,25 @@ export const CostGroupRow$outboundSchema: z.ZodType<
   CostGroupRow$Outbound,
   z.ZodTypeDef,
   CostGroupRow
-> = z.object({
-  model: z.nullable(z.string()),
-  apiKeyId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  externalUserId: z.nullable(z.string()),
-  orgId: z.nullable(z.string()),
-  cost: z.number(),
-  costNano: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKeyId: "api_key_id",
-    teamId: "team_id",
-    externalUserId: "external_user_id",
-    orgId: "org_id",
-    costNano: "cost_nano",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.nullable(z.string()),
+    apiKeyId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    externalUserId: z.nullable(z.string()),
+    orgId: z.nullable(z.string()),
+    cost: z.number(),
+    costNano: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKeyId: "api_key_id",
+      teamId: "team_id",
+      externalUserId: "external_user_id",
+      orgId: "org_id",
+      costNano: "cost_nano",
+    });
+  })
+);
 
 export function costGroupRowToJSON(costGroupRow: CostGroupRow): string {
   return JSON.stringify(CostGroupRow$outboundSchema.parse(costGroupRow));

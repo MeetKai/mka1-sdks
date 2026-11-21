@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateRepoRequest$inboundSchema: z.ZodType<
   CreateRepoRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateRepoRequest: components.CreateRepoRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateRepoRequest": "createRepoRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateRepoRequest: components.CreateRepoRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateRepoRequest": "createRepoRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateRepoRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateRepoRequest$outboundSchema: z.ZodType<
   CreateRepoRequest$Outbound,
   z.ZodTypeDef,
   CreateRepoRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createRepoRequest: components.CreateRepoRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createRepoRequest: "CreateRepoRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createRepoRequest: components.CreateRepoRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createRepoRequest: "CreateRepoRequest",
+    });
+  })
+);
 
 export function createRepoRequestToJSON(
   createRepoRequest: CreateRepoRequest,

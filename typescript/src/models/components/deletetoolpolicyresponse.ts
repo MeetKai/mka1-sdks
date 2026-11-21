@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const DeleteToolPolicyResponse$inboundSchema: z.ZodType<
   DeleteToolPolicyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("tool_policy"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("tool_policy"),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteToolPolicyResponse$Outbound = {
   object: "tool_policy";
@@ -35,10 +37,12 @@ export const DeleteToolPolicyResponse$outboundSchema: z.ZodType<
   DeleteToolPolicyResponse$Outbound,
   z.ZodTypeDef,
   DeleteToolPolicyResponse
-> = z.object({
-  object: z.literal("tool_policy"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("tool_policy"),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteToolPolicyResponseToJSON(
   deleteToolPolicyResponse: DeleteToolPolicyResponse,

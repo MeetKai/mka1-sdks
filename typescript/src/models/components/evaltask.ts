@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -94,31 +94,33 @@ export const EvalTask$inboundSchema: z.ZodType<
   EvalTask,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string().optional(),
-  type: EvalTaskType$inboundSchema,
-  dataset: EvalDataset$inboundSchema,
-  prompt_template: z.string().optional(),
-  target_template: z.string().optional(),
-  choices: z.array(z.string()).optional(),
-  output_extraction: EvalOutputExtraction$inboundSchema.optional(),
-  metrics: z.array(EvalMetric$inboundSchema).optional(),
-  grader: EvalPythonGrader$inboundSchema.optional(),
-  embedding: EvalEmbeddingConfig$inboundSchema.optional(),
-  preprocess: EvalPythonPreprocessor$inboundSchema.optional(),
-  fewshot: EvalFewshotConfig$inboundSchema.optional(),
-  num_fewshot: z.number().int().optional(),
-  language: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_template": "promptTemplate",
-    "target_template": "targetTemplate",
-    "output_extraction": "outputExtraction",
-    "num_fewshot": "numFewshot",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string().optional(),
+    type: EvalTaskType$inboundSchema,
+    dataset: EvalDataset$inboundSchema,
+    prompt_template: z.string().optional(),
+    target_template: z.string().optional(),
+    choices: z.array(z.string()).optional(),
+    output_extraction: EvalOutputExtraction$inboundSchema.optional(),
+    metrics: z.array(EvalMetric$inboundSchema).optional(),
+    grader: EvalPythonGrader$inboundSchema.optional(),
+    embedding: EvalEmbeddingConfig$inboundSchema.optional(),
+    preprocess: EvalPythonPreprocessor$inboundSchema.optional(),
+    fewshot: EvalFewshotConfig$inboundSchema.optional(),
+    num_fewshot: z.number().int().optional(),
+    language: z.string().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_template": "promptTemplate",
+      "target_template": "targetTemplate",
+      "output_extraction": "outputExtraction",
+      "num_fewshot": "numFewshot",
+    });
+  })
+);
 /** @internal */
 export type EvalTask$Outbound = {
   id: string;
@@ -144,31 +146,33 @@ export const EvalTask$outboundSchema: z.ZodType<
   EvalTask$Outbound,
   z.ZodTypeDef,
   EvalTask
-> = z.object({
-  id: z.string(),
-  name: z.string().optional(),
-  type: EvalTaskType$outboundSchema,
-  dataset: EvalDataset$outboundSchema,
-  promptTemplate: z.string().optional(),
-  targetTemplate: z.string().optional(),
-  choices: z.array(z.string()).optional(),
-  outputExtraction: EvalOutputExtraction$outboundSchema.optional(),
-  metrics: z.array(EvalMetric$outboundSchema).optional(),
-  grader: EvalPythonGrader$outboundSchema.optional(),
-  embedding: EvalEmbeddingConfig$outboundSchema.optional(),
-  preprocess: EvalPythonPreprocessor$outboundSchema.optional(),
-  fewshot: EvalFewshotConfig$outboundSchema.optional(),
-  numFewshot: z.number().int().optional(),
-  language: z.string().optional(),
-  metadata: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTemplate: "prompt_template",
-    targetTemplate: "target_template",
-    outputExtraction: "output_extraction",
-    numFewshot: "num_fewshot",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string().optional(),
+    type: EvalTaskType$outboundSchema,
+    dataset: EvalDataset$outboundSchema,
+    promptTemplate: z.string().optional(),
+    targetTemplate: z.string().optional(),
+    choices: z.array(z.string()).optional(),
+    outputExtraction: EvalOutputExtraction$outboundSchema.optional(),
+    metrics: z.array(EvalMetric$outboundSchema).optional(),
+    grader: EvalPythonGrader$outboundSchema.optional(),
+    embedding: EvalEmbeddingConfig$outboundSchema.optional(),
+    preprocess: EvalPythonPreprocessor$outboundSchema.optional(),
+    fewshot: EvalFewshotConfig$outboundSchema.optional(),
+    numFewshot: z.number().int().optional(),
+    language: z.string().optional(),
+    metadata: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTemplate: "prompt_template",
+      targetTemplate: "target_template",
+      outputExtraction: "output_extraction",
+      numFewshot: "num_fewshot",
+    });
+  })
+);
 
 export function evalTaskToJSON(evalTask: EvalTask): string {
   return JSON.stringify(EvalTask$outboundSchema.parse(evalTask));

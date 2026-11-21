@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,14 +27,16 @@ export const AnalyticsCaptureRequest$inboundSchema: z.ZodType<
   AnalyticsCaptureRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  idempotency_key: z.string(),
-  events: z.array(AnalyticsEvent$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "idempotency_key": "idempotencyKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotency_key: z.string(),
+    events: z.array(AnalyticsEvent$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "idempotency_key": "idempotencyKey",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsCaptureRequest$Outbound = {
   idempotency_key: string;
@@ -46,14 +48,16 @@ export const AnalyticsCaptureRequest$outboundSchema: z.ZodType<
   AnalyticsCaptureRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsCaptureRequest
-> = z.object({
-  idempotencyKey: z.string(),
-  events: z.array(AnalyticsEvent$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "idempotency_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string(),
+    events: z.array(AnalyticsEvent$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "idempotency_key",
+    });
+  })
+);
 
 export function analyticsCaptureRequestToJSON(
   analyticsCaptureRequest: AnalyticsCaptureRequest,

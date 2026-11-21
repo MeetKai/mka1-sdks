@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const FormatList$inboundSchema: z.ZodType<
   FormatList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(FormatSummary$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FormatSummary$inboundSchema),
+  })
+);
 /** @internal */
 export type FormatList$Outbound = {
   data: Array<FormatSummary$Outbound>;
@@ -35,9 +37,11 @@ export const FormatList$outboundSchema: z.ZodType<
   FormatList$Outbound,
   z.ZodTypeDef,
   FormatList
-> = z.object({
-  data: z.array(FormatSummary$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(FormatSummary$outboundSchema),
+  })
+);
 
 export function formatListToJSON(formatList: FormatList): string {
   return JSON.stringify(FormatList$outboundSchema.parse(formatList));

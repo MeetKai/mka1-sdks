@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,7 +38,7 @@ export type AuditExportQueued = {
 /** @internal */
 export const AuditExportQueuedStatus$inboundSchema: z.ZodNativeEnum<
   typeof AuditExportQueuedStatus
-> = z.nativeEnum(AuditExportQueuedStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AuditExportQueuedStatus));
 /** @internal */
 export const AuditExportQueuedStatus$outboundSchema: z.ZodNativeEnum<
   typeof AuditExportQueuedStatus
@@ -49,16 +49,18 @@ export const AuditExportQueued$inboundSchema: z.ZodType<
   AuditExportQueued,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  export_id: z.string(),
-  status: AuditExportQueuedStatus$inboundSchema,
-  total_rows: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "export_id": "exportId",
-    "total_rows": "totalRows",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    export_id: z.string(),
+    status: AuditExportQueuedStatus$inboundSchema,
+    total_rows: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "export_id": "exportId",
+      "total_rows": "totalRows",
+    });
+  })
+);
 /** @internal */
 export type AuditExportQueued$Outbound = {
   export_id: string;
@@ -71,16 +73,18 @@ export const AuditExportQueued$outboundSchema: z.ZodType<
   AuditExportQueued$Outbound,
   z.ZodTypeDef,
   AuditExportQueued
-> = z.object({
-  exportId: z.string(),
-  status: AuditExportQueuedStatus$outboundSchema,
-  totalRows: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    exportId: "export_id",
-    totalRows: "total_rows",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exportId: z.string(),
+    status: AuditExportQueuedStatus$outboundSchema,
+    totalRows: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      exportId: "export_id",
+      totalRows: "total_rows",
+    });
+  })
+);
 
 export function auditExportQueuedToJSON(
   auditExportQueued: AuditExportQueued,

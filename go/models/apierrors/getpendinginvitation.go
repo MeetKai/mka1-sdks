@@ -16,6 +16,12 @@ type GetPendingInvitationForbiddenError struct {
 var _ error = &GetPendingInvitationForbiddenError{}
 
 func (e *GetPendingInvitationForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +35,12 @@ type GetPendingInvitationUnauthorizedError struct {
 var _ error = &GetPendingInvitationUnauthorizedError{}
 
 func (e *GetPendingInvitationUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

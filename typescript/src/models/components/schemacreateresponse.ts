@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -61,20 +61,26 @@ export const SchemaCreateResponseData$inboundSchema: z.ZodType<
   SchemaCreateResponseData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type SchemaCreateResponseData$Outbound = {
   id: string;
@@ -91,20 +97,22 @@ export const SchemaCreateResponseData$outboundSchema: z.ZodType<
   SchemaCreateResponseData$Outbound,
   z.ZodTypeDef,
   SchemaCreateResponseData
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-  metadata: z.record(z.any()).optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+    metadata: z.record(z.any()).optional(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function schemaCreateResponseDataToJSON(
   schemaCreateResponseData: SchemaCreateResponseData,
@@ -128,10 +136,12 @@ export const SchemaCreateResponse$inboundSchema: z.ZodType<
   SchemaCreateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  success: z.boolean(),
-  data: z.lazy(() => SchemaCreateResponseData$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.lazy(() => SchemaCreateResponseData$inboundSchema),
+  })
+);
 /** @internal */
 export type SchemaCreateResponse$Outbound = {
   success: boolean;
@@ -143,10 +153,12 @@ export const SchemaCreateResponse$outboundSchema: z.ZodType<
   SchemaCreateResponse$Outbound,
   z.ZodTypeDef,
   SchemaCreateResponse
-> = z.object({
-  success: z.boolean(),
-  data: z.lazy(() => SchemaCreateResponseData$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.lazy(() => SchemaCreateResponseData$outboundSchema),
+  })
+);
 
 export function schemaCreateResponseToJSON(
   schemaCreateResponse: SchemaCreateResponse,

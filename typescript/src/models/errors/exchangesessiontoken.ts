@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -230,10 +230,12 @@ export const ExchangeSessionTokenSessionResponse500Details$inboundSchema:
     ExchangeSessionTokenSessionResponse500Details,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 /** @internal */
 export type ExchangeSessionTokenSessionResponse500Details$Outbound = {
   path: string;
@@ -246,10 +248,12 @@ export const ExchangeSessionTokenSessionResponse500Details$outboundSchema:
     ExchangeSessionTokenSessionResponse500Details$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse500Details
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 
 export function exchangeSessionTokenSessionResponse500DetailsToJSON(
   exchangeSessionTokenSessionResponse500Details:
@@ -283,22 +287,26 @@ export const ExchangeSessionTokenSessionResponse500ResponseBody$inboundSchema:
     ExchangeSessionTokenSessionResponse500ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    details: z.array(
-      z.lazy(() => ExchangeSessionTokenSessionResponse500Details$inboundSchema),
-    ).optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ExchangeSessionTokenSessionResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() =>
+          ExchangeSessionTokenSessionResponse500Details$inboundSchema
+        ),
+      ).optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ExchangeSessionTokenSessionResponse500ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ExchangeSessionTokenSessionResponse500ResponseBody$Outbound = {
@@ -314,16 +322,18 @@ export const ExchangeSessionTokenSessionResponse500ResponseBody$outboundSchema:
     ExchangeSessionTokenSessionResponse500ResponseBody$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse500ResponseBody
-  > = z.instanceof(ExchangeSessionTokenSessionResponse500ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      details: z.array(
-        z.lazy(() =>
-          ExchangeSessionTokenSessionResponse500Details$outboundSchema
-        ),
-      ).optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ExchangeSessionTokenSessionResponse500ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        details: z.array(
+          z.lazy(() =>
+            ExchangeSessionTokenSessionResponse500Details$outboundSchema
+          ),
+        ).optional(),
+      }))
+  );
 
 /** @internal */
 export const ExchangeSessionTokenSessionResponse429Details$inboundSchema:
@@ -331,10 +341,12 @@ export const ExchangeSessionTokenSessionResponse429Details$inboundSchema:
     ExchangeSessionTokenSessionResponse429Details,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 /** @internal */
 export type ExchangeSessionTokenSessionResponse429Details$Outbound = {
   path: string;
@@ -347,10 +359,12 @@ export const ExchangeSessionTokenSessionResponse429Details$outboundSchema:
     ExchangeSessionTokenSessionResponse429Details$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse429Details
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 
 export function exchangeSessionTokenSessionResponse429DetailsToJSON(
   exchangeSessionTokenSessionResponse429Details:
@@ -384,22 +398,26 @@ export const ExchangeSessionTokenSessionResponse429ResponseBody$inboundSchema:
     ExchangeSessionTokenSessionResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    details: z.array(
-      z.lazy(() => ExchangeSessionTokenSessionResponse429Details$inboundSchema),
-    ).optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ExchangeSessionTokenSessionResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() =>
+          ExchangeSessionTokenSessionResponse429Details$inboundSchema
+        ),
+      ).optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ExchangeSessionTokenSessionResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ExchangeSessionTokenSessionResponse429ResponseBody$Outbound = {
@@ -415,16 +433,18 @@ export const ExchangeSessionTokenSessionResponse429ResponseBody$outboundSchema:
     ExchangeSessionTokenSessionResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse429ResponseBody
-  > = z.instanceof(ExchangeSessionTokenSessionResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      details: z.array(
-        z.lazy(() =>
-          ExchangeSessionTokenSessionResponse429Details$outboundSchema
-        ),
-      ).optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ExchangeSessionTokenSessionResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        details: z.array(
+          z.lazy(() =>
+            ExchangeSessionTokenSessionResponse429Details$outboundSchema
+          ),
+        ).optional(),
+      }))
+  );
 
 /** @internal */
 export const ExchangeSessionTokenSessionResponse413Details$inboundSchema:
@@ -432,10 +452,12 @@ export const ExchangeSessionTokenSessionResponse413Details$inboundSchema:
     ExchangeSessionTokenSessionResponse413Details,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 /** @internal */
 export type ExchangeSessionTokenSessionResponse413Details$Outbound = {
   path: string;
@@ -448,10 +470,12 @@ export const ExchangeSessionTokenSessionResponse413Details$outboundSchema:
     ExchangeSessionTokenSessionResponse413Details$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse413Details
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 
 export function exchangeSessionTokenSessionResponse413DetailsToJSON(
   exchangeSessionTokenSessionResponse413Details:
@@ -485,22 +509,26 @@ export const ExchangeSessionTokenSessionResponse413ResponseBody$inboundSchema:
     ExchangeSessionTokenSessionResponse413ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    details: z.array(
-      z.lazy(() => ExchangeSessionTokenSessionResponse413Details$inboundSchema),
-    ).optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ExchangeSessionTokenSessionResponse413ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() =>
+          ExchangeSessionTokenSessionResponse413Details$inboundSchema
+        ),
+      ).optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ExchangeSessionTokenSessionResponse413ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ExchangeSessionTokenSessionResponse413ResponseBody$Outbound = {
@@ -516,24 +544,28 @@ export const ExchangeSessionTokenSessionResponse413ResponseBody$outboundSchema:
     ExchangeSessionTokenSessionResponse413ResponseBody$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponse413ResponseBody
-  > = z.instanceof(ExchangeSessionTokenSessionResponse413ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      details: z.array(
-        z.lazy(() =>
-          ExchangeSessionTokenSessionResponse413Details$outboundSchema
-        ),
-      ).optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ExchangeSessionTokenSessionResponse413ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        details: z.array(
+          z.lazy(() =>
+            ExchangeSessionTokenSessionResponse413Details$outboundSchema
+          ),
+        ).optional(),
+      }))
+  );
 
 /** @internal */
 export const ExchangeSessionTokenSessionResponseDetails$inboundSchema:
   z.ZodType<ExchangeSessionTokenSessionResponseDetails, z.ZodTypeDef, unknown> =
-    z.object({
-      path: z.string(),
-      message: z.string(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        path: z.string(),
+        message: z.string(),
+      })
+    );
 /** @internal */
 export type ExchangeSessionTokenSessionResponseDetails$Outbound = {
   path: string;
@@ -546,10 +578,12 @@ export const ExchangeSessionTokenSessionResponseDetails$outboundSchema:
     ExchangeSessionTokenSessionResponseDetails$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponseDetails
-  > = z.object({
-    path: z.string(),
-    message: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      path: z.string(),
+      message: z.string(),
+    })
+  );
 
 export function exchangeSessionTokenSessionResponseDetailsToJSON(
   exchangeSessionTokenSessionResponseDetails:
@@ -583,22 +617,24 @@ export const ExchangeSessionTokenSessionResponseResponseBody$inboundSchema:
     ExchangeSessionTokenSessionResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    details: z.array(
-      z.lazy(() => ExchangeSessionTokenSessionResponseDetails$inboundSchema),
-    ).optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ExchangeSessionTokenSessionResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() => ExchangeSessionTokenSessionResponseDetails$inboundSchema),
+      ).optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ExchangeSessionTokenSessionResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ExchangeSessionTokenSessionResponseResponseBody$Outbound = {
@@ -614,24 +650,30 @@ export const ExchangeSessionTokenSessionResponseResponseBody$outboundSchema:
     ExchangeSessionTokenSessionResponseResponseBody$Outbound,
     z.ZodTypeDef,
     ExchangeSessionTokenSessionResponseResponseBody
-  > = z.instanceof(ExchangeSessionTokenSessionResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      details: z.array(
-        z.lazy(() => ExchangeSessionTokenSessionResponseDetails$outboundSchema),
-      ).optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ExchangeSessionTokenSessionResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        details: z.array(
+          z.lazy(() =>
+            ExchangeSessionTokenSessionResponseDetails$outboundSchema
+          ),
+        ).optional(),
+      }))
+  );
 
 /** @internal */
 export const ExchangeSessionTokenSessionDetails$inboundSchema: z.ZodType<
   ExchangeSessionTokenSessionDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenSessionDetails$Outbound = {
   path: string;
@@ -643,10 +685,12 @@ export const ExchangeSessionTokenSessionDetails$outboundSchema: z.ZodType<
   ExchangeSessionTokenSessionDetails$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenSessionDetails
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 
 export function exchangeSessionTokenSessionDetailsToJSON(
   exchangeSessionTokenSessionDetails: ExchangeSessionTokenSessionDetails,
@@ -673,22 +717,24 @@ export const ExchangeSessionTokenSessionResponseBody$inboundSchema: z.ZodType<
   ExchangeSessionTokenSessionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  details: z.array(
-    z.lazy(() => ExchangeSessionTokenSessionDetails$inboundSchema),
-  ).optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ExchangeSessionTokenSessionResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    details: z.array(
+      z.lazy(() => ExchangeSessionTokenSessionDetails$inboundSchema),
+    ).optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ExchangeSessionTokenSessionResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type ExchangeSessionTokenSessionResponseBody$Outbound = {
@@ -701,24 +747,28 @@ export const ExchangeSessionTokenSessionResponseBody$outboundSchema: z.ZodType<
   ExchangeSessionTokenSessionResponseBody$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenSessionResponseBody
-> = z.instanceof(ExchangeSessionTokenSessionResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    details: z.array(
-      z.lazy(() => ExchangeSessionTokenSessionDetails$outboundSchema),
-    ).optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ExchangeSessionTokenSessionResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() => ExchangeSessionTokenSessionDetails$outboundSchema),
+      ).optional(),
+    }))
+);
 
 /** @internal */
 export const ExchangeSessionTokenDetails$inboundSchema: z.ZodType<
   ExchangeSessionTokenDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type ExchangeSessionTokenDetails$Outbound = {
   path: string;
@@ -730,10 +780,12 @@ export const ExchangeSessionTokenDetails$outboundSchema: z.ZodType<
   ExchangeSessionTokenDetails$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenDetails
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 
 export function exchangeSessionTokenDetailsToJSON(
   exchangeSessionTokenDetails: ExchangeSessionTokenDetails,
@@ -759,21 +811,23 @@ export const ExchangeSessionTokenResponseBody$inboundSchema: z.ZodType<
   ExchangeSessionTokenResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  details: z.array(z.lazy(() => ExchangeSessionTokenDetails$inboundSchema))
-    .optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new ExchangeSessionTokenResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    details: z.array(z.lazy(() => ExchangeSessionTokenDetails$inboundSchema))
+      .optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new ExchangeSessionTokenResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type ExchangeSessionTokenResponseBody$Outbound = {
@@ -786,10 +840,12 @@ export const ExchangeSessionTokenResponseBody$outboundSchema: z.ZodType<
   ExchangeSessionTokenResponseBody$Outbound,
   z.ZodTypeDef,
   ExchangeSessionTokenResponseBody
-> = z.instanceof(ExchangeSessionTokenResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    details: z.array(z.lazy(() => ExchangeSessionTokenDetails$outboundSchema))
-      .optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(ExchangeSessionTokenResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      details: z.array(z.lazy(() => ExchangeSessionTokenDetails$outboundSchema))
+        .optional(),
+    }))
+);

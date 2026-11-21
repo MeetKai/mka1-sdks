@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -51,16 +51,18 @@ export type UploadFileRequest = {
 };
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    fileName: z.string(),
-    content: z.union([
-      z.instanceof(ReadableStream<Uint8Array>),
-      z.instanceof(Blob),
-      z.instanceof(ArrayBuffer),
-      z.instanceof(Uint8Array),
-    ]),
-  });
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      fileName: z.string(),
+      content: z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]),
+    })
+  );
 /** @internal */
 export type FileT$Outbound = {
   fileName: string;
@@ -72,15 +74,17 @@ export const FileT$outboundSchema: z.ZodType<
   FileT$Outbound,
   z.ZodTypeDef,
   FileT
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function fileToJSON(fileT: FileT): string {
   return JSON.stringify(FileT$outboundSchema.parse(fileT));
@@ -96,8 +100,8 @@ export function fileFromJSON(
 }
 
 /** @internal */
-export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
-  .nativeEnum(Purpose);
+export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Purpose));
 /** @internal */
 export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
   Purpose$inboundSchema;
@@ -107,10 +111,12 @@ export const UploadFileRequestBody$inboundSchema: z.ZodType<
   UploadFileRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file: z.lazy(() => FileT$inboundSchema),
-  purpose: Purpose$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file: z.lazy(() => FileT$inboundSchema),
+    purpose: Purpose$inboundSchema,
+  })
+);
 /** @internal */
 export type UploadFileRequestBody$Outbound = {
   file: FileT$Outbound | Blob;
@@ -122,10 +128,12 @@ export const UploadFileRequestBody$outboundSchema: z.ZodType<
   UploadFileRequestBody$Outbound,
   z.ZodTypeDef,
   UploadFileRequestBody
-> = z.object({
-  file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
-  purpose: Purpose$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file: z.lazy(() => FileT$outboundSchema).or(blobLikeSchema),
+    purpose: Purpose$outboundSchema,
+  })
+);
 
 export function uploadFileRequestBodyToJSON(
   uploadFileRequestBody: UploadFileRequestBody,
@@ -149,15 +157,17 @@ export const UploadFileRequest$inboundSchema: z.ZodType<
   UploadFileRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UploadFileRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UploadFileRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UploadFileRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -169,15 +179,17 @@ export const UploadFileRequest$outboundSchema: z.ZodType<
   UploadFileRequest$Outbound,
   z.ZodTypeDef,
   UploadFileRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UploadFileRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UploadFileRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function uploadFileRequestToJSON(
   uploadFileRequest: UploadFileRequest,

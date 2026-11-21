@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const ReasoningText$inboundSchema: z.ZodType<
   ReasoningText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("reasoning_text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning_text"),
+    text: z.string(),
+  })
+);
 /** @internal */
 export type ReasoningText$Outbound = {
   type: "reasoning_text";
@@ -32,10 +34,12 @@ export const ReasoningText$outboundSchema: z.ZodType<
   ReasoningText$Outbound,
   z.ZodTypeDef,
   ReasoningText
-> = z.object({
-  type: z.literal("reasoning_text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("reasoning_text"),
+    text: z.string(),
+  })
+);
 
 export function reasoningTextToJSON(reasoningText: ReasoningText): string {
   return JSON.stringify(ReasoningText$outboundSchema.parse(reasoningText));

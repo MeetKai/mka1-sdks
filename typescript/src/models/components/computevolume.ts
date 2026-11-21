@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,7 @@ export type ComputeVolume = {
 /** @internal */
 export const ComputeVolumeStatus$inboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeStatus
-> = z.nativeEnum(ComputeVolumeStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ComputeVolumeStatus));
 /** @internal */
 export const ComputeVolumeStatus$outboundSchema: z.ZodNativeEnum<
   typeof ComputeVolumeStatus
@@ -48,21 +48,23 @@ export const ComputeVolume$inboundSchema: z.ZodType<
   ComputeVolume,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accrued_cost_usd: z.number(),
-  data: z.array(ComputeVolumeData$inboundSchema),
-  mount_path: z.string(),
-  price_usd_hr: z.number(),
-  size_gb: z.number().int(),
-  status: ComputeVolumeStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "accrued_cost_usd": "accruedCostUsd",
-    "mount_path": "mountPath",
-    "price_usd_hr": "priceUsdHr",
-    "size_gb": "sizeGb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accrued_cost_usd: z.number(),
+    data: z.array(ComputeVolumeData$inboundSchema),
+    mount_path: z.string(),
+    price_usd_hr: z.number(),
+    size_gb: z.number().int(),
+    status: ComputeVolumeStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "accrued_cost_usd": "accruedCostUsd",
+      "mount_path": "mountPath",
+      "price_usd_hr": "priceUsdHr",
+      "size_gb": "sizeGb",
+    });
+  })
+);
 /** @internal */
 export type ComputeVolume$Outbound = {
   accrued_cost_usd: number;
@@ -78,21 +80,23 @@ export const ComputeVolume$outboundSchema: z.ZodType<
   ComputeVolume$Outbound,
   z.ZodTypeDef,
   ComputeVolume
-> = z.object({
-  accruedCostUsd: z.number(),
-  data: z.array(ComputeVolumeData$outboundSchema),
-  mountPath: z.string(),
-  priceUsdHr: z.number(),
-  sizeGb: z.number().int(),
-  status: ComputeVolumeStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    accruedCostUsd: "accrued_cost_usd",
-    mountPath: "mount_path",
-    priceUsdHr: "price_usd_hr",
-    sizeGb: "size_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accruedCostUsd: z.number(),
+    data: z.array(ComputeVolumeData$outboundSchema),
+    mountPath: z.string(),
+    priceUsdHr: z.number(),
+    sizeGb: z.number().int(),
+    status: ComputeVolumeStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      accruedCostUsd: "accrued_cost_usd",
+      mountPath: "mount_path",
+      priceUsdHr: "price_usd_hr",
+      sizeGb: "size_gb",
+    });
+  })
+);
 
 export function computeVolumeToJSON(computeVolume: ComputeVolume): string {
   return JSON.stringify(ComputeVolume$outboundSchema.parse(computeVolume));

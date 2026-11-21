@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -197,19 +198,21 @@ export const UpdateSsoPolicyAuthOrgsResponse429ResponseBody$inboundSchema:
     UpdateSsoPolicyAuthOrgsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateSsoPolicyAuthOrgsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateSsoPolicyAuthOrgsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponse429ResponseBody$Outbound = {
@@ -222,11 +225,13 @@ export const UpdateSsoPolicyAuthOrgsResponse429ResponseBody$outboundSchema:
     UpdateSsoPolicyAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateSsoPolicyAuthOrgsResponse429ResponseBody
-  > = z.instanceof(UpdateSsoPolicyAuthOrgsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateSsoPolicyAuthOrgsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsResponse410ResponseBody$inboundSchema:
@@ -234,19 +239,21 @@ export const UpdateSsoPolicyAuthOrgsResponse410ResponseBody$inboundSchema:
     UpdateSsoPolicyAuthOrgsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateSsoPolicyAuthOrgsResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateSsoPolicyAuthOrgsResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponse410ResponseBody$Outbound = {
@@ -259,11 +266,13 @@ export const UpdateSsoPolicyAuthOrgsResponse410ResponseBody$outboundSchema:
     UpdateSsoPolicyAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateSsoPolicyAuthOrgsResponse410ResponseBody
-  > = z.instanceof(UpdateSsoPolicyAuthOrgsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateSsoPolicyAuthOrgsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsResponse409ResponseBody$inboundSchema:
@@ -271,19 +280,21 @@ export const UpdateSsoPolicyAuthOrgsResponse409ResponseBody$inboundSchema:
     UpdateSsoPolicyAuthOrgsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateSsoPolicyAuthOrgsResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateSsoPolicyAuthOrgsResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponse409ResponseBody$Outbound = {
@@ -296,11 +307,13 @@ export const UpdateSsoPolicyAuthOrgsResponse409ResponseBody$outboundSchema:
     UpdateSsoPolicyAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateSsoPolicyAuthOrgsResponse409ResponseBody
-  > = z.instanceof(UpdateSsoPolicyAuthOrgsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateSsoPolicyAuthOrgsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsResponse404ResponseBody$inboundSchema:
@@ -308,19 +321,21 @@ export const UpdateSsoPolicyAuthOrgsResponse404ResponseBody$inboundSchema:
     UpdateSsoPolicyAuthOrgsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateSsoPolicyAuthOrgsResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateSsoPolicyAuthOrgsResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponse404ResponseBody$Outbound = {
@@ -333,11 +348,13 @@ export const UpdateSsoPolicyAuthOrgsResponse404ResponseBody$outboundSchema:
     UpdateSsoPolicyAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateSsoPolicyAuthOrgsResponse404ResponseBody
-  > = z.instanceof(UpdateSsoPolicyAuthOrgsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateSsoPolicyAuthOrgsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsResponseResponseBody$inboundSchema:
@@ -345,20 +362,22 @@ export const UpdateSsoPolicyAuthOrgsResponseResponseBody$inboundSchema:
     UpdateSsoPolicyAuthOrgsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new UpdateSsoPolicyAuthOrgsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new UpdateSsoPolicyAuthOrgsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponseResponseBody$Outbound = {
@@ -372,31 +391,35 @@ export const UpdateSsoPolicyAuthOrgsResponseResponseBody$outboundSchema:
     UpdateSsoPolicyAuthOrgsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateSsoPolicyAuthOrgsResponseResponseBody
-  > = z.instanceof(UpdateSsoPolicyAuthOrgsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(UpdateSsoPolicyAuthOrgsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const UpdateSsoPolicyAuthOrgsResponseBody$inboundSchema: z.ZodType<
   UpdateSsoPolicyAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new UpdateSsoPolicyAuthOrgsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new UpdateSsoPolicyAuthOrgsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type UpdateSsoPolicyAuthOrgsResponseBody$Outbound = {
@@ -408,30 +431,34 @@ export const UpdateSsoPolicyAuthOrgsResponseBody$outboundSchema: z.ZodType<
   UpdateSsoPolicyAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyAuthOrgsResponseBody
-> = z.instanceof(UpdateSsoPolicyAuthOrgsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(UpdateSsoPolicyAuthOrgsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const UpdateSsoPolicyResponseBody$inboundSchema: z.ZodType<
   UpdateSsoPolicyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new UpdateSsoPolicyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new UpdateSsoPolicyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type UpdateSsoPolicyResponseBody$Outbound = {
@@ -443,8 +470,10 @@ export const UpdateSsoPolicyResponseBody$outboundSchema: z.ZodType<
   UpdateSsoPolicyResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateSsoPolicyResponseBody
-> = z.instanceof(UpdateSsoPolicyResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(UpdateSsoPolicyResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

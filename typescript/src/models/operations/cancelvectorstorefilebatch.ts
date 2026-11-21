@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const CancelVectorStoreFileBatchRequest$inboundSchema: z.ZodType<
   CancelVectorStoreFileBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  batch_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "batch_id": "batchId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    batch_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "batch_id": "batchId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type CancelVectorStoreFileBatchRequest$Outbound = {
   vector_store_id: string;
@@ -45,17 +47,19 @@ export const CancelVectorStoreFileBatchRequest$outboundSchema: z.ZodType<
   CancelVectorStoreFileBatchRequest$Outbound,
   z.ZodTypeDef,
   CancelVectorStoreFileBatchRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  batchId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    batchId: "batch_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    batchId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      batchId: "batch_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function cancelVectorStoreFileBatchRequestToJSON(
   cancelVectorStoreFileBatchRequest: CancelVectorStoreFileBatchRequest,

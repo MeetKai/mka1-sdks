@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -87,15 +87,15 @@ export type EvalDataset = {
 };
 
 /** @internal */
-export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> = z
-  .nativeEnum(Source);
+export const Source$inboundSchema: z.ZodNativeEnum<typeof Source> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Source));
 /** @internal */
 export const Source$outboundSchema: z.ZodNativeEnum<typeof Source> =
   Source$inboundSchema;
 
 /** @internal */
-export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.array(z.string())]);
+export const Three$inboundSchema: z.ZodType<Three, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.array(z.string())]));
 /** @internal */
 export type Three$Outbound = string | Array<string>;
 
@@ -104,7 +104,9 @@ export const Three$outboundSchema: z.ZodType<
   Three$Outbound,
   z.ZodTypeDef,
   Three
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function threeToJSON(three: Three): string {
   return JSON.stringify(Three$outboundSchema.parse(three));
@@ -124,11 +126,13 @@ export const DataFiles$inboundSchema: z.ZodType<
   DataFiles,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.string()),
-  z.record(z.union([z.string(), z.array(z.string())])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.string()),
+    z.record(z.union([z.string(), z.array(z.string())])),
+  ])
+);
 /** @internal */
 export type DataFiles$Outbound = string | Array<string> | {
   [k: string]: string | Array<string>;
@@ -139,11 +143,13 @@ export const DataFiles$outboundSchema: z.ZodType<
   DataFiles$Outbound,
   z.ZodTypeDef,
   DataFiles
-> = z.union([
-  z.string(),
-  z.array(z.string()),
-  z.record(z.union([z.string(), z.array(z.string())])),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.string()),
+    z.record(z.union([z.string(), z.array(z.string())])),
+  ])
+);
 
 export function dataFilesToJSON(dataFiles: DataFiles): string {
   return JSON.stringify(DataFiles$outboundSchema.parse(dataFiles));
@@ -163,31 +169,33 @@ export const EvalDataset$inboundSchema: z.ZodType<
   EvalDataset,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: Source$inboundSchema.optional(),
-  file_id: z.string().optional(),
-  format: EvalDatasetFormat$inboundSchema.optional(),
-  path: z.string().optional(),
-  name: z.string().optional(),
-  split: z.string().optional(),
-  revision: z.string().optional(),
-  data_files: z.union([
-    z.string(),
-    z.array(z.string()),
-    z.record(z.union([z.string(), z.array(z.string())])),
-  ]).optional(),
-  dataset_kwargs: z.record(z.any()).optional(),
-  max_rows: z.number().int().optional(),
-  audio_column: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "data_files": "dataFiles",
-    "dataset_kwargs": "datasetKwargs",
-    "max_rows": "maxRows",
-    "audio_column": "audioColumn",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: Source$inboundSchema.optional(),
+    file_id: z.string().optional(),
+    format: EvalDatasetFormat$inboundSchema.optional(),
+    path: z.string().optional(),
+    name: z.string().optional(),
+    split: z.string().optional(),
+    revision: z.string().optional(),
+    data_files: z.union([
+      z.string(),
+      z.array(z.string()),
+      z.record(z.union([z.string(), z.array(z.string())])),
+    ]).optional(),
+    dataset_kwargs: z.record(z.any()).optional(),
+    max_rows: z.number().int().optional(),
+    audio_column: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "data_files": "dataFiles",
+      "dataset_kwargs": "datasetKwargs",
+      "max_rows": "maxRows",
+      "audio_column": "audioColumn",
+    });
+  })
+);
 /** @internal */
 export type EvalDataset$Outbound = {
   source?: string | undefined;
@@ -212,31 +220,33 @@ export const EvalDataset$outboundSchema: z.ZodType<
   EvalDataset$Outbound,
   z.ZodTypeDef,
   EvalDataset
-> = z.object({
-  source: Source$outboundSchema.optional(),
-  fileId: z.string().optional(),
-  format: EvalDatasetFormat$outboundSchema.optional(),
-  path: z.string().optional(),
-  name: z.string().optional(),
-  split: z.string().optional(),
-  revision: z.string().optional(),
-  dataFiles: z.union([
-    z.string(),
-    z.array(z.string()),
-    z.record(z.union([z.string(), z.array(z.string())])),
-  ]).optional(),
-  datasetKwargs: z.record(z.any()).optional(),
-  maxRows: z.number().int().optional(),
-  audioColumn: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    dataFiles: "data_files",
-    datasetKwargs: "dataset_kwargs",
-    maxRows: "max_rows",
-    audioColumn: "audio_column",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: Source$outboundSchema.optional(),
+    fileId: z.string().optional(),
+    format: EvalDatasetFormat$outboundSchema.optional(),
+    path: z.string().optional(),
+    name: z.string().optional(),
+    split: z.string().optional(),
+    revision: z.string().optional(),
+    dataFiles: z.union([
+      z.string(),
+      z.array(z.string()),
+      z.record(z.union([z.string(), z.array(z.string())])),
+    ]).optional(),
+    datasetKwargs: z.record(z.any()).optional(),
+    maxRows: z.number().int().optional(),
+    audioColumn: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      dataFiles: "data_files",
+      datasetKwargs: "dataset_kwargs",
+      maxRows: "max_rows",
+      audioColumn: "audio_column",
+    });
+  })
+);
 
 export function evalDatasetToJSON(evalDataset: EvalDataset): string {
   return JSON.stringify(EvalDataset$outboundSchema.parse(evalDataset));

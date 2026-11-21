@@ -18,6 +18,12 @@ type FeatureFlagError struct {
 var _ error = &FeatureFlagError{}
 
 func (e *FeatureFlagError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

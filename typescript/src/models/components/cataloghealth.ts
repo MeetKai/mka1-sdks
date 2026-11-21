@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,17 +39,19 @@ export const CatalogHealth$inboundSchema: z.ZodType<
   CatalogHealth,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: CatalogHealthStatus$inboundSchema,
-  is_available: z.boolean(),
-  last_health_check: z.nullable(z.number()),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "is_available": "isAvailable",
-    "last_health_check": "lastHealthCheck",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogHealthStatus$inboundSchema,
+    is_available: z.boolean(),
+    last_health_check: z.nullable(z.number()),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "is_available": "isAvailable",
+      "last_health_check": "lastHealthCheck",
+    });
+  })
+);
 /** @internal */
 export type CatalogHealth$Outbound = {
   status: string;
@@ -63,17 +65,19 @@ export const CatalogHealth$outboundSchema: z.ZodType<
   CatalogHealth$Outbound,
   z.ZodTypeDef,
   CatalogHealth
-> = z.object({
-  status: CatalogHealthStatus$outboundSchema,
-  isAvailable: z.boolean(),
-  lastHealthCheck: z.nullable(z.number()),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    isAvailable: "is_available",
-    lastHealthCheck: "last_health_check",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogHealthStatus$outboundSchema,
+    isAvailable: z.boolean(),
+    lastHealthCheck: z.nullable(z.number()),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      isAvailable: "is_available",
+      lastHealthCheck: "last_health_check",
+    });
+  })
+);
 
 export function catalogHealthToJSON(catalogHealth: CatalogHealth): string {
   return JSON.stringify(CatalogHealth$outboundSchema.parse(catalogHealth));

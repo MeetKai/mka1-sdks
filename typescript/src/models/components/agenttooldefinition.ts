@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,16 +32,18 @@ export const AgentToolDefinition$inboundSchema: z.ZodType<
   AgentToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("agent"),
-  agent_id: z.string(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("agent"),
+    agent_id: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  })
+);
 /** @internal */
 export type AgentToolDefinition$Outbound = {
   type: "agent";
@@ -55,16 +57,18 @@ export const AgentToolDefinition$outboundSchema: z.ZodType<
   AgentToolDefinition$Outbound,
   z.ZodTypeDef,
   AgentToolDefinition
-> = z.object({
-  type: z.literal("agent"),
-  agentId: z.string(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("agent"),
+    agentId: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
+  })
+);
 
 export function agentToolDefinitionToJSON(
   agentToolDefinition: AgentToolDefinition,

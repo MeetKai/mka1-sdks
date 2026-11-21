@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,7 @@ export type AgentConnectorList = {
 /** @internal */
 export const AgentConnectorListObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorListObject
-> = z.nativeEnum(AgentConnectorListObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentConnectorListObject));
 /** @internal */
 export const AgentConnectorListObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentConnectorListObject
@@ -44,19 +44,21 @@ export const AgentConnectorList$inboundSchema: z.ZodType<
   AgentConnectorList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentConnectorListObject$inboundSchema,
-  data: z.array(AgentConnector$inboundSchema),
-  first_id: z.nullable(z.string()),
-  last_id: z.nullable(z.string()),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorListObject$inboundSchema,
+    data: z.array(AgentConnector$inboundSchema),
+    first_id: z.nullable(z.string()),
+    last_id: z.nullable(z.string()),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type AgentConnectorList$Outbound = {
   object: string;
@@ -71,19 +73,21 @@ export const AgentConnectorList$outboundSchema: z.ZodType<
   AgentConnectorList$Outbound,
   z.ZodTypeDef,
   AgentConnectorList
-> = z.object({
-  object: AgentConnectorListObject$outboundSchema,
-  data: z.array(AgentConnector$outboundSchema),
-  firstId: z.nullable(z.string()),
-  lastId: z.nullable(z.string()),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentConnectorListObject$outboundSchema,
+    data: z.array(AgentConnector$outboundSchema),
+    firstId: z.nullable(z.string()),
+    lastId: z.nullable(z.string()),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function agentConnectorListToJSON(
   agentConnectorList: AgentConnectorList,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -36,19 +36,21 @@ export const PutPricingRequest$inboundSchema: z.ZodType<
   PutPricingRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "Idempotency-Key": z.string(),
-  "If-Match": z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputePricingUpdate: components.ComputePricingUpdate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Idempotency-Key": "idempotencyKey",
-    "If-Match": "ifMatch",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputePricingUpdate": "computePricingUpdate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "Idempotency-Key": z.string(),
+    "If-Match": z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputePricingUpdate: components.ComputePricingUpdate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Idempotency-Key": "idempotencyKey",
+      "If-Match": "ifMatch",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputePricingUpdate": "computePricingUpdate",
+    });
+  })
+);
 /** @internal */
 export type PutPricingRequest$Outbound = {
   "Idempotency-Key": string;
@@ -62,19 +64,21 @@ export const PutPricingRequest$outboundSchema: z.ZodType<
   PutPricingRequest$Outbound,
   z.ZodTypeDef,
   PutPricingRequest
-> = z.object({
-  idempotencyKey: z.string(),
-  ifMatch: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  computePricingUpdate: components.ComputePricingUpdate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "Idempotency-Key",
-    ifMatch: "If-Match",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computePricingUpdate: "ComputePricingUpdate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string(),
+    ifMatch: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    computePricingUpdate: components.ComputePricingUpdate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "Idempotency-Key",
+      ifMatch: "If-Match",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computePricingUpdate: "ComputePricingUpdate",
+    });
+  })
+);
 
 export function putPricingRequestToJSON(
   putPricingRequest: PutPricingRequest,
@@ -98,10 +102,12 @@ export const PutPricingResponseResult$inboundSchema: z.ZodType<
   PutPricingResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputePricing$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputePricing$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type PutPricingResponseResult$Outbound =
   | components.ComputePricing$Outbound
@@ -112,10 +118,12 @@ export const PutPricingResponseResult$outboundSchema: z.ZodType<
   PutPricingResponseResult$Outbound,
   z.ZodTypeDef,
   PutPricingResponseResult
-> = z.union([
-  components.ComputePricing$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputePricing$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function putPricingResponseResultToJSON(
   putPricingResponseResult: PutPricingResponseResult,
@@ -139,18 +147,20 @@ export const PutPricingResponse$inboundSchema: z.ZodType<
   PutPricingResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    components.ComputePricing$inboundSchema,
-    components.ComputeErrorEnvelope$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      components.ComputePricing$inboundSchema,
+      components.ComputeErrorEnvelope$inboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type PutPricingResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -164,18 +174,20 @@ export const PutPricingResponse$outboundSchema: z.ZodType<
   PutPricingResponse$Outbound,
   z.ZodTypeDef,
   PutPricingResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    components.ComputePricing$outboundSchema,
-    components.ComputeErrorEnvelope$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      components.ComputePricing$outboundSchema,
+      components.ComputeErrorEnvelope$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function putPricingResponseToJSON(
   putPricingResponse: PutPricingResponse,

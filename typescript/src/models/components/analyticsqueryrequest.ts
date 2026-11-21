@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -116,21 +116,24 @@ export type AnalyticsQueryRequest = {
 /** @internal */
 export const AnalyticsQueryRequestMetric$inboundSchema: z.ZodNativeEnum<
   typeof AnalyticsQueryRequestMetric
-> = z.nativeEnum(AnalyticsQueryRequestMetric);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AnalyticsQueryRequestMetric)
+);
 /** @internal */
 export const AnalyticsQueryRequestMetric$outboundSchema: z.ZodNativeEnum<
   typeof AnalyticsQueryRequestMetric
 > = AnalyticsQueryRequestMetric$inboundSchema;
 
 /** @internal */
-export const Bucket$inboundSchema: z.ZodNativeEnum<typeof Bucket> = z
-  .nativeEnum(Bucket);
+export const Bucket$inboundSchema: z.ZodNativeEnum<typeof Bucket> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Bucket));
 /** @internal */
 export const Bucket$outboundSchema: z.ZodNativeEnum<typeof Bucket> =
   Bucket$inboundSchema;
 
 /** @internal */
-export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> = z.nativeEnum(Op);
+export const Op$inboundSchema: z.ZodNativeEnum<typeof Op> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Op));
 /** @internal */
 export const Op$outboundSchema: z.ZodNativeEnum<typeof Op> = Op$inboundSchema;
 
@@ -139,7 +142,9 @@ export const AnalyticsQueryRequestValue$inboundSchema: z.ZodType<
   AnalyticsQueryRequestValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type AnalyticsQueryRequestValue$Outbound = string | number | boolean;
 
@@ -148,7 +153,9 @@ export const AnalyticsQueryRequestValue$outboundSchema: z.ZodType<
   AnalyticsQueryRequestValue$Outbound,
   z.ZodTypeDef,
   AnalyticsQueryRequestValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function analyticsQueryRequestValueToJSON(
   analyticsQueryRequestValue: AnalyticsQueryRequestValue,
@@ -172,11 +179,14 @@ export const AnalyticsQueryRequestFilters$inboundSchema: z.ZodType<
   AnalyticsQueryRequestFilters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  property: z.string(),
-  op: Op$inboundSchema,
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    property: z.string(),
+    op: Op$inboundSchema,
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+  })
+);
 /** @internal */
 export type AnalyticsQueryRequestFilters$Outbound = {
   property: string;
@@ -189,11 +199,14 @@ export const AnalyticsQueryRequestFilters$outboundSchema: z.ZodType<
   AnalyticsQueryRequestFilters$Outbound,
   z.ZodTypeDef,
   AnalyticsQueryRequestFilters
-> = z.object({
-  property: z.string(),
-  op: Op$outboundSchema,
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    property: z.string(),
+    op: Op$outboundSchema,
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+  })
+);
 
 export function analyticsQueryRequestFiltersToJSON(
   analyticsQueryRequestFilters: AnalyticsQueryRequestFilters,
@@ -219,23 +232,25 @@ export const AnalyticsQueryRequest$inboundSchema: z.ZodType<
   AnalyticsQueryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metric: AnalyticsQueryRequestMetric$inboundSchema,
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  event_name: z.string().optional(),
-  bucket: Bucket$inboundSchema.optional(),
-  timezone: z.string().optional(),
-  group_by: z.string().optional(),
-  filters: z.array(z.lazy(() => AnalyticsQueryRequestFilters$inboundSchema))
-    .optional(),
-  limit: z.number().int().default(100),
-}).transform((v) => {
-  return remap$(v, {
-    "event_name": "eventName",
-    "group_by": "groupBy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: AnalyticsQueryRequestMetric$inboundSchema,
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    event_name: z.string().optional(),
+    bucket: Bucket$inboundSchema.optional(),
+    timezone: z.string().optional(),
+    group_by: z.string().optional(),
+    filters: z.array(z.lazy(() => AnalyticsQueryRequestFilters$inboundSchema))
+      .optional(),
+    limit: z.number().int().default(100),
+  }).transform((v) => {
+    return remap$(v, {
+      "event_name": "eventName",
+      "group_by": "groupBy",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsQueryRequest$Outbound = {
   metric: string;
@@ -254,23 +269,25 @@ export const AnalyticsQueryRequest$outboundSchema: z.ZodType<
   AnalyticsQueryRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsQueryRequest
-> = z.object({
-  metric: AnalyticsQueryRequestMetric$outboundSchema,
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  eventName: z.string().optional(),
-  bucket: Bucket$outboundSchema.optional(),
-  timezone: z.string().optional(),
-  groupBy: z.string().optional(),
-  filters: z.array(z.lazy(() => AnalyticsQueryRequestFilters$outboundSchema))
-    .optional(),
-  limit: z.number().int().default(100),
-}).transform((v) => {
-  return remap$(v, {
-    eventName: "event_name",
-    groupBy: "group_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metric: AnalyticsQueryRequestMetric$outboundSchema,
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    eventName: z.string().optional(),
+    bucket: Bucket$outboundSchema.optional(),
+    timezone: z.string().optional(),
+    groupBy: z.string().optional(),
+    filters: z.array(z.lazy(() => AnalyticsQueryRequestFilters$outboundSchema))
+      .optional(),
+    limit: z.number().int().default(100),
+  }).transform((v) => {
+    return remap$(v, {
+      eventName: "event_name",
+      groupBy: "group_by",
+    });
+  })
+);
 
 export function analyticsQueryRequestToJSON(
   analyticsQueryRequest: AnalyticsQueryRequest,

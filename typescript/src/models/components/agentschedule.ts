@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -92,7 +92,7 @@ export type AgentSchedule = {
 /** @internal */
 export const AgentScheduleObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleObject
-> = z.nativeEnum(AgentScheduleObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentScheduleObject));
 /** @internal */
 export const AgentScheduleObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleObject
@@ -101,15 +101,15 @@ export const AgentScheduleObject$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AgentScheduleStatus$inboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleStatus
-> = z.nativeEnum(AgentScheduleStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentScheduleStatus));
 /** @internal */
 export const AgentScheduleStatus$outboundSchema: z.ZodNativeEnum<
   typeof AgentScheduleStatus
 > = AgentScheduleStatus$inboundSchema;
 
 /** @internal */
-export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> = z
-  .nativeEnum(DeliverTo);
+export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeliverTo));
 /** @internal */
 export const DeliverTo$outboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
   DeliverTo$inboundSchema;
@@ -119,56 +119,62 @@ export const AgentSchedule$inboundSchema: z.ZodType<
   AgentSchedule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentScheduleObject$inboundSchema,
-  id: z.string(),
-  agent_id: z.string(),
-  name: z.nullable(z.string()),
-  status: AgentScheduleStatus$inboundSchema,
-  schedule: AgentScheduleSpec$inboundSchema,
-  input: z.any().optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previous_response_id: z.nullable(z.string()),
-  context_management: z.nullable(
-    z.array(AgentCompactionContextManagement$inboundSchema),
-  ),
-  metadata: z.nullable(z.record(z.string())),
-  deliver_to: z.nullable(DeliverTo$inboundSchema),
-  temporal_schedule_id: z.nullable(z.string()),
-  last_run_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  last_run_id: z.nullable(z.string()),
-  last_run_status: z.nullable(z.string()),
-  last_error: z.nullable(z.string()),
-  next_run_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  stalled: z.nullable(z.boolean()),
-  run_count: z.number().int(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  deleted_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "previous_response_id": "previousResponseId",
-    "context_management": "contextManagement",
-    "deliver_to": "deliverTo",
-    "temporal_schedule_id": "temporalScheduleId",
-    "last_run_at": "lastRunAt",
-    "last_run_id": "lastRunId",
-    "last_run_status": "lastRunStatus",
-    "last_error": "lastError",
-    "next_run_at": "nextRunAt",
-    "run_count": "runCount",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "deleted_at": "deletedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentScheduleObject$inboundSchema,
+    id: z.string(),
+    agent_id: z.string(),
+    name: z.nullable(z.string()),
+    status: AgentScheduleStatus$inboundSchema,
+    schedule: AgentScheduleSpec$inboundSchema,
+    input: z.any().optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previous_response_id: z.nullable(z.string()),
+    context_management: z.nullable(
+      z.array(AgentCompactionContextManagement$inboundSchema),
+    ),
+    metadata: z.nullable(z.record(z.string())),
+    deliver_to: z.nullable(DeliverTo$inboundSchema),
+    temporal_schedule_id: z.nullable(z.string()),
+    last_run_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    last_run_id: z.nullable(z.string()),
+    last_run_status: z.nullable(z.string()),
+    last_error: z.nullable(z.string()),
+    next_run_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    stalled: z.nullable(z.boolean()),
+    run_count: z.number().int(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    deleted_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "previous_response_id": "previousResponseId",
+      "context_management": "contextManagement",
+      "deliver_to": "deliverTo",
+      "temporal_schedule_id": "temporalScheduleId",
+      "last_run_at": "lastRunAt",
+      "last_run_id": "lastRunId",
+      "last_run_status": "lastRunStatus",
+      "last_error": "lastError",
+      "next_run_at": "nextRunAt",
+      "run_count": "runCount",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "deleted_at": "deletedAt",
+    });
+  })
+);
 /** @internal */
 export type AgentSchedule$Outbound = {
   object: string;
@@ -201,50 +207,52 @@ export const AgentSchedule$outboundSchema: z.ZodType<
   AgentSchedule$Outbound,
   z.ZodTypeDef,
   AgentSchedule
-> = z.object({
-  object: AgentScheduleObject$outboundSchema,
-  id: z.string(),
-  agentId: z.string(),
-  name: z.nullable(z.string()),
-  status: AgentScheduleStatus$outboundSchema,
-  schedule: AgentScheduleSpec$outboundSchema,
-  input: z.any().optional(),
-  conversation: z.nullable(z.any()).optional(),
-  previousResponseId: z.nullable(z.string()),
-  contextManagement: z.nullable(
-    z.array(AgentCompactionContextManagement$outboundSchema),
-  ),
-  metadata: z.nullable(z.record(z.string())),
-  deliverTo: z.nullable(DeliverTo$outboundSchema),
-  temporalScheduleId: z.nullable(z.string()),
-  lastRunAt: z.nullable(z.date().transform(v => v.toISOString())),
-  lastRunId: z.nullable(z.string()),
-  lastRunStatus: z.nullable(z.string()),
-  lastError: z.nullable(z.string()),
-  nextRunAt: z.nullable(z.date().transform(v => v.toISOString())),
-  stalled: z.nullable(z.boolean()),
-  runCount: z.number().int(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    previousResponseId: "previous_response_id",
-    contextManagement: "context_management",
-    deliverTo: "deliver_to",
-    temporalScheduleId: "temporal_schedule_id",
-    lastRunAt: "last_run_at",
-    lastRunId: "last_run_id",
-    lastRunStatus: "last_run_status",
-    lastError: "last_error",
-    nextRunAt: "next_run_at",
-    runCount: "run_count",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    deletedAt: "deleted_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentScheduleObject$outboundSchema,
+    id: z.string(),
+    agentId: z.string(),
+    name: z.nullable(z.string()),
+    status: AgentScheduleStatus$outboundSchema,
+    schedule: AgentScheduleSpec$outboundSchema,
+    input: z.any().optional(),
+    conversation: z.nullable(z.any()).optional(),
+    previousResponseId: z.nullable(z.string()),
+    contextManagement: z.nullable(
+      z.array(AgentCompactionContextManagement$outboundSchema),
+    ),
+    metadata: z.nullable(z.record(z.string())),
+    deliverTo: z.nullable(DeliverTo$outboundSchema),
+    temporalScheduleId: z.nullable(z.string()),
+    lastRunAt: z.nullable(z.date().transform(v => v.toISOString())),
+    lastRunId: z.nullable(z.string()),
+    lastRunStatus: z.nullable(z.string()),
+    lastError: z.nullable(z.string()),
+    nextRunAt: z.nullable(z.date().transform(v => v.toISOString())),
+    stalled: z.nullable(z.boolean()),
+    runCount: z.number().int(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      previousResponseId: "previous_response_id",
+      contextManagement: "context_management",
+      deliverTo: "deliver_to",
+      temporalScheduleId: "temporal_schedule_id",
+      lastRunAt: "last_run_at",
+      lastRunId: "last_run_id",
+      lastRunStatus: "last_run_status",
+      lastError: "last_error",
+      nextRunAt: "next_run_at",
+      runCount: "run_count",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      deletedAt: "deleted_at",
+    });
+  })
+);
 
 export function agentScheduleToJSON(agentSchedule: AgentSchedule): string {
   return JSON.stringify(AgentSchedule$outboundSchema.parse(agentSchedule));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,15 +26,17 @@ export const GetComputeTenantRequest$inboundSchema: z.ZodType<
   GetComputeTenantRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetComputeTenantRequest$Outbound = {
   org_id: string;
@@ -46,15 +48,17 @@ export const GetComputeTenantRequest$outboundSchema: z.ZodType<
   GetComputeTenantRequest$Outbound,
   z.ZodTypeDef,
   GetComputeTenantRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getComputeTenantRequestToJSON(
   getComputeTenantRequest: GetComputeTenantRequest,
@@ -78,10 +82,12 @@ export const GetComputeTenantResponse$inboundSchema: z.ZodType<
   GetComputeTenantResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeTenant$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeTenant$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type GetComputeTenantResponse$Outbound =
   | components.ComputeTenant$Outbound
@@ -92,10 +98,12 @@ export const GetComputeTenantResponse$outboundSchema: z.ZodType<
   GetComputeTenantResponse$Outbound,
   z.ZodTypeDef,
   GetComputeTenantResponse
-> = z.union([
-  components.ComputeTenant$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeTenant$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function getComputeTenantResponseToJSON(
   getComputeTenantResponse: GetComputeTenantResponse,

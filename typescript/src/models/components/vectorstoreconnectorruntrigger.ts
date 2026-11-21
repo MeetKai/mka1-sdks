@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -25,7 +26,9 @@ export type VectorStoreConnectorRunTrigger = ClosedEnum<
 /** @internal */
 export const VectorStoreConnectorRunTrigger$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRunTrigger
-> = z.nativeEnum(VectorStoreConnectorRunTrigger);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VectorStoreConnectorRunTrigger)
+);
 /** @internal */
 export const VectorStoreConnectorRunTrigger$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRunTrigger

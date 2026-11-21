@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,11 +35,13 @@ export const CreateAgentConnectorRequest$inboundSchema: z.ZodType<
   CreateAgentConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  CreateTelegramAgentConnectorRequest$inboundSchema,
-  CreateWhatsAppAgentConnectorRequest$inboundSchema,
-  CreateWebAgentConnectorRequest$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    CreateTelegramAgentConnectorRequest$inboundSchema,
+    CreateWhatsAppAgentConnectorRequest$inboundSchema,
+    CreateWebAgentConnectorRequest$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateAgentConnectorRequest$Outbound =
   | CreateTelegramAgentConnectorRequest$Outbound
@@ -51,11 +53,13 @@ export const CreateAgentConnectorRequest$outboundSchema: z.ZodType<
   CreateAgentConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentConnectorRequest
-> = z.union([
-  CreateTelegramAgentConnectorRequest$outboundSchema,
-  CreateWhatsAppAgentConnectorRequest$outboundSchema,
-  CreateWebAgentConnectorRequest$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    CreateTelegramAgentConnectorRequest$outboundSchema,
+    CreateWhatsAppAgentConnectorRequest$outboundSchema,
+    CreateWebAgentConnectorRequest$outboundSchema,
+  ])
+);
 
 export function createAgentConnectorRequestToJSON(
   createAgentConnectorRequest: CreateAgentConnectorRequest,

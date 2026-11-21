@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -37,7 +37,7 @@ export type AgentTextConfiguration = {
 /** @internal */
 export const AgentTextConfigurationType$inboundSchema: z.ZodNativeEnum<
   typeof AgentTextConfigurationType
-> = z.nativeEnum(AgentTextConfigurationType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentTextConfigurationType));
 /** @internal */
 export const AgentTextConfigurationType$outboundSchema: z.ZodNativeEnum<
   typeof AgentTextConfigurationType
@@ -48,9 +48,11 @@ export const AgentTextConfigurationFormat$inboundSchema: z.ZodType<
   AgentTextConfigurationFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AgentTextConfigurationType$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentTextConfigurationType$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type AgentTextConfigurationFormat$Outbound = {
   type?: string | undefined;
@@ -61,9 +63,11 @@ export const AgentTextConfigurationFormat$outboundSchema: z.ZodType<
   AgentTextConfigurationFormat$Outbound,
   z.ZodTypeDef,
   AgentTextConfigurationFormat
-> = z.object({
-  type: AgentTextConfigurationType$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentTextConfigurationType$outboundSchema.optional(),
+  })
+);
 
 export function agentTextConfigurationFormatToJSON(
   agentTextConfigurationFormat: AgentTextConfigurationFormat,
@@ -87,7 +91,9 @@ export function agentTextConfigurationFormatFromJSON(
 /** @internal */
 export const AgentTextConfigurationVerbosity$inboundSchema: z.ZodNativeEnum<
   typeof AgentTextConfigurationVerbosity
-> = z.nativeEnum(AgentTextConfigurationVerbosity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentTextConfigurationVerbosity)
+);
 /** @internal */
 export const AgentTextConfigurationVerbosity$outboundSchema: z.ZodNativeEnum<
   typeof AgentTextConfigurationVerbosity
@@ -98,10 +104,12 @@ export const AgentTextConfiguration$inboundSchema: z.ZodType<
   AgentTextConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: z.lazy(() => AgentTextConfigurationFormat$inboundSchema).optional(),
-  verbosity: AgentTextConfigurationVerbosity$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: z.lazy(() => AgentTextConfigurationFormat$inboundSchema).optional(),
+    verbosity: AgentTextConfigurationVerbosity$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type AgentTextConfiguration$Outbound = {
   format?: AgentTextConfigurationFormat$Outbound | undefined;
@@ -113,10 +121,13 @@ export const AgentTextConfiguration$outboundSchema: z.ZodType<
   AgentTextConfiguration$Outbound,
   z.ZodTypeDef,
   AgentTextConfiguration
-> = z.object({
-  format: z.lazy(() => AgentTextConfigurationFormat$outboundSchema).optional(),
-  verbosity: AgentTextConfigurationVerbosity$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: z.lazy(() => AgentTextConfigurationFormat$outboundSchema)
+      .optional(),
+    verbosity: AgentTextConfigurationVerbosity$outboundSchema.optional(),
+  })
+);
 
 export function agentTextConfigurationToJSON(
   agentTextConfiguration: AgentTextConfiguration,

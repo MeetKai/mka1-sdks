@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateAgentRequest$inboundSchema: z.ZodType<
   CreateAgentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateAgentRequest: components.CreateAgentRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateAgentRequest": "createAgentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateAgentRequest: components.CreateAgentRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateAgentRequest": "createAgentRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateAgentRequest$outboundSchema: z.ZodType<
   CreateAgentRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createAgentRequest: components.CreateAgentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createAgentRequest: "CreateAgentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createAgentRequest: components.CreateAgentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createAgentRequest: "CreateAgentRequest",
+    });
+  })
+);
 
 export function createAgentRequestToJSON(
   createAgentRequest: CreateAgentRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -94,7 +94,7 @@ export type ComputeJob = {
 
 /** @internal */
 export const PricingModel$inboundSchema: z.ZodNativeEnum<typeof PricingModel> =
-  z.nativeEnum(PricingModel);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PricingModel));
 /** @internal */
 export const PricingModel$outboundSchema: z.ZodNativeEnum<typeof PricingModel> =
   PricingModel$inboundSchema;
@@ -104,48 +104,52 @@ export const ComputeJob$inboundSchema: z.ZodType<
   ComputeJob,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accrued_usd: z.number(),
-  allocated_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ).optional(),
-  compute: ComputeRequest$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  current_price_usd_hr: z.number().optional(),
-  endpoints: z.array(ComputeEndpoint$inboundSchema),
-  hardware: ComputeHardware$inboundSchema.optional(),
-  id: z.string(),
-  instance_price_usd_hr: z.number().optional(),
-  limits: ComputeLimits$inboundSchema,
-  name: z.string().optional(),
-  price_usd_hr: z.number().optional(),
-  pricing_model: PricingModel$inboundSchema.optional(),
-  provider: z.string().optional(),
-  reason: z.nullable(ComputeReason$inboundSchema),
-  ssh: ComputeSSH$inboundSchema.optional(),
-  started_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  state: ComputeResourceState$inboundSchema,
-  terminal_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
-  exit_code: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accrued_usd": "accruedUsd",
-    "allocated_at": "allocatedAt",
-    "created_at": "createdAt",
-    "current_price_usd_hr": "currentPriceUsdHr",
-    "instance_price_usd_hr": "instancePriceUsdHr",
-    "price_usd_hr": "priceUsdHr",
-    "pricing_model": "pricingModel",
-    "started_at": "startedAt",
-    "terminal_at": "terminalAt",
-    "exit_code": "exitCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accrued_usd: z.number(),
+    allocated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    compute: ComputeRequest$inboundSchema,
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    current_price_usd_hr: z.number().optional(),
+    endpoints: z.array(ComputeEndpoint$inboundSchema),
+    hardware: ComputeHardware$inboundSchema.optional(),
+    id: z.string(),
+    instance_price_usd_hr: z.number().optional(),
+    limits: ComputeLimits$inboundSchema,
+    name: z.string().optional(),
+    price_usd_hr: z.number().optional(),
+    pricing_model: PricingModel$inboundSchema.optional(),
+    provider: z.string().optional(),
+    reason: z.nullable(ComputeReason$inboundSchema),
+    ssh: ComputeSSH$inboundSchema.optional(),
+    started_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    state: ComputeResourceState$inboundSchema,
+    terminal_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
+    exit_code: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "accrued_usd": "accruedUsd",
+      "allocated_at": "allocatedAt",
+      "created_at": "createdAt",
+      "current_price_usd_hr": "currentPriceUsdHr",
+      "instance_price_usd_hr": "instancePriceUsdHr",
+      "price_usd_hr": "priceUsdHr",
+      "pricing_model": "pricingModel",
+      "started_at": "startedAt",
+      "terminal_at": "terminalAt",
+      "exit_code": "exitCode",
+    });
+  })
+);
 /** @internal */
 export type ComputeJob$Outbound = {
   accrued_usd: number;
@@ -176,42 +180,44 @@ export const ComputeJob$outboundSchema: z.ZodType<
   ComputeJob$Outbound,
   z.ZodTypeDef,
   ComputeJob
-> = z.object({
-  accruedUsd: z.number(),
-  allocatedAt: z.date().transform(v => v.toISOString()).optional(),
-  compute: ComputeRequest$outboundSchema,
-  createdAt: z.date().transform(v => v.toISOString()),
-  currentPriceUsdHr: z.number().optional(),
-  endpoints: z.array(ComputeEndpoint$outboundSchema),
-  hardware: ComputeHardware$outboundSchema.optional(),
-  id: z.string(),
-  instancePriceUsdHr: z.number().optional(),
-  limits: ComputeLimits$outboundSchema,
-  name: z.string().optional(),
-  priceUsdHr: z.number().optional(),
-  pricingModel: PricingModel$outboundSchema.optional(),
-  provider: z.string().optional(),
-  reason: z.nullable(ComputeReason$outboundSchema),
-  ssh: ComputeSSH$outboundSchema.optional(),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  state: ComputeResourceState$outboundSchema,
-  terminalAt: z.nullable(z.date().transform(v => v.toISOString())),
-  volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
-  exitCode: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accruedUsd: "accrued_usd",
-    allocatedAt: "allocated_at",
-    createdAt: "created_at",
-    currentPriceUsdHr: "current_price_usd_hr",
-    instancePriceUsdHr: "instance_price_usd_hr",
-    priceUsdHr: "price_usd_hr",
-    pricingModel: "pricing_model",
-    startedAt: "started_at",
-    terminalAt: "terminal_at",
-    exitCode: "exit_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accruedUsd: z.number(),
+    allocatedAt: z.date().transform(v => v.toISOString()).optional(),
+    compute: ComputeRequest$outboundSchema,
+    createdAt: z.date().transform(v => v.toISOString()),
+    currentPriceUsdHr: z.number().optional(),
+    endpoints: z.array(ComputeEndpoint$outboundSchema),
+    hardware: ComputeHardware$outboundSchema.optional(),
+    id: z.string(),
+    instancePriceUsdHr: z.number().optional(),
+    limits: ComputeLimits$outboundSchema,
+    name: z.string().optional(),
+    priceUsdHr: z.number().optional(),
+    pricingModel: PricingModel$outboundSchema.optional(),
+    provider: z.string().optional(),
+    reason: z.nullable(ComputeReason$outboundSchema),
+    ssh: ComputeSSH$outboundSchema.optional(),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    state: ComputeResourceState$outboundSchema,
+    terminalAt: z.nullable(z.date().transform(v => v.toISOString())),
+    volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
+    exitCode: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accruedUsd: "accrued_usd",
+      allocatedAt: "allocated_at",
+      createdAt: "created_at",
+      currentPriceUsdHr: "current_price_usd_hr",
+      instancePriceUsdHr: "instance_price_usd_hr",
+      priceUsdHr: "price_usd_hr",
+      pricingModel: "pricing_model",
+      startedAt: "started_at",
+      terminalAt: "terminal_at",
+      exitCode: "exit_code",
+    });
+  })
+);
 
 export function computeJobToJSON(computeJob: ComputeJob): string {
   return JSON.stringify(ComputeJob$outboundSchema.parse(computeJob));

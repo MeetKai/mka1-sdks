@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,10 +23,12 @@ export const McpOAuthCompleteRequest$inboundSchema: z.ZodType<
   McpOAuthCompleteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  state: z.string(),
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: z.string(),
+    code: z.string(),
+  })
+);
 /** @internal */
 export type McpOAuthCompleteRequest$Outbound = {
   state: string;
@@ -38,10 +40,12 @@ export const McpOAuthCompleteRequest$outboundSchema: z.ZodType<
   McpOAuthCompleteRequest$Outbound,
   z.ZodTypeDef,
   McpOAuthCompleteRequest
-> = z.object({
-  state: z.string(),
-  code: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: z.string(),
+    code: z.string(),
+  })
+);
 
 export function mcpOAuthCompleteRequestToJSON(
   mcpOAuthCompleteRequest: McpOAuthCompleteRequest,

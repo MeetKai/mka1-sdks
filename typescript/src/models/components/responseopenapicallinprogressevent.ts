@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,21 +28,23 @@ export const ResponseOpenApiCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseOpenApiCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.openapi_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  tool_set: z.string(),
-  operation: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "tool_set": "toolSet",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.openapi_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    tool_set: z.string(),
+    operation: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "tool_set": "toolSet",
+    });
+  })
+);
 /** @internal */
 export type ResponseOpenApiCallInProgressEvent$Outbound = {
   type: "response.openapi_call.in_progress";
@@ -58,21 +60,23 @@ export const ResponseOpenApiCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseOpenApiCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseOpenApiCallInProgressEvent
-> = z.object({
-  type: z.literal("response.openapi_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  toolSet: z.string(),
-  operation: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    toolSet: "tool_set",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.openapi_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    toolSet: z.string(),
+    operation: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      toolSet: "tool_set",
+    });
+  })
+);
 
 export function responseOpenApiCallInProgressEventToJSON(
   responseOpenApiCallInProgressEvent: ResponseOpenApiCallInProgressEvent,

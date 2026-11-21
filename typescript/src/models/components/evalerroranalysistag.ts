@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,15 +68,15 @@ export type EvalErrorAnalysisTag = {
 /** @internal */
 export const EvalErrorAnalysisTagTier$inboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisTagTier
-> = z.nativeEnum(EvalErrorAnalysisTagTier);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EvalErrorAnalysisTagTier));
 /** @internal */
 export const EvalErrorAnalysisTagTier$outboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisTagTier
 > = EvalErrorAnalysisTagTier$inboundSchema;
 
 /** @internal */
-export const Verdict$inboundSchema: z.ZodNativeEnum<typeof Verdict> = z
-  .nativeEnum(Verdict);
+export const Verdict$inboundSchema: z.ZodNativeEnum<typeof Verdict> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Verdict));
 /** @internal */
 export const Verdict$outboundSchema: z.ZodNativeEnum<typeof Verdict> =
   Verdict$inboundSchema;
@@ -84,7 +84,9 @@ export const Verdict$outboundSchema: z.ZodNativeEnum<typeof Verdict> =
 /** @internal */
 export const EvalErrorAnalysisTagSeverity$inboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisTagSeverity
-> = z.nativeEnum(EvalErrorAnalysisTagSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvalErrorAnalysisTagSeverity)
+);
 /** @internal */
 export const EvalErrorAnalysisTagSeverity$outboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisTagSeverity
@@ -95,44 +97,46 @@ export const EvalErrorAnalysisTag$inboundSchema: z.ZodType<
   EvalErrorAnalysisTag,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  run_id: z.string(),
-  task_id: z.string(),
-  sample_index: z.number().int(),
-  tier: EvalErrorAnalysisTagTier$inboundSchema,
-  metric_value: z.number(),
-  secondary_value: z.nullable(z.number()),
-  board_median: z.nullable(z.number()),
-  others_failing: z.number().int(),
-  others_total: z.number().int(),
-  excess_over_board: z.nullable(z.number()),
-  both_judges_fail: z.boolean(),
-  heard_text: z.string(),
-  verdict: Verdict$inboundSchema,
-  categories: z.array(z.string()),
-  primary_category: z.string(),
-  severity: EvalErrorAnalysisTagSeverity$inboundSchema,
-  affected_span: z.string(),
-  explanation: z.string(),
-  batch: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "task_id": "taskId",
-    "sample_index": "sampleIndex",
-    "metric_value": "metricValue",
-    "secondary_value": "secondaryValue",
-    "board_median": "boardMedian",
-    "others_failing": "othersFailing",
-    "others_total": "othersTotal",
-    "excess_over_board": "excessOverBoard",
-    "both_judges_fail": "bothJudgesFail",
-    "heard_text": "heardText",
-    "primary_category": "primaryCategory",
-    "affected_span": "affectedSpan",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    run_id: z.string(),
+    task_id: z.string(),
+    sample_index: z.number().int(),
+    tier: EvalErrorAnalysisTagTier$inboundSchema,
+    metric_value: z.number(),
+    secondary_value: z.nullable(z.number()),
+    board_median: z.nullable(z.number()),
+    others_failing: z.number().int(),
+    others_total: z.number().int(),
+    excess_over_board: z.nullable(z.number()),
+    both_judges_fail: z.boolean(),
+    heard_text: z.string(),
+    verdict: Verdict$inboundSchema,
+    categories: z.array(z.string()),
+    primary_category: z.string(),
+    severity: EvalErrorAnalysisTagSeverity$inboundSchema,
+    affected_span: z.string(),
+    explanation: z.string(),
+    batch: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "task_id": "taskId",
+      "sample_index": "sampleIndex",
+      "metric_value": "metricValue",
+      "secondary_value": "secondaryValue",
+      "board_median": "boardMedian",
+      "others_failing": "othersFailing",
+      "others_total": "othersTotal",
+      "excess_over_board": "excessOverBoard",
+      "both_judges_fail": "bothJudgesFail",
+      "heard_text": "heardText",
+      "primary_category": "primaryCategory",
+      "affected_span": "affectedSpan",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisTag$Outbound = {
   id: string;
@@ -162,44 +166,46 @@ export const EvalErrorAnalysisTag$outboundSchema: z.ZodType<
   EvalErrorAnalysisTag$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisTag
-> = z.object({
-  id: z.string(),
-  runId: z.string(),
-  taskId: z.string(),
-  sampleIndex: z.number().int(),
-  tier: EvalErrorAnalysisTagTier$outboundSchema,
-  metricValue: z.number(),
-  secondaryValue: z.nullable(z.number()),
-  boardMedian: z.nullable(z.number()),
-  othersFailing: z.number().int(),
-  othersTotal: z.number().int(),
-  excessOverBoard: z.nullable(z.number()),
-  bothJudgesFail: z.boolean(),
-  heardText: z.string(),
-  verdict: Verdict$outboundSchema,
-  categories: z.array(z.string()),
-  primaryCategory: z.string(),
-  severity: EvalErrorAnalysisTagSeverity$outboundSchema,
-  affectedSpan: z.string(),
-  explanation: z.string(),
-  batch: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    taskId: "task_id",
-    sampleIndex: "sample_index",
-    metricValue: "metric_value",
-    secondaryValue: "secondary_value",
-    boardMedian: "board_median",
-    othersFailing: "others_failing",
-    othersTotal: "others_total",
-    excessOverBoard: "excess_over_board",
-    bothJudgesFail: "both_judges_fail",
-    heardText: "heard_text",
-    primaryCategory: "primary_category",
-    affectedSpan: "affected_span",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    runId: z.string(),
+    taskId: z.string(),
+    sampleIndex: z.number().int(),
+    tier: EvalErrorAnalysisTagTier$outboundSchema,
+    metricValue: z.number(),
+    secondaryValue: z.nullable(z.number()),
+    boardMedian: z.nullable(z.number()),
+    othersFailing: z.number().int(),
+    othersTotal: z.number().int(),
+    excessOverBoard: z.nullable(z.number()),
+    bothJudgesFail: z.boolean(),
+    heardText: z.string(),
+    verdict: Verdict$outboundSchema,
+    categories: z.array(z.string()),
+    primaryCategory: z.string(),
+    severity: EvalErrorAnalysisTagSeverity$outboundSchema,
+    affectedSpan: z.string(),
+    explanation: z.string(),
+    batch: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      taskId: "task_id",
+      sampleIndex: "sample_index",
+      metricValue: "metric_value",
+      secondaryValue: "secondary_value",
+      boardMedian: "board_median",
+      othersFailing: "others_failing",
+      othersTotal: "others_total",
+      excessOverBoard: "excess_over_board",
+      bothJudgesFail: "both_judges_fail",
+      heardText: "heard_text",
+      primaryCategory: "primary_category",
+      affectedSpan: "affected_span",
+    });
+  })
+);
 
 export function evalErrorAnalysisTagToJSON(
   evalErrorAnalysisTag: EvalErrorAnalysisTag,

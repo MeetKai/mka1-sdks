@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const ConnectGitHubAccountRequest$inboundSchema: z.ZodType<
   ConnectGitHubAccountRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ConnectRequest: components.ConnectRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ConnectRequest": "connectRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ConnectRequest: components.ConnectRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ConnectRequest": "connectRequest",
+    });
+  })
+);
 /** @internal */
 export type ConnectGitHubAccountRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const ConnectGitHubAccountRequest$outboundSchema: z.ZodType<
   ConnectGitHubAccountRequest$Outbound,
   z.ZodTypeDef,
   ConnectGitHubAccountRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  connectRequest: components.ConnectRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    connectRequest: "ConnectRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    connectRequest: components.ConnectRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      connectRequest: "ConnectRequest",
+    });
+  })
+);
 
 export function connectGitHubAccountRequestToJSON(
   connectGitHubAccountRequest: ConnectGitHubAccountRequest,

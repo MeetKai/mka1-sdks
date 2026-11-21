@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -157,11 +157,13 @@ export const GetFileContentLlmFilesResponseError$inboundSchema: z.ZodType<
   GetFileContentLlmFilesResponseError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type GetFileContentLlmFilesResponseError$Outbound = {
   message?: string | undefined;
@@ -174,11 +176,13 @@ export const GetFileContentLlmFilesResponseError$outboundSchema: z.ZodType<
   GetFileContentLlmFilesResponseError$Outbound,
   z.ZodTypeDef,
   GetFileContentLlmFilesResponseError
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 
 export function getFileContentLlmFilesResponseErrorToJSON(
   getFileContentLlmFilesResponseError: GetFileContentLlmFilesResponseError,
@@ -206,20 +210,22 @@ export const GetFileContentLlmFilesResponse500ResponseBody$inboundSchema:
     GetFileContentLlmFilesResponse500ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    error: z.lazy(() => GetFileContentLlmFilesResponseError$inboundSchema)
-      .optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetFileContentLlmFilesResponse500ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      error: z.lazy(() => GetFileContentLlmFilesResponseError$inboundSchema)
+        .optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetFileContentLlmFilesResponse500ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetFileContentLlmFilesResponse500ResponseBody$Outbound = {
@@ -232,23 +238,27 @@ export const GetFileContentLlmFilesResponse500ResponseBody$outboundSchema:
     GetFileContentLlmFilesResponse500ResponseBody$Outbound,
     z.ZodTypeDef,
     GetFileContentLlmFilesResponse500ResponseBody
-  > = z.instanceof(GetFileContentLlmFilesResponse500ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      error: z.lazy(() => GetFileContentLlmFilesResponseError$outboundSchema)
-        .optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetFileContentLlmFilesResponse500ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        error: z.lazy(() => GetFileContentLlmFilesResponseError$outboundSchema)
+          .optional(),
+      }))
+  );
 
 /** @internal */
 export const GetFileContentLlmFilesError$inboundSchema: z.ZodType<
   GetFileContentLlmFilesError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type GetFileContentLlmFilesError$Outbound = {
   message?: string | undefined;
@@ -261,11 +271,13 @@ export const GetFileContentLlmFilesError$outboundSchema: z.ZodType<
   GetFileContentLlmFilesError$Outbound,
   z.ZodTypeDef,
   GetFileContentLlmFilesError
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 
 export function getFileContentLlmFilesErrorToJSON(
   getFileContentLlmFilesError: GetFileContentLlmFilesError,
@@ -289,19 +301,22 @@ export function getFileContentLlmFilesErrorFromJSON(
 /** @internal */
 export const GetFileContentLlmFilesResponseResponseBody$inboundSchema:
   z.ZodType<GetFileContentLlmFilesResponseResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      error: z.lazy(() => GetFileContentLlmFilesError$inboundSchema).optional(),
-      request$: z.instanceof(Request),
-      response$: z.instanceof(Response),
-      body$: z.string(),
-    })
-      .transform((v) => {
-        return new GetFileContentLlmFilesResponseResponseBody(v, {
-          request: v.request$,
-          response: v.response$,
-          body: v.body$,
-        });
-      });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        error: z.lazy(() => GetFileContentLlmFilesError$inboundSchema)
+          .optional(),
+        request$: z.instanceof(Request),
+        response$: z.instanceof(Response),
+        body$: z.string(),
+      })
+        .transform((v) => {
+          return new GetFileContentLlmFilesResponseResponseBody(v, {
+            request: v.request$,
+            response: v.response$,
+            body: v.body$,
+          });
+        })
+    );
 
 /** @internal */
 export type GetFileContentLlmFilesResponseResponseBody$Outbound = {
@@ -314,23 +329,27 @@ export const GetFileContentLlmFilesResponseResponseBody$outboundSchema:
     GetFileContentLlmFilesResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetFileContentLlmFilesResponseResponseBody
-  > = z.instanceof(GetFileContentLlmFilesResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      error: z.lazy(() => GetFileContentLlmFilesError$outboundSchema)
-        .optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetFileContentLlmFilesResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        error: z.lazy(() => GetFileContentLlmFilesError$outboundSchema)
+          .optional(),
+      }))
+  );
 
 /** @internal */
 export const GetFileContentError$inboundSchema: z.ZodType<
   GetFileContentError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type GetFileContentError$Outbound = {
   message?: string | undefined;
@@ -343,11 +362,13 @@ export const GetFileContentError$outboundSchema: z.ZodType<
   GetFileContentError$Outbound,
   z.ZodTypeDef,
   GetFileContentError
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 
 export function getFileContentErrorToJSON(
   getFileContentError: GetFileContentError,
@@ -371,19 +392,21 @@ export const GetFileContentLlmFilesResponseBody$inboundSchema: z.ZodType<
   GetFileContentLlmFilesResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.lazy(() => GetFileContentError$inboundSchema).optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetFileContentLlmFilesResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.lazy(() => GetFileContentError$inboundSchema).optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetFileContentLlmFilesResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetFileContentLlmFilesResponseBody$Outbound = {
@@ -395,22 +418,26 @@ export const GetFileContentLlmFilesResponseBody$outboundSchema: z.ZodType<
   GetFileContentLlmFilesResponseBody$Outbound,
   z.ZodTypeDef,
   GetFileContentLlmFilesResponseBody
-> = z.instanceof(GetFileContentLlmFilesResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.lazy(() => GetFileContentError$outboundSchema).optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetFileContentLlmFilesResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      error: z.lazy(() => GetFileContentError$outboundSchema).optional(),
+    }))
+);
 
 /** @internal */
 export const GetFileContentLlmFilesResponse400Error$inboundSchema: z.ZodType<
   GetFileContentLlmFilesResponse400Error,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type GetFileContentLlmFilesResponse400Error$Outbound = {
   message?: string | undefined;
@@ -423,11 +450,13 @@ export const GetFileContentLlmFilesResponse400Error$outboundSchema: z.ZodType<
   GetFileContentLlmFilesResponse400Error$Outbound,
   z.ZodTypeDef,
   GetFileContentLlmFilesResponse400Error
-> = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  code: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string().optional(),
+    type: z.string().optional(),
+    code: z.number().int().optional(),
+  })
+);
 
 export function getFileContentLlmFilesResponse400ErrorToJSON(
   getFileContentLlmFilesResponse400Error:
@@ -455,20 +484,22 @@ export const GetFileContentResponseBody$inboundSchema: z.ZodType<
   GetFileContentResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: z.lazy(() => GetFileContentLlmFilesResponse400Error$inboundSchema)
-    .optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetFileContentResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: z.lazy(() => GetFileContentLlmFilesResponse400Error$inboundSchema)
+      .optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetFileContentResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetFileContentResponseBody$Outbound = {
@@ -480,9 +511,11 @@ export const GetFileContentResponseBody$outboundSchema: z.ZodType<
   GetFileContentResponseBody$Outbound,
   z.ZodTypeDef,
   GetFileContentResponseBody
-> = z.instanceof(GetFileContentResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    error: z.lazy(() => GetFileContentLlmFilesResponse400Error$outboundSchema)
-      .optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetFileContentResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      error: z.lazy(() => GetFileContentLlmFilesResponse400Error$outboundSchema)
+        .optional(),
+    }))
+);

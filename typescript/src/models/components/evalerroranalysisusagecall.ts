@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,9 +31,8 @@ export type EvalErrorAnalysisUsageCall = {
 };
 
 /** @internal */
-export const Stage$inboundSchema: z.ZodNativeEnum<typeof Stage> = z.nativeEnum(
-  Stage,
-);
+export const Stage$inboundSchema: z.ZodNativeEnum<typeof Stage> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Stage));
 /** @internal */
 export const Stage$outboundSchema: z.ZodNativeEnum<typeof Stage> =
   Stage$inboundSchema;
@@ -43,26 +42,28 @@ export const EvalErrorAnalysisUsageCall$inboundSchema: z.ZodType<
   EvalErrorAnalysisUsageCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stage: Stage$inboundSchema,
-  batch: z.nullable(z.string()),
-  prompt_tokens: z.number().int(),
-  prompt_text_tokens: z.number().int(),
-  prompt_audio_tokens: z.number().int(),
-  prompt_cached_tokens: z.number().int().default(0),
-  output_tokens: z.number().int(),
-  thinking_tokens: z.number().int(),
-  seconds: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "prompt_text_tokens": "promptTextTokens",
-    "prompt_audio_tokens": "promptAudioTokens",
-    "prompt_cached_tokens": "promptCachedTokens",
-    "output_tokens": "outputTokens",
-    "thinking_tokens": "thinkingTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: Stage$inboundSchema,
+    batch: z.nullable(z.string()),
+    prompt_tokens: z.number().int(),
+    prompt_text_tokens: z.number().int(),
+    prompt_audio_tokens: z.number().int(),
+    prompt_cached_tokens: z.number().int().default(0),
+    output_tokens: z.number().int(),
+    thinking_tokens: z.number().int(),
+    seconds: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "prompt_text_tokens": "promptTextTokens",
+      "prompt_audio_tokens": "promptAudioTokens",
+      "prompt_cached_tokens": "promptCachedTokens",
+      "output_tokens": "outputTokens",
+      "thinking_tokens": "thinkingTokens",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisUsageCall$Outbound = {
   stage: string;
@@ -81,26 +82,28 @@ export const EvalErrorAnalysisUsageCall$outboundSchema: z.ZodType<
   EvalErrorAnalysisUsageCall$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisUsageCall
-> = z.object({
-  stage: Stage$outboundSchema,
-  batch: z.nullable(z.string()),
-  promptTokens: z.number().int(),
-  promptTextTokens: z.number().int(),
-  promptAudioTokens: z.number().int(),
-  promptCachedTokens: z.number().int().default(0),
-  outputTokens: z.number().int(),
-  thinkingTokens: z.number().int(),
-  seconds: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    promptTextTokens: "prompt_text_tokens",
-    promptAudioTokens: "prompt_audio_tokens",
-    promptCachedTokens: "prompt_cached_tokens",
-    outputTokens: "output_tokens",
-    thinkingTokens: "thinking_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: Stage$outboundSchema,
+    batch: z.nullable(z.string()),
+    promptTokens: z.number().int(),
+    promptTextTokens: z.number().int(),
+    promptAudioTokens: z.number().int(),
+    promptCachedTokens: z.number().int().default(0),
+    outputTokens: z.number().int(),
+    thinkingTokens: z.number().int(),
+    seconds: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      promptTextTokens: "prompt_text_tokens",
+      promptAudioTokens: "prompt_audio_tokens",
+      promptCachedTokens: "prompt_cached_tokens",
+      outputTokens: "output_tokens",
+      thinkingTokens: "thinking_tokens",
+    });
+  })
+);
 
 export function evalErrorAnalysisUsageCallToJSON(
   evalErrorAnalysisUsageCall: EvalErrorAnalysisUsageCall,

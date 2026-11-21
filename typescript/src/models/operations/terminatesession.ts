@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const TerminateSessionRequest$inboundSchema: z.ZodType<
   TerminateSessionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  TerminateSessionRequest: components.TerminateSessionRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "TerminateSessionRequest": "terminateSessionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    TerminateSessionRequest: components.TerminateSessionRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "TerminateSessionRequest": "terminateSessionRequest",
+    });
+  })
+);
 /** @internal */
 export type TerminateSessionRequest$Outbound = {
   session_id: string;
@@ -46,17 +48,19 @@ export const TerminateSessionRequest$outboundSchema: z.ZodType<
   TerminateSessionRequest$Outbound,
   z.ZodTypeDef,
   TerminateSessionRequest
-> = z.object({
-  sessionId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  terminateSessionRequest: components.TerminateSessionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    terminateSessionRequest: "TerminateSessionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    terminateSessionRequest: components.TerminateSessionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      terminateSessionRequest: "TerminateSessionRequest",
+    });
+  })
+);
 
 export function terminateSessionRequestToJSON(
   terminateSessionRequest: TerminateSessionRequest,

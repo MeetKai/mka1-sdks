@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -43,15 +43,17 @@ export const GetServiceAccountRequest$inboundSchema: z.ZodType<
   GetServiceAccountRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetServiceAccountRequest$Outbound = {
   orgId: string;
@@ -64,15 +66,17 @@ export const GetServiceAccountRequest$outboundSchema: z.ZodType<
   GetServiceAccountRequest$Outbound,
   z.ZodTypeDef,
   GetServiceAccountRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getServiceAccountRequestToJSON(
   getServiceAccountRequest: GetServiceAccountRequest,
@@ -96,13 +100,15 @@ export const GetServiceAccountServiceAccount$inboundSchema: z.ZodType<
   GetServiceAccountServiceAccount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type GetServiceAccountServiceAccount$Outbound = {
   id: string;
@@ -117,13 +123,15 @@ export const GetServiceAccountServiceAccount$outboundSchema: z.ZodType<
   GetServiceAccountServiceAccount$Outbound,
   z.ZodTypeDef,
   GetServiceAccountServiceAccount
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  name: z.string(),
-  admin: z.boolean(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    name: z.string(),
+    admin: z.boolean(),
+    createdAt: z.string(),
+  })
+);
 
 export function getServiceAccountServiceAccountToJSON(
   getServiceAccountServiceAccount: GetServiceAccountServiceAccount,
@@ -149,10 +157,12 @@ export const GetServiceAccountTeams$inboundSchema: z.ZodType<
   GetServiceAccountTeams,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    teamId: z.string(),
+  })
+);
 /** @internal */
 export type GetServiceAccountTeams$Outbound = {
   id: string;
@@ -164,10 +174,12 @@ export const GetServiceAccountTeams$outboundSchema: z.ZodType<
   GetServiceAccountTeams$Outbound,
   z.ZodTypeDef,
   GetServiceAccountTeams
-> = z.object({
-  id: z.string(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    teamId: z.string(),
+  })
+);
 
 export function getServiceAccountTeamsToJSON(
   getServiceAccountTeams: GetServiceAccountTeams,
@@ -191,10 +203,12 @@ export const GetServiceAccountResponseBody$inboundSchema: z.ZodType<
   GetServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  serviceAccount: z.lazy(() => GetServiceAccountServiceAccount$inboundSchema),
-  teams: z.array(z.lazy(() => GetServiceAccountTeams$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() => GetServiceAccountServiceAccount$inboundSchema),
+    teams: z.array(z.lazy(() => GetServiceAccountTeams$inboundSchema)),
+  })
+);
 /** @internal */
 export type GetServiceAccountResponseBody$Outbound = {
   serviceAccount: GetServiceAccountServiceAccount$Outbound;
@@ -206,10 +220,14 @@ export const GetServiceAccountResponseBody$outboundSchema: z.ZodType<
   GetServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   GetServiceAccountResponseBody
-> = z.object({
-  serviceAccount: z.lazy(() => GetServiceAccountServiceAccount$outboundSchema),
-  teams: z.array(z.lazy(() => GetServiceAccountTeams$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serviceAccount: z.lazy(() =>
+      GetServiceAccountServiceAccount$outboundSchema
+    ),
+    teams: z.array(z.lazy(() => GetServiceAccountTeams$outboundSchema)),
+  })
+);
 
 export function getServiceAccountResponseBodyToJSON(
   getServiceAccountResponseBody: GetServiceAccountResponseBody,

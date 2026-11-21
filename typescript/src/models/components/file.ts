@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -79,39 +79,41 @@ export type FileT = {
 };
 
 /** @internal */
-export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> = z
-  .nativeEnum(Purpose);
+export const Purpose$inboundSchema: z.ZodNativeEnum<typeof Purpose> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Purpose));
 /** @internal */
 export const Purpose$outboundSchema: z.ZodNativeEnum<typeof Purpose> =
   Purpose$inboundSchema;
 
 /** @internal */
-export const FileStatus$inboundSchema: z.ZodNativeEnum<typeof FileStatus> = z
-  .nativeEnum(FileStatus);
+export const FileStatus$inboundSchema: z.ZodNativeEnum<typeof FileStatus> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FileStatus));
 /** @internal */
 export const FileStatus$outboundSchema: z.ZodNativeEnum<typeof FileStatus> =
   FileStatus$inboundSchema;
 
 /** @internal */
-export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    object: z.literal("file").default("file"),
-    bytes: z.number().int(),
-    created_at: z.number().int(),
-    expires_at: z.nullable(z.number().int()).optional(),
-    filename: z.string(),
-    purpose: Purpose$inboundSchema,
-    status: FileStatus$inboundSchema.optional(),
-    status_details: z.string().optional(),
-    sha256: z.nullable(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "created_at": "createdAt",
-      "expires_at": "expiresAt",
-      "status_details": "statusDetails",
-    });
-  });
+export const FileT$inboundSchema: z.ZodType<FileT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      object: z.literal("file").default("file"),
+      bytes: z.number().int(),
+      created_at: z.number().int(),
+      expires_at: z.nullable(z.number().int()).optional(),
+      filename: z.string(),
+      purpose: Purpose$inboundSchema,
+      status: FileStatus$inboundSchema.optional(),
+      status_details: z.string().optional(),
+      sha256: z.nullable(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "created_at": "createdAt",
+        "expires_at": "expiresAt",
+        "status_details": "statusDetails",
+      });
+    })
+  );
 /** @internal */
 export type FileT$Outbound = {
   id: string;
@@ -131,24 +133,26 @@ export const FileT$outboundSchema: z.ZodType<
   FileT$Outbound,
   z.ZodTypeDef,
   FileT
-> = z.object({
-  id: z.string(),
-  object: z.literal("file").default("file" as const),
-  bytes: z.number().int(),
-  createdAt: z.number().int(),
-  expiresAt: z.nullable(z.number().int()).optional(),
-  filename: z.string(),
-  purpose: Purpose$outboundSchema,
-  status: FileStatus$outboundSchema.optional(),
-  statusDetails: z.string().optional(),
-  sha256: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    expiresAt: "expires_at",
-    statusDetails: "status_details",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("file").default("file" as const),
+    bytes: z.number().int(),
+    createdAt: z.number().int(),
+    expiresAt: z.nullable(z.number().int()).optional(),
+    filename: z.string(),
+    purpose: Purpose$outboundSchema,
+    status: FileStatus$outboundSchema.optional(),
+    statusDetails: z.string().optional(),
+    sha256: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      expiresAt: "expires_at",
+      statusDetails: "status_details",
+    });
+  })
+);
 
 export function fileToJSON(fileT: FileT): string {
   return JSON.stringify(FileT$outboundSchema.parse(fileT));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,24 +22,28 @@ export const ReverseAccessEntry$inboundSchema: z.ZodType<
   ReverseAccessEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  granted_by: z.string(),
-  granted_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  active: z.boolean(),
-  activated_by: z.nullable(z.string()),
-  activated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "granted_by": "grantedBy",
-    "granted_at": "grantedAt",
-    "activated_by": "activatedBy",
-    "activated_at": "activatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    granted_by: z.string(),
+    granted_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    active: z.boolean(),
+    activated_by: z.nullable(z.string()),
+    activated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "granted_by": "grantedBy",
+      "granted_at": "grantedAt",
+      "activated_by": "activatedBy",
+      "activated_at": "activatedAt",
+    });
+  })
+);
 /** @internal */
 export type ReverseAccessEntry$Outbound = {
   org_id: string;
@@ -55,22 +59,24 @@ export const ReverseAccessEntry$outboundSchema: z.ZodType<
   ReverseAccessEntry$Outbound,
   z.ZodTypeDef,
   ReverseAccessEntry
-> = z.object({
-  orgId: z.string(),
-  grantedBy: z.string(),
-  grantedAt: z.date().transform(v => v.toISOString()),
-  active: z.boolean(),
-  activatedBy: z.nullable(z.string()),
-  activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    grantedBy: "granted_by",
-    grantedAt: "granted_at",
-    activatedBy: "activated_by",
-    activatedAt: "activated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    grantedBy: z.string(),
+    grantedAt: z.date().transform(v => v.toISOString()),
+    active: z.boolean(),
+    activatedBy: z.nullable(z.string()),
+    activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      grantedBy: "granted_by",
+      grantedAt: "granted_at",
+      activatedBy: "activated_by",
+      activatedAt: "activated_at",
+    });
+  })
+);
 
 export function reverseAccessEntryToJSON(
   reverseAccessEntry: ReverseAccessEntry,

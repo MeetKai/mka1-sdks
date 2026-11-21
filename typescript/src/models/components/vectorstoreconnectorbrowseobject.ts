@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -34,19 +34,21 @@ export const VectorStoreConnectorBrowseObject$inboundSchema: z.ZodType<
   VectorStoreConnectorBrowseObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("object"),
-  name: z.string(),
-  path: z.string(),
-  size_bytes: z.number().int(),
-  modified_at: z.number().int(),
-  selected: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "size_bytes": "sizeBytes",
-    "modified_at": "modifiedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("object"),
+    name: z.string(),
+    path: z.string(),
+    size_bytes: z.number().int(),
+    modified_at: z.number().int(),
+    selected: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "size_bytes": "sizeBytes",
+      "modified_at": "modifiedAt",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorBrowseObject$Outbound = {
   kind: "object";
@@ -62,19 +64,21 @@ export const VectorStoreConnectorBrowseObject$outboundSchema: z.ZodType<
   VectorStoreConnectorBrowseObject$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorBrowseObject
-> = z.object({
-  kind: z.literal("object"),
-  name: z.string(),
-  path: z.string(),
-  sizeBytes: z.number().int(),
-  modifiedAt: z.number().int(),
-  selected: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    sizeBytes: "size_bytes",
-    modifiedAt: "modified_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("object"),
+    name: z.string(),
+    path: z.string(),
+    sizeBytes: z.number().int(),
+    modifiedAt: z.number().int(),
+    selected: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      sizeBytes: "size_bytes",
+      modifiedAt: "modified_at",
+    });
+  })
+);
 
 export function vectorStoreConnectorBrowseObjectToJSON(
   vectorStoreConnectorBrowseObject: VectorStoreConnectorBrowseObject,

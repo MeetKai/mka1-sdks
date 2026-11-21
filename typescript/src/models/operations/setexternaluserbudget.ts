@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -151,7 +151,7 @@ export type SetExternalUserBudgetResponseBody = {
 /** @internal */
 export const SetExternalUserBudgetOwner$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetOwner
-> = z.nativeEnum(SetExternalUserBudgetOwner);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SetExternalUserBudgetOwner));
 /** @internal */
 export const SetExternalUserBudgetOwner$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetOwner
@@ -160,7 +160,9 @@ export const SetExternalUserBudgetOwner$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SetExternalUserBudgetPeriod$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetPeriod
-> = z.nativeEnum(SetExternalUserBudgetPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetPeriod)
+);
 /** @internal */
 export const SetExternalUserBudgetPeriod$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetPeriod
@@ -169,7 +171,9 @@ export const SetExternalUserBudgetPeriod$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SetExternalUserBudgetAction$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetAction
-> = z.nativeEnum(SetExternalUserBudgetAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetAction)
+);
 /** @internal */
 export const SetExternalUserBudgetAction$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetAction
@@ -180,10 +184,12 @@ export const SetExternalUserBudgetThresholds$inboundSchema: z.ZodType<
   SetExternalUserBudgetThresholds,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  pct: z.number().int(),
-  action: SetExternalUserBudgetAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: SetExternalUserBudgetAction$inboundSchema,
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetThresholds$Outbound = {
   pct: number;
@@ -195,10 +201,12 @@ export const SetExternalUserBudgetThresholds$outboundSchema: z.ZodType<
   SetExternalUserBudgetThresholds$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetThresholds
-> = z.object({
-  pct: z.number().int(),
-  action: SetExternalUserBudgetAction$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: SetExternalUserBudgetAction$outboundSchema,
+  })
+);
 
 export function setExternalUserBudgetThresholdsToJSON(
   setExternalUserBudgetThresholds: SetExternalUserBudgetThresholds,
@@ -224,21 +232,23 @@ export const SetExternalUserBudgetRequestBody$inboundSchema: z.ZodType<
   SetExternalUserBudgetRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  owner: SetExternalUserBudgetOwner$inboundSchema.default("org"),
-  period: SetExternalUserBudgetPeriod$inboundSchema,
-  limit: z.number(),
-  thresholds: z.array(
-    z.lazy(() => SetExternalUserBudgetThresholds$inboundSchema),
-  ),
-  webhook_url: z.nullable(z.string()).optional(),
-  webhook_secret: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "webhook_url": "webhookUrl",
-    "webhook_secret": "webhookSecret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    owner: SetExternalUserBudgetOwner$inboundSchema.default("org"),
+    period: SetExternalUserBudgetPeriod$inboundSchema,
+    limit: z.number(),
+    thresholds: z.array(
+      z.lazy(() => SetExternalUserBudgetThresholds$inboundSchema),
+    ),
+    webhook_url: z.nullable(z.string()).optional(),
+    webhook_secret: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "webhook_url": "webhookUrl",
+      "webhook_secret": "webhookSecret",
+    });
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetRequestBody$Outbound = {
   owner: string;
@@ -254,21 +264,23 @@ export const SetExternalUserBudgetRequestBody$outboundSchema: z.ZodType<
   SetExternalUserBudgetRequestBody$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetRequestBody
-> = z.object({
-  owner: SetExternalUserBudgetOwner$outboundSchema.default("org"),
-  period: SetExternalUserBudgetPeriod$outboundSchema,
-  limit: z.number(),
-  thresholds: z.array(
-    z.lazy(() => SetExternalUserBudgetThresholds$outboundSchema),
-  ),
-  webhookUrl: z.nullable(z.string()).optional(),
-  webhookSecret: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    webhookUrl: "webhook_url",
-    webhookSecret: "webhook_secret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    owner: SetExternalUserBudgetOwner$outboundSchema.default("org"),
+    period: SetExternalUserBudgetPeriod$outboundSchema,
+    limit: z.number(),
+    thresholds: z.array(
+      z.lazy(() => SetExternalUserBudgetThresholds$outboundSchema),
+    ),
+    webhookUrl: z.nullable(z.string()).optional(),
+    webhookSecret: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      webhookUrl: "webhook_url",
+      webhookSecret: "webhook_secret",
+    });
+  })
+);
 
 export function setExternalUserBudgetRequestBodyToJSON(
   setExternalUserBudgetRequestBody: SetExternalUserBudgetRequestBody,
@@ -294,16 +306,18 @@ export const SetExternalUserBudgetRequest$inboundSchema: z.ZodType<
   SetExternalUserBudgetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  org_id: z.string().optional(),
-  RequestBody: z.lazy(() => SetExternalUserBudgetRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    org_id: z.string().optional(),
+    RequestBody: z.lazy(() => SetExternalUserBudgetRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetRequest$Outbound = {
   id: string;
@@ -316,16 +330,18 @@ export const SetExternalUserBudgetRequest$outboundSchema: z.ZodType<
   SetExternalUserBudgetRequest$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetRequest
-> = z.object({
-  id: z.string(),
-  orgId: z.string().optional(),
-  requestBody: z.lazy(() => SetExternalUserBudgetRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string().optional(),
+    requestBody: z.lazy(() => SetExternalUserBudgetRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function setExternalUserBudgetRequestToJSON(
   setExternalUserBudgetRequest: SetExternalUserBudgetRequest,
@@ -349,7 +365,7 @@ export function setExternalUserBudgetRequestFromJSON(
 /** @internal */
 export const SetExternalUserBudgetScope$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetScope
-> = z.nativeEnum(SetExternalUserBudgetScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SetExternalUserBudgetScope));
 /** @internal */
 export const SetExternalUserBudgetScope$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetScope
@@ -358,7 +374,9 @@ export const SetExternalUserBudgetScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SetExternalUserBudgetBudgetsOwner$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsOwner
-> = z.nativeEnum(SetExternalUserBudgetBudgetsOwner);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetBudgetsOwner)
+);
 /** @internal */
 export const SetExternalUserBudgetBudgetsOwner$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsOwner
@@ -367,7 +385,9 @@ export const SetExternalUserBudgetBudgetsOwner$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SetExternalUserBudgetBudgetsPeriod$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsPeriod
-> = z.nativeEnum(SetExternalUserBudgetBudgetsPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetBudgetsPeriod)
+);
 /** @internal */
 export const SetExternalUserBudgetBudgetsPeriod$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsPeriod
@@ -376,7 +396,9 @@ export const SetExternalUserBudgetBudgetsPeriod$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const SetExternalUserBudgetBudgetsAction$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsAction
-> = z.nativeEnum(SetExternalUserBudgetBudgetsAction);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetBudgetsAction)
+);
 /** @internal */
 export const SetExternalUserBudgetBudgetsAction$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetBudgetsAction
@@ -387,10 +409,12 @@ export const SetExternalUserBudgetBudgetsThresholds$inboundSchema: z.ZodType<
   SetExternalUserBudgetBudgetsThresholds,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  pct: z.number().int(),
-  action: SetExternalUserBudgetBudgetsAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: SetExternalUserBudgetBudgetsAction$inboundSchema,
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetBudgetsThresholds$Outbound = {
   pct: number;
@@ -402,10 +426,12 @@ export const SetExternalUserBudgetBudgetsThresholds$outboundSchema: z.ZodType<
   SetExternalUserBudgetBudgetsThresholds$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetBudgetsThresholds
-> = z.object({
-  pct: z.number().int(),
-  action: SetExternalUserBudgetBudgetsAction$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    pct: z.number().int(),
+    action: SetExternalUserBudgetBudgetsAction$outboundSchema,
+  })
+);
 
 export function setExternalUserBudgetBudgetsThresholdsToJSON(
   setExternalUserBudgetBudgetsThresholds:
@@ -431,7 +457,9 @@ export function setExternalUserBudgetBudgetsThresholdsFromJSON(
 /** @internal */
 export const SetExternalUserBudgetStatus$inboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetStatus
-> = z.nativeEnum(SetExternalUserBudgetStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SetExternalUserBudgetStatus)
+);
 /** @internal */
 export const SetExternalUserBudgetStatus$outboundSchema: z.ZodNativeEnum<
   typeof SetExternalUserBudgetStatus
@@ -442,17 +470,19 @@ export const SetExternalUserBudgetSpend$inboundSchema: z.ZodType<
   SetExternalUserBudgetSpend,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  window: z.string(),
-  cost_spent: z.number(),
-  limit: z.number(),
-  pct: z.number().int(),
-  status: SetExternalUserBudgetStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "cost_spent": "costSpent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z.string(),
+    cost_spent: z.number(),
+    limit: z.number(),
+    pct: z.number().int(),
+    status: SetExternalUserBudgetStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "cost_spent": "costSpent",
+    });
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetSpend$Outbound = {
   window: string;
@@ -467,17 +497,19 @@ export const SetExternalUserBudgetSpend$outboundSchema: z.ZodType<
   SetExternalUserBudgetSpend$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetSpend
-> = z.object({
-  window: z.string(),
-  costSpent: z.number(),
-  limit: z.number(),
-  pct: z.number().int(),
-  status: SetExternalUserBudgetStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    costSpent: "cost_spent",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    window: z.string(),
+    costSpent: z.number(),
+    limit: z.number(),
+    pct: z.number().int(),
+    status: SetExternalUserBudgetStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      costSpent: "cost_spent",
+    });
+  })
+);
 
 export function setExternalUserBudgetSpendToJSON(
   setExternalUserBudgetSpend: SetExternalUserBudgetSpend,
@@ -501,26 +533,28 @@ export const SetExternalUserBudgetResponseBody$inboundSchema: z.ZodType<
   SetExternalUserBudgetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  scope: SetExternalUserBudgetScope$inboundSchema,
-  scope_id: z.string(),
-  scope_org_id: z.nullable(z.string()),
-  owner: SetExternalUserBudgetBudgetsOwner$inboundSchema,
-  period: SetExternalUserBudgetBudgetsPeriod$inboundSchema,
-  limit: z.number(),
-  thresholds: z.array(
-    z.lazy(() => SetExternalUserBudgetBudgetsThresholds$inboundSchema),
-  ),
-  alert_webhook_url: z.nullable(z.string()),
-  spend: z.lazy(() => SetExternalUserBudgetSpend$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "scope_id": "scopeId",
-    "scope_org_id": "scopeOrgId",
-    "alert_webhook_url": "alertWebhookUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scope: SetExternalUserBudgetScope$inboundSchema,
+    scope_id: z.string(),
+    scope_org_id: z.nullable(z.string()),
+    owner: SetExternalUserBudgetBudgetsOwner$inboundSchema,
+    period: SetExternalUserBudgetBudgetsPeriod$inboundSchema,
+    limit: z.number(),
+    thresholds: z.array(
+      z.lazy(() => SetExternalUserBudgetBudgetsThresholds$inboundSchema),
+    ),
+    alert_webhook_url: z.nullable(z.string()),
+    spend: z.lazy(() => SetExternalUserBudgetSpend$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "scope_id": "scopeId",
+      "scope_org_id": "scopeOrgId",
+      "alert_webhook_url": "alertWebhookUrl",
+    });
+  })
+);
 /** @internal */
 export type SetExternalUserBudgetResponseBody$Outbound = {
   id: string;
@@ -540,26 +574,28 @@ export const SetExternalUserBudgetResponseBody$outboundSchema: z.ZodType<
   SetExternalUserBudgetResponseBody$Outbound,
   z.ZodTypeDef,
   SetExternalUserBudgetResponseBody
-> = z.object({
-  id: z.string(),
-  scope: SetExternalUserBudgetScope$outboundSchema,
-  scopeId: z.string(),
-  scopeOrgId: z.nullable(z.string()),
-  owner: SetExternalUserBudgetBudgetsOwner$outboundSchema,
-  period: SetExternalUserBudgetBudgetsPeriod$outboundSchema,
-  limit: z.number(),
-  thresholds: z.array(
-    z.lazy(() => SetExternalUserBudgetBudgetsThresholds$outboundSchema),
-  ),
-  alertWebhookUrl: z.nullable(z.string()),
-  spend: z.lazy(() => SetExternalUserBudgetSpend$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    scopeId: "scope_id",
-    scopeOrgId: "scope_org_id",
-    alertWebhookUrl: "alert_webhook_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    scope: SetExternalUserBudgetScope$outboundSchema,
+    scopeId: z.string(),
+    scopeOrgId: z.nullable(z.string()),
+    owner: SetExternalUserBudgetBudgetsOwner$outboundSchema,
+    period: SetExternalUserBudgetBudgetsPeriod$outboundSchema,
+    limit: z.number(),
+    thresholds: z.array(
+      z.lazy(() => SetExternalUserBudgetBudgetsThresholds$outboundSchema),
+    ),
+    alertWebhookUrl: z.nullable(z.string()),
+    spend: z.lazy(() => SetExternalUserBudgetSpend$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeId: "scope_id",
+      scopeOrgId: "scope_org_id",
+      alertWebhookUrl: "alert_webhook_url",
+    });
+  })
+);
 
 export function setExternalUserBudgetResponseBodyToJSON(
   setExternalUserBudgetResponseBody: SetExternalUserBudgetResponseBody,

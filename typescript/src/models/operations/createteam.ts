@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,9 +41,11 @@ export const CreateTeamRequestBody$inboundSchema: z.ZodType<
   CreateTeamRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 /** @internal */
 export type CreateTeamRequestBody$Outbound = {
   name: string;
@@ -54,9 +56,11 @@ export const CreateTeamRequestBody$outboundSchema: z.ZodType<
   CreateTeamRequestBody$Outbound,
   z.ZodTypeDef,
   CreateTeamRequestBody
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function createTeamRequestBodyToJSON(
   createTeamRequestBody: CreateTeamRequestBody,
@@ -80,16 +84,18 @@ export const CreateTeamRequest$inboundSchema: z.ZodType<
   CreateTeamRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreateTeamRequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreateTeamRequestBody$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateTeamRequest$Outbound = {
   orgId: string;
@@ -102,16 +108,18 @@ export const CreateTeamRequest$outboundSchema: z.ZodType<
   CreateTeamRequest$Outbound,
   z.ZodTypeDef,
   CreateTeamRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreateTeamRequestBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreateTeamRequestBody$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createTeamRequestToJSON(
   createTeamRequest: CreateTeamRequest,
@@ -131,14 +139,16 @@ export function createTeamRequestFromJSON(
 }
 
 /** @internal */
-export const Team$inboundSchema: z.ZodType<Team, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    organizationId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  });
+export const Team$inboundSchema: z.ZodType<Team, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      organizationId: z.string(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
+    })
+  );
 /** @internal */
 export type Team$Outbound = {
   id: string;
@@ -150,13 +160,15 @@ export type Team$Outbound = {
 
 /** @internal */
 export const Team$outboundSchema: z.ZodType<Team$Outbound, z.ZodTypeDef, Team> =
-  z.object({
-    id: z.string(),
-    name: z.string(),
-    organizationId: z.string(),
-    createdAt: z.string(),
-    updatedAt: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      organizationId: z.string(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
+    })
+  );
 
 export function teamToJSON(team: Team): string {
   return JSON.stringify(Team$outboundSchema.parse(team));
@@ -176,9 +188,11 @@ export const CreateTeamResponseBody$inboundSchema: z.ZodType<
   CreateTeamResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  team: z.lazy(() => Team$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    team: z.lazy(() => Team$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateTeamResponseBody$Outbound = {
   team: Team$Outbound;
@@ -189,9 +203,11 @@ export const CreateTeamResponseBody$outboundSchema: z.ZodType<
   CreateTeamResponseBody$Outbound,
   z.ZodTypeDef,
   CreateTeamResponseBody
-> = z.object({
-  team: z.lazy(() => Team$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    team: z.lazy(() => Team$outboundSchema),
+  })
+);
 
 export function createTeamResponseBodyToJSON(
   createTeamResponseBody: CreateTeamResponseBody,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,9 +59,10 @@ export type ExportResponseFeedbackResponse = {
 
 /** @internal */
 export const ExportResponseFeedbackQueryParamOrder$inboundSchema:
-  z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamOrder> = z.nativeEnum(
-    ExportResponseFeedbackQueryParamOrder,
-  );
+  z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamOrder> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ExportResponseFeedbackQueryParamOrder)
+    );
 /** @internal */
 export const ExportResponseFeedbackQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamOrder> =
@@ -69,9 +70,10 @@ export const ExportResponseFeedbackQueryParamOrder$outboundSchema:
 
 /** @internal */
 export const ExportResponseFeedbackQueryParamRating$inboundSchema:
-  z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamRating> = z.nativeEnum(
-    ExportResponseFeedbackQueryParamRating,
-  );
+  z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamRating> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ExportResponseFeedbackQueryParamRating)
+    );
 /** @internal */
 export const ExportResponseFeedbackQueryParamRating$outboundSchema:
   z.ZodNativeEnum<typeof ExportResponseFeedbackQueryParamRating> =
@@ -82,15 +84,17 @@ export const ExportResponseFeedbackRequest$inboundSchema: z.ZodType<
   ExportResponseFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  order: ExportResponseFeedbackQueryParamOrder$inboundSchema.default("desc"),
-  rating: ExportResponseFeedbackQueryParamRating$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    order: ExportResponseFeedbackQueryParamOrder$inboundSchema.default("desc"),
+    rating: ExportResponseFeedbackQueryParamRating$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ExportResponseFeedbackRequest$Outbound = {
   order: string;
@@ -103,15 +107,17 @@ export const ExportResponseFeedbackRequest$outboundSchema: z.ZodType<
   ExportResponseFeedbackRequest$Outbound,
   z.ZodTypeDef,
   ExportResponseFeedbackRequest
-> = z.object({
-  order: ExportResponseFeedbackQueryParamOrder$outboundSchema.default("desc"),
-  rating: ExportResponseFeedbackQueryParamRating$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    order: ExportResponseFeedbackQueryParamOrder$outboundSchema.default("desc"),
+    rating: ExportResponseFeedbackQueryParamRating$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function exportResponseFeedbackRequestToJSON(
   exportResponseFeedbackRequest: ExportResponseFeedbackRequest,
@@ -137,15 +143,17 @@ export const ExportResponseFeedbackResponse$inboundSchema: z.ZodType<
   ExportResponseFeedbackResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.instanceof(ReadableStream<Uint8Array>),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.instanceof(ReadableStream<Uint8Array>),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ExportResponseFeedbackResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -157,15 +165,17 @@ export const ExportResponseFeedbackResponse$outboundSchema: z.ZodType<
   ExportResponseFeedbackResponse$Outbound,
   z.ZodTypeDef,
   ExportResponseFeedbackResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.instanceof(ReadableStream<Uint8Array>),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.instanceof(ReadableStream<Uint8Array>),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function exportResponseFeedbackResponseToJSON(
   exportResponseFeedbackResponse: ExportResponseFeedbackResponse,

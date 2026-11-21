@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -54,14 +54,16 @@ export const CreateResourcePermissionRequest2$inboundSchema: z.ZodType<
   CreateResourcePermissionRequest2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantee_type: z.literal("team"),
-  role: GrantableResourcePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "grantee_type": "granteeType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantee_type: z.literal("team"),
+    role: GrantableResourcePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "grantee_type": "granteeType",
+    });
+  })
+);
 /** @internal */
 export type CreateResourcePermissionRequest2$Outbound = {
   grantee_type: "team";
@@ -73,14 +75,16 @@ export const CreateResourcePermissionRequest2$outboundSchema: z.ZodType<
   CreateResourcePermissionRequest2$Outbound,
   z.ZodTypeDef,
   CreateResourcePermissionRequest2
-> = z.object({
-  granteeType: z.literal("team"),
-  role: GrantableResourcePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    granteeType: "grantee_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granteeType: z.literal("team"),
+    role: GrantableResourcePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      granteeType: "grantee_type",
+    });
+  })
+);
 
 export function createResourcePermissionRequest2ToJSON(
   createResourcePermissionRequest2: CreateResourcePermissionRequest2,
@@ -106,16 +110,18 @@ export const CreateResourcePermissionRequest1$inboundSchema: z.ZodType<
   CreateResourcePermissionRequest1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  grantee_type: z.literal("user"),
-  user_id: z.string(),
-  role: GrantableResourcePermissionRole$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    grantee_type: z.literal("user"),
+    user_id: z.string(),
+    role: GrantableResourcePermissionRole$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type CreateResourcePermissionRequest1$Outbound = {
   grantee_type: "user";
@@ -128,16 +134,18 @@ export const CreateResourcePermissionRequest1$outboundSchema: z.ZodType<
   CreateResourcePermissionRequest1$Outbound,
   z.ZodTypeDef,
   CreateResourcePermissionRequest1
-> = z.object({
-  granteeType: z.literal("user"),
-  userId: z.string(),
-  role: GrantableResourcePermissionRole$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    granteeType: z.literal("user"),
+    userId: z.string(),
+    role: GrantableResourcePermissionRole$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function createResourcePermissionRequest1ToJSON(
   createResourcePermissionRequest1: CreateResourcePermissionRequest1,
@@ -163,10 +171,12 @@ export const CreateResourcePermissionRequest$inboundSchema: z.ZodType<
   CreateResourcePermissionRequest,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => CreateResourcePermissionRequest1$inboundSchema),
-  z.lazy(() => CreateResourcePermissionRequest2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateResourcePermissionRequest1$inboundSchema),
+    z.lazy(() => CreateResourcePermissionRequest2$inboundSchema),
+  ])
+);
 /** @internal */
 export type CreateResourcePermissionRequest$Outbound =
   | CreateResourcePermissionRequest1$Outbound
@@ -177,10 +187,12 @@ export const CreateResourcePermissionRequest$outboundSchema: z.ZodType<
   CreateResourcePermissionRequest$Outbound,
   z.ZodTypeDef,
   CreateResourcePermissionRequest
-> = z.union([
-  z.lazy(() => CreateResourcePermissionRequest1$outboundSchema),
-  z.lazy(() => CreateResourcePermissionRequest2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => CreateResourcePermissionRequest1$outboundSchema),
+    z.lazy(() => CreateResourcePermissionRequest2$outboundSchema),
+  ])
+);
 
 export function createResourcePermissionRequestToJSON(
   createResourcePermissionRequest: CreateResourcePermissionRequest,

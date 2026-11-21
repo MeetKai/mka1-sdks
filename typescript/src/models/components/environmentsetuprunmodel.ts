@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,7 +28,9 @@ export type EnvironmentSetupRunModel = {
 /** @internal */
 export const EnvironmentSetupRunModelStatus$inboundSchema: z.ZodNativeEnum<
   typeof EnvironmentSetupRunModelStatus
-> = z.nativeEnum(EnvironmentSetupRunModelStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EnvironmentSetupRunModelStatus)
+);
 /** @internal */
 export const EnvironmentSetupRunModelStatus$outboundSchema: z.ZodNativeEnum<
   typeof EnvironmentSetupRunModelStatus
@@ -39,17 +41,19 @@ export const EnvironmentSetupRunModel$inboundSchema: z.ZodType<
   EnvironmentSetupRunModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  status: EnvironmentSetupRunModelStatus$inboundSchema,
-  exit_code: z.nullable(z.number().int()).optional(),
-  detail: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "exit_code": "exitCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    status: EnvironmentSetupRunModelStatus$inboundSchema,
+    exit_code: z.nullable(z.number().int()).optional(),
+    detail: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "exit_code": "exitCode",
+    });
+  })
+);
 /** @internal */
 export type EnvironmentSetupRunModel$Outbound = {
   session_id: string;
@@ -63,17 +67,19 @@ export const EnvironmentSetupRunModel$outboundSchema: z.ZodType<
   EnvironmentSetupRunModel$Outbound,
   z.ZodTypeDef,
   EnvironmentSetupRunModel
-> = z.object({
-  sessionId: z.string(),
-  status: EnvironmentSetupRunModelStatus$outboundSchema,
-  exitCode: z.nullable(z.number().int()).optional(),
-  detail: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    exitCode: "exit_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    status: EnvironmentSetupRunModelStatus$outboundSchema,
+    exitCode: z.nullable(z.number().int()).optional(),
+    detail: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      exitCode: "exit_code",
+    });
+  })
+);
 
 export function environmentSetupRunModelToJSON(
   environmentSetupRunModel: EnvironmentSetupRunModel,

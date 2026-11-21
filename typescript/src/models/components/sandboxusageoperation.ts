@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SandboxUsageOperation = {
@@ -24,7 +25,7 @@ export type SandboxUsageOperation = ClosedEnum<typeof SandboxUsageOperation>;
 /** @internal */
 export const SandboxUsageOperation$inboundSchema: z.ZodNativeEnum<
   typeof SandboxUsageOperation
-> = z.nativeEnum(SandboxUsageOperation);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SandboxUsageOperation));
 /** @internal */
 export const SandboxUsageOperation$outboundSchema: z.ZodNativeEnum<
   typeof SandboxUsageOperation

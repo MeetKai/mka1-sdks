@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,17 +22,19 @@ export const UnlinkVectorStoreConnectorRequest$inboundSchema: z.ZodType<
   UnlinkVectorStoreConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  vector_store_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "vector_store_id": "vectorStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    vector_store_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "vector_store_id": "vectorStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type UnlinkVectorStoreConnectorRequest$Outbound = {
   connector_id: string;
@@ -45,17 +47,19 @@ export const UnlinkVectorStoreConnectorRequest$outboundSchema: z.ZodType<
   UnlinkVectorStoreConnectorRequest$Outbound,
   z.ZodTypeDef,
   UnlinkVectorStoreConnectorRequest
-> = z.object({
-  connectorId: z.string(),
-  vectorStoreId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    vectorStoreId: "vector_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    vectorStoreId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      vectorStoreId: "vector_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function unlinkVectorStoreConnectorRequestToJSON(
   unlinkVectorStoreConnectorRequest: UnlinkVectorStoreConnectorRequest,

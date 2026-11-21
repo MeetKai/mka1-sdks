@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,17 +26,19 @@ export const SandboxUsagePage$inboundSchema: z.ZodType<
   SandboxUsagePage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("page").default("page"),
-  data: z.array(SandboxUsageBucket$inboundSchema).optional(),
-  has_more: z.boolean().default(false),
-  next_page: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_page": "nextPage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("page").default("page"),
+    data: z.array(SandboxUsageBucket$inboundSchema).optional(),
+    has_more: z.boolean().default(false),
+    next_page: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_page": "nextPage",
+    });
+  })
+);
 /** @internal */
 export type SandboxUsagePage$Outbound = {
   object: "page";
@@ -50,17 +52,19 @@ export const SandboxUsagePage$outboundSchema: z.ZodType<
   SandboxUsagePage$Outbound,
   z.ZodTypeDef,
   SandboxUsagePage
-> = z.object({
-  object: z.literal("page").default("page" as const),
-  data: z.array(SandboxUsageBucket$outboundSchema).optional(),
-  hasMore: z.boolean().default(false),
-  nextPage: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    nextPage: "next_page",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("page").default("page" as const),
+    data: z.array(SandboxUsageBucket$outboundSchema).optional(),
+    hasMore: z.boolean().default(false),
+    nextPage: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      nextPage: "next_page",
+    });
+  })
+);
 
 export function sandboxUsagePageToJSON(
   sandboxUsagePage: SandboxUsagePage,

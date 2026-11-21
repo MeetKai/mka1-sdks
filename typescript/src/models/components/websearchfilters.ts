@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const WebSearchFilters$inboundSchema: z.ZodType<
   WebSearchFilters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowed_domains: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_domains": "allowedDomains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowed_domains: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_domains": "allowedDomains",
+    });
+  })
+);
 /** @internal */
 export type WebSearchFilters$Outbound = {
   allowed_domains?: Array<string> | undefined;
@@ -37,13 +39,15 @@ export const WebSearchFilters$outboundSchema: z.ZodType<
   WebSearchFilters$Outbound,
   z.ZodTypeDef,
   WebSearchFilters
-> = z.object({
-  allowedDomains: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allowedDomains: "allowed_domains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedDomains: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedDomains: "allowed_domains",
+    });
+  })
+);
 
 export function webSearchFiltersToJSON(
   webSearchFilters: WebSearchFilters,

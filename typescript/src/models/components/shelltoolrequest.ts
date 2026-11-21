@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -71,21 +71,23 @@ export const Environment2$inboundSchema: z.ZodType<
   Environment2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_reference"),
-  container_id: z.string(),
-  network_policy: ShellNetworkPolicy$inboundSchema.optional(),
-  skills: z.array(SkillEntry$inboundSchema).optional(),
-  memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
-  session_scope: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-    "network_policy": "networkPolicy",
-    "memory_stores": "memoryStores",
-    "session_scope": "sessionScope",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    container_id: z.string(),
+    network_policy: ShellNetworkPolicy$inboundSchema.optional(),
+    skills: z.array(SkillEntry$inboundSchema).optional(),
+    memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
+    session_scope: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+      "network_policy": "networkPolicy",
+      "memory_stores": "memoryStores",
+      "session_scope": "sessionScope",
+    });
+  })
+);
 /** @internal */
 export type Environment2$Outbound = {
   type: "container_reference";
@@ -101,21 +103,23 @@ export const Environment2$outboundSchema: z.ZodType<
   Environment2$Outbound,
   z.ZodTypeDef,
   Environment2
-> = z.object({
-  type: z.literal("container_reference"),
-  containerId: z.string(),
-  networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
-  skills: z.array(SkillEntry$outboundSchema).optional(),
-  memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
-  sessionScope: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-    networkPolicy: "network_policy",
-    memoryStores: "memory_stores",
-    sessionScope: "session_scope",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    containerId: z.string(),
+    networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
+    skills: z.array(SkillEntry$outboundSchema).optional(),
+    memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
+    sessionScope: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+      networkPolicy: "network_policy",
+      memoryStores: "memory_stores",
+      sessionScope: "session_scope",
+    });
+  })
+);
 
 export function environment2ToJSON(environment2: Environment2): string {
   return JSON.stringify(Environment2$outboundSchema.parse(environment2));
@@ -135,10 +139,12 @@ export const Environment$inboundSchema: z.ZodType<
   Environment,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ShellEnvironmentContainerAuto$inboundSchema,
-  z.lazy(() => Environment2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ShellEnvironmentContainerAuto$inboundSchema,
+    z.lazy(() => Environment2$inboundSchema),
+  ])
+);
 /** @internal */
 export type Environment$Outbound =
   | ShellEnvironmentContainerAuto$Outbound
@@ -149,10 +155,12 @@ export const Environment$outboundSchema: z.ZodType<
   Environment$Outbound,
   z.ZodTypeDef,
   Environment
-> = z.union([
-  ShellEnvironmentContainerAuto$outboundSchema,
-  z.lazy(() => Environment2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ShellEnvironmentContainerAuto$outboundSchema,
+    z.lazy(() => Environment2$outboundSchema),
+  ])
+);
 
 export function environmentToJSON(environment: Environment): string {
   return JSON.stringify(Environment$outboundSchema.parse(environment));
@@ -172,13 +180,15 @@ export const ShellToolRequest$inboundSchema: z.ZodType<
   ShellToolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("shell"),
-  environment: z.union([
-    ShellEnvironmentContainerAuto$inboundSchema,
-    z.lazy(() => Environment2$inboundSchema),
-  ]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell"),
+    environment: z.union([
+      ShellEnvironmentContainerAuto$inboundSchema,
+      z.lazy(() => Environment2$inboundSchema),
+    ]).optional(),
+  })
+);
 /** @internal */
 export type ShellToolRequest$Outbound = {
   type: "shell";
@@ -193,13 +203,15 @@ export const ShellToolRequest$outboundSchema: z.ZodType<
   ShellToolRequest$Outbound,
   z.ZodTypeDef,
   ShellToolRequest
-> = z.object({
-  type: z.literal("shell"),
-  environment: z.union([
-    ShellEnvironmentContainerAuto$outboundSchema,
-    z.lazy(() => Environment2$outboundSchema),
-  ]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell"),
+    environment: z.union([
+      ShellEnvironmentContainerAuto$outboundSchema,
+      z.lazy(() => Environment2$outboundSchema),
+    ]).optional(),
+  })
+);
 
 export function shellToolRequestToJSON(
   shellToolRequest: ShellToolRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,16 +39,18 @@ export const DownloadAuditExportRequest$inboundSchema: z.ZodType<
   DownloadAuditExportRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  export_id: z.string(),
-  orgId: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "export_id": "exportId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    export_id: z.string(),
+    orgId: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "export_id": "exportId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DownloadAuditExportRequest$Outbound = {
   export_id: string;
@@ -61,16 +63,18 @@ export const DownloadAuditExportRequest$outboundSchema: z.ZodType<
   DownloadAuditExportRequest$Outbound,
   z.ZodTypeDef,
   DownloadAuditExportRequest
-> = z.object({
-  exportId: z.string(),
-  orgId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    exportId: "export_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    exportId: z.string(),
+    orgId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      exportId: "export_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function downloadAuditExportRequestToJSON(
   downloadAuditExportRequest: DownloadAuditExportRequest,
@@ -94,7 +98,7 @@ export const DownloadAuditExportResponseBody$inboundSchema: z.ZodType<
   DownloadAuditExportResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type DownloadAuditExportResponseBody$Outbound = {};
 
@@ -103,7 +107,7 @@ export const DownloadAuditExportResponseBody$outboundSchema: z.ZodType<
   DownloadAuditExportResponseBody$Outbound,
   z.ZodTypeDef,
   DownloadAuditExportResponseBody
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 
 export function downloadAuditExportResponseBodyToJSON(
   downloadAuditExportResponseBody: DownloadAuditExportResponseBody,
@@ -129,10 +133,12 @@ export const DownloadAuditExportResponseResult$inboundSchema: z.ZodType<
   DownloadAuditExportResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.array(z.lazy(() => DownloadAuditExportResponseBody$inboundSchema)),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.array(z.lazy(() => DownloadAuditExportResponseBody$inboundSchema)),
+    z.string(),
+  ])
+);
 /** @internal */
 export type DownloadAuditExportResponseResult$Outbound =
   | Array<DownloadAuditExportResponseBody$Outbound>
@@ -143,10 +149,12 @@ export const DownloadAuditExportResponseResult$outboundSchema: z.ZodType<
   DownloadAuditExportResponseResult$Outbound,
   z.ZodTypeDef,
   DownloadAuditExportResponseResult
-> = z.union([
-  z.array(z.lazy(() => DownloadAuditExportResponseBody$outboundSchema)),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.array(z.lazy(() => DownloadAuditExportResponseBody$outboundSchema)),
+    z.string(),
+  ])
+);
 
 export function downloadAuditExportResponseResultToJSON(
   downloadAuditExportResponseResult: DownloadAuditExportResponseResult,
@@ -172,18 +180,20 @@ export const DownloadAuditExportResponse$inboundSchema: z.ZodType<
   DownloadAuditExportResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    z.array(z.lazy(() => DownloadAuditExportResponseBody$inboundSchema)),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      z.array(z.lazy(() => DownloadAuditExportResponseBody$inboundSchema)),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type DownloadAuditExportResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -195,18 +205,20 @@ export const DownloadAuditExportResponse$outboundSchema: z.ZodType<
   DownloadAuditExportResponse$Outbound,
   z.ZodTypeDef,
   DownloadAuditExportResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    z.array(z.lazy(() => DownloadAuditExportResponseBody$outboundSchema)),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      z.array(z.lazy(() => DownloadAuditExportResponseBody$outboundSchema)),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function downloadAuditExportResponseToJSON(
   downloadAuditExportResponse: DownloadAuditExportResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,11 +38,13 @@ export const UpdateOrgRateLimitRequestBody$inboundSchema: z.ZodType<
   UpdateOrgRateLimitRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.nullable(z.number().int()).optional(),
+  })
+);
 /** @internal */
 export type UpdateOrgRateLimitRequestBody$Outbound = {
   rateLimitEnabled?: boolean | undefined;
@@ -55,11 +57,13 @@ export const UpdateOrgRateLimitRequestBody$outboundSchema: z.ZodType<
   UpdateOrgRateLimitRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgRateLimitRequestBody
-> = z.object({
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.nullable(z.number().int()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.nullable(z.number().int()).optional(),
+  })
+);
 
 export function updateOrgRateLimitRequestBodyToJSON(
   updateOrgRateLimitRequestBody: UpdateOrgRateLimitRequestBody,
@@ -85,17 +89,19 @@ export const UpdateOrgRateLimitRequest$inboundSchema: z.ZodType<
   UpdateOrgRateLimitRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateOrgRateLimitRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateOrgRateLimitRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrgRateLimitRequest$Outbound = {
   orgId: string;
@@ -108,17 +114,19 @@ export const UpdateOrgRateLimitRequest$outboundSchema: z.ZodType<
   UpdateOrgRateLimitRequest$Outbound,
   z.ZodTypeDef,
   UpdateOrgRateLimitRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateOrgRateLimitRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateOrgRateLimitRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateOrgRateLimitRequestToJSON(
   updateOrgRateLimitRequest: UpdateOrgRateLimitRequest,
@@ -142,12 +150,14 @@ export const UpdateOrgRateLimitResponseBody$inboundSchema: z.ZodType<
   UpdateOrgRateLimitResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  rateLimitEnabled: z.boolean(),
-  rateLimitTimeWindow: z.nullable(z.number()),
-  rateLimitMax: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rateLimitEnabled: z.boolean(),
+    rateLimitTimeWindow: z.nullable(z.number()),
+    rateLimitMax: z.nullable(z.number()),
+  })
+);
 /** @internal */
 export type UpdateOrgRateLimitResponseBody$Outbound = {
   id: string;
@@ -161,12 +171,14 @@ export const UpdateOrgRateLimitResponseBody$outboundSchema: z.ZodType<
   UpdateOrgRateLimitResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateOrgRateLimitResponseBody
-> = z.object({
-  id: z.string(),
-  rateLimitEnabled: z.boolean(),
-  rateLimitTimeWindow: z.nullable(z.number()),
-  rateLimitMax: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rateLimitEnabled: z.boolean(),
+    rateLimitTimeWindow: z.nullable(z.number()),
+    rateLimitMax: z.nullable(z.number()),
+  })
+);
 
 export function updateOrgRateLimitResponseBodyToJSON(
   updateOrgRateLimitResponseBody: UpdateOrgRateLimitResponseBody,

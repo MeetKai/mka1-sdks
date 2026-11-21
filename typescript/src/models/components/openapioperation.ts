@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -61,7 +61,7 @@ export type OpenApiOperation = {
 /** @internal */
 export const OpenApiOperationMethod$inboundSchema: z.ZodNativeEnum<
   typeof OpenApiOperationMethod
-> = z.nativeEnum(OpenApiOperationMethod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OpenApiOperationMethod));
 /** @internal */
 export const OpenApiOperationMethod$outboundSchema: z.ZodNativeEnum<
   typeof OpenApiOperationMethod
@@ -72,16 +72,18 @@ export const RequestBody$inboundSchema: z.ZodType<
   RequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required: z.boolean().default(false),
-  description: z.string().optional(),
-  content_type: z.string().default("application/json"),
-  schema: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "content_type": "contentType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean().default(false),
+    description: z.string().optional(),
+    content_type: z.string().default("application/json"),
+    schema: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "content_type": "contentType",
+    });
+  })
+);
 /** @internal */
 export type RequestBody$Outbound = {
   required: boolean;
@@ -95,16 +97,18 @@ export const RequestBody$outboundSchema: z.ZodType<
   RequestBody$Outbound,
   z.ZodTypeDef,
   RequestBody
-> = z.object({
-  required: z.boolean().default(false),
-  description: z.string().optional(),
-  contentType: z.string().default("application/json"),
-  schema: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "content_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean().default(false),
+    description: z.string().optional(),
+    contentType: z.string().default("application/json"),
+    schema: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "content_type",
+    });
+  })
+);
 
 export function requestBodyToJSON(requestBody: RequestBody): string {
   return JSON.stringify(RequestBody$outboundSchema.parse(requestBody));
@@ -124,18 +128,20 @@ export const OpenApiOperation$inboundSchema: z.ZodType<
   OpenApiOperation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  method: OpenApiOperationMethod$inboundSchema,
-  path: z.string(),
-  parameters: z.array(OpenApiParameter$inboundSchema).optional(),
-  request_body: z.lazy(() => RequestBody$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_body": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    method: OpenApiOperationMethod$inboundSchema,
+    path: z.string(),
+    parameters: z.array(OpenApiParameter$inboundSchema).optional(),
+    request_body: z.lazy(() => RequestBody$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_body": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type OpenApiOperation$Outbound = {
   name: string;
@@ -151,18 +157,20 @@ export const OpenApiOperation$outboundSchema: z.ZodType<
   OpenApiOperation$Outbound,
   z.ZodTypeDef,
   OpenApiOperation
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  method: OpenApiOperationMethod$outboundSchema,
-  path: z.string(),
-  parameters: z.array(OpenApiParameter$outboundSchema).optional(),
-  requestBody: z.lazy(() => RequestBody$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "request_body",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    method: OpenApiOperationMethod$outboundSchema,
+    path: z.string(),
+    parameters: z.array(OpenApiParameter$outboundSchema).optional(),
+    requestBody: z.lazy(() => RequestBody$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "request_body",
+    });
+  })
+);
 
 export function openApiOperationToJSON(
   openApiOperation: OpenApiOperation,

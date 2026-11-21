@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetOrgQuotaTooManyRequestsError struct {
 var _ error = &GetOrgQuotaTooManyRequestsError{}
 
 func (e *GetOrgQuotaTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetOrgQuotaGoneError struct {
 var _ error = &GetOrgQuotaGoneError{}
 
 func (e *GetOrgQuotaGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetOrgQuotaConflictError struct {
 var _ error = &GetOrgQuotaConflictError{}
 
 func (e *GetOrgQuotaConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetOrgQuotaNotFoundError struct {
 var _ error = &GetOrgQuotaNotFoundError{}
 
 func (e *GetOrgQuotaNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetOrgQuotaForbiddenError struct {
 var _ error = &GetOrgQuotaForbiddenError{}
 
 func (e *GetOrgQuotaForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetOrgQuotaUnauthorizedError struct {
 var _ error = &GetOrgQuotaUnauthorizedError{}
 
 func (e *GetOrgQuotaUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetOrgQuotaBadRequestError struct {
 var _ error = &GetOrgQuotaBadRequestError{}
 
 func (e *GetOrgQuotaBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,14 +35,16 @@ export const ListReposRequest$inboundSchema: z.ZodType<
   ListReposRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: components.RepoKind$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: components.RepoKind$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListReposRequest$Outbound = {
   kind?: string | undefined;
@@ -54,14 +56,16 @@ export const ListReposRequest$outboundSchema: z.ZodType<
   ListReposRequest$Outbound,
   z.ZodTypeDef,
   ListReposRequest
-> = z.object({
-  kind: components.RepoKind$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: components.RepoKind$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listReposRequestToJSON(
   listReposRequest: ListReposRequest,
@@ -85,9 +89,11 @@ export const ListReposResponseBody$inboundSchema: z.ZodType<
   ListReposResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repos: z.array(components.Repo$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repos: z.array(components.Repo$inboundSchema),
+  })
+);
 /** @internal */
 export type ListReposResponseBody$Outbound = {
   repos: Array<components.Repo$Outbound>;
@@ -98,9 +104,11 @@ export const ListReposResponseBody$outboundSchema: z.ZodType<
   ListReposResponseBody$Outbound,
   z.ZodTypeDef,
   ListReposResponseBody
-> = z.object({
-  repos: z.array(components.Repo$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repos: z.array(components.Repo$outboundSchema),
+  })
+);
 
 export function listReposResponseBodyToJSON(
   listReposResponseBody: ListReposResponseBody,

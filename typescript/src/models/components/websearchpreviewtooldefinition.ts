@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -50,7 +50,9 @@ export type WebSearchPreviewToolDefinition = {
 /** @internal */
 export const WebSearchPreviewToolDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof WebSearchPreviewToolDefinitionType
-> = z.nativeEnum(WebSearchPreviewToolDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(WebSearchPreviewToolDefinitionType)
+);
 /** @internal */
 export const WebSearchPreviewToolDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof WebSearchPreviewToolDefinitionType
@@ -58,8 +60,10 @@ export const WebSearchPreviewToolDefinitionType$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const WebSearchPreviewToolDefinitionSearchContextSize$inboundSchema:
-  z.ZodNativeEnum<typeof WebSearchPreviewToolDefinitionSearchContextSize> = z
-    .nativeEnum(WebSearchPreviewToolDefinitionSearchContextSize);
+  z.ZodNativeEnum<typeof WebSearchPreviewToolDefinitionSearchContextSize> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(WebSearchPreviewToolDefinitionSearchContextSize)
+    );
 /** @internal */
 export const WebSearchPreviewToolDefinitionSearchContextSize$outboundSchema:
   z.ZodNativeEnum<typeof WebSearchPreviewToolDefinitionSearchContextSize> =
@@ -70,18 +74,20 @@ export const WebSearchPreviewToolDefinition$inboundSchema: z.ZodType<
   WebSearchPreviewToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: WebSearchPreviewToolDefinitionType$inboundSchema,
-  search_context_size:
-    WebSearchPreviewToolDefinitionSearchContextSize$inboundSchema.optional(),
-  user_location: UserLocation$inboundSchema.optional(),
-  filters: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "search_context_size": "searchContextSize",
-    "user_location": "userLocation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: WebSearchPreviewToolDefinitionType$inboundSchema,
+    search_context_size:
+      WebSearchPreviewToolDefinitionSearchContextSize$inboundSchema.optional(),
+    user_location: UserLocation$inboundSchema.optional(),
+    filters: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "search_context_size": "searchContextSize",
+      "user_location": "userLocation",
+    });
+  })
+);
 /** @internal */
 export type WebSearchPreviewToolDefinition$Outbound = {
   type: string;
@@ -95,18 +101,20 @@ export const WebSearchPreviewToolDefinition$outboundSchema: z.ZodType<
   WebSearchPreviewToolDefinition$Outbound,
   z.ZodTypeDef,
   WebSearchPreviewToolDefinition
-> = z.object({
-  type: WebSearchPreviewToolDefinitionType$outboundSchema,
-  searchContextSize:
-    WebSearchPreviewToolDefinitionSearchContextSize$outboundSchema.optional(),
-  userLocation: UserLocation$outboundSchema.optional(),
-  filters: z.any().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    searchContextSize: "search_context_size",
-    userLocation: "user_location",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: WebSearchPreviewToolDefinitionType$outboundSchema,
+    searchContextSize:
+      WebSearchPreviewToolDefinitionSearchContextSize$outboundSchema.optional(),
+    userLocation: UserLocation$outboundSchema.optional(),
+    filters: z.any().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      searchContextSize: "search_context_size",
+      userLocation: "user_location",
+    });
+  })
+);
 
 export function webSearchPreviewToolDefinitionToJSON(
   webSearchPreviewToolDefinition: WebSearchPreviewToolDefinition,

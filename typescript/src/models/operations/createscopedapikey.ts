@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -64,10 +64,12 @@ export const OnBehalfOf$inboundSchema: z.ZodType<
   OnBehalfOf,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  userType: z.literal("service-account"),
-  serviceAccountId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userType: z.literal("service-account"),
+    serviceAccountId: z.string(),
+  })
+);
 /** @internal */
 export type OnBehalfOf$Outbound = {
   userType: "service-account";
@@ -79,10 +81,12 @@ export const OnBehalfOf$outboundSchema: z.ZodType<
   OnBehalfOf$Outbound,
   z.ZodTypeDef,
   OnBehalfOf
-> = z.object({
-  userType: z.literal("service-account"),
-  serviceAccountId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userType: z.literal("service-account"),
+    serviceAccountId: z.string(),
+  })
+);
 
 export function onBehalfOfToJSON(onBehalfOf: OnBehalfOf): string {
   return JSON.stringify(OnBehalfOf$outboundSchema.parse(onBehalfOf));
@@ -102,16 +106,18 @@ export const CreateScopedApiKeyRequestBody$inboundSchema: z.ZodType<
   CreateScopedApiKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  teamId: z.string(),
-  scopes: z.array(z.string()),
-  expiresIn: z.number().int().optional(),
-  rateLimitEnabled: z.boolean().default(false),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  onBehalfOf: z.lazy(() => OnBehalfOf$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    teamId: z.string(),
+    scopes: z.array(z.string()),
+    expiresIn: z.number().int().optional(),
+    rateLimitEnabled: z.boolean().default(false),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    onBehalfOf: z.lazy(() => OnBehalfOf$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateScopedApiKeyRequestBody$Outbound = {
   name: string;
@@ -129,16 +135,18 @@ export const CreateScopedApiKeyRequestBody$outboundSchema: z.ZodType<
   CreateScopedApiKeyRequestBody$Outbound,
   z.ZodTypeDef,
   CreateScopedApiKeyRequestBody
-> = z.object({
-  name: z.string(),
-  teamId: z.string(),
-  scopes: z.array(z.string()),
-  expiresIn: z.number().int().optional(),
-  rateLimitEnabled: z.boolean().default(false),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  onBehalfOf: z.lazy(() => OnBehalfOf$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    teamId: z.string(),
+    scopes: z.array(z.string()),
+    expiresIn: z.number().int().optional(),
+    rateLimitEnabled: z.boolean().default(false),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    onBehalfOf: z.lazy(() => OnBehalfOf$outboundSchema).optional(),
+  })
+);
 
 export function createScopedApiKeyRequestBodyToJSON(
   createScopedApiKeyRequestBody: CreateScopedApiKeyRequestBody,
@@ -164,16 +172,18 @@ export const CreateScopedApiKeyRequest$inboundSchema: z.ZodType<
   CreateScopedApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreateScopedApiKeyRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreateScopedApiKeyRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateScopedApiKeyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -185,16 +195,18 @@ export const CreateScopedApiKeyRequest$outboundSchema: z.ZodType<
   CreateScopedApiKeyRequest$Outbound,
   z.ZodTypeDef,
   CreateScopedApiKeyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreateScopedApiKeyRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreateScopedApiKeyRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createScopedApiKeyRequestToJSON(
   createScopedApiKeyRequest: CreateScopedApiKeyRequest,
@@ -214,8 +226,8 @@ export function createScopedApiKeyRequestFromJSON(
 }
 
 /** @internal */
-export const UserType$inboundSchema: z.ZodNativeEnum<typeof UserType> = z
-  .nativeEnum(UserType);
+export const UserType$inboundSchema: z.ZodNativeEnum<typeof UserType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(UserType));
 /** @internal */
 export const UserType$outboundSchema: z.ZodNativeEnum<typeof UserType> =
   UserType$inboundSchema;
@@ -225,22 +237,24 @@ export const CreateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   CreateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: UserType$inboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.nullable(z.string()).optional(),
+    key: z.string().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    start: z.nullable(z.string()).optional(),
+    userId: z.string(),
+    userType: UserType$inboundSchema,
+    orgId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    scopes: z.array(z.string()),
+    rateLimitEnabled: z.nullable(z.boolean()).optional(),
+    rateLimitTimeWindow: z.nullable(z.number()).optional(),
+    rateLimitMax: z.nullable(z.number()).optional(),
+    expiresAt: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CreateScopedApiKeyResponseBody$Outbound = {
   id: string;
@@ -264,22 +278,24 @@ export const CreateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   CreateScopedApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   CreateScopedApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  name: z.nullable(z.string()).optional(),
-  key: z.string().optional(),
-  prefix: z.nullable(z.string()).optional(),
-  start: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  userType: UserType$outboundSchema,
-  orgId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  scopes: z.array(z.string()),
-  rateLimitEnabled: z.nullable(z.boolean()).optional(),
-  rateLimitTimeWindow: z.nullable(z.number()).optional(),
-  rateLimitMax: z.nullable(z.number()).optional(),
-  expiresAt: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.nullable(z.string()).optional(),
+    key: z.string().optional(),
+    prefix: z.nullable(z.string()).optional(),
+    start: z.nullable(z.string()).optional(),
+    userId: z.string(),
+    userType: UserType$outboundSchema,
+    orgId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    scopes: z.array(z.string()),
+    rateLimitEnabled: z.nullable(z.boolean()).optional(),
+    rateLimitTimeWindow: z.nullable(z.number()).optional(),
+    rateLimitMax: z.nullable(z.number()).optional(),
+    expiresAt: z.nullable(z.string()).optional(),
+  })
+);
 
 export function createScopedApiKeyResponseBodyToJSON(
   createScopedApiKeyResponseBody: CreateScopedApiKeyResponseBody,

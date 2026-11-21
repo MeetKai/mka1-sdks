@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -197,19 +198,21 @@ export const RemoveOrgMemberAuthOrgsResponse429ResponseBody$inboundSchema:
     RemoveOrgMemberAuthOrgsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RemoveOrgMemberAuthOrgsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RemoveOrgMemberAuthOrgsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponse429ResponseBody$Outbound = {
@@ -222,11 +225,13 @@ export const RemoveOrgMemberAuthOrgsResponse429ResponseBody$outboundSchema:
     RemoveOrgMemberAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     RemoveOrgMemberAuthOrgsResponse429ResponseBody
-  > = z.instanceof(RemoveOrgMemberAuthOrgsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RemoveOrgMemberAuthOrgsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RemoveOrgMemberAuthOrgsResponse410ResponseBody$inboundSchema:
@@ -234,19 +239,21 @@ export const RemoveOrgMemberAuthOrgsResponse410ResponseBody$inboundSchema:
     RemoveOrgMemberAuthOrgsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RemoveOrgMemberAuthOrgsResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RemoveOrgMemberAuthOrgsResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponse410ResponseBody$Outbound = {
@@ -259,11 +266,13 @@ export const RemoveOrgMemberAuthOrgsResponse410ResponseBody$outboundSchema:
     RemoveOrgMemberAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     RemoveOrgMemberAuthOrgsResponse410ResponseBody
-  > = z.instanceof(RemoveOrgMemberAuthOrgsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RemoveOrgMemberAuthOrgsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RemoveOrgMemberAuthOrgsResponse409ResponseBody$inboundSchema:
@@ -271,19 +280,21 @@ export const RemoveOrgMemberAuthOrgsResponse409ResponseBody$inboundSchema:
     RemoveOrgMemberAuthOrgsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RemoveOrgMemberAuthOrgsResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RemoveOrgMemberAuthOrgsResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponse409ResponseBody$Outbound = {
@@ -296,11 +307,13 @@ export const RemoveOrgMemberAuthOrgsResponse409ResponseBody$outboundSchema:
     RemoveOrgMemberAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     RemoveOrgMemberAuthOrgsResponse409ResponseBody
-  > = z.instanceof(RemoveOrgMemberAuthOrgsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RemoveOrgMemberAuthOrgsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RemoveOrgMemberAuthOrgsResponse404ResponseBody$inboundSchema:
@@ -308,19 +321,21 @@ export const RemoveOrgMemberAuthOrgsResponse404ResponseBody$inboundSchema:
     RemoveOrgMemberAuthOrgsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RemoveOrgMemberAuthOrgsResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RemoveOrgMemberAuthOrgsResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponse404ResponseBody$Outbound = {
@@ -333,11 +348,13 @@ export const RemoveOrgMemberAuthOrgsResponse404ResponseBody$outboundSchema:
     RemoveOrgMemberAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     RemoveOrgMemberAuthOrgsResponse404ResponseBody
-  > = z.instanceof(RemoveOrgMemberAuthOrgsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RemoveOrgMemberAuthOrgsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RemoveOrgMemberAuthOrgsResponseResponseBody$inboundSchema:
@@ -345,20 +362,22 @@ export const RemoveOrgMemberAuthOrgsResponseResponseBody$inboundSchema:
     RemoveOrgMemberAuthOrgsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RemoveOrgMemberAuthOrgsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RemoveOrgMemberAuthOrgsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponseResponseBody$Outbound = {
@@ -372,31 +391,35 @@ export const RemoveOrgMemberAuthOrgsResponseResponseBody$outboundSchema:
     RemoveOrgMemberAuthOrgsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     RemoveOrgMemberAuthOrgsResponseResponseBody
-  > = z.instanceof(RemoveOrgMemberAuthOrgsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RemoveOrgMemberAuthOrgsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const RemoveOrgMemberAuthOrgsResponseBody$inboundSchema: z.ZodType<
   RemoveOrgMemberAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new RemoveOrgMemberAuthOrgsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new RemoveOrgMemberAuthOrgsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type RemoveOrgMemberAuthOrgsResponseBody$Outbound = {
@@ -408,30 +431,34 @@ export const RemoveOrgMemberAuthOrgsResponseBody$outboundSchema: z.ZodType<
   RemoveOrgMemberAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   RemoveOrgMemberAuthOrgsResponseBody
-> = z.instanceof(RemoveOrgMemberAuthOrgsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(RemoveOrgMemberAuthOrgsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const RemoveOrgMemberResponseBody$inboundSchema: z.ZodType<
   RemoveOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new RemoveOrgMemberResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new RemoveOrgMemberResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type RemoveOrgMemberResponseBody$Outbound = {
@@ -443,8 +470,10 @@ export const RemoveOrgMemberResponseBody$outboundSchema: z.ZodType<
   RemoveOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   RemoveOrgMemberResponseBody
-> = z.instanceof(RemoveOrgMemberResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(RemoveOrgMemberResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

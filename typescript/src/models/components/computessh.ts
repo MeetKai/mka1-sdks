@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,12 +19,14 @@ export const ComputeSSH$inboundSchema: z.ZodType<
   ComputeSSH,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  command: z.string(),
-  host: z.string(),
-  port: z.number().int(),
-  user: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.string(),
+    host: z.string(),
+    port: z.number().int(),
+    user: z.string(),
+  })
+);
 /** @internal */
 export type ComputeSSH$Outbound = {
   command: string;
@@ -38,12 +40,14 @@ export const ComputeSSH$outboundSchema: z.ZodType<
   ComputeSSH$Outbound,
   z.ZodTypeDef,
   ComputeSSH
-> = z.object({
-  command: z.string(),
-  host: z.string(),
-  port: z.number().int(),
-  user: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    command: z.string(),
+    host: z.string(),
+    port: z.number().int(),
+    user: z.string(),
+  })
+);
 
 export function computeSSHToJSON(computeSSH: ComputeSSH): string {
   return JSON.stringify(ComputeSSH$outboundSchema.parse(computeSSH));

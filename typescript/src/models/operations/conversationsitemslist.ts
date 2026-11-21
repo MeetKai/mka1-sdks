@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -171,7 +171,7 @@ export type ConversationsItemsListResponseBody = {
 /** @internal */
 export const QueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamOrder
-> = z.nativeEnum(QueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamOrder));
 /** @internal */
 export const QueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamOrder
@@ -182,19 +182,21 @@ export const ConversationsItemsListRequest$inboundSchema: z.ZodType<
   ConversationsItemsListRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  conversation_id: z.string(),
-  after: z.string().optional(),
-  include: z.array(z.string()).optional(),
-  limit: z.number().int().default(20),
-  order: QueryParamOrder$inboundSchema.default("asc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "conversation_id": "conversationId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversation_id: z.string(),
+    after: z.string().optional(),
+    include: z.array(z.string()).optional(),
+    limit: z.number().int().default(20),
+    order: QueryParamOrder$inboundSchema.default("asc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "conversation_id": "conversationId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsListRequest$Outbound = {
   conversation_id: string;
@@ -210,19 +212,21 @@ export const ConversationsItemsListRequest$outboundSchema: z.ZodType<
   ConversationsItemsListRequest$Outbound,
   z.ZodTypeDef,
   ConversationsItemsListRequest
-> = z.object({
-  conversationId: z.string(),
-  after: z.string().optional(),
-  include: z.array(z.string()).optional(),
-  limit: z.number().int().default(20),
-  order: QueryParamOrder$outboundSchema.default("asc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    conversationId: "conversation_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    conversationId: z.string(),
+    after: z.string().optional(),
+    include: z.array(z.string()).optional(),
+    limit: z.number().int().default(20),
+    order: QueryParamOrder$outboundSchema.default("asc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      conversationId: "conversation_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function conversationsItemsListRequestToJSON(
   conversationsItemsListRequest: ConversationsItemsListRequest,
@@ -246,7 +250,9 @@ export function conversationsItemsListRequestFromJSON(
 /** @internal */
 export const ConversationsItemsListDataRole$inboundSchema: z.ZodNativeEnum<
   typeof ConversationsItemsListDataRole
-> = z.nativeEnum(ConversationsItemsListDataRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ConversationsItemsListDataRole)
+);
 /** @internal */
 export const ConversationsItemsListDataRole$outboundSchema: z.ZodNativeEnum<
   typeof ConversationsItemsListDataRole
@@ -257,10 +263,9 @@ export const ConversationsItemsListDataContent$inboundSchema: z.ZodType<
   ConversationsItemsListDataContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(components.InputMessageContent$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(components.InputMessageContent$inboundSchema)])
+);
 /** @internal */
 export type ConversationsItemsListDataContent$Outbound =
   | string
@@ -271,10 +276,9 @@ export const ConversationsItemsListDataContent$outboundSchema: z.ZodType<
   ConversationsItemsListDataContent$Outbound,
   z.ZodTypeDef,
   ConversationsItemsListDataContent
-> = z.union([
-  z.string(),
-  z.array(components.InputMessageContent$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(components.InputMessageContent$outboundSchema)])
+);
 
 export function conversationsItemsListDataContentToJSON(
   conversationsItemsListDataContent: ConversationsItemsListDataContent,
@@ -298,22 +302,24 @@ export function conversationsItemsListDataContentFromJSON(
 /** @internal */
 export const ConversationsItemsListDataInputMessageItem$inboundSchema:
   z.ZodType<ConversationsItemsListDataInputMessageItem, z.ZodTypeDef, unknown> =
-    z.object({
-      type: z.literal("message").optional(),
-      role: ConversationsItemsListDataRole$inboundSchema,
-      content: z.union([
-        z.string(),
-        z.array(components.InputMessageContent$inboundSchema),
-      ]),
-      status: components.Status$inboundSchema.optional(),
-      id: z.string(),
-      response_id: z.nullable(z.string()).optional(),
-      metadata: z.nullable(z.record(z.string())).optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "response_id": "responseId",
-      });
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        type: z.literal("message").optional(),
+        role: ConversationsItemsListDataRole$inboundSchema,
+        content: z.union([
+          z.string(),
+          z.array(components.InputMessageContent$inboundSchema),
+        ]),
+        status: components.Status$inboundSchema.optional(),
+        id: z.string(),
+        response_id: z.nullable(z.string()).optional(),
+        metadata: z.nullable(z.record(z.string())).optional(),
+      }).transform((v) => {
+        return remap$(v, {
+          "response_id": "responseId",
+        });
+      })
+    );
 /** @internal */
 export type ConversationsItemsListDataInputMessageItem$Outbound = {
   type?: "message" | undefined;
@@ -331,22 +337,24 @@ export const ConversationsItemsListDataInputMessageItem$outboundSchema:
     ConversationsItemsListDataInputMessageItem$Outbound,
     z.ZodTypeDef,
     ConversationsItemsListDataInputMessageItem
-  > = z.object({
-    type: z.literal("message").optional(),
-    role: ConversationsItemsListDataRole$outboundSchema,
-    content: z.union([
-      z.string(),
-      z.array(components.InputMessageContent$outboundSchema),
-    ]),
-    status: components.Status$outboundSchema.optional(),
-    id: z.string(),
-    responseId: z.nullable(z.string()).optional(),
-    metadata: z.nullable(z.record(z.string())).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      responseId: "response_id",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("message").optional(),
+      role: ConversationsItemsListDataRole$outboundSchema,
+      content: z.union([
+        z.string(),
+        z.array(components.InputMessageContent$outboundSchema),
+      ]),
+      status: components.Status$outboundSchema.optional(),
+      id: z.string(),
+      responseId: z.nullable(z.string()).optional(),
+      metadata: z.nullable(z.record(z.string())).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        responseId: "response_id",
+      });
+    })
+  );
 
 export function conversationsItemsListDataInputMessageItemToJSON(
   conversationsItemsListDataInputMessageItem:
@@ -375,35 +383,37 @@ export function conversationsItemsListDataInputMessageItemFromJSON(
 }
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .union([
-    components.ComputerToolCallWithId$inboundSchema,
-    components.CodeInterpreterToolCallWithId$inboundSchema,
-    components.OutputMessageWithId$inboundSchema,
-    components.OutputAudioItemWithId$inboundSchema,
-    components.FunctionToolCallWithId$inboundSchema,
-    components.LocalShellCallWithId$inboundSchema,
-    components.ShellCallWithId$inboundSchema,
-    components.MCPApprovalRequestWithId$inboundSchema,
-    components.ToolApprovalRequestWithId$inboundSchema,
-    components.MCPToolCallWithId$inboundSchema,
-    components.CustomToolCallWithId$inboundSchema,
-    components.FileSearchToolCallWithId$inboundSchema,
-    components.ComputerToolCallOutputWithId$inboundSchema,
-    components.WebSearchToolCallWithId$inboundSchema,
-    components.FunctionToolCallOutputWithId$inboundSchema,
-    components.ImageGenerationCallWithId$inboundSchema,
-    components.ShellCallOutputWithId$inboundSchema,
-    components.MCPListToolsWithId$inboundSchema,
-    components.MCPApprovalResponseWithId$inboundSchema,
-    components.ToolApprovalResponseWithId$inboundSchema,
-    components.CustomToolCallOutputWithId$inboundSchema,
-    z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
-    components.ReasoningWithId$inboundSchema,
-    components.LocalShellCallOutputWithId$inboundSchema,
-    components.ResponseCompactionItemWithId$inboundSchema,
-    components.ItemReferenceWithId$inboundSchema,
-  ]);
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.ComputerToolCallWithId$inboundSchema,
+      components.CodeInterpreterToolCallWithId$inboundSchema,
+      components.OutputMessageWithId$inboundSchema,
+      components.OutputAudioItemWithId$inboundSchema,
+      components.FunctionToolCallWithId$inboundSchema,
+      components.LocalShellCallWithId$inboundSchema,
+      components.ShellCallWithId$inboundSchema,
+      components.MCPApprovalRequestWithId$inboundSchema,
+      components.ToolApprovalRequestWithId$inboundSchema,
+      components.MCPToolCallWithId$inboundSchema,
+      components.CustomToolCallWithId$inboundSchema,
+      components.FileSearchToolCallWithId$inboundSchema,
+      components.ComputerToolCallOutputWithId$inboundSchema,
+      components.WebSearchToolCallWithId$inboundSchema,
+      components.FunctionToolCallOutputWithId$inboundSchema,
+      components.ImageGenerationCallWithId$inboundSchema,
+      components.ShellCallOutputWithId$inboundSchema,
+      components.MCPListToolsWithId$inboundSchema,
+      components.MCPApprovalResponseWithId$inboundSchema,
+      components.ToolApprovalResponseWithId$inboundSchema,
+      components.CustomToolCallOutputWithId$inboundSchema,
+      z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
+      components.ReasoningWithId$inboundSchema,
+      components.LocalShellCallOutputWithId$inboundSchema,
+      components.ResponseCompactionItemWithId$inboundSchema,
+      components.ItemReferenceWithId$inboundSchema,
+    ])
+  );
 /** @internal */
 export type Data$Outbound =
   | components.ComputerToolCallWithId$Outbound
@@ -435,34 +445,36 @@ export type Data$Outbound =
 
 /** @internal */
 export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
-  z.union([
-    components.ComputerToolCallWithId$outboundSchema,
-    components.CodeInterpreterToolCallWithId$outboundSchema,
-    components.OutputMessageWithId$outboundSchema,
-    components.OutputAudioItemWithId$outboundSchema,
-    components.FunctionToolCallWithId$outboundSchema,
-    components.LocalShellCallWithId$outboundSchema,
-    components.ShellCallWithId$outboundSchema,
-    components.MCPApprovalRequestWithId$outboundSchema,
-    components.ToolApprovalRequestWithId$outboundSchema,
-    components.MCPToolCallWithId$outboundSchema,
-    components.CustomToolCallWithId$outboundSchema,
-    components.FileSearchToolCallWithId$outboundSchema,
-    components.ComputerToolCallOutputWithId$outboundSchema,
-    components.WebSearchToolCallWithId$outboundSchema,
-    components.FunctionToolCallOutputWithId$outboundSchema,
-    components.ImageGenerationCallWithId$outboundSchema,
-    components.ShellCallOutputWithId$outboundSchema,
-    components.MCPListToolsWithId$outboundSchema,
-    components.MCPApprovalResponseWithId$outboundSchema,
-    components.ToolApprovalResponseWithId$outboundSchema,
-    components.CustomToolCallOutputWithId$outboundSchema,
-    z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
-    components.ReasoningWithId$outboundSchema,
-    components.LocalShellCallOutputWithId$outboundSchema,
-    components.ResponseCompactionItemWithId$outboundSchema,
-    components.ItemReferenceWithId$outboundSchema,
-  ]);
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      components.ComputerToolCallWithId$outboundSchema,
+      components.CodeInterpreterToolCallWithId$outboundSchema,
+      components.OutputMessageWithId$outboundSchema,
+      components.OutputAudioItemWithId$outboundSchema,
+      components.FunctionToolCallWithId$outboundSchema,
+      components.LocalShellCallWithId$outboundSchema,
+      components.ShellCallWithId$outboundSchema,
+      components.MCPApprovalRequestWithId$outboundSchema,
+      components.ToolApprovalRequestWithId$outboundSchema,
+      components.MCPToolCallWithId$outboundSchema,
+      components.CustomToolCallWithId$outboundSchema,
+      components.FileSearchToolCallWithId$outboundSchema,
+      components.ComputerToolCallOutputWithId$outboundSchema,
+      components.WebSearchToolCallWithId$outboundSchema,
+      components.FunctionToolCallOutputWithId$outboundSchema,
+      components.ImageGenerationCallWithId$outboundSchema,
+      components.ShellCallOutputWithId$outboundSchema,
+      components.MCPListToolsWithId$outboundSchema,
+      components.MCPApprovalResponseWithId$outboundSchema,
+      components.ToolApprovalResponseWithId$outboundSchema,
+      components.CustomToolCallOutputWithId$outboundSchema,
+      z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
+      components.ReasoningWithId$outboundSchema,
+      components.LocalShellCallOutputWithId$outboundSchema,
+      components.ResponseCompactionItemWithId$outboundSchema,
+      components.ItemReferenceWithId$outboundSchema,
+    ])
+  );
 
 export function dataToJSON(data: Data): string {
   return JSON.stringify(Data$outboundSchema.parse(data));
@@ -482,46 +494,48 @@ export const ConversationsItemsListResponseBody$inboundSchema: z.ZodType<
   ConversationsItemsListResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list").optional(),
-  data: z.array(
-    z.union([
-      components.ComputerToolCallWithId$inboundSchema,
-      components.CodeInterpreterToolCallWithId$inboundSchema,
-      components.OutputMessageWithId$inboundSchema,
-      components.OutputAudioItemWithId$inboundSchema,
-      components.FunctionToolCallWithId$inboundSchema,
-      components.LocalShellCallWithId$inboundSchema,
-      components.ShellCallWithId$inboundSchema,
-      components.MCPApprovalRequestWithId$inboundSchema,
-      components.ToolApprovalRequestWithId$inboundSchema,
-      components.MCPToolCallWithId$inboundSchema,
-      components.CustomToolCallWithId$inboundSchema,
-      components.FileSearchToolCallWithId$inboundSchema,
-      components.ComputerToolCallOutputWithId$inboundSchema,
-      components.WebSearchToolCallWithId$inboundSchema,
-      components.FunctionToolCallOutputWithId$inboundSchema,
-      components.ImageGenerationCallWithId$inboundSchema,
-      components.ShellCallOutputWithId$inboundSchema,
-      components.MCPListToolsWithId$inboundSchema,
-      components.MCPApprovalResponseWithId$inboundSchema,
-      components.ToolApprovalResponseWithId$inboundSchema,
-      components.CustomToolCallOutputWithId$inboundSchema,
-      z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
-      components.ReasoningWithId$inboundSchema,
-      components.LocalShellCallOutputWithId$inboundSchema,
-      components.ResponseCompactionItemWithId$inboundSchema,
-      components.ItemReferenceWithId$inboundSchema,
-    ]),
-  ),
-  has_more: z.boolean(),
-  last_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").optional(),
+    data: z.array(
+      z.union([
+        components.ComputerToolCallWithId$inboundSchema,
+        components.CodeInterpreterToolCallWithId$inboundSchema,
+        components.OutputMessageWithId$inboundSchema,
+        components.OutputAudioItemWithId$inboundSchema,
+        components.FunctionToolCallWithId$inboundSchema,
+        components.LocalShellCallWithId$inboundSchema,
+        components.ShellCallWithId$inboundSchema,
+        components.MCPApprovalRequestWithId$inboundSchema,
+        components.ToolApprovalRequestWithId$inboundSchema,
+        components.MCPToolCallWithId$inboundSchema,
+        components.CustomToolCallWithId$inboundSchema,
+        components.FileSearchToolCallWithId$inboundSchema,
+        components.ComputerToolCallOutputWithId$inboundSchema,
+        components.WebSearchToolCallWithId$inboundSchema,
+        components.FunctionToolCallOutputWithId$inboundSchema,
+        components.ImageGenerationCallWithId$inboundSchema,
+        components.ShellCallOutputWithId$inboundSchema,
+        components.MCPListToolsWithId$inboundSchema,
+        components.MCPApprovalResponseWithId$inboundSchema,
+        components.ToolApprovalResponseWithId$inboundSchema,
+        components.CustomToolCallOutputWithId$inboundSchema,
+        z.lazy(() => ConversationsItemsListDataInputMessageItem$inboundSchema),
+        components.ReasoningWithId$inboundSchema,
+        components.LocalShellCallOutputWithId$inboundSchema,
+        components.ResponseCompactionItemWithId$inboundSchema,
+        components.ItemReferenceWithId$inboundSchema,
+      ]),
+    ),
+    has_more: z.boolean(),
+    last_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type ConversationsItemsListResponseBody$Outbound = {
   object?: "list" | undefined;
@@ -562,46 +576,48 @@ export const ConversationsItemsListResponseBody$outboundSchema: z.ZodType<
   ConversationsItemsListResponseBody$Outbound,
   z.ZodTypeDef,
   ConversationsItemsListResponseBody
-> = z.object({
-  object: z.literal("list").optional(),
-  data: z.array(
-    z.union([
-      components.ComputerToolCallWithId$outboundSchema,
-      components.CodeInterpreterToolCallWithId$outboundSchema,
-      components.OutputMessageWithId$outboundSchema,
-      components.OutputAudioItemWithId$outboundSchema,
-      components.FunctionToolCallWithId$outboundSchema,
-      components.LocalShellCallWithId$outboundSchema,
-      components.ShellCallWithId$outboundSchema,
-      components.MCPApprovalRequestWithId$outboundSchema,
-      components.ToolApprovalRequestWithId$outboundSchema,
-      components.MCPToolCallWithId$outboundSchema,
-      components.CustomToolCallWithId$outboundSchema,
-      components.FileSearchToolCallWithId$outboundSchema,
-      components.ComputerToolCallOutputWithId$outboundSchema,
-      components.WebSearchToolCallWithId$outboundSchema,
-      components.FunctionToolCallOutputWithId$outboundSchema,
-      components.ImageGenerationCallWithId$outboundSchema,
-      components.ShellCallOutputWithId$outboundSchema,
-      components.MCPListToolsWithId$outboundSchema,
-      components.MCPApprovalResponseWithId$outboundSchema,
-      components.ToolApprovalResponseWithId$outboundSchema,
-      components.CustomToolCallOutputWithId$outboundSchema,
-      z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
-      components.ReasoningWithId$outboundSchema,
-      components.LocalShellCallOutputWithId$outboundSchema,
-      components.ResponseCompactionItemWithId$outboundSchema,
-      components.ItemReferenceWithId$outboundSchema,
-    ]),
-  ),
-  hasMore: z.boolean(),
-  lastId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list").optional(),
+    data: z.array(
+      z.union([
+        components.ComputerToolCallWithId$outboundSchema,
+        components.CodeInterpreterToolCallWithId$outboundSchema,
+        components.OutputMessageWithId$outboundSchema,
+        components.OutputAudioItemWithId$outboundSchema,
+        components.FunctionToolCallWithId$outboundSchema,
+        components.LocalShellCallWithId$outboundSchema,
+        components.ShellCallWithId$outboundSchema,
+        components.MCPApprovalRequestWithId$outboundSchema,
+        components.ToolApprovalRequestWithId$outboundSchema,
+        components.MCPToolCallWithId$outboundSchema,
+        components.CustomToolCallWithId$outboundSchema,
+        components.FileSearchToolCallWithId$outboundSchema,
+        components.ComputerToolCallOutputWithId$outboundSchema,
+        components.WebSearchToolCallWithId$outboundSchema,
+        components.FunctionToolCallOutputWithId$outboundSchema,
+        components.ImageGenerationCallWithId$outboundSchema,
+        components.ShellCallOutputWithId$outboundSchema,
+        components.MCPListToolsWithId$outboundSchema,
+        components.MCPApprovalResponseWithId$outboundSchema,
+        components.ToolApprovalResponseWithId$outboundSchema,
+        components.CustomToolCallOutputWithId$outboundSchema,
+        z.lazy(() => ConversationsItemsListDataInputMessageItem$outboundSchema),
+        components.ReasoningWithId$outboundSchema,
+        components.LocalShellCallOutputWithId$outboundSchema,
+        components.ResponseCompactionItemWithId$outboundSchema,
+        components.ItemReferenceWithId$outboundSchema,
+      ]),
+    ),
+    hasMore: z.boolean(),
+    lastId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function conversationsItemsListResponseBodyToJSON(
   conversationsItemsListResponseBody: ConversationsItemsListResponseBody,

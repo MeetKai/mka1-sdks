@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,8 +59,10 @@ export type ListVectorStoreFilesInBatchRequest = {
 
 /** @internal */
 export const ListVectorStoreFilesInBatchQueryParamOrder$inboundSchema:
-  z.ZodNativeEnum<typeof ListVectorStoreFilesInBatchQueryParamOrder> = z
-    .nativeEnum(ListVectorStoreFilesInBatchQueryParamOrder);
+  z.ZodNativeEnum<typeof ListVectorStoreFilesInBatchQueryParamOrder> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListVectorStoreFilesInBatchQueryParamOrder)
+    );
 /** @internal */
 export const ListVectorStoreFilesInBatchQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListVectorStoreFilesInBatchQueryParamOrder> =
@@ -69,7 +71,7 @@ export const ListVectorStoreFilesInBatchQueryParamOrder$outboundSchema:
 /** @internal */
 export const QueryParamFilter$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamFilter
-> = z.nativeEnum(QueryParamFilter);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamFilter));
 /** @internal */
 export const QueryParamFilter$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamFilter
@@ -80,24 +82,26 @@ export const ListVectorStoreFilesInBatchRequest$inboundSchema: z.ZodType<
   ListVectorStoreFilesInBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  batch_id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreFilesInBatchQueryParamOrder$inboundSchema.default(
-    "desc",
-  ),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  filter: QueryParamFilter$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "batch_id": "batchId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    batch_id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreFilesInBatchQueryParamOrder$inboundSchema.default(
+      "desc",
+    ),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    filter: QueryParamFilter$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "batch_id": "batchId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListVectorStoreFilesInBatchRequest$Outbound = {
   vector_store_id: string;
@@ -115,24 +119,26 @@ export const ListVectorStoreFilesInBatchRequest$outboundSchema: z.ZodType<
   ListVectorStoreFilesInBatchRequest$Outbound,
   z.ZodTypeDef,
   ListVectorStoreFilesInBatchRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  batchId: z.string(),
-  limit: z.number().int().default(20),
-  order: ListVectorStoreFilesInBatchQueryParamOrder$outboundSchema.default(
-    "desc",
-  ),
-  after: z.string().optional(),
-  before: z.string().optional(),
-  filter: QueryParamFilter$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    batchId: "batch_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    batchId: z.string(),
+    limit: z.number().int().default(20),
+    order: ListVectorStoreFilesInBatchQueryParamOrder$outboundSchema.default(
+      "desc",
+    ),
+    after: z.string().optional(),
+    before: z.string().optional(),
+    filter: QueryParamFilter$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      batchId: "batch_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listVectorStoreFilesInBatchRequestToJSON(
   listVectorStoreFilesInBatchRequest: ListVectorStoreFilesInBatchRequest,

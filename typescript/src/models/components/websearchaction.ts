@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -38,11 +38,13 @@ export const WebSearchAction$inboundSchema: z.ZodType<
   WebSearchAction,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  search: SearchAction$inboundSchema,
-  open_page: OpenPageAction$inboundSchema,
-  find: FindAction$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    search: SearchAction$inboundSchema,
+    open_page: OpenPageAction$inboundSchema,
+    find: FindAction$inboundSchema,
+  })
+);
 /** @internal */
 export type WebSearchAction$Outbound =
   | SearchAction$Outbound
@@ -54,11 +56,13 @@ export const WebSearchAction$outboundSchema: z.ZodType<
   WebSearchAction$Outbound,
   z.ZodTypeDef,
   WebSearchAction
-> = z.union([
-  SearchAction$outboundSchema,
-  OpenPageAction$outboundSchema,
-  FindAction$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    SearchAction$outboundSchema,
+    OpenPageAction$outboundSchema,
+    FindAction$outboundSchema,
+  ])
+);
 
 export function webSearchActionToJSON(
   webSearchAction: WebSearchAction,

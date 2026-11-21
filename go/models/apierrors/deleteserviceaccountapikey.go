@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type DeleteServiceAccountAPIKeyTooManyRequestsError struct {
 var _ error = &DeleteServiceAccountAPIKeyTooManyRequestsError{}
 
 func (e *DeleteServiceAccountAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type DeleteServiceAccountAPIKeyGoneError struct {
 var _ error = &DeleteServiceAccountAPIKeyGoneError{}
 
 func (e *DeleteServiceAccountAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type DeleteServiceAccountAPIKeyConflictError struct {
 var _ error = &DeleteServiceAccountAPIKeyConflictError{}
 
 func (e *DeleteServiceAccountAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type DeleteServiceAccountAPIKeyNotFoundError struct {
 var _ error = &DeleteServiceAccountAPIKeyNotFoundError{}
 
 func (e *DeleteServiceAccountAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type DeleteServiceAccountAPIKeyForbiddenError struct {
 var _ error = &DeleteServiceAccountAPIKeyForbiddenError{}
 
 func (e *DeleteServiceAccountAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type DeleteServiceAccountAPIKeyUnauthorizedError struct {
 var _ error = &DeleteServiceAccountAPIKeyUnauthorizedError{}
 
 func (e *DeleteServiceAccountAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type DeleteServiceAccountAPIKeyBadRequestError struct {
 var _ error = &DeleteServiceAccountAPIKeyBadRequestError{}
 
 func (e *DeleteServiceAccountAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

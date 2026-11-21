@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,9 +59,10 @@ export type ClusterDefaultRuleSummary = {
 
 /** @internal */
 export const ClusterDefaultRuleSummaryOutputTiming$inboundSchema:
-  z.ZodNativeEnum<typeof ClusterDefaultRuleSummaryOutputTiming> = z.nativeEnum(
-    ClusterDefaultRuleSummaryOutputTiming,
-  );
+  z.ZodNativeEnum<typeof ClusterDefaultRuleSummaryOutputTiming> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ClusterDefaultRuleSummaryOutputTiming)
+    );
 /** @internal */
 export const ClusterDefaultRuleSummaryOutputTiming$outboundSchema:
   z.ZodNativeEnum<typeof ClusterDefaultRuleSummaryOutputTiming> =
@@ -72,21 +73,24 @@ export const ClusterDefaultRuleSummary$inboundSchema: z.ZodType<
   ClusterDefaultRuleSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: GuardrailMode$inboundSchema,
-  enabled: z.boolean(),
-  check_output: z.boolean().optional(),
-  output_timing: ClusterDefaultRuleSummaryOutputTiming$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema),
-  rejection_message: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "input_sources": "inputSources",
-    "rejection_message": "rejectionMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: GuardrailMode$inboundSchema,
+    enabled: z.boolean(),
+    check_output: z.boolean().optional(),
+    output_timing: ClusterDefaultRuleSummaryOutputTiming$inboundSchema
+      .optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema),
+    rejection_message: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "input_sources": "inputSources",
+      "rejection_message": "rejectionMessage",
+    });
+  })
+);
 /** @internal */
 export type ClusterDefaultRuleSummary$Outbound = {
   mode: string;
@@ -102,21 +106,24 @@ export const ClusterDefaultRuleSummary$outboundSchema: z.ZodType<
   ClusterDefaultRuleSummary$Outbound,
   z.ZodTypeDef,
   ClusterDefaultRuleSummary
-> = z.object({
-  mode: GuardrailMode$outboundSchema,
-  enabled: z.boolean(),
-  checkOutput: z.boolean().optional(),
-  outputTiming: ClusterDefaultRuleSummaryOutputTiming$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema),
-  rejectionMessage: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    inputSources: "input_sources",
-    rejectionMessage: "rejection_message",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: GuardrailMode$outboundSchema,
+    enabled: z.boolean(),
+    checkOutput: z.boolean().optional(),
+    outputTiming: ClusterDefaultRuleSummaryOutputTiming$outboundSchema
+      .optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema),
+    rejectionMessage: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      inputSources: "input_sources",
+      rejectionMessage: "rejection_message",
+    });
+  })
+);
 
 export function clusterDefaultRuleSummaryToJSON(
   clusterDefaultRuleSummary: ClusterDefaultRuleSummary,

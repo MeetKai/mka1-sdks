@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const SupportCaseList$inboundSchema: z.ZodType<
   SupportCaseList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(SupportCase$inboundSchema),
-  total: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(SupportCase$inboundSchema),
+    total: z.number().int(),
+  })
+);
 /** @internal */
 export type SupportCaseList$Outbound = {
   data: Array<SupportCase$Outbound>;
@@ -38,10 +40,12 @@ export const SupportCaseList$outboundSchema: z.ZodType<
   SupportCaseList$Outbound,
   z.ZodTypeDef,
   SupportCaseList
-> = z.object({
-  data: z.array(SupportCase$outboundSchema),
-  total: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(SupportCase$outboundSchema),
+    total: z.number().int(),
+  })
+);
 
 export function supportCaseListToJSON(
   supportCaseList: SupportCaseList,

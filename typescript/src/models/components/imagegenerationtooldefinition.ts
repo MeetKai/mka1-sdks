@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -89,8 +89,8 @@ export type ImageGenerationToolDefinition = {
 };
 
 /** @internal */
-export const Background$inboundSchema: z.ZodNativeEnum<typeof Background> = z
-  .nativeEnum(Background);
+export const Background$inboundSchema: z.ZodNativeEnum<typeof Background> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Background));
 /** @internal */
 export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> =
   Background$inboundSchema;
@@ -98,23 +98,25 @@ export const Background$outboundSchema: z.ZodNativeEnum<typeof Background> =
 /** @internal */
 export const InputFidelity$inboundSchema: z.ZodNativeEnum<
   typeof InputFidelity
-> = z.nativeEnum(InputFidelity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputFidelity));
 /** @internal */
 export const InputFidelity$outboundSchema: z.ZodNativeEnum<
   typeof InputFidelity
 > = InputFidelity$inboundSchema;
 
 /** @internal */
-export const Moderation$inboundSchema: z.ZodNativeEnum<typeof Moderation> = z
-  .nativeEnum(Moderation);
+export const Moderation$inboundSchema: z.ZodNativeEnum<typeof Moderation> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Moderation));
 /** @internal */
 export const Moderation$outboundSchema: z.ZodNativeEnum<typeof Moderation> =
   Moderation$inboundSchema;
 
 /** @internal */
 export const ImageGenerationToolDefinitionOutputFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ImageGenerationToolDefinitionOutputFormat> = z
-    .nativeEnum(ImageGenerationToolDefinitionOutputFormat);
+  z.ZodNativeEnum<typeof ImageGenerationToolDefinitionOutputFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ImageGenerationToolDefinitionOutputFormat)
+    );
 /** @internal */
 export const ImageGenerationToolDefinitionOutputFormat$outboundSchema:
   z.ZodNativeEnum<typeof ImageGenerationToolDefinitionOutputFormat> =
@@ -122,9 +124,10 @@ export const ImageGenerationToolDefinitionOutputFormat$outboundSchema:
 
 /** @internal */
 export const ImageGenerationToolDefinitionQuality$inboundSchema:
-  z.ZodNativeEnum<typeof ImageGenerationToolDefinitionQuality> = z.nativeEnum(
-    ImageGenerationToolDefinitionQuality,
-  );
+  z.ZodNativeEnum<typeof ImageGenerationToolDefinitionQuality> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ImageGenerationToolDefinitionQuality)
+    );
 /** @internal */
 export const ImageGenerationToolDefinitionQuality$outboundSchema:
   z.ZodNativeEnum<typeof ImageGenerationToolDefinitionQuality> =
@@ -133,7 +136,9 @@ export const ImageGenerationToolDefinitionQuality$outboundSchema:
 /** @internal */
 export const ImageGenerationToolDefinitionSize$inboundSchema: z.ZodNativeEnum<
   typeof ImageGenerationToolDefinitionSize
-> = z.nativeEnum(ImageGenerationToolDefinitionSize);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ImageGenerationToolDefinitionSize)
+);
 /** @internal */
 export const ImageGenerationToolDefinitionSize$outboundSchema: z.ZodNativeEnum<
   typeof ImageGenerationToolDefinitionSize
@@ -144,30 +149,32 @@ export const ImageGenerationToolDefinition$inboundSchema: z.ZodType<
   ImageGenerationToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_generation"),
-  background: Background$inboundSchema.default("auto"),
-  input_fidelity: InputFidelity$inboundSchema.default("low"),
-  input_image_mask: InputImageMask$inboundSchema.optional(),
-  model: z.string().default("auto"),
-  moderation: Moderation$inboundSchema.default("auto"),
-  output_compression: z.number().int().default(100),
-  output_format: ImageGenerationToolDefinitionOutputFormat$inboundSchema
-    .default("png"),
-  partial_images: z.number().int().default(0),
-  quality: ImageGenerationToolDefinitionQuality$inboundSchema.default("auto"),
-  size: ImageGenerationToolDefinitionSize$inboundSchema.default("auto"),
-  prompt_guard: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_fidelity": "inputFidelity",
-    "input_image_mask": "inputImageMask",
-    "output_compression": "outputCompression",
-    "output_format": "outputFormat",
-    "partial_images": "partialImages",
-    "prompt_guard": "promptGuard",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_generation"),
+    background: Background$inboundSchema.default("auto"),
+    input_fidelity: InputFidelity$inboundSchema.default("low"),
+    input_image_mask: InputImageMask$inboundSchema.optional(),
+    model: z.string().default("auto"),
+    moderation: Moderation$inboundSchema.default("auto"),
+    output_compression: z.number().int().default(100),
+    output_format: ImageGenerationToolDefinitionOutputFormat$inboundSchema
+      .default("png"),
+    partial_images: z.number().int().default(0),
+    quality: ImageGenerationToolDefinitionQuality$inboundSchema.default("auto"),
+    size: ImageGenerationToolDefinitionSize$inboundSchema.default("auto"),
+    prompt_guard: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_fidelity": "inputFidelity",
+      "input_image_mask": "inputImageMask",
+      "output_compression": "outputCompression",
+      "output_format": "outputFormat",
+      "partial_images": "partialImages",
+      "prompt_guard": "promptGuard",
+    });
+  })
+);
 /** @internal */
 export type ImageGenerationToolDefinition$Outbound = {
   type: "image_generation";
@@ -189,30 +196,34 @@ export const ImageGenerationToolDefinition$outboundSchema: z.ZodType<
   ImageGenerationToolDefinition$Outbound,
   z.ZodTypeDef,
   ImageGenerationToolDefinition
-> = z.object({
-  type: z.literal("image_generation"),
-  background: Background$outboundSchema.default("auto"),
-  inputFidelity: InputFidelity$outboundSchema.default("low"),
-  inputImageMask: InputImageMask$outboundSchema.optional(),
-  model: z.string().default("auto"),
-  moderation: Moderation$outboundSchema.default("auto"),
-  outputCompression: z.number().int().default(100),
-  outputFormat: ImageGenerationToolDefinitionOutputFormat$outboundSchema
-    .default("png"),
-  partialImages: z.number().int().default(0),
-  quality: ImageGenerationToolDefinitionQuality$outboundSchema.default("auto"),
-  size: ImageGenerationToolDefinitionSize$outboundSchema.default("auto"),
-  promptGuard: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputFidelity: "input_fidelity",
-    inputImageMask: "input_image_mask",
-    outputCompression: "output_compression",
-    outputFormat: "output_format",
-    partialImages: "partial_images",
-    promptGuard: "prompt_guard",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_generation"),
+    background: Background$outboundSchema.default("auto"),
+    inputFidelity: InputFidelity$outboundSchema.default("low"),
+    inputImageMask: InputImageMask$outboundSchema.optional(),
+    model: z.string().default("auto"),
+    moderation: Moderation$outboundSchema.default("auto"),
+    outputCompression: z.number().int().default(100),
+    outputFormat: ImageGenerationToolDefinitionOutputFormat$outboundSchema
+      .default("png"),
+    partialImages: z.number().int().default(0),
+    quality: ImageGenerationToolDefinitionQuality$outboundSchema.default(
+      "auto",
+    ),
+    size: ImageGenerationToolDefinitionSize$outboundSchema.default("auto"),
+    promptGuard: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputFidelity: "input_fidelity",
+      inputImageMask: "input_image_mask",
+      outputCompression: "output_compression",
+      outputFormat: "output_format",
+      partialImages: "partial_images",
+      promptGuard: "prompt_guard",
+    });
+  })
+);
 
 export function imageGenerationToolDefinitionToJSON(
   imageGenerationToolDefinition: ImageGenerationToolDefinition,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -24,7 +25,9 @@ export type VectorStorePermissionSource = ClosedEnum<
 /** @internal */
 export const VectorStorePermissionSource$inboundSchema: z.ZodNativeEnum<
   typeof VectorStorePermissionSource
-> = z.nativeEnum(VectorStorePermissionSource);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VectorStorePermissionSource)
+);
 /** @internal */
 export const VectorStorePermissionSource$outboundSchema: z.ZodNativeEnum<
   typeof VectorStorePermissionSource

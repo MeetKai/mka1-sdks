@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetClusterOrgTooManyRequestsError struct {
 var _ error = &GetClusterOrgTooManyRequestsError{}
 
 func (e *GetClusterOrgTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetClusterOrgGoneError struct {
 var _ error = &GetClusterOrgGoneError{}
 
 func (e *GetClusterOrgGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetClusterOrgConflictError struct {
 var _ error = &GetClusterOrgConflictError{}
 
 func (e *GetClusterOrgConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetClusterOrgNotFoundError struct {
 var _ error = &GetClusterOrgNotFoundError{}
 
 func (e *GetClusterOrgNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetClusterOrgForbiddenError struct {
 var _ error = &GetClusterOrgForbiddenError{}
 
 func (e *GetClusterOrgForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetClusterOrgUnauthorizedError struct {
 var _ error = &GetClusterOrgUnauthorizedError{}
 
 func (e *GetClusterOrgUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetClusterOrgBadRequestError struct {
 var _ error = &GetClusterOrgBadRequestError{}
 
 func (e *GetClusterOrgBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

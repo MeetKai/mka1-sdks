@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -57,21 +57,23 @@ export const ShellEnvironmentContainerAuto$inboundSchema: z.ZodType<
   ShellEnvironmentContainerAuto,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_auto"),
-  session_scope: ShellSessionScope$inboundSchema.optional(),
-  context_files: z.array(z.string()).optional(),
-  network_policy: ShellNetworkPolicy$inboundSchema.optional(),
-  skills: z.array(SkillEntry$inboundSchema).optional(),
-  memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_scope": "sessionScope",
-    "context_files": "contextFiles",
-    "network_policy": "networkPolicy",
-    "memory_stores": "memoryStores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_auto"),
+    session_scope: ShellSessionScope$inboundSchema.optional(),
+    context_files: z.array(z.string()).optional(),
+    network_policy: ShellNetworkPolicy$inboundSchema.optional(),
+    skills: z.array(SkillEntry$inboundSchema).optional(),
+    memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_scope": "sessionScope",
+      "context_files": "contextFiles",
+      "network_policy": "networkPolicy",
+      "memory_stores": "memoryStores",
+    });
+  })
+);
 /** @internal */
 export type ShellEnvironmentContainerAuto$Outbound = {
   type: "container_auto";
@@ -87,21 +89,23 @@ export const ShellEnvironmentContainerAuto$outboundSchema: z.ZodType<
   ShellEnvironmentContainerAuto$Outbound,
   z.ZodTypeDef,
   ShellEnvironmentContainerAuto
-> = z.object({
-  type: z.literal("container_auto"),
-  sessionScope: ShellSessionScope$outboundSchema.optional(),
-  contextFiles: z.array(z.string()).optional(),
-  networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
-  skills: z.array(SkillEntry$outboundSchema).optional(),
-  memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionScope: "session_scope",
-    contextFiles: "context_files",
-    networkPolicy: "network_policy",
-    memoryStores: "memory_stores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_auto"),
+    sessionScope: ShellSessionScope$outboundSchema.optional(),
+    contextFiles: z.array(z.string()).optional(),
+    networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
+    skills: z.array(SkillEntry$outboundSchema).optional(),
+    memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionScope: "session_scope",
+      contextFiles: "context_files",
+      networkPolicy: "network_policy",
+      memoryStores: "memory_stores",
+    });
+  })
+);
 
 export function shellEnvironmentContainerAutoToJSON(
   shellEnvironmentContainerAuto: ShellEnvironmentContainerAuto,

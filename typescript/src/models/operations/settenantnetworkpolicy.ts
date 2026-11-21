@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -26,7 +26,7 @@ export type SetTenantNetworkPolicyRequest = {
 /** @internal */
 export const PathParamScope$inboundSchema: z.ZodNativeEnum<
   typeof PathParamScope
-> = z.nativeEnum(PathParamScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(PathParamScope));
 /** @internal */
 export const PathParamScope$outboundSchema: z.ZodNativeEnum<
   typeof PathParamScope
@@ -37,18 +37,20 @@ export const SetTenantNetworkPolicyRequest$inboundSchema: z.ZodType<
   SetTenantNetworkPolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: PathParamScope$inboundSchema,
-  expected_organization_id: z.nullable(z.string()).optional(),
-  expected_team_id: z.nullable(z.string()).optional(),
-  SaveTenantNetworkPolicy: components.SaveTenantNetworkPolicy$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "expected_organization_id": "expectedOrganizationId",
-    "expected_team_id": "expectedTeamId",
-    "SaveTenantNetworkPolicy": "saveTenantNetworkPolicy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: PathParamScope$inboundSchema,
+    expected_organization_id: z.nullable(z.string()).optional(),
+    expected_team_id: z.nullable(z.string()).optional(),
+    SaveTenantNetworkPolicy: components.SaveTenantNetworkPolicy$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "expected_organization_id": "expectedOrganizationId",
+      "expected_team_id": "expectedTeamId",
+      "SaveTenantNetworkPolicy": "saveTenantNetworkPolicy",
+    });
+  })
+);
 /** @internal */
 export type SetTenantNetworkPolicyRequest$Outbound = {
   scope: string;
@@ -62,18 +64,20 @@ export const SetTenantNetworkPolicyRequest$outboundSchema: z.ZodType<
   SetTenantNetworkPolicyRequest$Outbound,
   z.ZodTypeDef,
   SetTenantNetworkPolicyRequest
-> = z.object({
-  scope: PathParamScope$outboundSchema,
-  expectedOrganizationId: z.nullable(z.string()).optional(),
-  expectedTeamId: z.nullable(z.string()).optional(),
-  saveTenantNetworkPolicy: components.SaveTenantNetworkPolicy$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    expectedOrganizationId: "expected_organization_id",
-    expectedTeamId: "expected_team_id",
-    saveTenantNetworkPolicy: "SaveTenantNetworkPolicy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: PathParamScope$outboundSchema,
+    expectedOrganizationId: z.nullable(z.string()).optional(),
+    expectedTeamId: z.nullable(z.string()).optional(),
+    saveTenantNetworkPolicy: components.SaveTenantNetworkPolicy$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      expectedOrganizationId: "expected_organization_id",
+      expectedTeamId: "expected_team_id",
+      saveTenantNetworkPolicy: "SaveTenantNetworkPolicy",
+    });
+  })
+);
 
 export function setTenantNetworkPolicyRequestToJSON(
   setTenantNetworkPolicyRequest: SetTenantNetworkPolicyRequest,

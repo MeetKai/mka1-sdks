@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,18 @@ export const ComputeSecretRotate$inboundSchema: z.ZodType<
   ComputeSecretRotate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.record(z.string()),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.record(z.string()),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeSecretRotate$Outbound = {
   data: { [k: string]: string };
@@ -41,14 +44,16 @@ export const ComputeSecretRotate$outboundSchema: z.ZodType<
   ComputeSecretRotate$Outbound,
   z.ZodTypeDef,
   ComputeSecretRotate
-> = z.object({
-  data: z.record(z.string()),
-  expiresAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.record(z.string()),
+    expiresAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function computeSecretRotateToJSON(
   computeSecretRotate: ComputeSecretRotate,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const LogProbToken$inboundSchema: z.ZodType<
   LogProbToken,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.array(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number()).optional(),
+  })
+);
 /** @internal */
 export type LogProbToken$Outbound = {
   token: string;
@@ -35,11 +37,13 @@ export const LogProbToken$outboundSchema: z.ZodType<
   LogProbToken$Outbound,
   z.ZodTypeDef,
   LogProbToken
-> = z.object({
-  token: z.string(),
-  logprob: z.number(),
-  bytes: z.array(z.number()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+    logprob: z.number(),
+    bytes: z.array(z.number()).optional(),
+  })
+);
 
 export function logProbTokenToJSON(logProbToken: LogProbToken): string {
   return JSON.stringify(LogProbToken$outboundSchema.parse(logProbToken));

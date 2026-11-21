@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,16 +28,18 @@ export const ListComputeTenantsRequest$inboundSchema: z.ZodType<
   ListComputeTenantsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListComputeTenantsRequest$Outbound = {
   enabled?: boolean | undefined;
@@ -51,16 +53,18 @@ export const ListComputeTenantsRequest$outboundSchema: z.ZodType<
   ListComputeTenantsRequest$Outbound,
   z.ZodTypeDef,
   ListComputeTenantsRequest
-> = z.object({
-  enabled: z.boolean().optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listComputeTenantsRequestToJSON(
   listComputeTenantsRequest: ListComputeTenantsRequest,
@@ -84,10 +88,12 @@ export const ListComputeTenantsResponse$inboundSchema: z.ZodType<
   ListComputeTenantsResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeTenantList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeTenantList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListComputeTenantsResponse$Outbound =
   | components.ComputeTenantList$Outbound
@@ -98,10 +104,12 @@ export const ListComputeTenantsResponse$outboundSchema: z.ZodType<
   ListComputeTenantsResponse$Outbound,
   z.ZodTypeDef,
   ListComputeTenantsResponse
-> = z.union([
-  components.ComputeTenantList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeTenantList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listComputeTenantsResponseToJSON(
   listComputeTenantsResponse: ListComputeTenantsResponse,

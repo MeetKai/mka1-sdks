@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +29,9 @@ export type HostedToolShorthandDefinition = {
 /** @internal */
 export const HostedToolShorthandDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof HostedToolShorthandDefinitionType
-> = z.nativeEnum(HostedToolShorthandDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(HostedToolShorthandDefinitionType)
+);
 /** @internal */
 export const HostedToolShorthandDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof HostedToolShorthandDefinitionType
@@ -40,9 +42,11 @@ export const HostedToolShorthandDefinition$inboundSchema: z.ZodType<
   HostedToolShorthandDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: HostedToolShorthandDefinitionType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: HostedToolShorthandDefinitionType$inboundSchema,
+  })
+);
 /** @internal */
 export type HostedToolShorthandDefinition$Outbound = {
   type: string;
@@ -53,9 +57,11 @@ export const HostedToolShorthandDefinition$outboundSchema: z.ZodType<
   HostedToolShorthandDefinition$Outbound,
   z.ZodTypeDef,
   HostedToolShorthandDefinition
-> = z.object({
-  type: HostedToolShorthandDefinitionType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: HostedToolShorthandDefinitionType$outboundSchema,
+  })
+);
 
 export function hostedToolShorthandDefinitionToJSON(
   hostedToolShorthandDefinition: HostedToolShorthandDefinition,

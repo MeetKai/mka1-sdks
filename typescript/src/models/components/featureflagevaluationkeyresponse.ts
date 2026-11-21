@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const FeatureFlagEvaluationKeyResponse$inboundSchema: z.ZodType<
   FeatureFlagEvaluationKeyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+  })
+);
 /** @internal */
 export type FeatureFlagEvaluationKeyResponse$Outbound = {
   key: string;
@@ -32,9 +34,11 @@ export const FeatureFlagEvaluationKeyResponse$outboundSchema: z.ZodType<
   FeatureFlagEvaluationKeyResponse$Outbound,
   z.ZodTypeDef,
   FeatureFlagEvaluationKeyResponse
-> = z.object({
-  key: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+  })
+);
 
 export function featureFlagEvaluationKeyResponseToJSON(
   featureFlagEvaluationKeyResponse: FeatureFlagEvaluationKeyResponse,

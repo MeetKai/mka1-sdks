@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,7 +27,9 @@ export type OpenApiToolSetReference = {
 /** @internal */
 export const OpenApiToolSetReferenceType$inboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetReferenceType
-> = z.nativeEnum(OpenApiToolSetReferenceType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(OpenApiToolSetReferenceType)
+);
 /** @internal */
 export const OpenApiToolSetReferenceType$outboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetReferenceType
@@ -38,14 +40,16 @@ export const OpenApiToolSetReference$inboundSchema: z.ZodType<
   OpenApiToolSetReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: OpenApiToolSetReferenceType$inboundSchema,
-  openapi_tool_set_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "openapi_tool_set_id": "openapiToolSetId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: OpenApiToolSetReferenceType$inboundSchema,
+    openapi_tool_set_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "openapi_tool_set_id": "openapiToolSetId",
+    });
+  })
+);
 /** @internal */
 export type OpenApiToolSetReference$Outbound = {
   type: string;
@@ -57,14 +61,16 @@ export const OpenApiToolSetReference$outboundSchema: z.ZodType<
   OpenApiToolSetReference$Outbound,
   z.ZodTypeDef,
   OpenApiToolSetReference
-> = z.object({
-  type: OpenApiToolSetReferenceType$outboundSchema,
-  openapiToolSetId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    openapiToolSetId: "openapi_tool_set_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: OpenApiToolSetReferenceType$outboundSchema,
+    openapiToolSetId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      openapiToolSetId: "openapi_tool_set_id",
+    });
+  })
+);
 
 export function openApiToolSetReferenceToJSON(
   openApiToolSetReference: OpenApiToolSetReference,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const MemoryStoreVisibility = {
@@ -14,7 +15,7 @@ export type MemoryStoreVisibility = ClosedEnum<typeof MemoryStoreVisibility>;
 /** @internal */
 export const MemoryStoreVisibility$inboundSchema: z.ZodNativeEnum<
   typeof MemoryStoreVisibility
-> = z.nativeEnum(MemoryStoreVisibility);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MemoryStoreVisibility));
 /** @internal */
 export const MemoryStoreVisibility$outboundSchema: z.ZodNativeEnum<
   typeof MemoryStoreVisibility

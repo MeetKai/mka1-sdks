@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const MemoryMountAccess = {
@@ -14,7 +15,7 @@ export type MemoryMountAccess = ClosedEnum<typeof MemoryMountAccess>;
 /** @internal */
 export const MemoryMountAccess$inboundSchema: z.ZodNativeEnum<
   typeof MemoryMountAccess
-> = z.nativeEnum(MemoryMountAccess);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MemoryMountAccess));
 /** @internal */
 export const MemoryMountAccess$outboundSchema: z.ZodNativeEnum<
   typeof MemoryMountAccess

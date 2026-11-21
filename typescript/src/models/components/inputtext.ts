@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const InputText$inboundSchema: z.ZodType<
   InputText,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("input_text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_text"),
+    text: z.string(),
+  })
+);
 /** @internal */
 export type InputText$Outbound = {
   type: "input_text";
@@ -41,10 +43,12 @@ export const InputText$outboundSchema: z.ZodType<
   InputText$Outbound,
   z.ZodTypeDef,
   InputText
-> = z.object({
-  type: z.literal("input_text"),
-  text: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("input_text"),
+    text: z.string(),
+  })
+);
 
 export function inputTextToJSON(inputText: InputText): string {
   return JSON.stringify(InputText$outboundSchema.parse(inputText));

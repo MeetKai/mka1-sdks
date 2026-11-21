@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,18 @@ export const ConnectorAuthorizeIntentModel$inboundSchema: z.ZodType<
   ConnectorAuthorizeIntentModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  state: z.string(),
-  authorize_url: z.string(),
-  expires_in_seconds: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "authorize_url": "authorizeUrl",
-    "expires_in_seconds": "expiresInSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: z.string(),
+    authorize_url: z.string(),
+    expires_in_seconds: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "authorize_url": "authorizeUrl",
+      "expires_in_seconds": "expiresInSeconds",
+    });
+  })
+);
 /** @internal */
 export type ConnectorAuthorizeIntentModel$Outbound = {
   state: string;
@@ -41,16 +43,18 @@ export const ConnectorAuthorizeIntentModel$outboundSchema: z.ZodType<
   ConnectorAuthorizeIntentModel$Outbound,
   z.ZodTypeDef,
   ConnectorAuthorizeIntentModel
-> = z.object({
-  state: z.string(),
-  authorizeUrl: z.string(),
-  expiresInSeconds: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    authorizeUrl: "authorize_url",
-    expiresInSeconds: "expires_in_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    state: z.string(),
+    authorizeUrl: z.string(),
+    expiresInSeconds: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      authorizeUrl: "authorize_url",
+      expiresInSeconds: "expires_in_seconds",
+    });
+  })
+);
 
 export function connectorAuthorizeIntentModelToJSON(
   connectorAuthorizeIntentModel: ConnectorAuthorizeIntentModel,

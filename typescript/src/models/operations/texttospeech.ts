@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,15 +27,17 @@ export const TextToSpeechRequest$inboundSchema: z.ZodType<
   TextToSpeechRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  TextToSpeechRequest: components.TextToSpeechRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "TextToSpeechRequest": "textToSpeechRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    TextToSpeechRequest: components.TextToSpeechRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "TextToSpeechRequest": "textToSpeechRequest",
+    });
+  })
+);
 /** @internal */
 export type TextToSpeechRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -47,15 +49,17 @@ export const TextToSpeechRequest$outboundSchema: z.ZodType<
   TextToSpeechRequest$Outbound,
   z.ZodTypeDef,
   TextToSpeechRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  textToSpeechRequest: components.TextToSpeechRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    textToSpeechRequest: "TextToSpeechRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    textToSpeechRequest: components.TextToSpeechRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      textToSpeechRequest: "TextToSpeechRequest",
+    });
+  })
+);
 
 export function textToSpeechRequestToJSON(
   textToSpeechRequest: TextToSpeechRequest,
@@ -79,15 +83,17 @@ export const TextToSpeechResponse$inboundSchema: z.ZodType<
   TextToSpeechResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.instanceof(ReadableStream<Uint8Array>),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.instanceof(ReadableStream<Uint8Array>),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type TextToSpeechResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -99,15 +105,17 @@ export const TextToSpeechResponse$outboundSchema: z.ZodType<
   TextToSpeechResponse$Outbound,
   z.ZodTypeDef,
   TextToSpeechResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.instanceof(ReadableStream<Uint8Array>),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.instanceof(ReadableStream<Uint8Array>),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function textToSpeechResponseToJSON(
   textToSpeechResponse: TextToSpeechResponse,

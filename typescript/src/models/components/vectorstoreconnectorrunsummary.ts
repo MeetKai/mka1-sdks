@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,26 +48,28 @@ export const VectorStoreConnectorRunSummary$inboundSchema: z.ZodType<
   VectorStoreConnectorRunSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: VectorStoreConnectorRunStatus$inboundSchema,
-  trigger: VectorStoreConnectorRunTrigger$inboundSchema,
-  started_at: z.number().int(),
-  finished_at: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "finished_at": "finishedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.run"),
+    status: VectorStoreConnectorRunStatus$inboundSchema,
+    trigger: VectorStoreConnectorRunTrigger$inboundSchema,
+    started_at: z.number().int(),
+    finished_at: z.nullable(z.number().int()),
+    added: z.number().int(),
+    updated: z.number().int(),
+    removed: z.number().int(),
+    restored: z.number().int(),
+    skipped: z.number().int(),
+    failed: z.number().int(),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "started_at": "startedAt",
+      "finished_at": "finishedAt",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorRunSummary$Outbound = {
   id: string;
@@ -90,26 +92,28 @@ export const VectorStoreConnectorRunSummary$outboundSchema: z.ZodType<
   VectorStoreConnectorRunSummary$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorRunSummary
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: VectorStoreConnectorRunStatus$outboundSchema,
-  trigger: VectorStoreConnectorRunTrigger$outboundSchema,
-  startedAt: z.number().int(),
-  finishedAt: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    startedAt: "started_at",
-    finishedAt: "finished_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.run"),
+    status: VectorStoreConnectorRunStatus$outboundSchema,
+    trigger: VectorStoreConnectorRunTrigger$outboundSchema,
+    startedAt: z.number().int(),
+    finishedAt: z.nullable(z.number().int()),
+    added: z.number().int(),
+    updated: z.number().int(),
+    removed: z.number().int(),
+    restored: z.number().int(),
+    skipped: z.number().int(),
+    failed: z.number().int(),
+    error: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      startedAt: "started_at",
+      finishedAt: "finished_at",
+    });
+  })
+);
 
 export function vectorStoreConnectorRunSummaryToJSON(
   vectorStoreConnectorRunSummary: VectorStoreConnectorRunSummary,

@@ -18,6 +18,12 @@ type ExchangeSessionTokenInternalServerError struct {
 var _ error = &ExchangeSessionTokenInternalServerError{}
 
 func (e *ExchangeSessionTokenInternalServerError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -32,6 +38,12 @@ type ExchangeSessionTokenTooManyRequestsError struct {
 var _ error = &ExchangeSessionTokenTooManyRequestsError{}
 
 func (e *ExchangeSessionTokenTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -46,6 +58,12 @@ type ExchangeSessionTokenRequestEntityTooLargeError struct {
 var _ error = &ExchangeSessionTokenRequestEntityTooLargeError{}
 
 func (e *ExchangeSessionTokenRequestEntityTooLargeError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -60,6 +78,12 @@ type ExchangeSessionTokenForbiddenError struct {
 var _ error = &ExchangeSessionTokenForbiddenError{}
 
 func (e *ExchangeSessionTokenForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -74,6 +98,12 @@ type ExchangeSessionTokenUnauthorizedError struct {
 var _ error = &ExchangeSessionTokenUnauthorizedError{}
 
 func (e *ExchangeSessionTokenUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -88,6 +118,12 @@ type ExchangeSessionTokenBadRequestError struct {
 var _ error = &ExchangeSessionTokenBadRequestError{}
 
 func (e *ExchangeSessionTokenBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

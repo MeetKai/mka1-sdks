@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const ComputeReason$inboundSchema: z.ZodType<
   ComputeReason,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  details: z.record(z.any()).optional(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    details: z.record(z.any()).optional(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type ComputeReason$Outbound = {
   code: string;
@@ -35,11 +37,13 @@ export const ComputeReason$outboundSchema: z.ZodType<
   ComputeReason$Outbound,
   z.ZodTypeDef,
   ComputeReason
-> = z.object({
-  code: z.string(),
-  details: z.record(z.any()).optional(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    details: z.record(z.any()).optional(),
+    message: z.string(),
+  })
+);
 
 export function computeReasonToJSON(computeReason: ComputeReason): string {
   return JSON.stringify(ComputeReason$outboundSchema.parse(computeReason));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,26 +29,28 @@ export const UploadWorkspaceFileRequest$inboundSchema: z.ZodType<
   UploadWorkspaceFileRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  file_path: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "file_path": "filePath",
-    "session_token": "sessionToken",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    file_path: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "file_path": "filePath",
+      "session_token": "sessionToken",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UploadWorkspaceFileRequest$Outbound = {
   session_id: string;
@@ -68,26 +70,28 @@ export const UploadWorkspaceFileRequest$outboundSchema: z.ZodType<
   UploadWorkspaceFileRequest$Outbound,
   z.ZodTypeDef,
   UploadWorkspaceFileRequest
-> = z.object({
-  sessionId: z.string(),
-  filePath: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    filePath: "file_path",
-    sessionToken: "session_token",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    filePath: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      filePath: "file_path",
+      sessionToken: "session_token",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function uploadWorkspaceFileRequestToJSON(
   uploadWorkspaceFileRequest: UploadWorkspaceFileRequest,

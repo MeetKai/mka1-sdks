@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,23 +44,25 @@ export const UpdateModelAliasRequest$inboundSchema: z.ZodType<
   UpdateModelAliasRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  suite_id: z.string().optional(),
-  metric: z.string().optional(),
-  task_id: z.nullable(z.string()).optional(),
-  candidate_model_ids: z.array(z.string()).optional(),
-  default_model_id: z.nullable(z.string()).optional(),
-  pinned_model_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "task_id": "taskId",
-    "candidate_model_ids": "candidateModelIds",
-    "default_model_id": "defaultModelId",
-    "pinned_model_id": "pinnedModelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    suite_id: z.string().optional(),
+    metric: z.string().optional(),
+    task_id: z.nullable(z.string()).optional(),
+    candidate_model_ids: z.array(z.string()).optional(),
+    default_model_id: z.nullable(z.string()).optional(),
+    pinned_model_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "task_id": "taskId",
+      "candidate_model_ids": "candidateModelIds",
+      "default_model_id": "defaultModelId",
+      "pinned_model_id": "pinnedModelId",
+    });
+  })
+);
 /** @internal */
 export type UpdateModelAliasRequest$Outbound = {
   name: string;
@@ -77,23 +79,25 @@ export const UpdateModelAliasRequest$outboundSchema: z.ZodType<
   UpdateModelAliasRequest$Outbound,
   z.ZodTypeDef,
   UpdateModelAliasRequest
-> = z.object({
-  name: z.string(),
-  suiteId: z.string().optional(),
-  metric: z.string().optional(),
-  taskId: z.nullable(z.string()).optional(),
-  candidateModelIds: z.array(z.string()).optional(),
-  defaultModelId: z.nullable(z.string()).optional(),
-  pinnedModelId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    taskId: "task_id",
-    candidateModelIds: "candidate_model_ids",
-    defaultModelId: "default_model_id",
-    pinnedModelId: "pinned_model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    suiteId: z.string().optional(),
+    metric: z.string().optional(),
+    taskId: z.nullable(z.string()).optional(),
+    candidateModelIds: z.array(z.string()).optional(),
+    defaultModelId: z.nullable(z.string()).optional(),
+    pinnedModelId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      taskId: "task_id",
+      candidateModelIds: "candidate_model_ids",
+      defaultModelId: "default_model_id",
+      pinnedModelId: "pinned_model_id",
+    });
+  })
+);
 
 export function updateModelAliasRequestToJSON(
   updateModelAliasRequest: UpdateModelAliasRequest,

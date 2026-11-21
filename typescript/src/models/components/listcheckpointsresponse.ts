@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,19 +27,21 @@ export const ListCheckpointsResponse$inboundSchema: z.ZodType<
   ListCheckpointsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FineTuningCheckpoint$inboundSchema),
-  has_more: z.boolean(),
-  first_id: z.nullable(z.string()).optional(),
-  last_id: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "first_id": "firstId",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FineTuningCheckpoint$inboundSchema),
+    has_more: z.boolean(),
+    first_id: z.nullable(z.string()).optional(),
+    last_id: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "first_id": "firstId",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type ListCheckpointsResponse$Outbound = {
   object: "list";
@@ -54,19 +56,21 @@ export const ListCheckpointsResponse$outboundSchema: z.ZodType<
   ListCheckpointsResponse$Outbound,
   z.ZodTypeDef,
   ListCheckpointsResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(FineTuningCheckpoint$outboundSchema),
-  hasMore: z.boolean(),
-  firstId: z.nullable(z.string()).optional(),
-  lastId: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    firstId: "first_id",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(FineTuningCheckpoint$outboundSchema),
+    hasMore: z.boolean(),
+    firstId: z.nullable(z.string()).optional(),
+    lastId: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      firstId: "first_id",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function listCheckpointsResponseToJSON(
   listCheckpointsResponse: ListCheckpointsResponse,

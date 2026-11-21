@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,15 +22,17 @@ export const GetFormatApiV1DatasetsFormatsFormatIdGetRequest$inboundSchema:
     GetFormatApiV1DatasetsFormatsFormatIdGetRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    format_id: z.string(),
-    "X-On-Behalf-Of": z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "format_id": "formatId",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      format_id: z.string(),
+      "X-On-Behalf-Of": z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "format_id": "formatId",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+      });
+    })
+  );
 /** @internal */
 export type GetFormatApiV1DatasetsFormatsFormatIdGetRequest$Outbound = {
   format_id: string;
@@ -43,15 +45,17 @@ export const GetFormatApiV1DatasetsFormatsFormatIdGetRequest$outboundSchema:
     GetFormatApiV1DatasetsFormatsFormatIdGetRequest$Outbound,
     z.ZodTypeDef,
     GetFormatApiV1DatasetsFormatsFormatIdGetRequest
-  > = z.object({
-    formatId: z.string(),
-    xOnBehalfOf: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      formatId: "format_id",
-      xOnBehalfOf: "X-On-Behalf-Of",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      formatId: z.string(),
+      xOnBehalfOf: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        formatId: "format_id",
+        xOnBehalfOf: "X-On-Behalf-Of",
+      });
+    })
+  );
 
 export function getFormatApiV1DatasetsFormatsFormatIdGetRequestToJSON(
   getFormatApiV1DatasetsFormatsFormatIdGetRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,14 +22,16 @@ export const AnalyticsQueryRequest$inboundSchema: z.ZodType<
   AnalyticsQueryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  AnalyticsQueryRequest: components.AnalyticsQueryRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AnalyticsQueryRequest": "analyticsQueryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    AnalyticsQueryRequest: components.AnalyticsQueryRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "AnalyticsQueryRequest": "analyticsQueryRequest",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsQueryRequest$Outbound = {
   id: string;
@@ -41,14 +43,16 @@ export const AnalyticsQueryRequest$outboundSchema: z.ZodType<
   AnalyticsQueryRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsQueryRequest
-> = z.object({
-  id: z.string(),
-  analyticsQueryRequest: components.AnalyticsQueryRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    analyticsQueryRequest: "AnalyticsQueryRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    analyticsQueryRequest: components.AnalyticsQueryRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      analyticsQueryRequest: "AnalyticsQueryRequest",
+    });
+  })
+);
 
 export function analyticsQueryRequestToJSON(
   analyticsQueryRequest: AnalyticsQueryRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -31,10 +31,12 @@ export const SkillEntry$inboundSchema: z.ZodType<
   SkillEntry,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  skill_reference: SkillReference$inboundSchema,
-  preconfigured: PreconfiguredSkillReference$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    skill_reference: SkillReference$inboundSchema,
+    preconfigured: PreconfiguredSkillReference$inboundSchema,
+  })
+);
 /** @internal */
 export type SkillEntry$Outbound =
   | SkillReference$Outbound
@@ -45,10 +47,12 @@ export const SkillEntry$outboundSchema: z.ZodType<
   SkillEntry$Outbound,
   z.ZodTypeDef,
   SkillEntry
-> = z.union([
-  SkillReference$outboundSchema,
-  PreconfiguredSkillReference$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    SkillReference$outboundSchema,
+    PreconfiguredSkillReference$outboundSchema,
+  ])
+);
 
 export function skillEntryToJSON(skillEntry: SkillEntry): string {
   return JSON.stringify(SkillEntry$outboundSchema.parse(skillEntry));

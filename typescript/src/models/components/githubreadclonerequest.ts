@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,19 +24,21 @@ export const GitHubReadCloneRequest$inboundSchema: z.ZodType<
   GitHubReadCloneRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  assignment_generation: z.number().int(),
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  base_sha: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "assignment_generation": "assignmentGeneration",
-    "repository_id": "repositoryId",
-    "base_sha": "baseSha",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignment_generation: z.number().int(),
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    base_sha: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "assignment_generation": "assignmentGeneration",
+      "repository_id": "repositoryId",
+      "base_sha": "baseSha",
+    });
+  })
+);
 /** @internal */
 export type GitHubReadCloneRequest$Outbound = {
   assignment_generation: number;
@@ -51,19 +53,21 @@ export const GitHubReadCloneRequest$outboundSchema: z.ZodType<
   GitHubReadCloneRequest$Outbound,
   z.ZodTypeDef,
   GitHubReadCloneRequest
-> = z.object({
-  assignmentGeneration: z.number().int(),
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  baseSha: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    assignmentGeneration: "assignment_generation",
-    repositoryId: "repository_id",
-    baseSha: "base_sha",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    assignmentGeneration: z.number().int(),
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    baseSha: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      assignmentGeneration: "assignment_generation",
+      repositoryId: "repository_id",
+      baseSha: "base_sha",
+    });
+  })
+);
 
 export function gitHubReadCloneRequestToJSON(
   gitHubReadCloneRequest: GitHubReadCloneRequest,

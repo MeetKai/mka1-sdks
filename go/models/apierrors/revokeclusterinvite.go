@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type RevokeClusterInviteTooManyRequestsError struct {
 var _ error = &RevokeClusterInviteTooManyRequestsError{}
 
 func (e *RevokeClusterInviteTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type RevokeClusterInviteGoneError struct {
 var _ error = &RevokeClusterInviteGoneError{}
 
 func (e *RevokeClusterInviteGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type RevokeClusterInviteConflictError struct {
 var _ error = &RevokeClusterInviteConflictError{}
 
 func (e *RevokeClusterInviteConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type RevokeClusterInviteNotFoundError struct {
 var _ error = &RevokeClusterInviteNotFoundError{}
 
 func (e *RevokeClusterInviteNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type RevokeClusterInviteForbiddenError struct {
 var _ error = &RevokeClusterInviteForbiddenError{}
 
 func (e *RevokeClusterInviteForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type RevokeClusterInviteUnauthorizedError struct {
 var _ error = &RevokeClusterInviteUnauthorizedError{}
 
 func (e *RevokeClusterInviteUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type RevokeClusterInviteBadRequestError struct {
 var _ error = &RevokeClusterInviteBadRequestError{}
 
 func (e *RevokeClusterInviteBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

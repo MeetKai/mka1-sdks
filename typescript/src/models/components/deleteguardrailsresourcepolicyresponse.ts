@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const DeleteGuardrailsResourcePolicyResponse$inboundSchema: z.ZodType<
   DeleteGuardrailsResourcePolicyResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_resource_policy"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_resource_policy"),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteGuardrailsResourcePolicyResponse$Outbound = {
   object: "guardrails_resource_policy";
@@ -32,10 +34,12 @@ export const DeleteGuardrailsResourcePolicyResponse$outboundSchema: z.ZodType<
   DeleteGuardrailsResourcePolicyResponse$Outbound,
   z.ZodTypeDef,
   DeleteGuardrailsResourcePolicyResponse
-> = z.object({
-  object: z.literal("guardrails_resource_policy"),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_resource_policy"),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteGuardrailsResourcePolicyResponseToJSON(
   deleteGuardrailsResourcePolicyResponse:

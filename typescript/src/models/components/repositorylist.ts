@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const RepositoryList$inboundSchema: z.ZodType<
   RepositoryList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repositories: z.array(ConnectedRepository$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositories: z.array(ConnectedRepository$inboundSchema),
+  })
+);
 /** @internal */
 export type RepositoryList$Outbound = {
   repositories: Array<ConnectedRepository$Outbound>;
@@ -35,9 +37,11 @@ export const RepositoryList$outboundSchema: z.ZodType<
   RepositoryList$Outbound,
   z.ZodTypeDef,
   RepositoryList
-> = z.object({
-  repositories: z.array(ConnectedRepository$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositories: z.array(ConnectedRepository$outboundSchema),
+  })
+);
 
 export function repositoryListToJSON(repositoryList: RepositoryList): string {
   return JSON.stringify(RepositoryList$outboundSchema.parse(repositoryList));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,10 @@ export type ResponseSleepCallCompletedEvent = {
 
 /** @internal */
 export const ResponseSleepCallCompletedEventStatus$inboundSchema:
-  z.ZodNativeEnum<typeof ResponseSleepCallCompletedEventStatus> = z.nativeEnum(
-    ResponseSleepCallCompletedEventStatus,
-  );
+  z.ZodNativeEnum<typeof ResponseSleepCallCompletedEventStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ResponseSleepCallCompletedEventStatus)
+    );
 /** @internal */
 export const ResponseSleepCallCompletedEventStatus$outboundSchema:
   z.ZodNativeEnum<typeof ResponseSleepCallCompletedEventStatus> =
@@ -42,21 +43,23 @@ export const ResponseSleepCallCompletedEvent$inboundSchema: z.ZodType<
   ResponseSleepCallCompletedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.sleep_call.completed"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  function_call_output: z.string().optional(),
-  status: ResponseSleepCallCompletedEventStatus$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "function_call_output": "functionCallOutput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.completed"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    function_call_output: z.string().optional(),
+    status: ResponseSleepCallCompletedEventStatus$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "function_call_output": "functionCallOutput",
+    });
+  })
+);
 /** @internal */
 export type ResponseSleepCallCompletedEvent$Outbound = {
   type: "response.sleep_call.completed";
@@ -72,21 +75,23 @@ export const ResponseSleepCallCompletedEvent$outboundSchema: z.ZodType<
   ResponseSleepCallCompletedEvent$Outbound,
   z.ZodTypeDef,
   ResponseSleepCallCompletedEvent
-> = z.object({
-  type: z.literal("response.sleep_call.completed"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  functionCallOutput: z.string().optional(),
-  status: ResponseSleepCallCompletedEventStatus$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    functionCallOutput: "function_call_output",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.completed"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    functionCallOutput: z.string().optional(),
+    status: ResponseSleepCallCompletedEventStatus$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      functionCallOutput: "function_call_output",
+    });
+  })
+);
 
 export function responseSleepCallCompletedEventToJSON(
   responseSleepCallCompletedEvent: ResponseSleepCallCompletedEvent,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -409,7 +409,7 @@ export type ToolDefinition =
 /** @internal */
 export const ToolDefinition13Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition13Type
-> = z.nativeEnum(ToolDefinition13Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition13Type));
 /** @internal */
 export const ToolDefinition13Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition13Type
@@ -418,7 +418,9 @@ export const ToolDefinition13Type$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionEnvironmentAccess
-> = z.nativeEnum(ToolDefinitionEnvironmentAccess);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ToolDefinitionEnvironmentAccess)
+);
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionEnvironmentAccess
@@ -429,17 +431,19 @@ export const EnvironmentMemoryStores$inboundSchema: z.ZodType<
   EnvironmentMemoryStores,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  store_id: z.string(),
-  label: z.string(),
-  access: ToolDefinitionEnvironmentAccess$inboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "store_id": "storeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    store_id: z.string(),
+    label: z.string(),
+    access: ToolDefinitionEnvironmentAccess$inboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "store_id": "storeId",
+    });
+  })
+);
 /** @internal */
 export type EnvironmentMemoryStores$Outbound = {
   store_id: string;
@@ -454,17 +458,19 @@ export const EnvironmentMemoryStores$outboundSchema: z.ZodType<
   EnvironmentMemoryStores$Outbound,
   z.ZodTypeDef,
   EnvironmentMemoryStores
-> = z.object({
-  storeId: z.string(),
-  label: z.string(),
-  access: ToolDefinitionEnvironmentAccess$outboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storeId: "store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    storeId: z.string(),
+    label: z.string(),
+    access: ToolDefinitionEnvironmentAccess$outboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storeId: "store_id",
+    });
+  })
+);
 
 export function environmentMemoryStoresToJSON(
   environmentMemoryStores: EnvironmentMemoryStores,
@@ -488,20 +494,22 @@ export const ToolDefinitionEnvironment2$inboundSchema: z.ZodType<
   ToolDefinitionEnvironment2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_reference"),
-  container_id: z.string(),
-  network_policy: z.any().optional(),
-  skills: z.array(z.any()).optional(),
-  memory_stores: z.array(z.lazy(() => EnvironmentMemoryStores$inboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-    "network_policy": "networkPolicy",
-    "memory_stores": "memoryStores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    container_id: z.string(),
+    network_policy: z.any().optional(),
+    skills: z.array(z.any()).optional(),
+    memory_stores: z.array(z.lazy(() => EnvironmentMemoryStores$inboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+      "network_policy": "networkPolicy",
+      "memory_stores": "memoryStores",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinitionEnvironment2$Outbound = {
   type: "container_reference";
@@ -516,20 +524,22 @@ export const ToolDefinitionEnvironment2$outboundSchema: z.ZodType<
   ToolDefinitionEnvironment2$Outbound,
   z.ZodTypeDef,
   ToolDefinitionEnvironment2
-> = z.object({
-  type: z.literal("container_reference"),
-  containerId: z.string(),
-  networkPolicy: z.any().optional(),
-  skills: z.array(z.any()).optional(),
-  memoryStores: z.array(z.lazy(() => EnvironmentMemoryStores$outboundSchema))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-    networkPolicy: "network_policy",
-    memoryStores: "memory_stores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    containerId: z.string(),
+    networkPolicy: z.any().optional(),
+    skills: z.array(z.any()).optional(),
+    memoryStores: z.array(z.lazy(() => EnvironmentMemoryStores$outboundSchema))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+      networkPolicy: "network_policy",
+      memoryStores: "memory_stores",
+    });
+  })
+);
 
 export function toolDefinitionEnvironment2ToJSON(
   toolDefinitionEnvironment2: ToolDefinitionEnvironment2,
@@ -551,7 +561,7 @@ export function toolDefinitionEnvironment2FromJSON(
 /** @internal */
 export const EnvironmentAccess$inboundSchema: z.ZodNativeEnum<
   typeof EnvironmentAccess
-> = z.nativeEnum(EnvironmentAccess);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(EnvironmentAccess));
 /** @internal */
 export const EnvironmentAccess$outboundSchema: z.ZodNativeEnum<
   typeof EnvironmentAccess
@@ -562,17 +572,19 @@ export const MemoryStores$inboundSchema: z.ZodType<
   MemoryStores,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  store_id: z.string(),
-  label: z.string(),
-  access: EnvironmentAccess$inboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "store_id": "storeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    store_id: z.string(),
+    label: z.string(),
+    access: EnvironmentAccess$inboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "store_id": "storeId",
+    });
+  })
+);
 /** @internal */
 export type MemoryStores$Outbound = {
   store_id: string;
@@ -587,17 +599,19 @@ export const MemoryStores$outboundSchema: z.ZodType<
   MemoryStores$Outbound,
   z.ZodTypeDef,
   MemoryStores
-> = z.object({
-  storeId: z.string(),
-  label: z.string(),
-  access: EnvironmentAccess$outboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storeId: "store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    storeId: z.string(),
+    label: z.string(),
+    access: EnvironmentAccess$outboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storeId: "store_id",
+    });
+  })
+);
 
 export function memoryStoresToJSON(memoryStores: MemoryStores): string {
   return JSON.stringify(MemoryStores$outboundSchema.parse(memoryStores));
@@ -617,19 +631,21 @@ export const Environment1$inboundSchema: z.ZodType<
   Environment1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_auto"),
-  session_scope: AgentsShellSessionScope$inboundSchema.optional(),
-  network_policy: z.any().optional(),
-  skills: z.array(z.any()).optional(),
-  memory_stores: z.array(z.lazy(() => MemoryStores$inboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_scope": "sessionScope",
-    "network_policy": "networkPolicy",
-    "memory_stores": "memoryStores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_auto"),
+    session_scope: AgentsShellSessionScope$inboundSchema.optional(),
+    network_policy: z.any().optional(),
+    skills: z.array(z.any()).optional(),
+    memory_stores: z.array(z.lazy(() => MemoryStores$inboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_scope": "sessionScope",
+      "network_policy": "networkPolicy",
+      "memory_stores": "memoryStores",
+    });
+  })
+);
 /** @internal */
 export type Environment1$Outbound = {
   type: "container_auto";
@@ -644,19 +660,21 @@ export const Environment1$outboundSchema: z.ZodType<
   Environment1$Outbound,
   z.ZodTypeDef,
   Environment1
-> = z.object({
-  type: z.literal("container_auto"),
-  sessionScope: AgentsShellSessionScope$outboundSchema.optional(),
-  networkPolicy: z.any().optional(),
-  skills: z.array(z.any()).optional(),
-  memoryStores: z.array(z.lazy(() => MemoryStores$outboundSchema)).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionScope: "session_scope",
-    networkPolicy: "network_policy",
-    memoryStores: "memory_stores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_auto"),
+    sessionScope: AgentsShellSessionScope$outboundSchema.optional(),
+    networkPolicy: z.any().optional(),
+    skills: z.array(z.any()).optional(),
+    memoryStores: z.array(z.lazy(() => MemoryStores$outboundSchema)).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionScope: "session_scope",
+      networkPolicy: "network_policy",
+      memoryStores: "memory_stores",
+    });
+  })
+);
 
 export function environment1ToJSON(environment1: Environment1): string {
   return JSON.stringify(Environment1$outboundSchema.parse(environment1));
@@ -676,10 +694,12 @@ export const ToolDefinitionEnvironment$inboundSchema: z.ZodType<
   ToolDefinitionEnvironment,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  container_auto: z.lazy(() => Environment1$inboundSchema),
-  container_reference: z.lazy(() => ToolDefinitionEnvironment2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    container_auto: z.lazy(() => Environment1$inboundSchema),
+    container_reference: z.lazy(() => ToolDefinitionEnvironment2$inboundSchema),
+  })
+);
 /** @internal */
 export type ToolDefinitionEnvironment$Outbound =
   | Environment1$Outbound
@@ -690,10 +710,12 @@ export const ToolDefinitionEnvironment$outboundSchema: z.ZodType<
   ToolDefinitionEnvironment$Outbound,
   z.ZodTypeDef,
   ToolDefinitionEnvironment
-> = z.union([
-  z.lazy(() => Environment1$outboundSchema),
-  z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Environment1$outboundSchema),
+    z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
+  ])
+);
 
 export function toolDefinitionEnvironmentToJSON(
   toolDefinitionEnvironment: ToolDefinitionEnvironment,
@@ -717,13 +739,17 @@ export const Thirteen$inboundSchema: z.ZodType<
   Thirteen,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ToolDefinition13Type$inboundSchema,
-  environment: discriminatedUnion("type", {
-    container_auto: z.lazy(() => Environment1$inboundSchema),
-    container_reference: z.lazy(() => ToolDefinitionEnvironment2$inboundSchema),
-  }).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition13Type$inboundSchema,
+    environment: discriminatedUnion("type", {
+      container_auto: z.lazy(() => Environment1$inboundSchema),
+      container_reference: z.lazy(() =>
+        ToolDefinitionEnvironment2$inboundSchema
+      ),
+    }).optional(),
+  })
+);
 /** @internal */
 export type Thirteen$Outbound = {
   type: string;
@@ -738,13 +764,15 @@ export const Thirteen$outboundSchema: z.ZodType<
   Thirteen$Outbound,
   z.ZodTypeDef,
   Thirteen
-> = z.object({
-  type: ToolDefinition13Type$outboundSchema,
-  environment: z.union([
-    z.lazy(() => Environment1$outboundSchema),
-    z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
-  ]).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition13Type$outboundSchema,
+    environment: z.union([
+      z.lazy(() => Environment1$outboundSchema),
+      z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
+    ]).optional(),
+  })
+);
 
 export function thirteenToJSON(thirteen: Thirteen): string {
   return JSON.stringify(Thirteen$outboundSchema.parse(thirteen));
@@ -762,24 +790,26 @@ export function thirteenFromJSON(
 /** @internal */
 export const ToolDefinition12Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition12Type
-> = z.nativeEnum(ToolDefinition12Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition12Type));
 /** @internal */
 export const ToolDefinition12Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition12Type
 > = ToolDefinition12Type$inboundSchema;
 
 /** @internal */
-export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition12Type$inboundSchema,
-    agent_id: z.string(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "agent_id": "agentId",
-    });
-  });
+export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition12Type$inboundSchema,
+      agent_id: z.string(),
+      name: z.string().optional(),
+      description: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "agent_id": "agentId",
+      });
+    })
+  );
 /** @internal */
 export type Twelve$Outbound = {
   type: string;
@@ -793,16 +823,18 @@ export const Twelve$outboundSchema: z.ZodType<
   Twelve$Outbound,
   z.ZodTypeDef,
   Twelve
-> = z.object({
-  type: ToolDefinition12Type$outboundSchema,
-  agentId: z.string(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition12Type$outboundSchema,
+    agentId: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
+  })
+);
 
 export function twelveToJSON(twelve: Twelve): string {
   return JSON.stringify(Twelve$outboundSchema.parse(twelve));
@@ -820,17 +852,19 @@ export function twelveFromJSON(
 /** @internal */
 export const ToolDefinition11Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition11Type
-> = z.nativeEnum(ToolDefinition11Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition11Type));
 /** @internal */
 export const ToolDefinition11Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition11Type
 > = ToolDefinition11Type$inboundSchema;
 
 /** @internal */
-export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition11Type$inboundSchema,
-  });
+export const Eleven$inboundSchema: z.ZodType<Eleven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition11Type$inboundSchema,
+    })
+  );
 /** @internal */
 export type Eleven$Outbound = {
   type: string;
@@ -841,9 +875,11 @@ export const Eleven$outboundSchema: z.ZodType<
   Eleven$Outbound,
   z.ZodTypeDef,
   Eleven
-> = z.object({
-  type: ToolDefinition11Type$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition11Type$outboundSchema,
+  })
+);
 
 export function elevenToJSON(eleven: Eleven): string {
   return JSON.stringify(Eleven$outboundSchema.parse(eleven));
@@ -861,27 +897,31 @@ export function elevenFromJSON(
 /** @internal */
 export const ToolDefinition10Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition10Type
-> = z.nativeEnum(ToolDefinition10Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition10Type));
 /** @internal */
 export const ToolDefinition10Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition10Type
 > = ToolDefinition10Type$inboundSchema;
 
 /** @internal */
-export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition10Type$inboundSchema,
-  });
+export const Ten$inboundSchema: z.ZodType<Ten, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition10Type$inboundSchema,
+    })
+  );
 /** @internal */
 export type Ten$Outbound = {
   type: string;
 };
 
 /** @internal */
-export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> = z
-  .object({
-    type: ToolDefinition10Type$outboundSchema,
-  });
+export const Ten$outboundSchema: z.ZodType<Ten$Outbound, z.ZodTypeDef, Ten> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition10Type$outboundSchema,
+    })
+  );
 
 export function tenToJSON(ten: Ten): string {
   return JSON.stringify(Ten$outboundSchema.parse(ten));
@@ -899,17 +939,19 @@ export function tenFromJSON(
 /** @internal */
 export const ToolDefinition9Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition9Type
-> = z.nativeEnum(ToolDefinition9Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition9Type));
 /** @internal */
 export const ToolDefinition9Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition9Type
 > = ToolDefinition9Type$inboundSchema;
 
 /** @internal */
-export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition9Type$inboundSchema,
-  });
+export const Nine$inboundSchema: z.ZodType<Nine, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition9Type$inboundSchema,
+    })
+  );
 /** @internal */
 export type Nine$Outbound = {
   type: string;
@@ -917,9 +959,11 @@ export type Nine$Outbound = {
 
 /** @internal */
 export const Nine$outboundSchema: z.ZodType<Nine$Outbound, z.ZodTypeDef, Nine> =
-  z.object({
-    type: ToolDefinition9Type$outboundSchema,
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition9Type$outboundSchema,
+    })
+  );
 
 export function nineToJSON(nine: Nine): string {
   return JSON.stringify(Nine$outboundSchema.parse(nine));
@@ -937,7 +981,7 @@ export function nineFromJSON(
 /** @internal */
 export const ToolDefinition8Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition8Type
-> = z.nativeEnum(ToolDefinition8Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition8Type));
 /** @internal */
 export const ToolDefinition8Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition8Type
@@ -946,7 +990,7 @@ export const ToolDefinition8Type$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ContainerType$inboundSchema: z.ZodNativeEnum<
   typeof ContainerType
-> = z.nativeEnum(ContainerType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ContainerType));
 /** @internal */
 export const ContainerType$outboundSchema: z.ZodNativeEnum<
   typeof ContainerType
@@ -955,7 +999,9 @@ export const ContainerType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ToolDefinitionContainerMemoryLimit$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionContainerMemoryLimit
-> = z.nativeEnum(ToolDefinitionContainerMemoryLimit);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ToolDefinitionContainerMemoryLimit)
+);
 /** @internal */
 export const ToolDefinitionContainerMemoryLimit$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionContainerMemoryLimit
@@ -966,19 +1012,21 @@ export const ToolDefinitionContainer2$inboundSchema: z.ZodType<
   ToolDefinitionContainer2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ContainerType$inboundSchema,
-  session_scope: AgentsSandboxSessionScope$inboundSchema.optional(),
-  file_ids: z.nullable(z.array(z.string())).optional(),
-  memory_limit: z.nullable(ToolDefinitionContainerMemoryLimit$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_scope": "sessionScope",
-    "file_ids": "fileIds",
-    "memory_limit": "memoryLimit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ContainerType$inboundSchema,
+    session_scope: AgentsSandboxSessionScope$inboundSchema.optional(),
+    file_ids: z.nullable(z.array(z.string())).optional(),
+    memory_limit: z.nullable(ToolDefinitionContainerMemoryLimit$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_scope": "sessionScope",
+      "file_ids": "fileIds",
+      "memory_limit": "memoryLimit",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinitionContainer2$Outbound = {
   type: string;
@@ -992,19 +1040,21 @@ export const ToolDefinitionContainer2$outboundSchema: z.ZodType<
   ToolDefinitionContainer2$Outbound,
   z.ZodTypeDef,
   ToolDefinitionContainer2
-> = z.object({
-  type: ContainerType$outboundSchema,
-  sessionScope: AgentsSandboxSessionScope$outboundSchema.optional(),
-  fileIds: z.nullable(z.array(z.string())).optional(),
-  memoryLimit: z.nullable(ToolDefinitionContainerMemoryLimit$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionScope: "session_scope",
-    fileIds: "file_ids",
-    memoryLimit: "memory_limit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ContainerType$outboundSchema,
+    sessionScope: AgentsSandboxSessionScope$outboundSchema.optional(),
+    fileIds: z.nullable(z.array(z.string())).optional(),
+    memoryLimit: z.nullable(ToolDefinitionContainerMemoryLimit$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionScope: "session_scope",
+      fileIds: "file_ids",
+      memoryLimit: "memory_limit",
+    });
+  })
+);
 
 export function toolDefinitionContainer2ToJSON(
   toolDefinitionContainer2: ToolDefinitionContainer2,
@@ -1028,7 +1078,9 @@ export const ToolDefinitionContainer$inboundSchema: z.ZodType<
   ToolDefinitionContainer,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => ToolDefinitionContainer2$inboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => ToolDefinitionContainer2$inboundSchema), z.string()])
+);
 /** @internal */
 export type ToolDefinitionContainer$Outbound =
   | ToolDefinitionContainer2$Outbound
@@ -1039,10 +1091,9 @@ export const ToolDefinitionContainer$outboundSchema: z.ZodType<
   ToolDefinitionContainer$Outbound,
   z.ZodTypeDef,
   ToolDefinitionContainer
-> = z.union([
-  z.lazy(() => ToolDefinitionContainer2$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => ToolDefinitionContainer2$outboundSchema), z.string()])
+);
 
 export function toolDefinitionContainerToJSON(
   toolDefinitionContainer: ToolDefinitionContainer,
@@ -1062,14 +1113,16 @@ export function toolDefinitionContainerFromJSON(
 }
 
 /** @internal */
-export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition8Type$inboundSchema,
-    container: z.union([
-      z.lazy(() => ToolDefinitionContainer2$inboundSchema),
-      z.string(),
-    ]),
-  });
+export const Eight$inboundSchema: z.ZodType<Eight, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition8Type$inboundSchema,
+      container: z.union([
+        z.lazy(() => ToolDefinitionContainer2$inboundSchema),
+        z.string(),
+      ]),
+    })
+  );
 /** @internal */
 export type Eight$Outbound = {
   type: string;
@@ -1081,13 +1134,15 @@ export const Eight$outboundSchema: z.ZodType<
   Eight$Outbound,
   z.ZodTypeDef,
   Eight
-> = z.object({
-  type: ToolDefinition8Type$outboundSchema,
-  container: z.union([
-    z.lazy(() => ToolDefinitionContainer2$outboundSchema),
-    z.string(),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition8Type$outboundSchema,
+    container: z.union([
+      z.lazy(() => ToolDefinitionContainer2$outboundSchema),
+      z.string(),
+    ]),
+  })
+);
 
 export function eightToJSON(eight: Eight): string {
   return JSON.stringify(Eight$outboundSchema.parse(eight));
@@ -1105,17 +1160,19 @@ export function eightFromJSON(
 /** @internal */
 export const ToolDefinition7Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition7Type
-> = z.nativeEnum(ToolDefinition7Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition7Type));
 /** @internal */
 export const ToolDefinition7Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition7Type
 > = ToolDefinition7Type$inboundSchema;
 
 /** @internal */
-export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition7Type$inboundSchema,
-  });
+export const Seven$inboundSchema: z.ZodType<Seven, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition7Type$inboundSchema,
+    })
+  );
 /** @internal */
 export type Seven$Outbound = {
   type: string;
@@ -1126,9 +1183,11 @@ export const Seven$outboundSchema: z.ZodType<
   Seven$Outbound,
   z.ZodTypeDef,
   Seven
-> = z.object({
-  type: ToolDefinition7Type$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition7Type$outboundSchema,
+  })
+);
 
 export function sevenToJSON(seven: Seven): string {
   return JSON.stringify(Seven$outboundSchema.parse(seven));
@@ -1146,7 +1205,7 @@ export function sevenFromJSON(
 /** @internal */
 export const ToolDefinition6Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition6Type
-> = z.nativeEnum(ToolDefinition6Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition6Type));
 /** @internal */
 export const ToolDefinition6Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition6Type
@@ -1157,32 +1216,34 @@ export const ToolDefinition6Filters$inboundSchema: z.ZodType<
   ToolDefinition6Filters,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  eq: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("eq") }),
-  ),
-  ne: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("ne") }),
-  ),
-  gt: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("gt") }),
-  ),
-  gte: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  lt: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("lt") }),
-  ),
-  lte: FileSearchComparisonFilter$inboundSchema.and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  and: FileSearchCompoundFilter$inboundSchema.and(
-    z.object({ type: z.literal("and") }),
-  ),
-  or: FileSearchCompoundFilter$inboundSchema.and(
-    z.object({ type: z.literal("or") }),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    eq: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    ne: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    gt: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    gte: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    lt: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    lte: FileSearchComparisonFilter$inboundSchema.and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    and: FileSearchCompoundFilter$inboundSchema.and(
+      z.object({ type: z.literal("and") }),
+    ),
+    or: FileSearchCompoundFilter$inboundSchema.and(
+      z.object({ type: z.literal("or") }),
+    ),
+  })
+);
 /** @internal */
 export type ToolDefinition6Filters$Outbound =
   | (FileSearchComparisonFilter$Outbound & { type: "eq" })
@@ -1199,32 +1260,34 @@ export const ToolDefinition6Filters$outboundSchema: z.ZodType<
   ToolDefinition6Filters$Outbound,
   z.ZodTypeDef,
   ToolDefinition6Filters
-> = z.union([
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("eq") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("ne") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("gt") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("gte") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("lt") }),
-  ),
-  FileSearchComparisonFilter$outboundSchema.and(
-    z.object({ type: z.literal("lte") }),
-  ),
-  FileSearchCompoundFilter$outboundSchema.and(
-    z.object({ type: z.literal("and") }),
-  ),
-  FileSearchCompoundFilter$outboundSchema.and(
-    z.object({ type: z.literal("or") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("eq") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("ne") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("gt") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("gte") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("lt") }),
+    ),
+    FileSearchComparisonFilter$outboundSchema.and(
+      z.object({ type: z.literal("lte") }),
+    ),
+    FileSearchCompoundFilter$outboundSchema.and(
+      z.object({ type: z.literal("and") }),
+    ),
+    FileSearchCompoundFilter$outboundSchema.and(
+      z.object({ type: z.literal("or") }),
+    ),
+  ])
+);
 
 export function toolDefinition6FiltersToJSON(
   toolDefinition6Filters: ToolDefinition6Filters,
@@ -1248,14 +1311,16 @@ export const ToolDefinitionRankingOptions$inboundSchema: z.ZodType<
   ToolDefinitionRankingOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ranker: z.string().optional(),
-  score_threshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "score_threshold": "scoreThreshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().optional(),
+    score_threshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "score_threshold": "scoreThreshold",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinitionRankingOptions$Outbound = {
   ranker?: string | undefined;
@@ -1267,14 +1332,16 @@ export const ToolDefinitionRankingOptions$outboundSchema: z.ZodType<
   ToolDefinitionRankingOptions$Outbound,
   z.ZodTypeDef,
   ToolDefinitionRankingOptions
-> = z.object({
-  ranker: z.string().optional(),
-  scoreThreshold: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    scoreThreshold: "score_threshold",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ranker: z.string().optional(),
+    scoreThreshold: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      scoreThreshold: "score_threshold",
+    });
+  })
+);
 
 export function toolDefinitionRankingOptionsToJSON(
   toolDefinitionRankingOptions: ToolDefinitionRankingOptions,
@@ -1300,45 +1367,47 @@ export const ToolDefinition6$inboundSchema: z.ZodType<
   ToolDefinition6,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ToolDefinition6Type$inboundSchema,
-  vector_store_ids: z.array(z.string()),
-  filters: discriminatedUnion("type", {
-    eq: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("eq") }),
-    ),
-    ne: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("ne") }),
-    ),
-    gt: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("gt") }),
-    ),
-    gte: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("gte") }),
-    ),
-    lt: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("lt") }),
-    ),
-    lte: FileSearchComparisonFilter$inboundSchema.and(
-      z.object({ type: z.literal("lte") }),
-    ),
-    and: FileSearchCompoundFilter$inboundSchema.and(
-      z.object({ type: z.literal("and") }),
-    ),
-    or: FileSearchCompoundFilter$inboundSchema.and(
-      z.object({ type: z.literal("or") }),
-    ),
-  }).optional(),
-  max_num_results: z.number().int().optional(),
-  ranking_options: z.lazy(() => ToolDefinitionRankingOptions$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_ids": "vectorStoreIds",
-    "max_num_results": "maxNumResults",
-    "ranking_options": "rankingOptions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition6Type$inboundSchema,
+    vector_store_ids: z.array(z.string()),
+    filters: discriminatedUnion("type", {
+      eq: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      ne: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      gt: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      gte: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      lt: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      lte: FileSearchComparisonFilter$inboundSchema.and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      and: FileSearchCompoundFilter$inboundSchema.and(
+        z.object({ type: z.literal("and") }),
+      ),
+      or: FileSearchCompoundFilter$inboundSchema.and(
+        z.object({ type: z.literal("or") }),
+      ),
+    }).optional(),
+    max_num_results: z.number().int().optional(),
+    ranking_options: z.lazy(() => ToolDefinitionRankingOptions$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_ids": "vectorStoreIds",
+      "max_num_results": "maxNumResults",
+      "ranking_options": "rankingOptions",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinition6$Outbound = {
   type: string;
@@ -1362,45 +1431,47 @@ export const ToolDefinition6$outboundSchema: z.ZodType<
   ToolDefinition6$Outbound,
   z.ZodTypeDef,
   ToolDefinition6
-> = z.object({
-  type: ToolDefinition6Type$outboundSchema,
-  vectorStoreIds: z.array(z.string()),
-  filters: z.union([
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("eq") }),
-    ),
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("ne") }),
-    ),
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("gt") }),
-    ),
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("gte") }),
-    ),
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("lt") }),
-    ),
-    FileSearchComparisonFilter$outboundSchema.and(
-      z.object({ type: z.literal("lte") }),
-    ),
-    FileSearchCompoundFilter$outboundSchema.and(
-      z.object({ type: z.literal("and") }),
-    ),
-    FileSearchCompoundFilter$outboundSchema.and(
-      z.object({ type: z.literal("or") }),
-    ),
-  ]).optional(),
-  maxNumResults: z.number().int().optional(),
-  rankingOptions: z.lazy(() => ToolDefinitionRankingOptions$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreIds: "vector_store_ids",
-    maxNumResults: "max_num_results",
-    rankingOptions: "ranking_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition6Type$outboundSchema,
+    vectorStoreIds: z.array(z.string()),
+    filters: z.union([
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("eq") }),
+      ),
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("ne") }),
+      ),
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("gt") }),
+      ),
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("gte") }),
+      ),
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("lt") }),
+      ),
+      FileSearchComparisonFilter$outboundSchema.and(
+        z.object({ type: z.literal("lte") }),
+      ),
+      FileSearchCompoundFilter$outboundSchema.and(
+        z.object({ type: z.literal("and") }),
+      ),
+      FileSearchCompoundFilter$outboundSchema.and(
+        z.object({ type: z.literal("or") }),
+      ),
+    ]).optional(),
+    maxNumResults: z.number().int().optional(),
+    rankingOptions: z.lazy(() => ToolDefinitionRankingOptions$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreIds: "vector_store_ids",
+      maxNumResults: "max_num_results",
+      rankingOptions: "ranking_options",
+    });
+  })
+);
 
 export function toolDefinition6ToJSON(
   toolDefinition6: ToolDefinition6,
@@ -1420,7 +1491,7 @@ export function toolDefinition6FromJSON(
 /** @internal */
 export const ToolDefinition5Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition5Type
-> = z.nativeEnum(ToolDefinition5Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition5Type));
 /** @internal */
 export const ToolDefinition5Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition5Type
@@ -1431,10 +1502,12 @@ export const ToolDefinitionRequireApproval2$inboundSchema: z.ZodType<
   ToolDefinitionRequireApproval2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  always: MCPToolFilter$inboundSchema.optional(),
-  never: MCPToolFilter$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$inboundSchema.optional(),
+    never: MCPToolFilter$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type ToolDefinitionRequireApproval2$Outbound = {
   always?: MCPToolFilter$Outbound | undefined;
@@ -1446,10 +1519,12 @@ export const ToolDefinitionRequireApproval2$outboundSchema: z.ZodType<
   ToolDefinitionRequireApproval2$Outbound,
   z.ZodTypeDef,
   ToolDefinitionRequireApproval2
-> = z.object({
-  always: MCPToolFilter$outboundSchema.optional(),
-  never: MCPToolFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$outboundSchema.optional(),
+    never: MCPToolFilter$outboundSchema.optional(),
+  })
+);
 
 export function toolDefinitionRequireApproval2ToJSON(
   toolDefinitionRequireApproval2: ToolDefinitionRequireApproval2,
@@ -1473,7 +1548,9 @@ export function toolDefinitionRequireApproval2FromJSON(
 /** @internal */
 export const ToolDefinitionRequireApproval1$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionRequireApproval1
-> = z.nativeEnum(ToolDefinitionRequireApproval1);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ToolDefinitionRequireApproval1)
+);
 /** @internal */
 export const ToolDefinitionRequireApproval1$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionRequireApproval1
@@ -1484,10 +1561,12 @@ export const FiveRequireApproval$inboundSchema: z.ZodType<
   FiveRequireApproval,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ToolDefinitionRequireApproval1$inboundSchema,
-  z.lazy(() => ToolDefinitionRequireApproval2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ToolDefinitionRequireApproval1$inboundSchema,
+    z.lazy(() => ToolDefinitionRequireApproval2$inboundSchema),
+  ])
+);
 /** @internal */
 export type FiveRequireApproval$Outbound =
   | string
@@ -1498,10 +1577,12 @@ export const FiveRequireApproval$outboundSchema: z.ZodType<
   FiveRequireApproval$Outbound,
   z.ZodTypeDef,
   FiveRequireApproval
-> = z.union([
-  ToolDefinitionRequireApproval1$outboundSchema,
-  z.lazy(() => ToolDefinitionRequireApproval2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ToolDefinitionRequireApproval1$outboundSchema,
+    z.lazy(() => ToolDefinitionRequireApproval2$outboundSchema),
+  ])
+);
 
 export function fiveRequireApprovalToJSON(
   fiveRequireApproval: FiveRequireApproval,
@@ -1525,7 +1606,9 @@ export const ToolDefinition5AllowedTools$inboundSchema: z.ZodType<
   ToolDefinition5AllowedTools,
   z.ZodTypeDef,
   unknown
-> = z.union([z.array(z.string()), MCPToolFilter$inboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+);
 /** @internal */
 export type ToolDefinition5AllowedTools$Outbound =
   | Array<string>
@@ -1536,7 +1619,9 @@ export const ToolDefinition5AllowedTools$outboundSchema: z.ZodType<
   ToolDefinition5AllowedTools$Outbound,
   z.ZodTypeDef,
   ToolDefinition5AllowedTools
-> = z.union([z.array(z.string()), MCPToolFilter$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+);
 
 export function toolDefinition5AllowedToolsToJSON(
   toolDefinition5AllowedTools: ToolDefinition5AllowedTools,
@@ -1558,33 +1643,35 @@ export function toolDefinition5AllowedToolsFromJSON(
 }
 
 /** @internal */
-export const Five2$inboundSchema: z.ZodType<Five2, z.ZodTypeDef, unknown> = z
-  .object({
-    type: ToolDefinition5Type$inboundSchema,
-    server_label: z.string().optional(),
-    mcp_server_id: z.string(),
-    mcp_credential_id: z.string().optional(),
-    server_url: z.string().optional(),
-    server_description: z.string().optional(),
-    authorization: z.string().optional(),
-    require_approval: z.union([
-      ToolDefinitionRequireApproval1$inboundSchema,
-      z.lazy(() => ToolDefinitionRequireApproval2$inboundSchema),
-    ]).optional(),
-    allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
-      .optional(),
-    headers: z.record(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_label": "serverLabel",
-      "mcp_server_id": "mcpServerId",
-      "mcp_credential_id": "mcpCredentialId",
-      "server_url": "serverUrl",
-      "server_description": "serverDescription",
-      "require_approval": "requireApproval",
-      "allowed_tools": "allowedTools",
-    });
-  });
+export const Five2$inboundSchema: z.ZodType<Five2, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: ToolDefinition5Type$inboundSchema,
+      server_label: z.string().optional(),
+      mcp_server_id: z.string(),
+      mcp_credential_id: z.string().optional(),
+      server_url: z.string().optional(),
+      server_description: z.string().optional(),
+      authorization: z.string().optional(),
+      require_approval: z.union([
+        ToolDefinitionRequireApproval1$inboundSchema,
+        z.lazy(() => ToolDefinitionRequireApproval2$inboundSchema),
+      ]).optional(),
+      allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+        .optional(),
+      headers: z.record(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "server_label": "serverLabel",
+        "mcp_server_id": "mcpServerId",
+        "mcp_credential_id": "mcpCredentialId",
+        "server_url": "serverUrl",
+        "server_description": "serverDescription",
+        "require_approval": "requireApproval",
+        "allowed_tools": "allowedTools",
+      });
+    })
+  );
 /** @internal */
 export type Five2$Outbound = {
   type: string;
@@ -1607,32 +1694,34 @@ export const Five2$outboundSchema: z.ZodType<
   Five2$Outbound,
   z.ZodTypeDef,
   Five2
-> = z.object({
-  type: ToolDefinition5Type$outboundSchema,
-  serverLabel: z.string().optional(),
-  mcpServerId: z.string(),
-  mcpCredentialId: z.string().optional(),
-  serverUrl: z.string().optional(),
-  serverDescription: z.string().optional(),
-  authorization: z.string().optional(),
-  requireApproval: z.union([
-    ToolDefinitionRequireApproval1$outboundSchema,
-    z.lazy(() => ToolDefinitionRequireApproval2$outboundSchema),
-  ]).optional(),
-  allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
-    .optional(),
-  headers: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-    serverUrl: "server_url",
-    serverDescription: "server_description",
-    requireApproval: "require_approval",
-    allowedTools: "allowed_tools",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition5Type$outboundSchema,
+    serverLabel: z.string().optional(),
+    mcpServerId: z.string(),
+    mcpCredentialId: z.string().optional(),
+    serverUrl: z.string().optional(),
+    serverDescription: z.string().optional(),
+    authorization: z.string().optional(),
+    requireApproval: z.union([
+      ToolDefinitionRequireApproval1$outboundSchema,
+      z.lazy(() => ToolDefinitionRequireApproval2$outboundSchema),
+    ]).optional(),
+    allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+      .optional(),
+    headers: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+      serverUrl: "server_url",
+      serverDescription: "server_description",
+      requireApproval: "require_approval",
+      allowedTools: "allowed_tools",
+    });
+  })
+);
 
 export function five2ToJSON(five2: Five2): string {
   return JSON.stringify(Five2$outboundSchema.parse(five2));
@@ -1648,8 +1737,8 @@ export function five2FromJSON(
 }
 
 /** @internal */
-export const FiveType$inboundSchema: z.ZodNativeEnum<typeof FiveType> = z
-  .nativeEnum(FiveType);
+export const FiveType$inboundSchema: z.ZodNativeEnum<typeof FiveType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FiveType));
 /** @internal */
 export const FiveType$outboundSchema: z.ZodNativeEnum<typeof FiveType> =
   FiveType$inboundSchema;
@@ -1659,10 +1748,12 @@ export const RequireApproval2$inboundSchema: z.ZodType<
   RequireApproval2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  always: MCPToolFilter$inboundSchema.optional(),
-  never: MCPToolFilter$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$inboundSchema.optional(),
+    never: MCPToolFilter$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type RequireApproval2$Outbound = {
   always?: MCPToolFilter$Outbound | undefined;
@@ -1674,10 +1765,12 @@ export const RequireApproval2$outboundSchema: z.ZodType<
   RequireApproval2$Outbound,
   z.ZodTypeDef,
   RequireApproval2
-> = z.object({
-  always: MCPToolFilter$outboundSchema.optional(),
-  never: MCPToolFilter$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    always: MCPToolFilter$outboundSchema.optional(),
+    never: MCPToolFilter$outboundSchema.optional(),
+  })
+);
 
 export function requireApproval2ToJSON(
   requireApproval2: RequireApproval2,
@@ -1699,7 +1792,7 @@ export function requireApproval2FromJSON(
 /** @internal */
 export const RequireApproval1$inboundSchema: z.ZodNativeEnum<
   typeof RequireApproval1
-> = z.nativeEnum(RequireApproval1);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RequireApproval1));
 /** @internal */
 export const RequireApproval1$outboundSchema: z.ZodNativeEnum<
   typeof RequireApproval1
@@ -1710,10 +1803,12 @@ export const RequireApproval$inboundSchema: z.ZodType<
   RequireApproval,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  RequireApproval1$inboundSchema,
-  z.lazy(() => RequireApproval2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    RequireApproval1$inboundSchema,
+    z.lazy(() => RequireApproval2$inboundSchema),
+  ])
+);
 /** @internal */
 export type RequireApproval$Outbound = string | RequireApproval2$Outbound;
 
@@ -1722,10 +1817,12 @@ export const RequireApproval$outboundSchema: z.ZodType<
   RequireApproval$Outbound,
   z.ZodTypeDef,
   RequireApproval
-> = z.union([
-  RequireApproval1$outboundSchema,
-  z.lazy(() => RequireApproval2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    RequireApproval1$outboundSchema,
+    z.lazy(() => RequireApproval2$outboundSchema),
+  ])
+);
 
 export function requireApprovalToJSON(
   requireApproval: RequireApproval,
@@ -1747,7 +1844,9 @@ export const FiveAllowedTools$inboundSchema: z.ZodType<
   FiveAllowedTools,
   z.ZodTypeDef,
   unknown
-> = z.union([z.array(z.string()), MCPToolFilter$inboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+);
 /** @internal */
 export type FiveAllowedTools$Outbound = Array<string> | MCPToolFilter$Outbound;
 
@@ -1756,7 +1855,9 @@ export const FiveAllowedTools$outboundSchema: z.ZodType<
   FiveAllowedTools$Outbound,
   z.ZodTypeDef,
   FiveAllowedTools
-> = z.union([z.array(z.string()), MCPToolFilter$outboundSchema]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+);
 
 export function fiveAllowedToolsToJSON(
   fiveAllowedTools: FiveAllowedTools,
@@ -1776,33 +1877,35 @@ export function fiveAllowedToolsFromJSON(
 }
 
 /** @internal */
-export const Five1$inboundSchema: z.ZodType<Five1, z.ZodTypeDef, unknown> = z
-  .object({
-    type: FiveType$inboundSchema,
-    server_label: z.string(),
-    mcp_server_id: z.string().optional(),
-    mcp_credential_id: z.string().optional(),
-    server_url: z.string().optional(),
-    server_description: z.string().optional(),
-    authorization: z.string().optional(),
-    require_approval: z.union([
-      RequireApproval1$inboundSchema,
-      z.lazy(() => RequireApproval2$inboundSchema),
-    ]).optional(),
-    allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
-      .optional(),
-    headers: z.record(z.string()).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "server_label": "serverLabel",
-      "mcp_server_id": "mcpServerId",
-      "mcp_credential_id": "mcpCredentialId",
-      "server_url": "serverUrl",
-      "server_description": "serverDescription",
-      "require_approval": "requireApproval",
-      "allowed_tools": "allowedTools",
-    });
-  });
+export const Five1$inboundSchema: z.ZodType<Five1, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: FiveType$inboundSchema,
+      server_label: z.string(),
+      mcp_server_id: z.string().optional(),
+      mcp_credential_id: z.string().optional(),
+      server_url: z.string().optional(),
+      server_description: z.string().optional(),
+      authorization: z.string().optional(),
+      require_approval: z.union([
+        RequireApproval1$inboundSchema,
+        z.lazy(() => RequireApproval2$inboundSchema),
+      ]).optional(),
+      allowed_tools: z.union([z.array(z.string()), MCPToolFilter$inboundSchema])
+        .optional(),
+      headers: z.record(z.string()).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "server_label": "serverLabel",
+        "mcp_server_id": "mcpServerId",
+        "mcp_credential_id": "mcpCredentialId",
+        "server_url": "serverUrl",
+        "server_description": "serverDescription",
+        "require_approval": "requireApproval",
+        "allowed_tools": "allowedTools",
+      });
+    })
+  );
 /** @internal */
 export type Five1$Outbound = {
   type: string;
@@ -1822,32 +1925,34 @@ export const Five1$outboundSchema: z.ZodType<
   Five1$Outbound,
   z.ZodTypeDef,
   Five1
-> = z.object({
-  type: FiveType$outboundSchema,
-  serverLabel: z.string(),
-  mcpServerId: z.string().optional(),
-  mcpCredentialId: z.string().optional(),
-  serverUrl: z.string().optional(),
-  serverDescription: z.string().optional(),
-  authorization: z.string().optional(),
-  requireApproval: z.union([
-    RequireApproval1$outboundSchema,
-    z.lazy(() => RequireApproval2$outboundSchema),
-  ]).optional(),
-  allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
-    .optional(),
-  headers: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    mcpServerId: "mcp_server_id",
-    mcpCredentialId: "mcp_credential_id",
-    serverUrl: "server_url",
-    serverDescription: "server_description",
-    requireApproval: "require_approval",
-    allowedTools: "allowed_tools",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FiveType$outboundSchema,
+    serverLabel: z.string(),
+    mcpServerId: z.string().optional(),
+    mcpCredentialId: z.string().optional(),
+    serverUrl: z.string().optional(),
+    serverDescription: z.string().optional(),
+    authorization: z.string().optional(),
+    requireApproval: z.union([
+      RequireApproval1$outboundSchema,
+      z.lazy(() => RequireApproval2$outboundSchema),
+    ]).optional(),
+    allowedTools: z.union([z.array(z.string()), MCPToolFilter$outboundSchema])
+      .optional(),
+    headers: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      mcpServerId: "mcp_server_id",
+      mcpCredentialId: "mcp_credential_id",
+      serverUrl: "server_url",
+      serverDescription: "server_description",
+      requireApproval: "require_approval",
+      allowedTools: "allowed_tools",
+    });
+  })
+);
 
 export function five1ToJSON(five1: Five1): string {
   return JSON.stringify(Five1$outboundSchema.parse(five1));
@@ -1867,10 +1972,12 @@ export const ToolDefinition5$inboundSchema: z.ZodType<
   ToolDefinition5,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => Five1$inboundSchema),
-  z.lazy(() => Five2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Five1$inboundSchema),
+    z.lazy(() => Five2$inboundSchema),
+  ])
+);
 /** @internal */
 export type ToolDefinition5$Outbound = Five1$Outbound | Five2$Outbound;
 
@@ -1879,10 +1986,12 @@ export const ToolDefinition5$outboundSchema: z.ZodType<
   ToolDefinition5$Outbound,
   z.ZodTypeDef,
   ToolDefinition5
-> = z.union([
-  z.lazy(() => Five1$outboundSchema),
-  z.lazy(() => Five2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Five1$outboundSchema),
+    z.lazy(() => Five2$outboundSchema),
+  ])
+);
 
 export function toolDefinition5ToJSON(
   toolDefinition5: ToolDefinition5,
@@ -1902,7 +2011,7 @@ export function toolDefinition5FromJSON(
 /** @internal */
 export const ToolDefinition4Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition4Type
-> = z.nativeEnum(ToolDefinition4Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition4Type));
 /** @internal */
 export const ToolDefinition4Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition4Type
@@ -1913,18 +2022,20 @@ export const ToolDefinition4$inboundSchema: z.ZodType<
   ToolDefinition4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ToolDefinition4Type$inboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  defer_loading: z.boolean().optional(),
-  parameters: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "defer_loading": "deferLoading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition4Type$inboundSchema,
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    defer_loading: z.boolean().optional(),
+    parameters: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      "defer_loading": "deferLoading",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinition4$Outbound = {
   type: string;
@@ -1940,18 +2051,20 @@ export const ToolDefinition4$outboundSchema: z.ZodType<
   ToolDefinition4$Outbound,
   z.ZodTypeDef,
   ToolDefinition4
-> = z.object({
-  type: ToolDefinition4Type$outboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  strict: z.boolean().optional(),
-  deferLoading: z.boolean().optional(),
-  parameters: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    deferLoading: "defer_loading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition4Type$outboundSchema,
+    name: z.string(),
+    description: z.string().optional(),
+    strict: z.boolean().optional(),
+    deferLoading: z.boolean().optional(),
+    parameters: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      deferLoading: "defer_loading",
+    });
+  })
+);
 
 export function toolDefinition4ToJSON(
   toolDefinition4: ToolDefinition4,
@@ -1971,7 +2084,7 @@ export function toolDefinition4FromJSON(
 /** @internal */
 export const ToolDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionType
-> = z.nativeEnum(ToolDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinitionType));
 /** @internal */
 export const ToolDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionType
@@ -1980,7 +2093,9 @@ export const ToolDefinitionType$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ToolDefinitionSearchContextSize$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionSearchContextSize
-> = z.nativeEnum(ToolDefinitionSearchContextSize);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ToolDefinitionSearchContextSize)
+);
 /** @internal */
 export const ToolDefinitionSearchContextSize$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinitionSearchContextSize
@@ -1989,7 +2104,7 @@ export const ToolDefinitionSearchContextSize$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ToolDefinition3Type$inboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition3Type
-> = z.nativeEnum(ToolDefinition3Type);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition3Type));
 /** @internal */
 export const ToolDefinition3Type$outboundSchema: z.ZodNativeEnum<
   typeof ToolDefinition3Type
@@ -2000,13 +2115,15 @@ export const ToolDefinitionUserLocation$inboundSchema: z.ZodType<
   ToolDefinitionUserLocation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ToolDefinition3Type$inboundSchema.optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition3Type$inboundSchema.optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    region: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 /** @internal */
 export type ToolDefinitionUserLocation$Outbound = {
   type?: string | undefined;
@@ -2021,13 +2138,15 @@ export const ToolDefinitionUserLocation$outboundSchema: z.ZodType<
   ToolDefinitionUserLocation$Outbound,
   z.ZodTypeDef,
   ToolDefinitionUserLocation
-> = z.object({
-  type: ToolDefinition3Type$outboundSchema.optional(),
-  city: z.string().optional(),
-  country: z.string().optional(),
-  region: z.string().optional(),
-  timezone: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition3Type$outboundSchema.optional(),
+    city: z.string().optional(),
+    country: z.string().optional(),
+    region: z.string().optional(),
+    timezone: z.string().optional(),
+  })
+);
 
 export function toolDefinitionUserLocationToJSON(
   toolDefinitionUserLocation: ToolDefinitionUserLocation,
@@ -2051,13 +2170,15 @@ export const ToolDefinitionFilters$inboundSchema: z.ZodType<
   ToolDefinitionFilters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  allowed_domains: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_domains": "allowedDomains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowed_domains: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_domains": "allowedDomains",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinitionFilters$Outbound = {
   allowed_domains?: Array<string> | undefined;
@@ -2068,13 +2189,15 @@ export const ToolDefinitionFilters$outboundSchema: z.ZodType<
   ToolDefinitionFilters$Outbound,
   z.ZodTypeDef,
   ToolDefinitionFilters
-> = z.object({
-  allowedDomains: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allowedDomains: "allowed_domains",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    allowedDomains: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedDomains: "allowed_domains",
+    });
+  })
+);
 
 export function toolDefinitionFiltersToJSON(
   toolDefinitionFilters: ToolDefinitionFilters,
@@ -2098,18 +2221,21 @@ export const ToolDefinition3$inboundSchema: z.ZodType<
   ToolDefinition3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ToolDefinitionType$inboundSchema,
-  search_context_size: ToolDefinitionSearchContextSize$inboundSchema.optional(),
-  user_location: z.lazy(() => ToolDefinitionUserLocation$inboundSchema)
-    .optional(),
-  filters: z.lazy(() => ToolDefinitionFilters$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "search_context_size": "searchContextSize",
-    "user_location": "userLocation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinitionType$inboundSchema,
+    search_context_size: ToolDefinitionSearchContextSize$inboundSchema
+      .optional(),
+    user_location: z.lazy(() => ToolDefinitionUserLocation$inboundSchema)
+      .optional(),
+    filters: z.lazy(() => ToolDefinitionFilters$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "search_context_size": "searchContextSize",
+      "user_location": "userLocation",
+    });
+  })
+);
 /** @internal */
 export type ToolDefinition3$Outbound = {
   type: string;
@@ -2123,18 +2249,21 @@ export const ToolDefinition3$outboundSchema: z.ZodType<
   ToolDefinition3$Outbound,
   z.ZodTypeDef,
   ToolDefinition3
-> = z.object({
-  type: ToolDefinitionType$outboundSchema,
-  searchContextSize: ToolDefinitionSearchContextSize$outboundSchema.optional(),
-  userLocation: z.lazy(() => ToolDefinitionUserLocation$outboundSchema)
-    .optional(),
-  filters: z.lazy(() => ToolDefinitionFilters$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    searchContextSize: "search_context_size",
-    userLocation: "user_location",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinitionType$outboundSchema,
+    searchContextSize: ToolDefinitionSearchContextSize$outboundSchema
+      .optional(),
+    userLocation: z.lazy(() => ToolDefinitionUserLocation$outboundSchema)
+      .optional(),
+    filters: z.lazy(() => ToolDefinitionFilters$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      searchContextSize: "search_context_size",
+      userLocation: "user_location",
+    });
+  })
+);
 
 export function toolDefinition3ToJSON(
   toolDefinition3: ToolDefinition3,
@@ -2156,24 +2285,26 @@ export const ToolDefinition$inboundSchema: z.ZodType<
   ToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => ToolDefinition4$inboundSchema),
-  FunctionToolReference$inboundSchema,
-  OpenApiToolSetReference$inboundSchema,
-  z.lazy(() => ToolDefinition6$inboundSchema),
-  z.lazy(() => Eight$inboundSchema),
-  z.lazy(() => Twelve$inboundSchema),
-  z.lazy(() => ToolDefinition3$inboundSchema),
-  z.lazy(() => Seven$inboundSchema),
-  z.lazy(() => Nine$inboundSchema),
-  z.lazy(() => Ten$inboundSchema),
-  z.lazy(() => Eleven$inboundSchema),
-  z.lazy(() => Thirteen$inboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
   z.union([
-    z.lazy(() => Five1$inboundSchema),
-    z.lazy(() => Five2$inboundSchema),
-  ]),
-]);
+    z.lazy(() => ToolDefinition4$inboundSchema),
+    FunctionToolReference$inboundSchema,
+    OpenApiToolSetReference$inboundSchema,
+    z.lazy(() => ToolDefinition6$inboundSchema),
+    z.lazy(() => Eight$inboundSchema),
+    z.lazy(() => Twelve$inboundSchema),
+    z.lazy(() => ToolDefinition3$inboundSchema),
+    z.lazy(() => Seven$inboundSchema),
+    z.lazy(() => Nine$inboundSchema),
+    z.lazy(() => Ten$inboundSchema),
+    z.lazy(() => Eleven$inboundSchema),
+    z.lazy(() => Thirteen$inboundSchema),
+    z.union([
+      z.lazy(() => Five1$inboundSchema),
+      z.lazy(() => Five2$inboundSchema),
+    ]),
+  ])
+);
 /** @internal */
 export type ToolDefinition$Outbound =
   | ToolDefinition4$Outbound
@@ -2196,24 +2327,26 @@ export const ToolDefinition$outboundSchema: z.ZodType<
   ToolDefinition$Outbound,
   z.ZodTypeDef,
   ToolDefinition
-> = z.union([
-  z.lazy(() => ToolDefinition4$outboundSchema),
-  FunctionToolReference$outboundSchema,
-  OpenApiToolSetReference$outboundSchema,
-  z.lazy(() => ToolDefinition6$outboundSchema),
-  z.lazy(() => Eight$outboundSchema),
-  z.lazy(() => Twelve$outboundSchema),
-  z.lazy(() => ToolDefinition3$outboundSchema),
-  z.lazy(() => Seven$outboundSchema),
-  z.lazy(() => Nine$outboundSchema),
-  z.lazy(() => Ten$outboundSchema),
-  z.lazy(() => Eleven$outboundSchema),
-  z.lazy(() => Thirteen$outboundSchema),
+> = /* @__PURE__ */ lazySchema$(() =>
   z.union([
-    z.lazy(() => Five1$outboundSchema),
-    z.lazy(() => Five2$outboundSchema),
-  ]),
-]);
+    z.lazy(() => ToolDefinition4$outboundSchema),
+    FunctionToolReference$outboundSchema,
+    OpenApiToolSetReference$outboundSchema,
+    z.lazy(() => ToolDefinition6$outboundSchema),
+    z.lazy(() => Eight$outboundSchema),
+    z.lazy(() => Twelve$outboundSchema),
+    z.lazy(() => ToolDefinition3$outboundSchema),
+    z.lazy(() => Seven$outboundSchema),
+    z.lazy(() => Nine$outboundSchema),
+    z.lazy(() => Ten$outboundSchema),
+    z.lazy(() => Eleven$outboundSchema),
+    z.lazy(() => Thirteen$outboundSchema),
+    z.union([
+      z.lazy(() => Five1$outboundSchema),
+      z.lazy(() => Five2$outboundSchema),
+    ]),
+  ])
+);
 
 export function toolDefinitionToJSON(toolDefinition: ToolDefinition): string {
   return JSON.stringify(ToolDefinition$outboundSchema.parse(toolDefinition));

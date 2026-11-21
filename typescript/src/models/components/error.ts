@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -13,11 +13,13 @@ export type ErrorT = {
 };
 
 /** @internal */
-export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> = z
-  .object({
-    code: z.string(),
-    message: z.string(),
-  });
+export const ErrorT$inboundSchema: z.ZodType<ErrorT, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      code: z.string(),
+      message: z.string(),
+    })
+  );
 /** @internal */
 export type ErrorT$Outbound = {
   code: string;
@@ -29,10 +31,12 @@ export const ErrorT$outboundSchema: z.ZodType<
   ErrorT$Outbound,
   z.ZodTypeDef,
   ErrorT
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+  })
+);
 
 export function errorToJSON(errorT: ErrorT): string {
   return JSON.stringify(ErrorT$outboundSchema.parse(errorT));

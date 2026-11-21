@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const ListOrgAutoModelsResponse$inboundSchema: z.ZodType<
   ListOrgAutoModelsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(OrgAutoModel$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(OrgAutoModel$inboundSchema),
+  })
+);
 /** @internal */
 export type ListOrgAutoModelsResponse$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const ListOrgAutoModelsResponse$outboundSchema: z.ZodType<
   ListOrgAutoModelsResponse$Outbound,
   z.ZodTypeDef,
   ListOrgAutoModelsResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(OrgAutoModel$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(OrgAutoModel$outboundSchema),
+  })
+);
 
 export function listOrgAutoModelsResponseToJSON(
   listOrgAutoModelsResponse: ListOrgAutoModelsResponse,

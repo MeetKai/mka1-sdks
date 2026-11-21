@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const FeatureFlagEvaluateRequest$inboundSchema: z.ZodType<
   FeatureFlagEvaluateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  identity: z.string().optional(),
-  traits: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: z.string().optional(),
+    traits: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type FeatureFlagEvaluateRequest$Outbound = {
   identity?: string | undefined;
@@ -32,10 +34,12 @@ export const FeatureFlagEvaluateRequest$outboundSchema: z.ZodType<
   FeatureFlagEvaluateRequest$Outbound,
   z.ZodTypeDef,
   FeatureFlagEvaluateRequest
-> = z.object({
-  identity: z.string().optional(),
-  traits: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    identity: z.string().optional(),
+    traits: z.record(z.any()).optional(),
+  })
+);
 
 export function featureFlagEvaluateRequestToJSON(
   featureFlagEvaluateRequest: FeatureFlagEvaluateRequest,

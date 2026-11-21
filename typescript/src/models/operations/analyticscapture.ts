@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export const AnalyticsCaptureSecurity$inboundSchema: z.ZodType<
   AnalyticsCaptureSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  analyticsCaptureKey: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    analyticsCaptureKey: z.string(),
+  })
+);
 /** @internal */
 export type AnalyticsCaptureSecurity$Outbound = {
   analyticsCaptureKey: string;
@@ -39,9 +41,11 @@ export const AnalyticsCaptureSecurity$outboundSchema: z.ZodType<
   AnalyticsCaptureSecurity$Outbound,
   z.ZodTypeDef,
   AnalyticsCaptureSecurity
-> = z.object({
-  analyticsCaptureKey: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    analyticsCaptureKey: z.string(),
+  })
+);
 
 export function analyticsCaptureSecurityToJSON(
   analyticsCaptureSecurity: AnalyticsCaptureSecurity,
@@ -65,15 +69,17 @@ export const AnalyticsCaptureRequest$inboundSchema: z.ZodType<
   AnalyticsCaptureRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  AnalyticsCaptureRequest: components.AnalyticsCaptureRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "AnalyticsCaptureRequest": "analyticsCaptureRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    AnalyticsCaptureRequest: components.AnalyticsCaptureRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "AnalyticsCaptureRequest": "analyticsCaptureRequest",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsCaptureRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -85,15 +91,17 @@ export const AnalyticsCaptureRequest$outboundSchema: z.ZodType<
   AnalyticsCaptureRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsCaptureRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  analyticsCaptureRequest: components.AnalyticsCaptureRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    analyticsCaptureRequest: "AnalyticsCaptureRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    analyticsCaptureRequest: components.AnalyticsCaptureRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      analyticsCaptureRequest: "AnalyticsCaptureRequest",
+    });
+  })
+);
 
 export function analyticsCaptureRequestToJSON(
   analyticsCaptureRequest: AnalyticsCaptureRequest,

@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const SupportCaseSeverity = {
@@ -16,7 +17,7 @@ export type SupportCaseSeverity = ClosedEnum<typeof SupportCaseSeverity>;
 /** @internal */
 export const SupportCaseSeverity$inboundSchema: z.ZodNativeEnum<
   typeof SupportCaseSeverity
-> = z.nativeEnum(SupportCaseSeverity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(SupportCaseSeverity));
 /** @internal */
 export const SupportCaseSeverity$outboundSchema: z.ZodNativeEnum<
   typeof SupportCaseSeverity

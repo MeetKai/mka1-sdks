@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,19 +53,21 @@ export const GetModelQuotaRequest$inboundSchema: z.ZodType<
   GetModelQuotaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  api_key_id: z.string().optional(),
-  service_account_id: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "api_key_id": "apiKeyId",
-    "service_account_id": "serviceAccountId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    api_key_id: z.string().optional(),
+    service_account_id: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "api_key_id": "apiKeyId",
+      "service_account_id": "serviceAccountId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetModelQuotaRequest$Outbound = {
   model_id: string;
@@ -79,19 +81,21 @@ export const GetModelQuotaRequest$outboundSchema: z.ZodType<
   GetModelQuotaRequest$Outbound,
   z.ZodTypeDef,
   GetModelQuotaRequest
-> = z.object({
-  modelId: z.string(),
-  apiKeyId: z.string().optional(),
-  serviceAccountId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    apiKeyId: "api_key_id",
-    serviceAccountId: "service_account_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    apiKeyId: z.string().optional(),
+    serviceAccountId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      apiKeyId: "api_key_id",
+      serviceAccountId: "service_account_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getModelQuotaRequestToJSON(
   getModelQuotaRequest: GetModelQuotaRequest,
@@ -113,29 +117,31 @@ export function getModelQuotaRequestFromJSON(
 /** @internal */
 export const GetModelQuotaScope$inboundSchema: z.ZodNativeEnum<
   typeof GetModelQuotaScope
-> = z.nativeEnum(GetModelQuotaScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetModelQuotaScope));
 /** @internal */
 export const GetModelQuotaScope$outboundSchema: z.ZodNativeEnum<
   typeof GetModelQuotaScope
 > = GetModelQuotaScope$inboundSchema;
 
 /** @internal */
-export const Limits$inboundSchema: z.ZodType<Limits, z.ZodTypeDef, unknown> = z
-  .object({
-    scope: GetModelQuotaScope$inboundSchema,
-    window_seconds: z.number().int(),
-    limit: z.number().int(),
-    used: z.number().int(),
-    remaining: z.number().int(),
-    reset_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "window_seconds": "windowSeconds",
-      "reset_at": "resetAt",
-    });
-  });
+export const Limits$inboundSchema: z.ZodType<Limits, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      scope: GetModelQuotaScope$inboundSchema,
+      window_seconds: z.number().int(),
+      limit: z.number().int(),
+      used: z.number().int(),
+      remaining: z.number().int(),
+      reset_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "window_seconds": "windowSeconds",
+        "reset_at": "resetAt",
+      });
+    })
+  );
 /** @internal */
 export type Limits$Outbound = {
   scope: string;
@@ -151,19 +157,21 @@ export const Limits$outboundSchema: z.ZodType<
   Limits$Outbound,
   z.ZodTypeDef,
   Limits
-> = z.object({
-  scope: GetModelQuotaScope$outboundSchema,
-  windowSeconds: z.number().int(),
-  limit: z.number().int(),
-  used: z.number().int(),
-  remaining: z.number().int(),
-  resetAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    windowSeconds: "window_seconds",
-    resetAt: "reset_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: GetModelQuotaScope$outboundSchema,
+    windowSeconds: z.number().int(),
+    limit: z.number().int(),
+    used: z.number().int(),
+    remaining: z.number().int(),
+    resetAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      windowSeconds: "window_seconds",
+      resetAt: "reset_at",
+    });
+  })
+);
 
 export function limitsToJSON(limits: Limits): string {
   return JSON.stringify(Limits$outboundSchema.parse(limits));
@@ -183,14 +191,16 @@ export const GetModelQuotaResponseBody$inboundSchema: z.ZodType<
   GetModelQuotaResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  limits: z.array(z.lazy(() => Limits$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    limits: z.array(z.lazy(() => Limits$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+    });
+  })
+);
 /** @internal */
 export type GetModelQuotaResponseBody$Outbound = {
   model_id: string;
@@ -202,14 +212,16 @@ export const GetModelQuotaResponseBody$outboundSchema: z.ZodType<
   GetModelQuotaResponseBody$Outbound,
   z.ZodTypeDef,
   GetModelQuotaResponseBody
-> = z.object({
-  modelId: z.string(),
-  limits: z.array(z.lazy(() => Limits$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    limits: z.array(z.lazy(() => Limits$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function getModelQuotaResponseBodyToJSON(
   getModelQuotaResponseBody: GetModelQuotaResponseBody,

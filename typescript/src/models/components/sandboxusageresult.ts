@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -43,44 +43,46 @@ export const SandboxUsageResult$inboundSchema: z.ZodType<
   SandboxUsageResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("organization.usage.sandbox.result").default(
-    "organization.usage.sandbox.result",
-  ),
-  num_operations: z.number().int().default(0),
-  num_sessions: z.number().int().default(0),
-  request_count: z.number().int().default(0),
-  duration_ms: z.number().int().default(0),
-  workspace_bytes_in: z.number().int().default(0),
-  workspace_bytes_out: z.number().int().default(0),
-  files_changed_count: z.number().int().default(0),
-  oom_killed_count: z.number().int().default(0),
-  peak_memory_mib: z.nullable(z.number()).optional(),
-  reserved_memory_mib: z.nullable(z.number().int()).optional(),
-  user_id: z.nullable(z.string()).optional(),
-  api_key_id: z.nullable(z.string()).optional(),
-  org_id: z.nullable(z.string()).optional(),
-  operation: z.nullable(SandboxUsageOperation$inboundSchema).optional(),
-  provider: z.nullable(z.string()).optional(),
-  session_kind: z.nullable(SessionKind$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "num_operations": "numOperations",
-    "num_sessions": "numSessions",
-    "request_count": "requestCount",
-    "duration_ms": "durationMs",
-    "workspace_bytes_in": "workspaceBytesIn",
-    "workspace_bytes_out": "workspaceBytesOut",
-    "files_changed_count": "filesChangedCount",
-    "oom_killed_count": "oomKilledCount",
-    "peak_memory_mib": "peakMemoryMib",
-    "reserved_memory_mib": "reservedMemoryMib",
-    "user_id": "userId",
-    "api_key_id": "apiKeyId",
-    "org_id": "orgId",
-    "session_kind": "sessionKind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("organization.usage.sandbox.result").default(
+      "organization.usage.sandbox.result",
+    ),
+    num_operations: z.number().int().default(0),
+    num_sessions: z.number().int().default(0),
+    request_count: z.number().int().default(0),
+    duration_ms: z.number().int().default(0),
+    workspace_bytes_in: z.number().int().default(0),
+    workspace_bytes_out: z.number().int().default(0),
+    files_changed_count: z.number().int().default(0),
+    oom_killed_count: z.number().int().default(0),
+    peak_memory_mib: z.nullable(z.number()).optional(),
+    reserved_memory_mib: z.nullable(z.number().int()).optional(),
+    user_id: z.nullable(z.string()).optional(),
+    api_key_id: z.nullable(z.string()).optional(),
+    org_id: z.nullable(z.string()).optional(),
+    operation: z.nullable(SandboxUsageOperation$inboundSchema).optional(),
+    provider: z.nullable(z.string()).optional(),
+    session_kind: z.nullable(SessionKind$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "num_operations": "numOperations",
+      "num_sessions": "numSessions",
+      "request_count": "requestCount",
+      "duration_ms": "durationMs",
+      "workspace_bytes_in": "workspaceBytesIn",
+      "workspace_bytes_out": "workspaceBytesOut",
+      "files_changed_count": "filesChangedCount",
+      "oom_killed_count": "oomKilledCount",
+      "peak_memory_mib": "peakMemoryMib",
+      "reserved_memory_mib": "reservedMemoryMib",
+      "user_id": "userId",
+      "api_key_id": "apiKeyId",
+      "org_id": "orgId",
+      "session_kind": "sessionKind",
+    });
+  })
+);
 /** @internal */
 export type SandboxUsageResult$Outbound = {
   object: "organization.usage.sandbox.result";
@@ -107,44 +109,46 @@ export const SandboxUsageResult$outboundSchema: z.ZodType<
   SandboxUsageResult$Outbound,
   z.ZodTypeDef,
   SandboxUsageResult
-> = z.object({
-  object: z.literal("organization.usage.sandbox.result").default(
-    "organization.usage.sandbox.result" as const,
-  ),
-  numOperations: z.number().int().default(0),
-  numSessions: z.number().int().default(0),
-  requestCount: z.number().int().default(0),
-  durationMs: z.number().int().default(0),
-  workspaceBytesIn: z.number().int().default(0),
-  workspaceBytesOut: z.number().int().default(0),
-  filesChangedCount: z.number().int().default(0),
-  oomKilledCount: z.number().int().default(0),
-  peakMemoryMib: z.nullable(z.number()).optional(),
-  reservedMemoryMib: z.nullable(z.number().int()).optional(),
-  userId: z.nullable(z.string()).optional(),
-  apiKeyId: z.nullable(z.string()).optional(),
-  orgId: z.nullable(z.string()).optional(),
-  operation: z.nullable(SandboxUsageOperation$outboundSchema).optional(),
-  provider: z.nullable(z.string()).optional(),
-  sessionKind: z.nullable(SessionKind$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    numOperations: "num_operations",
-    numSessions: "num_sessions",
-    requestCount: "request_count",
-    durationMs: "duration_ms",
-    workspaceBytesIn: "workspace_bytes_in",
-    workspaceBytesOut: "workspace_bytes_out",
-    filesChangedCount: "files_changed_count",
-    oomKilledCount: "oom_killed_count",
-    peakMemoryMib: "peak_memory_mib",
-    reservedMemoryMib: "reserved_memory_mib",
-    userId: "user_id",
-    apiKeyId: "api_key_id",
-    orgId: "org_id",
-    sessionKind: "session_kind",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("organization.usage.sandbox.result").default(
+      "organization.usage.sandbox.result" as const,
+    ),
+    numOperations: z.number().int().default(0),
+    numSessions: z.number().int().default(0),
+    requestCount: z.number().int().default(0),
+    durationMs: z.number().int().default(0),
+    workspaceBytesIn: z.number().int().default(0),
+    workspaceBytesOut: z.number().int().default(0),
+    filesChangedCount: z.number().int().default(0),
+    oomKilledCount: z.number().int().default(0),
+    peakMemoryMib: z.nullable(z.number()).optional(),
+    reservedMemoryMib: z.nullable(z.number().int()).optional(),
+    userId: z.nullable(z.string()).optional(),
+    apiKeyId: z.nullable(z.string()).optional(),
+    orgId: z.nullable(z.string()).optional(),
+    operation: z.nullable(SandboxUsageOperation$outboundSchema).optional(),
+    provider: z.nullable(z.string()).optional(),
+    sessionKind: z.nullable(SessionKind$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      numOperations: "num_operations",
+      numSessions: "num_sessions",
+      requestCount: "request_count",
+      durationMs: "duration_ms",
+      workspaceBytesIn: "workspace_bytes_in",
+      workspaceBytesOut: "workspace_bytes_out",
+      filesChangedCount: "files_changed_count",
+      oomKilledCount: "oom_killed_count",
+      peakMemoryMib: "peak_memory_mib",
+      reservedMemoryMib: "reserved_memory_mib",
+      userId: "user_id",
+      apiKeyId: "api_key_id",
+      orgId: "org_id",
+      sessionKind: "session_kind",
+    });
+  })
+);
 
 export function sandboxUsageResultToJSON(
   sandboxUsageResult: SandboxUsageResult,

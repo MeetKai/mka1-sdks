@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,8 +27,8 @@ export type TextConfiguration = {
 };
 
 /** @internal */
-export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> = z
-  .nativeEnum(Verbosity);
+export const Verbosity$inboundSchema: z.ZodNativeEnum<typeof Verbosity> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Verbosity));
 /** @internal */
 export const Verbosity$outboundSchema: z.ZodNativeEnum<typeof Verbosity> =
   Verbosity$inboundSchema;
@@ -38,10 +38,12 @@ export const TextConfiguration$inboundSchema: z.ZodType<
   TextConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: ResponseFormat$inboundSchema,
-  verbosity: Verbosity$inboundSchema.default("medium"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: ResponseFormat$inboundSchema,
+    verbosity: Verbosity$inboundSchema.default("medium"),
+  })
+);
 /** @internal */
 export type TextConfiguration$Outbound = {
   format: ResponseFormat$Outbound;
@@ -53,10 +55,12 @@ export const TextConfiguration$outboundSchema: z.ZodType<
   TextConfiguration$Outbound,
   z.ZodTypeDef,
   TextConfiguration
-> = z.object({
-  format: ResponseFormat$outboundSchema,
-  verbosity: Verbosity$outboundSchema.default("medium"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: ResponseFormat$outboundSchema,
+    verbosity: Verbosity$outboundSchema.default("medium"),
+  })
+);
 
 export function textConfigurationToJSON(
   textConfiguration: TextConfiguration,

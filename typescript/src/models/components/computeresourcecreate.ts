@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -68,16 +68,18 @@ export const ComputeResourceCreate$inboundSchema: z.ZodType<
   ComputeResourceCreate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access: ComputeAccessCreate$inboundSchema.optional(),
-  compute: ComputeRequest$inboundSchema,
-  container: ComputeContainerCreate$inboundSchema,
-  limits: ComputeLimits$inboundSchema.optional(),
-  name: z.string().optional(),
-  placement: ComputePlacement$inboundSchema,
-  service: ComputeServiceInput$inboundSchema.optional(),
-  volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: ComputeAccessCreate$inboundSchema.optional(),
+    compute: ComputeRequest$inboundSchema,
+    container: ComputeContainerCreate$inboundSchema,
+    limits: ComputeLimits$inboundSchema.optional(),
+    name: z.string().optional(),
+    placement: ComputePlacement$inboundSchema,
+    service: ComputeServiceInput$inboundSchema.optional(),
+    volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type ComputeResourceCreate$Outbound = {
   access?: ComputeAccessCreate$Outbound | undefined;
@@ -95,16 +97,18 @@ export const ComputeResourceCreate$outboundSchema: z.ZodType<
   ComputeResourceCreate$Outbound,
   z.ZodTypeDef,
   ComputeResourceCreate
-> = z.object({
-  access: ComputeAccessCreate$outboundSchema.optional(),
-  compute: ComputeRequest$outboundSchema,
-  container: ComputeContainerCreate$outboundSchema,
-  limits: ComputeLimits$outboundSchema.optional(),
-  name: z.string().optional(),
-  placement: ComputePlacement$outboundSchema,
-  service: ComputeServiceInput$outboundSchema.optional(),
-  volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: ComputeAccessCreate$outboundSchema.optional(),
+    compute: ComputeRequest$outboundSchema,
+    container: ComputeContainerCreate$outboundSchema,
+    limits: ComputeLimits$outboundSchema.optional(),
+    name: z.string().optional(),
+    placement: ComputePlacement$outboundSchema,
+    service: ComputeServiceInput$outboundSchema.optional(),
+    volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
+  })
+);
 
 export function computeResourceCreateToJSON(
   computeResourceCreate: ComputeResourceCreate,

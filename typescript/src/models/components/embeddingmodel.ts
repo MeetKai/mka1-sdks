@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,12 +40,14 @@ export const EmbeddingModel$inboundSchema: z.ZodType<
   EmbeddingModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  provider: z.string(),
-  model: z.string(),
-  limits: EmbeddingModelLimits$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    provider: z.string(),
+    model: z.string(),
+    limits: EmbeddingModelLimits$inboundSchema,
+  })
+);
 /** @internal */
 export type EmbeddingModel$Outbound = {
   id: string;
@@ -59,12 +61,14 @@ export const EmbeddingModel$outboundSchema: z.ZodType<
   EmbeddingModel$Outbound,
   z.ZodTypeDef,
   EmbeddingModel
-> = z.object({
-  id: z.string(),
-  provider: z.string(),
-  model: z.string(),
-  limits: EmbeddingModelLimits$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    provider: z.string(),
+    model: z.string(),
+    limits: EmbeddingModelLimits$outboundSchema,
+  })
+);
 
 export function embeddingModelToJSON(embeddingModel: EmbeddingModel): string {
   return JSON.stringify(EmbeddingModel$outboundSchema.parse(embeddingModel));

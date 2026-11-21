@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const UpdateSkillRequest$inboundSchema: z.ZodType<
   UpdateSkillRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  skill_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SkillUpdateRequest: components.SkillUpdateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SkillUpdateRequest": "skillUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skill_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SkillUpdateRequest: components.SkillUpdateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SkillUpdateRequest": "skillUpdateRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateSkillRequest$Outbound = {
   skill_id: string;
@@ -46,17 +48,19 @@ export const UpdateSkillRequest$outboundSchema: z.ZodType<
   UpdateSkillRequest$Outbound,
   z.ZodTypeDef,
   UpdateSkillRequest
-> = z.object({
-  skillId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  skillUpdateRequest: components.SkillUpdateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    skillUpdateRequest: "SkillUpdateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    skillUpdateRequest: components.SkillUpdateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      skillUpdateRequest: "SkillUpdateRequest",
+    });
+  })
+);
 
 export function updateSkillRequestToJSON(
   updateSkillRequest: UpdateSkillRequest,

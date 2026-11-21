@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,15 +49,17 @@ export const CompletionTokensDetails$inboundSchema: z.ZodType<
   CompletionTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reasoning_tokens: z.number().int().optional(),
-  audio_tokens: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "reasoning_tokens": "reasoningTokens",
-    "audio_tokens": "audioTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoning_tokens: z.number().int().optional(),
+    audio_tokens: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "reasoning_tokens": "reasoningTokens",
+      "audio_tokens": "audioTokens",
+    });
+  })
+);
 /** @internal */
 export type CompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | undefined;
@@ -69,15 +71,17 @@ export const CompletionTokensDetails$outboundSchema: z.ZodType<
   CompletionTokensDetails$Outbound,
   z.ZodTypeDef,
   CompletionTokensDetails
-> = z.object({
-  reasoningTokens: z.number().int().optional(),
-  audioTokens: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    reasoningTokens: "reasoning_tokens",
-    audioTokens: "audio_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reasoningTokens: z.number().int().optional(),
+    audioTokens: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      reasoningTokens: "reasoning_tokens",
+      audioTokens: "audio_tokens",
+    });
+  })
+);
 
 export function completionTokensDetailsToJSON(
   completionTokensDetails: CompletionTokensDetails,
@@ -101,20 +105,23 @@ export const OpenAIChatCompletionUsage$inboundSchema: z.ZodType<
   OpenAIChatCompletionUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number().int(),
-  completion_tokens: z.number().int(),
-  total_tokens: z.number().int(),
-  completion_tokens_details: z.lazy(() => CompletionTokensDetails$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "completion_tokens": "completionTokens",
-    "total_tokens": "totalTokens",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number().int(),
+    completion_tokens: z.number().int(),
+    total_tokens: z.number().int(),
+    completion_tokens_details: z.lazy(() =>
+      CompletionTokensDetails$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "completion_tokens": "completionTokens",
+      "total_tokens": "totalTokens",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 /** @internal */
 export type OpenAIChatCompletionUsage$Outbound = {
   prompt_tokens: number;
@@ -128,20 +135,23 @@ export const OpenAIChatCompletionUsage$outboundSchema: z.ZodType<
   OpenAIChatCompletionUsage$Outbound,
   z.ZodTypeDef,
   OpenAIChatCompletionUsage
-> = z.object({
-  promptTokens: z.number().int(),
-  completionTokens: z.number().int(),
-  totalTokens: z.number().int(),
-  completionTokensDetails: z.lazy(() => CompletionTokensDetails$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    completionTokens: "completion_tokens",
-    totalTokens: "total_tokens",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    promptTokens: z.number().int(),
+    completionTokens: z.number().int(),
+    totalTokens: z.number().int(),
+    completionTokensDetails: z.lazy(() =>
+      CompletionTokensDetails$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      completionTokens: "completion_tokens",
+      totalTokens: "total_tokens",
+      completionTokensDetails: "completion_tokens_details",
+    });
+  })
+);
 
 export function openAIChatCompletionUsageToJSON(
   openAIChatCompletionUsage: OpenAIChatCompletionUsage,

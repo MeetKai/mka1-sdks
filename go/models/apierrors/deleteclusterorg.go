@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type DeleteClusterOrgTooManyRequestsError struct {
 var _ error = &DeleteClusterOrgTooManyRequestsError{}
 
 func (e *DeleteClusterOrgTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type DeleteClusterOrgGoneError struct {
 var _ error = &DeleteClusterOrgGoneError{}
 
 func (e *DeleteClusterOrgGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type DeleteClusterOrgConflictError struct {
 var _ error = &DeleteClusterOrgConflictError{}
 
 func (e *DeleteClusterOrgConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type DeleteClusterOrgNotFoundError struct {
 var _ error = &DeleteClusterOrgNotFoundError{}
 
 func (e *DeleteClusterOrgNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type DeleteClusterOrgForbiddenError struct {
 var _ error = &DeleteClusterOrgForbiddenError{}
 
 func (e *DeleteClusterOrgForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type DeleteClusterOrgUnauthorizedError struct {
 var _ error = &DeleteClusterOrgUnauthorizedError{}
 
 func (e *DeleteClusterOrgUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type DeleteClusterOrgBadRequestError struct {
 var _ error = &DeleteClusterOrgBadRequestError{}
 
 func (e *DeleteClusterOrgBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

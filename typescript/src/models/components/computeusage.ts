@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -137,10 +137,12 @@ export const CostBreakdownUsd$inboundSchema: z.ZodType<
   CostBreakdownUsd,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  compute: z.number(),
-  volume: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compute: z.number(),
+    volume: z.number(),
+  })
+);
 /** @internal */
 export type CostBreakdownUsd$Outbound = {
   compute: number;
@@ -152,10 +154,12 @@ export const CostBreakdownUsd$outboundSchema: z.ZodType<
   CostBreakdownUsd$Outbound,
   z.ZodTypeDef,
   CostBreakdownUsd
-> = z.object({
-  compute: z.number(),
-  volume: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compute: z.number(),
+    volume: z.number(),
+  })
+);
 
 export function costBreakdownUsdToJSON(
   costBreakdownUsd: CostBreakdownUsd,
@@ -179,28 +183,30 @@ export const ComputeUsageData$inboundSchema: z.ZodType<
   ComputeUsageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accrued_usd: z.number(),
-  billable_seconds: z.number(),
-  cost_breakdown_usd: z.lazy(() => CostBreakdownUsd$inboundSchema).optional(),
-  name: z.string(),
-  replica_seconds: z.number().optional(),
-  resource_id: z.string(),
-  resource_type: ComputeUsageResourceType$inboundSchema,
-  stored_byte_seconds: z.number().optional(),
-  stored_gib_hours: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "accrued_usd": "accruedUsd",
-    "billable_seconds": "billableSeconds",
-    "cost_breakdown_usd": "costBreakdownUsd",
-    "replica_seconds": "replicaSeconds",
-    "resource_id": "resourceId",
-    "resource_type": "resourceType",
-    "stored_byte_seconds": "storedByteSeconds",
-    "stored_gib_hours": "storedGibHours",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accrued_usd: z.number(),
+    billable_seconds: z.number(),
+    cost_breakdown_usd: z.lazy(() => CostBreakdownUsd$inboundSchema).optional(),
+    name: z.string(),
+    replica_seconds: z.number().optional(),
+    resource_id: z.string(),
+    resource_type: ComputeUsageResourceType$inboundSchema,
+    stored_byte_seconds: z.number().optional(),
+    stored_gib_hours: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "accrued_usd": "accruedUsd",
+      "billable_seconds": "billableSeconds",
+      "cost_breakdown_usd": "costBreakdownUsd",
+      "replica_seconds": "replicaSeconds",
+      "resource_id": "resourceId",
+      "resource_type": "resourceType",
+      "stored_byte_seconds": "storedByteSeconds",
+      "stored_gib_hours": "storedGibHours",
+    });
+  })
+);
 /** @internal */
 export type ComputeUsageData$Outbound = {
   accrued_usd: number;
@@ -219,28 +225,30 @@ export const ComputeUsageData$outboundSchema: z.ZodType<
   ComputeUsageData$Outbound,
   z.ZodTypeDef,
   ComputeUsageData
-> = z.object({
-  accruedUsd: z.number(),
-  billableSeconds: z.number(),
-  costBreakdownUsd: z.lazy(() => CostBreakdownUsd$outboundSchema).optional(),
-  name: z.string(),
-  replicaSeconds: z.number().optional(),
-  resourceId: z.string(),
-  resourceType: ComputeUsageResourceType$outboundSchema,
-  storedByteSeconds: z.number().optional(),
-  storedGibHours: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    accruedUsd: "accrued_usd",
-    billableSeconds: "billable_seconds",
-    costBreakdownUsd: "cost_breakdown_usd",
-    replicaSeconds: "replica_seconds",
-    resourceId: "resource_id",
-    resourceType: "resource_type",
-    storedByteSeconds: "stored_byte_seconds",
-    storedGibHours: "stored_gib_hours",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accruedUsd: z.number(),
+    billableSeconds: z.number(),
+    costBreakdownUsd: z.lazy(() => CostBreakdownUsd$outboundSchema).optional(),
+    name: z.string(),
+    replicaSeconds: z.number().optional(),
+    resourceId: z.string(),
+    resourceType: ComputeUsageResourceType$outboundSchema,
+    storedByteSeconds: z.number().optional(),
+    storedGibHours: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      accruedUsd: "accrued_usd",
+      billableSeconds: "billable_seconds",
+      costBreakdownUsd: "cost_breakdown_usd",
+      replicaSeconds: "replica_seconds",
+      resourceId: "resource_id",
+      resourceType: "resource_type",
+      storedByteSeconds: "stored_byte_seconds",
+      storedGibHours: "stored_gib_hours",
+    });
+  })
+);
 
 export function computeUsageDataToJSON(
   computeUsageData: ComputeUsageData,
@@ -260,8 +268,8 @@ export function computeUsageDataFromJSON(
 }
 
 /** @internal */
-export const Granularity$inboundSchema: z.ZodNativeEnum<typeof Granularity> = z
-  .nativeEnum(Granularity);
+export const Granularity$inboundSchema: z.ZodNativeEnum<typeof Granularity> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Granularity));
 /** @internal */
 export const Granularity$outboundSchema: z.ZodNativeEnum<typeof Granularity> =
   Granularity$inboundSchema;
@@ -271,19 +279,21 @@ export const ComputeUsageSummary$inboundSchema: z.ZodType<
   ComputeUsageSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  job_usd: z.number(),
-  service_usd: z.number(),
-  total_usd: z.number(),
-  volume_usd: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "job_usd": "jobUsd",
-    "service_usd": "serviceUsd",
-    "total_usd": "totalUsd",
-    "volume_usd": "volumeUsd",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    job_usd: z.number(),
+    service_usd: z.number(),
+    total_usd: z.number(),
+    volume_usd: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "job_usd": "jobUsd",
+      "service_usd": "serviceUsd",
+      "total_usd": "totalUsd",
+      "volume_usd": "volumeUsd",
+    });
+  })
+);
 /** @internal */
 export type ComputeUsageSummary$Outbound = {
   job_usd: number;
@@ -297,19 +307,21 @@ export const ComputeUsageSummary$outboundSchema: z.ZodType<
   ComputeUsageSummary$Outbound,
   z.ZodTypeDef,
   ComputeUsageSummary
-> = z.object({
-  jobUsd: z.number(),
-  serviceUsd: z.number(),
-  totalUsd: z.number(),
-  volumeUsd: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    jobUsd: "job_usd",
-    serviceUsd: "service_usd",
-    totalUsd: "total_usd",
-    volumeUsd: "volume_usd",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    jobUsd: z.number(),
+    serviceUsd: z.number(),
+    totalUsd: z.number(),
+    volumeUsd: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      jobUsd: "job_usd",
+      serviceUsd: "service_usd",
+      totalUsd: "total_usd",
+      volumeUsd: "volume_usd",
+    });
+  })
+);
 
 export function computeUsageSummaryToJSON(
   computeUsageSummary: ComputeUsageSummary,
@@ -331,7 +343,7 @@ export function computeUsageSummaryFromJSON(
 /** @internal */
 export const VolumeAllocation$inboundSchema: z.ZodNativeEnum<
   typeof VolumeAllocation
-> = z.nativeEnum(VolumeAllocation);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VolumeAllocation));
 /** @internal */
 export const VolumeAllocation$outboundSchema: z.ZodNativeEnum<
   typeof VolumeAllocation
@@ -340,19 +352,21 @@ export const VolumeAllocation$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const VolumeLedgerGranularity$inboundSchema: z.ZodNativeEnum<
   typeof VolumeLedgerGranularity
-> = z.nativeEnum(VolumeLedgerGranularity);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VolumeLedgerGranularity));
 /** @internal */
 export const VolumeLedgerGranularity$outboundSchema: z.ZodNativeEnum<
   typeof VolumeLedgerGranularity
 > = VolumeLedgerGranularity$inboundSchema;
 
 /** @internal */
-export const Window$inboundSchema: z.ZodType<Window, z.ZodTypeDef, unknown> = z
-  .object({
-    defaulted: z.boolean(),
-    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  });
+export const Window$inboundSchema: z.ZodType<Window, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      defaulted: z.boolean(),
+      from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    })
+  );
 /** @internal */
 export type Window$Outbound = {
   defaulted: boolean;
@@ -365,11 +379,13 @@ export const Window$outboundSchema: z.ZodType<
   Window$Outbound,
   z.ZodTypeDef,
   Window
-> = z.object({
-  defaulted: z.boolean(),
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaulted: z.boolean(),
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+  })
+);
 
 export function windowToJSON(window: Window): string {
   return JSON.stringify(Window$outboundSchema.parse(window));
@@ -389,36 +405,38 @@ export const ComputeUsage$inboundSchema: z.ZodType<
   ComputeUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  as_of: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  data: z.array(z.lazy(() => ComputeUsageData$inboundSchema)),
-  final: z.boolean(),
-  final_through: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  granularity: Granularity$inboundSchema,
-  next_cursor: z.nullable(z.string()),
-  settlement_window_seconds: z.number().int(),
-  summary: z.lazy(() => ComputeUsageSummary$inboundSchema),
-  total: z.number().int(),
-  volume_allocation: VolumeAllocation$inboundSchema,
-  volume_ledger_granularity: VolumeLedgerGranularity$inboundSchema,
-  volume_usage_complete: z.boolean(),
-  volume_usage_complete_through: z.string().datetime({ offset: true })
-    .transform(v => new Date(v)),
-  window: z.lazy(() => Window$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "as_of": "asOf",
-    "final_through": "finalThrough",
-    "next_cursor": "nextCursor",
-    "settlement_window_seconds": "settlementWindowSeconds",
-    "volume_allocation": "volumeAllocation",
-    "volume_ledger_granularity": "volumeLedgerGranularity",
-    "volume_usage_complete": "volumeUsageComplete",
-    "volume_usage_complete_through": "volumeUsageCompleteThrough",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    as_of: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    data: z.array(z.lazy(() => ComputeUsageData$inboundSchema)),
+    final: z.boolean(),
+    final_through: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    granularity: Granularity$inboundSchema,
+    next_cursor: z.nullable(z.string()),
+    settlement_window_seconds: z.number().int(),
+    summary: z.lazy(() => ComputeUsageSummary$inboundSchema),
+    total: z.number().int(),
+    volume_allocation: VolumeAllocation$inboundSchema,
+    volume_ledger_granularity: VolumeLedgerGranularity$inboundSchema,
+    volume_usage_complete: z.boolean(),
+    volume_usage_complete_through: z.string().datetime({ offset: true })
+      .transform(v => new Date(v)),
+    window: z.lazy(() => Window$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "as_of": "asOf",
+      "final_through": "finalThrough",
+      "next_cursor": "nextCursor",
+      "settlement_window_seconds": "settlementWindowSeconds",
+      "volume_allocation": "volumeAllocation",
+      "volume_ledger_granularity": "volumeLedgerGranularity",
+      "volume_usage_complete": "volumeUsageComplete",
+      "volume_usage_complete_through": "volumeUsageCompleteThrough",
+    });
+  })
+);
 /** @internal */
 export type ComputeUsage$Outbound = {
   as_of: string;
@@ -442,33 +460,35 @@ export const ComputeUsage$outboundSchema: z.ZodType<
   ComputeUsage$Outbound,
   z.ZodTypeDef,
   ComputeUsage
-> = z.object({
-  asOf: z.date().transform(v => v.toISOString()),
-  data: z.array(z.lazy(() => ComputeUsageData$outboundSchema)),
-  final: z.boolean(),
-  finalThrough: z.date().transform(v => v.toISOString()),
-  granularity: Granularity$outboundSchema,
-  nextCursor: z.nullable(z.string()),
-  settlementWindowSeconds: z.number().int(),
-  summary: z.lazy(() => ComputeUsageSummary$outboundSchema),
-  total: z.number().int(),
-  volumeAllocation: VolumeAllocation$outboundSchema,
-  volumeLedgerGranularity: VolumeLedgerGranularity$outboundSchema,
-  volumeUsageComplete: z.boolean(),
-  volumeUsageCompleteThrough: z.date().transform(v => v.toISOString()),
-  window: z.lazy(() => Window$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    asOf: "as_of",
-    finalThrough: "final_through",
-    nextCursor: "next_cursor",
-    settlementWindowSeconds: "settlement_window_seconds",
-    volumeAllocation: "volume_allocation",
-    volumeLedgerGranularity: "volume_ledger_granularity",
-    volumeUsageComplete: "volume_usage_complete",
-    volumeUsageCompleteThrough: "volume_usage_complete_through",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    asOf: z.date().transform(v => v.toISOString()),
+    data: z.array(z.lazy(() => ComputeUsageData$outboundSchema)),
+    final: z.boolean(),
+    finalThrough: z.date().transform(v => v.toISOString()),
+    granularity: Granularity$outboundSchema,
+    nextCursor: z.nullable(z.string()),
+    settlementWindowSeconds: z.number().int(),
+    summary: z.lazy(() => ComputeUsageSummary$outboundSchema),
+    total: z.number().int(),
+    volumeAllocation: VolumeAllocation$outboundSchema,
+    volumeLedgerGranularity: VolumeLedgerGranularity$outboundSchema,
+    volumeUsageComplete: z.boolean(),
+    volumeUsageCompleteThrough: z.date().transform(v => v.toISOString()),
+    window: z.lazy(() => Window$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      asOf: "as_of",
+      finalThrough: "final_through",
+      nextCursor: "next_cursor",
+      settlementWindowSeconds: "settlement_window_seconds",
+      volumeAllocation: "volume_allocation",
+      volumeLedgerGranularity: "volume_ledger_granularity",
+      volumeUsageComplete: "volume_usage_complete",
+      volumeUsageCompleteThrough: "volume_usage_complete_through",
+    });
+  })
+);
 
 export function computeUsageToJSON(computeUsage: ComputeUsage): string {
   return JSON.stringify(ComputeUsage$outboundSchema.parse(computeUsage));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateVectorStoreFileRequest$inboundSchema: z.ZodType<
   CreateVectorStoreFileRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  vector_store_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateVectorStoreFileRequest:
-    components.CreateVectorStoreFileRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateVectorStoreFileRequest": "createVectorStoreFileRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vector_store_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateVectorStoreFileRequest:
+      components.CreateVectorStoreFileRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateVectorStoreFileRequest": "createVectorStoreFileRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStoreFileRequest$Outbound = {
   vector_store_id: string;
@@ -48,18 +50,20 @@ export const CreateVectorStoreFileRequest$outboundSchema: z.ZodType<
   CreateVectorStoreFileRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreFileRequest
-> = z.object({
-  vectorStoreId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createVectorStoreFileRequest:
-    components.CreateVectorStoreFileRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createVectorStoreFileRequest: "CreateVectorStoreFileRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    vectorStoreId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createVectorStoreFileRequest:
+      components.CreateVectorStoreFileRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createVectorStoreFileRequest: "CreateVectorStoreFileRequest",
+    });
+  })
+);
 
 export function createVectorStoreFileRequestToJSON(
   createVectorStoreFileRequest: CreateVectorStoreFileRequest,

@@ -34,7 +34,7 @@ generation:
   repoSubDirectory: go
   repoUrl: https://github.com/MeetKai/mka1-sdks
 go:
-  version: 0.1.82
+  version: 0.1.83
   additionalDependencies: {}
   baseErrorName: SDKError
   clientServerStatusCodesAsErrors: true
@@ -42,6 +42,7 @@ go:
   enableCustomCodeRegions: false
   enableSkipDeserialization: false
   fixFlags:
+    applyPathParamDefaults: false
     encodePathParams: true
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: true

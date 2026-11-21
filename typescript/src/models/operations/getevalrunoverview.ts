@@ -3,8 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+  withinMaxLength as withinMaxLength$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,16 +26,18 @@ export const GetEvalRunOverviewRequest$inboundSchema: z.ZodType<
   GetEvalRunOverviewRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  metric: z.string().default("reward"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    metric: z.string().default("reward"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetEvalRunOverviewRequest$Outbound = {
   run_id: string;
@@ -44,16 +50,22 @@ export const GetEvalRunOverviewRequest$outboundSchema: z.ZodType<
   GetEvalRunOverviewRequest$Outbound,
   z.ZodTypeDef,
   GetEvalRunOverviewRequest
-> = z.object({
-  runId: z.string(),
-  metric: z.string().default("reward"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    metric: z.string().refine(withinMaxLength$(128), {
+      message: "Value must be at most 128 characters long",
+    }).refine(matchesPattern$("^[\\w.-]+$", 128), {
+      message: "Value must match pattern ^[\\w.-]+$",
+    }).default("reward"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getEvalRunOverviewRequestToJSON(
   getEvalRunOverviewRequest: GetEvalRunOverviewRequest,

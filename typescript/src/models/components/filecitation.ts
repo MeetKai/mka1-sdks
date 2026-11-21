@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -35,16 +35,18 @@ export const FileCitation$inboundSchema: z.ZodType<
   FileCitation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_citation"),
-  file_id: z.string(),
-  filename: z.string(),
-  index: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_citation"),
+    file_id: z.string(),
+    filename: z.string(),
+    index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type FileCitation$Outbound = {
   type: "file_citation";
@@ -58,16 +60,18 @@ export const FileCitation$outboundSchema: z.ZodType<
   FileCitation$Outbound,
   z.ZodTypeDef,
   FileCitation
-> = z.object({
-  type: z.literal("file_citation"),
-  fileId: z.string(),
-  filename: z.string(),
-  index: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_citation"),
+    fileId: z.string(),
+    filename: z.string(),
+    index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function fileCitationToJSON(fileCitation: FileCitation): string {
   return JSON.stringify(FileCitation$outboundSchema.parse(fileCitation));

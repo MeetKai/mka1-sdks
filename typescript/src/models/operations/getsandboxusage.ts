@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,25 +45,27 @@ export const GetSandboxUsageRequest$inboundSchema: z.ZodType<
   GetSandboxUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start_time: z.number().int(),
-  end_time: z.nullable(z.number().int()).optional(),
-  bucket_width: components.SandboxUsageBucketWidth$inboundSchema.optional(),
-  group_by: z.nullable(z.array(z.string())).optional(),
-  all_orgs: z.boolean().default(false),
-  org_ids: z.nullable(z.array(z.string())).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "bucket_width": "bucketWidth",
-    "group_by": "groupBy",
-    "all_orgs": "allOrgs",
-    "org_ids": "orgIds",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start_time: z.number().int(),
+    end_time: z.nullable(z.number().int()).optional(),
+    bucket_width: components.SandboxUsageBucketWidth$inboundSchema.optional(),
+    group_by: z.nullable(z.array(z.string())).optional(),
+    all_orgs: z.boolean().default(false),
+    org_ids: z.nullable(z.array(z.string())).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "bucket_width": "bucketWidth",
+      "group_by": "groupBy",
+      "all_orgs": "allOrgs",
+      "org_ids": "orgIds",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetSandboxUsageRequest$Outbound = {
   start_time: number;
@@ -80,25 +82,27 @@ export const GetSandboxUsageRequest$outboundSchema: z.ZodType<
   GetSandboxUsageRequest$Outbound,
   z.ZodTypeDef,
   GetSandboxUsageRequest
-> = z.object({
-  startTime: z.number().int(),
-  endTime: z.nullable(z.number().int()).optional(),
-  bucketWidth: components.SandboxUsageBucketWidth$outboundSchema.optional(),
-  groupBy: z.nullable(z.array(z.string())).optional(),
-  allOrgs: z.boolean().default(false),
-  orgIds: z.nullable(z.array(z.string())).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    bucketWidth: "bucket_width",
-    groupBy: "group_by",
-    allOrgs: "all_orgs",
-    orgIds: "org_ids",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startTime: z.number().int(),
+    endTime: z.nullable(z.number().int()).optional(),
+    bucketWidth: components.SandboxUsageBucketWidth$outboundSchema.optional(),
+    groupBy: z.nullable(z.array(z.string())).optional(),
+    allOrgs: z.boolean().default(false),
+    orgIds: z.nullable(z.array(z.string())).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      bucketWidth: "bucket_width",
+      groupBy: "group_by",
+      allOrgs: "all_orgs",
+      orgIds: "org_ids",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getSandboxUsageRequestToJSON(
   getSandboxUsageRequest: GetSandboxUsageRequest,

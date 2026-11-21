@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const ResolveGitHubReferenceRequest$inboundSchema: z.ZodType<
   ResolveGitHubReferenceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ResolveReferenceRequest: components.ResolveReferenceRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ResolveReferenceRequest": "resolveReferenceRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ResolveReferenceRequest: components.ResolveReferenceRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ResolveReferenceRequest": "resolveReferenceRequest",
+    });
+  })
+);
 /** @internal */
 export type ResolveGitHubReferenceRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const ResolveGitHubReferenceRequest$outboundSchema: z.ZodType<
   ResolveGitHubReferenceRequest$Outbound,
   z.ZodTypeDef,
   ResolveGitHubReferenceRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  resolveReferenceRequest: components.ResolveReferenceRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    resolveReferenceRequest: "ResolveReferenceRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    resolveReferenceRequest: components.ResolveReferenceRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      resolveReferenceRequest: "ResolveReferenceRequest",
+    });
+  })
+);
 
 export function resolveGitHubReferenceRequestToJSON(
   resolveGitHubReferenceRequest: ResolveGitHubReferenceRequest,

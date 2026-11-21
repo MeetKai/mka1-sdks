@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,10 +23,12 @@ export const ListModelPricesResponse$inboundSchema: z.ZodType<
   ListModelPricesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ModelPriceRow$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ModelPriceRow$inboundSchema),
+  })
+);
 /** @internal */
 export type ListModelPricesResponse$Outbound = {
   object: "list";
@@ -38,10 +40,12 @@ export const ListModelPricesResponse$outboundSchema: z.ZodType<
   ListModelPricesResponse$Outbound,
   z.ZodTypeDef,
   ListModelPricesResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ModelPriceRow$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ModelPriceRow$outboundSchema),
+  })
+);
 
 export function listModelPricesResponseToJSON(
   listModelPricesResponse: ListModelPricesResponse,

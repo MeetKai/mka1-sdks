@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -47,28 +47,34 @@ export const EnvironmentModel$inboundSchema: z.ZodType<
   EnvironmentModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environment_id: z.number().int(),
-  name: z.string(),
-  environment_variables: z.record(z.string()),
-  setup_script: z.nullable(z.string()).optional(),
-  repositories: z.array(EnvironmentRepositoryModel$inboundSchema),
-  network_access: NetworkAccess$inboundSchema,
-  connectors: z.array(z.string()).optional(),
-  created_by_user_id: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "environment_id": "environmentId",
-    "environment_variables": "environmentVariables",
-    "setup_script": "setupScript",
-    "network_access": "networkAccess",
-    "created_by_user_id": "createdByUserId",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment_id: z.number().int(),
+    name: z.string(),
+    environment_variables: z.record(z.string()),
+    setup_script: z.nullable(z.string()).optional(),
+    repositories: z.array(EnvironmentRepositoryModel$inboundSchema),
+    network_access: NetworkAccess$inboundSchema,
+    connectors: z.array(z.string()).optional(),
+    created_by_user_id: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "environment_id": "environmentId",
+      "environment_variables": "environmentVariables",
+      "setup_script": "setupScript",
+      "network_access": "networkAccess",
+      "created_by_user_id": "createdByUserId",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type EnvironmentModel$Outbound = {
   environment_id: number;
@@ -88,28 +94,30 @@ export const EnvironmentModel$outboundSchema: z.ZodType<
   EnvironmentModel$Outbound,
   z.ZodTypeDef,
   EnvironmentModel
-> = z.object({
-  environmentId: z.number().int(),
-  name: z.string(),
-  environmentVariables: z.record(z.string()),
-  setupScript: z.nullable(z.string()).optional(),
-  repositories: z.array(EnvironmentRepositoryModel$outboundSchema),
-  networkAccess: NetworkAccess$outboundSchema,
-  connectors: z.array(z.string()).optional(),
-  createdByUserId: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    environmentId: "environment_id",
-    environmentVariables: "environment_variables",
-    setupScript: "setup_script",
-    networkAccess: "network_access",
-    createdByUserId: "created_by_user_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.number().int(),
+    name: z.string(),
+    environmentVariables: z.record(z.string()),
+    setupScript: z.nullable(z.string()).optional(),
+    repositories: z.array(EnvironmentRepositoryModel$outboundSchema),
+    networkAccess: NetworkAccess$outboundSchema,
+    connectors: z.array(z.string()).optional(),
+    createdByUserId: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      environmentId: "environment_id",
+      environmentVariables: "environment_variables",
+      setupScript: "setup_script",
+      networkAccess: "network_access",
+      createdByUserId: "created_by_user_id",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function environmentModelToJSON(
   environmentModel: EnvironmentModel,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -83,21 +83,23 @@ export type CreatePromptResponse = {
 
 /** @internal */
 export const Version$inboundSchema: z.ZodType<Version, z.ZodTypeDef, unknown> =
-  z.object({
-    id: z.string(),
-    prompt_id: z.string(),
-    version: z.number().int(),
-    object: z.literal("prompt.version"),
-    template: z.string(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-  }).transform((v) => {
-    return remap$(v, {
-      "prompt_id": "promptId",
-      "created_at": "createdAt",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      prompt_id: z.string(),
+      version: z.number().int(),
+      object: z.literal("prompt.version"),
+      template: z.string(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+    }).transform((v) => {
+      return remap$(v, {
+        "prompt_id": "promptId",
+        "created_at": "createdAt",
+      });
+    })
+  );
 /** @internal */
 export type Version$Outbound = {
   id: string;
@@ -113,19 +115,21 @@ export const Version$outboundSchema: z.ZodType<
   Version$Outbound,
   z.ZodTypeDef,
   Version
-> = z.object({
-  id: z.string(),
-  promptId: z.string(),
-  version: z.number().int(),
-  object: z.literal("prompt.version"),
-  template: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    promptId: "prompt_id",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    promptId: z.string(),
+    version: z.number().int(),
+    object: z.literal("prompt.version"),
+    template: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      promptId: "prompt_id",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function versionToJSON(version: Version): string {
   return JSON.stringify(Version$outboundSchema.parse(version));
@@ -145,25 +149,31 @@ export const CreatePromptResponse$inboundSchema: z.ZodType<
   CreatePromptResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("prompt"),
-  name: z.string(),
-  description: z.string().optional(),
-  active_version: z.number().int(),
-  latest_version: z.number().int(),
-  metadata: z.record(z.any()),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  version: z.lazy(() => Version$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "active_version": "activeVersion",
-    "latest_version": "latestVersion",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("prompt"),
+    name: z.string(),
+    description: z.string().optional(),
+    active_version: z.number().int(),
+    latest_version: z.number().int(),
+    metadata: z.record(z.any()),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    version: z.lazy(() => Version$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "active_version": "activeVersion",
+      "latest_version": "latestVersion",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type CreatePromptResponse$Outbound = {
   id: string;
@@ -183,25 +193,27 @@ export const CreatePromptResponse$outboundSchema: z.ZodType<
   CreatePromptResponse$Outbound,
   z.ZodTypeDef,
   CreatePromptResponse
-> = z.object({
-  id: z.string(),
-  object: z.literal("prompt"),
-  name: z.string(),
-  description: z.string().optional(),
-  activeVersion: z.number().int(),
-  latestVersion: z.number().int(),
-  metadata: z.record(z.any()),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  version: z.lazy(() => Version$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    activeVersion: "active_version",
-    latestVersion: "latest_version",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("prompt"),
+    name: z.string(),
+    description: z.string().optional(),
+    activeVersion: z.number().int(),
+    latestVersion: z.number().int(),
+    metadata: z.record(z.any()),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    version: z.lazy(() => Version$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      activeVersion: "active_version",
+      latestVersion: "latest_version",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function createPromptResponseToJSON(
   createPromptResponse: CreatePromptResponse,

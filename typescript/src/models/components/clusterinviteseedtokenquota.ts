@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +29,9 @@ export type ClusterInviteSeedTokenQuota = {
 /** @internal */
 export const ClusterInviteSeedTokenQuotaPeriod$inboundSchema: z.ZodNativeEnum<
   typeof ClusterInviteSeedTokenQuotaPeriod
-> = z.nativeEnum(ClusterInviteSeedTokenQuotaPeriod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ClusterInviteSeedTokenQuotaPeriod)
+);
 /** @internal */
 export const ClusterInviteSeedTokenQuotaPeriod$outboundSchema: z.ZodNativeEnum<
   typeof ClusterInviteSeedTokenQuotaPeriod
@@ -40,11 +42,13 @@ export const ClusterInviteSeedTokenQuota$inboundSchema: z.ZodType<
   ClusterInviteSeedTokenQuota,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  period: z.nullable(ClusterInviteSeedTokenQuotaPeriod$inboundSchema),
-  limit: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    period: z.nullable(ClusterInviteSeedTokenQuotaPeriod$inboundSchema),
+    limit: z.nullable(z.number().int()),
+  })
+);
 /** @internal */
 export type ClusterInviteSeedTokenQuota$Outbound = {
   enabled: boolean;
@@ -57,11 +61,13 @@ export const ClusterInviteSeedTokenQuota$outboundSchema: z.ZodType<
   ClusterInviteSeedTokenQuota$Outbound,
   z.ZodTypeDef,
   ClusterInviteSeedTokenQuota
-> = z.object({
-  enabled: z.boolean(),
-  period: z.nullable(ClusterInviteSeedTokenQuotaPeriod$outboundSchema),
-  limit: z.nullable(z.number().int()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    period: z.nullable(ClusterInviteSeedTokenQuotaPeriod$outboundSchema),
+    limit: z.nullable(z.number().int()),
+  })
+);
 
 export function clusterInviteSeedTokenQuotaToJSON(
   clusterInviteSeedTokenQuota: ClusterInviteSeedTokenQuota,

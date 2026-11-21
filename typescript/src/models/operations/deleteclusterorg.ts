@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -53,14 +53,16 @@ export const DeleteClusterOrgRequest$inboundSchema: z.ZodType<
   DeleteClusterOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteClusterOrgRequest$Outbound = {
   id: string;
@@ -72,14 +74,16 @@ export const DeleteClusterOrgRequest$outboundSchema: z.ZodType<
   DeleteClusterOrgRequest$Outbound,
   z.ZodTypeDef,
   DeleteClusterOrgRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteClusterOrgRequestToJSON(
   deleteClusterOrgRequest: DeleteClusterOrgRequest,
@@ -99,16 +103,15 @@ export function deleteClusterOrgRequestFromJSON(
 }
 
 /** @internal */
-export const Dory$inboundSchema: z.ZodNativeEnum<typeof Dory> = z.nativeEnum(
-  Dory,
-);
+export const Dory$inboundSchema: z.ZodNativeEnum<typeof Dory> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Dory));
 /** @internal */
 export const Dory$outboundSchema: z.ZodNativeEnum<typeof Dory> =
   Dory$inboundSchema;
 
 /** @internal */
-export const Billing$inboundSchema: z.ZodNativeEnum<typeof Billing> = z
-  .nativeEnum(Billing);
+export const Billing$inboundSchema: z.ZodNativeEnum<typeof Billing> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Billing));
 /** @internal */
 export const Billing$outboundSchema: z.ZodNativeEnum<typeof Billing> =
   Billing$inboundSchema;
@@ -118,10 +121,12 @@ export const Scheduling$inboundSchema: z.ZodType<
   Scheduling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dory: Dory$inboundSchema,
-  billing: Billing$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dory: Dory$inboundSchema,
+    billing: Billing$inboundSchema,
+  })
+);
 /** @internal */
 export type Scheduling$Outbound = {
   dory: string;
@@ -133,10 +138,12 @@ export const Scheduling$outboundSchema: z.ZodType<
   Scheduling$Outbound,
   z.ZodTypeDef,
   Scheduling
-> = z.object({
-  dory: Dory$outboundSchema,
-  billing: Billing$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dory: Dory$outboundSchema,
+    billing: Billing$outboundSchema,
+  })
+);
 
 export function schedulingToJSON(scheduling: Scheduling): string {
   return JSON.stringify(Scheduling$outboundSchema.parse(scheduling));
@@ -156,14 +163,16 @@ export const DeleteClusterOrgResponseBody$inboundSchema: z.ZodType<
   DeleteClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  id: z.string(),
-  status: z.literal("deleted"),
-  deletedAt: z.nullable(z.string()),
-  purgeAfter: z.string(),
-  scheduling: z.lazy(() => Scheduling$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    id: z.string(),
+    status: z.literal("deleted"),
+    deletedAt: z.nullable(z.string()),
+    purgeAfter: z.string(),
+    scheduling: z.lazy(() => Scheduling$inboundSchema),
+  })
+);
 /** @internal */
 export type DeleteClusterOrgResponseBody$Outbound = {
   message: string;
@@ -179,14 +188,16 @@ export const DeleteClusterOrgResponseBody$outboundSchema: z.ZodType<
   DeleteClusterOrgResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteClusterOrgResponseBody
-> = z.object({
-  message: z.string(),
-  id: z.string(),
-  status: z.literal("deleted"),
-  deletedAt: z.nullable(z.string()),
-  purgeAfter: z.string(),
-  scheduling: z.lazy(() => Scheduling$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    id: z.string(),
+    status: z.literal("deleted"),
+    deletedAt: z.nullable(z.string()),
+    purgeAfter: z.string(),
+    scheduling: z.lazy(() => Scheduling$outboundSchema),
+  })
+);
 
 export function deleteClusterOrgResponseBodyToJSON(
   deleteClusterOrgResponseBody: DeleteClusterOrgResponseBody,

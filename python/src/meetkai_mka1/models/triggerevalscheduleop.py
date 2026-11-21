@@ -2,7 +2,15 @@
 
 from __future__ import annotations
 from .evalscheduleoverlappolicy import EvalScheduleOverlapPolicy
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -35,13 +43,20 @@ class TriggerEvalScheduleRequest(BaseModel):
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["X-On-Behalf-Of"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -197,6 +212,9 @@ class TriggerEvalScheduleGeneration(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -230,11 +248,15 @@ class TriggerEvalScheduleGeneration(BaseModel):
                 "max_empty_retries",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             serialized.pop(k, serialized.pop(n, None))
 
@@ -299,6 +321,9 @@ class TriggerEvalScheduleRun(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -313,11 +338,15 @@ class TriggerEvalScheduleRun(BaseModel):
                 "max_workflow_sample_activities",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             serialized.pop(k, serialized.pop(n, None))
 
@@ -418,12 +447,19 @@ class TriggerEvalScheduleResponse(BaseModel):
     ] = "eval.schedule"
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

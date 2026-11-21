@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const OrganizationCodeConfig$inboundSchema: z.ZodType<
   OrganizationCodeConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  releaseManifestUrl: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    releaseManifestUrl: z.string(),
+  })
+);
 /** @internal */
 export type OrganizationCodeConfig$Outbound = {
   releaseManifestUrl: string;
@@ -32,9 +34,11 @@ export const OrganizationCodeConfig$outboundSchema: z.ZodType<
   OrganizationCodeConfig$Outbound,
   z.ZodTypeDef,
   OrganizationCodeConfig
-> = z.object({
-  releaseManifestUrl: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    releaseManifestUrl: z.string(),
+  })
+);
 
 export function organizationCodeConfigToJSON(
   organizationCodeConfig: OrganizationCodeConfig,

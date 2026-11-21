@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,17 +32,19 @@ export const UpdateGuardrailsResponse$inboundSchema: z.ZodType<
   UpdateGuardrailsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-  team_id: z.nullable(z.string()),
-  updated_at: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "team_id": "teamId",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+    team_id: z.nullable(z.string()),
+    updated_at: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "team_id": "teamId",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type UpdateGuardrailsResponse$Outbound = {
   object: "guardrails_settings";
@@ -56,17 +58,19 @@ export const UpdateGuardrailsResponse$outboundSchema: z.ZodType<
   UpdateGuardrailsResponse$Outbound,
   z.ZodTypeDef,
   UpdateGuardrailsResponse
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-  teamId: z.nullable(z.string()),
-  updatedAt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    teamId: "team_id",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+    teamId: z.nullable(z.string()),
+    updatedAt: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      teamId: "team_id",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function updateGuardrailsResponseToJSON(
   updateGuardrailsResponse: UpdateGuardrailsResponse,

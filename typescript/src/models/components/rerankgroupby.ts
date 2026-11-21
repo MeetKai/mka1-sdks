@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const RerankGroupBy = {
@@ -16,7 +17,7 @@ export type RerankGroupBy = ClosedEnum<typeof RerankGroupBy>;
 /** @internal */
 export const RerankGroupBy$inboundSchema: z.ZodNativeEnum<
   typeof RerankGroupBy
-> = z.nativeEnum(RerankGroupBy);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RerankGroupBy));
 /** @internal */
 export const RerankGroupBy$outboundSchema: z.ZodNativeEnum<
   typeof RerankGroupBy

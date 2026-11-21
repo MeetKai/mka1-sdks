@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,24 +24,26 @@ export const GitHubPushResult$inboundSchema: z.ZodType<
   GitHubPushResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  assignment_generation: z.number().int(),
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  branch: z.string(),
-  remote_head_sha: z.string(),
-  no_changes: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "assignment_generation": "assignmentGeneration",
-    "repository_id": "repositoryId",
-    "remote_head_sha": "remoteHeadSha",
-    "no_changes": "noChanges",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    assignment_generation: z.number().int(),
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    branch: z.string(),
+    remote_head_sha: z.string(),
+    no_changes: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "assignment_generation": "assignmentGeneration",
+      "repository_id": "repositoryId",
+      "remote_head_sha": "remoteHeadSha",
+      "no_changes": "noChanges",
+    });
+  })
+);
 /** @internal */
 export type GitHubPushResult$Outbound = {
   session_id: string;
@@ -59,24 +61,26 @@ export const GitHubPushResult$outboundSchema: z.ZodType<
   GitHubPushResult$Outbound,
   z.ZodTypeDef,
   GitHubPushResult
-> = z.object({
-  sessionId: z.string(),
-  assignmentGeneration: z.number().int(),
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  branch: z.string(),
-  remoteHeadSha: z.string(),
-  noChanges: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    assignmentGeneration: "assignment_generation",
-    repositoryId: "repository_id",
-    remoteHeadSha: "remote_head_sha",
-    noChanges: "no_changes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    assignmentGeneration: z.number().int(),
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    branch: z.string(),
+    remoteHeadSha: z.string(),
+    noChanges: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      assignmentGeneration: "assignment_generation",
+      repositoryId: "repository_id",
+      remoteHeadSha: "remote_head_sha",
+      noChanges: "no_changes",
+    });
+  })
+);
 
 export function gitHubPushResultToJSON(
   gitHubPushResult: GitHubPushResult,

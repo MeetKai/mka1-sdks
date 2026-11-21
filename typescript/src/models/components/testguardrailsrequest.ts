@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,10 +28,12 @@ export const TestGuardrailsRequest$inboundSchema: z.ZodType<
   TestGuardrailsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  content: z.string(),
-  source: GuardrailInputSource$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.string(),
+    source: GuardrailInputSource$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type TestGuardrailsRequest$Outbound = {
   content: string;
@@ -43,10 +45,12 @@ export const TestGuardrailsRequest$outboundSchema: z.ZodType<
   TestGuardrailsRequest$Outbound,
   z.ZodTypeDef,
   TestGuardrailsRequest
-> = z.object({
-  content: z.string(),
-  source: GuardrailInputSource$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    content: z.string(),
+    source: GuardrailInputSource$outboundSchema.optional(),
+  })
+);
 
 export function testGuardrailsRequestToJSON(
   testGuardrailsRequest: TestGuardrailsRequest,

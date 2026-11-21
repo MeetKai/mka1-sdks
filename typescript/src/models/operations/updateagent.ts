@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const UpdateAgentRequest$inboundSchema: z.ZodType<
   UpdateAgentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateAgentRequest: components.UpdateAgentRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateAgentRequest": "updateAgentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateAgentRequest: components.UpdateAgentRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateAgentRequest": "updateAgentRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateAgentRequest$Outbound = {
   agent_id: string;
@@ -46,17 +48,19 @@ export const UpdateAgentRequest$outboundSchema: z.ZodType<
   UpdateAgentRequest$Outbound,
   z.ZodTypeDef,
   UpdateAgentRequest
-> = z.object({
-  agentId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateAgentRequest: components.UpdateAgentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateAgentRequest: "UpdateAgentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    updateAgentRequest: components.UpdateAgentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateAgentRequest: "UpdateAgentRequest",
+    });
+  })
+);
 
 export function updateAgentRequestToJSON(
   updateAgentRequest: UpdateAgentRequest,

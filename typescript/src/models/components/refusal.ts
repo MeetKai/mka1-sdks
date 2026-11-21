@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,10 +23,12 @@ export type Refusal = {
 
 /** @internal */
 export const Refusal$inboundSchema: z.ZodType<Refusal, z.ZodTypeDef, unknown> =
-  z.object({
-    type: z.literal("refusal"),
-    refusal: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("refusal"),
+      refusal: z.string(),
+    })
+  );
 /** @internal */
 export type Refusal$Outbound = {
   type: "refusal";
@@ -38,10 +40,12 @@ export const Refusal$outboundSchema: z.ZodType<
   Refusal$Outbound,
   z.ZodTypeDef,
   Refusal
-> = z.object({
-  type: z.literal("refusal"),
-  refusal: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("refusal"),
+    refusal: z.string(),
+  })
+);
 
 export function refusalToJSON(refusal: Refusal): string {
   return JSON.stringify(Refusal$outboundSchema.parse(refusal));

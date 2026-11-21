@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetNetworkPolicyAccessTooManyRequestsError struct {
 var _ error = &GetNetworkPolicyAccessTooManyRequestsError{}
 
 func (e *GetNetworkPolicyAccessTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetNetworkPolicyAccessGoneError struct {
 var _ error = &GetNetworkPolicyAccessGoneError{}
 
 func (e *GetNetworkPolicyAccessGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetNetworkPolicyAccessConflictError struct {
 var _ error = &GetNetworkPolicyAccessConflictError{}
 
 func (e *GetNetworkPolicyAccessConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetNetworkPolicyAccessNotFoundError struct {
 var _ error = &GetNetworkPolicyAccessNotFoundError{}
 
 func (e *GetNetworkPolicyAccessNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetNetworkPolicyAccessForbiddenError struct {
 var _ error = &GetNetworkPolicyAccessForbiddenError{}
 
 func (e *GetNetworkPolicyAccessForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetNetworkPolicyAccessUnauthorizedError struct {
 var _ error = &GetNetworkPolicyAccessUnauthorizedError{}
 
 func (e *GetNetworkPolicyAccessUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetNetworkPolicyAccessBadRequestError struct {
 var _ error = &GetNetworkPolicyAccessBadRequestError{}
 
 func (e *GetNetworkPolicyAccessBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

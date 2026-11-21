@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -81,10 +81,12 @@ export const InviteOrgMemberSecurity$inboundSchema: z.ZodType<
   InviteOrgMemberSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type InviteOrgMemberSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -96,10 +98,12 @@ export const InviteOrgMemberSecurity$outboundSchema: z.ZodType<
   InviteOrgMemberSecurity$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function inviteOrgMemberSecurityToJSON(
   inviteOrgMemberSecurity: InviteOrgMemberSecurity,
@@ -121,7 +125,7 @@ export function inviteOrgMemberSecurityFromJSON(
 /** @internal */
 export const InviteOrgMemberRole$inboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberRole
-> = z.nativeEnum(InviteOrgMemberRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InviteOrgMemberRole));
 /** @internal */
 export const InviteOrgMemberRole$outboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberRole
@@ -132,11 +136,13 @@ export const InviteOrgMemberRequestBody$inboundSchema: z.ZodType<
   InviteOrgMemberRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  role: InviteOrgMemberRole$inboundSchema.default("member"),
-  resend: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    role: InviteOrgMemberRole$inboundSchema.default("member"),
+    resend: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type InviteOrgMemberRequestBody$Outbound = {
   email: string;
@@ -149,11 +155,13 @@ export const InviteOrgMemberRequestBody$outboundSchema: z.ZodType<
   InviteOrgMemberRequestBody$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberRequestBody
-> = z.object({
-  email: z.string(),
-  role: InviteOrgMemberRole$outboundSchema.default("member"),
-  resend: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    role: InviteOrgMemberRole$outboundSchema.default("member"),
+    resend: z.boolean().optional(),
+  })
+);
 
 export function inviteOrgMemberRequestBodyToJSON(
   inviteOrgMemberRequestBody: InviteOrgMemberRequestBody,
@@ -177,16 +185,18 @@ export const InviteOrgMemberRequest$inboundSchema: z.ZodType<
   InviteOrgMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => InviteOrgMemberRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => InviteOrgMemberRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type InviteOrgMemberRequest$Outbound = {
   orgId: string;
@@ -199,16 +209,18 @@ export const InviteOrgMemberRequest$outboundSchema: z.ZodType<
   InviteOrgMemberRequest$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => InviteOrgMemberRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => InviteOrgMemberRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function inviteOrgMemberRequestToJSON(
   inviteOrgMemberRequest: InviteOrgMemberRequest,
@@ -230,7 +242,9 @@ export function inviteOrgMemberRequestFromJSON(
 /** @internal */
 export const InviteOrgMemberAuthOrgsStatus$inboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberAuthOrgsStatus
-> = z.nativeEnum(InviteOrgMemberAuthOrgsStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(InviteOrgMemberAuthOrgsStatus)
+);
 /** @internal */
 export const InviteOrgMemberAuthOrgsStatus$outboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberAuthOrgsStatus
@@ -241,11 +255,13 @@ export const InviteOrgMemberAuthOrgsResponseBody$inboundSchema: z.ZodType<
   InviteOrgMemberAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  invitationId: z.string(),
-  status: InviteOrgMemberAuthOrgsStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    invitationId: z.string(),
+    status: InviteOrgMemberAuthOrgsStatus$inboundSchema,
+  })
+);
 /** @internal */
 export type InviteOrgMemberAuthOrgsResponseBody$Outbound = {
   email: string;
@@ -258,11 +274,13 @@ export const InviteOrgMemberAuthOrgsResponseBody$outboundSchema: z.ZodType<
   InviteOrgMemberAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberAuthOrgsResponseBody
-> = z.object({
-  email: z.string(),
-  invitationId: z.string(),
-  status: InviteOrgMemberAuthOrgsStatus$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    invitationId: z.string(),
+    status: InviteOrgMemberAuthOrgsStatus$outboundSchema,
+  })
+);
 
 export function inviteOrgMemberAuthOrgsResponseBodyToJSON(
   inviteOrgMemberAuthOrgsResponseBody: InviteOrgMemberAuthOrgsResponseBody,
@@ -287,7 +305,7 @@ export function inviteOrgMemberAuthOrgsResponseBodyFromJSON(
 /** @internal */
 export const InviteOrgMemberStatus$inboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberStatus
-> = z.nativeEnum(InviteOrgMemberStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InviteOrgMemberStatus));
 /** @internal */
 export const InviteOrgMemberStatus$outboundSchema: z.ZodNativeEnum<
   typeof InviteOrgMemberStatus
@@ -298,11 +316,13 @@ export const InviteOrgMemberResponseBody$inboundSchema: z.ZodType<
   InviteOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  invitationId: z.string().optional(),
-  status: InviteOrgMemberStatus$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    invitationId: z.string().optional(),
+    status: InviteOrgMemberStatus$inboundSchema,
+  })
+);
 /** @internal */
 export type InviteOrgMemberResponseBody$Outbound = {
   email: string;
@@ -315,11 +335,13 @@ export const InviteOrgMemberResponseBody$outboundSchema: z.ZodType<
   InviteOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberResponseBody
-> = z.object({
-  email: z.string(),
-  invitationId: z.string().optional(),
-  status: InviteOrgMemberStatus$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    invitationId: z.string().optional(),
+    status: InviteOrgMemberStatus$outboundSchema,
+  })
+);
 
 export function inviteOrgMemberResponseBodyToJSON(
   inviteOrgMemberResponseBody: InviteOrgMemberResponseBody,
@@ -345,19 +367,21 @@ export const InviteOrgMemberResponse$inboundSchema: z.ZodType<
   InviteOrgMemberResponse,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("status", {
-  already_invited: z.lazy(() => InviteOrgMemberResponseBody$inboundSchema).and(
-    z.object({ status: z.literal("already_invited") }),
-  ),
-  already_member: z.lazy(() => InviteOrgMemberResponseBody$inboundSchema).and(
-    z.object({ status: z.literal("already_member") }),
-  ),
-  sent: z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$inboundSchema).and(
-    z.object({ status: z.literal("sent") }),
-  ),
-  email_failed: z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$inboundSchema)
-    .and(z.object({ status: z.literal("email_failed") })),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("status", {
+    already_invited: z.lazy(() => InviteOrgMemberResponseBody$inboundSchema)
+      .and(z.object({ status: z.literal("already_invited") })),
+    already_member: z.lazy(() => InviteOrgMemberResponseBody$inboundSchema).and(
+      z.object({ status: z.literal("already_member") }),
+    ),
+    sent: z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$inboundSchema).and(
+      z.object({ status: z.literal("sent") }),
+    ),
+    email_failed: z.lazy(() =>
+      InviteOrgMemberAuthOrgsResponseBody$inboundSchema
+    ).and(z.object({ status: z.literal("email_failed") })),
+  })
+);
 /** @internal */
 export type InviteOrgMemberResponse$Outbound =
   | (InviteOrgMemberResponseBody$Outbound & { status: "already_invited" })
@@ -370,20 +394,22 @@ export const InviteOrgMemberResponse$outboundSchema: z.ZodType<
   InviteOrgMemberResponse$Outbound,
   z.ZodTypeDef,
   InviteOrgMemberResponse
-> = z.union([
-  z.lazy(() => InviteOrgMemberResponseBody$outboundSchema).and(
-    z.object({ status: z.literal("already_invited") }),
-  ),
-  z.lazy(() => InviteOrgMemberResponseBody$outboundSchema).and(
-    z.object({ status: z.literal("already_member") }),
-  ),
-  z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$outboundSchema).and(
-    z.object({ status: z.literal("sent") }),
-  ),
-  z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$outboundSchema).and(
-    z.object({ status: z.literal("email_failed") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => InviteOrgMemberResponseBody$outboundSchema).and(
+      z.object({ status: z.literal("already_invited") }),
+    ),
+    z.lazy(() => InviteOrgMemberResponseBody$outboundSchema).and(
+      z.object({ status: z.literal("already_member") }),
+    ),
+    z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$outboundSchema).and(
+      z.object({ status: z.literal("sent") }),
+    ),
+    z.lazy(() => InviteOrgMemberAuthOrgsResponseBody$outboundSchema).and(
+      z.object({ status: z.literal("email_failed") }),
+    ),
+  ])
+);
 
 export function inviteOrgMemberResponseToJSON(
   inviteOrgMemberResponse: InviteOrgMemberResponse,

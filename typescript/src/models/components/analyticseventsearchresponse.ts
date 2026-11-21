@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -30,14 +30,16 @@ export const AnalyticsEventSearchResponse$inboundSchema: z.ZodType<
   AnalyticsEventSearchResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  events: z.array(AnalyticsEvent$inboundSchema),
-  next_cursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "next_cursor": "nextCursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    events: z.array(AnalyticsEvent$inboundSchema),
+    next_cursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_cursor": "nextCursor",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsEventSearchResponse$Outbound = {
   events: Array<AnalyticsEvent$Outbound>;
@@ -49,14 +51,16 @@ export const AnalyticsEventSearchResponse$outboundSchema: z.ZodType<
   AnalyticsEventSearchResponse$Outbound,
   z.ZodTypeDef,
   AnalyticsEventSearchResponse
-> = z.object({
-  events: z.array(AnalyticsEvent$outboundSchema),
-  nextCursor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    nextCursor: "next_cursor",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    events: z.array(AnalyticsEvent$outboundSchema),
+    nextCursor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      nextCursor: "next_cursor",
+    });
+  })
+);
 
 export function analyticsEventSearchResponseToJSON(
   analyticsEventSearchResponse: AnalyticsEventSearchResponse,

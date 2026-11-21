@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,8 +21,8 @@ export type GrammarFormat = {
 };
 
 /** @internal */
-export const Syntax$inboundSchema: z.ZodNativeEnum<typeof Syntax> = z
-  .nativeEnum(Syntax);
+export const Syntax$inboundSchema: z.ZodNativeEnum<typeof Syntax> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Syntax));
 /** @internal */
 export const Syntax$outboundSchema: z.ZodNativeEnum<typeof Syntax> =
   Syntax$inboundSchema;
@@ -32,11 +32,13 @@ export const GrammarFormat$inboundSchema: z.ZodType<
   GrammarFormat,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("grammar"),
-  definition: z.string(),
-  syntax: Syntax$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("grammar"),
+    definition: z.string(),
+    syntax: Syntax$inboundSchema,
+  })
+);
 /** @internal */
 export type GrammarFormat$Outbound = {
   type: "grammar";
@@ -49,11 +51,13 @@ export const GrammarFormat$outboundSchema: z.ZodType<
   GrammarFormat$Outbound,
   z.ZodTypeDef,
   GrammarFormat
-> = z.object({
-  type: z.literal("grammar"),
-  definition: z.string(),
-  syntax: Syntax$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("grammar"),
+    definition: z.string(),
+    syntax: Syntax$outboundSchema,
+  })
+);
 
 export function grammarFormatToJSON(grammarFormat: GrammarFormat): string {
   return JSON.stringify(GrammarFormat$outboundSchema.parse(grammarFormat));

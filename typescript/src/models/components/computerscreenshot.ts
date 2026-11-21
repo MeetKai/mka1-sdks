@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,16 +19,18 @@ export const ComputerScreenshot$inboundSchema: z.ZodType<
   ComputerScreenshot,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("computer_screenshot"),
-  file_id: z.string().optional(),
-  image_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "image_url": "imageUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_screenshot"),
+    file_id: z.string().optional(),
+    image_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "image_url": "imageUrl",
+    });
+  })
+);
 /** @internal */
 export type ComputerScreenshot$Outbound = {
   type: "computer_screenshot";
@@ -41,16 +43,18 @@ export const ComputerScreenshot$outboundSchema: z.ZodType<
   ComputerScreenshot$Outbound,
   z.ZodTypeDef,
   ComputerScreenshot
-> = z.object({
-  type: z.literal("computer_screenshot"),
-  fileId: z.string().optional(),
-  imageUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    imageUrl: "image_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_screenshot"),
+    fileId: z.string().optional(),
+    imageUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      imageUrl: "image_url",
+    });
+  })
+);
 
 export function computerScreenshotToJSON(
   computerScreenshot: ComputerScreenshot,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const SkillUpdateRequest$inboundSchema: z.ZodType<
   SkillUpdateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  default_version: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "default_version": "defaultVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    default_version: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "default_version": "defaultVersion",
+    });
+  })
+);
 /** @internal */
 export type SkillUpdateRequest$Outbound = {
   default_version: string;
@@ -37,13 +39,15 @@ export const SkillUpdateRequest$outboundSchema: z.ZodType<
   SkillUpdateRequest$Outbound,
   z.ZodTypeDef,
   SkillUpdateRequest
-> = z.object({
-  defaultVersion: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    defaultVersion: "default_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    defaultVersion: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      defaultVersion: "default_version",
+    });
+  })
+);
 
 export function skillUpdateRequestToJSON(
   skillUpdateRequest: SkillUpdateRequest,

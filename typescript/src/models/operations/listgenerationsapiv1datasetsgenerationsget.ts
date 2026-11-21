@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -36,7 +36,9 @@ export type ListGenerationsApiV1DatasetsGenerationsGetRequest = {
 export const ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$inboundSchema:
   z.ZodNativeEnum<
     typeof ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder
-  > = z.nativeEnum(ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder)
+  );
 /** @internal */
 export const ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<
@@ -49,31 +51,33 @@ export const ListGenerationsApiV1DatasetsGenerationsGetRequest$inboundSchema:
     ListGenerationsApiV1DatasetsGenerationsGetRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    state: z.nullable(components.GenerationState$inboundSchema).optional(),
-    generator_id: z.nullable(z.string()).optional(),
-    output_repo: z.nullable(z.string()).optional(),
-    created_after: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    created_before: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ).optional(),
-    limit: z.number().int().default(20),
-    cursor: z.nullable(z.string()).optional(),
-    order:
-      ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$inboundSchema
-        .default("desc"),
-    "X-On-Behalf-Of": z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "generator_id": "generatorId",
-      "output_repo": "outputRepo",
-      "created_after": "createdAfter",
-      "created_before": "createdBefore",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      state: z.nullable(components.GenerationState$inboundSchema).optional(),
+      generator_id: z.nullable(z.string()).optional(),
+      output_repo: z.nullable(z.string()).optional(),
+      created_after: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      created_before: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ).optional(),
+      limit: z.number().int().default(20),
+      cursor: z.nullable(z.string()).optional(),
+      order:
+        ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$inboundSchema
+          .default("desc"),
+      "X-On-Behalf-Of": z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "generator_id": "generatorId",
+        "output_repo": "outputRepo",
+        "created_after": "createdAfter",
+        "created_before": "createdBefore",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+      });
+    })
+  );
 /** @internal */
 export type ListGenerationsApiV1DatasetsGenerationsGetRequest$Outbound = {
   state?: string | null | undefined;
@@ -93,29 +97,31 @@ export const ListGenerationsApiV1DatasetsGenerationsGetRequest$outboundSchema:
     ListGenerationsApiV1DatasetsGenerationsGetRequest$Outbound,
     z.ZodTypeDef,
     ListGenerationsApiV1DatasetsGenerationsGetRequest
-  > = z.object({
-    state: z.nullable(components.GenerationState$outboundSchema).optional(),
-    generatorId: z.nullable(z.string()).optional(),
-    outputRepo: z.nullable(z.string()).optional(),
-    createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-    createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
-      .optional(),
-    limit: z.number().int().default(20),
-    cursor: z.nullable(z.string()).optional(),
-    order:
-      ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$outboundSchema
-        .default("desc"),
-    xOnBehalfOf: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      generatorId: "generator_id",
-      outputRepo: "output_repo",
-      createdAfter: "created_after",
-      createdBefore: "created_before",
-      xOnBehalfOf: "X-On-Behalf-Of",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      state: z.nullable(components.GenerationState$outboundSchema).optional(),
+      generatorId: z.nullable(z.string()).optional(),
+      outputRepo: z.nullable(z.string()).optional(),
+      createdAfter: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      createdBefore: z.nullable(z.date().transform(v => v.toISOString()))
+        .optional(),
+      limit: z.number().int().default(20),
+      cursor: z.nullable(z.string()).optional(),
+      order:
+        ListGenerationsApiV1DatasetsGenerationsGetQueryParamOrder$outboundSchema
+          .default("desc"),
+      xOnBehalfOf: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        generatorId: "generator_id",
+        outputRepo: "output_repo",
+        createdAfter: "created_after",
+        createdBefore: "created_before",
+        xOnBehalfOf: "X-On-Behalf-Of",
+      });
+    })
+  );
 
 export function listGenerationsApiV1DatasetsGenerationsGetRequestToJSON(
   listGenerationsApiV1DatasetsGenerationsGetRequest:

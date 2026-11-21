@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -15,13 +15,15 @@ export type LogLine = {
 
 /** @internal */
 export const LogLine$inboundSchema: z.ZodType<LogLine, z.ZodTypeDef, unknown> =
-  z.object({
-    timestamp: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    stream: z.string(),
-    message: z.string(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      timestamp: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      stream: z.string(),
+      message: z.string(),
+    })
+  );
 /** @internal */
 export type LogLine$Outbound = {
   timestamp: string;
@@ -34,11 +36,13 @@ export const LogLine$outboundSchema: z.ZodType<
   LogLine$Outbound,
   z.ZodTypeDef,
   LogLine
-> = z.object({
-  timestamp: z.date().transform(v => v.toISOString()),
-  stream: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    timestamp: z.date().transform(v => v.toISOString()),
+    stream: z.string(),
+    message: z.string(),
+  })
+);
 
 export function logLineToJSON(logLine: LogLine): string {
   return JSON.stringify(LogLine$outboundSchema.parse(logLine));

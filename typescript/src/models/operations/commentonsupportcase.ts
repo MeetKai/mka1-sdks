@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,17 +26,20 @@ export const CommentOnSupportCaseRequest$inboundSchema: z.ZodType<
   CommentOnSupportCaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  case_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SupportCaseCommentRequest: components.SupportCaseCommentRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "case_id": "caseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SupportCaseCommentRequest": "supportCaseCommentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    case_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SupportCaseCommentRequest:
+      components.SupportCaseCommentRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "case_id": "caseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SupportCaseCommentRequest": "supportCaseCommentRequest",
+    });
+  })
+);
 /** @internal */
 export type CommentOnSupportCaseRequest$Outbound = {
   case_id: string;
@@ -49,18 +52,20 @@ export const CommentOnSupportCaseRequest$outboundSchema: z.ZodType<
   CommentOnSupportCaseRequest$Outbound,
   z.ZodTypeDef,
   CommentOnSupportCaseRequest
-> = z.object({
-  caseId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  supportCaseCommentRequest:
-    components.SupportCaseCommentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    caseId: "case_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    supportCaseCommentRequest: "SupportCaseCommentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    caseId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    supportCaseCommentRequest:
+      components.SupportCaseCommentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      caseId: "case_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      supportCaseCommentRequest: "SupportCaseCommentRequest",
+    });
+  })
+);
 
 export function commentOnSupportCaseRequestToJSON(
   commentOnSupportCaseRequest: CommentOnSupportCaseRequest,

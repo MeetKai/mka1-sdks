@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,25 +29,31 @@ export const AnalyticsProject$inboundSchema: z.ZodType<
   AnalyticsProject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  org_id: z.string(),
-  team_id: z.nullable(z.string()),
-  name: z.string(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  archived_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "team_id": "teamId",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-    "archived_at": "archivedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    org_id: z.string(),
+    team_id: z.nullable(z.string()),
+    name: z.string(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    archived_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "team_id": "teamId",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+      "archived_at": "archivedAt",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsProject$Outbound = {
   id: string;
@@ -64,23 +70,25 @@ export const AnalyticsProject$outboundSchema: z.ZodType<
   AnalyticsProject$Outbound,
   z.ZodTypeDef,
   AnalyticsProject
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  teamId: z.nullable(z.string()),
-  name: z.string(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  archivedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    teamId: "team_id",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    archivedAt: "archived_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    teamId: z.nullable(z.string()),
+    name: z.string(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    archivedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      teamId: "team_id",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      archivedAt: "archived_at",
+    });
+  })
+);
 
 export function analyticsProjectToJSON(
   analyticsProject: AnalyticsProject,

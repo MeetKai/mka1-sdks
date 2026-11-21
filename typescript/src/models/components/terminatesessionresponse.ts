@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const TerminateSessionResponse$inboundSchema: z.ZodType<
   TerminateSessionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session: SessionRecord$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session: SessionRecord$inboundSchema,
+  })
+);
 /** @internal */
 export type TerminateSessionResponse$Outbound = {
   session: SessionRecord$Outbound;
@@ -35,9 +37,11 @@ export const TerminateSessionResponse$outboundSchema: z.ZodType<
   TerminateSessionResponse$Outbound,
   z.ZodTypeDef,
   TerminateSessionResponse
-> = z.object({
-  session: SessionRecord$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session: SessionRecord$outboundSchema,
+  })
+);
 
 export function terminateSessionResponseToJSON(
   terminateSessionResponse: TerminateSessionResponse,

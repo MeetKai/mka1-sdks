@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -31,15 +31,17 @@ export const EvalCandidateObject2$inboundSchema: z.ZodType<
   EvalCandidateObject2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("saved_agent"),
-  agent_id: z.string(),
-  version: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("saved_agent"),
+    agent_id: z.string(),
+    version: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  })
+);
 /** @internal */
 export type EvalCandidateObject2$Outbound = {
   type: "saved_agent";
@@ -52,15 +54,17 @@ export const EvalCandidateObject2$outboundSchema: z.ZodType<
   EvalCandidateObject2$Outbound,
   z.ZodTypeDef,
   EvalCandidateObject2
-> = z.object({
-  type: z.literal("saved_agent"),
-  agentId: z.string(),
-  version: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("saved_agent"),
+    agentId: z.string(),
+    version: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
+  })
+);
 
 export function evalCandidateObject2ToJSON(
   evalCandidateObject2: EvalCandidateObject2,
@@ -84,10 +88,12 @@ export const EvalCandidateObject1$inboundSchema: z.ZodType<
   EvalCandidateObject1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("model"),
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("model"),
+    model: z.string(),
+  })
+);
 /** @internal */
 export type EvalCandidateObject1$Outbound = {
   type: "model";
@@ -99,10 +105,12 @@ export const EvalCandidateObject1$outboundSchema: z.ZodType<
   EvalCandidateObject1$Outbound,
   z.ZodTypeDef,
   EvalCandidateObject1
-> = z.object({
-  type: z.literal("model"),
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("model"),
+    model: z.string(),
+  })
+);
 
 export function evalCandidateObject1ToJSON(
   evalCandidateObject1: EvalCandidateObject1,
@@ -126,10 +134,12 @@ export const EvalCandidateObject$inboundSchema: z.ZodType<
   EvalCandidateObject,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  model: z.lazy(() => EvalCandidateObject1$inboundSchema),
-  saved_agent: z.lazy(() => EvalCandidateObject2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    model: z.lazy(() => EvalCandidateObject1$inboundSchema),
+    saved_agent: z.lazy(() => EvalCandidateObject2$inboundSchema),
+  })
+);
 /** @internal */
 export type EvalCandidateObject$Outbound =
   | EvalCandidateObject1$Outbound
@@ -140,10 +150,12 @@ export const EvalCandidateObject$outboundSchema: z.ZodType<
   EvalCandidateObject$Outbound,
   z.ZodTypeDef,
   EvalCandidateObject
-> = z.union([
-  z.lazy(() => EvalCandidateObject1$outboundSchema),
-  z.lazy(() => EvalCandidateObject2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => EvalCandidateObject1$outboundSchema),
+    z.lazy(() => EvalCandidateObject2$outboundSchema),
+  ])
+);
 
 export function evalCandidateObjectToJSON(
   evalCandidateObject: EvalCandidateObject,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -29,12 +30,14 @@ export const WakeAgentRunRequestInput2$inboundSchema: z.ZodType<
   WakeAgentRunRequestInput2,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 /** @internal */
 export type WakeAgentRunRequestInput2$Outbound = {
@@ -47,17 +50,19 @@ export const WakeAgentRunRequestInput2$outboundSchema: z.ZodType<
   WakeAgentRunRequestInput2$Outbound,
   z.ZodTypeDef,
   WakeAgentRunRequestInput2
-> = z.object({
-  type: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function wakeAgentRunRequestInput2ToJSON(
   wakeAgentRunRequestInput2: WakeAgentRunRequestInput2,
@@ -81,10 +86,12 @@ export const WakeAgentRunRequestInput$inboundSchema: z.ZodType<
   WakeAgentRunRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => WakeAgentRunRequestInput2$inboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => WakeAgentRunRequestInput2$inboundSchema)),
+  ])
+);
 /** @internal */
 export type WakeAgentRunRequestInput$Outbound =
   | string
@@ -95,10 +102,12 @@ export const WakeAgentRunRequestInput$outboundSchema: z.ZodType<
   WakeAgentRunRequestInput$Outbound,
   z.ZodTypeDef,
   WakeAgentRunRequestInput
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => WakeAgentRunRequestInput2$outboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => WakeAgentRunRequestInput2$outboundSchema)),
+  ])
+);
 
 export function wakeAgentRunRequestInputToJSON(
   wakeAgentRunRequestInput: WakeAgentRunRequestInput,
@@ -122,12 +131,14 @@ export const WakeAgentRunRequest$inboundSchema: z.ZodType<
   WakeAgentRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => WakeAgentRunRequestInput2$inboundSchema)),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => WakeAgentRunRequestInput2$inboundSchema)),
+    ]),
+  })
+);
 /** @internal */
 export type WakeAgentRunRequest$Outbound = {
   input: string | Array<WakeAgentRunRequestInput2$Outbound>;
@@ -138,12 +149,14 @@ export const WakeAgentRunRequest$outboundSchema: z.ZodType<
   WakeAgentRunRequest$Outbound,
   z.ZodTypeDef,
   WakeAgentRunRequest
-> = z.object({
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => WakeAgentRunRequestInput2$outboundSchema)),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => WakeAgentRunRequestInput2$outboundSchema)),
+    ]),
+  })
+);
 
 export function wakeAgentRunRequestToJSON(
   wakeAgentRunRequest: WakeAgentRunRequest,

@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -18,6 +19,12 @@ type GetJwtFromKeyInternalServerError struct {
 var _ error = &GetJwtFromKeyInternalServerError{}
 
 func (e *GetJwtFromKeyInternalServerError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -32,6 +39,15 @@ type GetJwtFromKeyForbiddenError struct {
 var _ error = &GetJwtFromKeyForbiddenError{}
 
 func (e *GetJwtFromKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -46,6 +62,12 @@ type GetJwtFromKeyUnauthorizedError struct {
 var _ error = &GetJwtFromKeyUnauthorizedError{}
 
 func (e *GetJwtFromKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -62,6 +84,12 @@ type GetJwtFromKeyBadRequestError struct {
 var _ error = &GetJwtFromKeyBadRequestError{}
 
 func (e *GetJwtFromKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

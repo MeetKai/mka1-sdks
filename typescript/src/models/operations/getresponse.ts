@@ -4,8 +4,11 @@
 
 import * as z from "zod/v3";
 import { EventStream } from "../../lib/event-streams.js";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -58,8 +61,8 @@ export type GetResponseResponse =
   | EventStream<GetResponseResponseBody>;
 
 /** @internal */
-export const Include$inboundSchema: z.ZodNativeEnum<typeof Include> = z
-  .nativeEnum(Include);
+export const Include$inboundSchema: z.ZodNativeEnum<typeof Include> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Include));
 /** @internal */
 export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> =
   Include$inboundSchema;
@@ -69,21 +72,23 @@ export const GetResponseRequest$inboundSchema: z.ZodType<
   GetResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  response_id: z.string(),
-  include: z.array(Include$inboundSchema).optional(),
-  include_obfuscation: z.boolean().optional(),
-  starting_after: z.number().int().optional(),
-  stream: z.boolean().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-    "include_obfuscation": "includeObfuscation",
-    "starting_after": "startingAfter",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    response_id: z.string(),
+    include: z.array(Include$inboundSchema).optional(),
+    include_obfuscation: z.boolean().optional(),
+    starting_after: z.number().int().optional(),
+    stream: z.boolean().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+      "include_obfuscation": "includeObfuscation",
+      "starting_after": "startingAfter",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetResponseRequest$Outbound = {
   response_id: string;
@@ -99,21 +104,25 @@ export const GetResponseRequest$outboundSchema: z.ZodType<
   GetResponseRequest$Outbound,
   z.ZodTypeDef,
   GetResponseRequest
-> = z.object({
-  responseId: z.string(),
-  include: z.array(Include$outboundSchema).optional(),
-  includeObfuscation: z.boolean().optional(),
-  startingAfter: z.number().int().optional(),
-  stream: z.boolean().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-    includeObfuscation: "include_obfuscation",
-    startingAfter: "starting_after",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    responseId: z.string().refine(matchesPattern$("^resp[-_][a-zA-Z0-9]+$"), {
+      message: "Value must match pattern ^resp[-_][a-zA-Z0-9]+$",
+    }),
+    include: z.array(Include$outboundSchema).optional(),
+    includeObfuscation: z.boolean().optional(),
+    startingAfter: z.number().int().optional(),
+    stream: z.boolean().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+      includeObfuscation: "include_obfuscation",
+      startingAfter: "starting_after",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getResponseRequestToJSON(
   getResponseRequest: GetResponseRequest,
@@ -137,20 +146,22 @@ export const GetResponseResponseBody$inboundSchema: z.ZodType<
   GetResponseResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  event: z.string().optional(),
-  data: z.unknown().transform((v, ctx) => {
-    if (typeof v !== "string") return v;
-    try {
-      return JSON.parse(v);
-    } catch (err) {
-      ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
-      return z.NEVER;
-    }
-  }).pipe(components.ResponseStreamingEvent$inboundSchema),
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.string().optional(),
+    data: z.unknown().transform((v, ctx) => {
+      if (typeof v !== "string") return v;
+      try {
+        return JSON.parse(v);
+      } catch (err) {
+        ctx.addIssue({ code: "custom", message: `malformed json: ${err}` });
+        return z.NEVER;
+      }
+    }).pipe(components.ResponseStreamingEvent$inboundSchema),
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 /** @internal */
 export type GetResponseResponseBody$Outbound = {
   event?: string | undefined;
@@ -164,12 +175,14 @@ export const GetResponseResponseBody$outboundSchema: z.ZodType<
   GetResponseResponseBody$Outbound,
   z.ZodTypeDef,
   GetResponseResponseBody
-> = z.object({
-  event: z.string().optional(),
-  data: components.ResponseStreamingEvent$outboundSchema,
-  id: z.string().optional(),
-  retry: z.number().int().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    event: z.string().optional(),
+    data: components.ResponseStreamingEvent$outboundSchema,
+    id: z.string().optional(),
+    retry: z.number().int().optional(),
+  })
+);
 
 export function getResponseResponseBodyToJSON(
   getResponseResponseBody: GetResponseResponseBody,
@@ -193,20 +206,22 @@ export const GetResponseResponse$inboundSchema: z.ZodType<
   GetResponseResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ResponseObject$inboundSchema,
-  z.instanceof(ReadableStream<Uint8Array>)
-    .transform(stream => {
-      return new EventStream(stream, rawEvent => {
-        return {
-          done: false,
-          value: z.lazy(() => GetResponseResponseBody$inboundSchema).parse(
-            rawEvent,
-          ),
-        };
-      });
-    }),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ResponseObject$inboundSchema,
+    z.instanceof(ReadableStream<Uint8Array>)
+      .transform(stream => {
+        return new EventStream(stream, rawEvent => {
+          return {
+            done: false,
+            value: z.lazy(() => GetResponseResponseBody$inboundSchema).parse(
+              rawEvent,
+            ),
+          };
+        });
+      }),
+  ])
+);
 /** @internal */
 export type GetResponseResponse$Outbound =
   | components.ResponseObject$Outbound
@@ -217,7 +232,9 @@ export const GetResponseResponse$outboundSchema: z.ZodType<
   GetResponseResponse$Outbound,
   z.ZodTypeDef,
   GetResponseResponse
-> = z.union([components.ResponseObject$outboundSchema, z.never()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([components.ResponseObject$outboundSchema, z.never()])
+);
 
 export function getResponseResponseToJSON(
   getResponseResponse: GetResponseResponse,

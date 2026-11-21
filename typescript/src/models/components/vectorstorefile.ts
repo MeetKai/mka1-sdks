@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -99,7 +99,7 @@ export type VectorStoreFile = {
 /** @internal */
 export const VectorStoreFileStatus$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreFileStatus
-> = z.nativeEnum(VectorStoreFileStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VectorStoreFileStatus));
 /** @internal */
 export const VectorStoreFileStatus$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreFileStatus
@@ -110,7 +110,9 @@ export const VectorStoreFileAttributes$inboundSchema: z.ZodType<
   VectorStoreFileAttributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type VectorStoreFileAttributes$Outbound = string | boolean | number;
 
@@ -119,7 +121,9 @@ export const VectorStoreFileAttributes$outboundSchema: z.ZodType<
   VectorStoreFileAttributes$Outbound,
   z.ZodTypeDef,
   VectorStoreFileAttributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function vectorStoreFileAttributesToJSON(
   vectorStoreFileAttributes: VectorStoreFileAttributes,
@@ -143,35 +147,37 @@ export const VectorStoreFile$inboundSchema: z.ZodType<
   VectorStoreFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file"),
-  usage_bytes: z.number().int(),
-  created_at: z.number().int(),
-  vector_store_id: z.string(),
-  filename: z.string().optional(),
-  status: VectorStoreFileStatus$inboundSchema,
-  last_error: z.nullable(VectorStoreFileError$inboundSchema),
-  chunking_strategy: ChunkingStrategy$inboundSchema.optional(),
-  chunk_count: z.nullable(z.number().int()).optional(),
-  processed_chunk_count: z.nullable(z.number().int()).optional(),
-  page_count: z.nullable(z.number().int()).optional(),
-  processed_page_count: z.nullable(z.number().int()).optional(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "usage_bytes": "usageBytes",
-    "created_at": "createdAt",
-    "vector_store_id": "vectorStoreId",
-    "last_error": "lastError",
-    "chunking_strategy": "chunkingStrategy",
-    "chunk_count": "chunkCount",
-    "processed_chunk_count": "processedChunkCount",
-    "page_count": "pageCount",
-    "processed_page_count": "processedPageCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file"),
+    usage_bytes: z.number().int(),
+    created_at: z.number().int(),
+    vector_store_id: z.string(),
+    filename: z.string().optional(),
+    status: VectorStoreFileStatus$inboundSchema,
+    last_error: z.nullable(VectorStoreFileError$inboundSchema),
+    chunking_strategy: ChunkingStrategy$inboundSchema.optional(),
+    chunk_count: z.nullable(z.number().int()).optional(),
+    processed_chunk_count: z.nullable(z.number().int()).optional(),
+    page_count: z.nullable(z.number().int()).optional(),
+    processed_page_count: z.nullable(z.number().int()).optional(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "usage_bytes": "usageBytes",
+      "created_at": "createdAt",
+      "vector_store_id": "vectorStoreId",
+      "last_error": "lastError",
+      "chunking_strategy": "chunkingStrategy",
+      "chunk_count": "chunkCount",
+      "processed_chunk_count": "processedChunkCount",
+      "page_count": "pageCount",
+      "processed_page_count": "processedPageCount",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreFile$Outbound = {
   id: string;
@@ -195,35 +201,37 @@ export const VectorStoreFile$outboundSchema: z.ZodType<
   VectorStoreFile$Outbound,
   z.ZodTypeDef,
   VectorStoreFile
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file"),
-  usageBytes: z.number().int(),
-  createdAt: z.number().int(),
-  vectorStoreId: z.string(),
-  filename: z.string().optional(),
-  status: VectorStoreFileStatus$outboundSchema,
-  lastError: z.nullable(VectorStoreFileError$outboundSchema),
-  chunkingStrategy: ChunkingStrategy$outboundSchema.optional(),
-  chunkCount: z.nullable(z.number().int()).optional(),
-  processedChunkCount: z.nullable(z.number().int()).optional(),
-  pageCount: z.nullable(z.number().int()).optional(),
-  processedPageCount: z.nullable(z.number().int()).optional(),
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    usageBytes: "usage_bytes",
-    createdAt: "created_at",
-    vectorStoreId: "vector_store_id",
-    lastError: "last_error",
-    chunkingStrategy: "chunking_strategy",
-    chunkCount: "chunk_count",
-    processedChunkCount: "processed_chunk_count",
-    pageCount: "page_count",
-    processedPageCount: "processed_page_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file"),
+    usageBytes: z.number().int(),
+    createdAt: z.number().int(),
+    vectorStoreId: z.string(),
+    filename: z.string().optional(),
+    status: VectorStoreFileStatus$outboundSchema,
+    lastError: z.nullable(VectorStoreFileError$outboundSchema),
+    chunkingStrategy: ChunkingStrategy$outboundSchema.optional(),
+    chunkCount: z.nullable(z.number().int()).optional(),
+    processedChunkCount: z.nullable(z.number().int()).optional(),
+    pageCount: z.nullable(z.number().int()).optional(),
+    processedPageCount: z.nullable(z.number().int()).optional(),
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      usageBytes: "usage_bytes",
+      createdAt: "created_at",
+      vectorStoreId: "vector_store_id",
+      lastError: "last_error",
+      chunkingStrategy: "chunking_strategy",
+      chunkCount: "chunk_count",
+      processedChunkCount: "processed_chunk_count",
+      pageCount: "page_count",
+      processedPageCount: "processed_page_count",
+    });
+  })
+);
 
 export function vectorStoreFileToJSON(
   vectorStoreFile: VectorStoreFile,

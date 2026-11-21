@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,9 +25,11 @@ export const DecideAgentRunApprovalsRequest$inboundSchema: z.ZodType<
   DecideAgentRunApprovalsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  decisions: z.array(AgentRunApprovalDecision$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decisions: z.array(AgentRunApprovalDecision$inboundSchema),
+  })
+);
 /** @internal */
 export type DecideAgentRunApprovalsRequest$Outbound = {
   decisions: Array<AgentRunApprovalDecision$Outbound>;
@@ -38,9 +40,11 @@ export const DecideAgentRunApprovalsRequest$outboundSchema: z.ZodType<
   DecideAgentRunApprovalsRequest$Outbound,
   z.ZodTypeDef,
   DecideAgentRunApprovalsRequest
-> = z.object({
-  decisions: z.array(AgentRunApprovalDecision$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decisions: z.array(AgentRunApprovalDecision$outboundSchema),
+  })
+);
 
 export function decideAgentRunApprovalsRequestToJSON(
   decideAgentRunApprovalsRequest: DecideAgentRunApprovalsRequest,

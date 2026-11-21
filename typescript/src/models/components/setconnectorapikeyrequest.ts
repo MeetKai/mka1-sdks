@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const SetConnectorApiKeyRequest$inboundSchema: z.ZodType<
   SetConnectorApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  api_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "api_key": "apiKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    api_key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "api_key": "apiKey",
+    });
+  })
+);
 /** @internal */
 export type SetConnectorApiKeyRequest$Outbound = {
   api_key: string;
@@ -34,13 +36,15 @@ export const SetConnectorApiKeyRequest$outboundSchema: z.ZodType<
   SetConnectorApiKeyRequest$Outbound,
   z.ZodTypeDef,
   SetConnectorApiKeyRequest
-> = z.object({
-  apiKey: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    apiKey: "api_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKey: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      apiKey: "api_key",
+    });
+  })
+);
 
 export function setConnectorApiKeyRequestToJSON(
   setConnectorApiKeyRequest: SetConnectorApiKeyRequest,

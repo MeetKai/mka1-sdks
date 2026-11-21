@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ResponseCancelledEvent$inboundSchema: z.ZodType<
   ResponseCancelledEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.cancelled"),
-  sequence_number: z.number().int(),
-  response: ResponseObject$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.cancelled"),
+    sequence_number: z.number().int(),
+    response: ResponseObject$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 /** @internal */
 export type ResponseCancelledEvent$Outbound = {
   type: "response.cancelled";
@@ -46,15 +48,17 @@ export const ResponseCancelledEvent$outboundSchema: z.ZodType<
   ResponseCancelledEvent$Outbound,
   z.ZodTypeDef,
   ResponseCancelledEvent
-> = z.object({
-  type: z.literal("response.cancelled"),
-  sequenceNumber: z.number().int(),
-  response: ResponseObject$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.cancelled"),
+    sequenceNumber: z.number().int(),
+    response: ResponseObject$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+    });
+  })
+);
 
 export function responseCancelledEventToJSON(
   responseCancelledEvent: ResponseCancelledEvent,

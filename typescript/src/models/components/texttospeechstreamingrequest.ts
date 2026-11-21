@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -87,17 +87,18 @@ export type TextToSpeechStreamingRequest = {
 
 /** @internal */
 export const TextToSpeechStreamingRequestLanguage$inboundSchema:
-  z.ZodNativeEnum<typeof TextToSpeechStreamingRequestLanguage> = z.nativeEnum(
-    TextToSpeechStreamingRequestLanguage,
-  );
+  z.ZodNativeEnum<typeof TextToSpeechStreamingRequestLanguage> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(TextToSpeechStreamingRequestLanguage)
+    );
 /** @internal */
 export const TextToSpeechStreamingRequestLanguage$outboundSchema:
   z.ZodNativeEnum<typeof TextToSpeechStreamingRequestLanguage> =
     TextToSpeechStreamingRequestLanguage$inboundSchema;
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Format));
 /** @internal */
 export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
   Format$inboundSchema;
@@ -107,14 +108,18 @@ export const TextToSpeechStreamingRequest$inboundSchema: z.ZodType<
   TextToSpeechStreamingRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-  voice: z.string().optional(),
-  language: TextToSpeechStreamingRequestLanguage$inboundSchema.default("auto"),
-  model: z.string().default("auto"),
-  store: z.boolean().default(false),
-  format: Format$inboundSchema.default("mp3"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    voice: z.string().optional(),
+    language: TextToSpeechStreamingRequestLanguage$inboundSchema.default(
+      "auto",
+    ),
+    model: z.string().default("auto"),
+    store: z.boolean().default(false),
+    format: Format$inboundSchema.default("mp3"),
+  })
+);
 /** @internal */
 export type TextToSpeechStreamingRequest$Outbound = {
   text: string;
@@ -130,14 +135,18 @@ export const TextToSpeechStreamingRequest$outboundSchema: z.ZodType<
   TextToSpeechStreamingRequest$Outbound,
   z.ZodTypeDef,
   TextToSpeechStreamingRequest
-> = z.object({
-  text: z.string(),
-  voice: z.string().optional(),
-  language: TextToSpeechStreamingRequestLanguage$outboundSchema.default("auto"),
-  model: z.string().default("auto"),
-  store: z.boolean().default(false),
-  format: Format$outboundSchema.default("mp3"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    voice: z.string().optional(),
+    language: TextToSpeechStreamingRequestLanguage$outboundSchema.default(
+      "auto",
+    ),
+    model: z.string().default("auto"),
+    store: z.boolean().default(false),
+    format: Format$outboundSchema.default("mp3"),
+  })
+);
 
 export function textToSpeechStreamingRequestToJSON(
   textToSpeechStreamingRequest: TextToSpeechStreamingRequest,

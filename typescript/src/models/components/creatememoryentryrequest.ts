@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const CreateMemoryEntryRequest$inboundSchema: z.ZodType<
   CreateMemoryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  content: z.string(),
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    content: z.string(),
+    metadata: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type CreateMemoryEntryRequest$Outbound = {
   path: string;
@@ -35,11 +37,13 @@ export const CreateMemoryEntryRequest$outboundSchema: z.ZodType<
   CreateMemoryEntryRequest$Outbound,
   z.ZodTypeDef,
   CreateMemoryEntryRequest
-> = z.object({
-  path: z.string(),
-  content: z.string(),
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    content: z.string(),
+    metadata: z.record(z.string()).optional(),
+  })
+);
 
 export function createMemoryEntryRequestToJSON(
   createMemoryEntryRequest: CreateMemoryEntryRequest,

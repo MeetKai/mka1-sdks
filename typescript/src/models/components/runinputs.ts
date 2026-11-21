@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -23,13 +23,15 @@ export const RunInputs$inboundSchema: z.ZodType<
   RunInputs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  dataset_inputs: z.array(DatasetInput$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "dataset_inputs": "datasetInputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    dataset_inputs: z.array(DatasetInput$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "dataset_inputs": "datasetInputs",
+    });
+  })
+);
 /** @internal */
 export type RunInputs$Outbound = {
   dataset_inputs?: Array<DatasetInput$Outbound> | undefined;
@@ -40,13 +42,15 @@ export const RunInputs$outboundSchema: z.ZodType<
   RunInputs$Outbound,
   z.ZodTypeDef,
   RunInputs
-> = z.object({
-  datasetInputs: z.array(DatasetInput$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    datasetInputs: "dataset_inputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    datasetInputs: z.array(DatasetInput$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      datasetInputs: "dataset_inputs",
+    });
+  })
+);
 
 export function runInputsToJSON(runInputs: RunInputs): string {
   return JSON.stringify(RunInputs$outboundSchema.parse(runInputs));

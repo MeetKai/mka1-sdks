@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,18 +21,20 @@ export const ConnectedRepository$inboundSchema: z.ZodType<
   ConnectedRepository,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  private: z.boolean(),
-  default_branch: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "repository_id": "repositoryId",
-    "default_branch": "defaultBranch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    private: z.boolean(),
+    default_branch: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "repository_id": "repositoryId",
+      "default_branch": "defaultBranch",
+    });
+  })
+);
 /** @internal */
 export type ConnectedRepository$Outbound = {
   repository_id: number;
@@ -47,18 +49,20 @@ export const ConnectedRepository$outboundSchema: z.ZodType<
   ConnectedRepository$Outbound,
   z.ZodTypeDef,
   ConnectedRepository
-> = z.object({
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  private: z.boolean(),
-  defaultBranch: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    repositoryId: "repository_id",
-    defaultBranch: "default_branch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    private: z.boolean(),
+    defaultBranch: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      repositoryId: "repository_id",
+      defaultBranch: "default_branch",
+    });
+  })
+);
 
 export function connectedRepositoryToJSON(
   connectedRepository: ConnectedRepository,

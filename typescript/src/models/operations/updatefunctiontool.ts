@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const UpdateFunctionToolRequest$inboundSchema: z.ZodType<
   UpdateFunctionToolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  tool_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  AgentsFunctionToolDefinition:
-    components.AgentsFunctionToolDefinition$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "tool_id": "toolId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "AgentsFunctionToolDefinition": "agentsFunctionToolDefinition",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    tool_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    AgentsFunctionToolDefinition:
+      components.AgentsFunctionToolDefinition$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_id": "toolId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "AgentsFunctionToolDefinition": "agentsFunctionToolDefinition",
+    });
+  })
+);
 /** @internal */
 export type UpdateFunctionToolRequest$Outbound = {
   tool_id: string;
@@ -48,18 +50,20 @@ export const UpdateFunctionToolRequest$outboundSchema: z.ZodType<
   UpdateFunctionToolRequest$Outbound,
   z.ZodTypeDef,
   UpdateFunctionToolRequest
-> = z.object({
-  toolId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  agentsFunctionToolDefinition:
-    components.AgentsFunctionToolDefinition$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    toolId: "tool_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    agentsFunctionToolDefinition: "AgentsFunctionToolDefinition",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    toolId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    agentsFunctionToolDefinition:
+      components.AgentsFunctionToolDefinition$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      toolId: "tool_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      agentsFunctionToolDefinition: "AgentsFunctionToolDefinition",
+    });
+  })
+);
 
 export function updateFunctionToolRequestToJSON(
   updateFunctionToolRequest: UpdateFunctionToolRequest,

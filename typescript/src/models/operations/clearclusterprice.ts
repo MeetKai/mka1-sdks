@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const ClearClusterPriceRequest$inboundSchema: z.ZodType<
   ClearClusterPriceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 /** @internal */
 export type ClearClusterPriceRequest$Outbound = {
   model: string;
@@ -29,9 +31,11 @@ export const ClearClusterPriceRequest$outboundSchema: z.ZodType<
   ClearClusterPriceRequest$Outbound,
   z.ZodTypeDef,
   ClearClusterPriceRequest
-> = z.object({
-  model: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+  })
+);
 
 export function clearClusterPriceRequestToJSON(
   clearClusterPriceRequest: ClearClusterPriceRequest,

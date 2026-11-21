@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,18 +33,20 @@ export const ListJobInstancesRequest$inboundSchema: z.ZodType<
   ListJobInstancesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  state: components.ComputeInstanceState$inboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  order: components.ComputeOrder$inboundSchema.default("asc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    state: components.ComputeInstanceState$inboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    order: components.ComputeOrder$inboundSchema.default("asc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListJobInstancesRequest$Outbound = {
   id: string;
@@ -60,18 +62,20 @@ export const ListJobInstancesRequest$outboundSchema: z.ZodType<
   ListJobInstancesRequest$Outbound,
   z.ZodTypeDef,
   ListJobInstancesRequest
-> = z.object({
-  id: z.string(),
-  state: components.ComputeInstanceState$outboundSchema.optional(),
-  cursor: z.string().optional(),
-  limit: z.number().int().default(50),
-  order: components.ComputeOrder$outboundSchema.default("asc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    state: components.ComputeInstanceState$outboundSchema.optional(),
+    cursor: z.string().optional(),
+    limit: z.number().int().default(50),
+    order: components.ComputeOrder$outboundSchema.default("asc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listJobInstancesRequestToJSON(
   listJobInstancesRequest: ListJobInstancesRequest,
@@ -95,10 +99,12 @@ export const ListJobInstancesResponse$inboundSchema: z.ZodType<
   ListJobInstancesResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeInstanceList$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeInstanceList$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type ListJobInstancesResponse$Outbound =
   | components.ComputeInstanceList$Outbound
@@ -109,10 +115,12 @@ export const ListJobInstancesResponse$outboundSchema: z.ZodType<
   ListJobInstancesResponse$Outbound,
   z.ZodTypeDef,
   ListJobInstancesResponse
-> = z.union([
-  components.ComputeInstanceList$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeInstanceList$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function listJobInstancesResponseToJSON(
   listJobInstancesResponse: ListJobInstancesResponse,

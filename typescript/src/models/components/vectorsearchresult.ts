@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -57,7 +57,9 @@ export const VectorSearchResultAttributes$inboundSchema: z.ZodType<
   VectorSearchResultAttributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type VectorSearchResultAttributes$Outbound = string | boolean | number;
 
@@ -66,7 +68,9 @@ export const VectorSearchResultAttributes$outboundSchema: z.ZodType<
   VectorSearchResultAttributes$Outbound,
   z.ZodTypeDef,
   VectorSearchResultAttributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function vectorSearchResultAttributesToJSON(
   vectorSearchResultAttributes: VectorSearchResultAttributes,
@@ -92,20 +96,22 @@ export const VectorSearchResult$inboundSchema: z.ZodType<
   VectorSearchResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  file_id: z.string(),
-  filename: z.string(),
-  score: z.number(),
-  score_breakdown: ScoreBreakdown$inboundSchema,
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  content: z.array(VectorSearchResultContent$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "score_breakdown": "scoreBreakdown",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    file_id: z.string(),
+    filename: z.string(),
+    score: z.number(),
+    score_breakdown: ScoreBreakdown$inboundSchema,
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    content: z.array(VectorSearchResultContent$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "score_breakdown": "scoreBreakdown",
+    });
+  })
+);
 /** @internal */
 export type VectorSearchResult$Outbound = {
   file_id: string;
@@ -121,20 +127,22 @@ export const VectorSearchResult$outboundSchema: z.ZodType<
   VectorSearchResult$Outbound,
   z.ZodTypeDef,
   VectorSearchResult
-> = z.object({
-  fileId: z.string(),
-  filename: z.string(),
-  score: z.number(),
-  scoreBreakdown: ScoreBreakdown$outboundSchema,
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  content: z.array(VectorSearchResultContent$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    scoreBreakdown: "score_breakdown",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileId: z.string(),
+    filename: z.string(),
+    score: z.number(),
+    scoreBreakdown: ScoreBreakdown$outboundSchema,
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    content: z.array(VectorSearchResultContent$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      scoreBreakdown: "score_breakdown",
+    });
+  })
+);
 
 export function vectorSearchResultToJSON(
   vectorSearchResult: VectorSearchResult,

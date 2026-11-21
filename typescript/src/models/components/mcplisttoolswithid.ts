@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,20 +41,22 @@ export const MCPListToolsWithId$inboundSchema: z.ZodType<
   MCPListToolsWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_list_tools"),
-  id: z.string(),
-  server_label: z.string(),
-  tools: z.array(MCPTool$inboundSchema),
-  error: z.string().optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_list_tools"),
+    id: z.string(),
+    server_label: z.string(),
+    tools: z.array(MCPTool$inboundSchema),
+    error: z.string().optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type MCPListToolsWithId$Outbound = {
   type: "mcp_list_tools";
@@ -71,20 +73,22 @@ export const MCPListToolsWithId$outboundSchema: z.ZodType<
   MCPListToolsWithId$Outbound,
   z.ZodTypeDef,
   MCPListToolsWithId
-> = z.object({
-  type: z.literal("mcp_list_tools"),
-  id: z.string(),
-  serverLabel: z.string(),
-  tools: z.array(MCPTool$outboundSchema),
-  error: z.string().optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_list_tools"),
+    id: z.string(),
+    serverLabel: z.string(),
+    tools: z.array(MCPTool$outboundSchema),
+    error: z.string().optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function mcpListToolsWithIdToJSON(
   mcpListToolsWithId: MCPListToolsWithId,

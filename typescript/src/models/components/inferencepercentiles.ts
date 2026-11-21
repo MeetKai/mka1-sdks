@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const InferencePercentiles$inboundSchema: z.ZodType<
   InferencePercentiles,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  p50: z.nullable(z.number()),
-  p95: z.nullable(z.number()),
-  p99: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    p50: z.nullable(z.number()),
+    p95: z.nullable(z.number()),
+    p99: z.nullable(z.number()),
+  })
+);
 /** @internal */
 export type InferencePercentiles$Outbound = {
   p50: number | null;
@@ -35,11 +37,13 @@ export const InferencePercentiles$outboundSchema: z.ZodType<
   InferencePercentiles$Outbound,
   z.ZodTypeDef,
   InferencePercentiles
-> = z.object({
-  p50: z.nullable(z.number()),
-  p95: z.nullable(z.number()),
-  p99: z.nullable(z.number()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    p50: z.nullable(z.number()),
+    p95: z.nullable(z.number()),
+    p99: z.nullable(z.number()),
+  })
+);
 
 export function inferencePercentilesToJSON(
   inferencePercentiles: InferencePercentiles,

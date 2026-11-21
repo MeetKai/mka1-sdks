@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,13 +24,15 @@ export type ResponseWebSearchCallInProgressEvent = {
 };
 
 /** @internal */
-export const Args$inboundSchema: z.ZodType<Args, z.ZodTypeDef, unknown> = z
-  .object({
-    query: z.string(),
-    location: z.string().optional(),
-    language: z.string().optional(),
-    country: z.string().optional(),
-  });
+export const Args$inboundSchema: z.ZodType<Args, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      query: z.string(),
+      location: z.string().optional(),
+      language: z.string().optional(),
+      country: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Args$Outbound = {
   query: string;
@@ -41,12 +43,14 @@ export type Args$Outbound = {
 
 /** @internal */
 export const Args$outboundSchema: z.ZodType<Args$Outbound, z.ZodTypeDef, Args> =
-  z.object({
-    query: z.string(),
-    location: z.string().optional(),
-    language: z.string().optional(),
-    country: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      query: z.string(),
+      location: z.string().optional(),
+      language: z.string().optional(),
+      country: z.string().optional(),
+    })
+  );
 
 export function argsToJSON(args: Args): string {
   return JSON.stringify(Args$outboundSchema.parse(args));
@@ -66,19 +70,21 @@ export const ResponseWebSearchCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseWebSearchCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.web_search_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => Args$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.web_search_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => Args$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseWebSearchCallInProgressEvent$Outbound = {
   type: "response.web_search_call.in_progress";
@@ -93,19 +99,21 @@ export const ResponseWebSearchCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseWebSearchCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseWebSearchCallInProgressEvent
-> = z.object({
-  type: z.literal("response.web_search_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => Args$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.web_search_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => Args$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseWebSearchCallInProgressEventToJSON(
   responseWebSearchCallInProgressEvent: ResponseWebSearchCallInProgressEvent,

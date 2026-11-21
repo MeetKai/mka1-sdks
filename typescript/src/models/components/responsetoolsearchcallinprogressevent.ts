@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,14 +26,16 @@ export const ResponseToolSearchCallInProgressEventArgs$inboundSchema: z.ZodType<
   ResponseToolSearchCallInProgressEventArgs,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  query: z.string(),
-  max_results: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_results": "maxResults",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    query: z.string(),
+    max_results: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_results": "maxResults",
+    });
+  })
+);
 /** @internal */
 export type ResponseToolSearchCallInProgressEventArgs$Outbound = {
   query: string;
@@ -46,14 +48,16 @@ export const ResponseToolSearchCallInProgressEventArgs$outboundSchema:
     ResponseToolSearchCallInProgressEventArgs$Outbound,
     z.ZodTypeDef,
     ResponseToolSearchCallInProgressEventArgs
-  > = z.object({
-    query: z.string(),
-    maxResults: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      maxResults: "max_results",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      query: z.string(),
+      maxResults: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        maxResults: "max_results",
+      });
+    })
+  );
 
 export function responseToolSearchCallInProgressEventArgsToJSON(
   responseToolSearchCallInProgressEventArgs:
@@ -86,20 +90,22 @@ export const ResponseToolSearchCallInProgressEvent$inboundSchema: z.ZodType<
   ResponseToolSearchCallInProgressEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.tool_search_call.in_progress"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  args: z.lazy(() => ResponseToolSearchCallInProgressEventArgs$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.tool_search_call.in_progress"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    args: z.lazy(() => ResponseToolSearchCallInProgressEventArgs$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseToolSearchCallInProgressEvent$Outbound = {
   type: "response.tool_search_call.in_progress";
@@ -114,20 +120,22 @@ export const ResponseToolSearchCallInProgressEvent$outboundSchema: z.ZodType<
   ResponseToolSearchCallInProgressEvent$Outbound,
   z.ZodTypeDef,
   ResponseToolSearchCallInProgressEvent
-> = z.object({
-  type: z.literal("response.tool_search_call.in_progress"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  args: z.lazy(() => ResponseToolSearchCallInProgressEventArgs$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.tool_search_call.in_progress"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    args: z.lazy(() => ResponseToolSearchCallInProgressEventArgs$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+    });
+  })
+);
 
 export function responseToolSearchCallInProgressEventToJSON(
   responseToolSearchCallInProgressEvent: ResponseToolSearchCallInProgressEvent,

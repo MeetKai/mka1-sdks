@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -74,13 +74,15 @@ export const GetOrganizationBillingRequest$inboundSchema: z.ZodType<
   GetOrganizationBillingRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetOrganizationBillingRequest$Outbound = {
   org_id?: string | undefined;
@@ -91,13 +93,15 @@ export const GetOrganizationBillingRequest$outboundSchema: z.ZodType<
   GetOrganizationBillingRequest$Outbound,
   z.ZodTypeDef,
   GetOrganizationBillingRequest
-> = z.object({
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getOrganizationBillingRequestToJSON(
   getOrganizationBillingRequest: GetOrganizationBillingRequest,
@@ -121,7 +125,9 @@ export function getOrganizationBillingRequestFromJSON(
 /** @internal */
 export const GetOrganizationBillingStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetOrganizationBillingStatus
-> = z.nativeEnum(GetOrganizationBillingStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetOrganizationBillingStatus)
+);
 /** @internal */
 export const GetOrganizationBillingStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetOrganizationBillingStatus
@@ -132,18 +138,20 @@ export const GetOrganizationBillingAddress$inboundSchema: z.ZodType<
   GetOrganizationBillingAddress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  line1: z.string(),
-  line2: z.string().optional(),
-  city: z.string(),
-  state: z.string().optional(),
-  postal_code: z.string(),
-  country: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "postal_code": "postalCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    line1: z.string(),
+    line2: z.string().optional(),
+    city: z.string(),
+    state: z.string().optional(),
+    postal_code: z.string(),
+    country: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "postal_code": "postalCode",
+    });
+  })
+);
 /** @internal */
 export type GetOrganizationBillingAddress$Outbound = {
   line1: string;
@@ -159,18 +167,20 @@ export const GetOrganizationBillingAddress$outboundSchema: z.ZodType<
   GetOrganizationBillingAddress$Outbound,
   z.ZodTypeDef,
   GetOrganizationBillingAddress
-> = z.object({
-  line1: z.string(),
-  line2: z.string().optional(),
-  city: z.string(),
-  state: z.string().optional(),
-  postalCode: z.string(),
-  country: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    postalCode: "postal_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    line1: z.string(),
+    line2: z.string().optional(),
+    city: z.string(),
+    state: z.string().optional(),
+    postalCode: z.string(),
+    country: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      postalCode: "postal_code",
+    });
+  })
+);
 
 export function getOrganizationBillingAddressToJSON(
   getOrganizationBillingAddress: GetOrganizationBillingAddress,
@@ -196,10 +206,12 @@ export const CurrentPeriod$inboundSchema: z.ZodType<
   CurrentPeriod,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start: z.string(),
-  end: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start: z.string(),
+    end: z.string(),
+  })
+);
 /** @internal */
 export type CurrentPeriod$Outbound = {
   start: string;
@@ -211,10 +223,12 @@ export const CurrentPeriod$outboundSchema: z.ZodType<
   CurrentPeriod$Outbound,
   z.ZodTypeDef,
   CurrentPeriod
-> = z.object({
-  start: z.string(),
-  end: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start: z.string(),
+    end: z.string(),
+  })
+);
 
 export function currentPeriodToJSON(currentPeriod: CurrentPeriod): string {
   return JSON.stringify(CurrentPeriod$outboundSchema.parse(currentPeriod));
@@ -234,26 +248,28 @@ export const Invoices$inboundSchema: z.ZodType<
   Invoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  period_start: z.string(),
-  period_end: z.string(),
-  currency: z.string(),
-  amount_due_minor: z.number().int(),
-  amount_paid_minor: z.number().int(),
-  status: z.string(),
-  hosted_invoice_url: z.nullable(z.string()),
-  pdf_url: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "period_start": "periodStart",
-    "period_end": "periodEnd",
-    "amount_due_minor": "amountDueMinor",
-    "amount_paid_minor": "amountPaidMinor",
-    "hosted_invoice_url": "hostedInvoiceUrl",
-    "pdf_url": "pdfUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    period_start: z.string(),
+    period_end: z.string(),
+    currency: z.string(),
+    amount_due_minor: z.number().int(),
+    amount_paid_minor: z.number().int(),
+    status: z.string(),
+    hosted_invoice_url: z.nullable(z.string()),
+    pdf_url: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "period_start": "periodStart",
+      "period_end": "periodEnd",
+      "amount_due_minor": "amountDueMinor",
+      "amount_paid_minor": "amountPaidMinor",
+      "hosted_invoice_url": "hostedInvoiceUrl",
+      "pdf_url": "pdfUrl",
+    });
+  })
+);
 /** @internal */
 export type Invoices$Outbound = {
   id: string;
@@ -272,26 +288,28 @@ export const Invoices$outboundSchema: z.ZodType<
   Invoices$Outbound,
   z.ZodTypeDef,
   Invoices
-> = z.object({
-  id: z.string(),
-  periodStart: z.string(),
-  periodEnd: z.string(),
-  currency: z.string(),
-  amountDueMinor: z.number().int(),
-  amountPaidMinor: z.number().int(),
-  status: z.string(),
-  hostedInvoiceUrl: z.nullable(z.string()),
-  pdfUrl: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    periodStart: "period_start",
-    periodEnd: "period_end",
-    amountDueMinor: "amount_due_minor",
-    amountPaidMinor: "amount_paid_minor",
-    hostedInvoiceUrl: "hosted_invoice_url",
-    pdfUrl: "pdf_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    periodStart: z.string(),
+    periodEnd: z.string(),
+    currency: z.string(),
+    amountDueMinor: z.number().int(),
+    amountPaidMinor: z.number().int(),
+    status: z.string(),
+    hostedInvoiceUrl: z.nullable(z.string()),
+    pdfUrl: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      periodStart: "period_start",
+      periodEnd: "period_end",
+      amountDueMinor: "amount_due_minor",
+      amountPaidMinor: "amount_paid_minor",
+      hostedInvoiceUrl: "hosted_invoice_url",
+      pdfUrl: "pdf_url",
+    });
+  })
+);
 
 export function invoicesToJSON(invoices: Invoices): string {
   return JSON.stringify(Invoices$outboundSchema.parse(invoices));
@@ -311,35 +329,37 @@ export const GetOrganizationBillingResponseBody$inboundSchema: z.ZodType<
   GetOrganizationBillingResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  configured: z.boolean(),
-  enabled: z.boolean(),
-  status: GetOrganizationBillingStatus$inboundSchema,
-  currency: z.string(),
-  legal_name: z.nullable(z.string()),
-  billing_email: z.nullable(z.string()),
-  address: z.nullable(
-    z.lazy(() => GetOrganizationBillingAddress$inboundSchema),
-  ),
-  activated_at: z.nullable(z.string()),
-  current_period: z.lazy(() => CurrentPeriod$inboundSchema),
-  current_unbilled_minor: z.number().int(),
-  outstanding_minor: z.number().int(),
-  invoices: z.array(z.lazy(() => Invoices$inboundSchema)),
-  invoices_has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "legal_name": "legalName",
-    "billing_email": "billingEmail",
-    "activated_at": "activatedAt",
-    "current_period": "currentPeriod",
-    "current_unbilled_minor": "currentUnbilledMinor",
-    "outstanding_minor": "outstandingMinor",
-    "invoices_has_more": "invoicesHasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    configured: z.boolean(),
+    enabled: z.boolean(),
+    status: GetOrganizationBillingStatus$inboundSchema,
+    currency: z.string(),
+    legal_name: z.nullable(z.string()),
+    billing_email: z.nullable(z.string()),
+    address: z.nullable(
+      z.lazy(() => GetOrganizationBillingAddress$inboundSchema),
+    ),
+    activated_at: z.nullable(z.string()),
+    current_period: z.lazy(() => CurrentPeriod$inboundSchema),
+    current_unbilled_minor: z.number().int(),
+    outstanding_minor: z.number().int(),
+    invoices: z.array(z.lazy(() => Invoices$inboundSchema)),
+    invoices_has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "legal_name": "legalName",
+      "billing_email": "billingEmail",
+      "activated_at": "activatedAt",
+      "current_period": "currentPeriod",
+      "current_unbilled_minor": "currentUnbilledMinor",
+      "outstanding_minor": "outstandingMinor",
+      "invoices_has_more": "invoicesHasMore",
+    });
+  })
+);
 /** @internal */
 export type GetOrganizationBillingResponseBody$Outbound = {
   org_id: string;
@@ -363,35 +383,37 @@ export const GetOrganizationBillingResponseBody$outboundSchema: z.ZodType<
   GetOrganizationBillingResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrganizationBillingResponseBody
-> = z.object({
-  orgId: z.string(),
-  configured: z.boolean(),
-  enabled: z.boolean(),
-  status: GetOrganizationBillingStatus$outboundSchema,
-  currency: z.string(),
-  legalName: z.nullable(z.string()),
-  billingEmail: z.nullable(z.string()),
-  address: z.nullable(
-    z.lazy(() => GetOrganizationBillingAddress$outboundSchema),
-  ),
-  activatedAt: z.nullable(z.string()),
-  currentPeriod: z.lazy(() => CurrentPeriod$outboundSchema),
-  currentUnbilledMinor: z.number().int(),
-  outstandingMinor: z.number().int(),
-  invoices: z.array(z.lazy(() => Invoices$outboundSchema)),
-  invoicesHasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    legalName: "legal_name",
-    billingEmail: "billing_email",
-    activatedAt: "activated_at",
-    currentPeriod: "current_period",
-    currentUnbilledMinor: "current_unbilled_minor",
-    outstandingMinor: "outstanding_minor",
-    invoicesHasMore: "invoices_has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    configured: z.boolean(),
+    enabled: z.boolean(),
+    status: GetOrganizationBillingStatus$outboundSchema,
+    currency: z.string(),
+    legalName: z.nullable(z.string()),
+    billingEmail: z.nullable(z.string()),
+    address: z.nullable(
+      z.lazy(() => GetOrganizationBillingAddress$outboundSchema),
+    ),
+    activatedAt: z.nullable(z.string()),
+    currentPeriod: z.lazy(() => CurrentPeriod$outboundSchema),
+    currentUnbilledMinor: z.number().int(),
+    outstandingMinor: z.number().int(),
+    invoices: z.array(z.lazy(() => Invoices$outboundSchema)),
+    invoicesHasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      legalName: "legal_name",
+      billingEmail: "billing_email",
+      activatedAt: "activated_at",
+      currentPeriod: "current_period",
+      currentUnbilledMinor: "current_unbilled_minor",
+      outstandingMinor: "outstanding_minor",
+      invoicesHasMore: "invoices_has_more",
+    });
+  })
+);
 
 export function getOrganizationBillingResponseBodyToJSON(
   getOrganizationBillingResponseBody: GetOrganizationBillingResponseBody,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,12 +32,14 @@ export type Run = {
 };
 
 /** @internal */
-export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> = z
-  .object({
-    info: RunInfo$inboundSchema,
-    data: RunData$inboundSchema.optional(),
-    inputs: RunInputs$inboundSchema.optional(),
-  });
+export const Run$inboundSchema: z.ZodType<Run, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      info: RunInfo$inboundSchema,
+      data: RunData$inboundSchema.optional(),
+      inputs: RunInputs$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Run$Outbound = {
   info: RunInfo$Outbound;
@@ -46,12 +48,14 @@ export type Run$Outbound = {
 };
 
 /** @internal */
-export const Run$outboundSchema: z.ZodType<Run$Outbound, z.ZodTypeDef, Run> = z
-  .object({
-    info: RunInfo$outboundSchema,
-    data: RunData$outboundSchema.optional(),
-    inputs: RunInputs$outboundSchema.optional(),
-  });
+export const Run$outboundSchema: z.ZodType<Run$Outbound, z.ZodTypeDef, Run> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      info: RunInfo$outboundSchema,
+      data: RunData$outboundSchema.optional(),
+      inputs: RunInputs$outboundSchema.optional(),
+    })
+  );
 
 export function runToJSON(run: Run): string {
   return JSON.stringify(Run$outboundSchema.parse(run));

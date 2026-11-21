@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -61,32 +61,34 @@ export const ComputeOfferCapabilities$inboundSchema: z.ZodType<
   ComputeOfferCapabilities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  custom_image: z.boolean(),
-  http_ports: z.boolean(),
-  managed_service: z.boolean(),
-  multi_node: z.boolean(),
-  persistent_volume: z.boolean(),
-  private_image: z.boolean(),
-  scale_to_zero: z.boolean(),
-  shared_volume: z.boolean(),
-  ssh: z.boolean(),
-  standalone_volume: z.boolean(),
-  tcp_ports: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "custom_image": "customImage",
-    "http_ports": "httpPorts",
-    "managed_service": "managedService",
-    "multi_node": "multiNode",
-    "persistent_volume": "persistentVolume",
-    "private_image": "privateImage",
-    "scale_to_zero": "scaleToZero",
-    "shared_volume": "sharedVolume",
-    "standalone_volume": "standaloneVolume",
-    "tcp_ports": "tcpPorts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    custom_image: z.boolean(),
+    http_ports: z.boolean(),
+    managed_service: z.boolean(),
+    multi_node: z.boolean(),
+    persistent_volume: z.boolean(),
+    private_image: z.boolean(),
+    scale_to_zero: z.boolean(),
+    shared_volume: z.boolean(),
+    ssh: z.boolean(),
+    standalone_volume: z.boolean(),
+    tcp_ports: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "custom_image": "customImage",
+      "http_ports": "httpPorts",
+      "managed_service": "managedService",
+      "multi_node": "multiNode",
+      "persistent_volume": "persistentVolume",
+      "private_image": "privateImage",
+      "scale_to_zero": "scaleToZero",
+      "shared_volume": "sharedVolume",
+      "standalone_volume": "standaloneVolume",
+      "tcp_ports": "tcpPorts",
+    });
+  })
+);
 /** @internal */
 export type ComputeOfferCapabilities$Outbound = {
   custom_image: boolean;
@@ -107,32 +109,34 @@ export const ComputeOfferCapabilities$outboundSchema: z.ZodType<
   ComputeOfferCapabilities$Outbound,
   z.ZodTypeDef,
   ComputeOfferCapabilities
-> = z.object({
-  customImage: z.boolean(),
-  httpPorts: z.boolean(),
-  managedService: z.boolean(),
-  multiNode: z.boolean(),
-  persistentVolume: z.boolean(),
-  privateImage: z.boolean(),
-  scaleToZero: z.boolean(),
-  sharedVolume: z.boolean(),
-  ssh: z.boolean(),
-  standaloneVolume: z.boolean(),
-  tcpPorts: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    customImage: "custom_image",
-    httpPorts: "http_ports",
-    managedService: "managed_service",
-    multiNode: "multi_node",
-    persistentVolume: "persistent_volume",
-    privateImage: "private_image",
-    scaleToZero: "scale_to_zero",
-    sharedVolume: "shared_volume",
-    standaloneVolume: "standalone_volume",
-    tcpPorts: "tcp_ports",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    customImage: z.boolean(),
+    httpPorts: z.boolean(),
+    managedService: z.boolean(),
+    multiNode: z.boolean(),
+    persistentVolume: z.boolean(),
+    privateImage: z.boolean(),
+    scaleToZero: z.boolean(),
+    sharedVolume: z.boolean(),
+    ssh: z.boolean(),
+    standaloneVolume: z.boolean(),
+    tcpPorts: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      customImage: "custom_image",
+      httpPorts: "http_ports",
+      managedService: "managed_service",
+      multiNode: "multi_node",
+      persistentVolume: "persistent_volume",
+      privateImage: "private_image",
+      scaleToZero: "scale_to_zero",
+      sharedVolume: "shared_volume",
+      standaloneVolume: "standalone_volume",
+      tcpPorts: "tcp_ports",
+    });
+  })
+);
 
 export function computeOfferCapabilitiesToJSON(
   computeOfferCapabilities: ComputeOfferCapabilities,
@@ -153,24 +157,26 @@ export function computeOfferCapabilitiesFromJSON(
 
 /** @internal */
 export const Compute$inboundSchema: z.ZodType<Compute, z.ZodTypeDef, unknown> =
-  z.object({
-    accelerator: z.string(),
-    ephemeral_disk_gb: z.number().int(),
-    gpu_count: z.number().int(),
-    gpu_memory_gb: z.number().int(),
-    instance_count: z.number().int(),
-    interconnect: z.string().optional(),
-    memory_gb: z.number().int(),
-    vcpus: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "ephemeral_disk_gb": "ephemeralDiskGb",
-      "gpu_count": "gpuCount",
-      "gpu_memory_gb": "gpuMemoryGb",
-      "instance_count": "instanceCount",
-      "memory_gb": "memoryGb",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accelerator: z.string(),
+      ephemeral_disk_gb: z.number().int(),
+      gpu_count: z.number().int(),
+      gpu_memory_gb: z.number().int(),
+      instance_count: z.number().int(),
+      interconnect: z.string().optional(),
+      memory_gb: z.number().int(),
+      vcpus: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        "ephemeral_disk_gb": "ephemeralDiskGb",
+        "gpu_count": "gpuCount",
+        "gpu_memory_gb": "gpuMemoryGb",
+        "instance_count": "instanceCount",
+        "memory_gb": "memoryGb",
+      });
+    })
+  );
 /** @internal */
 export type Compute$Outbound = {
   accelerator: string;
@@ -188,24 +194,26 @@ export const Compute$outboundSchema: z.ZodType<
   Compute$Outbound,
   z.ZodTypeDef,
   Compute
-> = z.object({
-  accelerator: z.string(),
-  ephemeralDiskGb: z.number().int(),
-  gpuCount: z.number().int(),
-  gpuMemoryGb: z.number().int(),
-  instanceCount: z.number().int(),
-  interconnect: z.string().optional(),
-  memoryGb: z.number().int(),
-  vcpus: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    ephemeralDiskGb: "ephemeral_disk_gb",
-    gpuCount: "gpu_count",
-    gpuMemoryGb: "gpu_memory_gb",
-    instanceCount: "instance_count",
-    memoryGb: "memory_gb",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string(),
+    ephemeralDiskGb: z.number().int(),
+    gpuCount: z.number().int(),
+    gpuMemoryGb: z.number().int(),
+    instanceCount: z.number().int(),
+    interconnect: z.string().optional(),
+    memoryGb: z.number().int(),
+    vcpus: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      ephemeralDiskGb: "ephemeral_disk_gb",
+      gpuCount: "gpu_count",
+      gpuMemoryGb: "gpu_memory_gb",
+      instanceCount: "instance_count",
+      memoryGb: "memory_gb",
+    });
+  })
+);
 
 export function computeToJSON(compute: Compute): string {
   return JSON.stringify(Compute$outboundSchema.parse(compute));
@@ -221,11 +229,13 @@ export function computeFromJSON(
 }
 
 /** @internal */
-export const Region$inboundSchema: z.ZodType<Region, z.ZodTypeDef, unknown> = z
-  .object({
-    country: z.string().optional(),
-    name: z.string(),
-  });
+export const Region$inboundSchema: z.ZodType<Region, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      country: z.string().optional(),
+      name: z.string(),
+    })
+  );
 /** @internal */
 export type Region$Outbound = {
   country?: string | undefined;
@@ -237,10 +247,12 @@ export const Region$outboundSchema: z.ZodType<
   Region$Outbound,
   z.ZodTypeDef,
   Region
-> = z.object({
-  country: z.string().optional(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    country: z.string().optional(),
+    name: z.string(),
+  })
+);
 
 export function regionToJSON(region: Region): string {
   return JSON.stringify(Region$outboundSchema.parse(region));
@@ -260,28 +272,30 @@ export const ComputeOffer$inboundSchema: z.ZodType<
   ComputeOffer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  available: z.boolean(),
-  capabilities: z.lazy(() => ComputeOfferCapabilities$inboundSchema),
-  compute: z.lazy(() => Compute$inboundSchema),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  observed_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  price_usd_hr: z.number(),
-  provider: z.string(),
-  provider_sku: z.string(),
-  region: z.lazy(() => Region$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
-    "observed_at": "observedAt",
-    "price_usd_hr": "priceUsdHr",
-    "provider_sku": "providerSku",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.boolean(),
+    capabilities: z.lazy(() => ComputeOfferCapabilities$inboundSchema),
+    compute: z.lazy(() => Compute$inboundSchema),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    observed_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    price_usd_hr: z.number(),
+    provider: z.string(),
+    provider_sku: z.string(),
+    region: z.lazy(() => Region$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+      "observed_at": "observedAt",
+      "price_usd_hr": "priceUsdHr",
+      "provider_sku": "providerSku",
+    });
+  })
+);
 /** @internal */
 export type ComputeOffer$Outbound = {
   available: boolean;
@@ -300,24 +314,26 @@ export const ComputeOffer$outboundSchema: z.ZodType<
   ComputeOffer$Outbound,
   z.ZodTypeDef,
   ComputeOffer
-> = z.object({
-  available: z.boolean(),
-  capabilities: z.lazy(() => ComputeOfferCapabilities$outboundSchema),
-  compute: z.lazy(() => Compute$outboundSchema),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  observedAt: z.date().transform(v => v.toISOString()),
-  priceUsdHr: z.number(),
-  provider: z.string(),
-  providerSku: z.string(),
-  region: z.lazy(() => Region$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-    observedAt: "observed_at",
-    priceUsdHr: "price_usd_hr",
-    providerSku: "provider_sku",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.boolean(),
+    capabilities: z.lazy(() => ComputeOfferCapabilities$outboundSchema),
+    compute: z.lazy(() => Compute$outboundSchema),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    observedAt: z.date().transform(v => v.toISOString()),
+    priceUsdHr: z.number(),
+    provider: z.string(),
+    providerSku: z.string(),
+    region: z.lazy(() => Region$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      expiresAt: "expires_at",
+      observedAt: "observed_at",
+      priceUsdHr: "price_usd_hr",
+      providerSku: "provider_sku",
+    });
+  })
+);
 
 export function computeOfferToJSON(computeOffer: ComputeOffer): string {
   return JSON.stringify(ComputeOffer$outboundSchema.parse(computeOffer));

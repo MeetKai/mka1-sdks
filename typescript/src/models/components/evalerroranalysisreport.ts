@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -94,7 +94,9 @@ export type EvalErrorAnalysisReport = {
 /** @internal */
 export const EvalErrorAnalysisReportSeverity$inboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisReportSeverity
-> = z.nativeEnum(EvalErrorAnalysisReportSeverity);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvalErrorAnalysisReportSeverity)
+);
 /** @internal */
 export const EvalErrorAnalysisReportSeverity$outboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisReportSeverity
@@ -105,20 +107,22 @@ export const ErrorCategories$inboundSchema: z.ZodType<
   ErrorCategories,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  category: z.string(),
-  count: z.number().int(),
-  share_of_analysed_failures: z.string(),
-  severity: EvalErrorAnalysisReportSeverity$inboundSchema,
-  what_happens: z.string(),
-  example_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "share_of_analysed_failures": "shareOfAnalysedFailures",
-    "what_happens": "whatHappens",
-    "example_ids": "exampleIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: z.string(),
+    count: z.number().int(),
+    share_of_analysed_failures: z.string(),
+    severity: EvalErrorAnalysisReportSeverity$inboundSchema,
+    what_happens: z.string(),
+    example_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "share_of_analysed_failures": "shareOfAnalysedFailures",
+      "what_happens": "whatHappens",
+      "example_ids": "exampleIds",
+    });
+  })
+);
 /** @internal */
 export type ErrorCategories$Outbound = {
   category: string;
@@ -134,20 +138,22 @@ export const ErrorCategories$outboundSchema: z.ZodType<
   ErrorCategories$Outbound,
   z.ZodTypeDef,
   ErrorCategories
-> = z.object({
-  category: z.string(),
-  count: z.number().int(),
-  shareOfAnalysedFailures: z.string(),
-  severity: EvalErrorAnalysisReportSeverity$outboundSchema,
-  whatHappens: z.string(),
-  exampleIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    shareOfAnalysedFailures: "share_of_analysed_failures",
-    whatHappens: "what_happens",
-    exampleIds: "example_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    category: z.string(),
+    count: z.number().int(),
+    shareOfAnalysedFailures: z.string(),
+    severity: EvalErrorAnalysisReportSeverity$outboundSchema,
+    whatHappens: z.string(),
+    exampleIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      shareOfAnalysedFailures: "share_of_analysed_failures",
+      whatHappens: "what_happens",
+      exampleIds: "example_ids",
+    });
+  })
+);
 
 export function errorCategoriesToJSON(
   errorCategories: ErrorCategories,
@@ -169,15 +175,17 @@ export const WeakTasks$inboundSchema: z.ZodType<
   WeakTasks,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  task: z.string(),
-  why: z.string(),
-  example_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "example_ids": "exampleIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task: z.string(),
+    why: z.string(),
+    example_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "example_ids": "exampleIds",
+    });
+  })
+);
 /** @internal */
 export type WeakTasks$Outbound = {
   task: string;
@@ -190,15 +198,17 @@ export const WeakTasks$outboundSchema: z.ZodType<
   WeakTasks$Outbound,
   z.ZodTypeDef,
   WeakTasks
-> = z.object({
-  task: z.string(),
-  why: z.string(),
-  exampleIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    exampleIds: "example_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    task: z.string(),
+    why: z.string(),
+    exampleIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      exampleIds: "example_ids",
+    });
+  })
+);
 
 export function weakTasksToJSON(weakTasks: WeakTasks): string {
   return JSON.stringify(WeakTasks$outboundSchema.parse(weakTasks));
@@ -218,18 +228,20 @@ export const JudgeAndBenchmarkIssues$inboundSchema: z.ZodType<
   JudgeAndBenchmarkIssues,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  judge_error_count: z.number().int(),
-  reference_issue_count: z.number().int(),
-  note: z.string(),
-  example_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "judge_error_count": "judgeErrorCount",
-    "reference_issue_count": "referenceIssueCount",
-    "example_ids": "exampleIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    judge_error_count: z.number().int(),
+    reference_issue_count: z.number().int(),
+    note: z.string(),
+    example_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "judge_error_count": "judgeErrorCount",
+      "reference_issue_count": "referenceIssueCount",
+      "example_ids": "exampleIds",
+    });
+  })
+);
 /** @internal */
 export type JudgeAndBenchmarkIssues$Outbound = {
   judge_error_count: number;
@@ -243,18 +255,20 @@ export const JudgeAndBenchmarkIssues$outboundSchema: z.ZodType<
   JudgeAndBenchmarkIssues$Outbound,
   z.ZodTypeDef,
   JudgeAndBenchmarkIssues
-> = z.object({
-  judgeErrorCount: z.number().int(),
-  referenceIssueCount: z.number().int(),
-  note: z.string(),
-  exampleIds: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    judgeErrorCount: "judge_error_count",
-    referenceIssueCount: "reference_issue_count",
-    exampleIds: "example_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    judgeErrorCount: z.number().int(),
+    referenceIssueCount: z.number().int(),
+    note: z.string(),
+    exampleIds: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      judgeErrorCount: "judge_error_count",
+      referenceIssueCount: "reference_issue_count",
+      exampleIds: "example_ids",
+    });
+  })
+);
 
 export function judgeAndBenchmarkIssuesToJSON(
   judgeAndBenchmarkIssues: JudgeAndBenchmarkIssues,
@@ -274,15 +288,15 @@ export function judgeAndBenchmarkIssuesFromJSON(
 }
 
 /** @internal */
-export const ActionType$inboundSchema: z.ZodNativeEnum<typeof ActionType> = z
-  .nativeEnum(ActionType);
+export const ActionType$inboundSchema: z.ZodNativeEnum<typeof ActionType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ActionType));
 /** @internal */
 export const ActionType$outboundSchema: z.ZodNativeEnum<typeof ActionType> =
   ActionType$inboundSchema;
 
 /** @internal */
-export const Confidence$inboundSchema: z.ZodNativeEnum<typeof Confidence> = z
-  .nativeEnum(Confidence);
+export const Confidence$inboundSchema: z.ZodNativeEnum<typeof Confidence> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Confidence));
 /** @internal */
 export const Confidence$outboundSchema: z.ZodNativeEnum<typeof Confidence> =
   Confidence$inboundSchema;
@@ -290,7 +304,9 @@ export const Confidence$outboundSchema: z.ZodNativeEnum<typeof Confidence> =
 /** @internal */
 export const EvalErrorAnalysisReportEffort$inboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisReportEffort
-> = z.nativeEnum(EvalErrorAnalysisReportEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(EvalErrorAnalysisReportEffort)
+);
 /** @internal */
 export const EvalErrorAnalysisReportEffort$outboundSchema: z.ZodNativeEnum<
   typeof EvalErrorAnalysisReportEffort
@@ -301,27 +317,29 @@ export const ActionableItems$inboundSchema: z.ZodType<
   ActionableItems,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  priority: z.number().int(),
-  title: z.string(),
-  action_type: ActionType$inboundSchema,
-  what_to_do: z.string(),
-  why_it_helps: z.string(),
-  addresses_categories: z.array(z.string()),
-  estimated_share_of_failures_fixed: z.string(),
-  evidence_ids: z.array(z.string()),
-  confidence: Confidence$inboundSchema,
-  effort: EvalErrorAnalysisReportEffort$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "action_type": "actionType",
-    "what_to_do": "whatToDo",
-    "why_it_helps": "whyItHelps",
-    "addresses_categories": "addressesCategories",
-    "estimated_share_of_failures_fixed": "estimatedShareOfFailuresFixed",
-    "evidence_ids": "evidenceIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    priority: z.number().int(),
+    title: z.string(),
+    action_type: ActionType$inboundSchema,
+    what_to_do: z.string(),
+    why_it_helps: z.string(),
+    addresses_categories: z.array(z.string()),
+    estimated_share_of_failures_fixed: z.string(),
+    evidence_ids: z.array(z.string()),
+    confidence: Confidence$inboundSchema,
+    effort: EvalErrorAnalysisReportEffort$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "action_type": "actionType",
+      "what_to_do": "whatToDo",
+      "why_it_helps": "whyItHelps",
+      "addresses_categories": "addressesCategories",
+      "estimated_share_of_failures_fixed": "estimatedShareOfFailuresFixed",
+      "evidence_ids": "evidenceIds",
+    });
+  })
+);
 /** @internal */
 export type ActionableItems$Outbound = {
   priority: number;
@@ -341,27 +359,29 @@ export const ActionableItems$outboundSchema: z.ZodType<
   ActionableItems$Outbound,
   z.ZodTypeDef,
   ActionableItems
-> = z.object({
-  priority: z.number().int(),
-  title: z.string(),
-  actionType: ActionType$outboundSchema,
-  whatToDo: z.string(),
-  whyItHelps: z.string(),
-  addressesCategories: z.array(z.string()),
-  estimatedShareOfFailuresFixed: z.string(),
-  evidenceIds: z.array(z.string()),
-  confidence: Confidence$outboundSchema,
-  effort: EvalErrorAnalysisReportEffort$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    actionType: "action_type",
-    whatToDo: "what_to_do",
-    whyItHelps: "why_it_helps",
-    addressesCategories: "addresses_categories",
-    estimatedShareOfFailuresFixed: "estimated_share_of_failures_fixed",
-    evidenceIds: "evidence_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    priority: z.number().int(),
+    title: z.string(),
+    actionType: ActionType$outboundSchema,
+    whatToDo: z.string(),
+    whyItHelps: z.string(),
+    addressesCategories: z.array(z.string()),
+    estimatedShareOfFailuresFixed: z.string(),
+    evidenceIds: z.array(z.string()),
+    confidence: Confidence$outboundSchema,
+    effort: EvalErrorAnalysisReportEffort$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      actionType: "action_type",
+      whatToDo: "what_to_do",
+      whyItHelps: "why_it_helps",
+      addressesCategories: "addresses_categories",
+      estimatedShareOfFailuresFixed: "estimated_share_of_failures_fixed",
+      evidenceIds: "evidence_ids",
+    });
+  })
+);
 
 export function actionableItemsToJSON(
   actionableItems: ActionableItems,
@@ -383,27 +403,29 @@ export const EvalErrorAnalysisReport$inboundSchema: z.ZodType<
   EvalErrorAnalysisReport,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  headline: z.string(),
-  overall_assessment: z.string(),
-  error_categories: z.array(z.lazy(() => ErrorCategories$inboundSchema)),
-  weak_tasks: z.array(z.lazy(() => WeakTasks$inboundSchema)),
-  judge_and_benchmark_issues: z.lazy(() =>
-    JudgeAndBenchmarkIssues$inboundSchema
-  ),
-  actionable_items: z.array(z.lazy(() => ActionableItems$inboundSchema)),
-  strengths: z.array(z.string()),
-  limits_of_this_analysis: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "overall_assessment": "overallAssessment",
-    "error_categories": "errorCategories",
-    "weak_tasks": "weakTasks",
-    "judge_and_benchmark_issues": "judgeAndBenchmarkIssues",
-    "actionable_items": "actionableItems",
-    "limits_of_this_analysis": "limitsOfThisAnalysis",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headline: z.string(),
+    overall_assessment: z.string(),
+    error_categories: z.array(z.lazy(() => ErrorCategories$inboundSchema)),
+    weak_tasks: z.array(z.lazy(() => WeakTasks$inboundSchema)),
+    judge_and_benchmark_issues: z.lazy(() =>
+      JudgeAndBenchmarkIssues$inboundSchema
+    ),
+    actionable_items: z.array(z.lazy(() => ActionableItems$inboundSchema)),
+    strengths: z.array(z.string()),
+    limits_of_this_analysis: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "overall_assessment": "overallAssessment",
+      "error_categories": "errorCategories",
+      "weak_tasks": "weakTasks",
+      "judge_and_benchmark_issues": "judgeAndBenchmarkIssues",
+      "actionable_items": "actionableItems",
+      "limits_of_this_analysis": "limitsOfThisAnalysis",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisReport$Outbound = {
   headline: string;
@@ -421,25 +443,29 @@ export const EvalErrorAnalysisReport$outboundSchema: z.ZodType<
   EvalErrorAnalysisReport$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisReport
-> = z.object({
-  headline: z.string(),
-  overallAssessment: z.string(),
-  errorCategories: z.array(z.lazy(() => ErrorCategories$outboundSchema)),
-  weakTasks: z.array(z.lazy(() => WeakTasks$outboundSchema)),
-  judgeAndBenchmarkIssues: z.lazy(() => JudgeAndBenchmarkIssues$outboundSchema),
-  actionableItems: z.array(z.lazy(() => ActionableItems$outboundSchema)),
-  strengths: z.array(z.string()),
-  limitsOfThisAnalysis: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    overallAssessment: "overall_assessment",
-    errorCategories: "error_categories",
-    weakTasks: "weak_tasks",
-    judgeAndBenchmarkIssues: "judge_and_benchmark_issues",
-    actionableItems: "actionable_items",
-    limitsOfThisAnalysis: "limits_of_this_analysis",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headline: z.string(),
+    overallAssessment: z.string(),
+    errorCategories: z.array(z.lazy(() => ErrorCategories$outboundSchema)),
+    weakTasks: z.array(z.lazy(() => WeakTasks$outboundSchema)),
+    judgeAndBenchmarkIssues: z.lazy(() =>
+      JudgeAndBenchmarkIssues$outboundSchema
+    ),
+    actionableItems: z.array(z.lazy(() => ActionableItems$outboundSchema)),
+    strengths: z.array(z.string()),
+    limitsOfThisAnalysis: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      overallAssessment: "overall_assessment",
+      errorCategories: "error_categories",
+      weakTasks: "weak_tasks",
+      judgeAndBenchmarkIssues: "judge_and_benchmark_issues",
+      actionableItems: "actionable_items",
+      limitsOfThisAnalysis: "limits_of_this_analysis",
+    });
+  })
+);
 
 export function evalErrorAnalysisReportToJSON(
   evalErrorAnalysisReport: EvalErrorAnalysisReport,

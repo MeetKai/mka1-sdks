@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const ConnectConnectorRequest$inboundSchema: z.ZodType<
   ConnectConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  state: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    state: z.string(),
+  })
+);
 /** @internal */
 export type ConnectConnectorRequest$Outbound = {
   code: string;
@@ -32,10 +34,12 @@ export const ConnectConnectorRequest$outboundSchema: z.ZodType<
   ConnectConnectorRequest$Outbound,
   z.ZodTypeDef,
   ConnectConnectorRequest
-> = z.object({
-  code: z.string(),
-  state: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    state: z.string(),
+  })
+);
 
 export function connectConnectorRequestToJSON(
   connectConnectorRequest: ConnectConnectorRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const PreconfiguredSkillReference$inboundSchema: z.ZodType<
   PreconfiguredSkillReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("preconfigured"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("preconfigured"),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type PreconfiguredSkillReference$Outbound = {
   type: "preconfigured";
@@ -35,10 +37,12 @@ export const PreconfiguredSkillReference$outboundSchema: z.ZodType<
   PreconfiguredSkillReference$Outbound,
   z.ZodTypeDef,
   PreconfiguredSkillReference
-> = z.object({
-  type: z.literal("preconfigured"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("preconfigured"),
+    name: z.string(),
+  })
+);
 
 export function preconfiguredSkillReferenceToJSON(
   preconfiguredSkillReference: PreconfiguredSkillReference,

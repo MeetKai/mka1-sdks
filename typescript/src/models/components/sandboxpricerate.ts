@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const SandboxPriceRate$inboundSchema: z.ZodType<
   SandboxPriceRate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  per_hour: z.number().default(0),
-  per_gib_hour: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    "per_hour": "perHour",
-    "per_gib_hour": "perGibHour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    per_hour: z.number().default(0),
+    per_gib_hour: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      "per_hour": "perHour",
+      "per_gib_hour": "perGibHour",
+    });
+  })
+);
 /** @internal */
 export type SandboxPriceRate$Outbound = {
   per_hour: number;
@@ -38,15 +40,17 @@ export const SandboxPriceRate$outboundSchema: z.ZodType<
   SandboxPriceRate$Outbound,
   z.ZodTypeDef,
   SandboxPriceRate
-> = z.object({
-  perHour: z.number().default(0),
-  perGibHour: z.number().default(0),
-}).transform((v) => {
-  return remap$(v, {
-    perHour: "per_hour",
-    perGibHour: "per_gib_hour",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    perHour: z.number().default(0),
+    perGibHour: z.number().default(0),
+  }).transform((v) => {
+    return remap$(v, {
+      perHour: "per_hour",
+      perGibHour: "per_gib_hour",
+    });
+  })
+);
 
 export function sandboxPriceRateToJSON(
   sandboxPriceRate: SandboxPriceRate,

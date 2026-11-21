@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,7 +57,9 @@ export type SessionRepositoryModel = {
 /** @internal */
 export const SessionRepositoryModelStatus$inboundSchema: z.ZodNativeEnum<
   typeof SessionRepositoryModelStatus
-> = z.nativeEnum(SessionRepositoryModelStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(SessionRepositoryModelStatus)
+);
 /** @internal */
 export const SessionRepositoryModelStatus$outboundSchema: z.ZodNativeEnum<
   typeof SessionRepositoryModelStatus
@@ -68,37 +70,43 @@ export const SessionRepositoryModel$inboundSchema: z.ZodType<
   SessionRepositoryModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  repository_id: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  requested_ref: z.nullable(z.string()).optional(),
-  ref: z.string(),
-  default_branch: z.nullable(z.string()).optional(),
-  base_sha: z.string(),
-  checkout_alias: z.string(),
-  checkout_path: z.string(),
-  status: SessionRepositoryModelStatus$inboundSchema,
-  failure: z.nullable(SessionRepositoryFailure$inboundSchema).optional(),
-  last_push: z.nullable(SessionRepositoryPush$inboundSchema).optional(),
-  pull_request: z.nullable(SessionRepositoryPullRequest$inboundSchema)
-    .optional(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "repository_id": "repositoryId",
-    "requested_ref": "requestedRef",
-    "default_branch": "defaultBranch",
-    "base_sha": "baseSha",
-    "checkout_alias": "checkoutAlias",
-    "checkout_path": "checkoutPath",
-    "last_push": "lastPush",
-    "pull_request": "pullRequest",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repository_id: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    requested_ref: z.nullable(z.string()).optional(),
+    ref: z.string(),
+    default_branch: z.nullable(z.string()).optional(),
+    base_sha: z.string(),
+    checkout_alias: z.string(),
+    checkout_path: z.string(),
+    status: SessionRepositoryModelStatus$inboundSchema,
+    failure: z.nullable(SessionRepositoryFailure$inboundSchema).optional(),
+    last_push: z.nullable(SessionRepositoryPush$inboundSchema).optional(),
+    pull_request: z.nullable(SessionRepositoryPullRequest$inboundSchema)
+      .optional(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "repository_id": "repositoryId",
+      "requested_ref": "requestedRef",
+      "default_branch": "defaultBranch",
+      "base_sha": "baseSha",
+      "checkout_alias": "checkoutAlias",
+      "checkout_path": "checkoutPath",
+      "last_push": "lastPush",
+      "pull_request": "pullRequest",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type SessionRepositoryModel$Outbound = {
   repository_id: number;
@@ -123,37 +131,39 @@ export const SessionRepositoryModel$outboundSchema: z.ZodType<
   SessionRepositoryModel$Outbound,
   z.ZodTypeDef,
   SessionRepositoryModel
-> = z.object({
-  repositoryId: z.number().int(),
-  owner: z.string(),
-  repository: z.string(),
-  requestedRef: z.nullable(z.string()).optional(),
-  ref: z.string(),
-  defaultBranch: z.nullable(z.string()).optional(),
-  baseSha: z.string(),
-  checkoutAlias: z.string(),
-  checkoutPath: z.string(),
-  status: SessionRepositoryModelStatus$outboundSchema,
-  failure: z.nullable(SessionRepositoryFailure$outboundSchema).optional(),
-  lastPush: z.nullable(SessionRepositoryPush$outboundSchema).optional(),
-  pullRequest: z.nullable(SessionRepositoryPullRequest$outboundSchema)
-    .optional(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    repositoryId: "repository_id",
-    requestedRef: "requested_ref",
-    defaultBranch: "default_branch",
-    baseSha: "base_sha",
-    checkoutAlias: "checkout_alias",
-    checkoutPath: "checkout_path",
-    lastPush: "last_push",
-    pullRequest: "pull_request",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    repositoryId: z.number().int(),
+    owner: z.string(),
+    repository: z.string(),
+    requestedRef: z.nullable(z.string()).optional(),
+    ref: z.string(),
+    defaultBranch: z.nullable(z.string()).optional(),
+    baseSha: z.string(),
+    checkoutAlias: z.string(),
+    checkoutPath: z.string(),
+    status: SessionRepositoryModelStatus$outboundSchema,
+    failure: z.nullable(SessionRepositoryFailure$outboundSchema).optional(),
+    lastPush: z.nullable(SessionRepositoryPush$outboundSchema).optional(),
+    pullRequest: z.nullable(SessionRepositoryPullRequest$outboundSchema)
+      .optional(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      repositoryId: "repository_id",
+      requestedRef: "requested_ref",
+      defaultBranch: "default_branch",
+      baseSha: "base_sha",
+      checkoutAlias: "checkout_alias",
+      checkoutPath: "checkout_path",
+      lastPush: "last_push",
+      pullRequest: "pull_request",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function sessionRepositoryModelToJSON(
   sessionRepositoryModel: SessionRepositoryModel,

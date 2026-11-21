@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,7 +28,9 @@ export type AgentsFunctionToolDefinition = {
 /** @internal */
 export const AgentsFunctionToolDefinitionType$inboundSchema: z.ZodNativeEnum<
   typeof AgentsFunctionToolDefinitionType
-> = z.nativeEnum(AgentsFunctionToolDefinitionType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentsFunctionToolDefinitionType)
+);
 /** @internal */
 export const AgentsFunctionToolDefinitionType$outboundSchema: z.ZodNativeEnum<
   typeof AgentsFunctionToolDefinitionType
@@ -39,18 +41,20 @@ export const AgentsFunctionToolDefinition$inboundSchema: z.ZodType<
   AgentsFunctionToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: AgentsFunctionToolDefinitionType$inboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.record(z.any()),
-  strict: z.boolean().default(true),
-  defer_loading: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "defer_loading": "deferLoading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentsFunctionToolDefinitionType$inboundSchema,
+    name: z.string(),
+    description: z.string().optional(),
+    parameters: z.record(z.any()),
+    strict: z.boolean().default(true),
+    defer_loading: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "defer_loading": "deferLoading",
+    });
+  })
+);
 /** @internal */
 export type AgentsFunctionToolDefinition$Outbound = {
   type: string;
@@ -66,18 +70,20 @@ export const AgentsFunctionToolDefinition$outboundSchema: z.ZodType<
   AgentsFunctionToolDefinition$Outbound,
   z.ZodTypeDef,
   AgentsFunctionToolDefinition
-> = z.object({
-  type: AgentsFunctionToolDefinitionType$outboundSchema,
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.record(z.any()),
-  strict: z.boolean().default(true),
-  deferLoading: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    deferLoading: "defer_loading",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: AgentsFunctionToolDefinitionType$outboundSchema,
+    name: z.string(),
+    description: z.string().optional(),
+    parameters: z.record(z.any()),
+    strict: z.boolean().default(true),
+    deferLoading: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      deferLoading: "defer_loading",
+    });
+  })
+);
 
 export function agentsFunctionToolDefinitionToJSON(
   agentsFunctionToolDefinition: AgentsFunctionToolDefinition,

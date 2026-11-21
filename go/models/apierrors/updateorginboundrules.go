@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateOrgInboundRulesTooManyRequestsError struct {
 var _ error = &UpdateOrgInboundRulesTooManyRequestsError{}
 
 func (e *UpdateOrgInboundRulesTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateOrgInboundRulesGoneError struct {
 var _ error = &UpdateOrgInboundRulesGoneError{}
 
 func (e *UpdateOrgInboundRulesGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,15 @@ type UpdateOrgInboundRulesConflictError struct {
 var _ error = &UpdateOrgInboundRulesConflictError{}
 
 func (e *UpdateOrgInboundRulesConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +78,12 @@ type UpdateOrgInboundRulesNotFoundError struct {
 var _ error = &UpdateOrgInboundRulesNotFoundError{}
 
 func (e *UpdateOrgInboundRulesNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -70,6 +98,15 @@ type UpdateOrgInboundRulesForbiddenError struct {
 var _ error = &UpdateOrgInboundRulesForbiddenError{}
 
 func (e *UpdateOrgInboundRulesForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -83,6 +120,12 @@ type UpdateOrgInboundRulesUnauthorizedError struct {
 var _ error = &UpdateOrgInboundRulesUnauthorizedError{}
 
 func (e *UpdateOrgInboundRulesUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -96,6 +139,12 @@ type UpdateOrgInboundRulesBadRequestError struct {
 var _ error = &UpdateOrgInboundRulesBadRequestError{}
 
 func (e *UpdateOrgInboundRulesBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const UpdateClusterDefaultGuardrailsRequest$inboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean(),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+  })
+);
 /** @internal */
 export type UpdateClusterDefaultGuardrailsRequest$Outbound = {
   enabled: boolean;
@@ -44,10 +46,12 @@ export const UpdateClusterDefaultGuardrailsRequest$outboundSchema: z.ZodType<
   UpdateClusterDefaultGuardrailsRequest$Outbound,
   z.ZodTypeDef,
   UpdateClusterDefaultGuardrailsRequest
-> = z.object({
-  enabled: z.boolean(),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean(),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+  })
+);
 
 export function updateClusterDefaultGuardrailsRequestToJSON(
   updateClusterDefaultGuardrailsRequest: UpdateClusterDefaultGuardrailsRequest,

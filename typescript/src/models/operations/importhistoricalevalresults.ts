@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,18 +27,21 @@ export const ImportHistoricalEvalResultsRequest$inboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-HuggingFace-Token": z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ImportHistoricalEvalResultsRequest:
-    components.ImportHistoricalEvalResultsRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-HuggingFace-Token": "xHuggingFaceToken",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ImportHistoricalEvalResultsRequest": "importHistoricalEvalResultsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-HuggingFace-Token": z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ImportHistoricalEvalResultsRequest:
+      components.ImportHistoricalEvalResultsRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-HuggingFace-Token": "xHuggingFaceToken",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ImportHistoricalEvalResultsRequest":
+        "importHistoricalEvalResultsRequest",
+    });
+  })
+);
 /** @internal */
 export type ImportHistoricalEvalResultsRequest$Outbound = {
   "X-HuggingFace-Token": string;
@@ -52,18 +55,20 @@ export const ImportHistoricalEvalResultsRequest$outboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequest$Outbound,
   z.ZodTypeDef,
   ImportHistoricalEvalResultsRequest
-> = z.object({
-  xHuggingFaceToken: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  importHistoricalEvalResultsRequest:
-    components.ImportHistoricalEvalResultsRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xHuggingFaceToken: "X-HuggingFace-Token",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    importHistoricalEvalResultsRequest: "ImportHistoricalEvalResultsRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xHuggingFaceToken: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    importHistoricalEvalResultsRequest:
+      components.ImportHistoricalEvalResultsRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xHuggingFaceToken: "X-HuggingFace-Token",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      importHistoricalEvalResultsRequest: "ImportHistoricalEvalResultsRequest",
+    });
+  })
+);
 
 export function importHistoricalEvalResultsRequestToJSON(
   importHistoricalEvalResultsRequest: ImportHistoricalEvalResultsRequest,

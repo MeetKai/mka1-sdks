@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -77,8 +77,8 @@ export type Agent = {
 };
 
 /** @internal */
-export const AgentObject$inboundSchema: z.ZodNativeEnum<typeof AgentObject> = z
-  .nativeEnum(AgentObject);
+export const AgentObject$inboundSchema: z.ZodNativeEnum<typeof AgentObject> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentObject));
 /** @internal */
 export const AgentObject$outboundSchema: z.ZodNativeEnum<typeof AgentObject> =
   AgentObject$inboundSchema;
@@ -86,62 +86,64 @@ export const AgentObject$outboundSchema: z.ZodNativeEnum<typeof AgentObject> =
 /** @internal */
 export const ConcurrencyOverflow$inboundSchema: z.ZodNativeEnum<
   typeof ConcurrencyOverflow
-> = z.nativeEnum(ConcurrencyOverflow);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ConcurrencyOverflow));
 /** @internal */
 export const ConcurrencyOverflow$outboundSchema: z.ZodNativeEnum<
   typeof ConcurrencyOverflow
 > = ConcurrencyOverflow$inboundSchema;
 
 /** @internal */
-export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> = z
-  .object({
-    object: AgentObject$inboundSchema,
-    id: z.string(),
-    name: z.string(),
-    description: z.nullable(z.string()),
-    model: z.string(),
-    instructions: z.nullable(z.string()),
-    tools: z.array(ToolDefinition$inboundSchema),
-    tool_choice: z.any().optional(),
-    parallel_tool_calls: z.boolean(),
-    max_tool_calls: z.nullable(z.number().int()),
-    fallback_models: z.array(z.string()),
-    max_concurrent_runs: z.nullable(z.number().int()),
-    concurrency_overflow: ConcurrencyOverflow$inboundSchema,
-    text: z.nullable(AgentTextConfiguration$inboundSchema),
-    reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
-    metadata: z.record(z.string()),
-    version: z.number().int(),
-    created_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    updated_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    deleted_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    retention_expires_at: z.nullable(
-      z.string().datetime({ offset: true }).transform(v => new Date(v)),
-    ),
-    within_restore_window: z.boolean(),
-    can_restore: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "tool_choice": "toolChoice",
-      "parallel_tool_calls": "parallelToolCalls",
-      "max_tool_calls": "maxToolCalls",
-      "fallback_models": "fallbackModels",
-      "max_concurrent_runs": "maxConcurrentRuns",
-      "concurrency_overflow": "concurrencyOverflow",
-      "created_at": "createdAt",
-      "updated_at": "updatedAt",
-      "deleted_at": "deletedAt",
-      "retention_expires_at": "retentionExpiresAt",
-      "within_restore_window": "withinRestoreWindow",
-      "can_restore": "canRestore",
-    });
-  });
+export const Agent$inboundSchema: z.ZodType<Agent, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      object: AgentObject$inboundSchema,
+      id: z.string(),
+      name: z.string(),
+      description: z.nullable(z.string()),
+      model: z.string(),
+      instructions: z.nullable(z.string()),
+      tools: z.array(ToolDefinition$inboundSchema),
+      tool_choice: z.any().optional(),
+      parallel_tool_calls: z.boolean(),
+      max_tool_calls: z.nullable(z.number().int()),
+      fallback_models: z.array(z.string()),
+      max_concurrent_runs: z.nullable(z.number().int()),
+      concurrency_overflow: ConcurrencyOverflow$inboundSchema,
+      text: z.nullable(AgentTextConfiguration$inboundSchema),
+      reasoning: z.nullable(AgentReasoningConfiguration$inboundSchema),
+      metadata: z.record(z.string()),
+      version: z.number().int(),
+      created_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      updated_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      deleted_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      retention_expires_at: z.nullable(
+        z.string().datetime({ offset: true }).transform(v => new Date(v)),
+      ),
+      within_restore_window: z.boolean(),
+      can_restore: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "tool_choice": "toolChoice",
+        "parallel_tool_calls": "parallelToolCalls",
+        "max_tool_calls": "maxToolCalls",
+        "fallback_models": "fallbackModels",
+        "max_concurrent_runs": "maxConcurrentRuns",
+        "concurrency_overflow": "concurrencyOverflow",
+        "created_at": "createdAt",
+        "updated_at": "updatedAt",
+        "deleted_at": "deletedAt",
+        "retention_expires_at": "retentionExpiresAt",
+        "within_restore_window": "withinRestoreWindow",
+        "can_restore": "canRestore",
+      });
+    })
+  );
 /** @internal */
 export type Agent$Outbound = {
   object: string;
@@ -174,46 +176,48 @@ export const Agent$outboundSchema: z.ZodType<
   Agent$Outbound,
   z.ZodTypeDef,
   Agent
-> = z.object({
-  object: AgentObject$outboundSchema,
-  id: z.string(),
-  name: z.string(),
-  description: z.nullable(z.string()),
-  model: z.string(),
-  instructions: z.nullable(z.string()),
-  tools: z.array(ToolDefinition$outboundSchema),
-  toolChoice: z.any().optional(),
-  parallelToolCalls: z.boolean(),
-  maxToolCalls: z.nullable(z.number().int()),
-  fallbackModels: z.array(z.string()),
-  maxConcurrentRuns: z.nullable(z.number().int()),
-  concurrencyOverflow: ConcurrencyOverflow$outboundSchema,
-  text: z.nullable(AgentTextConfiguration$outboundSchema),
-  reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
-  metadata: z.record(z.string()),
-  version: z.number().int(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  retentionExpiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  withinRestoreWindow: z.boolean(),
-  canRestore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    maxToolCalls: "max_tool_calls",
-    fallbackModels: "fallback_models",
-    maxConcurrentRuns: "max_concurrent_runs",
-    concurrencyOverflow: "concurrency_overflow",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-    deletedAt: "deleted_at",
-    retentionExpiresAt: "retention_expires_at",
-    withinRestoreWindow: "within_restore_window",
-    canRestore: "can_restore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentObject$outboundSchema,
+    id: z.string(),
+    name: z.string(),
+    description: z.nullable(z.string()),
+    model: z.string(),
+    instructions: z.nullable(z.string()),
+    tools: z.array(ToolDefinition$outboundSchema),
+    toolChoice: z.any().optional(),
+    parallelToolCalls: z.boolean(),
+    maxToolCalls: z.nullable(z.number().int()),
+    fallbackModels: z.array(z.string()),
+    maxConcurrentRuns: z.nullable(z.number().int()),
+    concurrencyOverflow: ConcurrencyOverflow$outboundSchema,
+    text: z.nullable(AgentTextConfiguration$outboundSchema),
+    reasoning: z.nullable(AgentReasoningConfiguration$outboundSchema),
+    metadata: z.record(z.string()),
+    version: z.number().int(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    deletedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    retentionExpiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    withinRestoreWindow: z.boolean(),
+    canRestore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      maxToolCalls: "max_tool_calls",
+      fallbackModels: "fallback_models",
+      maxConcurrentRuns: "max_concurrent_runs",
+      concurrencyOverflow: "concurrency_overflow",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+      deletedAt: "deleted_at",
+      retentionExpiresAt: "retention_expires_at",
+      withinRestoreWindow: "within_restore_window",
+      canRestore: "can_restore",
+    });
+  })
+);
 
 export function agentToJSON(agent: Agent): string {
   return JSON.stringify(Agent$outboundSchema.parse(agent));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -61,12 +61,14 @@ export const Annotation$inboundSchema: z.ZodType<
   Annotation,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  file_citation: FileCitation$inboundSchema,
-  url_citation: URLCitation$inboundSchema,
-  container_file_citation: ContainerFileCitation$inboundSchema,
-  file_path: FilePath$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    file_citation: FileCitation$inboundSchema,
+    url_citation: URLCitation$inboundSchema,
+    container_file_citation: ContainerFileCitation$inboundSchema,
+    file_path: FilePath$inboundSchema,
+  })
+);
 /** @internal */
 export type Annotation$Outbound =
   | FileCitation$Outbound
@@ -79,12 +81,14 @@ export const Annotation$outboundSchema: z.ZodType<
   Annotation$Outbound,
   z.ZodTypeDef,
   Annotation
-> = z.union([
-  FileCitation$outboundSchema,
-  URLCitation$outboundSchema,
-  ContainerFileCitation$outboundSchema,
-  FilePath$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FileCitation$outboundSchema,
+    URLCitation$outboundSchema,
+    ContainerFileCitation$outboundSchema,
+    FilePath$outboundSchema,
+  ])
+);
 
 export function annotationToJSON(annotation: Annotation): string {
   return JSON.stringify(Annotation$outboundSchema.parse(annotation));
@@ -104,28 +108,30 @@ export const ResponseOutputTextAnnotationAddedEvent$inboundSchema: z.ZodType<
   ResponseOutputTextAnnotationAddedEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.output_text.annotation.added"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  content_index: z.number().int(),
-  annotation_index: z.number().int(),
-  annotation: discriminatedUnion("type", {
-    file_citation: FileCitation$inboundSchema,
-    url_citation: URLCitation$inboundSchema,
-    container_file_citation: ContainerFileCitation$inboundSchema,
-    file_path: FilePath$inboundSchema,
-  }),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "content_index": "contentIndex",
-    "annotation_index": "annotationIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_text.annotation.added"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    content_index: z.number().int(),
+    annotation_index: z.number().int(),
+    annotation: discriminatedUnion("type", {
+      file_citation: FileCitation$inboundSchema,
+      url_citation: URLCitation$inboundSchema,
+      container_file_citation: ContainerFileCitation$inboundSchema,
+      file_path: FilePath$inboundSchema,
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "content_index": "contentIndex",
+      "annotation_index": "annotationIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseOutputTextAnnotationAddedEvent$Outbound = {
   type: "response.output_text.annotation.added";
@@ -146,28 +152,30 @@ export const ResponseOutputTextAnnotationAddedEvent$outboundSchema: z.ZodType<
   ResponseOutputTextAnnotationAddedEvent$Outbound,
   z.ZodTypeDef,
   ResponseOutputTextAnnotationAddedEvent
-> = z.object({
-  type: z.literal("response.output_text.annotation.added"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  contentIndex: z.number().int(),
-  annotationIndex: z.number().int(),
-  annotation: z.union([
-    FileCitation$outboundSchema,
-    URLCitation$outboundSchema,
-    ContainerFileCitation$outboundSchema,
-    FilePath$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    contentIndex: "content_index",
-    annotationIndex: "annotation_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_text.annotation.added"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    contentIndex: z.number().int(),
+    annotationIndex: z.number().int(),
+    annotation: z.union([
+      FileCitation$outboundSchema,
+      URLCitation$outboundSchema,
+      ContainerFileCitation$outboundSchema,
+      FilePath$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      contentIndex: "content_index",
+      annotationIndex: "annotation_index",
+    });
+  })
+);
 
 export function responseOutputTextAnnotationAddedEventToJSON(
   responseOutputTextAnnotationAddedEvent:

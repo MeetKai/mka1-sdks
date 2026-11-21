@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type CreateClusterOrgServiceUnavailableError struct {
 var _ error = &CreateClusterOrgServiceUnavailableError{}
 
 func (e *CreateClusterOrgServiceUnavailableError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type CreateClusterOrgTooManyRequestsError struct {
 var _ error = &CreateClusterOrgTooManyRequestsError{}
 
 func (e *CreateClusterOrgTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type CreateClusterOrgGoneError struct {
 var _ error = &CreateClusterOrgGoneError{}
 
 func (e *CreateClusterOrgGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type CreateClusterOrgConflictError struct {
 var _ error = &CreateClusterOrgConflictError{}
 
 func (e *CreateClusterOrgConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -68,6 +93,12 @@ type CreateClusterOrgNotFoundError struct {
 var _ error = &CreateClusterOrgNotFoundError{}
 
 func (e *CreateClusterOrgNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +113,15 @@ type CreateClusterOrgForbiddenError struct {
 var _ error = &CreateClusterOrgForbiddenError{}
 
 func (e *CreateClusterOrgForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type CreateClusterOrgUnauthorizedError struct {
 var _ error = &CreateClusterOrgUnauthorizedError{}
 
 func (e *CreateClusterOrgUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -108,6 +154,12 @@ type CreateClusterOrgBadRequestError struct {
 var _ error = &CreateClusterOrgBadRequestError{}
 
 func (e *CreateClusterOrgBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -563,145 +563,149 @@ export const ResponseStreamingEvent$inboundSchema: z.ZodType<
   ResponseStreamingEvent,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  ["response.created"]: ResponseCreatedEvent$inboundSchema,
-  ["response.in_progress"]: ResponseInProgressEvent$inboundSchema,
-  ["response.completed"]: ResponseCompletedEvent$inboundSchema,
-  ["response.failed"]: ResponseFailedEvent$inboundSchema,
-  ["response.incomplete"]: ResponseIncompleteEvent$inboundSchema,
-  ["response.queued"]: ResponseQueuedEvent$inboundSchema,
-  ["response.cancelled"]: ResponseCancelledEvent$inboundSchema,
-  ["response.output_item.added"]: ResponseOutputItemAddedEvent$inboundSchema,
-  ["response.output_item.done"]: ResponseOutputItemDoneEvent$inboundSchema,
-  ["response.content_part.added"]: ResponseContentPartAddedEvent$inboundSchema,
-  ["response.content_part.done"]: ResponseContentPartDoneEvent$inboundSchema,
-  ["response.output_text.delta"]: ResponseOutputTextDeltaEvent$inboundSchema,
-  ["response.output_text.done"]: ResponseOutputTextDoneEvent$inboundSchema,
-  ["response.refusal.delta"]: ResponseRefusalDeltaEvent$inboundSchema,
-  ["response.refusal.done"]: ResponseRefusalDoneEvent$inboundSchema,
-  ["response.function_call_arguments.delta"]:
-    ResponseFunctionCallArgumentsDeltaEvent$inboundSchema,
-  ["response.function_call_arguments.done"]:
-    ResponseFunctionCallArgumentsDoneEvent$inboundSchema,
-  ["response.file_search_call.in_progress"]:
-    ResponseFileSearchCallInProgressEvent$inboundSchema,
-  ["response.file_search_call.searching"]:
-    ResponseFileSearchCallSearchingEvent$inboundSchema,
-  ["response.file_search_call.completed"]:
-    ResponseFileSearchCallCompletedEvent$inboundSchema,
-  ["response.file_search_call.failed"]:
-    ResponseFileSearchCallFailedEvent$inboundSchema,
-  ["response.web_search_call.in_progress"]:
-    ResponseWebSearchCallInProgressEvent$inboundSchema,
-  ["response.web_search_call.searching"]:
-    ResponseWebSearchCallSearchingEvent$inboundSchema,
-  ["response.web_search_call.completed"]:
-    ResponseWebSearchCallCompletedEvent$inboundSchema,
-  ["response.history_call.in_progress"]:
-    ResponseHistoryCallInProgressEvent$inboundSchema,
-  ["response.history_call.searching"]:
-    ResponseHistoryCallSearchingEvent$inboundSchema,
-  ["response.history_call.completed"]:
-    ResponseHistoryCallCompletedEvent$inboundSchema,
-  ["response.sleep_call.in_progress"]:
-    ResponseSleepCallInProgressEvent$inboundSchema,
-  ["response.sleep_call.sleeping"]:
-    ResponseSleepCallSleepingEvent$inboundSchema,
-  ["response.sleep_call.completed"]:
-    ResponseSleepCallCompletedEvent$inboundSchema,
-  ["response.approval_call.in_progress"]:
-    ResponseApprovalCallInProgressEvent$inboundSchema,
-  ["response.approval_call.checking"]:
-    ResponseApprovalCallCheckingEvent$inboundSchema,
-  ["response.approval_call.completed"]:
-    ResponseApprovalCallCompletedEvent$inboundSchema,
-  ["response.schedule_call.in_progress"]:
-    ResponseScheduleCallInProgressEvent$inboundSchema,
-  ["response.schedule_call.completed"]:
-    ResponseScheduleCallCompletedEvent$inboundSchema,
-  ["response.tool_search_call.in_progress"]:
-    ResponseToolSearchCallInProgressEvent$inboundSchema,
-  ["response.tool_search_call.searching"]:
-    ResponseToolSearchCallSearchingEvent$inboundSchema,
-  ["response.tool_search_call.completed"]:
-    ResponseToolSearchCallCompletedEvent$inboundSchema,
-  ["response.reasoning_summary_part.added"]:
-    ResponseReasoningSummaryPartAddedEvent$inboundSchema,
-  ["response.reasoning_summary_part.done"]:
-    ResponseReasoningSummaryPartDoneEvent$inboundSchema,
-  ["response.reasoning_summary_text.delta"]:
-    ResponseReasoningSummaryTextDeltaEvent$inboundSchema,
-  ["response.reasoning_summary_text.done"]:
-    ResponseReasoningSummaryTextDoneEvent$inboundSchema,
-  ["response.reasoning_text.delta"]:
-    ResponseReasoningTextDeltaEvent$inboundSchema,
-  ["response.reasoning_text.done"]:
-    ResponseReasoningTextDoneEvent$inboundSchema,
-  ["response.image_generation_call.in_progress"]:
-    ResponseImageGenerationCallInProgressEvent$inboundSchema,
-  ["response.image_generation_call.generating"]:
-    ResponseImageGenerationCallGeneratingEvent$inboundSchema,
-  ["response.image_generation_call.completed"]:
-    ResponseImageGenerationCallCompletedEvent$inboundSchema,
-  ["response.image_generation_call.failed"]:
-    ResponseImageGenerationCallFailedEvent$inboundSchema,
-  ["response.image_generation_call.partial_image"]:
-    ResponseImageGenerationCallPartialImageEvent$inboundSchema,
-  ["response.mcp_call_arguments.delta"]:
-    ResponseMCPCallArgumentsDeltaEvent$inboundSchema,
-  ["response.mcp_call_arguments.done"]:
-    ResponseMCPCallArgumentsDoneEvent$inboundSchema,
-  ["response.mcp_call.in_progress"]:
-    ResponseMCPCallInProgressEvent$inboundSchema,
-  ["response.mcp_call.completed"]: ResponseMCPCallCompletedEvent$inboundSchema,
-  ["response.mcp_call.failed"]: ResponseMCPCallFailedEvent$inboundSchema,
-  ["response.agent_call.in_progress"]:
-    ResponseAgentCallInProgressEvent$inboundSchema,
-  ["response.agent_call.completed"]:
-    ResponseAgentCallCompletedEvent$inboundSchema,
-  ["response.agent_call.failed"]: ResponseAgentCallFailedEvent$inboundSchema,
-  ["response.openapi_call.in_progress"]:
-    ResponseOpenApiCallInProgressEvent$inboundSchema,
-  ["response.openapi_call.completed"]:
-    ResponseOpenApiCallCompletedEvent$inboundSchema,
-  ["response.openapi_call.failed"]:
-    ResponseOpenApiCallFailedEvent$inboundSchema,
-  ["response.mcp_list_tools.in_progress"]:
-    ResponseMCPListToolsInProgressEvent$inboundSchema,
-  ["response.mcp_list_tools.completed"]:
-    ResponseMCPListToolsCompletedEvent$inboundSchema,
-  ["response.mcp_list_tools.failed"]:
-    ResponseMCPListToolsFailedEvent$inboundSchema,
-  ["response.read_file_call.in_progress"]:
-    ResponseReadFileCallInProgressEvent$inboundSchema,
-  ["response.read_file_call.reading"]:
-    ResponseReadFileCallReadingEvent$inboundSchema,
-  ["response.read_file_call.completed"]:
-    ResponseReadFileCallCompletedEvent$inboundSchema,
-  ["response.code_interpreter_call.in_progress"]:
-    ResponseCodeInterpreterCallInProgressEvent$inboundSchema,
-  ["response.code_interpreter_call.interpreting"]:
-    ResponseCodeInterpreterCallInterpretingEvent$inboundSchema,
-  ["response.code_interpreter_call.completed"]:
-    ResponseCodeInterpreterCallCompletedEvent$inboundSchema,
-  ["response.code_interpreter_call_code.delta"]:
-    ResponseCodeInterpreterCallCodeDeltaEvent$inboundSchema,
-  ["response.code_interpreter_call_code.done"]:
-    ResponseCodeInterpreterCallCodeDoneEvent$inboundSchema,
-  ["response.shell_call.in_progress"]:
-    ResponseShellCallInProgressEvent$inboundSchema,
-  ["response.shell_call.executing"]:
-    ResponseShellCallExecutingEvent$inboundSchema,
-  ["response.shell_call.completed"]:
-    ResponseShellCallCompletedEvent$inboundSchema,
-  ["response.custom_tool_call_input.delta"]:
-    ResponseCustomToolCallInputDeltaEvent$inboundSchema,
-  ["response.custom_tool_call_input.done"]:
-    ResponseCustomToolCallInputDoneEvent$inboundSchema,
-  ["response.output_text.annotation.added"]:
-    ResponseOutputTextAnnotationAddedEvent$inboundSchema,
-  error: ErrorEvent$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    ["response.created"]: ResponseCreatedEvent$inboundSchema,
+    ["response.in_progress"]: ResponseInProgressEvent$inboundSchema,
+    ["response.completed"]: ResponseCompletedEvent$inboundSchema,
+    ["response.failed"]: ResponseFailedEvent$inboundSchema,
+    ["response.incomplete"]: ResponseIncompleteEvent$inboundSchema,
+    ["response.queued"]: ResponseQueuedEvent$inboundSchema,
+    ["response.cancelled"]: ResponseCancelledEvent$inboundSchema,
+    ["response.output_item.added"]: ResponseOutputItemAddedEvent$inboundSchema,
+    ["response.output_item.done"]: ResponseOutputItemDoneEvent$inboundSchema,
+    ["response.content_part.added"]:
+      ResponseContentPartAddedEvent$inboundSchema,
+    ["response.content_part.done"]: ResponseContentPartDoneEvent$inboundSchema,
+    ["response.output_text.delta"]: ResponseOutputTextDeltaEvent$inboundSchema,
+    ["response.output_text.done"]: ResponseOutputTextDoneEvent$inboundSchema,
+    ["response.refusal.delta"]: ResponseRefusalDeltaEvent$inboundSchema,
+    ["response.refusal.done"]: ResponseRefusalDoneEvent$inboundSchema,
+    ["response.function_call_arguments.delta"]:
+      ResponseFunctionCallArgumentsDeltaEvent$inboundSchema,
+    ["response.function_call_arguments.done"]:
+      ResponseFunctionCallArgumentsDoneEvent$inboundSchema,
+    ["response.file_search_call.in_progress"]:
+      ResponseFileSearchCallInProgressEvent$inboundSchema,
+    ["response.file_search_call.searching"]:
+      ResponseFileSearchCallSearchingEvent$inboundSchema,
+    ["response.file_search_call.completed"]:
+      ResponseFileSearchCallCompletedEvent$inboundSchema,
+    ["response.file_search_call.failed"]:
+      ResponseFileSearchCallFailedEvent$inboundSchema,
+    ["response.web_search_call.in_progress"]:
+      ResponseWebSearchCallInProgressEvent$inboundSchema,
+    ["response.web_search_call.searching"]:
+      ResponseWebSearchCallSearchingEvent$inboundSchema,
+    ["response.web_search_call.completed"]:
+      ResponseWebSearchCallCompletedEvent$inboundSchema,
+    ["response.history_call.in_progress"]:
+      ResponseHistoryCallInProgressEvent$inboundSchema,
+    ["response.history_call.searching"]:
+      ResponseHistoryCallSearchingEvent$inboundSchema,
+    ["response.history_call.completed"]:
+      ResponseHistoryCallCompletedEvent$inboundSchema,
+    ["response.sleep_call.in_progress"]:
+      ResponseSleepCallInProgressEvent$inboundSchema,
+    ["response.sleep_call.sleeping"]:
+      ResponseSleepCallSleepingEvent$inboundSchema,
+    ["response.sleep_call.completed"]:
+      ResponseSleepCallCompletedEvent$inboundSchema,
+    ["response.approval_call.in_progress"]:
+      ResponseApprovalCallInProgressEvent$inboundSchema,
+    ["response.approval_call.checking"]:
+      ResponseApprovalCallCheckingEvent$inboundSchema,
+    ["response.approval_call.completed"]:
+      ResponseApprovalCallCompletedEvent$inboundSchema,
+    ["response.schedule_call.in_progress"]:
+      ResponseScheduleCallInProgressEvent$inboundSchema,
+    ["response.schedule_call.completed"]:
+      ResponseScheduleCallCompletedEvent$inboundSchema,
+    ["response.tool_search_call.in_progress"]:
+      ResponseToolSearchCallInProgressEvent$inboundSchema,
+    ["response.tool_search_call.searching"]:
+      ResponseToolSearchCallSearchingEvent$inboundSchema,
+    ["response.tool_search_call.completed"]:
+      ResponseToolSearchCallCompletedEvent$inboundSchema,
+    ["response.reasoning_summary_part.added"]:
+      ResponseReasoningSummaryPartAddedEvent$inboundSchema,
+    ["response.reasoning_summary_part.done"]:
+      ResponseReasoningSummaryPartDoneEvent$inboundSchema,
+    ["response.reasoning_summary_text.delta"]:
+      ResponseReasoningSummaryTextDeltaEvent$inboundSchema,
+    ["response.reasoning_summary_text.done"]:
+      ResponseReasoningSummaryTextDoneEvent$inboundSchema,
+    ["response.reasoning_text.delta"]:
+      ResponseReasoningTextDeltaEvent$inboundSchema,
+    ["response.reasoning_text.done"]:
+      ResponseReasoningTextDoneEvent$inboundSchema,
+    ["response.image_generation_call.in_progress"]:
+      ResponseImageGenerationCallInProgressEvent$inboundSchema,
+    ["response.image_generation_call.generating"]:
+      ResponseImageGenerationCallGeneratingEvent$inboundSchema,
+    ["response.image_generation_call.completed"]:
+      ResponseImageGenerationCallCompletedEvent$inboundSchema,
+    ["response.image_generation_call.failed"]:
+      ResponseImageGenerationCallFailedEvent$inboundSchema,
+    ["response.image_generation_call.partial_image"]:
+      ResponseImageGenerationCallPartialImageEvent$inboundSchema,
+    ["response.mcp_call_arguments.delta"]:
+      ResponseMCPCallArgumentsDeltaEvent$inboundSchema,
+    ["response.mcp_call_arguments.done"]:
+      ResponseMCPCallArgumentsDoneEvent$inboundSchema,
+    ["response.mcp_call.in_progress"]:
+      ResponseMCPCallInProgressEvent$inboundSchema,
+    ["response.mcp_call.completed"]:
+      ResponseMCPCallCompletedEvent$inboundSchema,
+    ["response.mcp_call.failed"]: ResponseMCPCallFailedEvent$inboundSchema,
+    ["response.agent_call.in_progress"]:
+      ResponseAgentCallInProgressEvent$inboundSchema,
+    ["response.agent_call.completed"]:
+      ResponseAgentCallCompletedEvent$inboundSchema,
+    ["response.agent_call.failed"]: ResponseAgentCallFailedEvent$inboundSchema,
+    ["response.openapi_call.in_progress"]:
+      ResponseOpenApiCallInProgressEvent$inboundSchema,
+    ["response.openapi_call.completed"]:
+      ResponseOpenApiCallCompletedEvent$inboundSchema,
+    ["response.openapi_call.failed"]:
+      ResponseOpenApiCallFailedEvent$inboundSchema,
+    ["response.mcp_list_tools.in_progress"]:
+      ResponseMCPListToolsInProgressEvent$inboundSchema,
+    ["response.mcp_list_tools.completed"]:
+      ResponseMCPListToolsCompletedEvent$inboundSchema,
+    ["response.mcp_list_tools.failed"]:
+      ResponseMCPListToolsFailedEvent$inboundSchema,
+    ["response.read_file_call.in_progress"]:
+      ResponseReadFileCallInProgressEvent$inboundSchema,
+    ["response.read_file_call.reading"]:
+      ResponseReadFileCallReadingEvent$inboundSchema,
+    ["response.read_file_call.completed"]:
+      ResponseReadFileCallCompletedEvent$inboundSchema,
+    ["response.code_interpreter_call.in_progress"]:
+      ResponseCodeInterpreterCallInProgressEvent$inboundSchema,
+    ["response.code_interpreter_call.interpreting"]:
+      ResponseCodeInterpreterCallInterpretingEvent$inboundSchema,
+    ["response.code_interpreter_call.completed"]:
+      ResponseCodeInterpreterCallCompletedEvent$inboundSchema,
+    ["response.code_interpreter_call_code.delta"]:
+      ResponseCodeInterpreterCallCodeDeltaEvent$inboundSchema,
+    ["response.code_interpreter_call_code.done"]:
+      ResponseCodeInterpreterCallCodeDoneEvent$inboundSchema,
+    ["response.shell_call.in_progress"]:
+      ResponseShellCallInProgressEvent$inboundSchema,
+    ["response.shell_call.executing"]:
+      ResponseShellCallExecutingEvent$inboundSchema,
+    ["response.shell_call.completed"]:
+      ResponseShellCallCompletedEvent$inboundSchema,
+    ["response.custom_tool_call_input.delta"]:
+      ResponseCustomToolCallInputDeltaEvent$inboundSchema,
+    ["response.custom_tool_call_input.done"]:
+      ResponseCustomToolCallInputDoneEvent$inboundSchema,
+    ["response.output_text.annotation.added"]:
+      ResponseOutputTextAnnotationAddedEvent$inboundSchema,
+    error: ErrorEvent$inboundSchema,
+  })
+);
 /** @internal */
 export type ResponseStreamingEvent$Outbound =
   | ResponseCreatedEvent$Outbound
@@ -788,86 +792,88 @@ export const ResponseStreamingEvent$outboundSchema: z.ZodType<
   ResponseStreamingEvent$Outbound,
   z.ZodTypeDef,
   ResponseStreamingEvent
-> = z.union([
-  ResponseCreatedEvent$outboundSchema,
-  ResponseInProgressEvent$outboundSchema,
-  ResponseCompletedEvent$outboundSchema,
-  ResponseFailedEvent$outboundSchema,
-  ResponseIncompleteEvent$outboundSchema,
-  ResponseQueuedEvent$outboundSchema,
-  ResponseCancelledEvent$outboundSchema,
-  ResponseOutputItemAddedEvent$outboundSchema,
-  ResponseOutputItemDoneEvent$outboundSchema,
-  ResponseContentPartAddedEvent$outboundSchema,
-  ResponseContentPartDoneEvent$outboundSchema,
-  ResponseOutputTextDeltaEvent$outboundSchema,
-  ResponseOutputTextDoneEvent$outboundSchema,
-  ResponseRefusalDeltaEvent$outboundSchema,
-  ResponseRefusalDoneEvent$outboundSchema,
-  ResponseFunctionCallArgumentsDeltaEvent$outboundSchema,
-  ResponseFunctionCallArgumentsDoneEvent$outboundSchema,
-  ResponseFileSearchCallInProgressEvent$outboundSchema,
-  ResponseFileSearchCallSearchingEvent$outboundSchema,
-  ResponseFileSearchCallCompletedEvent$outboundSchema,
-  ResponseFileSearchCallFailedEvent$outboundSchema,
-  ResponseWebSearchCallInProgressEvent$outboundSchema,
-  ResponseWebSearchCallSearchingEvent$outboundSchema,
-  ResponseWebSearchCallCompletedEvent$outboundSchema,
-  ResponseHistoryCallInProgressEvent$outboundSchema,
-  ResponseHistoryCallSearchingEvent$outboundSchema,
-  ResponseHistoryCallCompletedEvent$outboundSchema,
-  ResponseSleepCallInProgressEvent$outboundSchema,
-  ResponseSleepCallSleepingEvent$outboundSchema,
-  ResponseSleepCallCompletedEvent$outboundSchema,
-  ResponseApprovalCallInProgressEvent$outboundSchema,
-  ResponseApprovalCallCheckingEvent$outboundSchema,
-  ResponseApprovalCallCompletedEvent$outboundSchema,
-  ResponseScheduleCallInProgressEvent$outboundSchema,
-  ResponseScheduleCallCompletedEvent$outboundSchema,
-  ResponseToolSearchCallInProgressEvent$outboundSchema,
-  ResponseToolSearchCallSearchingEvent$outboundSchema,
-  ResponseToolSearchCallCompletedEvent$outboundSchema,
-  ResponseReasoningSummaryPartAddedEvent$outboundSchema,
-  ResponseReasoningSummaryPartDoneEvent$outboundSchema,
-  ResponseReasoningSummaryTextDeltaEvent$outboundSchema,
-  ResponseReasoningSummaryTextDoneEvent$outboundSchema,
-  ResponseReasoningTextDeltaEvent$outboundSchema,
-  ResponseReasoningTextDoneEvent$outboundSchema,
-  ResponseImageGenerationCallInProgressEvent$outboundSchema,
-  ResponseImageGenerationCallGeneratingEvent$outboundSchema,
-  ResponseImageGenerationCallCompletedEvent$outboundSchema,
-  ResponseImageGenerationCallFailedEvent$outboundSchema,
-  ResponseImageGenerationCallPartialImageEvent$outboundSchema,
-  ResponseMCPCallArgumentsDeltaEvent$outboundSchema,
-  ResponseMCPCallArgumentsDoneEvent$outboundSchema,
-  ResponseMCPCallInProgressEvent$outboundSchema,
-  ResponseMCPCallCompletedEvent$outboundSchema,
-  ResponseMCPCallFailedEvent$outboundSchema,
-  ResponseAgentCallInProgressEvent$outboundSchema,
-  ResponseAgentCallCompletedEvent$outboundSchema,
-  ResponseAgentCallFailedEvent$outboundSchema,
-  ResponseOpenApiCallInProgressEvent$outboundSchema,
-  ResponseOpenApiCallCompletedEvent$outboundSchema,
-  ResponseOpenApiCallFailedEvent$outboundSchema,
-  ResponseMCPListToolsInProgressEvent$outboundSchema,
-  ResponseMCPListToolsCompletedEvent$outboundSchema,
-  ResponseMCPListToolsFailedEvent$outboundSchema,
-  ResponseReadFileCallInProgressEvent$outboundSchema,
-  ResponseReadFileCallReadingEvent$outboundSchema,
-  ResponseReadFileCallCompletedEvent$outboundSchema,
-  ResponseCodeInterpreterCallInProgressEvent$outboundSchema,
-  ResponseCodeInterpreterCallInterpretingEvent$outboundSchema,
-  ResponseCodeInterpreterCallCompletedEvent$outboundSchema,
-  ResponseCodeInterpreterCallCodeDeltaEvent$outboundSchema,
-  ResponseCodeInterpreterCallCodeDoneEvent$outboundSchema,
-  ResponseShellCallInProgressEvent$outboundSchema,
-  ResponseShellCallExecutingEvent$outboundSchema,
-  ResponseShellCallCompletedEvent$outboundSchema,
-  ResponseCustomToolCallInputDeltaEvent$outboundSchema,
-  ResponseCustomToolCallInputDoneEvent$outboundSchema,
-  ResponseOutputTextAnnotationAddedEvent$outboundSchema,
-  ErrorEvent$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ResponseCreatedEvent$outboundSchema,
+    ResponseInProgressEvent$outboundSchema,
+    ResponseCompletedEvent$outboundSchema,
+    ResponseFailedEvent$outboundSchema,
+    ResponseIncompleteEvent$outboundSchema,
+    ResponseQueuedEvent$outboundSchema,
+    ResponseCancelledEvent$outboundSchema,
+    ResponseOutputItemAddedEvent$outboundSchema,
+    ResponseOutputItemDoneEvent$outboundSchema,
+    ResponseContentPartAddedEvent$outboundSchema,
+    ResponseContentPartDoneEvent$outboundSchema,
+    ResponseOutputTextDeltaEvent$outboundSchema,
+    ResponseOutputTextDoneEvent$outboundSchema,
+    ResponseRefusalDeltaEvent$outboundSchema,
+    ResponseRefusalDoneEvent$outboundSchema,
+    ResponseFunctionCallArgumentsDeltaEvent$outboundSchema,
+    ResponseFunctionCallArgumentsDoneEvent$outboundSchema,
+    ResponseFileSearchCallInProgressEvent$outboundSchema,
+    ResponseFileSearchCallSearchingEvent$outboundSchema,
+    ResponseFileSearchCallCompletedEvent$outboundSchema,
+    ResponseFileSearchCallFailedEvent$outboundSchema,
+    ResponseWebSearchCallInProgressEvent$outboundSchema,
+    ResponseWebSearchCallSearchingEvent$outboundSchema,
+    ResponseWebSearchCallCompletedEvent$outboundSchema,
+    ResponseHistoryCallInProgressEvent$outboundSchema,
+    ResponseHistoryCallSearchingEvent$outboundSchema,
+    ResponseHistoryCallCompletedEvent$outboundSchema,
+    ResponseSleepCallInProgressEvent$outboundSchema,
+    ResponseSleepCallSleepingEvent$outboundSchema,
+    ResponseSleepCallCompletedEvent$outboundSchema,
+    ResponseApprovalCallInProgressEvent$outboundSchema,
+    ResponseApprovalCallCheckingEvent$outboundSchema,
+    ResponseApprovalCallCompletedEvent$outboundSchema,
+    ResponseScheduleCallInProgressEvent$outboundSchema,
+    ResponseScheduleCallCompletedEvent$outboundSchema,
+    ResponseToolSearchCallInProgressEvent$outboundSchema,
+    ResponseToolSearchCallSearchingEvent$outboundSchema,
+    ResponseToolSearchCallCompletedEvent$outboundSchema,
+    ResponseReasoningSummaryPartAddedEvent$outboundSchema,
+    ResponseReasoningSummaryPartDoneEvent$outboundSchema,
+    ResponseReasoningSummaryTextDeltaEvent$outboundSchema,
+    ResponseReasoningSummaryTextDoneEvent$outboundSchema,
+    ResponseReasoningTextDeltaEvent$outboundSchema,
+    ResponseReasoningTextDoneEvent$outboundSchema,
+    ResponseImageGenerationCallInProgressEvent$outboundSchema,
+    ResponseImageGenerationCallGeneratingEvent$outboundSchema,
+    ResponseImageGenerationCallCompletedEvent$outboundSchema,
+    ResponseImageGenerationCallFailedEvent$outboundSchema,
+    ResponseImageGenerationCallPartialImageEvent$outboundSchema,
+    ResponseMCPCallArgumentsDeltaEvent$outboundSchema,
+    ResponseMCPCallArgumentsDoneEvent$outboundSchema,
+    ResponseMCPCallInProgressEvent$outboundSchema,
+    ResponseMCPCallCompletedEvent$outboundSchema,
+    ResponseMCPCallFailedEvent$outboundSchema,
+    ResponseAgentCallInProgressEvent$outboundSchema,
+    ResponseAgentCallCompletedEvent$outboundSchema,
+    ResponseAgentCallFailedEvent$outboundSchema,
+    ResponseOpenApiCallInProgressEvent$outboundSchema,
+    ResponseOpenApiCallCompletedEvent$outboundSchema,
+    ResponseOpenApiCallFailedEvent$outboundSchema,
+    ResponseMCPListToolsInProgressEvent$outboundSchema,
+    ResponseMCPListToolsCompletedEvent$outboundSchema,
+    ResponseMCPListToolsFailedEvent$outboundSchema,
+    ResponseReadFileCallInProgressEvent$outboundSchema,
+    ResponseReadFileCallReadingEvent$outboundSchema,
+    ResponseReadFileCallCompletedEvent$outboundSchema,
+    ResponseCodeInterpreterCallInProgressEvent$outboundSchema,
+    ResponseCodeInterpreterCallInterpretingEvent$outboundSchema,
+    ResponseCodeInterpreterCallCompletedEvent$outboundSchema,
+    ResponseCodeInterpreterCallCodeDeltaEvent$outboundSchema,
+    ResponseCodeInterpreterCallCodeDoneEvent$outboundSchema,
+    ResponseShellCallInProgressEvent$outboundSchema,
+    ResponseShellCallExecutingEvent$outboundSchema,
+    ResponseShellCallCompletedEvent$outboundSchema,
+    ResponseCustomToolCallInputDeltaEvent$outboundSchema,
+    ResponseCustomToolCallInputDoneEvent$outboundSchema,
+    ResponseOutputTextAnnotationAddedEvent$outboundSchema,
+    ErrorEvent$outboundSchema,
+  ])
+);
 
 export function responseStreamingEventToJSON(
   responseStreamingEvent: ResponseStreamingEvent,

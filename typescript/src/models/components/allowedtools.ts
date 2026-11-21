@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -31,9 +31,8 @@ export type AllowedTools = {
 };
 
 /** @internal */
-export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> = z.nativeEnum(
-  Mode,
-);
+export const Mode$inboundSchema: z.ZodNativeEnum<typeof Mode> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Mode));
 /** @internal */
 export const Mode$outboundSchema: z.ZodNativeEnum<typeof Mode> =
   Mode$inboundSchema;
@@ -43,15 +42,17 @@ export const AllowedToolsTools$inboundSchema: z.ZodType<
   AllowedToolsTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.string(),
-  name: z.string().optional(),
-  server_label: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    name: z.string().optional(),
+    server_label: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type AllowedToolsTools$Outbound = {
   type: string;
@@ -64,15 +65,17 @@ export const AllowedToolsTools$outboundSchema: z.ZodType<
   AllowedToolsTools$Outbound,
   z.ZodTypeDef,
   AllowedToolsTools
-> = z.object({
-  type: z.string(),
-  name: z.string().optional(),
-  serverLabel: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string(),
+    name: z.string().optional(),
+    serverLabel: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function allowedToolsToolsToJSON(
   allowedToolsTools: AllowedToolsTools,
@@ -96,11 +99,13 @@ export const AllowedTools$inboundSchema: z.ZodType<
   AllowedTools,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("allowed_tools"),
-  mode: Mode$inboundSchema,
-  tools: z.array(z.lazy(() => AllowedToolsTools$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowed_tools"),
+    mode: Mode$inboundSchema,
+    tools: z.array(z.lazy(() => AllowedToolsTools$inboundSchema)),
+  })
+);
 /** @internal */
 export type AllowedTools$Outbound = {
   type: "allowed_tools";
@@ -113,11 +118,13 @@ export const AllowedTools$outboundSchema: z.ZodType<
   AllowedTools$Outbound,
   z.ZodTypeDef,
   AllowedTools
-> = z.object({
-  type: z.literal("allowed_tools"),
-  mode: Mode$outboundSchema,
-  tools: z.array(z.lazy(() => AllowedToolsTools$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowed_tools"),
+    mode: Mode$outboundSchema,
+    tools: z.array(z.lazy(() => AllowedToolsTools$outboundSchema)),
+  })
+);
 
 export function allowedToolsToJSON(allowedTools: AllowedTools): string {
   return JSON.stringify(AllowedTools$outboundSchema.parse(allowedTools));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,18 +40,20 @@ export const WebSearchToolCallWithId$inboundSchema: z.ZodType<
   WebSearchToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("web_search_call"),
-  id: z.string(),
-  action: WebSearchAction$inboundSchema,
-  status: z.string(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("web_search_call"),
+    id: z.string(),
+    action: WebSearchAction$inboundSchema,
+    status: z.string(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type WebSearchToolCallWithId$Outbound = {
   type: "web_search_call";
@@ -67,18 +69,20 @@ export const WebSearchToolCallWithId$outboundSchema: z.ZodType<
   WebSearchToolCallWithId$Outbound,
   z.ZodTypeDef,
   WebSearchToolCallWithId
-> = z.object({
-  type: z.literal("web_search_call"),
-  id: z.string(),
-  action: WebSearchAction$outboundSchema,
-  status: z.string(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("web_search_call"),
+    id: z.string(),
+    action: WebSearchAction$outboundSchema,
+    status: z.string(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseId: "response_id",
+    });
+  })
+);
 
 export function webSearchToolCallWithIdToJSON(
   webSearchToolCallWithId: WebSearchToolCallWithId,

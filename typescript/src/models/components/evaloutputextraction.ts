@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,20 +54,24 @@ export type EvalOutputExtraction =
   | Six;
 
 /** @internal */
-export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("number"),
-  });
+export const Six$inboundSchema: z.ZodType<Six, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("number"),
+    })
+  );
 /** @internal */
 export type Six$Outbound = {
   type: "number";
 };
 
 /** @internal */
-export const Six$outboundSchema: z.ZodType<Six$Outbound, z.ZodTypeDef, Six> = z
-  .object({
-    type: z.literal("number"),
-  });
+export const Six$outboundSchema: z.ZodType<Six$Outbound, z.ZodTypeDef, Six> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("number"),
+    })
+  );
 
 export function sixToJSON(six: Six): string {
   return JSON.stringify(Six$outboundSchema.parse(six));
@@ -83,16 +87,18 @@ export function sixFromJSON(
 }
 
 /** @internal */
-export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> = z
-  .object({
-    type: z.literal("label_set"),
-    labels: z.array(z.string()),
-    case_sensitive: z.boolean().default(false),
-  }).transform((v) => {
-    return remap$(v, {
-      "case_sensitive": "caseSensitive",
-    });
-  });
+export const Five$inboundSchema: z.ZodType<Five, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("label_set"),
+      labels: z.array(z.string()),
+      case_sensitive: z.boolean().default(false),
+    }).transform((v) => {
+      return remap$(v, {
+        "case_sensitive": "caseSensitive",
+      });
+    })
+  );
 /** @internal */
 export type Five$Outbound = {
   type: "label_set";
@@ -102,15 +108,17 @@ export type Five$Outbound = {
 
 /** @internal */
 export const Five$outboundSchema: z.ZodType<Five$Outbound, z.ZodTypeDef, Five> =
-  z.object({
-    type: z.literal("label_set"),
-    labels: z.array(z.string()),
-    caseSensitive: z.boolean().default(false),
-  }).transform((v) => {
-    return remap$(v, {
-      caseSensitive: "case_sensitive",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      type: z.literal("label_set"),
+      labels: z.array(z.string()),
+      caseSensitive: z.boolean().default(false),
+    }).transform((v) => {
+      return remap$(v, {
+        caseSensitive: "case_sensitive",
+      });
+    })
+  );
 
 export function fiveToJSON(five: Five): string {
   return JSON.stringify(Five$outboundSchema.parse(five));
@@ -130,7 +138,7 @@ export const EvalOutputExtractionGroup$inboundSchema: z.ZodType<
   EvalOutputExtractionGroup,
   z.ZodTypeDef,
   unknown
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 /** @internal */
 export type EvalOutputExtractionGroup$Outbound = number | string;
 
@@ -139,7 +147,7 @@ export const EvalOutputExtractionGroup$outboundSchema: z.ZodType<
   EvalOutputExtractionGroup$Outbound,
   z.ZodTypeDef,
   EvalOutputExtractionGroup
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 
 export function evalOutputExtractionGroupToJSON(
   evalOutputExtractionGroup: EvalOutputExtractionGroup,
@@ -163,12 +171,14 @@ export const EvalOutputExtraction4$inboundSchema: z.ZodType<
   EvalOutputExtraction4,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("regex_last"),
-  pattern: z.string(),
-  group: z.union([z.number().int(), z.string()]).optional(),
-  flags: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("regex_last"),
+    pattern: z.string(),
+    group: z.union([z.number().int(), z.string()]).optional(),
+    flags: z.string().optional(),
+  })
+);
 /** @internal */
 export type EvalOutputExtraction4$Outbound = {
   type: "regex_last";
@@ -182,12 +192,14 @@ export const EvalOutputExtraction4$outboundSchema: z.ZodType<
   EvalOutputExtraction4$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction4
-> = z.object({
-  type: z.literal("regex_last"),
-  pattern: z.string(),
-  group: z.union([z.number().int(), z.string()]).optional(),
-  flags: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("regex_last"),
+    pattern: z.string(),
+    group: z.union([z.number().int(), z.string()]).optional(),
+    flags: z.string().optional(),
+  })
+);
 
 export function evalOutputExtraction4ToJSON(
   evalOutputExtraction4: EvalOutputExtraction4,
@@ -211,7 +223,7 @@ export const EvalOutputExtraction3Group$inboundSchema: z.ZodType<
   EvalOutputExtraction3Group,
   z.ZodTypeDef,
   unknown
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 /** @internal */
 export type EvalOutputExtraction3Group$Outbound = number | string;
 
@@ -220,7 +232,7 @@ export const EvalOutputExtraction3Group$outboundSchema: z.ZodType<
   EvalOutputExtraction3Group$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction3Group
-> = z.union([z.number().int(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.number().int(), z.string()]));
 
 export function evalOutputExtraction3GroupToJSON(
   evalOutputExtraction3Group: EvalOutputExtraction3Group,
@@ -244,12 +256,14 @@ export const EvalOutputExtraction3$inboundSchema: z.ZodType<
   EvalOutputExtraction3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("regex"),
-  pattern: z.string(),
-  group: z.union([z.number().int(), z.string()]).optional(),
-  flags: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("regex"),
+    pattern: z.string(),
+    group: z.union([z.number().int(), z.string()]).optional(),
+    flags: z.string().optional(),
+  })
+);
 /** @internal */
 export type EvalOutputExtraction3$Outbound = {
   type: "regex";
@@ -263,12 +277,14 @@ export const EvalOutputExtraction3$outboundSchema: z.ZodType<
   EvalOutputExtraction3$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction3
-> = z.object({
-  type: z.literal("regex"),
-  pattern: z.string(),
-  group: z.union([z.number().int(), z.string()]).optional(),
-  flags: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("regex"),
+    pattern: z.string(),
+    group: z.union([z.number().int(), z.string()]).optional(),
+    flags: z.string().optional(),
+  })
+);
 
 export function evalOutputExtraction3ToJSON(
   evalOutputExtraction3: EvalOutputExtraction3,
@@ -292,10 +308,12 @@ export const EvalOutputExtraction2$inboundSchema: z.ZodType<
   EvalOutputExtraction2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("take_first"),
-  lines: z.number().int().default(1),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("take_first"),
+    lines: z.number().int().default(1),
+  })
+);
 /** @internal */
 export type EvalOutputExtraction2$Outbound = {
   type: "take_first";
@@ -307,10 +325,12 @@ export const EvalOutputExtraction2$outboundSchema: z.ZodType<
   EvalOutputExtraction2$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction2
-> = z.object({
-  type: z.literal("take_first"),
-  lines: z.number().int().default(1),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("take_first"),
+    lines: z.number().int().default(1),
+  })
+);
 
 export function evalOutputExtraction2ToJSON(
   evalOutputExtraction2: EvalOutputExtraction2,
@@ -334,9 +354,11 @@ export const EvalOutputExtraction1$inboundSchema: z.ZodType<
   EvalOutputExtraction1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 /** @internal */
 export type EvalOutputExtraction1$Outbound = {
   type: "none";
@@ -347,9 +369,11 @@ export const EvalOutputExtraction1$outboundSchema: z.ZodType<
   EvalOutputExtraction1$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction1
-> = z.object({
-  type: z.literal("none"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("none"),
+  })
+);
 
 export function evalOutputExtraction1ToJSON(
   evalOutputExtraction1: EvalOutputExtraction1,
@@ -373,14 +397,16 @@ export const EvalOutputExtraction$inboundSchema: z.ZodType<
   EvalOutputExtraction,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.lazy(() => EvalOutputExtraction1$inboundSchema),
-  z.lazy(() => EvalOutputExtraction2$inboundSchema),
-  z.lazy(() => EvalOutputExtraction3$inboundSchema),
-  z.lazy(() => EvalOutputExtraction4$inboundSchema),
-  z.lazy(() => Five$inboundSchema),
-  z.lazy(() => Six$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => EvalOutputExtraction1$inboundSchema),
+    z.lazy(() => EvalOutputExtraction2$inboundSchema),
+    z.lazy(() => EvalOutputExtraction3$inboundSchema),
+    z.lazy(() => EvalOutputExtraction4$inboundSchema),
+    z.lazy(() => Five$inboundSchema),
+    z.lazy(() => Six$inboundSchema),
+  ])
+);
 /** @internal */
 export type EvalOutputExtraction$Outbound =
   | EvalOutputExtraction1$Outbound
@@ -395,14 +421,16 @@ export const EvalOutputExtraction$outboundSchema: z.ZodType<
   EvalOutputExtraction$Outbound,
   z.ZodTypeDef,
   EvalOutputExtraction
-> = z.union([
-  z.lazy(() => EvalOutputExtraction1$outboundSchema),
-  z.lazy(() => EvalOutputExtraction2$outboundSchema),
-  z.lazy(() => EvalOutputExtraction3$outboundSchema),
-  z.lazy(() => EvalOutputExtraction4$outboundSchema),
-  z.lazy(() => Five$outboundSchema),
-  z.lazy(() => Six$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => EvalOutputExtraction1$outboundSchema),
+    z.lazy(() => EvalOutputExtraction2$outboundSchema),
+    z.lazy(() => EvalOutputExtraction3$outboundSchema),
+    z.lazy(() => EvalOutputExtraction4$outboundSchema),
+    z.lazy(() => Five$outboundSchema),
+    z.lazy(() => Six$outboundSchema),
+  ])
+);
 
 export function evalOutputExtractionToJSON(
   evalOutputExtraction: EvalOutputExtraction,

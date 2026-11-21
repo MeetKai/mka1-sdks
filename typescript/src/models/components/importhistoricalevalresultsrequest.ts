@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -38,17 +38,19 @@ export const ImportHistoricalEvalResultsRequestSource$inboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequestSource,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("huggingface").default("huggingface"),
-  repo: z.string().default("meetkai/lm-eval-harness-result"),
-  revision: z.string().default("main"),
-  path_prefix: z.string().optional(),
-  files: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "path_prefix": "pathPrefix",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("huggingface").default("huggingface"),
+    repo: z.string().default("meetkai/lm-eval-harness-result"),
+    revision: z.string().default("main"),
+    path_prefix: z.string().optional(),
+    files: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "path_prefix": "pathPrefix",
+    });
+  })
+);
 /** @internal */
 export type ImportHistoricalEvalResultsRequestSource$Outbound = {
   type: "huggingface";
@@ -63,17 +65,19 @@ export const ImportHistoricalEvalResultsRequestSource$outboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequestSource$Outbound,
   z.ZodTypeDef,
   ImportHistoricalEvalResultsRequestSource
-> = z.object({
-  type: z.literal("huggingface").default("huggingface" as const),
-  repo: z.string().default("meetkai/lm-eval-harness-result"),
-  revision: z.string().default("main"),
-  pathPrefix: z.string().optional(),
-  files: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    pathPrefix: "path_prefix",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("huggingface").default("huggingface" as const),
+    repo: z.string().default("meetkai/lm-eval-harness-result"),
+    revision: z.string().default("main"),
+    pathPrefix: z.string().optional(),
+    files: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      pathPrefix: "path_prefix",
+    });
+  })
+);
 
 export function importHistoricalEvalResultsRequestSourceToJSON(
   importHistoricalEvalResultsRequestSource:
@@ -106,26 +110,28 @@ export const ImportHistoricalEvalResultsRequest$inboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  source: z.lazy(() => ImportHistoricalEvalResultsRequestSource$inboundSchema)
-    .optional(),
-  suite_id: z.string().optional(),
-  suite_name: z.string().default("Historical lm-eval harness results"),
-  suite_description: z.string().optional(),
-  create_missing_tasks: z.boolean().default(true),
-  dry_run: z.boolean().default(false),
-  limit_files: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_name": "suiteName",
-    "suite_description": "suiteDescription",
-    "create_missing_tasks": "createMissingTasks",
-    "dry_run": "dryRun",
-    "limit_files": "limitFiles",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: z.lazy(() => ImportHistoricalEvalResultsRequestSource$inboundSchema)
+      .optional(),
+    suite_id: z.string().optional(),
+    suite_name: z.string().default("Historical lm-eval harness results"),
+    suite_description: z.string().optional(),
+    create_missing_tasks: z.boolean().default(true),
+    dry_run: z.boolean().default(false),
+    limit_files: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_name": "suiteName",
+      "suite_description": "suiteDescription",
+      "create_missing_tasks": "createMissingTasks",
+      "dry_run": "dryRun",
+      "limit_files": "limitFiles",
+    });
+  })
+);
 /** @internal */
 export type ImportHistoricalEvalResultsRequest$Outbound = {
   source?: ImportHistoricalEvalResultsRequestSource$Outbound | undefined;
@@ -143,26 +149,29 @@ export const ImportHistoricalEvalResultsRequest$outboundSchema: z.ZodType<
   ImportHistoricalEvalResultsRequest$Outbound,
   z.ZodTypeDef,
   ImportHistoricalEvalResultsRequest
-> = z.object({
-  source: z.lazy(() => ImportHistoricalEvalResultsRequestSource$outboundSchema)
-    .optional(),
-  suiteId: z.string().optional(),
-  suiteName: z.string().default("Historical lm-eval harness results"),
-  suiteDescription: z.string().optional(),
-  createMissingTasks: z.boolean().default(true),
-  dryRun: z.boolean().default(false),
-  limitFiles: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteName: "suite_name",
-    suiteDescription: "suite_description",
-    createMissingTasks: "create_missing_tasks",
-    dryRun: "dry_run",
-    limitFiles: "limit_files",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    source: z.lazy(() =>
+      ImportHistoricalEvalResultsRequestSource$outboundSchema
+    ).optional(),
+    suiteId: z.string().optional(),
+    suiteName: z.string().default("Historical lm-eval harness results"),
+    suiteDescription: z.string().optional(),
+    createMissingTasks: z.boolean().default(true),
+    dryRun: z.boolean().default(false),
+    limitFiles: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteName: "suite_name",
+      suiteDescription: "suite_description",
+      createMissingTasks: "create_missing_tasks",
+      dryRun: "dry_run",
+      limitFiles: "limit_files",
+    });
+  })
+);
 
 export function importHistoricalEvalResultsRequestToJSON(
   importHistoricalEvalResultsRequest: ImportHistoricalEvalResultsRequest,

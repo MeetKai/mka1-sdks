@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -66,10 +66,12 @@ export const RateCardUsdPer1m$inboundSchema: z.ZodType<
   RateCardUsdPer1m,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input: z.number(),
-  output: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.number(),
+    output: z.number(),
+  })
+);
 /** @internal */
 export type RateCardUsdPer1m$Outbound = {
   input: number;
@@ -81,10 +83,12 @@ export const RateCardUsdPer1m$outboundSchema: z.ZodType<
   RateCardUsdPer1m$Outbound,
   z.ZodTypeDef,
   RateCardUsdPer1m
-> = z.object({
-  input: z.number(),
-  output: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.number(),
+    output: z.number(),
+  })
+);
 
 export function rateCardUsdPer1mToJSON(
   rateCardUsdPer1m: RateCardUsdPer1m,
@@ -108,20 +112,22 @@ export const PerStage$inboundSchema: z.ZodType<
   PerStage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  calls: z.number().int(),
-  prompt_tokens: z.number().int(),
-  output_tokens: z.number().int(),
-  thinking_tokens: z.number().int(),
-  seconds: z.number(),
-  usd: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "output_tokens": "outputTokens",
-    "thinking_tokens": "thinkingTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int(),
+    prompt_tokens: z.number().int(),
+    output_tokens: z.number().int(),
+    thinking_tokens: z.number().int(),
+    seconds: z.number(),
+    usd: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "output_tokens": "outputTokens",
+      "thinking_tokens": "thinkingTokens",
+    });
+  })
+);
 /** @internal */
 export type PerStage$Outbound = {
   calls: number;
@@ -137,20 +143,22 @@ export const PerStage$outboundSchema: z.ZodType<
   PerStage$Outbound,
   z.ZodTypeDef,
   PerStage
-> = z.object({
-  calls: z.number().int(),
-  promptTokens: z.number().int(),
-  outputTokens: z.number().int(),
-  thinkingTokens: z.number().int(),
-  seconds: z.number(),
-  usd: z.nullable(z.number()),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    outputTokens: "output_tokens",
-    thinkingTokens: "thinking_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int(),
+    promptTokens: z.number().int(),
+    outputTokens: z.number().int(),
+    thinkingTokens: z.number().int(),
+    seconds: z.number(),
+    usd: z.nullable(z.number()),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      outputTokens: "output_tokens",
+      thinkingTokens: "thinking_tokens",
+    });
+  })
+);
 
 export function perStageToJSON(perStage: PerStage): string {
   return JSON.stringify(PerStage$outboundSchema.parse(perStage));
@@ -170,47 +178,49 @@ export const EvalErrorAnalysisUsage$inboundSchema: z.ZodType<
   EvalErrorAnalysisUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  analyzer_model: z.string(),
-  rate_card_usd_per_1m: z.nullable(
-    z.lazy(() => RateCardUsdPer1m$inboundSchema),
-  ),
-  calls: z.number().int(),
-  prompt_tokens: z.number().int(),
-  prompt_text_tokens: z.number().int(),
-  prompt_audio_tokens: z.number().int(),
-  prompt_cached_tokens: z.number().int().default(0),
-  output_tokens: z.number().int(),
-  thinking_tokens: z.number().int(),
-  seconds: z.number(),
-  usd_input: z.nullable(z.number()),
-  usd_output: z.nullable(z.number()),
-  usd_total: z.nullable(z.number()),
-  per_stage: z.record(z.lazy(() => PerStage$inboundSchema)),
-  calls_detail: z.array(EvalErrorAnalysisUsageCall$inboundSchema),
-  dropped_ids: z.number().int(),
-  report_attempts: z.number().int(),
-  samples_without_audio: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "analyzer_model": "analyzerModel",
-    "rate_card_usd_per_1m": "rateCardUsdPer1m",
-    "prompt_tokens": "promptTokens",
-    "prompt_text_tokens": "promptTextTokens",
-    "prompt_audio_tokens": "promptAudioTokens",
-    "prompt_cached_tokens": "promptCachedTokens",
-    "output_tokens": "outputTokens",
-    "thinking_tokens": "thinkingTokens",
-    "usd_input": "usdInput",
-    "usd_output": "usdOutput",
-    "usd_total": "usdTotal",
-    "per_stage": "perStage",
-    "calls_detail": "callsDetail",
-    "dropped_ids": "droppedIds",
-    "report_attempts": "reportAttempts",
-    "samples_without_audio": "samplesWithoutAudio",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    analyzer_model: z.string(),
+    rate_card_usd_per_1m: z.nullable(
+      z.lazy(() => RateCardUsdPer1m$inboundSchema),
+    ),
+    calls: z.number().int(),
+    prompt_tokens: z.number().int(),
+    prompt_text_tokens: z.number().int(),
+    prompt_audio_tokens: z.number().int(),
+    prompt_cached_tokens: z.number().int().default(0),
+    output_tokens: z.number().int(),
+    thinking_tokens: z.number().int(),
+    seconds: z.number(),
+    usd_input: z.nullable(z.number()),
+    usd_output: z.nullable(z.number()),
+    usd_total: z.nullable(z.number()),
+    per_stage: z.record(z.lazy(() => PerStage$inboundSchema)),
+    calls_detail: z.array(EvalErrorAnalysisUsageCall$inboundSchema),
+    dropped_ids: z.number().int(),
+    report_attempts: z.number().int(),
+    samples_without_audio: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "analyzer_model": "analyzerModel",
+      "rate_card_usd_per_1m": "rateCardUsdPer1m",
+      "prompt_tokens": "promptTokens",
+      "prompt_text_tokens": "promptTextTokens",
+      "prompt_audio_tokens": "promptAudioTokens",
+      "prompt_cached_tokens": "promptCachedTokens",
+      "output_tokens": "outputTokens",
+      "thinking_tokens": "thinkingTokens",
+      "usd_input": "usdInput",
+      "usd_output": "usdOutput",
+      "usd_total": "usdTotal",
+      "per_stage": "perStage",
+      "calls_detail": "callsDetail",
+      "dropped_ids": "droppedIds",
+      "report_attempts": "reportAttempts",
+      "samples_without_audio": "samplesWithoutAudio",
+    });
+  })
+);
 /** @internal */
 export type EvalErrorAnalysisUsage$Outbound = {
   analyzer_model: string;
@@ -238,45 +248,47 @@ export const EvalErrorAnalysisUsage$outboundSchema: z.ZodType<
   EvalErrorAnalysisUsage$Outbound,
   z.ZodTypeDef,
   EvalErrorAnalysisUsage
-> = z.object({
-  analyzerModel: z.string(),
-  rateCardUsdPer1m: z.nullable(z.lazy(() => RateCardUsdPer1m$outboundSchema)),
-  calls: z.number().int(),
-  promptTokens: z.number().int(),
-  promptTextTokens: z.number().int(),
-  promptAudioTokens: z.number().int(),
-  promptCachedTokens: z.number().int().default(0),
-  outputTokens: z.number().int(),
-  thinkingTokens: z.number().int(),
-  seconds: z.number(),
-  usdInput: z.nullable(z.number()),
-  usdOutput: z.nullable(z.number()),
-  usdTotal: z.nullable(z.number()),
-  perStage: z.record(z.lazy(() => PerStage$outboundSchema)),
-  callsDetail: z.array(EvalErrorAnalysisUsageCall$outboundSchema),
-  droppedIds: z.number().int(),
-  reportAttempts: z.number().int(),
-  samplesWithoutAudio: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    analyzerModel: "analyzer_model",
-    rateCardUsdPer1m: "rate_card_usd_per_1m",
-    promptTokens: "prompt_tokens",
-    promptTextTokens: "prompt_text_tokens",
-    promptAudioTokens: "prompt_audio_tokens",
-    promptCachedTokens: "prompt_cached_tokens",
-    outputTokens: "output_tokens",
-    thinkingTokens: "thinking_tokens",
-    usdInput: "usd_input",
-    usdOutput: "usd_output",
-    usdTotal: "usd_total",
-    perStage: "per_stage",
-    callsDetail: "calls_detail",
-    droppedIds: "dropped_ids",
-    reportAttempts: "report_attempts",
-    samplesWithoutAudio: "samples_without_audio",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    analyzerModel: z.string(),
+    rateCardUsdPer1m: z.nullable(z.lazy(() => RateCardUsdPer1m$outboundSchema)),
+    calls: z.number().int(),
+    promptTokens: z.number().int(),
+    promptTextTokens: z.number().int(),
+    promptAudioTokens: z.number().int(),
+    promptCachedTokens: z.number().int().default(0),
+    outputTokens: z.number().int(),
+    thinkingTokens: z.number().int(),
+    seconds: z.number(),
+    usdInput: z.nullable(z.number()),
+    usdOutput: z.nullable(z.number()),
+    usdTotal: z.nullable(z.number()),
+    perStage: z.record(z.lazy(() => PerStage$outboundSchema)),
+    callsDetail: z.array(EvalErrorAnalysisUsageCall$outboundSchema),
+    droppedIds: z.number().int(),
+    reportAttempts: z.number().int(),
+    samplesWithoutAudio: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      analyzerModel: "analyzer_model",
+      rateCardUsdPer1m: "rate_card_usd_per_1m",
+      promptTokens: "prompt_tokens",
+      promptTextTokens: "prompt_text_tokens",
+      promptAudioTokens: "prompt_audio_tokens",
+      promptCachedTokens: "prompt_cached_tokens",
+      outputTokens: "output_tokens",
+      thinkingTokens: "thinking_tokens",
+      usdInput: "usd_input",
+      usdOutput: "usd_output",
+      usdTotal: "usd_total",
+      perStage: "per_stage",
+      callsDetail: "calls_detail",
+      droppedIds: "dropped_ids",
+      reportAttempts: "report_attempts",
+      samplesWithoutAudio: "samples_without_audio",
+    });
+  })
+);
 
 export function evalErrorAnalysisUsageToJSON(
   evalErrorAnalysisUsage: EvalErrorAnalysisUsage,

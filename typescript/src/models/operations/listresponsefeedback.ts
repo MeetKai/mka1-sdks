@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,7 +57,9 @@ export type ListResponseFeedbackRequest = {
 /** @internal */
 export const ListResponseFeedbackQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListResponseFeedbackQueryParamOrder
-> = z.nativeEnum(ListResponseFeedbackQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListResponseFeedbackQueryParamOrder)
+);
 /** @internal */
 export const ListResponseFeedbackQueryParamOrder$outboundSchema:
   z.ZodNativeEnum<typeof ListResponseFeedbackQueryParamOrder> =
@@ -65,9 +67,10 @@ export const ListResponseFeedbackQueryParamOrder$outboundSchema:
 
 /** @internal */
 export const ListResponseFeedbackQueryParamRating$inboundSchema:
-  z.ZodNativeEnum<typeof ListResponseFeedbackQueryParamRating> = z.nativeEnum(
-    ListResponseFeedbackQueryParamRating,
-  );
+  z.ZodNativeEnum<typeof ListResponseFeedbackQueryParamRating> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ListResponseFeedbackQueryParamRating)
+    );
 /** @internal */
 export const ListResponseFeedbackQueryParamRating$outboundSchema:
   z.ZodNativeEnum<typeof ListResponseFeedbackQueryParamRating> =
@@ -78,17 +81,19 @@ export const ListResponseFeedbackRequest$inboundSchema: z.ZodType<
   ListResponseFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListResponseFeedbackQueryParamOrder$inboundSchema.default("desc"),
-  rating: ListResponseFeedbackQueryParamRating$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListResponseFeedbackQueryParamOrder$inboundSchema.default("desc"),
+    rating: ListResponseFeedbackQueryParamRating$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListResponseFeedbackRequest$Outbound = {
   after?: string | undefined;
@@ -103,17 +108,19 @@ export const ListResponseFeedbackRequest$outboundSchema: z.ZodType<
   ListResponseFeedbackRequest$Outbound,
   z.ZodTypeDef,
   ListResponseFeedbackRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListResponseFeedbackQueryParamOrder$outboundSchema.default("desc"),
-  rating: ListResponseFeedbackQueryParamRating$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListResponseFeedbackQueryParamOrder$outboundSchema.default("desc"),
+    rating: ListResponseFeedbackQueryParamRating$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listResponseFeedbackRequestToJSON(
   listResponseFeedbackRequest: ListResponseFeedbackRequest,

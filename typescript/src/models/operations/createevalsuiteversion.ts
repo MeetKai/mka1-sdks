@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -53,18 +54,20 @@ export const CreateEvalSuiteVersionRequest$inboundSchema: z.ZodType<
   CreateEvalSuiteVersionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateEvalSuiteVersionRequest:
-    components.CreateEvalSuiteVersionRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateEvalSuiteVersionRequest": "createEvalSuiteVersionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateEvalSuiteVersionRequest:
+      components.CreateEvalSuiteVersionRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateEvalSuiteVersionRequest": "createEvalSuiteVersionRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalSuiteVersionRequest$Outbound = {
   suite_id: string;
@@ -78,18 +81,20 @@ export const CreateEvalSuiteVersionRequest$outboundSchema: z.ZodType<
   CreateEvalSuiteVersionRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalSuiteVersionRequest
-> = z.object({
-  suiteId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createEvalSuiteVersionRequest:
-    components.CreateEvalSuiteVersionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createEvalSuiteVersionRequest: "CreateEvalSuiteVersionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createEvalSuiteVersionRequest:
+      components.CreateEvalSuiteVersionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createEvalSuiteVersionRequest: "CreateEvalSuiteVersionRequest",
+    });
+  })
+);
 
 export function createEvalSuiteVersionRequestToJSON(
   createEvalSuiteVersionRequest: CreateEvalSuiteVersionRequest,
@@ -115,19 +120,21 @@ export const Manifest$inboundSchema: z.ZodType<
   Manifest,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    schema_version: z.string().default("2026-05-27"),
-    tasks: z.array(z.nullable(z.any())),
-    metadata: z.record(z.any()).optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
-).transform((v) => {
-  return remap$(v, {
-    "schema_version": "schemaVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      schema_version: z.string().default("2026-05-27"),
+      tasks: z.array(z.nullable(z.any())),
+      metadata: z.record(z.any()).optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  ).transform((v) => {
+    return remap$(v, {
+      "schema_version": "schemaVersion",
+    });
+  })
+);
 /** @internal */
 export type Manifest$Outbound = {
   schema_version: string;
@@ -141,20 +148,22 @@ export const Manifest$outboundSchema: z.ZodType<
   Manifest$Outbound,
   z.ZodTypeDef,
   Manifest
-> = z.object({
-  schemaVersion: z.string().default("2026-05-27"),
-  tasks: z.array(z.nullable(z.any())),
-  metadata: z.record(z.any()).optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      schemaVersion: "schema_version",
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaVersion: z.string().default("2026-05-27"),
+    tasks: z.array(z.nullable(z.any())),
+    metadata: z.record(z.any()).optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        schemaVersion: "schema_version",
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function manifestToJSON(manifest: Manifest): string {
   return JSON.stringify(Manifest$outboundSchema.parse(manifest));
@@ -174,22 +183,24 @@ export const CreateEvalSuiteVersionResponseBody$inboundSchema: z.ZodType<
   CreateEvalSuiteVersionResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.version"),
-  suite_id: z.string(),
-  version: z.number().int(),
-  manifest: z.lazy(() => Manifest$inboundSchema),
-  dataset_file_ids: z.array(z.string()),
-  metadata: z.record(z.string()),
-  created_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "dataset_file_ids": "datasetFileIds",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.version"),
+    suite_id: z.string(),
+    version: z.number().int(),
+    manifest: z.lazy(() => Manifest$inboundSchema),
+    dataset_file_ids: z.array(z.string()),
+    metadata: z.record(z.string()),
+    created_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "dataset_file_ids": "datasetFileIds",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalSuiteVersionResponseBody$Outbound = {
   id: string;
@@ -207,22 +218,24 @@ export const CreateEvalSuiteVersionResponseBody$outboundSchema: z.ZodType<
   CreateEvalSuiteVersionResponseBody$Outbound,
   z.ZodTypeDef,
   CreateEvalSuiteVersionResponseBody
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.version"),
-  suiteId: z.string(),
-  version: z.number().int(),
-  manifest: z.lazy(() => Manifest$outboundSchema),
-  datasetFileIds: z.array(z.string()),
-  metadata: z.record(z.string()),
-  createdAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    datasetFileIds: "dataset_file_ids",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.version"),
+    suiteId: z.string(),
+    version: z.number().int(),
+    manifest: z.lazy(() => Manifest$outboundSchema),
+    datasetFileIds: z.array(z.string()),
+    metadata: z.record(z.string()),
+    createdAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      datasetFileIds: "dataset_file_ids",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function createEvalSuiteVersionResponseBodyToJSON(
   createEvalSuiteVersionResponseBody: CreateEvalSuiteVersionResponseBody,

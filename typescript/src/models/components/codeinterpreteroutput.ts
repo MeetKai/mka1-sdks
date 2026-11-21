@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -31,10 +31,12 @@ export const CodeInterpreterOutput$inboundSchema: z.ZodType<
   CodeInterpreterOutput,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  logs: CodeInterpreterOutputLogs$inboundSchema,
-  image: CodeInterpreterOutputImage$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    logs: CodeInterpreterOutputLogs$inboundSchema,
+    image: CodeInterpreterOutputImage$inboundSchema,
+  })
+);
 /** @internal */
 export type CodeInterpreterOutput$Outbound =
   | CodeInterpreterOutputLogs$Outbound
@@ -45,10 +47,12 @@ export const CodeInterpreterOutput$outboundSchema: z.ZodType<
   CodeInterpreterOutput$Outbound,
   z.ZodTypeDef,
   CodeInterpreterOutput
-> = z.union([
-  CodeInterpreterOutputLogs$outboundSchema,
-  CodeInterpreterOutputImage$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    CodeInterpreterOutputLogs$outboundSchema,
+    CodeInterpreterOutputImage$outboundSchema,
+  ])
+);
 
 export function codeInterpreterOutputToJSON(
   codeInterpreterOutput: CodeInterpreterOutput,

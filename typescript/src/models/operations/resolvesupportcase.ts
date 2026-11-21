@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,18 +26,20 @@ export const ResolveSupportCaseRequest$inboundSchema: z.ZodType<
   ResolveSupportCaseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  case_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SupportCaseResolveRequest: components.SupportCaseResolveRequest$inboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "case_id": "caseId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SupportCaseResolveRequest": "supportCaseResolveRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    case_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SupportCaseResolveRequest: components
+      .SupportCaseResolveRequest$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "case_id": "caseId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SupportCaseResolveRequest": "supportCaseResolveRequest",
+    });
+  })
+);
 /** @internal */
 export type ResolveSupportCaseRequest$Outbound = {
   case_id: string;
@@ -52,18 +54,20 @@ export const ResolveSupportCaseRequest$outboundSchema: z.ZodType<
   ResolveSupportCaseRequest$Outbound,
   z.ZodTypeDef,
   ResolveSupportCaseRequest
-> = z.object({
-  caseId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  supportCaseResolveRequest: components.SupportCaseResolveRequest$outboundSchema
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    caseId: "case_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    supportCaseResolveRequest: "SupportCaseResolveRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    caseId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    supportCaseResolveRequest: components
+      .SupportCaseResolveRequest$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      caseId: "case_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      supportCaseResolveRequest: "SupportCaseResolveRequest",
+    });
+  })
+);
 
 export function resolveSupportCaseRequestToJSON(
   resolveSupportCaseRequest: ResolveSupportCaseRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -125,41 +125,40 @@ export type ImageGenerationRequest = {
 };
 
 /** @internal */
-export const Quality$inboundSchema: z.ZodNativeEnum<typeof Quality> = z
-  .nativeEnum(Quality);
+export const Quality$inboundSchema: z.ZodNativeEnum<typeof Quality> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Quality));
 /** @internal */
 export const Quality$outboundSchema: z.ZodNativeEnum<typeof Quality> =
   Quality$inboundSchema;
 
 /** @internal */
 export const ImageGenerationRequestResponseFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ImageGenerationRequestResponseFormat> = z.nativeEnum(
-    ImageGenerationRequestResponseFormat,
-  );
+  z.ZodNativeEnum<typeof ImageGenerationRequestResponseFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ImageGenerationRequestResponseFormat)
+    );
 /** @internal */
 export const ImageGenerationRequestResponseFormat$outboundSchema:
   z.ZodNativeEnum<typeof ImageGenerationRequestResponseFormat> =
     ImageGenerationRequestResponseFormat$inboundSchema;
 
 /** @internal */
-export const Size$inboundSchema: z.ZodNativeEnum<typeof Size> = z.nativeEnum(
-  Size,
-);
+export const Size$inboundSchema: z.ZodNativeEnum<typeof Size> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Size));
 /** @internal */
 export const Size$outboundSchema: z.ZodNativeEnum<typeof Size> =
   Size$inboundSchema;
 
 /** @internal */
-export const Style$inboundSchema: z.ZodNativeEnum<typeof Style> = z.nativeEnum(
-  Style,
-);
+export const Style$inboundSchema: z.ZodNativeEnum<typeof Style> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Style));
 /** @internal */
 export const Style$outboundSchema: z.ZodNativeEnum<typeof Style> =
   Style$inboundSchema;
 
 /** @internal */
 export const OutputFormat$inboundSchema: z.ZodNativeEnum<typeof OutputFormat> =
-  z.nativeEnum(OutputFormat);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutputFormat));
 /** @internal */
 export const OutputFormat$outboundSchema: z.ZodNativeEnum<typeof OutputFormat> =
   OutputFormat$inboundSchema;
@@ -169,24 +168,26 @@ export const ImageGenerationRequest$inboundSchema: z.ZodType<
   ImageGenerationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string().default("auto"),
-  prompt: z.string(),
-  n: z.number().int().default(1),
-  quality: Quality$inboundSchema.default("auto"),
-  response_format: ImageGenerationRequestResponseFormat$inboundSchema.default(
-    "url",
-  ),
-  size: Size$inboundSchema.default("1024x1024"),
-  style: Style$inboundSchema.default("vivid"),
-  output_format: OutputFormat$inboundSchema.optional(),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "response_format": "responseFormat",
-    "output_format": "outputFormat",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().default("auto"),
+    prompt: z.string(),
+    n: z.number().int().default(1),
+    quality: Quality$inboundSchema.default("auto"),
+    response_format: ImageGenerationRequestResponseFormat$inboundSchema.default(
+      "url",
+    ),
+    size: Size$inboundSchema.default("1024x1024"),
+    style: Style$inboundSchema.default("vivid"),
+    output_format: OutputFormat$inboundSchema.optional(),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "response_format": "responseFormat",
+      "output_format": "outputFormat",
+    });
+  })
+);
 /** @internal */
 export type ImageGenerationRequest$Outbound = {
   model: string;
@@ -205,24 +206,26 @@ export const ImageGenerationRequest$outboundSchema: z.ZodType<
   ImageGenerationRequest$Outbound,
   z.ZodTypeDef,
   ImageGenerationRequest
-> = z.object({
-  model: z.string().default("auto"),
-  prompt: z.string(),
-  n: z.number().int().default(1),
-  quality: Quality$outboundSchema.default("auto"),
-  responseFormat: ImageGenerationRequestResponseFormat$outboundSchema.default(
-    "url",
-  ),
-  size: Size$outboundSchema.default("1024x1024"),
-  style: Style$outboundSchema.default("vivid"),
-  outputFormat: OutputFormat$outboundSchema.optional(),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    responseFormat: "response_format",
-    outputFormat: "output_format",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string().default("auto"),
+    prompt: z.string(),
+    n: z.number().int().default(1),
+    quality: Quality$outboundSchema.default("auto"),
+    responseFormat: ImageGenerationRequestResponseFormat$outboundSchema.default(
+      "url",
+    ),
+    size: Size$outboundSchema.default("1024x1024"),
+    style: Style$outboundSchema.default("vivid"),
+    outputFormat: OutputFormat$outboundSchema.optional(),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      responseFormat: "response_format",
+      outputFormat: "output_format",
+    });
+  })
+);
 
 export function imageGenerationRequestToJSON(
   imageGenerationRequest: ImageGenerationRequest,

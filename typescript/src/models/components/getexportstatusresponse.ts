@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -149,7 +149,9 @@ export type GetExportStatusResponse = {
 /** @internal */
 export const GetExportStatusResponseStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetExportStatusResponseStatus
-> = z.nativeEnum(GetExportStatusResponseStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetExportStatusResponseStatus)
+);
 /** @internal */
 export const GetExportStatusResponseStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetExportStatusResponseStatus
@@ -158,7 +160,9 @@ export const GetExportStatusResponseStatus$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const GetExportStatusResponseStage$inboundSchema: z.ZodNativeEnum<
   typeof GetExportStatusResponseStage
-> = z.nativeEnum(GetExportStatusResponseStage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(GetExportStatusResponseStage)
+);
 /** @internal */
 export const GetExportStatusResponseStage$outboundSchema: z.ZodNativeEnum<
   typeof GetExportStatusResponseStage
@@ -169,21 +173,23 @@ export const GetExportStatusResponseProgress$inboundSchema: z.ZodType<
   GetExportStatusResponseProgress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stage: GetExportStatusResponseStage$inboundSchema,
-  record_count: z.number().int().optional(),
-  completion_count: z.number().int().optional(),
-  response_count: z.number().int().optional(),
-  parquet_bytes: z.number().int().optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "record_count": "recordCount",
-    "completion_count": "completionCount",
-    "response_count": "responseCount",
-    "parquet_bytes": "parquetBytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: GetExportStatusResponseStage$inboundSchema,
+    record_count: z.number().int().optional(),
+    completion_count: z.number().int().optional(),
+    response_count: z.number().int().optional(),
+    parquet_bytes: z.number().int().optional(),
+    message: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "record_count": "recordCount",
+      "completion_count": "completionCount",
+      "response_count": "responseCount",
+      "parquet_bytes": "parquetBytes",
+    });
+  })
+);
 /** @internal */
 export type GetExportStatusResponseProgress$Outbound = {
   stage: string;
@@ -199,21 +205,23 @@ export const GetExportStatusResponseProgress$outboundSchema: z.ZodType<
   GetExportStatusResponseProgress$Outbound,
   z.ZodTypeDef,
   GetExportStatusResponseProgress
-> = z.object({
-  stage: GetExportStatusResponseStage$outboundSchema,
-  recordCount: z.number().int().optional(),
-  completionCount: z.number().int().optional(),
-  responseCount: z.number().int().optional(),
-  parquetBytes: z.number().int().optional(),
-  message: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    recordCount: "record_count",
-    completionCount: "completion_count",
-    responseCount: "response_count",
-    parquetBytes: "parquet_bytes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stage: GetExportStatusResponseStage$outboundSchema,
+    recordCount: z.number().int().optional(),
+    completionCount: z.number().int().optional(),
+    responseCount: z.number().int().optional(),
+    parquetBytes: z.number().int().optional(),
+    message: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      recordCount: "record_count",
+      completionCount: "completion_count",
+      responseCount: "response_count",
+      parquetBytes: "parquet_bytes",
+    });
+  })
+);
 
 export function getExportStatusResponseProgressToJSON(
   getExportStatusResponseProgress: GetExportStatusResponseProgress,
@@ -235,30 +243,32 @@ export function getExportStatusResponseProgressFromJSON(
 }
 
 /** @internal */
-export const Result$inboundSchema: z.ZodType<Result, z.ZodTypeDef, unknown> = z
-  .object({
-    output_path: z.string(),
-    completions_file: z.string(),
-    responses_file: z.string(),
-    record_count: z.number().int(),
-    completion_feedback_count: z.number().int(),
-    response_feedback_count: z.number().int(),
-    exported_at: z.string().datetime({ offset: true }).transform(v =>
-      new Date(v)
-    ),
-    duration_ms: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "output_path": "outputPath",
-      "completions_file": "completionsFile",
-      "responses_file": "responsesFile",
-      "record_count": "recordCount",
-      "completion_feedback_count": "completionFeedbackCount",
-      "response_feedback_count": "responseFeedbackCount",
-      "exported_at": "exportedAt",
-      "duration_ms": "durationMs",
-    });
-  });
+export const Result$inboundSchema: z.ZodType<Result, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      output_path: z.string(),
+      completions_file: z.string(),
+      responses_file: z.string(),
+      record_count: z.number().int(),
+      completion_feedback_count: z.number().int(),
+      response_feedback_count: z.number().int(),
+      exported_at: z.string().datetime({ offset: true }).transform(v =>
+        new Date(v)
+      ),
+      duration_ms: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        "output_path": "outputPath",
+        "completions_file": "completionsFile",
+        "responses_file": "responsesFile",
+        "record_count": "recordCount",
+        "completion_feedback_count": "completionFeedbackCount",
+        "response_feedback_count": "responseFeedbackCount",
+        "exported_at": "exportedAt",
+        "duration_ms": "durationMs",
+      });
+    })
+  );
 /** @internal */
 export type Result$Outbound = {
   output_path: string;
@@ -276,27 +286,29 @@ export const Result$outboundSchema: z.ZodType<
   Result$Outbound,
   z.ZodTypeDef,
   Result
-> = z.object({
-  outputPath: z.string(),
-  completionsFile: z.string(),
-  responsesFile: z.string(),
-  recordCount: z.number().int(),
-  completionFeedbackCount: z.number().int(),
-  responseFeedbackCount: z.number().int(),
-  exportedAt: z.date().transform(v => v.toISOString()),
-  durationMs: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    outputPath: "output_path",
-    completionsFile: "completions_file",
-    responsesFile: "responses_file",
-    recordCount: "record_count",
-    completionFeedbackCount: "completion_feedback_count",
-    responseFeedbackCount: "response_feedback_count",
-    exportedAt: "exported_at",
-    durationMs: "duration_ms",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    outputPath: z.string(),
+    completionsFile: z.string(),
+    responsesFile: z.string(),
+    recordCount: z.number().int(),
+    completionFeedbackCount: z.number().int(),
+    responseFeedbackCount: z.number().int(),
+    exportedAt: z.date().transform(v => v.toISOString()),
+    durationMs: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      outputPath: "output_path",
+      completionsFile: "completions_file",
+      responsesFile: "responses_file",
+      recordCount: "record_count",
+      completionFeedbackCount: "completion_feedback_count",
+      responseFeedbackCount: "response_feedback_count",
+      exportedAt: "exported_at",
+      durationMs: "duration_ms",
+    });
+  })
+);
 
 export function resultToJSON(result: Result): string {
   return JSON.stringify(Result$outboundSchema.parse(result));
@@ -316,22 +328,26 @@ export const GetExportStatusResponse$inboundSchema: z.ZodType<
   GetExportStatusResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: GetExportStatusResponseStatus$inboundSchema,
-  start_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  close_time: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  progress: z.lazy(() => GetExportStatusResponseProgress$inboundSchema)
-    .optional(),
-  result: z.lazy(() => Result$inboundSchema).optional(),
-  error: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "close_time": "closeTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: GetExportStatusResponseStatus$inboundSchema,
+    start_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    close_time: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    progress: z.lazy(() => GetExportStatusResponseProgress$inboundSchema)
+      .optional(),
+    result: z.lazy(() => Result$inboundSchema).optional(),
+    error: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "close_time": "closeTime",
+    });
+  })
+);
 /** @internal */
 export type GetExportStatusResponse$Outbound = {
   status: string;
@@ -347,20 +363,22 @@ export const GetExportStatusResponse$outboundSchema: z.ZodType<
   GetExportStatusResponse$Outbound,
   z.ZodTypeDef,
   GetExportStatusResponse
-> = z.object({
-  status: GetExportStatusResponseStatus$outboundSchema,
-  startTime: z.date().transform(v => v.toISOString()).optional(),
-  closeTime: z.date().transform(v => v.toISOString()).optional(),
-  progress: z.lazy(() => GetExportStatusResponseProgress$outboundSchema)
-    .optional(),
-  result: z.lazy(() => Result$outboundSchema).optional(),
-  error: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    closeTime: "close_time",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: GetExportStatusResponseStatus$outboundSchema,
+    startTime: z.date().transform(v => v.toISOString()).optional(),
+    closeTime: z.date().transform(v => v.toISOString()).optional(),
+    progress: z.lazy(() => GetExportStatusResponseProgress$outboundSchema)
+      .optional(),
+    result: z.lazy(() => Result$outboundSchema).optional(),
+    error: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      closeTime: "close_time",
+    });
+  })
+);
 
 export function getExportStatusResponseToJSON(
   getExportStatusResponse: GetExportStatusResponse,

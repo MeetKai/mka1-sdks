@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,14 +18,16 @@ export const SessionUrlResponse$inboundSchema: z.ZodType<
   SessionUrlResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+    });
+  })
+);
 /** @internal */
 export type SessionUrlResponse$Outbound = {
   session_id: string;
@@ -37,14 +39,16 @@ export const SessionUrlResponse$outboundSchema: z.ZodType<
   SessionUrlResponse$Outbound,
   z.ZodTypeDef,
   SessionUrlResponse
-> = z.object({
-  sessionId: z.string(),
-  url: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    url: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+    });
+  })
+);
 
 export function sessionUrlResponseToJSON(
   sessionUrlResponse: SessionUrlResponse,

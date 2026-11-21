@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -34,29 +34,33 @@ export const AccessEntry$inboundSchema: z.ZodType<
   AccessEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  model_id: z.string(),
-  granted_by: z.string(),
-  granted_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  activation_state: CatalogActivationState$inboundSchema,
-  blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
-  activated_by: z.nullable(z.string()),
-  activated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "model_id": "modelId",
-    "granted_by": "grantedBy",
-    "granted_at": "grantedAt",
-    "activation_state": "activationState",
-    "blocker_source": "blockerSource",
-    "activated_by": "activatedBy",
-    "activated_at": "activatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    model_id: z.string(),
+    granted_by: z.string(),
+    granted_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    activation_state: CatalogActivationState$inboundSchema,
+    blocker_source: z.nullable(RegistryNameHolder$inboundSchema),
+    activated_by: z.nullable(z.string()),
+    activated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "model_id": "modelId",
+      "granted_by": "grantedBy",
+      "granted_at": "grantedAt",
+      "activation_state": "activationState",
+      "blocker_source": "blockerSource",
+      "activated_by": "activatedBy",
+      "activated_at": "activatedAt",
+    });
+  })
+);
 /** @internal */
 export type AccessEntry$Outbound = {
   org_id: string;
@@ -74,27 +78,29 @@ export const AccessEntry$outboundSchema: z.ZodType<
   AccessEntry$Outbound,
   z.ZodTypeDef,
   AccessEntry
-> = z.object({
-  orgId: z.string(),
-  modelId: z.string(),
-  grantedBy: z.string(),
-  grantedAt: z.date().transform(v => v.toISOString()),
-  activationState: CatalogActivationState$outboundSchema,
-  blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
-  activatedBy: z.nullable(z.string()),
-  activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    modelId: "model_id",
-    grantedBy: "granted_by",
-    grantedAt: "granted_at",
-    activationState: "activation_state",
-    blockerSource: "blocker_source",
-    activatedBy: "activated_by",
-    activatedAt: "activated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    modelId: z.string(),
+    grantedBy: z.string(),
+    grantedAt: z.date().transform(v => v.toISOString()),
+    activationState: CatalogActivationState$outboundSchema,
+    blockerSource: z.nullable(RegistryNameHolder$outboundSchema),
+    activatedBy: z.nullable(z.string()),
+    activatedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      modelId: "model_id",
+      grantedBy: "granted_by",
+      grantedAt: "granted_at",
+      activationState: "activation_state",
+      blockerSource: "blocker_source",
+      activatedBy: "activated_by",
+      activatedAt: "activated_at",
+    });
+  })
+);
 
 export function accessEntryToJSON(accessEntry: AccessEntry): string {
   return JSON.stringify(AccessEntry$outboundSchema.parse(accessEntry));

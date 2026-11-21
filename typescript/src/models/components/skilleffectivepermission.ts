@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -58,20 +58,22 @@ export const SkillEffectivePermission$inboundSchema: z.ZodType<
   SkillEffectivePermission,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("skill.permission"),
-  skill_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  role: z.nullable(ResourcePermissionRole$inboundSchema),
-  source: ResourcePermissionSource$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("skill.permission"),
+    skill_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    role: z.nullable(ResourcePermissionRole$inboundSchema),
+    source: ResourcePermissionSource$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type SkillEffectivePermission$Outbound = {
   object: "skill.permission";
@@ -87,20 +89,22 @@ export const SkillEffectivePermission$outboundSchema: z.ZodType<
   SkillEffectivePermission$Outbound,
   z.ZodTypeDef,
   SkillEffectivePermission
-> = z.object({
-  object: z.literal("skill.permission"),
-  skillId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  role: z.nullable(ResourcePermissionRole$outboundSchema),
-  source: ResourcePermissionSource$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("skill.permission"),
+    skillId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    role: z.nullable(ResourcePermissionRole$outboundSchema),
+    source: ResourcePermissionSource$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function skillEffectivePermissionToJSON(
   skillEffectivePermission: SkillEffectivePermission,

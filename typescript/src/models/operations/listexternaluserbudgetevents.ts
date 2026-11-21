@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,14 +47,16 @@ export const ListExternalUserBudgetEventsRequest$inboundSchema: z.ZodType<
   ListExternalUserBudgetEventsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type ListExternalUserBudgetEventsRequest$Outbound = {
   id: string;
@@ -66,14 +68,16 @@ export const ListExternalUserBudgetEventsRequest$outboundSchema: z.ZodType<
   ListExternalUserBudgetEventsRequest$Outbound,
   z.ZodTypeDef,
   ListExternalUserBudgetEventsRequest
-> = z.object({
-  id: z.string(),
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function listExternalUserBudgetEventsRequestToJSON(
   listExternalUserBudgetEventsRequest: ListExternalUserBudgetEventsRequest,
@@ -98,7 +102,9 @@ export function listExternalUserBudgetEventsRequestFromJSON(
 /** @internal */
 export const ListExternalUserBudgetEventsType$inboundSchema: z.ZodNativeEnum<
   typeof ListExternalUserBudgetEventsType
-> = z.nativeEnum(ListExternalUserBudgetEventsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListExternalUserBudgetEventsType)
+);
 /** @internal */
 export const ListExternalUserBudgetEventsType$outboundSchema: z.ZodNativeEnum<
   typeof ListExternalUserBudgetEventsType
@@ -109,26 +115,28 @@ export const ListExternalUserBudgetEventsData$inboundSchema: z.ZodType<
   ListExternalUserBudgetEventsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  budget_id: z.string(),
-  type: ListExternalUserBudgetEventsType$inboundSchema,
-  pct: z.nullable(z.number()),
-  period_key: z.string(),
-  target_id: z.string(),
-  spend_snapshot: z.number(),
-  limit_snapshot: z.number(),
-  created_at: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_id": "budgetId",
-    "period_key": "periodKey",
-    "target_id": "targetId",
-    "spend_snapshot": "spendSnapshot",
-    "limit_snapshot": "limitSnapshot",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    budget_id: z.string(),
+    type: ListExternalUserBudgetEventsType$inboundSchema,
+    pct: z.nullable(z.number()),
+    period_key: z.string(),
+    target_id: z.string(),
+    spend_snapshot: z.number(),
+    limit_snapshot: z.number(),
+    created_at: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_id": "budgetId",
+      "period_key": "periodKey",
+      "target_id": "targetId",
+      "spend_snapshot": "spendSnapshot",
+      "limit_snapshot": "limitSnapshot",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type ListExternalUserBudgetEventsData$Outbound = {
   id: string;
@@ -147,26 +155,28 @@ export const ListExternalUserBudgetEventsData$outboundSchema: z.ZodType<
   ListExternalUserBudgetEventsData$Outbound,
   z.ZodTypeDef,
   ListExternalUserBudgetEventsData
-> = z.object({
-  id: z.string(),
-  budgetId: z.string(),
-  type: ListExternalUserBudgetEventsType$outboundSchema,
-  pct: z.nullable(z.number()),
-  periodKey: z.string(),
-  targetId: z.string(),
-  spendSnapshot: z.number(),
-  limitSnapshot: z.number(),
-  createdAt: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    periodKey: "period_key",
-    targetId: "target_id",
-    spendSnapshot: "spend_snapshot",
-    limitSnapshot: "limit_snapshot",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    budgetId: z.string(),
+    type: ListExternalUserBudgetEventsType$outboundSchema,
+    pct: z.nullable(z.number()),
+    periodKey: z.string(),
+    targetId: z.string(),
+    spendSnapshot: z.number(),
+    limitSnapshot: z.number(),
+    createdAt: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetId: "budget_id",
+      periodKey: "period_key",
+      targetId: "target_id",
+      spendSnapshot: "spend_snapshot",
+      limitSnapshot: "limit_snapshot",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function listExternalUserBudgetEventsDataToJSON(
   listExternalUserBudgetEventsData: ListExternalUserBudgetEventsData,
@@ -192,10 +202,12 @@ export const ListExternalUserBudgetEventsResponseBody$inboundSchema: z.ZodType<
   ListExternalUserBudgetEventsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListExternalUserBudgetEventsData$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListExternalUserBudgetEventsData$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListExternalUserBudgetEventsResponseBody$Outbound = {
   object: "list";
@@ -207,10 +219,14 @@ export const ListExternalUserBudgetEventsResponseBody$outboundSchema: z.ZodType<
   ListExternalUserBudgetEventsResponseBody$Outbound,
   z.ZodTypeDef,
   ListExternalUserBudgetEventsResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListExternalUserBudgetEventsData$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(
+      z.lazy(() => ListExternalUserBudgetEventsData$outboundSchema),
+    ),
+  })
+);
 
 export function listExternalUserBudgetEventsResponseBodyToJSON(
   listExternalUserBudgetEventsResponseBody:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,9 +45,8 @@ export type ConversationsListRequest = {
 };
 
 /** @internal */
-export const Order$inboundSchema: z.ZodNativeEnum<typeof Order> = z.nativeEnum(
-  Order,
-);
+export const Order$inboundSchema: z.ZodNativeEnum<typeof Order> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Order));
 /** @internal */
 export const Order$outboundSchema: z.ZodNativeEnum<typeof Order> =
   Order$inboundSchema;
@@ -57,7 +56,9 @@ export const Metadata$inboundSchema: z.ZodType<
   Metadata,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.record(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.string())])
+);
 /** @internal */
 export type Metadata$Outbound = string | { [k: string]: string };
 
@@ -66,7 +67,9 @@ export const Metadata$outboundSchema: z.ZodType<
   Metadata$Outbound,
   z.ZodTypeDef,
   Metadata
-> = z.union([z.string(), z.record(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.record(z.string())])
+);
 
 export function metadataToJSON(metadata: Metadata): string {
   return JSON.stringify(Metadata$outboundSchema.parse(metadata));
@@ -86,18 +89,20 @@ export const ConversationsListRequest$inboundSchema: z.ZodType<
   ConversationsListRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: Order$inboundSchema.default("asc"),
-  metadata: z.union([z.string(), z.record(z.string())]).optional(),
-  search: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: Order$inboundSchema.default("asc"),
+    metadata: z.union([z.string(), z.record(z.string())]).optional(),
+    search: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ConversationsListRequest$Outbound = {
   after?: string | undefined;
@@ -113,18 +118,20 @@ export const ConversationsListRequest$outboundSchema: z.ZodType<
   ConversationsListRequest$Outbound,
   z.ZodTypeDef,
   ConversationsListRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: Order$outboundSchema.default("asc"),
-  metadata: z.union([z.string(), z.record(z.string())]).optional(),
-  search: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: Order$outboundSchema.default("asc"),
+    metadata: z.union([z.string(), z.record(z.string())]).optional(),
+    search: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function conversationsListRequestToJSON(
   conversationsListRequest: ConversationsListRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKError } from "./sdkerror.js";
 import { SDKValidationError } from "./sdkvalidationerror.js";
@@ -219,19 +219,21 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody$inboundSch
     RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody$Outbound =
@@ -245,11 +247,13 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody$outboundSc
     RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody$inboundSchema:
@@ -257,19 +261,21 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody$inboundSch
     RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody$Outbound =
@@ -283,11 +289,13 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody$outboundSc
     RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody$inboundSchema:
@@ -295,19 +303,21 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody$inboundSch
     RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody$Outbound =
@@ -321,11 +331,13 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody$outboundSc
     RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody$inboundSchema:
@@ -333,19 +345,21 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody$inboundSch
     RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody$Outbound =
@@ -359,11 +373,13 @@ export const RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody$outboundSc
     RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyAuthApiKeysResponseResponseBody$inboundSchema:
@@ -371,20 +387,22 @@ export const RegenerateScopedApiKeyAuthApiKeysResponseResponseBody$inboundSchema
     RegenerateScopedApiKeyAuthApiKeysResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponseResponseBody$Outbound = {
@@ -398,12 +416,14 @@ export const RegenerateScopedApiKeyAuthApiKeysResponseResponseBody$outboundSchem
     RegenerateScopedApiKeyAuthApiKeysResponseResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponseResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyAuthApiKeysResponseBody$inboundSchema:
@@ -411,19 +431,21 @@ export const RegenerateScopedApiKeyAuthApiKeysResponseBody$inboundSchema:
     RegenerateScopedApiKeyAuthApiKeysResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RegenerateScopedApiKeyAuthApiKeysResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RegenerateScopedApiKeyAuthApiKeysResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RegenerateScopedApiKeyAuthApiKeysResponseBody$Outbound = {
@@ -436,21 +458,25 @@ export const RegenerateScopedApiKeyAuthApiKeysResponseBody$outboundSchema:
     RegenerateScopedApiKeyAuthApiKeysResponseBody$Outbound,
     z.ZodTypeDef,
     RegenerateScopedApiKeyAuthApiKeysResponseBody
-  > = z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RegenerateScopedApiKeyAuthApiKeysResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RegenerateScopedApiKeyDetails$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type RegenerateScopedApiKeyDetails$Outbound = {
   path: string;
@@ -462,10 +488,12 @@ export const RegenerateScopedApiKeyDetails$outboundSchema: z.ZodType<
   RegenerateScopedApiKeyDetails$Outbound,
   z.ZodTypeDef,
   RegenerateScopedApiKeyDetails
-> = z.object({
-  path: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    message: z.string(),
+  })
+);
 
 export function regenerateScopedApiKeyDetailsToJSON(
   regenerateScopedApiKeyDetails: RegenerateScopedApiKeyDetails,
@@ -491,21 +519,23 @@ export const RegenerateScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   RegenerateScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  details: z.array(z.lazy(() => RegenerateScopedApiKeyDetails$inboundSchema))
-    .optional(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new RegenerateScopedApiKeyResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    details: z.array(z.lazy(() => RegenerateScopedApiKeyDetails$inboundSchema))
+      .optional(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new RegenerateScopedApiKeyResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type RegenerateScopedApiKeyResponseBody$Outbound = {
@@ -518,10 +548,13 @@ export const RegenerateScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   RegenerateScopedApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   RegenerateScopedApiKeyResponseBody
-> = z.instanceof(RegenerateScopedApiKeyResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-    details: z.array(z.lazy(() => RegenerateScopedApiKeyDetails$outboundSchema))
-      .optional(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(RegenerateScopedApiKeyResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+      details: z.array(
+        z.lazy(() => RegenerateScopedApiKeyDetails$outboundSchema),
+      ).optional(),
+    }))
+);

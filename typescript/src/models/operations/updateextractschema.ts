@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -44,12 +44,14 @@ export const UpdateExtractSchemaRequestBody$inboundSchema: z.ZodType<
   UpdateExtractSchemaRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  schema: z.record(z.any()).optional(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    schema: z.record(z.any()).optional(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type UpdateExtractSchemaRequestBody$Outbound = {
   name?: string | undefined;
@@ -63,12 +65,14 @@ export const UpdateExtractSchemaRequestBody$outboundSchema: z.ZodType<
   UpdateExtractSchemaRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateExtractSchemaRequestBody
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  schema: z.record(z.any()).optional(),
-  metadata: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    schema: z.record(z.any()).optional(),
+    metadata: z.record(z.any()).optional(),
+  })
+);
 
 export function updateExtractSchemaRequestBodyToJSON(
   updateExtractSchemaRequestBody: UpdateExtractSchemaRequestBody,
@@ -94,17 +98,19 @@ export const UpdateExtractSchemaRequest$inboundSchema: z.ZodType<
   UpdateExtractSchemaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schema_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateExtractSchemaRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "schema_id": "schemaId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schema_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateExtractSchemaRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema_id": "schemaId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateExtractSchemaRequest$Outbound = {
   schema_id: string;
@@ -117,17 +123,19 @@ export const UpdateExtractSchemaRequest$outboundSchema: z.ZodType<
   UpdateExtractSchemaRequest$Outbound,
   z.ZodTypeDef,
   UpdateExtractSchemaRequest
-> = z.object({
-  schemaId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateExtractSchemaRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    schemaId: "schema_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateExtractSchemaRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      schemaId: "schema_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateExtractSchemaRequestToJSON(
   updateExtractSchemaRequest: UpdateExtractSchemaRequest,

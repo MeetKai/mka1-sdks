@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -104,15 +104,17 @@ export const OpenAIChatCompletionCompletionTokensDetails$inboundSchema:
     OpenAIChatCompletionCompletionTokensDetails,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    reasoning_tokens: z.number().int().optional(),
-    audio_tokens: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "reasoning_tokens": "reasoningTokens",
-      "audio_tokens": "audioTokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoning_tokens: z.number().int().optional(),
+      audio_tokens: z.number().int().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "reasoning_tokens": "reasoningTokens",
+        "audio_tokens": "audioTokens",
+      });
+    })
+  );
 /** @internal */
 export type OpenAIChatCompletionCompletionTokensDetails$Outbound = {
   reasoning_tokens?: number | undefined;
@@ -125,15 +127,17 @@ export const OpenAIChatCompletionCompletionTokensDetails$outboundSchema:
     OpenAIChatCompletionCompletionTokensDetails$Outbound,
     z.ZodTypeDef,
     OpenAIChatCompletionCompletionTokensDetails
-  > = z.object({
-    reasoningTokens: z.number().int().optional(),
-    audioTokens: z.number().int().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      reasoningTokens: "reasoning_tokens",
-      audioTokens: "audio_tokens",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      reasoningTokens: z.number().int().optional(),
+      audioTokens: z.number().int().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        reasoningTokens: "reasoning_tokens",
+        audioTokens: "audio_tokens",
+      });
+    })
+  );
 
 export function openAIChatCompletionCompletionTokensDetailsToJSON(
   openAIChatCompletionCompletionTokensDetails:
@@ -166,21 +170,23 @@ export const OpenAIChatCompletionUsage1$inboundSchema: z.ZodType<
   OpenAIChatCompletionUsage1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number().int(),
-  completion_tokens: z.number().int(),
-  total_tokens: z.number().int(),
-  completion_tokens_details: z.lazy(() =>
-    OpenAIChatCompletionCompletionTokensDetails$inboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "completion_tokens": "completionTokens",
-    "total_tokens": "totalTokens",
-    "completion_tokens_details": "completionTokensDetails",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number().int(),
+    completion_tokens: z.number().int(),
+    total_tokens: z.number().int(),
+    completion_tokens_details: z.lazy(() =>
+      OpenAIChatCompletionCompletionTokensDetails$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "completion_tokens": "completionTokens",
+      "total_tokens": "totalTokens",
+      "completion_tokens_details": "completionTokensDetails",
+    });
+  })
+);
 /** @internal */
 export type OpenAIChatCompletionUsage1$Outbound = {
   prompt_tokens: number;
@@ -196,21 +202,23 @@ export const OpenAIChatCompletionUsage1$outboundSchema: z.ZodType<
   OpenAIChatCompletionUsage1$Outbound,
   z.ZodTypeDef,
   OpenAIChatCompletionUsage1
-> = z.object({
-  promptTokens: z.number().int(),
-  completionTokens: z.number().int(),
-  totalTokens: z.number().int(),
-  completionTokensDetails: z.lazy(() =>
-    OpenAIChatCompletionCompletionTokensDetails$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    completionTokens: "completion_tokens",
-    totalTokens: "total_tokens",
-    completionTokensDetails: "completion_tokens_details",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    promptTokens: z.number().int(),
+    completionTokens: z.number().int(),
+    totalTokens: z.number().int(),
+    completionTokensDetails: z.lazy(() =>
+      OpenAIChatCompletionCompletionTokensDetails$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      completionTokens: "completion_tokens",
+      totalTokens: "total_tokens",
+      completionTokensDetails: "completion_tokens_details",
+    });
+  })
+);
 
 export function openAIChatCompletionUsage1ToJSON(
   openAIChatCompletionUsage1: OpenAIChatCompletionUsage1,
@@ -234,25 +242,27 @@ export const OpenAIChatCompletion$inboundSchema: z.ZodType<
   OpenAIChatCompletion,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("chat.completion"),
-  created: z.number().int(),
-  model: z.string(),
-  choices: z.array(OpenAIChatCompletionChoice$inboundSchema),
-  usage: z.lazy(() => OpenAIChatCompletionUsage1$inboundSchema),
-  system_fingerprint: z.string().optional(),
-  resolved_model: z.string().optional(),
-  resolved_provider: z.string().optional(),
-  resolved_serving_location: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "system_fingerprint": "systemFingerprint",
-    "resolved_model": "resolvedModel",
-    "resolved_provider": "resolvedProvider",
-    "resolved_serving_location": "resolvedServingLocation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("chat.completion"),
+    created: z.number().int(),
+    model: z.string(),
+    choices: z.array(OpenAIChatCompletionChoice$inboundSchema),
+    usage: z.lazy(() => OpenAIChatCompletionUsage1$inboundSchema),
+    system_fingerprint: z.string().optional(),
+    resolved_model: z.string().optional(),
+    resolved_provider: z.string().optional(),
+    resolved_serving_location: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "system_fingerprint": "systemFingerprint",
+      "resolved_model": "resolvedModel",
+      "resolved_provider": "resolvedProvider",
+      "resolved_serving_location": "resolvedServingLocation",
+    });
+  })
+);
 /** @internal */
 export type OpenAIChatCompletion$Outbound = {
   id: string;
@@ -272,25 +282,27 @@ export const OpenAIChatCompletion$outboundSchema: z.ZodType<
   OpenAIChatCompletion$Outbound,
   z.ZodTypeDef,
   OpenAIChatCompletion
-> = z.object({
-  id: z.string(),
-  object: z.literal("chat.completion"),
-  created: z.number().int(),
-  model: z.string(),
-  choices: z.array(OpenAIChatCompletionChoice$outboundSchema),
-  usage: z.lazy(() => OpenAIChatCompletionUsage1$outboundSchema),
-  systemFingerprint: z.string().optional(),
-  resolvedModel: z.string().optional(),
-  resolvedProvider: z.string().optional(),
-  resolvedServingLocation: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    systemFingerprint: "system_fingerprint",
-    resolvedModel: "resolved_model",
-    resolvedProvider: "resolved_provider",
-    resolvedServingLocation: "resolved_serving_location",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("chat.completion"),
+    created: z.number().int(),
+    model: z.string(),
+    choices: z.array(OpenAIChatCompletionChoice$outboundSchema),
+    usage: z.lazy(() => OpenAIChatCompletionUsage1$outboundSchema),
+    systemFingerprint: z.string().optional(),
+    resolvedModel: z.string().optional(),
+    resolvedProvider: z.string().optional(),
+    resolvedServingLocation: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      systemFingerprint: "system_fingerprint",
+      resolvedModel: "resolved_model",
+      resolvedProvider: "resolved_provider",
+      resolvedServingLocation: "resolved_serving_location",
+    });
+  })
+);
 
 export function openAIChatCompletionToJSON(
   openAIChatCompletion: OpenAIChatCompletion,

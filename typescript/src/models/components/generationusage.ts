@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,18 +29,20 @@ export const GenerationUsage$inboundSchema: z.ZodType<
   GenerationUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  calls: z.number().int().default(0),
-  input_tokens: z.number().int().default(0),
-  output_tokens: z.number().int().default(0),
-  by_model: z.record(GenerationModelUsage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "by_model": "byModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int().default(0),
+    input_tokens: z.number().int().default(0),
+    output_tokens: z.number().int().default(0),
+    by_model: z.record(GenerationModelUsage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "by_model": "byModel",
+    });
+  })
+);
 /** @internal */
 export type GenerationUsage$Outbound = {
   calls: number;
@@ -54,18 +56,20 @@ export const GenerationUsage$outboundSchema: z.ZodType<
   GenerationUsage$Outbound,
   z.ZodTypeDef,
   GenerationUsage
-> = z.object({
-  calls: z.number().int().default(0),
-  inputTokens: z.number().int().default(0),
-  outputTokens: z.number().int().default(0),
-  byModel: z.record(GenerationModelUsage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    byModel: "by_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    calls: z.number().int().default(0),
+    inputTokens: z.number().int().default(0),
+    outputTokens: z.number().int().default(0),
+    byModel: z.record(GenerationModelUsage$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      byModel: "by_model",
+    });
+  })
+);
 
 export function generationUsageToJSON(
   generationUsage: GenerationUsage,

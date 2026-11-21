@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const InputTokensDetails$inboundSchema: z.ZodType<
   InputTokensDetails,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cached_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "cached_tokens": "cachedTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cached_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "cached_tokens": "cachedTokens",
+    });
+  })
+);
 /** @internal */
 export type InputTokensDetails$Outbound = {
   cached_tokens: number;
@@ -34,13 +36,15 @@ export const InputTokensDetails$outboundSchema: z.ZodType<
   InputTokensDetails$Outbound,
   z.ZodTypeDef,
   InputTokensDetails
-> = z.object({
-  cachedTokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    cachedTokens: "cached_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cachedTokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      cachedTokens: "cached_tokens",
+    });
+  })
+);
 
 export function inputTokensDetailsToJSON(
   inputTokensDetails: InputTokensDetails,

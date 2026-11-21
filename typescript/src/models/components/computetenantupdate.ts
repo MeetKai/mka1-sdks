@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ComputeTenantUpdate$inboundSchema: z.ZodType<
   ComputeTenantUpdate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  enabled: z.boolean().optional(),
-  max_live_jobs: z.nullable(z.number().int()).optional(),
-  max_live_service_replicas: z.nullable(z.number().int()).optional(),
-  max_live_services: z.nullable(z.number().int()).optional(),
-  max_live_volumes: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "max_live_jobs": "maxLiveJobs",
-    "max_live_service_replicas": "maxLiveServiceReplicas",
-    "max_live_services": "maxLiveServices",
-    "max_live_volumes": "maxLiveVolumes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    max_live_jobs: z.nullable(z.number().int()).optional(),
+    max_live_service_replicas: z.nullable(z.number().int()).optional(),
+    max_live_services: z.nullable(z.number().int()).optional(),
+    max_live_volumes: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_live_jobs": "maxLiveJobs",
+      "max_live_service_replicas": "maxLiveServiceReplicas",
+      "max_live_services": "maxLiveServices",
+      "max_live_volumes": "maxLiveVolumes",
+    });
+  })
+);
 /** @internal */
 export type ComputeTenantUpdate$Outbound = {
   enabled?: boolean | undefined;
@@ -49,20 +51,22 @@ export const ComputeTenantUpdate$outboundSchema: z.ZodType<
   ComputeTenantUpdate$Outbound,
   z.ZodTypeDef,
   ComputeTenantUpdate
-> = z.object({
-  enabled: z.boolean().optional(),
-  maxLiveJobs: z.nullable(z.number().int()).optional(),
-  maxLiveServiceReplicas: z.nullable(z.number().int()).optional(),
-  maxLiveServices: z.nullable(z.number().int()).optional(),
-  maxLiveVolumes: z.nullable(z.number().int()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    maxLiveJobs: "max_live_jobs",
-    maxLiveServiceReplicas: "max_live_service_replicas",
-    maxLiveServices: "max_live_services",
-    maxLiveVolumes: "max_live_volumes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    enabled: z.boolean().optional(),
+    maxLiveJobs: z.nullable(z.number().int()).optional(),
+    maxLiveServiceReplicas: z.nullable(z.number().int()).optional(),
+    maxLiveServices: z.nullable(z.number().int()).optional(),
+    maxLiveVolumes: z.nullable(z.number().int()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      maxLiveJobs: "max_live_jobs",
+      maxLiveServiceReplicas: "max_live_service_replicas",
+      maxLiveServices: "max_live_services",
+      maxLiveVolumes: "max_live_volumes",
+    });
+  })
+);
 
 export function computeTenantUpdateToJSON(
   computeTenantUpdate: ComputeTenantUpdate,

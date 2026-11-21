@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
@@ -26,7 +26,7 @@ export type CatalogLifecycle = {
 /** @internal */
 export const CatalogLifecycleStatus$inboundSchema: z.ZodNativeEnum<
   typeof CatalogLifecycleStatus
-> = z.nativeEnum(CatalogLifecycleStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CatalogLifecycleStatus));
 /** @internal */
 export const CatalogLifecycleStatus$outboundSchema: z.ZodNativeEnum<
   typeof CatalogLifecycleStatus
@@ -37,12 +37,14 @@ export const CatalogLifecycle$inboundSchema: z.ZodType<
   CatalogLifecycle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: CatalogLifecycleStatus$inboundSchema,
-  deprecatedAt: z.string().transform(v => new RFCDate(v)).optional(),
-  retiresAt: z.string().transform(v => new RFCDate(v)).optional(),
-  successor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogLifecycleStatus$inboundSchema,
+    deprecatedAt: z.string().transform(v => new RFCDate(v)).optional(),
+    retiresAt: z.string().transform(v => new RFCDate(v)).optional(),
+    successor: z.string().optional(),
+  })
+);
 /** @internal */
 export type CatalogLifecycle$Outbound = {
   status: string;
@@ -56,12 +58,14 @@ export const CatalogLifecycle$outboundSchema: z.ZodType<
   CatalogLifecycle$Outbound,
   z.ZodTypeDef,
   CatalogLifecycle
-> = z.object({
-  status: CatalogLifecycleStatus$outboundSchema,
-  deprecatedAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  retiresAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
-  successor: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: CatalogLifecycleStatus$outboundSchema,
+    deprecatedAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    retiresAt: z.instanceof(RFCDate).transform(v => v.toString()).optional(),
+    successor: z.string().optional(),
+  })
+);
 
 export function catalogLifecycleToJSON(
   catalogLifecycle: CatalogLifecycle,

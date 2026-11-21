@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -64,7 +64,7 @@ export type VectorStoreFileBatch = {
 /** @internal */
 export const VectorStoreFileBatchStatus$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreFileBatchStatus
-> = z.nativeEnum(VectorStoreFileBatchStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(VectorStoreFileBatchStatus));
 /** @internal */
 export const VectorStoreFileBatchStatus$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreFileBatchStatus
@@ -75,20 +75,22 @@ export const VectorStoreFileBatch$inboundSchema: z.ZodType<
   VectorStoreFileBatch,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file_batch"),
-  created_at: z.number().int(),
-  vector_store_id: z.string(),
-  status: VectorStoreFileBatchStatus$inboundSchema,
-  file_counts: FileCounts$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "vector_store_id": "vectorStoreId",
-    "file_counts": "fileCounts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file_batch"),
+    created_at: z.number().int(),
+    vector_store_id: z.string(),
+    status: VectorStoreFileBatchStatus$inboundSchema,
+    file_counts: FileCounts$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "vector_store_id": "vectorStoreId",
+      "file_counts": "fileCounts",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreFileBatch$Outbound = {
   id: string;
@@ -104,20 +106,22 @@ export const VectorStoreFileBatch$outboundSchema: z.ZodType<
   VectorStoreFileBatch$Outbound,
   z.ZodTypeDef,
   VectorStoreFileBatch
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.file_batch"),
-  createdAt: z.number().int(),
-  vectorStoreId: z.string(),
-  status: VectorStoreFileBatchStatus$outboundSchema,
-  fileCounts: FileCounts$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    vectorStoreId: "vector_store_id",
-    fileCounts: "file_counts",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.file_batch"),
+    createdAt: z.number().int(),
+    vectorStoreId: z.string(),
+    status: VectorStoreFileBatchStatus$outboundSchema,
+    fileCounts: FileCounts$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      vectorStoreId: "vector_store_id",
+      fileCounts: "file_counts",
+    });
+  })
+);
 
 export function vectorStoreFileBatchToJSON(
   vectorStoreFileBatch: VectorStoreFileBatch,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -70,9 +70,11 @@ export const InviteClusterOrgMembersSecurity$inboundSchema: z.ZodType<
   InviteClusterOrgMembersSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type InviteClusterOrgMembersSecurity$Outbound = {
   sessionCookie: string;
@@ -83,9 +85,11 @@ export const InviteClusterOrgMembersSecurity$outboundSchema: z.ZodType<
   InviteClusterOrgMembersSecurity$Outbound,
   z.ZodTypeDef,
   InviteClusterOrgMembersSecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function inviteClusterOrgMembersSecurityToJSON(
   inviteClusterOrgMembersSecurity: InviteClusterOrgMembersSecurity,
@@ -109,7 +113,9 @@ export function inviteClusterOrgMembersSecurityFromJSON(
 /** @internal */
 export const InviteClusterOrgMembersRole$inboundSchema: z.ZodNativeEnum<
   typeof InviteClusterOrgMembersRole
-> = z.nativeEnum(InviteClusterOrgMembersRole);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(InviteClusterOrgMembersRole)
+);
 /** @internal */
 export const InviteClusterOrgMembersRole$outboundSchema: z.ZodNativeEnum<
   typeof InviteClusterOrgMembersRole
@@ -120,11 +126,13 @@ export const Invitations$inboundSchema: z.ZodType<
   Invitations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  role: InviteClusterOrgMembersRole$inboundSchema.default("member"),
-  resend: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    role: InviteClusterOrgMembersRole$inboundSchema.default("member"),
+    resend: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type Invitations$Outbound = {
   email: string;
@@ -137,11 +145,13 @@ export const Invitations$outboundSchema: z.ZodType<
   Invitations$Outbound,
   z.ZodTypeDef,
   Invitations
-> = z.object({
-  email: z.string(),
-  role: InviteClusterOrgMembersRole$outboundSchema.default("member"),
-  resend: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    role: InviteClusterOrgMembersRole$outboundSchema.default("member"),
+    resend: z.boolean().optional(),
+  })
+);
 
 export function invitationsToJSON(invitations: Invitations): string {
   return JSON.stringify(Invitations$outboundSchema.parse(invitations));
@@ -161,9 +171,11 @@ export const InviteClusterOrgMembersRequestBody$inboundSchema: z.ZodType<
   InviteClusterOrgMembersRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invitations: z.array(z.lazy(() => Invitations$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitations: z.array(z.lazy(() => Invitations$inboundSchema)),
+  })
+);
 /** @internal */
 export type InviteClusterOrgMembersRequestBody$Outbound = {
   invitations: Array<Invitations$Outbound>;
@@ -174,9 +186,11 @@ export const InviteClusterOrgMembersRequestBody$outboundSchema: z.ZodType<
   InviteClusterOrgMembersRequestBody$Outbound,
   z.ZodTypeDef,
   InviteClusterOrgMembersRequestBody
-> = z.object({
-  invitations: z.array(z.lazy(() => Invitations$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitations: z.array(z.lazy(() => Invitations$outboundSchema)),
+  })
+);
 
 export function inviteClusterOrgMembersRequestBodyToJSON(
   inviteClusterOrgMembersRequestBody: InviteClusterOrgMembersRequestBody,
@@ -203,16 +217,18 @@ export const InviteClusterOrgMembersRequest$inboundSchema: z.ZodType<
   InviteClusterOrgMembersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => InviteClusterOrgMembersRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => InviteClusterOrgMembersRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type InviteClusterOrgMembersRequest$Outbound = {
   id: string;
@@ -225,16 +241,20 @@ export const InviteClusterOrgMembersRequest$outboundSchema: z.ZodType<
   InviteClusterOrgMembersRequest$Outbound,
   z.ZodTypeDef,
   InviteClusterOrgMembersRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => InviteClusterOrgMembersRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      InviteClusterOrgMembersRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function inviteClusterOrgMembersRequestToJSON(
   inviteClusterOrgMembersRequest: InviteClusterOrgMembersRequest,
@@ -258,7 +278,9 @@ export function inviteClusterOrgMembersRequestFromJSON(
 /** @internal */
 export const InviteClusterOrgMembersStatus$inboundSchema: z.ZodNativeEnum<
   typeof InviteClusterOrgMembersStatus
-> = z.nativeEnum(InviteClusterOrgMembersStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(InviteClusterOrgMembersStatus)
+);
 /** @internal */
 export const InviteClusterOrgMembersStatus$outboundSchema: z.ZodNativeEnum<
   typeof InviteClusterOrgMembersStatus
@@ -266,12 +288,14 @@ export const InviteClusterOrgMembersStatus$outboundSchema: z.ZodNativeEnum<
 
 /** @internal */
 export const Results$inboundSchema: z.ZodType<Results, z.ZodTypeDef, unknown> =
-  z.object({
-    email: z.string(),
-    status: InviteClusterOrgMembersStatus$inboundSchema,
-    invitationId: z.string().optional(),
-    message: z.string().optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      email: z.string(),
+      status: InviteClusterOrgMembersStatus$inboundSchema,
+      invitationId: z.string().optional(),
+      message: z.string().optional(),
+    })
+  );
 /** @internal */
 export type Results$Outbound = {
   email: string;
@@ -285,12 +309,14 @@ export const Results$outboundSchema: z.ZodType<
   Results$Outbound,
   z.ZodTypeDef,
   Results
-> = z.object({
-  email: z.string(),
-  status: InviteClusterOrgMembersStatus$outboundSchema,
-  invitationId: z.string().optional(),
-  message: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: InviteClusterOrgMembersStatus$outboundSchema,
+    invitationId: z.string().optional(),
+    message: z.string().optional(),
+  })
+);
 
 export function resultsToJSON(results: Results): string {
   return JSON.stringify(Results$outboundSchema.parse(results));
@@ -310,9 +336,11 @@ export const InviteClusterOrgMembersResponseBody$inboundSchema: z.ZodType<
   InviteClusterOrgMembersResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  results: z.array(z.lazy(() => Results$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.array(z.lazy(() => Results$inboundSchema)),
+  })
+);
 /** @internal */
 export type InviteClusterOrgMembersResponseBody$Outbound = {
   results: Array<Results$Outbound>;
@@ -323,9 +351,11 @@ export const InviteClusterOrgMembersResponseBody$outboundSchema: z.ZodType<
   InviteClusterOrgMembersResponseBody$Outbound,
   z.ZodTypeDef,
   InviteClusterOrgMembersResponseBody
-> = z.object({
-  results: z.array(z.lazy(() => Results$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    results: z.array(z.lazy(() => Results$outboundSchema)),
+  })
+);
 
 export function inviteClusterOrgMembersResponseBodyToJSON(
   inviteClusterOrgMembersResponseBody: InviteClusterOrgMembersResponseBody,

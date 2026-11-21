@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,7 +46,7 @@ export type GuardrailsResourcePolicy = {
 
 /** @internal */
 export const ResourceType$inboundSchema: z.ZodNativeEnum<typeof ResourceType> =
-  z.nativeEnum(ResourceType);
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ResourceType));
 /** @internal */
 export const ResourceType$outboundSchema: z.ZodNativeEnum<typeof ResourceType> =
   ResourceType$inboundSchema;
@@ -56,20 +56,24 @@ export const GuardrailsResourcePolicy$inboundSchema: z.ZodType<
   GuardrailsResourcePolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resource_type: ResourceType$inboundSchema,
-  resource_id: z.string(),
-  team_id: z.nullable(z.string()),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-    "resource_id": "resourceId",
-    "team_id": "teamId",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource_type: ResourceType$inboundSchema,
+    resource_id: z.string(),
+    team_id: z.nullable(z.string()),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+      "resource_id": "resourceId",
+      "team_id": "teamId",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type GuardrailsResourcePolicy$Outbound = {
   resource_type: string;
@@ -84,20 +88,22 @@ export const GuardrailsResourcePolicy$outboundSchema: z.ZodType<
   GuardrailsResourcePolicy$Outbound,
   z.ZodTypeDef,
   GuardrailsResourcePolicy
-> = z.object({
-  resourceType: ResourceType$outboundSchema,
-  resourceId: z.string(),
-  teamId: z.nullable(z.string()),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-    resourceId: "resource_id",
-    teamId: "team_id",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceType: ResourceType$outboundSchema,
+    resourceId: z.string(),
+    teamId: z.nullable(z.string()),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+      resourceId: "resource_id",
+      teamId: "team_id",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function guardrailsResourcePolicyToJSON(
   guardrailsResourcePolicy: GuardrailsResourcePolicy,

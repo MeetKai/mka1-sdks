@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,19 +24,21 @@ export const ProxyBrowserPortRequestRequest$inboundSchema: z.ZodType<
   ProxyBrowserPortRequestRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  port: z.number().int(),
-  subpath: z.string(),
-  session_token: z.nullable(z.string()).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_token": "sessionToken",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    port: z.number().int(),
+    subpath: z.string(),
+    session_token: z.nullable(z.string()).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_token": "sessionToken",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ProxyBrowserPortRequestRequest$Outbound = {
   session_id: string;
@@ -51,19 +53,21 @@ export const ProxyBrowserPortRequestRequest$outboundSchema: z.ZodType<
   ProxyBrowserPortRequestRequest$Outbound,
   z.ZodTypeDef,
   ProxyBrowserPortRequestRequest
-> = z.object({
-  sessionId: z.string(),
-  port: z.number().int(),
-  subpath: z.string(),
-  sessionToken: z.nullable(z.string()).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionToken: "session_token",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    port: z.number().int(),
+    subpath: z.string(),
+    sessionToken: z.nullable(z.string()).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionToken: "session_token",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function proxyBrowserPortRequestRequestToJSON(
   proxyBrowserPortRequestRequest: ProxyBrowserPortRequestRequest,

@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -57,12 +58,14 @@ export const CreateAgentRunRequestInput2$inboundSchema: z.ZodType<
   CreateAgentRunRequestInput2,
   z.ZodTypeDef,
   unknown
-> = collectExtraKeys$(
-  z.object({
-    type: z.string().optional(),
-  }).catchall(z.any()),
-  "additionalProperties",
-  true,
+> = /* @__PURE__ */ lazySchema$(() =>
+  collectExtraKeys$(
+    z.object({
+      type: z.string().optional(),
+    }).catchall(z.any()),
+    "additionalProperties",
+    true,
+  )
 );
 /** @internal */
 export type CreateAgentRunRequestInput2$Outbound = {
@@ -75,17 +78,19 @@ export const CreateAgentRunRequestInput2$outboundSchema: z.ZodType<
   CreateAgentRunRequestInput2$Outbound,
   z.ZodTypeDef,
   CreateAgentRunRequestInput2
-> = z.object({
-  type: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function createAgentRunRequestInput2ToJSON(
   createAgentRunRequestInput2: CreateAgentRunRequestInput2,
@@ -111,10 +116,12 @@ export const CreateAgentRunRequestInput$inboundSchema: z.ZodType<
   CreateAgentRunRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => CreateAgentRunRequestInput2$inboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => CreateAgentRunRequestInput2$inboundSchema)),
+  ])
+);
 /** @internal */
 export type CreateAgentRunRequestInput$Outbound =
   | string
@@ -125,10 +132,12 @@ export const CreateAgentRunRequestInput$outboundSchema: z.ZodType<
   CreateAgentRunRequestInput$Outbound,
   z.ZodTypeDef,
   CreateAgentRunRequestInput
-> = z.union([
-  z.string(),
-  z.array(z.lazy(() => CreateAgentRunRequestInput2$outboundSchema)),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.string(),
+    z.array(z.lazy(() => CreateAgentRunRequestInput2$outboundSchema)),
+  ])
+);
 
 export function createAgentRunRequestInputToJSON(
   createAgentRunRequestInput: CreateAgentRunRequestInput,
@@ -152,27 +161,29 @@ export const CreateAgentRunRequest$inboundSchema: z.ZodType<
   CreateAgentRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  idempotency_key: z.string().optional(),
-  agent_version: z.number().int().optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => CreateAgentRunRequestInput2$inboundSchema)),
-  ]),
-  conversation: z.any().optional(),
-  previous_response_id: z.string().optional(),
-  context_management: z.array(AgentCompactionContextManagement$inboundSchema)
-    .optional(),
-  stream: z.boolean().default(false),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "idempotency_key": "idempotencyKey",
-    "agent_version": "agentVersion",
-    "previous_response_id": "previousResponseId",
-    "context_management": "contextManagement",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotency_key: z.string().optional(),
+    agent_version: z.number().int().optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => CreateAgentRunRequestInput2$inboundSchema)),
+    ]),
+    conversation: z.any().optional(),
+    previous_response_id: z.string().optional(),
+    context_management: z.array(AgentCompactionContextManagement$inboundSchema)
+      .optional(),
+    stream: z.boolean().default(false),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "idempotency_key": "idempotencyKey",
+      "agent_version": "agentVersion",
+      "previous_response_id": "previousResponseId",
+      "context_management": "contextManagement",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentRunRequest$Outbound = {
   idempotency_key?: string | undefined;
@@ -192,27 +203,29 @@ export const CreateAgentRunRequest$outboundSchema: z.ZodType<
   CreateAgentRunRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentRunRequest
-> = z.object({
-  idempotencyKey: z.string().optional(),
-  agentVersion: z.number().int().optional(),
-  input: z.union([
-    z.string(),
-    z.array(z.lazy(() => CreateAgentRunRequestInput2$outboundSchema)),
-  ]),
-  conversation: z.any().optional(),
-  previousResponseId: z.string().optional(),
-  contextManagement: z.array(AgentCompactionContextManagement$outboundSchema)
-    .optional(),
-  stream: z.boolean().default(false),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "idempotency_key",
-    agentVersion: "agent_version",
-    previousResponseId: "previous_response_id",
-    contextManagement: "context_management",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string().optional(),
+    agentVersion: z.number().int().optional(),
+    input: z.union([
+      z.string(),
+      z.array(z.lazy(() => CreateAgentRunRequestInput2$outboundSchema)),
+    ]),
+    conversation: z.any().optional(),
+    previousResponseId: z.string().optional(),
+    contextManagement: z.array(AgentCompactionContextManagement$outboundSchema)
+      .optional(),
+    stream: z.boolean().default(false),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "idempotency_key",
+      agentVersion: "agent_version",
+      previousResponseId: "previous_response_id",
+      contextManagement: "context_management",
+    });
+  })
+);
 
 export function createAgentRunRequestToJSON(
   createAgentRunRequest: CreateAgentRunRequest,

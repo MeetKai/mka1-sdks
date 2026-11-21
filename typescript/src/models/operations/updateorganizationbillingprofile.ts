@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -82,18 +82,20 @@ export type UpdateOrganizationBillingProfileResponseBody = {
 
 /** @internal */
 export const Address$inboundSchema: z.ZodType<Address, z.ZodTypeDef, unknown> =
-  z.object({
-    line1: z.string(),
-    line2: z.string().optional(),
-    city: z.string(),
-    state: z.string().optional(),
-    postal_code: z.string(),
-    country: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "postal_code": "postalCode",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      line1: z.string(),
+      line2: z.string().optional(),
+      city: z.string(),
+      state: z.string().optional(),
+      postal_code: z.string(),
+      country: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "postal_code": "postalCode",
+      });
+    })
+  );
 /** @internal */
 export type Address$Outbound = {
   line1: string;
@@ -109,18 +111,20 @@ export const Address$outboundSchema: z.ZodType<
   Address$Outbound,
   z.ZodTypeDef,
   Address
-> = z.object({
-  line1: z.string(),
-  line2: z.string().optional(),
-  city: z.string(),
-  state: z.string().optional(),
-  postalCode: z.string(),
-  country: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    postalCode: "postal_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    line1: z.string(),
+    line2: z.string().optional(),
+    city: z.string(),
+    state: z.string().optional(),
+    postalCode: z.string(),
+    country: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      postalCode: "postal_code",
+    });
+  })
+);
 
 export function addressToJSON(address: Address): string {
   return JSON.stringify(Address$outboundSchema.parse(address));
@@ -141,16 +145,18 @@ export const UpdateOrganizationBillingProfileRequestBody$inboundSchema:
     UpdateOrganizationBillingProfileRequestBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    legal_name: z.string(),
-    billing_email: z.string(),
-    address: z.lazy(() => Address$inboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      "legal_name": "legalName",
-      "billing_email": "billingEmail",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      legal_name: z.string(),
+      billing_email: z.string(),
+      address: z.lazy(() => Address$inboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        "legal_name": "legalName",
+        "billing_email": "billingEmail",
+      });
+    })
+  );
 /** @internal */
 export type UpdateOrganizationBillingProfileRequestBody$Outbound = {
   legal_name: string;
@@ -164,16 +170,18 @@ export const UpdateOrganizationBillingProfileRequestBody$outboundSchema:
     UpdateOrganizationBillingProfileRequestBody$Outbound,
     z.ZodTypeDef,
     UpdateOrganizationBillingProfileRequestBody
-  > = z.object({
-    legalName: z.string(),
-    billingEmail: z.string(),
-    address: z.lazy(() => Address$outboundSchema),
-  }).transform((v) => {
-    return remap$(v, {
-      legalName: "legal_name",
-      billingEmail: "billing_email",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      legalName: z.string(),
+      billingEmail: z.string(),
+      address: z.lazy(() => Address$outboundSchema),
+    }).transform((v) => {
+      return remap$(v, {
+        legalName: "legal_name",
+        billingEmail: "billing_email",
+      });
+    })
+  );
 
 export function updateOrganizationBillingProfileRequestBodyToJSON(
   updateOrganizationBillingProfileRequestBody:
@@ -203,9 +211,10 @@ export function updateOrganizationBillingProfileRequestBodyFromJSON(
 
 /** @internal */
 export const UpdateOrganizationBillingProfileStatus$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateOrganizationBillingProfileStatus> = z.nativeEnum(
-    UpdateOrganizationBillingProfileStatus,
-  );
+  z.ZodNativeEnum<typeof UpdateOrganizationBillingProfileStatus> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateOrganizationBillingProfileStatus)
+    );
 /** @internal */
 export const UpdateOrganizationBillingProfileStatus$outboundSchema:
   z.ZodNativeEnum<typeof UpdateOrganizationBillingProfileStatus> =
@@ -216,18 +225,20 @@ export const UpdateOrganizationBillingProfileAddress$inboundSchema: z.ZodType<
   UpdateOrganizationBillingProfileAddress,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  line1: z.string(),
-  line2: z.string().optional(),
-  city: z.string(),
-  state: z.string().optional(),
-  postal_code: z.string(),
-  country: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "postal_code": "postalCode",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    line1: z.string(),
+    line2: z.string().optional(),
+    city: z.string(),
+    state: z.string().optional(),
+    postal_code: z.string(),
+    country: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "postal_code": "postalCode",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrganizationBillingProfileAddress$Outbound = {
   line1: string;
@@ -243,18 +254,20 @@ export const UpdateOrganizationBillingProfileAddress$outboundSchema: z.ZodType<
   UpdateOrganizationBillingProfileAddress$Outbound,
   z.ZodTypeDef,
   UpdateOrganizationBillingProfileAddress
-> = z.object({
-  line1: z.string(),
-  line2: z.string().optional(),
-  city: z.string(),
-  state: z.string().optional(),
-  postalCode: z.string(),
-  country: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    postalCode: "postal_code",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    line1: z.string(),
+    line2: z.string().optional(),
+    city: z.string(),
+    state: z.string().optional(),
+    postalCode: z.string(),
+    country: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      postalCode: "postal_code",
+    });
+  })
+);
 
 export function updateOrganizationBillingProfileAddressToJSON(
   updateOrganizationBillingProfileAddress:
@@ -288,10 +301,12 @@ export const UpdateOrganizationBillingProfileCurrentPeriod$inboundSchema:
     UpdateOrganizationBillingProfileCurrentPeriod,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    start: z.string(),
-    end: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      start: z.string(),
+      end: z.string(),
+    })
+  );
 /** @internal */
 export type UpdateOrganizationBillingProfileCurrentPeriod$Outbound = {
   start: string;
@@ -304,10 +319,12 @@ export const UpdateOrganizationBillingProfileCurrentPeriod$outboundSchema:
     UpdateOrganizationBillingProfileCurrentPeriod$Outbound,
     z.ZodTypeDef,
     UpdateOrganizationBillingProfileCurrentPeriod
-  > = z.object({
-    start: z.string(),
-    end: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      start: z.string(),
+      end: z.string(),
+    })
+  );
 
 export function updateOrganizationBillingProfileCurrentPeriodToJSON(
   updateOrganizationBillingProfileCurrentPeriod:
@@ -340,26 +357,28 @@ export const UpdateOrganizationBillingProfileInvoices$inboundSchema: z.ZodType<
   UpdateOrganizationBillingProfileInvoices,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  period_start: z.string(),
-  period_end: z.string(),
-  currency: z.string(),
-  amount_due_minor: z.number().int(),
-  amount_paid_minor: z.number().int(),
-  status: z.string(),
-  hosted_invoice_url: z.nullable(z.string()),
-  pdf_url: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "period_start": "periodStart",
-    "period_end": "periodEnd",
-    "amount_due_minor": "amountDueMinor",
-    "amount_paid_minor": "amountPaidMinor",
-    "hosted_invoice_url": "hostedInvoiceUrl",
-    "pdf_url": "pdfUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    period_start: z.string(),
+    period_end: z.string(),
+    currency: z.string(),
+    amount_due_minor: z.number().int(),
+    amount_paid_minor: z.number().int(),
+    status: z.string(),
+    hosted_invoice_url: z.nullable(z.string()),
+    pdf_url: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "period_start": "periodStart",
+      "period_end": "periodEnd",
+      "amount_due_minor": "amountDueMinor",
+      "amount_paid_minor": "amountPaidMinor",
+      "hosted_invoice_url": "hostedInvoiceUrl",
+      "pdf_url": "pdfUrl",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrganizationBillingProfileInvoices$Outbound = {
   id: string;
@@ -378,26 +397,28 @@ export const UpdateOrganizationBillingProfileInvoices$outboundSchema: z.ZodType<
   UpdateOrganizationBillingProfileInvoices$Outbound,
   z.ZodTypeDef,
   UpdateOrganizationBillingProfileInvoices
-> = z.object({
-  id: z.string(),
-  periodStart: z.string(),
-  periodEnd: z.string(),
-  currency: z.string(),
-  amountDueMinor: z.number().int(),
-  amountPaidMinor: z.number().int(),
-  status: z.string(),
-  hostedInvoiceUrl: z.nullable(z.string()),
-  pdfUrl: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    periodStart: "period_start",
-    periodEnd: "period_end",
-    amountDueMinor: "amount_due_minor",
-    amountPaidMinor: "amount_paid_minor",
-    hostedInvoiceUrl: "hosted_invoice_url",
-    pdfUrl: "pdf_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    periodStart: z.string(),
+    periodEnd: z.string(),
+    currency: z.string(),
+    amountDueMinor: z.number().int(),
+    amountPaidMinor: z.number().int(),
+    status: z.string(),
+    hostedInvoiceUrl: z.nullable(z.string()),
+    pdfUrl: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      periodStart: "period_start",
+      periodEnd: "period_end",
+      amountDueMinor: "amount_due_minor",
+      amountPaidMinor: "amount_paid_minor",
+      hostedInvoiceUrl: "hosted_invoice_url",
+      pdfUrl: "pdf_url",
+    });
+  })
+);
 
 export function updateOrganizationBillingProfileInvoicesToJSON(
   updateOrganizationBillingProfileInvoices:
@@ -431,39 +452,41 @@ export const UpdateOrganizationBillingProfileResponseBody$inboundSchema:
     UpdateOrganizationBillingProfileResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    org_id: z.string(),
-    configured: z.boolean(),
-    enabled: z.boolean(),
-    status: UpdateOrganizationBillingProfileStatus$inboundSchema,
-    currency: z.string(),
-    legal_name: z.nullable(z.string()),
-    billing_email: z.nullable(z.string()),
-    address: z.nullable(
-      z.lazy(() => UpdateOrganizationBillingProfileAddress$inboundSchema),
-    ),
-    activated_at: z.nullable(z.string()),
-    current_period: z.lazy(() =>
-      UpdateOrganizationBillingProfileCurrentPeriod$inboundSchema
-    ),
-    current_unbilled_minor: z.number().int(),
-    outstanding_minor: z.number().int(),
-    invoices: z.array(
-      z.lazy(() => UpdateOrganizationBillingProfileInvoices$inboundSchema),
-    ),
-    invoices_has_more: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      "org_id": "orgId",
-      "legal_name": "legalName",
-      "billing_email": "billingEmail",
-      "activated_at": "activatedAt",
-      "current_period": "currentPeriod",
-      "current_unbilled_minor": "currentUnbilledMinor",
-      "outstanding_minor": "outstandingMinor",
-      "invoices_has_more": "invoicesHasMore",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      org_id: z.string(),
+      configured: z.boolean(),
+      enabled: z.boolean(),
+      status: UpdateOrganizationBillingProfileStatus$inboundSchema,
+      currency: z.string(),
+      legal_name: z.nullable(z.string()),
+      billing_email: z.nullable(z.string()),
+      address: z.nullable(
+        z.lazy(() => UpdateOrganizationBillingProfileAddress$inboundSchema),
+      ),
+      activated_at: z.nullable(z.string()),
+      current_period: z.lazy(() =>
+        UpdateOrganizationBillingProfileCurrentPeriod$inboundSchema
+      ),
+      current_unbilled_minor: z.number().int(),
+      outstanding_minor: z.number().int(),
+      invoices: z.array(
+        z.lazy(() => UpdateOrganizationBillingProfileInvoices$inboundSchema),
+      ),
+      invoices_has_more: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        "org_id": "orgId",
+        "legal_name": "legalName",
+        "billing_email": "billingEmail",
+        "activated_at": "activatedAt",
+        "current_period": "currentPeriod",
+        "current_unbilled_minor": "currentUnbilledMinor",
+        "outstanding_minor": "outstandingMinor",
+        "invoices_has_more": "invoicesHasMore",
+      });
+    })
+  );
 /** @internal */
 export type UpdateOrganizationBillingProfileResponseBody$Outbound = {
   org_id: string;
@@ -488,39 +511,41 @@ export const UpdateOrganizationBillingProfileResponseBody$outboundSchema:
     UpdateOrganizationBillingProfileResponseBody$Outbound,
     z.ZodTypeDef,
     UpdateOrganizationBillingProfileResponseBody
-  > = z.object({
-    orgId: z.string(),
-    configured: z.boolean(),
-    enabled: z.boolean(),
-    status: UpdateOrganizationBillingProfileStatus$outboundSchema,
-    currency: z.string(),
-    legalName: z.nullable(z.string()),
-    billingEmail: z.nullable(z.string()),
-    address: z.nullable(
-      z.lazy(() => UpdateOrganizationBillingProfileAddress$outboundSchema),
-    ),
-    activatedAt: z.nullable(z.string()),
-    currentPeriod: z.lazy(() =>
-      UpdateOrganizationBillingProfileCurrentPeriod$outboundSchema
-    ),
-    currentUnbilledMinor: z.number().int(),
-    outstandingMinor: z.number().int(),
-    invoices: z.array(
-      z.lazy(() => UpdateOrganizationBillingProfileInvoices$outboundSchema),
-    ),
-    invoicesHasMore: z.boolean(),
-  }).transform((v) => {
-    return remap$(v, {
-      orgId: "org_id",
-      legalName: "legal_name",
-      billingEmail: "billing_email",
-      activatedAt: "activated_at",
-      currentPeriod: "current_period",
-      currentUnbilledMinor: "current_unbilled_minor",
-      outstandingMinor: "outstanding_minor",
-      invoicesHasMore: "invoices_has_more",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      orgId: z.string(),
+      configured: z.boolean(),
+      enabled: z.boolean(),
+      status: UpdateOrganizationBillingProfileStatus$outboundSchema,
+      currency: z.string(),
+      legalName: z.nullable(z.string()),
+      billingEmail: z.nullable(z.string()),
+      address: z.nullable(
+        z.lazy(() => UpdateOrganizationBillingProfileAddress$outboundSchema),
+      ),
+      activatedAt: z.nullable(z.string()),
+      currentPeriod: z.lazy(() =>
+        UpdateOrganizationBillingProfileCurrentPeriod$outboundSchema
+      ),
+      currentUnbilledMinor: z.number().int(),
+      outstandingMinor: z.number().int(),
+      invoices: z.array(
+        z.lazy(() => UpdateOrganizationBillingProfileInvoices$outboundSchema),
+      ),
+      invoicesHasMore: z.boolean(),
+    }).transform((v) => {
+      return remap$(v, {
+        orgId: "org_id",
+        legalName: "legal_name",
+        billingEmail: "billing_email",
+        activatedAt: "activated_at",
+        currentPeriod: "current_period",
+        currentUnbilledMinor: "current_unbilled_minor",
+        outstandingMinor: "outstanding_minor",
+        invoicesHasMore: "invoices_has_more",
+      });
+    })
+  );
 
 export function updateOrganizationBillingProfileResponseBodyToJSON(
   updateOrganizationBillingProfileResponseBody:

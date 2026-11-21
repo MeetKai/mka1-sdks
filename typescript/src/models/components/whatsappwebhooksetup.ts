@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,7 +29,7 @@ export type WhatsAppWebhookSetup = {
 /** @internal */
 export const WhatsAppWebhookSetupObject$inboundSchema: z.ZodNativeEnum<
   typeof WhatsAppWebhookSetupObject
-> = z.nativeEnum(WhatsAppWebhookSetupObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(WhatsAppWebhookSetupObject));
 /** @internal */
 export const WhatsAppWebhookSetupObject$outboundSchema: z.ZodNativeEnum<
   typeof WhatsAppWebhookSetupObject
@@ -40,18 +40,20 @@ export const WhatsAppWebhookSetup$inboundSchema: z.ZodType<
   WhatsAppWebhookSetup,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: WhatsAppWebhookSetupObject$inboundSchema,
-  app_id: z.string(),
-  callback_url: z.string(),
-  verify_token: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "app_id": "appId",
-    "callback_url": "callbackUrl",
-    "verify_token": "verifyToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: WhatsAppWebhookSetupObject$inboundSchema,
+    app_id: z.string(),
+    callback_url: z.string(),
+    verify_token: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "app_id": "appId",
+      "callback_url": "callbackUrl",
+      "verify_token": "verifyToken",
+    });
+  })
+);
 /** @internal */
 export type WhatsAppWebhookSetup$Outbound = {
   object: string;
@@ -65,18 +67,20 @@ export const WhatsAppWebhookSetup$outboundSchema: z.ZodType<
   WhatsAppWebhookSetup$Outbound,
   z.ZodTypeDef,
   WhatsAppWebhookSetup
-> = z.object({
-  object: WhatsAppWebhookSetupObject$outboundSchema,
-  appId: z.string(),
-  callbackUrl: z.string(),
-  verifyToken: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    callbackUrl: "callback_url",
-    verifyToken: "verify_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: WhatsAppWebhookSetupObject$outboundSchema,
+    appId: z.string(),
+    callbackUrl: z.string(),
+    verifyToken: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      callbackUrl: "callback_url",
+      verifyToken: "verify_token",
+    });
+  })
+);
 
 export function whatsAppWebhookSetupToJSON(
   whatsAppWebhookSetup: WhatsAppWebhookSetup,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,33 +41,35 @@ export const WritablePriceRates$inboundSchema: z.ZodType<
   WritablePriceRates,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_tokens: z.number().optional(),
-  output_tokens: z.number().optional(),
-  cached_tokens: z.number().optional(),
-  reasoning_tokens: z.number().optional(),
-  batch_input_tokens: z.number().optional(),
-  batch_output_tokens: z.number().optional(),
-  batch_cached_tokens: z.number().optional(),
-  batch_reasoning_tokens: z.number().optional(),
-  characters: z.number().optional(),
-  seconds: z.number().optional(),
-  image: z.number().optional(),
-  image_tiers: z.record(z.number()).optional(),
-  searches: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_tokens": "inputTokens",
-    "output_tokens": "outputTokens",
-    "cached_tokens": "cachedTokens",
-    "reasoning_tokens": "reasoningTokens",
-    "batch_input_tokens": "batchInputTokens",
-    "batch_output_tokens": "batchOutputTokens",
-    "batch_cached_tokens": "batchCachedTokens",
-    "batch_reasoning_tokens": "batchReasoningTokens",
-    "image_tiers": "imageTiers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_tokens: z.number().optional(),
+    output_tokens: z.number().optional(),
+    cached_tokens: z.number().optional(),
+    reasoning_tokens: z.number().optional(),
+    batch_input_tokens: z.number().optional(),
+    batch_output_tokens: z.number().optional(),
+    batch_cached_tokens: z.number().optional(),
+    batch_reasoning_tokens: z.number().optional(),
+    characters: z.number().optional(),
+    seconds: z.number().optional(),
+    image: z.number().optional(),
+    image_tiers: z.record(z.number()).optional(),
+    searches: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_tokens": "inputTokens",
+      "output_tokens": "outputTokens",
+      "cached_tokens": "cachedTokens",
+      "reasoning_tokens": "reasoningTokens",
+      "batch_input_tokens": "batchInputTokens",
+      "batch_output_tokens": "batchOutputTokens",
+      "batch_cached_tokens": "batchCachedTokens",
+      "batch_reasoning_tokens": "batchReasoningTokens",
+      "image_tiers": "imageTiers",
+    });
+  })
+);
 /** @internal */
 export type WritablePriceRates$Outbound = {
   input_tokens?: number | undefined;
@@ -90,33 +92,35 @@ export const WritablePriceRates$outboundSchema: z.ZodType<
   WritablePriceRates$Outbound,
   z.ZodTypeDef,
   WritablePriceRates
-> = z.object({
-  inputTokens: z.number().optional(),
-  outputTokens: z.number().optional(),
-  cachedTokens: z.number().optional(),
-  reasoningTokens: z.number().optional(),
-  batchInputTokens: z.number().optional(),
-  batchOutputTokens: z.number().optional(),
-  batchCachedTokens: z.number().optional(),
-  batchReasoningTokens: z.number().optional(),
-  characters: z.number().optional(),
-  seconds: z.number().optional(),
-  image: z.number().optional(),
-  imageTiers: z.record(z.number()).optional(),
-  searches: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    reasoningTokens: "reasoning_tokens",
-    batchInputTokens: "batch_input_tokens",
-    batchOutputTokens: "batch_output_tokens",
-    batchCachedTokens: "batch_cached_tokens",
-    batchReasoningTokens: "batch_reasoning_tokens",
-    imageTiers: "image_tiers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTokens: z.number().optional(),
+    outputTokens: z.number().optional(),
+    cachedTokens: z.number().optional(),
+    reasoningTokens: z.number().optional(),
+    batchInputTokens: z.number().optional(),
+    batchOutputTokens: z.number().optional(),
+    batchCachedTokens: z.number().optional(),
+    batchReasoningTokens: z.number().optional(),
+    characters: z.number().optional(),
+    seconds: z.number().optional(),
+    image: z.number().optional(),
+    imageTiers: z.record(z.number()).optional(),
+    searches: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      reasoningTokens: "reasoning_tokens",
+      batchInputTokens: "batch_input_tokens",
+      batchOutputTokens: "batch_output_tokens",
+      batchCachedTokens: "batch_cached_tokens",
+      batchReasoningTokens: "batch_reasoning_tokens",
+      imageTiers: "image_tiers",
+    });
+  })
+);
 
 export function writablePriceRatesToJSON(
   writablePriceRates: WritablePriceRates,

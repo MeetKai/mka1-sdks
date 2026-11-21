@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,16 +27,18 @@ export const BanWordsConfig$inboundSchema: z.ZodType<
   BanWordsConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  words: z.array(z.string()).optional(),
-  rejection_message: z.string().default(
-    "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "rejection_message": "rejectionMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    words: z.array(z.string()).optional(),
+    rejection_message: z.string().default(
+      "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "rejection_message": "rejectionMessage",
+    });
+  })
+);
 /** @internal */
 export type BanWordsConfig$Outbound = {
   words?: Array<string> | undefined;
@@ -48,16 +50,18 @@ export const BanWordsConfig$outboundSchema: z.ZodType<
   BanWordsConfig$Outbound,
   z.ZodTypeDef,
   BanWordsConfig
-> = z.object({
-  words: z.array(z.string()).optional(),
-  rejectionMessage: z.string().default(
-    "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    rejectionMessage: "rejection_message",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    words: z.array(z.string()).optional(),
+    rejectionMessage: z.string().default(
+      "I'm sorry, but I can't process this request as it contains content that isn't allowed. Please rephrase your message.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      rejectionMessage: "rejection_message",
+    });
+  })
+);
 
 export function banWordsConfigToJSON(banWordsConfig: BanWordsConfig): string {
   return JSON.stringify(BanWordsConfig$outboundSchema.parse(banWordsConfig));

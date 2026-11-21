@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,22 +27,24 @@ export const CreateMcpCredentialRequest$inboundSchema: z.ZodType<
   CreateMcpCredentialRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  auth_type: MCPAuthType$inboundSchema.optional(),
-  bearer_token: z.string().optional(),
-  authorization: z.string().optional(),
-  headers: z.record(z.string()).optional(),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "auth_type": "authType",
-    "bearer_token": "bearerToken",
-    "expires_at": "expiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    auth_type: MCPAuthType$inboundSchema.optional(),
+    bearer_token: z.string().optional(),
+    authorization: z.string().optional(),
+    headers: z.record(z.string()).optional(),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "auth_type": "authType",
+      "bearer_token": "bearerToken",
+      "expires_at": "expiresAt",
+    });
+  })
+);
 /** @internal */
 export type CreateMcpCredentialRequest$Outbound = {
   name?: string | null | undefined;
@@ -58,20 +60,22 @@ export const CreateMcpCredentialRequest$outboundSchema: z.ZodType<
   CreateMcpCredentialRequest$Outbound,
   z.ZodTypeDef,
   CreateMcpCredentialRequest
-> = z.object({
-  name: z.nullable(z.string()).optional(),
-  authType: MCPAuthType$outboundSchema.optional(),
-  bearerToken: z.string().optional(),
-  authorization: z.string().optional(),
-  headers: z.record(z.string()).optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    authType: "auth_type",
-    bearerToken: "bearer_token",
-    expiresAt: "expires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.nullable(z.string()).optional(),
+    authType: MCPAuthType$outboundSchema.optional(),
+    bearerToken: z.string().optional(),
+    authorization: z.string().optional(),
+    headers: z.record(z.string()).optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      authType: "auth_type",
+      bearerToken: "bearer_token",
+      expiresAt: "expires_at",
+    });
+  })
+);
 
 export function createMcpCredentialRequestToJSON(
   createMcpCredentialRequest: CreateMcpCredentialRequest,

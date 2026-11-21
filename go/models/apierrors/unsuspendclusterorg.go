@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UnsuspendClusterOrgTooManyRequestsError struct {
 var _ error = &UnsuspendClusterOrgTooManyRequestsError{}
 
 func (e *UnsuspendClusterOrgTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UnsuspendClusterOrgGoneError struct {
 var _ error = &UnsuspendClusterOrgGoneError{}
 
 func (e *UnsuspendClusterOrgGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UnsuspendClusterOrgConflictError struct {
 var _ error = &UnsuspendClusterOrgConflictError{}
 
 func (e *UnsuspendClusterOrgConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UnsuspendClusterOrgNotFoundError struct {
 var _ error = &UnsuspendClusterOrgNotFoundError{}
 
 func (e *UnsuspendClusterOrgNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UnsuspendClusterOrgForbiddenError struct {
 var _ error = &UnsuspendClusterOrgForbiddenError{}
 
 func (e *UnsuspendClusterOrgForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UnsuspendClusterOrgUnauthorizedError struct {
 var _ error = &UnsuspendClusterOrgUnauthorizedError{}
 
 func (e *UnsuspendClusterOrgUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UnsuspendClusterOrgBadRequestError struct {
 var _ error = &UnsuspendClusterOrgBadRequestError{}
 
 func (e *UnsuspendClusterOrgBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

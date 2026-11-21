@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const SkillPermissionList$inboundSchema: z.ZodType<
   SkillPermissionList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(SkillPermission$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(SkillPermission$inboundSchema),
+  })
+);
 /** @internal */
 export type SkillPermissionList$Outbound = {
   object: "list";
@@ -47,10 +49,12 @@ export const SkillPermissionList$outboundSchema: z.ZodType<
   SkillPermissionList$Outbound,
   z.ZodTypeDef,
   SkillPermissionList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(SkillPermission$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(SkillPermission$outboundSchema),
+  })
+);
 
 export function skillPermissionListToJSON(
   skillPermissionList: SkillPermissionList,

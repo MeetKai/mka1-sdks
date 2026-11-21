@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,18 +41,22 @@ export const StatusSummary$inboundSchema: z.ZodType<
   StatusSummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  region: z.string(),
-  status: StatusComponentStatus$inboundSchema,
-  components: z.array(StatusComponent$inboundSchema),
-  active_incidents: z.array(StatusIncident$inboundSchema),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "active_incidents": "activeIncidents",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string(),
+    status: StatusComponentStatus$inboundSchema,
+    components: z.array(StatusComponent$inboundSchema),
+    active_incidents: z.array(StatusIncident$inboundSchema),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "active_incidents": "activeIncidents",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type StatusSummary$Outbound = {
   region: string;
@@ -67,18 +71,20 @@ export const StatusSummary$outboundSchema: z.ZodType<
   StatusSummary$Outbound,
   z.ZodTypeDef,
   StatusSummary
-> = z.object({
-  region: z.string(),
-  status: StatusComponentStatus$outboundSchema,
-  components: z.array(StatusComponent$outboundSchema),
-  activeIncidents: z.array(StatusIncident$outboundSchema),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    activeIncidents: "active_incidents",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    region: z.string(),
+    status: StatusComponentStatus$outboundSchema,
+    components: z.array(StatusComponent$outboundSchema),
+    activeIncidents: z.array(StatusIncident$outboundSchema),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      activeIncidents: "active_incidents",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function statusSummaryToJSON(statusSummary: StatusSummary): string {
   return JSON.stringify(StatusSummary$outboundSchema.parse(statusSummary));

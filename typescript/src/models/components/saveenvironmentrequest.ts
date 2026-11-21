@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -33,20 +33,22 @@ export const SaveEnvironmentRequest$inboundSchema: z.ZodType<
   SaveEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  environment_variables: z.record(z.string()).optional(),
-  setup_script: z.nullable(z.string()).optional(),
-  repositories: z.array(EnvironmentRepositoryModel$inboundSchema).optional(),
-  network_access: z.nullable(NetworkAccess$inboundSchema).optional(),
-  connectors: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "environment_variables": "environmentVariables",
-    "setup_script": "setupScript",
-    "network_access": "networkAccess",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    environment_variables: z.record(z.string()).optional(),
+    setup_script: z.nullable(z.string()).optional(),
+    repositories: z.array(EnvironmentRepositoryModel$inboundSchema).optional(),
+    network_access: z.nullable(NetworkAccess$inboundSchema).optional(),
+    connectors: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "environment_variables": "environmentVariables",
+      "setup_script": "setupScript",
+      "network_access": "networkAccess",
+    });
+  })
+);
 /** @internal */
 export type SaveEnvironmentRequest$Outbound = {
   name: string;
@@ -62,20 +64,22 @@ export const SaveEnvironmentRequest$outboundSchema: z.ZodType<
   SaveEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   SaveEnvironmentRequest
-> = z.object({
-  name: z.string(),
-  environmentVariables: z.record(z.string()).optional(),
-  setupScript: z.nullable(z.string()).optional(),
-  repositories: z.array(EnvironmentRepositoryModel$outboundSchema).optional(),
-  networkAccess: z.nullable(NetworkAccess$outboundSchema).optional(),
-  connectors: z.nullable(z.array(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    environmentVariables: "environment_variables",
-    setupScript: "setup_script",
-    networkAccess: "network_access",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    environmentVariables: z.record(z.string()).optional(),
+    setupScript: z.nullable(z.string()).optional(),
+    repositories: z.array(EnvironmentRepositoryModel$outboundSchema).optional(),
+    networkAccess: z.nullable(NetworkAccess$outboundSchema).optional(),
+    connectors: z.nullable(z.array(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      environmentVariables: "environment_variables",
+      setupScript: "setup_script",
+      networkAccess: "network_access",
+    });
+  })
+);
 
 export function saveEnvironmentRequestToJSON(
   saveEnvironmentRequest: SaveEnvironmentRequest,

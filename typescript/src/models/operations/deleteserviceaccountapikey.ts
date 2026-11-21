@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,16 +31,18 @@ export const DeleteServiceAccountApiKeyRequest$inboundSchema: z.ZodType<
   DeleteServiceAccountApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteServiceAccountApiKeyRequest$Outbound = {
   orgId: string;
@@ -54,16 +56,18 @@ export const DeleteServiceAccountApiKeyRequest$outboundSchema: z.ZodType<
   DeleteServiceAccountApiKeyRequest$Outbound,
   z.ZodTypeDef,
   DeleteServiceAccountApiKeyRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteServiceAccountApiKeyRequestToJSON(
   deleteServiceAccountApiKeyRequest: DeleteServiceAccountApiKeyRequest,
@@ -89,10 +93,12 @@ export const DeleteServiceAccountApiKeyResponseBody$inboundSchema: z.ZodType<
   DeleteServiceAccountApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteServiceAccountApiKeyResponseBody$Outbound = {
   id: string;
@@ -104,10 +110,12 @@ export const DeleteServiceAccountApiKeyResponseBody$outboundSchema: z.ZodType<
   DeleteServiceAccountApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteServiceAccountApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteServiceAccountApiKeyResponseBodyToJSON(
   deleteServiceAccountApiKeyResponseBody:

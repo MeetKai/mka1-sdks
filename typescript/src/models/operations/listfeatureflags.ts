@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -25,17 +25,19 @@ export const ListFeatureFlagsRequest$inboundSchema: z.ZodType<
   ListFeatureFlagsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_archived: z.boolean().default(false),
-  project_id: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_archived": "includeArchived",
-    "project_id": "projectId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    include_archived: z.boolean().default(false),
+    project_id: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_archived": "includeArchived",
+      "project_id": "projectId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListFeatureFlagsRequest$Outbound = {
   include_archived: boolean;
@@ -48,17 +50,19 @@ export const ListFeatureFlagsRequest$outboundSchema: z.ZodType<
   ListFeatureFlagsRequest$Outbound,
   z.ZodTypeDef,
   ListFeatureFlagsRequest
-> = z.object({
-  includeArchived: z.boolean().default(false),
-  projectId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeArchived: "include_archived",
-    projectId: "project_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeArchived: z.boolean().default(false),
+    projectId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeArchived: "include_archived",
+      projectId: "project_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listFeatureFlagsRequestToJSON(
   listFeatureFlagsRequest: ListFeatureFlagsRequest,

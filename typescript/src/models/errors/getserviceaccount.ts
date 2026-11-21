@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -207,18 +208,20 @@ export const GetServiceAccountAuthServiceAccountsResponse429ResponseBody$inbound
     GetServiceAccountAuthServiceAccountsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponse429ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponse429ResponseBody$Outbound =
@@ -232,11 +235,13 @@ export const GetServiceAccountAuthServiceAccountsResponse429ResponseBody$outboun
     GetServiceAccountAuthServiceAccountsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponse429ResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountAuthServiceAccountsResponse410ResponseBody$inboundSchema:
@@ -244,18 +249,20 @@ export const GetServiceAccountAuthServiceAccountsResponse410ResponseBody$inbound
     GetServiceAccountAuthServiceAccountsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponse410ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponse410ResponseBody$Outbound =
@@ -269,11 +276,13 @@ export const GetServiceAccountAuthServiceAccountsResponse410ResponseBody$outboun
     GetServiceAccountAuthServiceAccountsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponse410ResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountAuthServiceAccountsResponse409ResponseBody$inboundSchema:
@@ -281,18 +290,20 @@ export const GetServiceAccountAuthServiceAccountsResponse409ResponseBody$inbound
     GetServiceAccountAuthServiceAccountsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponse409ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponse409ResponseBody$Outbound =
@@ -306,11 +317,13 @@ export const GetServiceAccountAuthServiceAccountsResponse409ResponseBody$outboun
     GetServiceAccountAuthServiceAccountsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponse409ResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountAuthServiceAccountsResponse404ResponseBody$inboundSchema:
@@ -318,18 +331,20 @@ export const GetServiceAccountAuthServiceAccountsResponse404ResponseBody$inbound
     GetServiceAccountAuthServiceAccountsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponse404ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponse404ResponseBody$Outbound =
@@ -343,11 +358,13 @@ export const GetServiceAccountAuthServiceAccountsResponse404ResponseBody$outboun
     GetServiceAccountAuthServiceAccountsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponse404ResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountAuthServiceAccountsResponseResponseBody$inboundSchema:
@@ -355,20 +372,22 @@ export const GetServiceAccountAuthServiceAccountsResponseResponseBody$inboundSch
     GetServiceAccountAuthServiceAccountsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponseResponseBody$Outbound =
@@ -383,12 +402,14 @@ export const GetServiceAccountAuthServiceAccountsResponseResponseBody$outboundSc
     GetServiceAccountAuthServiceAccountsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponseResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountAuthServiceAccountsResponseBody$inboundSchema:
@@ -396,19 +417,21 @@ export const GetServiceAccountAuthServiceAccountsResponseBody$inboundSchema:
     GetServiceAccountAuthServiceAccountsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetServiceAccountAuthServiceAccountsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetServiceAccountAuthServiceAccountsResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetServiceAccountAuthServiceAccountsResponseBody$Outbound = {
@@ -421,30 +444,34 @@ export const GetServiceAccountAuthServiceAccountsResponseBody$outboundSchema:
     GetServiceAccountAuthServiceAccountsResponseBody$Outbound,
     z.ZodTypeDef,
     GetServiceAccountAuthServiceAccountsResponseBody
-  > = z.instanceof(GetServiceAccountAuthServiceAccountsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetServiceAccountAuthServiceAccountsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetServiceAccountResponseBody$inboundSchema: z.ZodType<
   GetServiceAccountResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetServiceAccountResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetServiceAccountResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetServiceAccountResponseBody$Outbound = {
@@ -456,8 +483,10 @@ export const GetServiceAccountResponseBody$outboundSchema: z.ZodType<
   GetServiceAccountResponseBody$Outbound,
   z.ZodTypeDef,
   GetServiceAccountResponseBody
-> = z.instanceof(GetServiceAccountResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetServiceAccountResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

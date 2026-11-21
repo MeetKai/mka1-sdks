@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,19 +24,21 @@ export const McpServerTest$inboundSchema: z.ZodType<
   McpServerTest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  server_id: z.string(),
-  object: z.literal("mcp.server.test"),
-  connected: z.boolean(),
-  tool_count: z.number().int(),
-  tool_names: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "server_id": "serverId",
-    "tool_count": "toolCount",
-    "tool_names": "toolNames",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    server_id: z.string(),
+    object: z.literal("mcp.server.test"),
+    connected: z.boolean(),
+    tool_count: z.number().int(),
+    tool_names: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_id": "serverId",
+      "tool_count": "toolCount",
+      "tool_names": "toolNames",
+    });
+  })
+);
 /** @internal */
 export type McpServerTest$Outbound = {
   server_id: string;
@@ -51,19 +53,21 @@ export const McpServerTest$outboundSchema: z.ZodType<
   McpServerTest$Outbound,
   z.ZodTypeDef,
   McpServerTest
-> = z.object({
-  serverId: z.string(),
-  object: z.literal("mcp.server.test"),
-  connected: z.boolean(),
-  toolCount: z.number().int(),
-  toolNames: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    serverId: "server_id",
-    toolCount: "tool_count",
-    toolNames: "tool_names",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    serverId: z.string(),
+    object: z.literal("mcp.server.test"),
+    connected: z.boolean(),
+    toolCount: z.number().int(),
+    toolNames: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      serverId: "server_id",
+      toolCount: "tool_count",
+      toolNames: "tool_names",
+    });
+  })
+);
 
 export function mcpServerTestToJSON(mcpServerTest: McpServerTest): string {
   return JSON.stringify(McpServerTest$outboundSchema.parse(mcpServerTest));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,11 +24,13 @@ export const VectorStoreConnectorBrowseFolder$inboundSchema: z.ZodType<
   VectorStoreConnectorBrowseFolder,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("folder"),
-  name: z.string(),
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("folder"),
+    name: z.string(),
+    path: z.string(),
+  })
+);
 /** @internal */
 export type VectorStoreConnectorBrowseFolder$Outbound = {
   kind: "folder";
@@ -41,11 +43,13 @@ export const VectorStoreConnectorBrowseFolder$outboundSchema: z.ZodType<
   VectorStoreConnectorBrowseFolder$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorBrowseFolder
-> = z.object({
-  kind: z.literal("folder"),
-  name: z.string(),
-  path: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("folder"),
+    name: z.string(),
+    path: z.string(),
+  })
+);
 
 export function vectorStoreConnectorBrowseFolderToJSON(
   vectorStoreConnectorBrowseFolder: VectorStoreConnectorBrowseFolder,

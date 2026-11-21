@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -79,7 +79,7 @@ export type CreateSessionRequest = {
 /** @internal */
 export const MemoryLimitMib$inboundSchema: z.ZodNativeEnum<
   typeof MemoryLimitMib
-> = z.nativeEnum(MemoryLimitMib);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MemoryLimitMib));
 /** @internal */
 export const MemoryLimitMib$outboundSchema: z.ZodNativeEnum<
   typeof MemoryLimitMib
@@ -90,42 +90,44 @@ export const CreateSessionRequest$inboundSchema: z.ZodType<
   CreateSessionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  memory_limit_mib: z.nullable(MemoryLimitMib$inboundSchema).optional(),
-  network_policy: z.nullable(OutboundNetworkPolicy$inboundSchema).optional(),
-  session_id: z.string(),
-  session_key: z.nullable(z.string()).optional(),
-  user_id: z.string().default("demo-user"),
-  session_kind: SessionKind$inboundSchema.optional(),
-  resource_class: z.nullable(SandboxResourceClass$inboundSchema).optional(),
-  ttl_seconds: z.number().int().default(600),
-  sandbox_features: z.array(SandboxFeature$inboundSchema).optional(),
-  runtime_profile: SandboxRuntimeProfile$inboundSchema.optional(),
-  memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
-  queue_if_full: z.boolean().default(false),
-  skip_llm_credential_exchange: z.boolean().default(false),
-  persistent: z.boolean().default(false),
-  environment_id: z.nullable(z.number().int()).optional(),
-  coding_harness_skills: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_limit_mib": "memoryLimitMib",
-    "network_policy": "networkPolicy",
-    "session_id": "sessionId",
-    "session_key": "sessionKey",
-    "user_id": "userId",
-    "session_kind": "sessionKind",
-    "resource_class": "resourceClass",
-    "ttl_seconds": "ttlSeconds",
-    "sandbox_features": "sandboxFeatures",
-    "runtime_profile": "runtimeProfile",
-    "memory_mounts": "memoryMounts",
-    "queue_if_full": "queueIfFull",
-    "skip_llm_credential_exchange": "skipLlmCredentialExchange",
-    "environment_id": "environmentId",
-    "coding_harness_skills": "codingHarnessSkills",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memory_limit_mib: z.nullable(MemoryLimitMib$inboundSchema).optional(),
+    network_policy: z.nullable(OutboundNetworkPolicy$inboundSchema).optional(),
+    session_id: z.string(),
+    session_key: z.nullable(z.string()).optional(),
+    user_id: z.string().default("demo-user"),
+    session_kind: SessionKind$inboundSchema.optional(),
+    resource_class: z.nullable(SandboxResourceClass$inboundSchema).optional(),
+    ttl_seconds: z.number().int().default(600),
+    sandbox_features: z.array(SandboxFeature$inboundSchema).optional(),
+    runtime_profile: SandboxRuntimeProfile$inboundSchema.optional(),
+    memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
+    queue_if_full: z.boolean().default(false),
+    skip_llm_credential_exchange: z.boolean().default(false),
+    persistent: z.boolean().default(false),
+    environment_id: z.nullable(z.number().int()).optional(),
+    coding_harness_skills: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_limit_mib": "memoryLimitMib",
+      "network_policy": "networkPolicy",
+      "session_id": "sessionId",
+      "session_key": "sessionKey",
+      "user_id": "userId",
+      "session_kind": "sessionKind",
+      "resource_class": "resourceClass",
+      "ttl_seconds": "ttlSeconds",
+      "sandbox_features": "sandboxFeatures",
+      "runtime_profile": "runtimeProfile",
+      "memory_mounts": "memoryMounts",
+      "queue_if_full": "queueIfFull",
+      "skip_llm_credential_exchange": "skipLlmCredentialExchange",
+      "environment_id": "environmentId",
+      "coding_harness_skills": "codingHarnessSkills",
+    });
+  })
+);
 /** @internal */
 export type CreateSessionRequest$Outbound = {
   memory_limit_mib?: number | null | undefined;
@@ -151,42 +153,44 @@ export const CreateSessionRequest$outboundSchema: z.ZodType<
   CreateSessionRequest$Outbound,
   z.ZodTypeDef,
   CreateSessionRequest
-> = z.object({
-  memoryLimitMib: z.nullable(MemoryLimitMib$outboundSchema).optional(),
-  networkPolicy: z.nullable(OutboundNetworkPolicy$outboundSchema).optional(),
-  sessionId: z.string(),
-  sessionKey: z.nullable(z.string()).optional(),
-  userId: z.string().default("demo-user"),
-  sessionKind: SessionKind$outboundSchema.optional(),
-  resourceClass: z.nullable(SandboxResourceClass$outboundSchema).optional(),
-  ttlSeconds: z.number().int().default(600),
-  sandboxFeatures: z.array(SandboxFeature$outboundSchema).optional(),
-  runtimeProfile: SandboxRuntimeProfile$outboundSchema.optional(),
-  memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
-  queueIfFull: z.boolean().default(false),
-  skipLlmCredentialExchange: z.boolean().default(false),
-  persistent: z.boolean().default(false),
-  environmentId: z.nullable(z.number().int()).optional(),
-  codingHarnessSkills: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryLimitMib: "memory_limit_mib",
-    networkPolicy: "network_policy",
-    sessionId: "session_id",
-    sessionKey: "session_key",
-    userId: "user_id",
-    sessionKind: "session_kind",
-    resourceClass: "resource_class",
-    ttlSeconds: "ttl_seconds",
-    sandboxFeatures: "sandbox_features",
-    runtimeProfile: "runtime_profile",
-    memoryMounts: "memory_mounts",
-    queueIfFull: "queue_if_full",
-    skipLlmCredentialExchange: "skip_llm_credential_exchange",
-    environmentId: "environment_id",
-    codingHarnessSkills: "coding_harness_skills",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    memoryLimitMib: z.nullable(MemoryLimitMib$outboundSchema).optional(),
+    networkPolicy: z.nullable(OutboundNetworkPolicy$outboundSchema).optional(),
+    sessionId: z.string(),
+    sessionKey: z.nullable(z.string()).optional(),
+    userId: z.string().default("demo-user"),
+    sessionKind: SessionKind$outboundSchema.optional(),
+    resourceClass: z.nullable(SandboxResourceClass$outboundSchema).optional(),
+    ttlSeconds: z.number().int().default(600),
+    sandboxFeatures: z.array(SandboxFeature$outboundSchema).optional(),
+    runtimeProfile: SandboxRuntimeProfile$outboundSchema.optional(),
+    memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
+    queueIfFull: z.boolean().default(false),
+    skipLlmCredentialExchange: z.boolean().default(false),
+    persistent: z.boolean().default(false),
+    environmentId: z.nullable(z.number().int()).optional(),
+    codingHarnessSkills: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryLimitMib: "memory_limit_mib",
+      networkPolicy: "network_policy",
+      sessionId: "session_id",
+      sessionKey: "session_key",
+      userId: "user_id",
+      sessionKind: "session_kind",
+      resourceClass: "resource_class",
+      ttlSeconds: "ttl_seconds",
+      sandboxFeatures: "sandbox_features",
+      runtimeProfile: "runtime_profile",
+      memoryMounts: "memory_mounts",
+      queueIfFull: "queue_if_full",
+      skipLlmCredentialExchange: "skip_llm_credential_exchange",
+      environmentId: "environment_id",
+      codingHarnessSkills: "coding_harness_skills",
+    });
+  })
+);
 
 export function createSessionRequestToJSON(
   createSessionRequest: CreateSessionRequest,

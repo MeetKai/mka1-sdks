@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,7 +23,9 @@ export const Attributes$inboundSchema: z.ZodType<
   Attributes,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 /** @internal */
 export type Attributes$Outbound = string | boolean | number;
 
@@ -32,7 +34,9 @@ export const Attributes$outboundSchema: z.ZodType<
   Attributes$Outbound,
   z.ZodTypeDef,
   Attributes
-> = z.union([z.string(), z.boolean(), z.number()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.boolean(), z.number()])
+);
 
 export function attributesToJSON(attributes: Attributes): string {
   return JSON.stringify(Attributes$outboundSchema.parse(attributes));
@@ -52,18 +56,20 @@ export const FileSearchResult$inboundSchema: z.ZodType<
   FileSearchResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  file_id: z.string().optional(),
-  filename: z.string().optional(),
-  score: z.number().optional(),
-  text: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    file_id: z.string().optional(),
+    filename: z.string().optional(),
+    score: z.number().optional(),
+    text: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type FileSearchResult$Outbound = {
   attributes?: { [k: string]: string | boolean | number } | undefined;
@@ -78,18 +84,20 @@ export const FileSearchResult$outboundSchema: z.ZodType<
   FileSearchResult$Outbound,
   z.ZodTypeDef,
   FileSearchResult
-> = z.object({
-  attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
-    .optional(),
-  fileId: z.string().optional(),
-  filename: z.string().optional(),
-  score: z.number().optional(),
-  text: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    attributes: z.record(z.union([z.string(), z.boolean(), z.number()]))
+      .optional(),
+    fileId: z.string().optional(),
+    filename: z.string().optional(),
+    score: z.number().optional(),
+    text: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function fileSearchResultToJSON(
   fileSearchResult: FileSearchResult,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -19,15 +19,17 @@ export const SetOrgPriceRequest$inboundSchema: z.ZodType<
   SetOrgPriceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  PutModelPriceBody: components.PutModelPriceBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-    "PutModelPriceBody": "putModelPriceBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    PutModelPriceBody: components.PutModelPriceBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+      "PutModelPriceBody": "putModelPriceBody",
+    });
+  })
+);
 /** @internal */
 export type SetOrgPriceRequest$Outbound = {
   org_id: string;
@@ -39,15 +41,17 @@ export const SetOrgPriceRequest$outboundSchema: z.ZodType<
   SetOrgPriceRequest$Outbound,
   z.ZodTypeDef,
   SetOrgPriceRequest
-> = z.object({
-  orgId: z.string(),
-  putModelPriceBody: components.PutModelPriceBody$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-    putModelPriceBody: "PutModelPriceBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    putModelPriceBody: components.PutModelPriceBody$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+      putModelPriceBody: "PutModelPriceBody",
+    });
+  })
+);
 
 export function setOrgPriceRequestToJSON(
   setOrgPriceRequest: SetOrgPriceRequest,

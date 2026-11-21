@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -35,13 +35,15 @@ export const GetOrgTokenQuotaRequest$inboundSchema: z.ZodType<
   GetOrgTokenQuotaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetOrgTokenQuotaRequest$Outbound = {
   org_id: string;
@@ -52,13 +54,15 @@ export const GetOrgTokenQuotaRequest$outboundSchema: z.ZodType<
   GetOrgTokenQuotaRequest$Outbound,
   z.ZodTypeDef,
   GetOrgTokenQuotaRequest
-> = z.object({
-  orgId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getOrgTokenQuotaRequestToJSON(
   getOrgTokenQuotaRequest: GetOrgTokenQuotaRequest,
@@ -80,7 +84,7 @@ export function getOrgTokenQuotaRequestFromJSON(
 /** @internal */
 export const GetOrgTokenQuotaPeriod$inboundSchema: z.ZodNativeEnum<
   typeof GetOrgTokenQuotaPeriod
-> = z.nativeEnum(GetOrgTokenQuotaPeriod);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetOrgTokenQuotaPeriod));
 /** @internal */
 export const GetOrgTokenQuotaPeriod$outboundSchema: z.ZodNativeEnum<
   typeof GetOrgTokenQuotaPeriod
@@ -91,16 +95,18 @@ export const GetOrgTokenQuotaResponseBody$inboundSchema: z.ZodType<
   GetOrgTokenQuotaResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string(),
-  enabled: z.boolean(),
-  limit: z.nullable(z.number().int()),
-  period: z.nullable(GetOrgTokenQuotaPeriod$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string(),
+    enabled: z.boolean(),
+    limit: z.nullable(z.number().int()),
+    period: z.nullable(GetOrgTokenQuotaPeriod$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetOrgTokenQuotaResponseBody$Outbound = {
   org_id: string;
@@ -114,16 +120,18 @@ export const GetOrgTokenQuotaResponseBody$outboundSchema: z.ZodType<
   GetOrgTokenQuotaResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgTokenQuotaResponseBody
-> = z.object({
-  orgId: z.string(),
-  enabled: z.boolean(),
-  limit: z.nullable(z.number().int()),
-  period: z.nullable(GetOrgTokenQuotaPeriod$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    enabled: z.boolean(),
+    limit: z.nullable(z.number().int()),
+    period: z.nullable(GetOrgTokenQuotaPeriod$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getOrgTokenQuotaResponseBodyToJSON(
   getOrgTokenQuotaResponseBody: GetOrgTokenQuotaResponseBody,

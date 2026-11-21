@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const BatchGetCompletionFeedbackRequest$inboundSchema: z.ZodType<
   BatchGetCompletionFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  BatchGetFeedbackRequest: components.BatchGetFeedbackRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "BatchGetFeedbackRequest": "batchGetFeedbackRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    BatchGetFeedbackRequest: components.BatchGetFeedbackRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "BatchGetFeedbackRequest": "batchGetFeedbackRequest",
+    });
+  })
+);
 /** @internal */
 export type BatchGetCompletionFeedbackRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const BatchGetCompletionFeedbackRequest$outboundSchema: z.ZodType<
   BatchGetCompletionFeedbackRequest$Outbound,
   z.ZodTypeDef,
   BatchGetCompletionFeedbackRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  batchGetFeedbackRequest: components.BatchGetFeedbackRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    batchGetFeedbackRequest: "BatchGetFeedbackRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    batchGetFeedbackRequest: components.BatchGetFeedbackRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      batchGetFeedbackRequest: "BatchGetFeedbackRequest",
+    });
+  })
+);
 
 export function batchGetCompletionFeedbackRequestToJSON(
   batchGetCompletionFeedbackRequest: BatchGetCompletionFeedbackRequest,

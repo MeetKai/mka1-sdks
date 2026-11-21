@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,22 +29,24 @@ export const ResponseOutputTextDeltaEvent$inboundSchema: z.ZodType<
   ResponseOutputTextDeltaEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.output_text.delta"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  content_index: z.number().int(),
-  delta: z.string(),
-  logprobs: z.array(LogProbToken$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "content_index": "contentIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_text.delta"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    content_index: z.number().int(),
+    delta: z.string(),
+    logprobs: z.array(LogProbToken$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "content_index": "contentIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseOutputTextDeltaEvent$Outbound = {
   type: "response.output_text.delta";
@@ -61,22 +63,24 @@ export const ResponseOutputTextDeltaEvent$outboundSchema: z.ZodType<
   ResponseOutputTextDeltaEvent$Outbound,
   z.ZodTypeDef,
   ResponseOutputTextDeltaEvent
-> = z.object({
-  type: z.literal("response.output_text.delta"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  contentIndex: z.number().int(),
-  delta: z.string(),
-  logprobs: z.array(LogProbToken$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    contentIndex: "content_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.output_text.delta"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    contentIndex: z.number().int(),
+    delta: z.string(),
+    logprobs: z.array(LogProbToken$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      contentIndex: "content_index",
+    });
+  })
+);
 
 export function responseOutputTextDeltaEventToJSON(
   responseOutputTextDeltaEvent: ResponseOutputTextDeltaEvent,

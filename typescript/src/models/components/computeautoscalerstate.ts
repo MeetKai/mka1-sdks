@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +34,9 @@ export type ComputeAutoscalerState = {
 /** @internal */
 export const ComputeAutoscalerStateStatus$inboundSchema: z.ZodNativeEnum<
   typeof ComputeAutoscalerStateStatus
-> = z.nativeEnum(ComputeAutoscalerStateStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ComputeAutoscalerStateStatus)
+);
 /** @internal */
 export const ComputeAutoscalerStateStatus$outboundSchema: z.ZodNativeEnum<
   typeof ComputeAutoscalerStateStatus
@@ -45,30 +47,32 @@ export const ComputeAutoscalerState$inboundSchema: z.ZodType<
   ComputeAutoscalerState,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  blocked_reason: z.nullable(z.string()),
-  drain_timeout_seconds: z.number().int(),
-  evaluation_interval_seconds: z.number().int(),
-  last_scale_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  observed_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  observed_concurrency: z.nullable(z.number().int()),
-  recommended_replicas: z.nullable(z.number().int()),
-  status: ComputeAutoscalerStateStatus$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "blocked_reason": "blockedReason",
-    "drain_timeout_seconds": "drainTimeoutSeconds",
-    "evaluation_interval_seconds": "evaluationIntervalSeconds",
-    "last_scale_at": "lastScaleAt",
-    "observed_at": "observedAt",
-    "observed_concurrency": "observedConcurrency",
-    "recommended_replicas": "recommendedReplicas",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blocked_reason: z.nullable(z.string()),
+    drain_timeout_seconds: z.number().int(),
+    evaluation_interval_seconds: z.number().int(),
+    last_scale_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    observed_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    observed_concurrency: z.nullable(z.number().int()),
+    recommended_replicas: z.nullable(z.number().int()),
+    status: ComputeAutoscalerStateStatus$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "blocked_reason": "blockedReason",
+      "drain_timeout_seconds": "drainTimeoutSeconds",
+      "evaluation_interval_seconds": "evaluationIntervalSeconds",
+      "last_scale_at": "lastScaleAt",
+      "observed_at": "observedAt",
+      "observed_concurrency": "observedConcurrency",
+      "recommended_replicas": "recommendedReplicas",
+    });
+  })
+);
 /** @internal */
 export type ComputeAutoscalerState$Outbound = {
   blocked_reason: string | null;
@@ -86,26 +90,28 @@ export const ComputeAutoscalerState$outboundSchema: z.ZodType<
   ComputeAutoscalerState$Outbound,
   z.ZodTypeDef,
   ComputeAutoscalerState
-> = z.object({
-  blockedReason: z.nullable(z.string()),
-  drainTimeoutSeconds: z.number().int(),
-  evaluationIntervalSeconds: z.number().int(),
-  lastScaleAt: z.nullable(z.date().transform(v => v.toISOString())),
-  observedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  observedConcurrency: z.nullable(z.number().int()),
-  recommendedReplicas: z.nullable(z.number().int()),
-  status: ComputeAutoscalerStateStatus$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    blockedReason: "blocked_reason",
-    drainTimeoutSeconds: "drain_timeout_seconds",
-    evaluationIntervalSeconds: "evaluation_interval_seconds",
-    lastScaleAt: "last_scale_at",
-    observedAt: "observed_at",
-    observedConcurrency: "observed_concurrency",
-    recommendedReplicas: "recommended_replicas",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    blockedReason: z.nullable(z.string()),
+    drainTimeoutSeconds: z.number().int(),
+    evaluationIntervalSeconds: z.number().int(),
+    lastScaleAt: z.nullable(z.date().transform(v => v.toISOString())),
+    observedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    observedConcurrency: z.nullable(z.number().int()),
+    recommendedReplicas: z.nullable(z.number().int()),
+    status: ComputeAutoscalerStateStatus$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      blockedReason: "blocked_reason",
+      drainTimeoutSeconds: "drain_timeout_seconds",
+      evaluationIntervalSeconds: "evaluation_interval_seconds",
+      lastScaleAt: "last_scale_at",
+      observedAt: "observed_at",
+      observedConcurrency: "observed_concurrency",
+      recommendedReplicas: "recommended_replicas",
+    });
+  })
+);
 
 export function computeAutoscalerStateToJSON(
   computeAutoscalerState: ComputeAutoscalerState,

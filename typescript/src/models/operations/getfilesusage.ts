@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -79,31 +79,33 @@ export const GetFilesUsageRequest$inboundSchema: z.ZodType<
   GetFilesUsageRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start_time: z.number().int(),
-  end_time: z.number().int().optional(),
-  bucket_width: components.BucketWidth$inboundSchema.default("1d"),
-  limit: z.number().int().optional(),
-  page: z.string().optional(),
-  user_ids: z.array(z.string()).optional(),
-  external_user_ids: z.array(z.string()).optional(),
-  all_orgs: z.string().optional(),
-  org_ids: z.array(z.string()).optional(),
-  group_by: z.array(components.FilesGroupBy$inboundSchema).optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "bucket_width": "bucketWidth",
-    "user_ids": "userIds",
-    "external_user_ids": "externalUserIds",
-    "all_orgs": "allOrgs",
-    "org_ids": "orgIds",
-    "group_by": "groupBy",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start_time: z.number().int(),
+    end_time: z.number().int().optional(),
+    bucket_width: components.BucketWidth$inboundSchema.default("1d"),
+    limit: z.number().int().optional(),
+    page: z.string().optional(),
+    user_ids: z.array(z.string()).optional(),
+    external_user_ids: z.array(z.string()).optional(),
+    all_orgs: z.string().optional(),
+    org_ids: z.array(z.string()).optional(),
+    group_by: z.array(components.FilesGroupBy$inboundSchema).optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "bucket_width": "bucketWidth",
+      "user_ids": "userIds",
+      "external_user_ids": "externalUserIds",
+      "all_orgs": "allOrgs",
+      "org_ids": "orgIds",
+      "group_by": "groupBy",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetFilesUsageRequest$Outbound = {
   start_time: number;
@@ -124,31 +126,33 @@ export const GetFilesUsageRequest$outboundSchema: z.ZodType<
   GetFilesUsageRequest$Outbound,
   z.ZodTypeDef,
   GetFilesUsageRequest
-> = z.object({
-  startTime: z.number().int(),
-  endTime: z.number().int().optional(),
-  bucketWidth: components.BucketWidth$outboundSchema.default("1d"),
-  limit: z.number().int().optional(),
-  page: z.string().optional(),
-  userIds: z.array(z.string()).optional(),
-  externalUserIds: z.array(z.string()).optional(),
-  allOrgs: z.string().optional(),
-  orgIds: z.array(z.string()).optional(),
-  groupBy: z.array(components.FilesGroupBy$outboundSchema).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    bucketWidth: "bucket_width",
-    userIds: "user_ids",
-    externalUserIds: "external_user_ids",
-    allOrgs: "all_orgs",
-    orgIds: "org_ids",
-    groupBy: "group_by",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startTime: z.number().int(),
+    endTime: z.number().int().optional(),
+    bucketWidth: components.BucketWidth$outboundSchema.default("1d"),
+    limit: z.number().int().optional(),
+    page: z.string().optional(),
+    userIds: z.array(z.string()).optional(),
+    externalUserIds: z.array(z.string()).optional(),
+    allOrgs: z.string().optional(),
+    orgIds: z.array(z.string()).optional(),
+    groupBy: z.array(components.FilesGroupBy$outboundSchema).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      bucketWidth: "bucket_width",
+      userIds: "user_ids",
+      externalUserIds: "external_user_ids",
+      allOrgs: "all_orgs",
+      orgIds: "org_ids",
+      groupBy: "group_by",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getFilesUsageRequestToJSON(
   getFilesUsageRequest: GetFilesUsageRequest,
@@ -172,17 +176,19 @@ export const GetFilesUsageData$inboundSchema: z.ZodType<
   GetFilesUsageData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("bucket"),
-  start_time: z.number().int(),
-  end_time: z.number().int(),
-  results: z.array(z.nullable(z.any())),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("bucket"),
+    start_time: z.number().int(),
+    end_time: z.number().int(),
+    results: z.array(z.nullable(z.any())),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+    });
+  })
+);
 /** @internal */
 export type GetFilesUsageData$Outbound = {
   object: "bucket";
@@ -196,17 +202,19 @@ export const GetFilesUsageData$outboundSchema: z.ZodType<
   GetFilesUsageData$Outbound,
   z.ZodTypeDef,
   GetFilesUsageData
-> = z.object({
-  object: z.literal("bucket"),
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  results: z.array(z.nullable(z.any())),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("bucket"),
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    results: z.array(z.nullable(z.any())),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+    });
+  })
+);
 
 export function getFilesUsageDataToJSON(
   getFilesUsageData: GetFilesUsageData,
@@ -230,24 +238,26 @@ export const GetFilesUsageResponseBody$inboundSchema: z.ZodType<
   GetFilesUsageResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("page"),
-  data: z.array(z.lazy(() => GetFilesUsageData$inboundSchema)),
-  has_more: z.boolean(),
-  next_page: z.nullable(z.string()),
-  as_of: z.number().int(),
-  settlement_window_seconds: z.number().int(),
-  final_through: z.number().int(),
-  final: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "next_page": "nextPage",
-    "as_of": "asOf",
-    "settlement_window_seconds": "settlementWindowSeconds",
-    "final_through": "finalThrough",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("page"),
+    data: z.array(z.lazy(() => GetFilesUsageData$inboundSchema)),
+    has_more: z.boolean(),
+    next_page: z.nullable(z.string()),
+    as_of: z.number().int(),
+    settlement_window_seconds: z.number().int(),
+    final_through: z.number().int(),
+    final: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "next_page": "nextPage",
+      "as_of": "asOf",
+      "settlement_window_seconds": "settlementWindowSeconds",
+      "final_through": "finalThrough",
+    });
+  })
+);
 /** @internal */
 export type GetFilesUsageResponseBody$Outbound = {
   object: "page";
@@ -265,24 +275,26 @@ export const GetFilesUsageResponseBody$outboundSchema: z.ZodType<
   GetFilesUsageResponseBody$Outbound,
   z.ZodTypeDef,
   GetFilesUsageResponseBody
-> = z.object({
-  object: z.literal("page"),
-  data: z.array(z.lazy(() => GetFilesUsageData$outboundSchema)),
-  hasMore: z.boolean(),
-  nextPage: z.nullable(z.string()),
-  asOf: z.number().int(),
-  settlementWindowSeconds: z.number().int(),
-  finalThrough: z.number().int(),
-  final: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    nextPage: "next_page",
-    asOf: "as_of",
-    settlementWindowSeconds: "settlement_window_seconds",
-    finalThrough: "final_through",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("page"),
+    data: z.array(z.lazy(() => GetFilesUsageData$outboundSchema)),
+    hasMore: z.boolean(),
+    nextPage: z.nullable(z.string()),
+    asOf: z.number().int(),
+    settlementWindowSeconds: z.number().int(),
+    finalThrough: z.number().int(),
+    final: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      nextPage: "next_page",
+      asOf: "as_of",
+      settlementWindowSeconds: "settlement_window_seconds",
+      finalThrough: "final_through",
+    });
+  })
+);
 
 export function getFilesUsageResponseBodyToJSON(
   getFilesUsageResponseBody: GetFilesUsageResponseBody,

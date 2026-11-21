@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -38,19 +38,21 @@ export const VectorStorePermissionDeleted$inboundSchema: z.ZodType<
   VectorStorePermissionDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("vector_store.permission.deleted"),
-  vector_store_id: z.string(),
-  grantee_type: VectorStorePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_id": "vectorStoreId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.permission.deleted"),
+    vector_store_id: z.string(),
+    grantee_type: VectorStorePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_id": "vectorStoreId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type VectorStorePermissionDeleted$Outbound = {
   object: "vector_store.permission.deleted";
@@ -65,19 +67,21 @@ export const VectorStorePermissionDeleted$outboundSchema: z.ZodType<
   VectorStorePermissionDeleted$Outbound,
   z.ZodTypeDef,
   VectorStorePermissionDeleted
-> = z.object({
-  object: z.literal("vector_store.permission.deleted"),
-  vectorStoreId: z.string(),
-  granteeType: VectorStorePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreId: "vector_store_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.permission.deleted"),
+    vectorStoreId: z.string(),
+    granteeType: VectorStorePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreId: "vector_store_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function vectorStorePermissionDeletedToJSON(
   vectorStorePermissionDeleted: VectorStorePermissionDeleted,

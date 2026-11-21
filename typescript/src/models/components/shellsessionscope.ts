@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
@@ -21,7 +22,7 @@ export type ShellSessionScope = ClosedEnum<typeof ShellSessionScope>;
 /** @internal */
 export const ShellSessionScope$inboundSchema: z.ZodNativeEnum<
   typeof ShellSessionScope
-> = z.nativeEnum(ShellSessionScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ShellSessionScope));
 /** @internal */
 export const ShellSessionScope$outboundSchema: z.ZodNativeEnum<
   typeof ShellSessionScope

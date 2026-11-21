@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetClusterInviteInfoTooManyRequestsError struct {
 var _ error = &GetClusterInviteInfoTooManyRequestsError{}
 
 func (e *GetClusterInviteInfoTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetClusterInviteInfoGoneError struct {
 var _ error = &GetClusterInviteInfoGoneError{}
 
 func (e *GetClusterInviteInfoGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetClusterInviteInfoConflictError struct {
 var _ error = &GetClusterInviteInfoConflictError{}
 
 func (e *GetClusterInviteInfoConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetClusterInviteInfoNotFoundError struct {
 var _ error = &GetClusterInviteInfoNotFoundError{}
 
 func (e *GetClusterInviteInfoNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetClusterInviteInfoForbiddenError struct {
 var _ error = &GetClusterInviteInfoForbiddenError{}
 
 func (e *GetClusterInviteInfoForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetClusterInviteInfoUnauthorizedError struct {
 var _ error = &GetClusterInviteInfoUnauthorizedError{}
 
 func (e *GetClusterInviteInfoUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetClusterInviteInfoBadRequestError struct {
 var _ error = &GetClusterInviteInfoBadRequestError{}
 
 func (e *GetClusterInviteInfoBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

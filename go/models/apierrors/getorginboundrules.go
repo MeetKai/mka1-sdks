@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type GetOrgInboundRulesTooManyRequestsError struct {
 var _ error = &GetOrgInboundRulesTooManyRequestsError{}
 
 func (e *GetOrgInboundRulesTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type GetOrgInboundRulesGoneError struct {
 var _ error = &GetOrgInboundRulesGoneError{}
 
 func (e *GetOrgInboundRulesGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type GetOrgInboundRulesConflictError struct {
 var _ error = &GetOrgInboundRulesConflictError{}
 
 func (e *GetOrgInboundRulesConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type GetOrgInboundRulesNotFoundError struct {
 var _ error = &GetOrgInboundRulesNotFoundError{}
 
 func (e *GetOrgInboundRulesNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type GetOrgInboundRulesForbiddenError struct {
 var _ error = &GetOrgInboundRulesForbiddenError{}
 
 func (e *GetOrgInboundRulesForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type GetOrgInboundRulesUnauthorizedError struct {
 var _ error = &GetOrgInboundRulesUnauthorizedError{}
 
 func (e *GetOrgInboundRulesUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type GetOrgInboundRulesBadRequestError struct {
 var _ error = &GetOrgInboundRulesBadRequestError{}
 
 func (e *GetOrgInboundRulesBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

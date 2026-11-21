@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,17 +39,19 @@ export const DeleteAgentScheduleRequest$inboundSchema: z.ZodType<
   DeleteAgentScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  schedule_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "schedule_id": "scheduleId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    schedule_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "schedule_id": "scheduleId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteAgentScheduleRequest$Outbound = {
   agent_id: string;
@@ -62,17 +64,19 @@ export const DeleteAgentScheduleRequest$outboundSchema: z.ZodType<
   DeleteAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   DeleteAgentScheduleRequest
-> = z.object({
-  agentId: z.string(),
-  scheduleId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    scheduleId: "schedule_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    scheduleId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      scheduleId: "schedule_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteAgentScheduleRequestToJSON(
   deleteAgentScheduleRequest: DeleteAgentScheduleRequest,
@@ -94,7 +98,7 @@ export function deleteAgentScheduleRequestFromJSON(
 /** @internal */
 export const DeleteAgentScheduleObject$inboundSchema: z.ZodNativeEnum<
   typeof DeleteAgentScheduleObject
-> = z.nativeEnum(DeleteAgentScheduleObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteAgentScheduleObject));
 /** @internal */
 export const DeleteAgentScheduleObject$outboundSchema: z.ZodNativeEnum<
   typeof DeleteAgentScheduleObject
@@ -105,11 +109,13 @@ export const DeleteAgentScheduleResponseBody$inboundSchema: z.ZodType<
   DeleteAgentScheduleResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: DeleteAgentScheduleObject$inboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteAgentScheduleObject$inboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 /** @internal */
 export type DeleteAgentScheduleResponseBody$Outbound = {
   object: string;
@@ -122,11 +128,13 @@ export const DeleteAgentScheduleResponseBody$outboundSchema: z.ZodType<
   DeleteAgentScheduleResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteAgentScheduleResponseBody
-> = z.object({
-  object: DeleteAgentScheduleObject$outboundSchema,
-  id: z.string(),
-  deleted: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: DeleteAgentScheduleObject$outboundSchema,
+    id: z.string(),
+    deleted: z.boolean(),
+  })
+);
 
 export function deleteAgentScheduleResponseBodyToJSON(
   deleteAgentScheduleResponseBody: DeleteAgentScheduleResponseBody,

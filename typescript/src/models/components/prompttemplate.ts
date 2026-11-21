@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,7 +20,7 @@ export const Variables$inboundSchema: z.ZodType<
   Variables,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.any()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.any()]));
 /** @internal */
 export type Variables$Outbound = string | any;
 
@@ -29,7 +29,7 @@ export const Variables$outboundSchema: z.ZodType<
   Variables$Outbound,
   z.ZodTypeDef,
   Variables
-> = z.union([z.string(), z.any()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.any()]));
 
 export function variablesToJSON(variables: Variables): string {
   return JSON.stringify(Variables$outboundSchema.parse(variables));
@@ -49,11 +49,13 @@ export const PromptTemplate$inboundSchema: z.ZodType<
   PromptTemplate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  variables: z.record(z.union([z.string(), z.any()])).optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    variables: z.record(z.union([z.string(), z.any()])).optional(),
+    version: z.string().optional(),
+  })
+);
 /** @internal */
 export type PromptTemplate$Outbound = {
   id: string;
@@ -66,11 +68,13 @@ export const PromptTemplate$outboundSchema: z.ZodType<
   PromptTemplate$Outbound,
   z.ZodTypeDef,
   PromptTemplate
-> = z.object({
-  id: z.string(),
-  variables: z.record(z.union([z.string(), z.any()])).optional(),
-  version: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    variables: z.record(z.union([z.string(), z.any()])).optional(),
+    version: z.string().optional(),
+  })
+);
 
 export function promptTemplateToJSON(promptTemplate: PromptTemplate): string {
   return JSON.stringify(PromptTemplate$outboundSchema.parse(promptTemplate));

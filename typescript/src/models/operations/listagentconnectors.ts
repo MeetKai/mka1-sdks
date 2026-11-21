@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,9 @@ export type ListAgentConnectorsRequest = {
 /** @internal */
 export const ListAgentConnectorsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentConnectorsQueryParamOrder
-> = z.nativeEnum(ListAgentConnectorsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListAgentConnectorsQueryParamOrder)
+);
 /** @internal */
 export const ListAgentConnectorsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentConnectorsQueryParamOrder
@@ -44,16 +46,18 @@ export const ListAgentConnectorsRequest$inboundSchema: z.ZodType<
   ListAgentConnectorsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListAgentConnectorsQueryParamOrder$inboundSchema.default("desc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListAgentConnectorsQueryParamOrder$inboundSchema.default("desc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListAgentConnectorsRequest$Outbound = {
   id: string;
@@ -67,16 +71,18 @@ export const ListAgentConnectorsRequest$outboundSchema: z.ZodType<
   ListAgentConnectorsRequest$Outbound,
   z.ZodTypeDef,
   ListAgentConnectorsRequest
-> = z.object({
-  id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListAgentConnectorsQueryParamOrder$outboundSchema.default("desc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListAgentConnectorsQueryParamOrder$outboundSchema.default("desc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listAgentConnectorsRequestToJSON(
   listAgentConnectorsRequest: ListAgentConnectorsRequest,

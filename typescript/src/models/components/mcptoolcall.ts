@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,21 +27,23 @@ export const MCPToolCall$inboundSchema: z.ZodType<
   MCPToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_call"),
-  id: z.string(),
-  approval_request_id: z.nullable(z.string()).optional(),
-  arguments: z.string(),
-  name: z.string(),
-  server_label: z.string(),
-  error: z.string().optional(),
-  output: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_call"),
+    id: z.string(),
+    approval_request_id: z.nullable(z.string()).optional(),
+    arguments: z.string(),
+    name: z.string(),
+    server_label: z.string(),
+    error: z.string().optional(),
+    output: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type MCPToolCall$Outbound = {
   type: "mcp_call";
@@ -59,21 +61,23 @@ export const MCPToolCall$outboundSchema: z.ZodType<
   MCPToolCall$Outbound,
   z.ZodTypeDef,
   MCPToolCall
-> = z.object({
-  type: z.literal("mcp_call"),
-  id: z.string(),
-  approvalRequestId: z.nullable(z.string()).optional(),
-  arguments: z.string(),
-  name: z.string(),
-  serverLabel: z.string(),
-  error: z.string().optional(),
-  output: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_call"),
+    id: z.string(),
+    approvalRequestId: z.nullable(z.string()).optional(),
+    arguments: z.string(),
+    name: z.string(),
+    serverLabel: z.string(),
+    error: z.string().optional(),
+    output: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function mcpToolCallToJSON(mcpToolCall: MCPToolCall): string {
   return JSON.stringify(MCPToolCall$outboundSchema.parse(mcpToolCall));

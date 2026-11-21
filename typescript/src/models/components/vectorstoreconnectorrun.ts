@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -62,29 +62,31 @@ export const VectorStoreConnectorRun$inboundSchema: z.ZodType<
   VectorStoreConnectorRun,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: VectorStoreConnectorRunStatus$inboundSchema,
-  trigger: VectorStoreConnectorRunTrigger$inboundSchema,
-  started_at: z.number().int(),
-  finished_at: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-  items: z.array(VectorStoreConnectorRunItem$inboundSchema),
-  items_has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "started_at": "startedAt",
-    "finished_at": "finishedAt",
-    "items_has_more": "itemsHasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.run"),
+    status: VectorStoreConnectorRunStatus$inboundSchema,
+    trigger: VectorStoreConnectorRunTrigger$inboundSchema,
+    started_at: z.number().int(),
+    finished_at: z.nullable(z.number().int()),
+    added: z.number().int(),
+    updated: z.number().int(),
+    removed: z.number().int(),
+    restored: z.number().int(),
+    skipped: z.number().int(),
+    failed: z.number().int(),
+    error: z.nullable(z.string()),
+    items: z.array(VectorStoreConnectorRunItem$inboundSchema),
+    items_has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "started_at": "startedAt",
+      "finished_at": "finishedAt",
+      "items_has_more": "itemsHasMore",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorRun$Outbound = {
   id: string;
@@ -109,29 +111,31 @@ export const VectorStoreConnectorRun$outboundSchema: z.ZodType<
   VectorStoreConnectorRun$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorRun
-> = z.object({
-  id: z.string(),
-  object: z.literal("vector_store.connector.run"),
-  status: VectorStoreConnectorRunStatus$outboundSchema,
-  trigger: VectorStoreConnectorRunTrigger$outboundSchema,
-  startedAt: z.number().int(),
-  finishedAt: z.nullable(z.number().int()),
-  added: z.number().int(),
-  updated: z.number().int(),
-  removed: z.number().int(),
-  restored: z.number().int(),
-  skipped: z.number().int(),
-  failed: z.number().int(),
-  error: z.nullable(z.string()),
-  items: z.array(VectorStoreConnectorRunItem$outboundSchema),
-  itemsHasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    startedAt: "started_at",
-    finishedAt: "finished_at",
-    itemsHasMore: "items_has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("vector_store.connector.run"),
+    status: VectorStoreConnectorRunStatus$outboundSchema,
+    trigger: VectorStoreConnectorRunTrigger$outboundSchema,
+    startedAt: z.number().int(),
+    finishedAt: z.nullable(z.number().int()),
+    added: z.number().int(),
+    updated: z.number().int(),
+    removed: z.number().int(),
+    restored: z.number().int(),
+    skipped: z.number().int(),
+    failed: z.number().int(),
+    error: z.nullable(z.string()),
+    items: z.array(VectorStoreConnectorRunItem$outboundSchema),
+    itemsHasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      startedAt: "started_at",
+      finishedAt: "finished_at",
+      itemsHasMore: "items_has_more",
+    });
+  })
+);
 
 export function vectorStoreConnectorRunToJSON(
   vectorStoreConnectorRun: VectorStoreConnectorRun,

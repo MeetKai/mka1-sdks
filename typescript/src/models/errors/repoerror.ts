@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -53,24 +54,26 @@ export const RepoError$inboundSchema: z.ZodType<
   RepoError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  correlation_id: z.string(),
-  error: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    const remapped = remap$(v, {
-      "correlation_id": "correlationId",
-    });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    correlation_id: z.string(),
+    error: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      const remapped = remap$(v, {
+        "correlation_id": "correlationId",
+      });
 
-    return new RepoError(remapped, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+      return new RepoError(remapped, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type RepoError$Outbound = {
@@ -83,15 +86,17 @@ export const RepoError$outboundSchema: z.ZodType<
   RepoError$Outbound,
   z.ZodTypeDef,
   RepoError
-> = z.instanceof(RepoError)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      correlationId: z.string(),
-      error: z.string(),
-    }).transform((v) => {
-      return remap$(v, {
-        correlationId: "correlation_id",
-      });
-    }),
-  );
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(RepoError)
+    .transform(v => v.data$)
+    .pipe(
+      z.object({
+        correlationId: z.string(),
+        error: z.string(),
+      }).transform((v) => {
+        return remap$(v, {
+          correlationId: "correlation_id",
+        });
+      }),
+    )
+);

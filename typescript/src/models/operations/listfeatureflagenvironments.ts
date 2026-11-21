@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,13 +20,15 @@ export const ListFeatureFlagEnvironmentsRequest$inboundSchema: z.ZodType<
   ListFeatureFlagEnvironmentsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListFeatureFlagEnvironmentsRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -37,13 +39,15 @@ export const ListFeatureFlagEnvironmentsRequest$outboundSchema: z.ZodType<
   ListFeatureFlagEnvironmentsRequest$Outbound,
   z.ZodTypeDef,
   ListFeatureFlagEnvironmentsRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listFeatureFlagEnvironmentsRequestToJSON(
   listFeatureFlagEnvironmentsRequest: ListFeatureFlagEnvironmentsRequest,

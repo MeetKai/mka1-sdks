@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const ManagedServiceName = {
@@ -13,7 +14,7 @@ export type ManagedServiceName = ClosedEnum<typeof ManagedServiceName>;
 /** @internal */
 export const ManagedServiceName$inboundSchema: z.ZodNativeEnum<
   typeof ManagedServiceName
-> = z.nativeEnum(ManagedServiceName);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ManagedServiceName));
 /** @internal */
 export const ManagedServiceName$outboundSchema: z.ZodNativeEnum<
   typeof ManagedServiceName

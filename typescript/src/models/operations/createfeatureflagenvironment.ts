@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const CreateFeatureFlagEnvironmentRequest$inboundSchema: z.ZodType<
   CreateFeatureFlagEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagEnvironmentCreateRequest:
-    components.FeatureFlagEnvironmentCreateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagEnvironmentCreateRequest":
-      "featureFlagEnvironmentCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagEnvironmentCreateRequest:
+      components.FeatureFlagEnvironmentCreateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagEnvironmentCreateRequest":
+        "featureFlagEnvironmentCreateRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateFeatureFlagEnvironmentRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -46,16 +48,19 @@ export const CreateFeatureFlagEnvironmentRequest$outboundSchema: z.ZodType<
   CreateFeatureFlagEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   CreateFeatureFlagEnvironmentRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  featureFlagEnvironmentCreateRequest:
-    components.FeatureFlagEnvironmentCreateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagEnvironmentCreateRequest: "FeatureFlagEnvironmentCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    featureFlagEnvironmentCreateRequest:
+      components.FeatureFlagEnvironmentCreateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagEnvironmentCreateRequest:
+        "FeatureFlagEnvironmentCreateRequest",
+    });
+  })
+);
 
 export function createFeatureFlagEnvironmentRequestToJSON(
   createFeatureFlagEnvironmentRequest: CreateFeatureFlagEnvironmentRequest,

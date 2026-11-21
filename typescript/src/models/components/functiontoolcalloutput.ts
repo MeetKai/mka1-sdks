@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,17 +32,19 @@ export const FunctionToolCallOutput$inboundSchema: z.ZodType<
   FunctionToolCallOutput,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function_call_output"),
-  call_id: z.string(),
-  output: z.string(),
-  id: z.string().optional(),
-  status: Status$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call_output"),
+    call_id: z.string(),
+    output: z.string(),
+    id: z.string().optional(),
+    status: Status$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolCallOutput$Outbound = {
   type: "function_call_output";
@@ -57,17 +59,19 @@ export const FunctionToolCallOutput$outboundSchema: z.ZodType<
   FunctionToolCallOutput$Outbound,
   z.ZodTypeDef,
   FunctionToolCallOutput
-> = z.object({
-  type: z.literal("function_call_output"),
-  callId: z.string(),
-  output: z.string(),
-  id: z.string().optional(),
-  status: Status$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call_output"),
+    callId: z.string(),
+    output: z.string(),
+    id: z.string().optional(),
+    status: Status$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+    });
+  })
+);
 
 export function functionToolCallOutputToJSON(
   functionToolCallOutput: FunctionToolCallOutput,

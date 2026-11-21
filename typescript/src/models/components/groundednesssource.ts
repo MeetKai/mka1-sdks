@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -44,11 +44,13 @@ export const GroundednessSource2$inboundSchema: z.ZodType<
   GroundednessSource2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("url"),
-  url: z.string(),
-  title: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("url"),
+    url: z.string(),
+    title: z.string(),
+  })
+);
 /** @internal */
 export type GroundednessSource2$Outbound = {
   kind: "url";
@@ -61,11 +63,13 @@ export const GroundednessSource2$outboundSchema: z.ZodType<
   GroundednessSource2$Outbound,
   z.ZodTypeDef,
   GroundednessSource2
-> = z.object({
-  kind: z.literal("url"),
-  url: z.string(),
-  title: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("url"),
+    url: z.string(),
+    title: z.string(),
+  })
+);
 
 export function groundednessSource2ToJSON(
   groundednessSource2: GroundednessSource2,
@@ -89,15 +93,17 @@ export const GroundednessSource1$inboundSchema: z.ZodType<
   GroundednessSource1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  kind: z.literal("file"),
-  file_id: z.string(),
-  filename: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("file"),
+    file_id: z.string(),
+    filename: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type GroundednessSource1$Outbound = {
   kind: "file";
@@ -110,15 +116,17 @@ export const GroundednessSource1$outboundSchema: z.ZodType<
   GroundednessSource1$Outbound,
   z.ZodTypeDef,
   GroundednessSource1
-> = z.object({
-  kind: z.literal("file"),
-  fileId: z.string(),
-  filename: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    kind: z.literal("file"),
+    fileId: z.string(),
+    filename: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function groundednessSource1ToJSON(
   groundednessSource1: GroundednessSource1,
@@ -142,10 +150,12 @@ export const GroundednessSource$inboundSchema: z.ZodType<
   GroundednessSource,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("kind", {
-  file: z.lazy(() => GroundednessSource1$inboundSchema),
-  url: z.lazy(() => GroundednessSource2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("kind", {
+    file: z.lazy(() => GroundednessSource1$inboundSchema),
+    url: z.lazy(() => GroundednessSource2$inboundSchema),
+  })
+);
 /** @internal */
 export type GroundednessSource$Outbound =
   | GroundednessSource1$Outbound
@@ -156,10 +166,12 @@ export const GroundednessSource$outboundSchema: z.ZodType<
   GroundednessSource$Outbound,
   z.ZodTypeDef,
   GroundednessSource
-> = z.union([
-  z.lazy(() => GroundednessSource1$outboundSchema),
-  z.lazy(() => GroundednessSource2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => GroundednessSource1$outboundSchema),
+    z.lazy(() => GroundednessSource2$outboundSchema),
+  ])
+);
 
 export function groundednessSourceToJSON(
   groundednessSource: GroundednessSource,

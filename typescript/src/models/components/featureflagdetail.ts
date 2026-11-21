@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -40,29 +40,35 @@ export const FeatureFlagDetail$inboundSchema: z.ZodType<
   FeatureFlagDetail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  archived_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  default_value: z.any().optional(),
-  description: z.string(),
-  key: z.string(),
-  name: z.string(),
-  project_id: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  value_type: FeatureFlagValueType$inboundSchema,
-  states: z.record(FeatureFlagState$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "archived_at": "archivedAt",
-    "created_at": "createdAt",
-    "default_value": "defaultValue",
-    "project_id": "projectId",
-    "updated_at": "updatedAt",
-    "value_type": "valueType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archived_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    default_value: z.any().optional(),
+    description: z.string(),
+    key: z.string(),
+    name: z.string(),
+    project_id: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    value_type: FeatureFlagValueType$inboundSchema,
+    states: z.record(FeatureFlagState$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "archived_at": "archivedAt",
+      "created_at": "createdAt",
+      "default_value": "defaultValue",
+      "project_id": "projectId",
+      "updated_at": "updatedAt",
+      "value_type": "valueType",
+    });
+  })
+);
 /** @internal */
 export type FeatureFlagDetail$Outbound = {
   archived_at: string | null;
@@ -82,27 +88,29 @@ export const FeatureFlagDetail$outboundSchema: z.ZodType<
   FeatureFlagDetail$Outbound,
   z.ZodTypeDef,
   FeatureFlagDetail
-> = z.object({
-  archivedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  createdAt: z.date().transform(v => v.toISOString()),
-  defaultValue: z.any().optional(),
-  description: z.string(),
-  key: z.string(),
-  name: z.string(),
-  projectId: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  valueType: FeatureFlagValueType$outboundSchema,
-  states: z.record(FeatureFlagState$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    archivedAt: "archived_at",
-    createdAt: "created_at",
-    defaultValue: "default_value",
-    projectId: "project_id",
-    updatedAt: "updated_at",
-    valueType: "value_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    archivedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    createdAt: z.date().transform(v => v.toISOString()),
+    defaultValue: z.any().optional(),
+    description: z.string(),
+    key: z.string(),
+    name: z.string(),
+    projectId: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    valueType: FeatureFlagValueType$outboundSchema,
+    states: z.record(FeatureFlagState$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      archivedAt: "archived_at",
+      createdAt: "created_at",
+      defaultValue: "default_value",
+      projectId: "project_id",
+      updatedAt: "updated_at",
+      valueType: "value_type",
+    });
+  })
+);
 
 export function featureFlagDetailToJSON(
   featureFlagDetail: FeatureFlagDetail,

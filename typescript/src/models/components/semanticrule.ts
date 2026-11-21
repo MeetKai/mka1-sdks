@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,11 +32,13 @@ export const SemanticRule$inboundSchema: z.ZodType<
   SemanticRule,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  severity: Severity$inboundSchema,
-  description: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    severity: Severity$inboundSchema,
+    description: z.string(),
+  })
+);
 /** @internal */
 export type SemanticRule$Outbound = {
   code: string;
@@ -49,11 +51,13 @@ export const SemanticRule$outboundSchema: z.ZodType<
   SemanticRule$Outbound,
   z.ZodTypeDef,
   SemanticRule
-> = z.object({
-  code: z.string(),
-  severity: Severity$outboundSchema,
-  description: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    severity: Severity$outboundSchema,
+    description: z.string(),
+  })
+);
 
 export function semanticRuleToJSON(semanticRule: SemanticRule): string {
   return JSON.stringify(SemanticRule$outboundSchema.parse(semanticRule));

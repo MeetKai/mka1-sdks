@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -56,7 +56,7 @@ export type TranscriptionResponse = {
 /** @internal */
 export const LanguageSource$inboundSchema: z.ZodNativeEnum<
   typeof LanguageSource
-> = z.nativeEnum(LanguageSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(LanguageSource));
 /** @internal */
 export const LanguageSource$outboundSchema: z.ZodNativeEnum<
   typeof LanguageSource
@@ -67,17 +67,19 @@ export const TranscriptionResponse$inboundSchema: z.ZodType<
   TranscriptionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-  language: z.string().optional(),
-  language_source: LanguageSource$inboundSchema.optional(),
-  confidence: z.number().optional(),
-  speakers: z.array(SpeakerSegment$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "language_source": "languageSource",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    language: z.string().optional(),
+    language_source: LanguageSource$inboundSchema.optional(),
+    confidence: z.number().optional(),
+    speakers: z.array(SpeakerSegment$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "language_source": "languageSource",
+    });
+  })
+);
 /** @internal */
 export type TranscriptionResponse$Outbound = {
   text: string;
@@ -92,17 +94,19 @@ export const TranscriptionResponse$outboundSchema: z.ZodType<
   TranscriptionResponse$Outbound,
   z.ZodTypeDef,
   TranscriptionResponse
-> = z.object({
-  text: z.string(),
-  language: z.string().optional(),
-  languageSource: LanguageSource$outboundSchema.optional(),
-  confidence: z.number().optional(),
-  speakers: z.array(SpeakerSegment$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    languageSource: "language_source",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    language: z.string().optional(),
+    languageSource: LanguageSource$outboundSchema.optional(),
+    confidence: z.number().optional(),
+    speakers: z.array(SpeakerSegment$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      languageSource: "language_source",
+    });
+  })
+);
 
 export function transcriptionResponseToJSON(
   transcriptionResponse: TranscriptionResponse,

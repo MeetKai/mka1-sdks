@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const AnalyticsVisitorsSearchRequest$inboundSchema: z.ZodType<
   AnalyticsVisitorsSearchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  AnalyticsVisitorSearchRequest:
-    components.AnalyticsVisitorSearchRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AnalyticsVisitorSearchRequest": "analyticsVisitorSearchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    AnalyticsVisitorSearchRequest:
+      components.AnalyticsVisitorSearchRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "AnalyticsVisitorSearchRequest": "analyticsVisitorSearchRequest",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsVisitorsSearchRequest$Outbound = {
   id: string;
@@ -43,15 +45,17 @@ export const AnalyticsVisitorsSearchRequest$outboundSchema: z.ZodType<
   AnalyticsVisitorsSearchRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsVisitorsSearchRequest
-> = z.object({
-  id: z.string(),
-  analyticsVisitorSearchRequest:
-    components.AnalyticsVisitorSearchRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    analyticsVisitorSearchRequest: "AnalyticsVisitorSearchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    analyticsVisitorSearchRequest:
+      components.AnalyticsVisitorSearchRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      analyticsVisitorSearchRequest: "AnalyticsVisitorSearchRequest",
+    });
+  })
+);
 
 export function analyticsVisitorsSearchRequestToJSON(
   analyticsVisitorsSearchRequest: AnalyticsVisitorsSearchRequest,

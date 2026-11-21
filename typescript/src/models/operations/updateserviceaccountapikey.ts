@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -41,16 +41,18 @@ export const UpdateServiceAccountApiKeyRequestBody$inboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scopes: z.array(z.string()),
-  name: z.string().optional(),
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  expiresAt: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scopes: z.array(z.string()),
+    name: z.string().optional(),
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    expiresAt: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  })
+);
 /** @internal */
 export type UpdateServiceAccountApiKeyRequestBody$Outbound = {
   scopes: Array<string>;
@@ -66,14 +68,16 @@ export const UpdateServiceAccountApiKeyRequestBody$outboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountApiKeyRequestBody
-> = z.object({
-  scopes: z.array(z.string()),
-  name: z.string().optional(),
-  rateLimitEnabled: z.boolean().optional(),
-  rateLimitTimeWindow: z.number().optional(),
-  rateLimitMax: z.number().optional(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scopes: z.array(z.string()),
+    name: z.string().optional(),
+    rateLimitEnabled: z.boolean().optional(),
+    rateLimitTimeWindow: z.number().optional(),
+    rateLimitMax: z.number().optional(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  })
+);
 
 export function updateServiceAccountApiKeyRequestBodyToJSON(
   updateServiceAccountApiKeyRequestBody: UpdateServiceAccountApiKeyRequestBody,
@@ -100,19 +104,22 @@ export const UpdateServiceAccountApiKeyRequest$inboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateServiceAccountApiKeyRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      UpdateServiceAccountApiKeyRequestBody$inboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateServiceAccountApiKeyRequest$Outbound = {
   orgId: string;
@@ -127,20 +134,22 @@ export const UpdateServiceAccountApiKeyRequest$outboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyRequest$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountApiKeyRequest
-> = z.object({
-  orgId: z.string(),
-  saId: z.string(),
-  keyId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() =>
-    UpdateServiceAccountApiKeyRequestBody$outboundSchema
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    saId: z.string(),
+    keyId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      UpdateServiceAccountApiKeyRequestBody$outboundSchema
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateServiceAccountApiKeyRequestToJSON(
   updateServiceAccountApiKeyRequest: UpdateServiceAccountApiKeyRequest,
@@ -166,10 +175,12 @@ export const UpdateServiceAccountApiKeyResponseBody$inboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  updated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updated: z.boolean(),
+  })
+);
 /** @internal */
 export type UpdateServiceAccountApiKeyResponseBody$Outbound = {
   id: string;
@@ -181,10 +192,12 @@ export const UpdateServiceAccountApiKeyResponseBody$outboundSchema: z.ZodType<
   UpdateServiceAccountApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   UpdateServiceAccountApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  updated: z.boolean(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    updated: z.boolean(),
+  })
+);
 
 export function updateServiceAccountApiKeyResponseBodyToJSON(
   updateServiceAccountApiKeyResponseBody:

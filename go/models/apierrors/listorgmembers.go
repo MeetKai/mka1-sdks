@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListOrgMembersTooManyRequestsError struct {
 var _ error = &ListOrgMembersTooManyRequestsError{}
 
 func (e *ListOrgMembersTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListOrgMembersGoneError struct {
 var _ error = &ListOrgMembersGoneError{}
 
 func (e *ListOrgMembersGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListOrgMembersConflictError struct {
 var _ error = &ListOrgMembersConflictError{}
 
 func (e *ListOrgMembersConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListOrgMembersNotFoundError struct {
 var _ error = &ListOrgMembersNotFoundError{}
 
 func (e *ListOrgMembersNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListOrgMembersForbiddenError struct {
 var _ error = &ListOrgMembersForbiddenError{}
 
 func (e *ListOrgMembersForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListOrgMembersUnauthorizedError struct {
 var _ error = &ListOrgMembersUnauthorizedError{}
 
 func (e *ListOrgMembersUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListOrgMembersBadRequestError struct {
 var _ error = &ListOrgMembersBadRequestError{}
 
 func (e *ListOrgMembersBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

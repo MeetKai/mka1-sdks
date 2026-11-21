@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,15 +49,17 @@ export type ListAgentSchedulesRequest = {
 /** @internal */
 export const ListAgentSchedulesQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentSchedulesQueryParamOrder
-> = z.nativeEnum(ListAgentSchedulesQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListAgentSchedulesQueryParamOrder)
+);
 /** @internal */
 export const ListAgentSchedulesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentSchedulesQueryParamOrder
 > = ListAgentSchedulesQueryParamOrder$inboundSchema;
 
 /** @internal */
-export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> = z
-  .nativeEnum(DeliverTo);
+export const DeliverTo$inboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeliverTo));
 /** @internal */
 export const DeliverTo$outboundSchema: z.ZodNativeEnum<typeof DeliverTo> =
   DeliverTo$inboundSchema;
@@ -67,20 +69,22 @@ export const ListAgentSchedulesRequest$inboundSchema: z.ZodType<
   ListAgentSchedulesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  limit: z.number().int().default(20),
-  order: ListAgentSchedulesQueryParamOrder$inboundSchema.default("desc"),
-  status: z.string().optional(),
-  deliver_to: DeliverTo$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "deliver_to": "deliverTo",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    limit: z.number().int().default(20),
+    order: ListAgentSchedulesQueryParamOrder$inboundSchema.default("desc"),
+    status: z.string().optional(),
+    deliver_to: DeliverTo$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "deliver_to": "deliverTo",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListAgentSchedulesRequest$Outbound = {
   agent_id: string;
@@ -96,20 +100,22 @@ export const ListAgentSchedulesRequest$outboundSchema: z.ZodType<
   ListAgentSchedulesRequest$Outbound,
   z.ZodTypeDef,
   ListAgentSchedulesRequest
-> = z.object({
-  agentId: z.string(),
-  limit: z.number().int().default(20),
-  order: ListAgentSchedulesQueryParamOrder$outboundSchema.default("desc"),
-  status: z.string().optional(),
-  deliverTo: DeliverTo$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    deliverTo: "deliver_to",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    limit: z.number().int().default(20),
+    order: ListAgentSchedulesQueryParamOrder$outboundSchema.default("desc"),
+    status: z.string().optional(),
+    deliverTo: DeliverTo$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      deliverTo: "deliver_to",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listAgentSchedulesRequestToJSON(
   listAgentSchedulesRequest: ListAgentSchedulesRequest,

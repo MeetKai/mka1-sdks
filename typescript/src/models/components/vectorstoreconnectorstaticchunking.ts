@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,15 +29,17 @@ export const VectorStoreConnectorStaticChunkingStatic$inboundSchema: z.ZodType<
   VectorStoreConnectorStaticChunkingStatic,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  chunk_overlap_tokens: z.number().int(),
-  max_chunk_size_tokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "chunk_overlap_tokens": "chunkOverlapTokens",
-    "max_chunk_size_tokens": "maxChunkSizeTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunk_overlap_tokens: z.number().int(),
+    max_chunk_size_tokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "chunk_overlap_tokens": "chunkOverlapTokens",
+      "max_chunk_size_tokens": "maxChunkSizeTokens",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorStaticChunkingStatic$Outbound = {
   chunk_overlap_tokens: number;
@@ -49,15 +51,17 @@ export const VectorStoreConnectorStaticChunkingStatic$outboundSchema: z.ZodType<
   VectorStoreConnectorStaticChunkingStatic$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorStaticChunkingStatic
-> = z.object({
-  chunkOverlapTokens: z.number().int(),
-  maxChunkSizeTokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    chunkOverlapTokens: "chunk_overlap_tokens",
-    maxChunkSizeTokens: "max_chunk_size_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunkOverlapTokens: z.number().int(),
+    maxChunkSizeTokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkOverlapTokens: "chunk_overlap_tokens",
+      maxChunkSizeTokens: "max_chunk_size_tokens",
+    });
+  })
+);
 
 export function vectorStoreConnectorStaticChunkingStaticToJSON(
   vectorStoreConnectorStaticChunkingStatic:
@@ -90,10 +94,14 @@ export const VectorStoreConnectorStaticChunking$inboundSchema: z.ZodType<
   VectorStoreConnectorStaticChunking,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("static"),
-  static: z.lazy(() => VectorStoreConnectorStaticChunkingStatic$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("static"),
+    static: z.lazy(() =>
+      VectorStoreConnectorStaticChunkingStatic$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type VectorStoreConnectorStaticChunking$Outbound = {
   type: "static";
@@ -105,10 +113,14 @@ export const VectorStoreConnectorStaticChunking$outboundSchema: z.ZodType<
   VectorStoreConnectorStaticChunking$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorStaticChunking
-> = z.object({
-  type: z.literal("static"),
-  static: z.lazy(() => VectorStoreConnectorStaticChunkingStatic$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("static"),
+    static: z.lazy(() =>
+      VectorStoreConnectorStaticChunkingStatic$outboundSchema
+    ),
+  })
+);
 
 export function vectorStoreConnectorStaticChunkingToJSON(
   vectorStoreConnectorStaticChunking: VectorStoreConnectorStaticChunking,

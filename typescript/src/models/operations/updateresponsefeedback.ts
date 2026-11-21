@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,7 +49,9 @@ export type UpdateResponseFeedbackRequest = {
 /** @internal */
 export const UpdateResponseFeedbackRating$inboundSchema: z.ZodNativeEnum<
   typeof UpdateResponseFeedbackRating
-> = z.nativeEnum(UpdateResponseFeedbackRating);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(UpdateResponseFeedbackRating)
+);
 /** @internal */
 export const UpdateResponseFeedbackRating$outboundSchema: z.ZodNativeEnum<
   typeof UpdateResponseFeedbackRating
@@ -60,10 +62,12 @@ export const UpdateResponseFeedbackRequestBody$inboundSchema: z.ZodType<
   UpdateResponseFeedbackRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rating: z.nullable(UpdateResponseFeedbackRating$inboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rating: z.nullable(UpdateResponseFeedbackRating$inboundSchema).optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateResponseFeedbackRequestBody$Outbound = {
   rating?: string | null | undefined;
@@ -75,10 +79,12 @@ export const UpdateResponseFeedbackRequestBody$outboundSchema: z.ZodType<
   UpdateResponseFeedbackRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateResponseFeedbackRequestBody
-> = z.object({
-  rating: z.nullable(UpdateResponseFeedbackRating$outboundSchema).optional(),
-  description: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rating: z.nullable(UpdateResponseFeedbackRating$outboundSchema).optional(),
+    description: z.nullable(z.string()).optional(),
+  })
+);
 
 export function updateResponseFeedbackRequestBodyToJSON(
   updateResponseFeedbackRequestBody: UpdateResponseFeedbackRequestBody,
@@ -104,16 +110,18 @@ export const UpdateResponseFeedbackRequest$inboundSchema: z.ZodType<
   UpdateResponseFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => UpdateResponseFeedbackRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => UpdateResponseFeedbackRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateResponseFeedbackRequest$Outbound = {
   id: string;
@@ -126,16 +134,18 @@ export const UpdateResponseFeedbackRequest$outboundSchema: z.ZodType<
   UpdateResponseFeedbackRequest$Outbound,
   z.ZodTypeDef,
   UpdateResponseFeedbackRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => UpdateResponseFeedbackRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => UpdateResponseFeedbackRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateResponseFeedbackRequestToJSON(
   updateResponseFeedbackRequest: UpdateResponseFeedbackRequest,

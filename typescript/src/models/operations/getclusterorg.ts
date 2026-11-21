@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,14 +44,16 @@ export const GetClusterOrgRequest$inboundSchema: z.ZodType<
   GetClusterOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetClusterOrgRequest$Outbound = {
   id: string;
@@ -63,14 +65,16 @@ export const GetClusterOrgRequest$outboundSchema: z.ZodType<
   GetClusterOrgRequest$Outbound,
   z.ZodTypeDef,
   GetClusterOrgRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getClusterOrgRequestToJSON(
   getClusterOrgRequest: GetClusterOrgRequest,
@@ -92,7 +96,7 @@ export function getClusterOrgRequestFromJSON(
 /** @internal */
 export const GetClusterOrgStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetClusterOrgStatus
-> = z.nativeEnum(GetClusterOrgStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetClusterOrgStatus));
 /** @internal */
 export const GetClusterOrgStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetClusterOrgStatus
@@ -103,17 +107,19 @@ export const GetClusterOrgResponseBody$inboundSchema: z.ZodType<
   GetClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: GetClusterOrgStatus$inboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().optional(),
-  apiKeyCount: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: GetClusterOrgStatus$inboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().optional(),
+    apiKeyCount: z.number().optional(),
+  })
+);
 /** @internal */
 export type GetClusterOrgResponseBody$Outbound = {
   id: string;
@@ -132,17 +138,19 @@ export const GetClusterOrgResponseBody$outboundSchema: z.ZodType<
   GetClusterOrgResponseBody$Outbound,
   z.ZodTypeDef,
   GetClusterOrgResponseBody
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: GetClusterOrgStatus$outboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().optional(),
-  apiKeyCount: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: GetClusterOrgStatus$outboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().optional(),
+    apiKeyCount: z.number().optional(),
+  })
+);
 
 export function getClusterOrgResponseBodyToJSON(
   getClusterOrgResponseBody: GetClusterOrgResponseBody,

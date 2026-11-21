@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListClusterOrgsTooManyRequestsError struct {
 var _ error = &ListClusterOrgsTooManyRequestsError{}
 
 func (e *ListClusterOrgsTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListClusterOrgsGoneError struct {
 var _ error = &ListClusterOrgsGoneError{}
 
 func (e *ListClusterOrgsGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListClusterOrgsConflictError struct {
 var _ error = &ListClusterOrgsConflictError{}
 
 func (e *ListClusterOrgsConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListClusterOrgsNotFoundError struct {
 var _ error = &ListClusterOrgsNotFoundError{}
 
 func (e *ListClusterOrgsNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListClusterOrgsForbiddenError struct {
 var _ error = &ListClusterOrgsForbiddenError{}
 
 func (e *ListClusterOrgsForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListClusterOrgsUnauthorizedError struct {
 var _ error = &ListClusterOrgsUnauthorizedError{}
 
 func (e *ListClusterOrgsUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListClusterOrgsBadRequestError struct {
 var _ error = &ListClusterOrgsBadRequestError{}
 
 func (e *ListClusterOrgsBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

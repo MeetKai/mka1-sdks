@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,16 +25,18 @@ export const OutboundNetworkPolicySummary$inboundSchema: z.ZodType<
   OutboundNetworkPolicySummary,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("allowlist").default("allowlist"),
-  allowed_domains: z.array(z.string()),
-  domain_secrets: z.array(DomainSecretSummary$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_domains": "allowedDomains",
-    "domain_secrets": "domainSecrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowlist").default("allowlist"),
+    allowed_domains: z.array(z.string()),
+    domain_secrets: z.array(DomainSecretSummary$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_domains": "allowedDomains",
+      "domain_secrets": "domainSecrets",
+    });
+  })
+);
 /** @internal */
 export type OutboundNetworkPolicySummary$Outbound = {
   type: "allowlist";
@@ -47,16 +49,18 @@ export const OutboundNetworkPolicySummary$outboundSchema: z.ZodType<
   OutboundNetworkPolicySummary$Outbound,
   z.ZodTypeDef,
   OutboundNetworkPolicySummary
-> = z.object({
-  type: z.literal("allowlist").default("allowlist" as const),
-  allowedDomains: z.array(z.string()),
-  domainSecrets: z.array(DomainSecretSummary$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allowedDomains: "allowed_domains",
-    domainSecrets: "domain_secrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowlist").default("allowlist" as const),
+    allowedDomains: z.array(z.string()),
+    domainSecrets: z.array(DomainSecretSummary$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedDomains: "allowed_domains",
+      domainSecrets: "domain_secrets",
+    });
+  })
+);
 
 export function outboundNetworkPolicySummaryToJSON(
   outboundNetworkPolicySummary: OutboundNetworkPolicySummary,

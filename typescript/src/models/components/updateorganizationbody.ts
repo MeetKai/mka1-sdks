@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const UpdateOrganizationBody$inboundSchema: z.ZodType<
   UpdateOrganizationBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metadata: OrganizationMetadata$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: OrganizationMetadata$inboundSchema,
+  })
+);
 /** @internal */
 export type UpdateOrganizationBody$Outbound = {
   metadata: OrganizationMetadata$Outbound;
@@ -35,9 +37,11 @@ export const UpdateOrganizationBody$outboundSchema: z.ZodType<
   UpdateOrganizationBody$Outbound,
   z.ZodTypeDef,
   UpdateOrganizationBody
-> = z.object({
-  metadata: OrganizationMetadata$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metadata: OrganizationMetadata$outboundSchema,
+  })
+);
 
 export function updateOrganizationBodyToJSON(
   updateOrganizationBody: UpdateOrganizationBody,

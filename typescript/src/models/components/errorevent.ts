@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,17 +21,19 @@ export const ErrorEvent$inboundSchema: z.ZodType<
   ErrorEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("error"),
-  sequence_number: z.number().int(),
-  code: z.string(),
-  message: z.string(),
-  param: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("error"),
+    sequence_number: z.number().int(),
+    code: z.string(),
+    message: z.string(),
+    param: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+    });
+  })
+);
 /** @internal */
 export type ErrorEvent$Outbound = {
   type: "error";
@@ -46,17 +48,19 @@ export const ErrorEvent$outboundSchema: z.ZodType<
   ErrorEvent$Outbound,
   z.ZodTypeDef,
   ErrorEvent
-> = z.object({
-  type: z.literal("error"),
-  sequenceNumber: z.number().int(),
-  code: z.string(),
-  message: z.string(),
-  param: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("error"),
+    sequenceNumber: z.number().int(),
+    code: z.string(),
+    message: z.string(),
+    param: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+    });
+  })
+);
 
 export function errorEventToJSON(errorEvent: ErrorEvent): string {
   return JSON.stringify(ErrorEvent$outboundSchema.parse(errorEvent));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateExtractSchemaRequest$inboundSchema: z.ZodType<
   CreateExtractSchemaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  ExtractionSchema: components.ExtractionSchema$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ExtractionSchema": "extractionSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    ExtractionSchema: components.ExtractionSchema$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ExtractionSchema": "extractionSchema",
+    });
+  })
+);
 /** @internal */
 export type CreateExtractSchemaRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateExtractSchemaRequest$outboundSchema: z.ZodType<
   CreateExtractSchemaRequest$Outbound,
   z.ZodTypeDef,
   CreateExtractSchemaRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  extractionSchema: components.ExtractionSchema$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    extractionSchema: "ExtractionSchema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    extractionSchema: components.ExtractionSchema$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      extractionSchema: "ExtractionSchema",
+    });
+  })
+);
 
 export function createExtractSchemaRequestToJSON(
   createExtractSchemaRequest: CreateExtractSchemaRequest,

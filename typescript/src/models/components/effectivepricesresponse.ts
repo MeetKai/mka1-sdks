@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,11 +24,13 @@ export const EffectivePricesResponse$inboundSchema: z.ZodType<
   EffectivePricesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  currency: z.nullable(z.string()),
-  data: z.array(EffectivePriceRow$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    currency: z.nullable(z.string()),
+    data: z.array(EffectivePriceRow$inboundSchema),
+  })
+);
 /** @internal */
 export type EffectivePricesResponse$Outbound = {
   object: "list";
@@ -41,11 +43,13 @@ export const EffectivePricesResponse$outboundSchema: z.ZodType<
   EffectivePricesResponse$Outbound,
   z.ZodTypeDef,
   EffectivePricesResponse
-> = z.object({
-  object: z.literal("list"),
-  currency: z.nullable(z.string()),
-  data: z.array(EffectivePriceRow$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    currency: z.nullable(z.string()),
+    data: z.array(EffectivePriceRow$outboundSchema),
+  })
+);
 
 export function effectivePricesResponseToJSON(
   effectivePricesResponse: EffectivePricesResponse,

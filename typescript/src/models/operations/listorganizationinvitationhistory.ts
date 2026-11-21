@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -53,9 +53,11 @@ export const ListOrganizationInvitationHistorySecurity$inboundSchema: z.ZodType<
   ListOrganizationInvitationHistorySecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type ListOrganizationInvitationHistorySecurity$Outbound = {
   sessionCookie: string;
@@ -67,9 +69,11 @@ export const ListOrganizationInvitationHistorySecurity$outboundSchema:
     ListOrganizationInvitationHistorySecurity$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistorySecurity
-  > = z.object({
-    sessionCookie: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      sessionCookie: z.string(),
+    })
+  );
 
 export function listOrganizationInvitationHistorySecurityToJSON(
   listOrganizationInvitationHistorySecurity:
@@ -102,19 +106,21 @@ export const ListOrganizationInvitationHistoryRequest$inboundSchema: z.ZodType<
   ListOrganizationInvitationHistoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  limit: z.string().optional(),
-  offset: z.string().optional(),
-  status: z.string().optional(),
-  query: z.string().optional(),
-  invitationId: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+    status: z.string().optional(),
+    query: z.string().optional(),
+    invitationId: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListOrganizationInvitationHistoryRequest$Outbound = {
   orgId: string;
@@ -131,19 +137,21 @@ export const ListOrganizationInvitationHistoryRequest$outboundSchema: z.ZodType<
   ListOrganizationInvitationHistoryRequest$Outbound,
   z.ZodTypeDef,
   ListOrganizationInvitationHistoryRequest
-> = z.object({
-  orgId: z.string(),
-  limit: z.string().optional(),
-  offset: z.string().optional(),
-  status: z.string().optional(),
-  query: z.string().optional(),
-  invitationId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    limit: z.string().optional(),
+    offset: z.string().optional(),
+    status: z.string().optional(),
+    query: z.string().optional(),
+    invitationId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listOrganizationInvitationHistoryRequestToJSON(
   listOrganizationInvitationHistoryRequest:
@@ -177,17 +185,19 @@ export const ListOrganizationInvitationHistoryInvitations$inboundSchema:
     ListOrganizationInvitationHistoryInvitations,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    id: z.string(),
-    organizationId: z.string(),
-    email: z.string(),
-    role: z.nullable(z.string()),
-    status: z.string(),
-    teamId: z.nullable(z.string()),
-    expiresAt: z.string(),
-    createdAt: z.string(),
-    inviterId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      organizationId: z.string(),
+      email: z.string(),
+      role: z.nullable(z.string()),
+      status: z.string(),
+      teamId: z.nullable(z.string()),
+      expiresAt: z.string(),
+      createdAt: z.string(),
+      inviterId: z.string(),
+    })
+  );
 /** @internal */
 export type ListOrganizationInvitationHistoryInvitations$Outbound = {
   id: string;
@@ -207,17 +217,19 @@ export const ListOrganizationInvitationHistoryInvitations$outboundSchema:
     ListOrganizationInvitationHistoryInvitations$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryInvitations
-  > = z.object({
-    id: z.string(),
-    organizationId: z.string(),
-    email: z.string(),
-    role: z.nullable(z.string()),
-    status: z.string(),
-    teamId: z.nullable(z.string()),
-    expiresAt: z.string(),
-    createdAt: z.string(),
-    inviterId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      organizationId: z.string(),
+      email: z.string(),
+      role: z.nullable(z.string()),
+      status: z.string(),
+      teamId: z.nullable(z.string()),
+      expiresAt: z.string(),
+      createdAt: z.string(),
+      inviterId: z.string(),
+    })
+  );
 
 export function listOrganizationInvitationHistoryInvitationsToJSON(
   listOrganizationInvitationHistoryInvitations:
@@ -251,15 +263,19 @@ export const ListOrganizationInvitationHistoryResponseBody$inboundSchema:
     ListOrganizationInvitationHistoryResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    invitations: z.array(
-      z.lazy(() => ListOrganizationInvitationHistoryInvitations$inboundSchema),
-    ),
-    total: z.number().int(),
-    hasMore: z.boolean(),
-    limit: z.number().int(),
-    offset: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      invitations: z.array(
+        z.lazy(() =>
+          ListOrganizationInvitationHistoryInvitations$inboundSchema
+        ),
+      ),
+      total: z.number().int(),
+      hasMore: z.boolean(),
+      limit: z.number().int(),
+      offset: z.number().int(),
+    })
+  );
 /** @internal */
 export type ListOrganizationInvitationHistoryResponseBody$Outbound = {
   invitations: Array<ListOrganizationInvitationHistoryInvitations$Outbound>;
@@ -275,15 +291,19 @@ export const ListOrganizationInvitationHistoryResponseBody$outboundSchema:
     ListOrganizationInvitationHistoryResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryResponseBody
-  > = z.object({
-    invitations: z.array(
-      z.lazy(() => ListOrganizationInvitationHistoryInvitations$outboundSchema),
-    ),
-    total: z.number().int(),
-    hasMore: z.boolean(),
-    limit: z.number().int(),
-    offset: z.number().int(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      invitations: z.array(
+        z.lazy(() =>
+          ListOrganizationInvitationHistoryInvitations$outboundSchema
+        ),
+      ),
+      total: z.number().int(),
+      hasMore: z.boolean(),
+      limit: z.number().int(),
+      offset: z.number().int(),
+    })
+  );
 
 export function listOrganizationInvitationHistoryResponseBodyToJSON(
   listOrganizationInvitationHistoryResponseBody:

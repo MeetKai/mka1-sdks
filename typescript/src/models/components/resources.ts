@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,15 +22,17 @@ export const Resources$inboundSchema: z.ZodType<
   Resources,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  cpu: z.string().default("1"),
-  memory: z.string().default("2Gi"),
-  ephemeral_storage: z.string().default("10Gi"),
-}).transform((v) => {
-  return remap$(v, {
-    "ephemeral_storage": "ephemeralStorage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().default("1"),
+    memory: z.string().default("2Gi"),
+    ephemeral_storage: z.string().default("10Gi"),
+  }).transform((v) => {
+    return remap$(v, {
+      "ephemeral_storage": "ephemeralStorage",
+    });
+  })
+);
 /** @internal */
 export type Resources$Outbound = {
   cpu: string;
@@ -43,15 +45,17 @@ export const Resources$outboundSchema: z.ZodType<
   Resources$Outbound,
   z.ZodTypeDef,
   Resources
-> = z.object({
-  cpu: z.string().default("1"),
-  memory: z.string().default("2Gi"),
-  ephemeralStorage: z.string().default("10Gi"),
-}).transform((v) => {
-  return remap$(v, {
-    ephemeralStorage: "ephemeral_storage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    cpu: z.string().default("1"),
+    memory: z.string().default("2Gi"),
+    ephemeralStorage: z.string().default("10Gi"),
+  }).transform((v) => {
+    return remap$(v, {
+      ephemeralStorage: "ephemeral_storage",
+    });
+  })
+);
 
 export function resourcesToJSON(resources: Resources): string {
   return JSON.stringify(Resources$outboundSchema.parse(resources));

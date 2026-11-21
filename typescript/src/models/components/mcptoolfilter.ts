@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,15 +18,17 @@ export const MCPToolFilter$inboundSchema: z.ZodType<
   MCPToolFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  read_only: z.boolean().optional(),
-  tool_names: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "read_only": "readOnly",
-    "tool_names": "toolNames",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    read_only: z.boolean().optional(),
+    tool_names: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "read_only": "readOnly",
+      "tool_names": "toolNames",
+    });
+  })
+);
 /** @internal */
 export type MCPToolFilter$Outbound = {
   read_only?: boolean | undefined;
@@ -38,15 +40,17 @@ export const MCPToolFilter$outboundSchema: z.ZodType<
   MCPToolFilter$Outbound,
   z.ZodTypeDef,
   MCPToolFilter
-> = z.object({
-  readOnly: z.boolean().optional(),
-  toolNames: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    readOnly: "read_only",
-    toolNames: "tool_names",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    readOnly: z.boolean().optional(),
+    toolNames: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      readOnly: "read_only",
+      toolNames: "tool_names",
+    });
+  })
+);
 
 export function mcpToolFilterToJSON(mcpToolFilter: MCPToolFilter): string {
   return JSON.stringify(MCPToolFilter$outboundSchema.parse(mcpToolFilter));

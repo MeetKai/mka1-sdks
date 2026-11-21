@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const ResumeFineTuningJobRequest$inboundSchema: z.ZodType<
   ResumeFineTuningJobRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fine_tuning_job_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "fine_tuning_job_id": "fineTuningJobId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fine_tuning_job_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "fine_tuning_job_id": "fineTuningJobId",
+    });
+  })
+);
 /** @internal */
 export type ResumeFineTuningJobRequest$Outbound = {
   fine_tuning_job_id: string;
@@ -34,13 +36,15 @@ export const ResumeFineTuningJobRequest$outboundSchema: z.ZodType<
   ResumeFineTuningJobRequest$Outbound,
   z.ZodTypeDef,
   ResumeFineTuningJobRequest
-> = z.object({
-  fineTuningJobId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    fineTuningJobId: "fine_tuning_job_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fineTuningJobId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      fineTuningJobId: "fine_tuning_job_id",
+    });
+  })
+);
 
 export function resumeFineTuningJobRequestToJSON(
   resumeFineTuningJobRequest: ResumeFineTuningJobRequest,

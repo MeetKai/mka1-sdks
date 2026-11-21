@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type AddTeamMemberTooManyRequestsError struct {
 var _ error = &AddTeamMemberTooManyRequestsError{}
 
 func (e *AddTeamMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type AddTeamMemberGoneError struct {
 var _ error = &AddTeamMemberGoneError{}
 
 func (e *AddTeamMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type AddTeamMemberConflictError struct {
 var _ error = &AddTeamMemberConflictError{}
 
 func (e *AddTeamMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type AddTeamMemberNotFoundError struct {
 var _ error = &AddTeamMemberNotFoundError{}
 
 func (e *AddTeamMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type AddTeamMemberForbiddenError struct {
 var _ error = &AddTeamMemberForbiddenError{}
 
 func (e *AddTeamMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type AddTeamMemberUnauthorizedError struct {
 var _ error = &AddTeamMemberUnauthorizedError{}
 
 func (e *AddTeamMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type AddTeamMemberBadRequestError struct {
 var _ error = &AddTeamMemberBadRequestError{}
 
 func (e *AddTeamMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,9 +29,10 @@ export type GetTenantResourcePolicyRequest = {
 
 /** @internal */
 export const GetTenantResourcePolicyPathParamScope$inboundSchema:
-  z.ZodNativeEnum<typeof GetTenantResourcePolicyPathParamScope> = z.nativeEnum(
-    GetTenantResourcePolicyPathParamScope,
-  );
+  z.ZodNativeEnum<typeof GetTenantResourcePolicyPathParamScope> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(GetTenantResourcePolicyPathParamScope)
+    );
 /** @internal */
 export const GetTenantResourcePolicyPathParamScope$outboundSchema:
   z.ZodNativeEnum<typeof GetTenantResourcePolicyPathParamScope> =
@@ -42,18 +43,20 @@ export const GetTenantResourcePolicyRequest$inboundSchema: z.ZodType<
   GetTenantResourcePolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: GetTenantResourcePolicyPathParamScope$inboundSchema,
-  expected_organization_id: z.string(),
-  expected_team_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "expected_organization_id": "expectedOrganizationId",
-    "expected_team_id": "expectedTeamId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: GetTenantResourcePolicyPathParamScope$inboundSchema,
+    expected_organization_id: z.string(),
+    expected_team_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "expected_organization_id": "expectedOrganizationId",
+      "expected_team_id": "expectedTeamId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetTenantResourcePolicyRequest$Outbound = {
   scope: string;
@@ -67,18 +70,20 @@ export const GetTenantResourcePolicyRequest$outboundSchema: z.ZodType<
   GetTenantResourcePolicyRequest$Outbound,
   z.ZodTypeDef,
   GetTenantResourcePolicyRequest
-> = z.object({
-  scope: GetTenantResourcePolicyPathParamScope$outboundSchema,
-  expectedOrganizationId: z.string(),
-  expectedTeamId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    expectedOrganizationId: "expected_organization_id",
-    expectedTeamId: "expected_team_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: GetTenantResourcePolicyPathParamScope$outboundSchema,
+    expectedOrganizationId: z.string(),
+    expectedTeamId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      expectedOrganizationId: "expected_organization_id",
+      expectedTeamId: "expected_team_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getTenantResourcePolicyRequestToJSON(
   getTenantResourcePolicyRequest: GetTenantResourcePolicyRequest,

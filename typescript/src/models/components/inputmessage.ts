@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -67,7 +67,7 @@ export type InputMessage = {
 /** @internal */
 export const InputMessageRole$inboundSchema: z.ZodNativeEnum<
   typeof InputMessageRole
-> = z.nativeEnum(InputMessageRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(InputMessageRole));
 /** @internal */
 export const InputMessageRole$outboundSchema: z.ZodNativeEnum<
   typeof InputMessageRole
@@ -78,7 +78,9 @@ export const InputMessageContent1$inboundSchema: z.ZodType<
   InputMessageContent1,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(InputMessageContent$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(InputMessageContent$inboundSchema)])
+);
 /** @internal */
 export type InputMessageContent1$Outbound =
   | string
@@ -89,7 +91,9 @@ export const InputMessageContent1$outboundSchema: z.ZodType<
   InputMessageContent1$Outbound,
   z.ZodTypeDef,
   InputMessageContent1
-> = z.union([z.string(), z.array(InputMessageContent$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(InputMessageContent$outboundSchema)])
+);
 
 export function inputMessageContent1ToJSON(
   inputMessageContent1: InputMessageContent1,
@@ -113,13 +117,15 @@ export const InputMessage$inboundSchema: z.ZodType<
   InputMessage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("message").optional(),
-  role: InputMessageRole$inboundSchema,
-  content: z.union([z.string(), z.array(InputMessageContent$inboundSchema)]),
-  status: Status$inboundSchema.optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message").optional(),
+    role: InputMessageRole$inboundSchema,
+    content: z.union([z.string(), z.array(InputMessageContent$inboundSchema)]),
+    status: Status$inboundSchema.optional(),
+    id: z.string().optional(),
+  })
+);
 /** @internal */
 export type InputMessage$Outbound = {
   type?: "message" | undefined;
@@ -134,13 +140,15 @@ export const InputMessage$outboundSchema: z.ZodType<
   InputMessage$Outbound,
   z.ZodTypeDef,
   InputMessage
-> = z.object({
-  type: z.literal("message").optional(),
-  role: InputMessageRole$outboundSchema,
-  content: z.union([z.string(), z.array(InputMessageContent$outboundSchema)]),
-  status: Status$outboundSchema.optional(),
-  id: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("message").optional(),
+    role: InputMessageRole$outboundSchema,
+    content: z.union([z.string(), z.array(InputMessageContent$outboundSchema)]),
+    status: Status$outboundSchema.optional(),
+    id: z.string().optional(),
+  })
+);
 
 export function inputMessageToJSON(inputMessage: InputMessage): string {
   return JSON.stringify(InputMessage$outboundSchema.parse(inputMessage));

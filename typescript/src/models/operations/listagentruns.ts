@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,7 +34,9 @@ export type ListAgentRunsRequest = {
 /** @internal */
 export const ListAgentRunsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListAgentRunsQueryParamOrder
-> = z.nativeEnum(ListAgentRunsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListAgentRunsQueryParamOrder)
+);
 /** @internal */
 export const ListAgentRunsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListAgentRunsQueryParamOrder
@@ -45,18 +47,20 @@ export const ListAgentRunsRequest$inboundSchema: z.ZodType<
   ListAgentRunsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  agent_id: z.string(),
-  offset: z.number().int().default(0),
-  limit: z.number().int().default(20),
-  order: ListAgentRunsQueryParamOrder$inboundSchema.default("desc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "agent_id": "agentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agent_id: z.string(),
+    offset: z.number().int().default(0),
+    limit: z.number().int().default(20),
+    order: ListAgentRunsQueryParamOrder$inboundSchema.default("desc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListAgentRunsRequest$Outbound = {
   agent_id: string;
@@ -71,18 +75,20 @@ export const ListAgentRunsRequest$outboundSchema: z.ZodType<
   ListAgentRunsRequest$Outbound,
   z.ZodTypeDef,
   ListAgentRunsRequest
-> = z.object({
-  agentId: z.string(),
-  offset: z.number().int().default(0),
-  limit: z.number().int().default(20),
-  order: ListAgentRunsQueryParamOrder$outboundSchema.default("desc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    agentId: "agent_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    agentId: z.string(),
+    offset: z.number().int().default(0),
+    limit: z.number().int().default(20),
+    order: ListAgentRunsQueryParamOrder$outboundSchema.default("desc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listAgentRunsRequestToJSON(
   listAgentRunsRequest: ListAgentRunsRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -57,15 +57,17 @@ export const InputMessageContent$inboundSchema: z.ZodType<
   InputMessageContent,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  InputText$inboundSchema,
-  InputAudio$inboundSchema,
-  OutputText$inboundSchema,
-  Refusal$inboundSchema,
-  InputImage$inboundSchema,
-  InputFile$inboundSchema,
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    InputText$inboundSchema,
+    InputAudio$inboundSchema,
+    OutputText$inboundSchema,
+    Refusal$inboundSchema,
+    InputImage$inboundSchema,
+    InputFile$inboundSchema,
+    z.string(),
+  ])
+);
 /** @internal */
 export type InputMessageContent$Outbound =
   | InputText$Outbound
@@ -81,15 +83,17 @@ export const InputMessageContent$outboundSchema: z.ZodType<
   InputMessageContent$Outbound,
   z.ZodTypeDef,
   InputMessageContent
-> = z.union([
-  InputText$outboundSchema,
-  InputAudio$outboundSchema,
-  OutputText$outboundSchema,
-  Refusal$outboundSchema,
-  InputImage$outboundSchema,
-  InputFile$outboundSchema,
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    InputText$outboundSchema,
+    InputAudio$outboundSchema,
+    OutputText$outboundSchema,
+    Refusal$outboundSchema,
+    InputImage$outboundSchema,
+    InputFile$outboundSchema,
+    z.string(),
+  ])
+);
 
 export function inputMessageContentToJSON(
   inputMessageContent: InputMessageContent,

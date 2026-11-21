@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,10 +26,12 @@ export const ComputeStandaloneVolumeCreate$inboundSchema: z.ZodType<
   ComputeStandaloneVolumeCreate,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(ComputeVolumeDataInput$inboundSchema).optional(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ComputeVolumeDataInput$inboundSchema).optional(),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type ComputeStandaloneVolumeCreate$Outbound = {
   data?: Array<ComputeVolumeDataInput$Outbound> | undefined;
@@ -41,10 +43,12 @@ export const ComputeStandaloneVolumeCreate$outboundSchema: z.ZodType<
   ComputeStandaloneVolumeCreate$Outbound,
   z.ZodTypeDef,
   ComputeStandaloneVolumeCreate
-> = z.object({
-  data: z.array(ComputeVolumeDataInput$outboundSchema).optional(),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(ComputeVolumeDataInput$outboundSchema).optional(),
+    name: z.string(),
+  })
+);
 
 export function computeStandaloneVolumeCreateToJSON(
   computeStandaloneVolumeCreate: ComputeStandaloneVolumeCreate,

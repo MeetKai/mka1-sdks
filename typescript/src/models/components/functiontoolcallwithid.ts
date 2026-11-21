@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -44,21 +44,23 @@ export const FunctionToolCallWithId$inboundSchema: z.ZodType<
   FunctionToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function_call"),
-  arguments: z.string(),
-  call_id: z.string(),
-  name: z.string(),
-  id: z.string(),
-  status: Status$inboundSchema.optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call"),
+    arguments: z.string(),
+    call_id: z.string(),
+    name: z.string(),
+    id: z.string(),
+    status: Status$inboundSchema.optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolCallWithId$Outbound = {
   type: "function_call";
@@ -76,21 +78,23 @@ export const FunctionToolCallWithId$outboundSchema: z.ZodType<
   FunctionToolCallWithId$Outbound,
   z.ZodTypeDef,
   FunctionToolCallWithId
-> = z.object({
-  type: z.literal("function_call"),
-  arguments: z.string(),
-  callId: z.string(),
-  name: z.string(),
-  id: z.string(),
-  status: Status$outboundSchema.optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call"),
+    arguments: z.string(),
+    callId: z.string(),
+    name: z.string(),
+    id: z.string(),
+    status: Status$outboundSchema.optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function functionToolCallWithIdToJSON(
   functionToolCallWithId: FunctionToolCallWithId,

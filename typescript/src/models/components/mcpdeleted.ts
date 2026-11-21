@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,8 +21,8 @@ export type McpDeleted = {
 };
 
 /** @internal */
-export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> = z
-  .nativeEnum(ObjectT);
+export const ObjectT$inboundSchema: z.ZodNativeEnum<typeof ObjectT> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ObjectT));
 /** @internal */
 export const ObjectT$outboundSchema: z.ZodNativeEnum<typeof ObjectT> =
   ObjectT$inboundSchema;
@@ -32,11 +32,13 @@ export const McpDeleted$inboundSchema: z.ZodType<
   McpDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: ObjectT$inboundSchema,
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: ObjectT$inboundSchema,
+    deleted: z.literal(true),
+  })
+);
 /** @internal */
 export type McpDeleted$Outbound = {
   id: string;
@@ -49,11 +51,13 @@ export const McpDeleted$outboundSchema: z.ZodType<
   McpDeleted$Outbound,
   z.ZodTypeDef,
   McpDeleted
-> = z.object({
-  id: z.string(),
-  object: ObjectT$outboundSchema,
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: ObjectT$outboundSchema,
+    deleted: z.literal(true),
+  })
+);
 
 export function mcpDeletedToJSON(mcpDeleted: McpDeleted): string {
   return JSON.stringify(McpDeleted$outboundSchema.parse(mcpDeleted));

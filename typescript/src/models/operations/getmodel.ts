@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { RFCDate } from "../../types/rfcdate.js";
@@ -247,15 +247,17 @@ export const GetModelRequest$inboundSchema: z.ZodType<
   GetModelRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetModelRequest$Outbound = {
   model_id: string;
@@ -267,15 +269,17 @@ export const GetModelRequest$outboundSchema: z.ZodType<
   GetModelRequest$Outbound,
   z.ZodTypeDef,
   GetModelRequest
-> = z.object({
-  modelId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getModelRequestToJSON(
   getModelRequest: GetModelRequest,
@@ -293,8 +297,8 @@ export function getModelRequestFromJSON(
 }
 
 /** @internal */
-export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> = z
-  .nativeEnum(ModelType);
+export const ModelType$inboundSchema: z.ZodNativeEnum<typeof ModelType> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ModelType));
 /** @internal */
 export const ModelType$outboundSchema: z.ZodNativeEnum<typeof ModelType> =
   ModelType$inboundSchema;
@@ -304,10 +308,12 @@ export const MaxImageResolution$inboundSchema: z.ZodType<
   MaxImageResolution,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 /** @internal */
 export type MaxImageResolution$Outbound = {
   width: number;
@@ -319,10 +325,12 @@ export const MaxImageResolution$outboundSchema: z.ZodType<
   MaxImageResolution$Outbound,
   z.ZodTypeDef,
   MaxImageResolution
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 
 export function maxImageResolutionToJSON(
   maxImageResolution: MaxImageResolution,
@@ -346,10 +354,12 @@ export const MinImageResolution$inboundSchema: z.ZodType<
   MinImageResolution,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 /** @internal */
 export type MinImageResolution$Outbound = {
   width: number;
@@ -361,10 +371,12 @@ export const MinImageResolution$outboundSchema: z.ZodType<
   MinImageResolution$Outbound,
   z.ZodTypeDef,
   MinImageResolution
-> = z.object({
-  width: z.number().int(),
-  height: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    width: z.number().int(),
+    height: z.number().int(),
+  })
+);
 
 export function minImageResolutionToJSON(
   minImageResolution: MinImageResolution,
@@ -388,11 +400,13 @@ export const EmbeddingDimensionRange$inboundSchema: z.ZodType<
   EmbeddingDimensionRange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 /** @internal */
 export type EmbeddingDimensionRange$Outbound = {
   min: number;
@@ -405,11 +419,13 @@ export const EmbeddingDimensionRange$outboundSchema: z.ZodType<
   EmbeddingDimensionRange$Outbound,
   z.ZodTypeDef,
   EmbeddingDimensionRange
-> = z.object({
-  min: z.number().int(),
-  max: z.number().int(),
-  default: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    min: z.number().int(),
+    max: z.number().int(),
+    default: z.number().int(),
+  })
+);
 
 export function embeddingDimensionRangeToJSON(
   embeddingDimensionRange: EmbeddingDimensionRange,
@@ -429,19 +445,21 @@ export function embeddingDimensionRangeFromJSON(
 }
 
 /** @internal */
-export const Weights$inboundSchema: z.ZodNativeEnum<typeof Weights> = z
-  .nativeEnum(Weights);
+export const Weights$inboundSchema: z.ZodNativeEnum<typeof Weights> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Weights));
 /** @internal */
 export const Weights$outboundSchema: z.ZodNativeEnum<typeof Weights> =
   Weights$inboundSchema;
 
 /** @internal */
-export const Voices$inboundSchema: z.ZodType<Voices, z.ZodTypeDef, unknown> = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    language: z.string(),
-  });
+export const Voices$inboundSchema: z.ZodType<Voices, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      id: z.string(),
+      name: z.string(),
+      language: z.string(),
+    })
+  );
 /** @internal */
 export type Voices$Outbound = {
   id: string;
@@ -454,11 +472,13 @@ export const Voices$outboundSchema: z.ZodType<
   Voices$Outbound,
   z.ZodTypeDef,
   Voices
-> = z.object({
-  id: z.string(),
-  name: z.string(),
-  language: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    name: z.string(),
+    language: z.string(),
+  })
+);
 
 export function voicesToJSON(voices: Voices): string {
   return JSON.stringify(Voices$outboundSchema.parse(voices));
@@ -474,15 +494,17 @@ export function voicesFromJSON(
 }
 
 /** @internal */
-export const Tts$inboundSchema: z.ZodType<Tts, z.ZodTypeDef, unknown> = z
-  .object({
-    default_voice: z.record(z.string()),
-    voices: z.array(z.lazy(() => Voices$inboundSchema)),
-  }).transform((v) => {
-    return remap$(v, {
-      "default_voice": "defaultVoice",
-    });
-  });
+export const Tts$inboundSchema: z.ZodType<Tts, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      default_voice: z.record(z.string()),
+      voices: z.array(z.lazy(() => Voices$inboundSchema)),
+    }).transform((v) => {
+      return remap$(v, {
+        "default_voice": "defaultVoice",
+      });
+    })
+  );
 /** @internal */
 export type Tts$Outbound = {
   default_voice: { [k: string]: string };
@@ -490,15 +512,17 @@ export type Tts$Outbound = {
 };
 
 /** @internal */
-export const Tts$outboundSchema: z.ZodType<Tts$Outbound, z.ZodTypeDef, Tts> = z
-  .object({
-    defaultVoice: z.record(z.string()),
-    voices: z.array(z.lazy(() => Voices$outboundSchema)),
-  }).transform((v) => {
-    return remap$(v, {
-      defaultVoice: "default_voice",
-    });
-  });
+export const Tts$outboundSchema: z.ZodType<Tts$Outbound, z.ZodTypeDef, Tts> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      defaultVoice: z.record(z.string()),
+      voices: z.array(z.lazy(() => Voices$outboundSchema)),
+    }).transform((v) => {
+      return remap$(v, {
+        defaultVoice: "default_voice",
+      });
+    })
+  );
 
 export function ttsToJSON(tts: Tts): string {
   return JSON.stringify(Tts$outboundSchema.parse(tts));
@@ -516,7 +540,7 @@ export function ttsFromJSON(
 /** @internal */
 export const GetModelStatus$inboundSchema: z.ZodNativeEnum<
   typeof GetModelStatus
-> = z.nativeEnum(GetModelStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetModelStatus));
 /** @internal */
 export const GetModelStatus$outboundSchema: z.ZodNativeEnum<
   typeof GetModelStatus
@@ -527,17 +551,19 @@ export const Lifecycle$inboundSchema: z.ZodType<
   Lifecycle,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: GetModelStatus$inboundSchema,
-  deprecated_at: z.nullable(z.string().transform(v => new RFCDate(v))),
-  retires_at: z.nullable(z.string().transform(v => new RFCDate(v))),
-  successor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "deprecated_at": "deprecatedAt",
-    "retires_at": "retiresAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: GetModelStatus$inboundSchema,
+    deprecated_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+    retires_at: z.nullable(z.string().transform(v => new RFCDate(v))),
+    successor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "deprecated_at": "deprecatedAt",
+      "retires_at": "retiresAt",
+    });
+  })
+);
 /** @internal */
 export type Lifecycle$Outbound = {
   status: string;
@@ -551,17 +577,21 @@ export const Lifecycle$outboundSchema: z.ZodType<
   Lifecycle$Outbound,
   z.ZodTypeDef,
   Lifecycle
-> = z.object({
-  status: GetModelStatus$outboundSchema,
-  deprecatedAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  retiresAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  successor: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    deprecatedAt: "deprecated_at",
-    retiresAt: "retires_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: GetModelStatus$outboundSchema,
+    deprecatedAt: z.nullable(
+      z.instanceof(RFCDate).transform(v => v.toString()),
+    ),
+    retiresAt: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+    successor: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      deprecatedAt: "deprecated_at",
+      retiresAt: "retires_at",
+    });
+  })
+);
 
 export function lifecycleToJSON(lifecycle: Lifecycle): string {
   return JSON.stringify(Lifecycle$outboundSchema.parse(lifecycle));
@@ -581,21 +611,23 @@ export const Capabilities$inboundSchema: z.ZodType<
   Capabilities,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  supports_temperature: z.boolean(),
-  supports_top_p: z.boolean(),
-  supports_reasoning: z.boolean(),
-  supports_reasoning_effort: z.boolean(),
-  supports_structured_outputs: z.nullable(z.boolean()),
-}).transform((v) => {
-  return remap$(v, {
-    "supports_temperature": "supportsTemperature",
-    "supports_top_p": "supportsTopP",
-    "supports_reasoning": "supportsReasoning",
-    "supports_reasoning_effort": "supportsReasoningEffort",
-    "supports_structured_outputs": "supportsStructuredOutputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    supports_temperature: z.boolean(),
+    supports_top_p: z.boolean(),
+    supports_reasoning: z.boolean(),
+    supports_reasoning_effort: z.boolean(),
+    supports_structured_outputs: z.nullable(z.boolean()),
+  }).transform((v) => {
+    return remap$(v, {
+      "supports_temperature": "supportsTemperature",
+      "supports_top_p": "supportsTopP",
+      "supports_reasoning": "supportsReasoning",
+      "supports_reasoning_effort": "supportsReasoningEffort",
+      "supports_structured_outputs": "supportsStructuredOutputs",
+    });
+  })
+);
 /** @internal */
 export type Capabilities$Outbound = {
   supports_temperature: boolean;
@@ -610,21 +642,23 @@ export const Capabilities$outboundSchema: z.ZodType<
   Capabilities$Outbound,
   z.ZodTypeDef,
   Capabilities
-> = z.object({
-  supportsTemperature: z.boolean(),
-  supportsTopP: z.boolean(),
-  supportsReasoning: z.boolean(),
-  supportsReasoningEffort: z.boolean(),
-  supportsStructuredOutputs: z.nullable(z.boolean()),
-}).transform((v) => {
-  return remap$(v, {
-    supportsTemperature: "supports_temperature",
-    supportsTopP: "supports_top_p",
-    supportsReasoning: "supports_reasoning",
-    supportsReasoningEffort: "supports_reasoning_effort",
-    supportsStructuredOutputs: "supports_structured_outputs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    supportsTemperature: z.boolean(),
+    supportsTopP: z.boolean(),
+    supportsReasoning: z.boolean(),
+    supportsReasoningEffort: z.boolean(),
+    supportsStructuredOutputs: z.nullable(z.boolean()),
+  }).transform((v) => {
+    return remap$(v, {
+      supportsTemperature: "supports_temperature",
+      supportsTopP: "supports_top_p",
+      supportsReasoning: "supports_reasoning",
+      supportsReasoningEffort: "supports_reasoning_effort",
+      supportsStructuredOutputs: "supports_structured_outputs",
+    });
+  })
+);
 
 export function capabilitiesToJSON(capabilities: Capabilities): string {
   return JSON.stringify(Capabilities$outboundSchema.parse(capabilities));
@@ -640,14 +674,16 @@ export function capabilitiesFromJSON(
 }
 
 /** @internal */
-export const Alias$inboundSchema: z.ZodType<Alias, z.ZodTypeDef, unknown> = z
-  .object({
-    served_model_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "served_model_id": "servedModelId",
-    });
-  });
+export const Alias$inboundSchema: z.ZodType<Alias, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      served_model_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "served_model_id": "servedModelId",
+      });
+    })
+  );
 /** @internal */
 export type Alias$Outbound = {
   served_model_id: string;
@@ -658,13 +694,15 @@ export const Alias$outboundSchema: z.ZodType<
   Alias$Outbound,
   z.ZodTypeDef,
   Alias
-> = z.object({
-  servedModelId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    servedModelId: "served_model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    servedModelId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      servedModelId: "served_model_id",
+    });
+  })
+);
 
 export function aliasToJSON(alias: Alias): string {
   return JSON.stringify(Alias$outboundSchema.parse(alias));
@@ -684,55 +722,57 @@ export const GetModelResponseBody$inboundSchema: z.ZodType<
   GetModelResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("model"),
-  created: z.number().int(),
-  owned_by: z.string(),
-  model_type: ModelType$inboundSchema,
-  input_modalities: z.array(z.string()),
-  output_modalities: z.array(z.string()),
-  context_window: z.nullable(z.number().int()),
-  max_image_resolution: z.nullable(
-    z.lazy(() => MaxImageResolution$inboundSchema),
-  ),
-  min_image_resolution: z.nullable(
-    z.lazy(() => MinImageResolution$inboundSchema),
-  ),
-  embedding_dimension_range: z.nullable(
-    z.lazy(() => EmbeddingDimensionRange$inboundSchema),
-  ),
-  parameter_count: z.nullable(z.number().int()),
-  active_parameter_count: z.nullable(z.number().int()),
-  release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
-  serving_locations: z.nullable(z.array(z.string())),
-  developer: z.nullable(z.string()),
-  base_model: z.nullable(z.string()),
-  weights: z.nullable(Weights$inboundSchema),
-  license: z.nullable(z.string()),
-  languages: z.nullable(z.array(z.string())),
-  tts: z.nullable(z.lazy(() => Tts$inboundSchema)),
-  limitations: z.nullable(z.string()),
-  lifecycle: z.lazy(() => Lifecycle$inboundSchema),
-  capabilities: z.lazy(() => Capabilities$inboundSchema),
-  alias: z.nullable(z.lazy(() => Alias$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "owned_by": "ownedBy",
-    "model_type": "modelType",
-    "input_modalities": "inputModalities",
-    "output_modalities": "outputModalities",
-    "context_window": "contextWindow",
-    "max_image_resolution": "maxImageResolution",
-    "min_image_resolution": "minImageResolution",
-    "embedding_dimension_range": "embeddingDimensionRange",
-    "parameter_count": "parameterCount",
-    "active_parameter_count": "activeParameterCount",
-    "release_date": "releaseDate",
-    "serving_locations": "servingLocations",
-    "base_model": "baseModel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("model"),
+    created: z.number().int(),
+    owned_by: z.string(),
+    model_type: ModelType$inboundSchema,
+    input_modalities: z.array(z.string()),
+    output_modalities: z.array(z.string()),
+    context_window: z.nullable(z.number().int()),
+    max_image_resolution: z.nullable(
+      z.lazy(() => MaxImageResolution$inboundSchema),
+    ),
+    min_image_resolution: z.nullable(
+      z.lazy(() => MinImageResolution$inboundSchema),
+    ),
+    embedding_dimension_range: z.nullable(
+      z.lazy(() => EmbeddingDimensionRange$inboundSchema),
+    ),
+    parameter_count: z.nullable(z.number().int()),
+    active_parameter_count: z.nullable(z.number().int()),
+    release_date: z.nullable(z.string().transform(v => new RFCDate(v))),
+    serving_locations: z.nullable(z.array(z.string())),
+    developer: z.nullable(z.string()),
+    base_model: z.nullable(z.string()),
+    weights: z.nullable(Weights$inboundSchema),
+    license: z.nullable(z.string()),
+    languages: z.nullable(z.array(z.string())),
+    tts: z.nullable(z.lazy(() => Tts$inboundSchema)),
+    limitations: z.nullable(z.string()),
+    lifecycle: z.lazy(() => Lifecycle$inboundSchema),
+    capabilities: z.lazy(() => Capabilities$inboundSchema),
+    alias: z.nullable(z.lazy(() => Alias$inboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      "owned_by": "ownedBy",
+      "model_type": "modelType",
+      "input_modalities": "inputModalities",
+      "output_modalities": "outputModalities",
+      "context_window": "contextWindow",
+      "max_image_resolution": "maxImageResolution",
+      "min_image_resolution": "minImageResolution",
+      "embedding_dimension_range": "embeddingDimensionRange",
+      "parameter_count": "parameterCount",
+      "active_parameter_count": "activeParameterCount",
+      "release_date": "releaseDate",
+      "serving_locations": "servingLocations",
+      "base_model": "baseModel",
+    });
+  })
+);
 /** @internal */
 export type GetModelResponseBody$Outbound = {
   id: string;
@@ -767,55 +807,57 @@ export const GetModelResponseBody$outboundSchema: z.ZodType<
   GetModelResponseBody$Outbound,
   z.ZodTypeDef,
   GetModelResponseBody
-> = z.object({
-  id: z.string(),
-  object: z.literal("model"),
-  created: z.number().int(),
-  ownedBy: z.string(),
-  modelType: ModelType$outboundSchema,
-  inputModalities: z.array(z.string()),
-  outputModalities: z.array(z.string()),
-  contextWindow: z.nullable(z.number().int()),
-  maxImageResolution: z.nullable(
-    z.lazy(() => MaxImageResolution$outboundSchema),
-  ),
-  minImageResolution: z.nullable(
-    z.lazy(() => MinImageResolution$outboundSchema),
-  ),
-  embeddingDimensionRange: z.nullable(
-    z.lazy(() => EmbeddingDimensionRange$outboundSchema),
-  ),
-  parameterCount: z.nullable(z.number().int()),
-  activeParameterCount: z.nullable(z.number().int()),
-  releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
-  servingLocations: z.nullable(z.array(z.string())),
-  developer: z.nullable(z.string()),
-  baseModel: z.nullable(z.string()),
-  weights: z.nullable(Weights$outboundSchema),
-  license: z.nullable(z.string()),
-  languages: z.nullable(z.array(z.string())),
-  tts: z.nullable(z.lazy(() => Tts$outboundSchema)),
-  limitations: z.nullable(z.string()),
-  lifecycle: z.lazy(() => Lifecycle$outboundSchema),
-  capabilities: z.lazy(() => Capabilities$outboundSchema),
-  alias: z.nullable(z.lazy(() => Alias$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    ownedBy: "owned_by",
-    modelType: "model_type",
-    inputModalities: "input_modalities",
-    outputModalities: "output_modalities",
-    contextWindow: "context_window",
-    maxImageResolution: "max_image_resolution",
-    minImageResolution: "min_image_resolution",
-    embeddingDimensionRange: "embedding_dimension_range",
-    parameterCount: "parameter_count",
-    activeParameterCount: "active_parameter_count",
-    releaseDate: "release_date",
-    servingLocations: "serving_locations",
-    baseModel: "base_model",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("model"),
+    created: z.number().int(),
+    ownedBy: z.string(),
+    modelType: ModelType$outboundSchema,
+    inputModalities: z.array(z.string()),
+    outputModalities: z.array(z.string()),
+    contextWindow: z.nullable(z.number().int()),
+    maxImageResolution: z.nullable(
+      z.lazy(() => MaxImageResolution$outboundSchema),
+    ),
+    minImageResolution: z.nullable(
+      z.lazy(() => MinImageResolution$outboundSchema),
+    ),
+    embeddingDimensionRange: z.nullable(
+      z.lazy(() => EmbeddingDimensionRange$outboundSchema),
+    ),
+    parameterCount: z.nullable(z.number().int()),
+    activeParameterCount: z.nullable(z.number().int()),
+    releaseDate: z.nullable(z.instanceof(RFCDate).transform(v => v.toString())),
+    servingLocations: z.nullable(z.array(z.string())),
+    developer: z.nullable(z.string()),
+    baseModel: z.nullable(z.string()),
+    weights: z.nullable(Weights$outboundSchema),
+    license: z.nullable(z.string()),
+    languages: z.nullable(z.array(z.string())),
+    tts: z.nullable(z.lazy(() => Tts$outboundSchema)),
+    limitations: z.nullable(z.string()),
+    lifecycle: z.lazy(() => Lifecycle$outboundSchema),
+    capabilities: z.lazy(() => Capabilities$outboundSchema),
+    alias: z.nullable(z.lazy(() => Alias$outboundSchema)),
+  }).transform((v) => {
+    return remap$(v, {
+      ownedBy: "owned_by",
+      modelType: "model_type",
+      inputModalities: "input_modalities",
+      outputModalities: "output_modalities",
+      contextWindow: "context_window",
+      maxImageResolution: "max_image_resolution",
+      minImageResolution: "min_image_resolution",
+      embeddingDimensionRange: "embedding_dimension_range",
+      parameterCount: "parameter_count",
+      activeParameterCount: "active_parameter_count",
+      releaseDate: "release_date",
+      servingLocations: "serving_locations",
+      baseModel: "base_model",
+    });
+  })
+);
 
 export function getModelResponseBodyToJSON(
   getModelResponseBody: GetModelResponseBody,

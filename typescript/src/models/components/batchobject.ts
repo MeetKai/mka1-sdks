@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,7 +63,7 @@ export type BatchObject = {
 /** @internal */
 export const BatchObjectStatus$inboundSchema: z.ZodNativeEnum<
   typeof BatchObjectStatus
-> = z.nativeEnum(BatchObjectStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(BatchObjectStatus));
 /** @internal */
 export const BatchObjectStatus$outboundSchema: z.ZodNativeEnum<
   typeof BatchObjectStatus
@@ -74,47 +74,49 @@ export const BatchObject$inboundSchema: z.ZodType<
   BatchObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("batch"),
-  endpoint: z.string(),
-  errors: z.nullable(BatchErrors$inboundSchema).optional(),
-  input_file_id: z.string(),
-  completion_window: z.string(),
-  status: BatchObjectStatus$inboundSchema,
-  output_file_id: z.nullable(z.string()).optional(),
-  error_file_id: z.nullable(z.string()).optional(),
-  created_at: z.number().int(),
-  in_progress_at: z.nullable(z.number().int()).optional(),
-  expires_at: z.nullable(z.number().int()).optional(),
-  finalizing_at: z.nullable(z.number().int()).optional(),
-  completed_at: z.nullable(z.number().int()).optional(),
-  failed_at: z.nullable(z.number().int()).optional(),
-  expired_at: z.nullable(z.number().int()).optional(),
-  cancelling_at: z.nullable(z.number().int()).optional(),
-  cancelled_at: z.nullable(z.number().int()).optional(),
-  request_counts: RequestCounts$inboundSchema,
-  metadata: z.nullable(z.record(z.string())).optional(),
-  max_concurrency: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_file_id": "inputFileId",
-    "completion_window": "completionWindow",
-    "output_file_id": "outputFileId",
-    "error_file_id": "errorFileId",
-    "created_at": "createdAt",
-    "in_progress_at": "inProgressAt",
-    "expires_at": "expiresAt",
-    "finalizing_at": "finalizingAt",
-    "completed_at": "completedAt",
-    "failed_at": "failedAt",
-    "expired_at": "expiredAt",
-    "cancelling_at": "cancellingAt",
-    "cancelled_at": "cancelledAt",
-    "request_counts": "requestCounts",
-    "max_concurrency": "maxConcurrency",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("batch"),
+    endpoint: z.string(),
+    errors: z.nullable(BatchErrors$inboundSchema).optional(),
+    input_file_id: z.string(),
+    completion_window: z.string(),
+    status: BatchObjectStatus$inboundSchema,
+    output_file_id: z.nullable(z.string()).optional(),
+    error_file_id: z.nullable(z.string()).optional(),
+    created_at: z.number().int(),
+    in_progress_at: z.nullable(z.number().int()).optional(),
+    expires_at: z.nullable(z.number().int()).optional(),
+    finalizing_at: z.nullable(z.number().int()).optional(),
+    completed_at: z.nullable(z.number().int()).optional(),
+    failed_at: z.nullable(z.number().int()).optional(),
+    expired_at: z.nullable(z.number().int()).optional(),
+    cancelling_at: z.nullable(z.number().int()).optional(),
+    cancelled_at: z.nullable(z.number().int()).optional(),
+    request_counts: RequestCounts$inboundSchema,
+    metadata: z.nullable(z.record(z.string())).optional(),
+    max_concurrency: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_file_id": "inputFileId",
+      "completion_window": "completionWindow",
+      "output_file_id": "outputFileId",
+      "error_file_id": "errorFileId",
+      "created_at": "createdAt",
+      "in_progress_at": "inProgressAt",
+      "expires_at": "expiresAt",
+      "finalizing_at": "finalizingAt",
+      "completed_at": "completedAt",
+      "failed_at": "failedAt",
+      "expired_at": "expiredAt",
+      "cancelling_at": "cancellingAt",
+      "cancelled_at": "cancelledAt",
+      "request_counts": "requestCounts",
+      "max_concurrency": "maxConcurrency",
+    });
+  })
+);
 /** @internal */
 export type BatchObject$Outbound = {
   id: string;
@@ -145,47 +147,49 @@ export const BatchObject$outboundSchema: z.ZodType<
   BatchObject$Outbound,
   z.ZodTypeDef,
   BatchObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("batch"),
-  endpoint: z.string(),
-  errors: z.nullable(BatchErrors$outboundSchema).optional(),
-  inputFileId: z.string(),
-  completionWindow: z.string(),
-  status: BatchObjectStatus$outboundSchema,
-  outputFileId: z.nullable(z.string()).optional(),
-  errorFileId: z.nullable(z.string()).optional(),
-  createdAt: z.number().int(),
-  inProgressAt: z.nullable(z.number().int()).optional(),
-  expiresAt: z.nullable(z.number().int()).optional(),
-  finalizingAt: z.nullable(z.number().int()).optional(),
-  completedAt: z.nullable(z.number().int()).optional(),
-  failedAt: z.nullable(z.number().int()).optional(),
-  expiredAt: z.nullable(z.number().int()).optional(),
-  cancellingAt: z.nullable(z.number().int()).optional(),
-  cancelledAt: z.nullable(z.number().int()).optional(),
-  requestCounts: RequestCounts$outboundSchema,
-  metadata: z.nullable(z.record(z.string())).optional(),
-  maxConcurrency: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    inputFileId: "input_file_id",
-    completionWindow: "completion_window",
-    outputFileId: "output_file_id",
-    errorFileId: "error_file_id",
-    createdAt: "created_at",
-    inProgressAt: "in_progress_at",
-    expiresAt: "expires_at",
-    finalizingAt: "finalizing_at",
-    completedAt: "completed_at",
-    failedAt: "failed_at",
-    expiredAt: "expired_at",
-    cancellingAt: "cancelling_at",
-    cancelledAt: "cancelled_at",
-    requestCounts: "request_counts",
-    maxConcurrency: "max_concurrency",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("batch"),
+    endpoint: z.string(),
+    errors: z.nullable(BatchErrors$outboundSchema).optional(),
+    inputFileId: z.string(),
+    completionWindow: z.string(),
+    status: BatchObjectStatus$outboundSchema,
+    outputFileId: z.nullable(z.string()).optional(),
+    errorFileId: z.nullable(z.string()).optional(),
+    createdAt: z.number().int(),
+    inProgressAt: z.nullable(z.number().int()).optional(),
+    expiresAt: z.nullable(z.number().int()).optional(),
+    finalizingAt: z.nullable(z.number().int()).optional(),
+    completedAt: z.nullable(z.number().int()).optional(),
+    failedAt: z.nullable(z.number().int()).optional(),
+    expiredAt: z.nullable(z.number().int()).optional(),
+    cancellingAt: z.nullable(z.number().int()).optional(),
+    cancelledAt: z.nullable(z.number().int()).optional(),
+    requestCounts: RequestCounts$outboundSchema,
+    metadata: z.nullable(z.record(z.string())).optional(),
+    maxConcurrency: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputFileId: "input_file_id",
+      completionWindow: "completion_window",
+      outputFileId: "output_file_id",
+      errorFileId: "error_file_id",
+      createdAt: "created_at",
+      inProgressAt: "in_progress_at",
+      expiresAt: "expires_at",
+      finalizingAt: "finalizing_at",
+      completedAt: "completed_at",
+      failedAt: "failed_at",
+      expiredAt: "expired_at",
+      cancellingAt: "cancelling_at",
+      cancelledAt: "cancelled_at",
+      requestCounts: "request_counts",
+      maxConcurrency: "max_concurrency",
+    });
+  })
+);
 
 export function batchObjectToJSON(batchObject: BatchObject): string {
   return JSON.stringify(BatchObject$outboundSchema.parse(batchObject));

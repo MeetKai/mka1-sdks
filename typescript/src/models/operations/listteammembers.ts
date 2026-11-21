@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,15 +44,17 @@ export const ListTeamMembersRequest$inboundSchema: z.ZodType<
   ListTeamMembersRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListTeamMembersRequest$Outbound = {
   orgId: string;
@@ -65,15 +67,17 @@ export const ListTeamMembersRequest$outboundSchema: z.ZodType<
   ListTeamMembersRequest$Outbound,
   z.ZodTypeDef,
   ListTeamMembersRequest
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listTeamMembersRequestToJSON(
   listTeamMembersRequest: ListTeamMembersRequest,
@@ -95,7 +99,7 @@ export function listTeamMembersRequestFromJSON(
 /** @internal */
 export const ListTeamMembersRole$inboundSchema: z.ZodNativeEnum<
   typeof ListTeamMembersRole
-> = z.nativeEnum(ListTeamMembersRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListTeamMembersRole));
 /** @internal */
 export const ListTeamMembersRole$outboundSchema: z.ZodNativeEnum<
   typeof ListTeamMembersRole
@@ -106,13 +110,15 @@ export const ListTeamMembersMembers$inboundSchema: z.ZodType<
   ListTeamMembersMembers,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  role: ListTeamMembersRole$inboundSchema,
-  id: z.string(),
-  teamId: z.string(),
-  userId: z.string(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: ListTeamMembersRole$inboundSchema,
+    id: z.string(),
+    teamId: z.string(),
+    userId: z.string(),
+    createdAt: z.string(),
+  })
+);
 /** @internal */
 export type ListTeamMembersMembers$Outbound = {
   role: string;
@@ -127,13 +133,15 @@ export const ListTeamMembersMembers$outboundSchema: z.ZodType<
   ListTeamMembersMembers$Outbound,
   z.ZodTypeDef,
   ListTeamMembersMembers
-> = z.object({
-  role: ListTeamMembersRole$outboundSchema,
-  id: z.string(),
-  teamId: z.string(),
-  userId: z.string(),
-  createdAt: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    role: ListTeamMembersRole$outboundSchema,
+    id: z.string(),
+    teamId: z.string(),
+    userId: z.string(),
+    createdAt: z.string(),
+  })
+);
 
 export function listTeamMembersMembersToJSON(
   listTeamMembersMembers: ListTeamMembersMembers,
@@ -157,9 +165,11 @@ export const ListTeamMembersResponseBody$inboundSchema: z.ZodType<
   ListTeamMembersResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  members: z.array(z.lazy(() => ListTeamMembersMembers$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    members: z.array(z.lazy(() => ListTeamMembersMembers$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListTeamMembersResponseBody$Outbound = {
   members: Array<ListTeamMembersMembers$Outbound>;
@@ -170,9 +180,11 @@ export const ListTeamMembersResponseBody$outboundSchema: z.ZodType<
   ListTeamMembersResponseBody$Outbound,
   z.ZodTypeDef,
   ListTeamMembersResponseBody
-> = z.object({
-  members: z.array(z.lazy(() => ListTeamMembersMembers$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    members: z.array(z.lazy(() => ListTeamMembersMembers$outboundSchema)),
+  })
+);
 
 export function listTeamMembersResponseBodyToJSON(
   listTeamMembersResponseBody: ListTeamMembersResponseBody,

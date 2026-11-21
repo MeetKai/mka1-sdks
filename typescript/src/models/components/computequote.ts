@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -32,10 +32,12 @@ export const PriceBreakdownUsdHr$inboundSchema: z.ZodType<
   PriceBreakdownUsdHr,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  compute: ComputePriceRange$inboundSchema,
-  volume: ComputePriceRange$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compute: ComputePriceRange$inboundSchema,
+    volume: ComputePriceRange$inboundSchema,
+  })
+);
 /** @internal */
 export type PriceBreakdownUsdHr$Outbound = {
   compute: ComputePriceRange$Outbound;
@@ -47,10 +49,12 @@ export const PriceBreakdownUsdHr$outboundSchema: z.ZodType<
   PriceBreakdownUsdHr$Outbound,
   z.ZodTypeDef,
   PriceBreakdownUsdHr
-> = z.object({
-  compute: ComputePriceRange$outboundSchema,
-  volume: ComputePriceRange$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    compute: ComputePriceRange$outboundSchema,
+    volume: ComputePriceRange$outboundSchema,
+  })
+);
 
 export function priceBreakdownUsdHrToJSON(
   priceBreakdownUsdHr: PriceBreakdownUsdHr,
@@ -74,25 +78,27 @@ export const ComputeQuote$inboundSchema: z.ZodType<
   ComputeQuote,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  available: z.boolean(),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  observed_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  price_breakdown_usd_hr: z.lazy(() => PriceBreakdownUsdHr$inboundSchema)
-    .optional(),
-  price_usd_hr: z.nullable(ComputePriceRange$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "expires_at": "expiresAt",
-    "observed_at": "observedAt",
-    "price_breakdown_usd_hr": "priceBreakdownUsdHr",
-    "price_usd_hr": "priceUsdHr",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.boolean(),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    observed_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    price_breakdown_usd_hr: z.lazy(() => PriceBreakdownUsdHr$inboundSchema)
+      .optional(),
+    price_usd_hr: z.nullable(ComputePriceRange$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "expires_at": "expiresAt",
+      "observed_at": "observedAt",
+      "price_breakdown_usd_hr": "priceBreakdownUsdHr",
+      "price_usd_hr": "priceUsdHr",
+    });
+  })
+);
 /** @internal */
 export type ComputeQuote$Outbound = {
   available: boolean;
@@ -107,21 +113,23 @@ export const ComputeQuote$outboundSchema: z.ZodType<
   ComputeQuote$Outbound,
   z.ZodTypeDef,
   ComputeQuote
-> = z.object({
-  available: z.boolean(),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  observedAt: z.date().transform(v => v.toISOString()),
-  priceBreakdownUsdHr: z.lazy(() => PriceBreakdownUsdHr$outboundSchema)
-    .optional(),
-  priceUsdHr: z.nullable(ComputePriceRange$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    expiresAt: "expires_at",
-    observedAt: "observed_at",
-    priceBreakdownUsdHr: "price_breakdown_usd_hr",
-    priceUsdHr: "price_usd_hr",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    available: z.boolean(),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    observedAt: z.date().transform(v => v.toISOString()),
+    priceBreakdownUsdHr: z.lazy(() => PriceBreakdownUsdHr$outboundSchema)
+      .optional(),
+    priceUsdHr: z.nullable(ComputePriceRange$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      expiresAt: "expires_at",
+      observedAt: "observed_at",
+      priceBreakdownUsdHr: "price_breakdown_usd_hr",
+      priceUsdHr: "price_usd_hr",
+    });
+  })
+);
 
 export function computeQuoteToJSON(computeQuote: ComputeQuote): string {
   return JSON.stringify(ComputeQuote$outboundSchema.parse(computeQuote));

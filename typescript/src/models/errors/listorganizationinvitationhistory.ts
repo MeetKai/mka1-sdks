@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -218,18 +219,20 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody$in
     ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody$Outbound =
@@ -243,13 +246,15 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody$ou
     ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody
-  > = z.instanceof(
-    ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      ListOrganizationInvitationHistoryAuthOrgsResponse429ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody$inboundSchema:
@@ -257,18 +262,20 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody$in
     ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody$Outbound =
@@ -282,13 +289,15 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody$ou
     ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody
-  > = z.instanceof(
-    ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      ListOrganizationInvitationHistoryAuthOrgsResponse410ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody$inboundSchema:
@@ -296,18 +305,20 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody$in
     ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody$Outbound =
@@ -321,13 +332,15 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody$ou
     ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody
-  > = z.instanceof(
-    ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      ListOrganizationInvitationHistoryAuthOrgsResponse409ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody$inboundSchema:
@@ -335,18 +348,20 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody$in
     ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody$Outbound =
@@ -360,13 +375,15 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody$ou
     ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody
-  > = z.instanceof(
-    ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(
+      ListOrganizationInvitationHistoryAuthOrgsResponse404ResponseBody,
+    )
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody$inboundSchema:
@@ -374,19 +391,21 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody$inbou
     ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody(
-        v,
-        { request: v.request$, response: v.response$, body: v.body$ },
-      );
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody$Outbound =
@@ -401,14 +420,14 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody$outbo
     ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody
-  > = z.instanceof(
-    ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody,
-  )
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ListOrganizationInvitationHistoryAuthOrgsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryAuthOrgsResponseBody$inboundSchema:
@@ -416,19 +435,21 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponseBody$inboundSchema
     ListOrganizationInvitationHistoryAuthOrgsResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryAuthOrgsResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryAuthOrgsResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryAuthOrgsResponseBody$Outbound = {
@@ -441,11 +462,13 @@ export const ListOrganizationInvitationHistoryAuthOrgsResponseBody$outboundSchem
     ListOrganizationInvitationHistoryAuthOrgsResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryAuthOrgsResponseBody
-  > = z.instanceof(ListOrganizationInvitationHistoryAuthOrgsResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ListOrganizationInvitationHistoryAuthOrgsResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const ListOrganizationInvitationHistoryResponseBody$inboundSchema:
@@ -453,19 +476,21 @@ export const ListOrganizationInvitationHistoryResponseBody$inboundSchema:
     ListOrganizationInvitationHistoryResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new ListOrganizationInvitationHistoryResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new ListOrganizationInvitationHistoryResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type ListOrganizationInvitationHistoryResponseBody$Outbound = {
@@ -478,8 +503,10 @@ export const ListOrganizationInvitationHistoryResponseBody$outboundSchema:
     ListOrganizationInvitationHistoryResponseBody$Outbound,
     z.ZodTypeDef,
     ListOrganizationInvitationHistoryResponseBody
-  > = z.instanceof(ListOrganizationInvitationHistoryResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(ListOrganizationInvitationHistoryResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );

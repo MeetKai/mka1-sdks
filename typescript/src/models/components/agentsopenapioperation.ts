@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,7 +59,9 @@ export type AgentsOpenApiOperation = {
 /** @internal */
 export const AgentsOpenApiOperationMethod$inboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiOperationMethod
-> = z.nativeEnum(AgentsOpenApiOperationMethod);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentsOpenApiOperationMethod)
+);
 /** @internal */
 export const AgentsOpenApiOperationMethod$outboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiOperationMethod
@@ -68,7 +70,7 @@ export const AgentsOpenApiOperationMethod$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const AgentsOpenApiOperationIn$inboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiOperationIn
-> = z.nativeEnum(AgentsOpenApiOperationIn);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentsOpenApiOperationIn));
 /** @internal */
 export const AgentsOpenApiOperationIn$outboundSchema: z.ZodNativeEnum<
   typeof AgentsOpenApiOperationIn
@@ -79,13 +81,15 @@ export const ParametersT$inboundSchema: z.ZodType<
   ParametersT,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  in: AgentsOpenApiOperationIn$inboundSchema,
-  required: z.boolean(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    in: AgentsOpenApiOperationIn$inboundSchema,
+    required: z.boolean(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+  })
+);
 /** @internal */
 export type ParametersT$Outbound = {
   name: string;
@@ -100,13 +104,15 @@ export const ParametersT$outboundSchema: z.ZodType<
   ParametersT$Outbound,
   z.ZodTypeDef,
   ParametersT
-> = z.object({
-  name: z.string(),
-  in: AgentsOpenApiOperationIn$outboundSchema,
-  required: z.boolean(),
-  description: z.string().optional(),
-  schema: z.record(z.any()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    in: AgentsOpenApiOperationIn$outboundSchema,
+    required: z.boolean(),
+    description: z.string().optional(),
+    schema: z.record(z.any()),
+  })
+);
 
 export function parametersToJSON(parametersT: ParametersT): string {
   return JSON.stringify(ParametersT$outboundSchema.parse(parametersT));
@@ -126,16 +132,18 @@ export const AgentsOpenApiOperationRequestBody$inboundSchema: z.ZodType<
   AgentsOpenApiOperationRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  required: z.boolean(),
-  description: z.string().optional(),
-  content_type: z.string(),
-  schema: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    "content_type": "contentType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean(),
+    description: z.string().optional(),
+    content_type: z.string(),
+    schema: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      "content_type": "contentType",
+    });
+  })
+);
 /** @internal */
 export type AgentsOpenApiOperationRequestBody$Outbound = {
   required: boolean;
@@ -149,16 +157,18 @@ export const AgentsOpenApiOperationRequestBody$outboundSchema: z.ZodType<
   AgentsOpenApiOperationRequestBody$Outbound,
   z.ZodTypeDef,
   AgentsOpenApiOperationRequestBody
-> = z.object({
-  required: z.boolean(),
-  description: z.string().optional(),
-  contentType: z.string(),
-  schema: z.record(z.any()),
-}).transform((v) => {
-  return remap$(v, {
-    contentType: "content_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    required: z.boolean(),
+    description: z.string().optional(),
+    contentType: z.string(),
+    schema: z.record(z.any()),
+  }).transform((v) => {
+    return remap$(v, {
+      contentType: "content_type",
+    });
+  })
+);
 
 export function agentsOpenApiOperationRequestBodyToJSON(
   agentsOpenApiOperationRequestBody: AgentsOpenApiOperationRequestBody,
@@ -184,19 +194,21 @@ export const AgentsOpenApiOperation$inboundSchema: z.ZodType<
   AgentsOpenApiOperation,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  method: AgentsOpenApiOperationMethod$inboundSchema,
-  path: z.string(),
-  parameters: z.array(z.lazy(() => ParametersT$inboundSchema)),
-  request_body: z.lazy(() => AgentsOpenApiOperationRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "request_body": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    method: AgentsOpenApiOperationMethod$inboundSchema,
+    path: z.string(),
+    parameters: z.array(z.lazy(() => ParametersT$inboundSchema)),
+    request_body: z.lazy(() => AgentsOpenApiOperationRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "request_body": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type AgentsOpenApiOperation$Outbound = {
   name: string;
@@ -212,19 +224,21 @@ export const AgentsOpenApiOperation$outboundSchema: z.ZodType<
   AgentsOpenApiOperation$Outbound,
   z.ZodTypeDef,
   AgentsOpenApiOperation
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  method: AgentsOpenApiOperationMethod$outboundSchema,
-  path: z.string(),
-  parameters: z.array(z.lazy(() => ParametersT$outboundSchema)),
-  requestBody: z.lazy(() => AgentsOpenApiOperationRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    requestBody: "request_body",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    method: AgentsOpenApiOperationMethod$outboundSchema,
+    path: z.string(),
+    parameters: z.array(z.lazy(() => ParametersT$outboundSchema)),
+    requestBody: z.lazy(() => AgentsOpenApiOperationRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      requestBody: "request_body",
+    });
+  })
+);
 
 export function agentsOpenApiOperationToJSON(
   agentsOpenApiOperation: AgentsOpenApiOperation,

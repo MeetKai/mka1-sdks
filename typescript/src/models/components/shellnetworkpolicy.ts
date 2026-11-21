@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -31,17 +31,19 @@ export const ShellNetworkPolicy$inboundSchema: z.ZodType<
   ShellNetworkPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("allowlist"),
-  allowed_domains: z.array(z.string()).optional(),
-  domain_secrets: z.array(ShellNetworkPolicyDomainSecret$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "allowed_domains": "allowedDomains",
-    "domain_secrets": "domainSecrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowlist"),
+    allowed_domains: z.array(z.string()).optional(),
+    domain_secrets: z.array(ShellNetworkPolicyDomainSecret$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "allowed_domains": "allowedDomains",
+      "domain_secrets": "domainSecrets",
+    });
+  })
+);
 /** @internal */
 export type ShellNetworkPolicy$Outbound = {
   type: "allowlist";
@@ -54,17 +56,19 @@ export const ShellNetworkPolicy$outboundSchema: z.ZodType<
   ShellNetworkPolicy$Outbound,
   z.ZodTypeDef,
   ShellNetworkPolicy
-> = z.object({
-  type: z.literal("allowlist"),
-  allowedDomains: z.array(z.string()).optional(),
-  domainSecrets: z.array(ShellNetworkPolicyDomainSecret$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    allowedDomains: "allowed_domains",
-    domainSecrets: "domain_secrets",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("allowlist"),
+    allowedDomains: z.array(z.string()).optional(),
+    domainSecrets: z.array(ShellNetworkPolicyDomainSecret$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      allowedDomains: "allowed_domains",
+      domainSecrets: "domain_secrets",
+    });
+  })
+);
 
 export function shellNetworkPolicyToJSON(
   shellNetworkPolicy: ShellNetworkPolicy,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,21 +33,23 @@ export const TrackingRunsGetMetricHistoryRequest$inboundSchema: z.ZodType<
   TrackingRunsGetMetricHistoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  metric_key: z.string(),
-  max_results: z.number().int().optional(),
-  page_token: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "metric_key": "metricKey",
-    "max_results": "maxResults",
-    "page_token": "pageToken",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    metric_key: z.string(),
+    max_results: z.number().int().optional(),
+    page_token: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "metric_key": "metricKey",
+      "max_results": "maxResults",
+      "page_token": "pageToken",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsGetMetricHistoryRequest$Outbound = {
   run_id: string;
@@ -62,21 +64,23 @@ export const TrackingRunsGetMetricHistoryRequest$outboundSchema: z.ZodType<
   TrackingRunsGetMetricHistoryRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsGetMetricHistoryRequest
-> = z.object({
-  runId: z.string(),
-  metricKey: z.string(),
-  maxResults: z.number().int().optional(),
-  pageToken: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    metricKey: "metric_key",
-    maxResults: "max_results",
-    pageToken: "page_token",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    metricKey: z.string(),
+    maxResults: z.number().int().optional(),
+    pageToken: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      metricKey: "metric_key",
+      maxResults: "max_results",
+      pageToken: "page_token",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function trackingRunsGetMetricHistoryRequestToJSON(
   trackingRunsGetMetricHistoryRequest: TrackingRunsGetMetricHistoryRequest,
@@ -103,14 +107,16 @@ export const TrackingRunsGetMetricHistoryResponseBody$inboundSchema: z.ZodType<
   TrackingRunsGetMetricHistoryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  metrics: z.array(components.Metric$inboundSchema).optional(),
-  next_page_token: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "next_page_token": "nextPageToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metrics: z.array(components.Metric$inboundSchema).optional(),
+    next_page_token: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "next_page_token": "nextPageToken",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsGetMetricHistoryResponseBody$Outbound = {
   metrics?: Array<components.Metric$Outbound> | undefined;
@@ -122,14 +128,16 @@ export const TrackingRunsGetMetricHistoryResponseBody$outboundSchema: z.ZodType<
   TrackingRunsGetMetricHistoryResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsGetMetricHistoryResponseBody
-> = z.object({
-  metrics: z.array(components.Metric$outboundSchema).optional(),
-  nextPageToken: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    nextPageToken: "next_page_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    metrics: z.array(components.Metric$outboundSchema).optional(),
+    nextPageToken: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      nextPageToken: "next_page_token",
+    });
+  })
+);
 
 export function trackingRunsGetMetricHistoryResponseBodyToJSON(
   trackingRunsGetMetricHistoryResponseBody:

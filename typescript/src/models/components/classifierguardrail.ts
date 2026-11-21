@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,7 +68,9 @@ export type ClassifierGuardrail = {
 /** @internal */
 export const ClassifierGuardrailOutputTiming$inboundSchema: z.ZodNativeEnum<
   typeof ClassifierGuardrailOutputTiming
-> = z.nativeEnum(ClassifierGuardrailOutputTiming);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ClassifierGuardrailOutputTiming)
+);
 /** @internal */
 export const ClassifierGuardrailOutputTiming$outboundSchema: z.ZodNativeEnum<
   typeof ClassifierGuardrailOutputTiming
@@ -79,22 +81,24 @@ export const ClassifierGuardrail$inboundSchema: z.ZodType<
   ClassifierGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("classifier"),
-  enabled: z.boolean().default(true),
-  check_output: z.boolean().optional(),
-  output_timing: ClassifierGuardrailOutputTiming$inboundSchema.optional(),
-  output_window: OutputWindow$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
-  config: ClassifierConfig$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "output_window": "outputWindow",
-    "input_sources": "inputSources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("classifier"),
+    enabled: z.boolean().default(true),
+    check_output: z.boolean().optional(),
+    output_timing: ClassifierGuardrailOutputTiming$inboundSchema.optional(),
+    output_window: OutputWindow$inboundSchema.optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
+    config: ClassifierConfig$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "output_window": "outputWindow",
+      "input_sources": "inputSources",
+    });
+  })
+);
 /** @internal */
 export type ClassifierGuardrail$Outbound = {
   mode: "classifier";
@@ -111,22 +115,24 @@ export const ClassifierGuardrail$outboundSchema: z.ZodType<
   ClassifierGuardrail$Outbound,
   z.ZodTypeDef,
   ClassifierGuardrail
-> = z.object({
-  mode: z.literal("classifier"),
-  enabled: z.boolean().default(true),
-  checkOutput: z.boolean().optional(),
-  outputTiming: ClassifierGuardrailOutputTiming$outboundSchema.optional(),
-  outputWindow: OutputWindow$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
-  config: ClassifierConfig$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    outputWindow: "output_window",
-    inputSources: "input_sources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("classifier"),
+    enabled: z.boolean().default(true),
+    checkOutput: z.boolean().optional(),
+    outputTiming: ClassifierGuardrailOutputTiming$outboundSchema.optional(),
+    outputWindow: OutputWindow$outboundSchema.optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
+    config: ClassifierConfig$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      outputWindow: "output_window",
+      inputSources: "input_sources",
+    });
+  })
+);
 
 export function classifierGuardrailToJSON(
   classifierGuardrail: ClassifierGuardrail,

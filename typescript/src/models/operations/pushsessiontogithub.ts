@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const PushSessionToGitHubRequest$inboundSchema: z.ZodType<
   PushSessionToGitHubRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  GitHubPushRequest: components.GitHubPushRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "GitHubPushRequest": "gitHubPushRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    GitHubPushRequest: components.GitHubPushRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "GitHubPushRequest": "gitHubPushRequest",
+    });
+  })
+);
 /** @internal */
 export type PushSessionToGitHubRequest$Outbound = {
   session_id: string;
@@ -46,17 +48,19 @@ export const PushSessionToGitHubRequest$outboundSchema: z.ZodType<
   PushSessionToGitHubRequest$Outbound,
   z.ZodTypeDef,
   PushSessionToGitHubRequest
-> = z.object({
-  sessionId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  gitHubPushRequest: components.GitHubPushRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    gitHubPushRequest: "GitHubPushRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    gitHubPushRequest: components.GitHubPushRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      gitHubPushRequest: "GitHubPushRequest",
+    });
+  })
+);
 
 export function pushSessionToGitHubRequestToJSON(
   pushSessionToGitHubRequest: PushSessionToGitHubRequest,

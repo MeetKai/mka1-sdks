@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -65,10 +65,12 @@ export const CreateClusterOrgSecurity$inboundSchema: z.ZodType<
   CreateClusterOrgSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type CreateClusterOrgSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -80,10 +82,12 @@ export const CreateClusterOrgSecurity$outboundSchema: z.ZodType<
   CreateClusterOrgSecurity$Outbound,
   z.ZodTypeDef,
   CreateClusterOrgSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function createClusterOrgSecurityToJSON(
   createClusterOrgSecurity: CreateClusterOrgSecurity,
@@ -107,10 +111,12 @@ export const CreateClusterOrgRequestBody$inboundSchema: z.ZodType<
   CreateClusterOrgRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgName: z.string(),
-  orgSlug: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgName: z.string(),
+    orgSlug: z.string(),
+  })
+);
 /** @internal */
 export type CreateClusterOrgRequestBody$Outbound = {
   orgName: string;
@@ -122,10 +128,12 @@ export const CreateClusterOrgRequestBody$outboundSchema: z.ZodType<
   CreateClusterOrgRequestBody$Outbound,
   z.ZodTypeDef,
   CreateClusterOrgRequestBody
-> = z.object({
-  orgName: z.string(),
-  orgSlug: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgName: z.string(),
+    orgSlug: z.string(),
+  })
+);
 
 export function createClusterOrgRequestBodyToJSON(
   createClusterOrgRequestBody: CreateClusterOrgRequestBody,
@@ -151,15 +159,17 @@ export const CreateClusterOrgRequest$inboundSchema: z.ZodType<
   CreateClusterOrgRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreateClusterOrgRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreateClusterOrgRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateClusterOrgRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -171,15 +181,17 @@ export const CreateClusterOrgRequest$outboundSchema: z.ZodType<
   CreateClusterOrgRequest$Outbound,
   z.ZodTypeDef,
   CreateClusterOrgRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreateClusterOrgRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreateClusterOrgRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createClusterOrgRequestToJSON(
   createClusterOrgRequest: CreateClusterOrgRequest,
@@ -201,7 +213,7 @@ export function createClusterOrgRequestFromJSON(
 /** @internal */
 export const CreateClusterOrgStatus$inboundSchema: z.ZodNativeEnum<
   typeof CreateClusterOrgStatus
-> = z.nativeEnum(CreateClusterOrgStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CreateClusterOrgStatus));
 /** @internal */
 export const CreateClusterOrgStatus$outboundSchema: z.ZodNativeEnum<
   typeof CreateClusterOrgStatus
@@ -212,18 +224,20 @@ export const Organization$inboundSchema: z.ZodType<
   Organization,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: CreateClusterOrgStatus$inboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().int(),
-  apiKeyCount: z.number().optional(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: CreateClusterOrgStatus$inboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().int(),
+    apiKeyCount: z.number().optional(),
+    teamId: z.string(),
+  })
+);
 /** @internal */
 export type Organization$Outbound = {
   id: string;
@@ -243,18 +257,20 @@ export const Organization$outboundSchema: z.ZodType<
   Organization$Outbound,
   z.ZodTypeDef,
   Organization
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: CreateClusterOrgStatus$outboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().int(),
-  apiKeyCount: z.number().optional(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: CreateClusterOrgStatus$outboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().int(),
+    apiKeyCount: z.number().optional(),
+    teamId: z.string(),
+  })
+);
 
 export function organizationToJSON(organization: Organization): string {
   return JSON.stringify(Organization$outboundSchema.parse(organization));
@@ -274,9 +290,11 @@ export const CreateClusterOrgResponseBody$inboundSchema: z.ZodType<
   CreateClusterOrgResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organization: z.lazy(() => Organization$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization: z.lazy(() => Organization$inboundSchema),
+  })
+);
 /** @internal */
 export type CreateClusterOrgResponseBody$Outbound = {
   organization: Organization$Outbound;
@@ -287,9 +305,11 @@ export const CreateClusterOrgResponseBody$outboundSchema: z.ZodType<
   CreateClusterOrgResponseBody$Outbound,
   z.ZodTypeDef,
   CreateClusterOrgResponseBody
-> = z.object({
-  organization: z.lazy(() => Organization$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organization: z.lazy(() => Organization$outboundSchema),
+  })
+);
 
 export function createClusterOrgResponseBodyToJSON(
   createClusterOrgResponseBody: CreateClusterOrgResponseBody,

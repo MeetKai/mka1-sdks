@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const RecomputeModelAliasRequest$inboundSchema: z.ZodType<
   RecomputeModelAliasRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 /** @internal */
 export type RecomputeModelAliasRequest$Outbound = {
   name: string;
@@ -29,9 +31,11 @@ export const RecomputeModelAliasRequest$outboundSchema: z.ZodType<
   RecomputeModelAliasRequest$Outbound,
   z.ZodTypeDef,
   RecomputeModelAliasRequest
-> = z.object({
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+  })
+);
 
 export function recomputeModelAliasRequestToJSON(
   recomputeModelAliasRequest: RecomputeModelAliasRequest,

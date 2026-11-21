@@ -6,6 +6,7 @@ import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import {
   collectExtraKeys as collectExtraKeys$,
+  lazySchema as lazySchema$,
   safeParse,
 } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -66,12 +67,14 @@ export type CreateAgentScheduleRequest = {
 
 /** @internal */
 export const Input2$inboundSchema: z.ZodType<Input2, z.ZodTypeDef, unknown> =
-  collectExtraKeys$(
-    z.object({
-      type: z.string().optional(),
-    }).catchall(z.any()),
-    "additionalProperties",
-    true,
+  /* @__PURE__ */ lazySchema$(() =>
+    collectExtraKeys$(
+      z.object({
+        type: z.string().optional(),
+      }).catchall(z.any()),
+      "additionalProperties",
+      true,
+    )
   );
 /** @internal */
 export type Input2$Outbound = {
@@ -84,17 +87,19 @@ export const Input2$outboundSchema: z.ZodType<
   Input2$Outbound,
   z.ZodTypeDef,
   Input2
-> = z.object({
-  type: z.string().optional(),
-  additionalProperties: z.record(z.any()).optional(),
-}).transform((v) => {
-  return {
-    ...v.additionalProperties,
-    ...remap$(v, {
-      additionalProperties: null,
-    }),
-  };
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.string().optional(),
+    additionalProperties: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return {
+      ...v.additionalProperties,
+      ...remap$(v, {
+        additionalProperties: null,
+      }),
+    };
+  })
+);
 
 export function input2ToJSON(input2: Input2): string {
   return JSON.stringify(Input2$outboundSchema.parse(input2));
@@ -114,7 +119,9 @@ export const CreateAgentScheduleRequestInput$inboundSchema: z.ZodType<
   CreateAgentScheduleRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.lazy(() => Input2$inboundSchema))]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.lazy(() => Input2$inboundSchema))])
+);
 /** @internal */
 export type CreateAgentScheduleRequestInput$Outbound =
   | string
@@ -125,7 +132,9 @@ export const CreateAgentScheduleRequestInput$outboundSchema: z.ZodType<
   CreateAgentScheduleRequestInput$Outbound,
   z.ZodTypeDef,
   CreateAgentScheduleRequestInput
-> = z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))])
+);
 
 export function createAgentScheduleRequestInputToJSON(
   createAgentScheduleRequestInput: CreateAgentScheduleRequestInput,
@@ -149,7 +158,9 @@ export function createAgentScheduleRequestInputFromJSON(
 /** @internal */
 export const CreateAgentScheduleRequestDeliverTo$inboundSchema: z.ZodNativeEnum<
   typeof CreateAgentScheduleRequestDeliverTo
-> = z.nativeEnum(CreateAgentScheduleRequestDeliverTo);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CreateAgentScheduleRequestDeliverTo)
+);
 /** @internal */
 export const CreateAgentScheduleRequestDeliverTo$outboundSchema:
   z.ZodNativeEnum<typeof CreateAgentScheduleRequestDeliverTo> =
@@ -160,23 +171,25 @@ export const CreateAgentScheduleRequest$inboundSchema: z.ZodType<
   CreateAgentScheduleRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  schedule: AgentScheduleSpec$inboundSchema,
-  input: z.union([z.string(), z.array(z.lazy(() => Input2$inboundSchema))]),
-  conversation: z.any().optional(),
-  previous_response_id: z.string().optional(),
-  context_management: z.array(AgentCompactionContextManagement$inboundSchema)
-    .optional(),
-  metadata: z.record(z.string()).optional(),
-  deliver_to: CreateAgentScheduleRequestDeliverTo$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "previous_response_id": "previousResponseId",
-    "context_management": "contextManagement",
-    "deliver_to": "deliverTo",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    schedule: AgentScheduleSpec$inboundSchema,
+    input: z.union([z.string(), z.array(z.lazy(() => Input2$inboundSchema))]),
+    conversation: z.any().optional(),
+    previous_response_id: z.string().optional(),
+    context_management: z.array(AgentCompactionContextManagement$inboundSchema)
+      .optional(),
+    metadata: z.record(z.string()).optional(),
+    deliver_to: CreateAgentScheduleRequestDeliverTo$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "previous_response_id": "previousResponseId",
+      "context_management": "contextManagement",
+      "deliver_to": "deliverTo",
+    });
+  })
+);
 /** @internal */
 export type CreateAgentScheduleRequest$Outbound = {
   name?: string | undefined;
@@ -196,23 +209,25 @@ export const CreateAgentScheduleRequest$outboundSchema: z.ZodType<
   CreateAgentScheduleRequest$Outbound,
   z.ZodTypeDef,
   CreateAgentScheduleRequest
-> = z.object({
-  name: z.string().optional(),
-  schedule: AgentScheduleSpec$outboundSchema,
-  input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]),
-  conversation: z.any().optional(),
-  previousResponseId: z.string().optional(),
-  contextManagement: z.array(AgentCompactionContextManagement$outboundSchema)
-    .optional(),
-  metadata: z.record(z.string()).optional(),
-  deliverTo: CreateAgentScheduleRequestDeliverTo$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    previousResponseId: "previous_response_id",
-    contextManagement: "context_management",
-    deliverTo: "deliver_to",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    schedule: AgentScheduleSpec$outboundSchema,
+    input: z.union([z.string(), z.array(z.lazy(() => Input2$outboundSchema))]),
+    conversation: z.any().optional(),
+    previousResponseId: z.string().optional(),
+    contextManagement: z.array(AgentCompactionContextManagement$outboundSchema)
+      .optional(),
+    metadata: z.record(z.string()).optional(),
+    deliverTo: CreateAgentScheduleRequestDeliverTo$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      previousResponseId: "previous_response_id",
+      contextManagement: "context_management",
+      deliverTo: "deliver_to",
+    });
+  })
+);
 
 export function createAgentScheduleRequestToJSON(
   createAgentScheduleRequest: CreateAgentScheduleRequest,

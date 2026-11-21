@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,16 +20,18 @@ export const EvalSuiteDeletedObject$inboundSchema: z.ZodType<
   EvalSuiteDeletedObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.deleted"),
-  deleted: z.boolean(),
-  deleted_runs: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "deleted_runs": "deletedRuns",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.deleted"),
+    deleted: z.boolean(),
+    deleted_runs: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "deleted_runs": "deletedRuns",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteDeletedObject$Outbound = {
   id: string;
@@ -43,16 +45,18 @@ export const EvalSuiteDeletedObject$outboundSchema: z.ZodType<
   EvalSuiteDeletedObject$Outbound,
   z.ZodTypeDef,
   EvalSuiteDeletedObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.deleted"),
-  deleted: z.boolean(),
-  deletedRuns: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    deletedRuns: "deleted_runs",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.deleted"),
+    deleted: z.boolean(),
+    deletedRuns: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      deletedRuns: "deleted_runs",
+    });
+  })
+);
 
 export function evalSuiteDeletedObjectToJSON(
   evalSuiteDeletedObject: EvalSuiteDeletedObject,

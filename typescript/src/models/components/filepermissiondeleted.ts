@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -41,19 +41,21 @@ export const FilePermissionDeleted$inboundSchema: z.ZodType<
   FilePermissionDeleted,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("file.permission.deleted"),
-  file_id: z.string(),
-  grantee_type: ResourcePermissionGranteeType$inboundSchema,
-  user_id: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-    "grantee_type": "granteeType",
-    "user_id": "userId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("file.permission.deleted"),
+    file_id: z.string(),
+    grantee_type: ResourcePermissionGranteeType$inboundSchema,
+    user_id: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+      "grantee_type": "granteeType",
+      "user_id": "userId",
+    });
+  })
+);
 /** @internal */
 export type FilePermissionDeleted$Outbound = {
   object: "file.permission.deleted";
@@ -68,19 +70,21 @@ export const FilePermissionDeleted$outboundSchema: z.ZodType<
   FilePermissionDeleted$Outbound,
   z.ZodTypeDef,
   FilePermissionDeleted
-> = z.object({
-  object: z.literal("file.permission.deleted"),
-  fileId: z.string(),
-  granteeType: ResourcePermissionGranteeType$outboundSchema,
-  userId: z.nullable(z.string()),
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-    granteeType: "grantee_type",
-    userId: "user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("file.permission.deleted"),
+    fileId: z.string(),
+    granteeType: ResourcePermissionGranteeType$outboundSchema,
+    userId: z.nullable(z.string()),
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+      granteeType: "grantee_type",
+      userId: "user_id",
+    });
+  })
+);
 
 export function filePermissionDeletedToJSON(
   filePermissionDeleted: FilePermissionDeleted,

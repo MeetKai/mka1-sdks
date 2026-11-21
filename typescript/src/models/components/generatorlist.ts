@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -22,9 +22,11 @@ export const GeneratorList$inboundSchema: z.ZodType<
   GeneratorList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(Declaration$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Declaration$inboundSchema),
+  })
+);
 /** @internal */
 export type GeneratorList$Outbound = {
   data: Array<Declaration$Outbound>;
@@ -35,9 +37,11 @@ export const GeneratorList$outboundSchema: z.ZodType<
   GeneratorList$Outbound,
   z.ZodTypeDef,
   GeneratorList
-> = z.object({
-  data: z.array(Declaration$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(Declaration$outboundSchema),
+  })
+);
 
 export function generatorListToJSON(generatorList: GeneratorList): string {
   return JSON.stringify(GeneratorList$outboundSchema.parse(generatorList));

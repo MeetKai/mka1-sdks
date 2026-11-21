@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -44,7 +44,7 @@ export type CodeInterpreterToolRequest = {
 /** @internal */
 export const ContainerMemoryLimit$inboundSchema: z.ZodNativeEnum<
   typeof ContainerMemoryLimit
-> = z.nativeEnum(ContainerMemoryLimit);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ContainerMemoryLimit));
 /** @internal */
 export const ContainerMemoryLimit$outboundSchema: z.ZodNativeEnum<
   typeof ContainerMemoryLimit
@@ -55,18 +55,20 @@ export const Container2$inboundSchema: z.ZodType<
   Container2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("auto"),
-  session_scope: SandboxSessionScope$inboundSchema.optional(),
-  file_ids: z.nullable(z.array(z.string())).optional(),
-  memory_limit: z.nullable(ContainerMemoryLimit$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_scope": "sessionScope",
-    "file_ids": "fileIds",
-    "memory_limit": "memoryLimit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+    session_scope: SandboxSessionScope$inboundSchema.optional(),
+    file_ids: z.nullable(z.array(z.string())).optional(),
+    memory_limit: z.nullable(ContainerMemoryLimit$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_scope": "sessionScope",
+      "file_ids": "fileIds",
+      "memory_limit": "memoryLimit",
+    });
+  })
+);
 /** @internal */
 export type Container2$Outbound = {
   type: "auto";
@@ -80,18 +82,20 @@ export const Container2$outboundSchema: z.ZodType<
   Container2$Outbound,
   z.ZodTypeDef,
   Container2
-> = z.object({
-  type: z.literal("auto"),
-  sessionScope: SandboxSessionScope$outboundSchema.optional(),
-  fileIds: z.nullable(z.array(z.string())).optional(),
-  memoryLimit: z.nullable(ContainerMemoryLimit$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionScope: "session_scope",
-    fileIds: "file_ids",
-    memoryLimit: "memory_limit",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("auto"),
+    sessionScope: SandboxSessionScope$outboundSchema.optional(),
+    fileIds: z.nullable(z.array(z.string())).optional(),
+    memoryLimit: z.nullable(ContainerMemoryLimit$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionScope: "session_scope",
+      fileIds: "file_ids",
+      memoryLimit: "memory_limit",
+    });
+  })
+);
 
 export function container2ToJSON(container2: Container2): string {
   return JSON.stringify(Container2$outboundSchema.parse(container2));
@@ -111,7 +115,9 @@ export const Container$inboundSchema: z.ZodType<
   Container,
   z.ZodTypeDef,
   unknown
-> = z.union([z.lazy(() => Container2$inboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => Container2$inboundSchema), z.string()])
+);
 /** @internal */
 export type Container$Outbound = Container2$Outbound | string;
 
@@ -120,7 +126,9 @@ export const Container$outboundSchema: z.ZodType<
   Container$Outbound,
   z.ZodTypeDef,
   Container
-> = z.union([z.lazy(() => Container2$outboundSchema), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.lazy(() => Container2$outboundSchema), z.string()])
+);
 
 export function containerToJSON(container: Container): string {
   return JSON.stringify(Container$outboundSchema.parse(container));
@@ -140,10 +148,12 @@ export const CodeInterpreterToolRequest$inboundSchema: z.ZodType<
   CodeInterpreterToolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("code_interpreter"),
-  container: z.union([z.lazy(() => Container2$inboundSchema), z.string()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter"),
+    container: z.union([z.lazy(() => Container2$inboundSchema), z.string()]),
+  })
+);
 /** @internal */
 export type CodeInterpreterToolRequest$Outbound = {
   type: "code_interpreter";
@@ -155,10 +165,12 @@ export const CodeInterpreterToolRequest$outboundSchema: z.ZodType<
   CodeInterpreterToolRequest$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolRequest
-> = z.object({
-  type: z.literal("code_interpreter"),
-  container: z.union([z.lazy(() => Container2$outboundSchema), z.string()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter"),
+    container: z.union([z.lazy(() => Container2$outboundSchema), z.string()]),
+  })
+);
 
 export function codeInterpreterToolRequestToJSON(
   codeInterpreterToolRequest: CodeInterpreterToolRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -29,15 +29,17 @@ export type ComparisonFilter = {
 /** @internal */
 export const ComparisonFilterType$inboundSchema: z.ZodNativeEnum<
   typeof ComparisonFilterType
-> = z.nativeEnum(ComparisonFilterType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ComparisonFilterType));
 /** @internal */
 export const ComparisonFilterType$outboundSchema: z.ZodNativeEnum<
   typeof ComparisonFilterType
 > = ComparisonFilterType$inboundSchema;
 
 /** @internal */
-export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> = z
-  .union([z.string(), z.number(), z.boolean()]);
+export const Value$inboundSchema: z.ZodType<Value, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([z.string(), z.number(), z.boolean()])
+  );
 /** @internal */
 export type Value$Outbound = string | number | boolean;
 
@@ -46,7 +48,9 @@ export const Value$outboundSchema: z.ZodType<
   Value$Outbound,
   z.ZodTypeDef,
   Value
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function valueToJSON(value: Value): string {
   return JSON.stringify(Value$outboundSchema.parse(value));
@@ -66,11 +70,13 @@ export const ComparisonFilter$inboundSchema: z.ZodType<
   ComparisonFilter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: ComparisonFilterType$inboundSchema,
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ComparisonFilterType$inboundSchema,
+    key: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 /** @internal */
 export type ComparisonFilter$Outbound = {
   type: string;
@@ -83,11 +89,13 @@ export const ComparisonFilter$outboundSchema: z.ZodType<
   ComparisonFilter$Outbound,
   z.ZodTypeDef,
   ComparisonFilter
-> = z.object({
-  type: ComparisonFilterType$outboundSchema,
-  key: z.string(),
-  value: z.union([z.string(), z.number(), z.boolean()]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ComparisonFilterType$outboundSchema,
+    key: z.string(),
+    value: z.union([z.string(), z.number(), z.boolean()]),
+  })
+);
 
 export function comparisonFilterToJSON(
   comparisonFilter: ComparisonFilter,

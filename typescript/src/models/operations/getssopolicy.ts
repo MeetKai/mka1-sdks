@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,9 +47,11 @@ export const GetSsoPolicySecurity$inboundSchema: z.ZodType<
   GetSsoPolicySecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type GetSsoPolicySecurity$Outbound = {
   sessionCookie: string;
@@ -60,9 +62,11 @@ export const GetSsoPolicySecurity$outboundSchema: z.ZodType<
   GetSsoPolicySecurity$Outbound,
   z.ZodTypeDef,
   GetSsoPolicySecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function getSsoPolicySecurityToJSON(
   getSsoPolicySecurity: GetSsoPolicySecurity,
@@ -86,14 +90,16 @@ export const GetSsoPolicyRequest$inboundSchema: z.ZodType<
   GetSsoPolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  providerId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetSsoPolicyRequest$Outbound = {
   providerId: string;
@@ -105,14 +111,16 @@ export const GetSsoPolicyRequest$outboundSchema: z.ZodType<
   GetSsoPolicyRequest$Outbound,
   z.ZodTypeDef,
   GetSsoPolicyRequest
-> = z.object({
-  providerId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getSsoPolicyRequestToJSON(
   getSsoPolicyRequest: GetSsoPolicyRequest,
@@ -134,7 +142,7 @@ export function getSsoPolicyRequestFromJSON(
 /** @internal */
 export const GetSsoPolicyRole$inboundSchema: z.ZodNativeEnum<
   typeof GetSsoPolicyRole
-> = z.nativeEnum(GetSsoPolicyRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GetSsoPolicyRole));
 /** @internal */
 export const GetSsoPolicyRole$outboundSchema: z.ZodNativeEnum<
   typeof GetSsoPolicyRole
@@ -145,10 +153,12 @@ export const GetSsoPolicyMappings$inboundSchema: z.ZodType<
   GetSsoPolicyMappings,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  groupValue: z.string(),
-  role: GetSsoPolicyRole$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: GetSsoPolicyRole$inboundSchema,
+  })
+);
 /** @internal */
 export type GetSsoPolicyMappings$Outbound = {
   groupValue: string;
@@ -160,10 +170,12 @@ export const GetSsoPolicyMappings$outboundSchema: z.ZodType<
   GetSsoPolicyMappings$Outbound,
   z.ZodTypeDef,
   GetSsoPolicyMappings
-> = z.object({
-  groupValue: z.string(),
-  role: GetSsoPolicyRole$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    groupValue: z.string(),
+    role: GetSsoPolicyRole$outboundSchema,
+  })
+);
 
 export function getSsoPolicyMappingsToJSON(
   getSsoPolicyMappings: GetSsoPolicyMappings,
@@ -187,12 +199,14 @@ export const GetSsoPolicyResponseBody$inboundSchema: z.ZodType<
   GetSsoPolicyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => GetSsoPolicyMappings$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => GetSsoPolicyMappings$inboundSchema)),
+  })
+);
 /** @internal */
 export type GetSsoPolicyResponseBody$Outbound = {
   providerId: string;
@@ -206,12 +220,14 @@ export const GetSsoPolicyResponseBody$outboundSchema: z.ZodType<
   GetSsoPolicyResponseBody$Outbound,
   z.ZodTypeDef,
   GetSsoPolicyResponseBody
-> = z.object({
-  providerId: z.string(),
-  enabled: z.boolean(),
-  groupsClaim: z.string(),
-  mappings: z.array(z.lazy(() => GetSsoPolicyMappings$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    providerId: z.string(),
+    enabled: z.boolean(),
+    groupsClaim: z.string(),
+    mappings: z.array(z.lazy(() => GetSsoPolicyMappings$outboundSchema)),
+  })
+);
 
 export function getSsoPolicyResponseBodyToJSON(
   getSsoPolicyResponseBody: GetSsoPolicyResponseBody,

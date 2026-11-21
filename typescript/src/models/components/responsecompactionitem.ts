@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,18 +33,20 @@ export const ResponseCompactionItem$inboundSchema: z.ZodType<
   ResponseCompactionItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("compaction"),
-  id: z.string(),
-  content: z.string(),
-  encrypted_content: z.string().optional(),
-  created_by: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "encrypted_content": "encryptedContent",
-    "created_by": "createdBy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("compaction"),
+    id: z.string(),
+    content: z.string(),
+    encrypted_content: z.string().optional(),
+    created_by: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "encrypted_content": "encryptedContent",
+      "created_by": "createdBy",
+    });
+  })
+);
 /** @internal */
 export type ResponseCompactionItem$Outbound = {
   type: "compaction";
@@ -59,18 +61,20 @@ export const ResponseCompactionItem$outboundSchema: z.ZodType<
   ResponseCompactionItem$Outbound,
   z.ZodTypeDef,
   ResponseCompactionItem
-> = z.object({
-  type: z.literal("compaction"),
-  id: z.string(),
-  content: z.string(),
-  encryptedContent: z.string().optional(),
-  createdBy: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    encryptedContent: "encrypted_content",
-    createdBy: "created_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("compaction"),
+    id: z.string(),
+    content: z.string(),
+    encryptedContent: z.string().optional(),
+    createdBy: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      encryptedContent: "encrypted_content",
+      createdBy: "created_by",
+    });
+  })
+);
 
 export function responseCompactionItemToJSON(
   responseCompactionItem: ResponseCompactionItem,

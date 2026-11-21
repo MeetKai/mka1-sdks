@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,23 +32,29 @@ export const ComputeSecret$inboundSchema: z.ZodType<
   ComputeSecret,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  id: z.string(),
-  keys: z.array(z.string()),
-  name: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  version: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "expires_at": "expiresAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    id: z.string(),
+    keys: z.array(z.string()),
+    name: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    version: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "expires_at": "expiresAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeSecret$Outbound = {
   created_at: string;
@@ -65,21 +71,23 @@ export const ComputeSecret$outboundSchema: z.ZodType<
   ComputeSecret$Outbound,
   z.ZodTypeDef,
   ComputeSecret
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
-  id: z.string(),
-  keys: z.array(z.string()),
-  name: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  version: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    expiresAt: "expires_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    expiresAt: z.nullable(z.date().transform(v => v.toISOString())),
+    id: z.string(),
+    keys: z.array(z.string()),
+    name: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    version: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      expiresAt: "expires_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function computeSecretToJSON(computeSecret: ComputeSecret): string {
   return JSON.stringify(ComputeSecret$outboundSchema.parse(computeSecret));

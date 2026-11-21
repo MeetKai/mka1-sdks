@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -57,7 +57,9 @@ export type DeleteApiKeyBudgetResponseBody = {
 /** @internal */
 export const DeleteApiKeyBudgetQueryParamOwner$inboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetQueryParamOwner
-> = z.nativeEnum(DeleteApiKeyBudgetQueryParamOwner);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeleteApiKeyBudgetQueryParamOwner)
+);
 /** @internal */
 export const DeleteApiKeyBudgetQueryParamOwner$outboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetQueryParamOwner
@@ -68,10 +70,12 @@ export const DeleteApiKeyBudgetRequest$inboundSchema: z.ZodType<
   DeleteApiKeyBudgetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  apiKeyId: z.string(),
-  owner: DeleteApiKeyBudgetQueryParamOwner$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+    owner: DeleteApiKeyBudgetQueryParamOwner$inboundSchema,
+  })
+);
 /** @internal */
 export type DeleteApiKeyBudgetRequest$Outbound = {
   apiKeyId: string;
@@ -83,10 +87,12 @@ export const DeleteApiKeyBudgetRequest$outboundSchema: z.ZodType<
   DeleteApiKeyBudgetRequest$Outbound,
   z.ZodTypeDef,
   DeleteApiKeyBudgetRequest
-> = z.object({
-  apiKeyId: z.string(),
-  owner: DeleteApiKeyBudgetQueryParamOwner$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    apiKeyId: z.string(),
+    owner: DeleteApiKeyBudgetQueryParamOwner$outboundSchema,
+  })
+);
 
 export function deleteApiKeyBudgetRequestToJSON(
   deleteApiKeyBudgetRequest: DeleteApiKeyBudgetRequest,
@@ -108,7 +114,7 @@ export function deleteApiKeyBudgetRequestFromJSON(
 /** @internal */
 export const DeleteApiKeyBudgetScope$inboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetScope
-> = z.nativeEnum(DeleteApiKeyBudgetScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteApiKeyBudgetScope));
 /** @internal */
 export const DeleteApiKeyBudgetScope$outboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetScope
@@ -117,7 +123,7 @@ export const DeleteApiKeyBudgetScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const DeleteApiKeyBudgetOwner$inboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetOwner
-> = z.nativeEnum(DeleteApiKeyBudgetOwner);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteApiKeyBudgetOwner));
 /** @internal */
 export const DeleteApiKeyBudgetOwner$outboundSchema: z.ZodNativeEnum<
   typeof DeleteApiKeyBudgetOwner
@@ -128,16 +134,18 @@ export const DeleteApiKeyBudgetResponseBody$inboundSchema: z.ZodType<
   DeleteApiKeyBudgetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: DeleteApiKeyBudgetScope$inboundSchema,
-  scope_id: z.string(),
-  owner: DeleteApiKeyBudgetOwner$inboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "scope_id": "scopeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteApiKeyBudgetScope$inboundSchema,
+    scope_id: z.string(),
+    owner: DeleteApiKeyBudgetOwner$inboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "scope_id": "scopeId",
+    });
+  })
+);
 /** @internal */
 export type DeleteApiKeyBudgetResponseBody$Outbound = {
   scope: string;
@@ -151,16 +159,18 @@ export const DeleteApiKeyBudgetResponseBody$outboundSchema: z.ZodType<
   DeleteApiKeyBudgetResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteApiKeyBudgetResponseBody
-> = z.object({
-  scope: DeleteApiKeyBudgetScope$outboundSchema,
-  scopeId: z.string(),
-  owner: DeleteApiKeyBudgetOwner$outboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    scopeId: "scope_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteApiKeyBudgetScope$outboundSchema,
+    scopeId: z.string(),
+    owner: DeleteApiKeyBudgetOwner$outboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeId: "scope_id",
+    });
+  })
+);
 
 export function deleteApiKeyBudgetResponseBodyToJSON(
   deleteApiKeyBudgetResponseBody: DeleteApiKeyBudgetResponseBody,

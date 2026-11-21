@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const ItemReference$inboundSchema: z.ZodType<
   ItemReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("item_reference").default("item_reference"),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("item_reference").default("item_reference"),
+    id: z.string(),
+  })
+);
 /** @internal */
 export type ItemReference$Outbound = {
   type: "item_reference";
@@ -35,10 +37,12 @@ export const ItemReference$outboundSchema: z.ZodType<
   ItemReference$Outbound,
   z.ZodTypeDef,
   ItemReference
-> = z.object({
-  type: z.literal("item_reference").default("item_reference" as const),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("item_reference").default("item_reference" as const),
+    id: z.string(),
+  })
+);
 
 export function itemReferenceToJSON(itemReference: ItemReference): string {
   return JSON.stringify(ItemReference$outboundSchema.parse(itemReference));

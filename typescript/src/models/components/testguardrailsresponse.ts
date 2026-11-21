@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,20 +27,22 @@ export const TestGuardrailsResponse$inboundSchema: z.ZodType<
   TestGuardrailsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_test_result"),
-  passed: z.boolean(),
-  triggered_guardrail: GuardrailMode$inboundSchema.optional(),
-  rejection_message: z.string().optional(),
-  user_input: z.string().optional(),
-  details: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "triggered_guardrail": "triggeredGuardrail",
-    "rejection_message": "rejectionMessage",
-    "user_input": "userInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_test_result"),
+    passed: z.boolean(),
+    triggered_guardrail: GuardrailMode$inboundSchema.optional(),
+    rejection_message: z.string().optional(),
+    user_input: z.string().optional(),
+    details: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "triggered_guardrail": "triggeredGuardrail",
+      "rejection_message": "rejectionMessage",
+      "user_input": "userInput",
+    });
+  })
+);
 /** @internal */
 export type TestGuardrailsResponse$Outbound = {
   object: "guardrails_test_result";
@@ -56,20 +58,22 @@ export const TestGuardrailsResponse$outboundSchema: z.ZodType<
   TestGuardrailsResponse$Outbound,
   z.ZodTypeDef,
   TestGuardrailsResponse
-> = z.object({
-  object: z.literal("guardrails_test_result"),
-  passed: z.boolean(),
-  triggeredGuardrail: GuardrailMode$outboundSchema.optional(),
-  rejectionMessage: z.string().optional(),
-  userInput: z.string().optional(),
-  details: z.record(z.any()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    triggeredGuardrail: "triggered_guardrail",
-    rejectionMessage: "rejection_message",
-    userInput: "user_input",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_test_result"),
+    passed: z.boolean(),
+    triggeredGuardrail: GuardrailMode$outboundSchema.optional(),
+    rejectionMessage: z.string().optional(),
+    userInput: z.string().optional(),
+    details: z.record(z.any()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      triggeredGuardrail: "triggered_guardrail",
+      rejectionMessage: "rejection_message",
+      userInput: "user_input",
+    });
+  })
+);
 
 export function testGuardrailsResponseToJSON(
   testGuardrailsResponse: TestGuardrailsResponse,

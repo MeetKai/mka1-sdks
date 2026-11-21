@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,14 +27,16 @@ export const ComputePlacement$inboundSchema: z.ZodType<
   ComputePlacement,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  capacity_wait_seconds: z.number().int().default(0),
-  provider: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "capacity_wait_seconds": "capacityWaitSeconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capacity_wait_seconds: z.number().int().default(0),
+    provider: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "capacity_wait_seconds": "capacityWaitSeconds",
+    });
+  })
+);
 /** @internal */
 export type ComputePlacement$Outbound = {
   capacity_wait_seconds: number;
@@ -46,14 +48,16 @@ export const ComputePlacement$outboundSchema: z.ZodType<
   ComputePlacement$Outbound,
   z.ZodTypeDef,
   ComputePlacement
-> = z.object({
-  capacityWaitSeconds: z.number().int().default(0),
-  provider: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    capacityWaitSeconds: "capacity_wait_seconds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    capacityWaitSeconds: z.number().int().default(0),
+    provider: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      capacityWaitSeconds: "capacity_wait_seconds",
+    });
+  })
+);
 
 export function computePlacementToJSON(
   computePlacement: ComputePlacement,

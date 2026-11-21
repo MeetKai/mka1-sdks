@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,17 +27,19 @@ export const CreateServiceRequest$inboundSchema: z.ZodType<
   CreateServiceRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "Idempotency-Key": z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  ComputeResourceCreate: components.ComputeResourceCreate$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Idempotency-Key": "idempotencyKey",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "ComputeResourceCreate": "computeResourceCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "Idempotency-Key": z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    ComputeResourceCreate: components.ComputeResourceCreate$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Idempotency-Key": "idempotencyKey",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "ComputeResourceCreate": "computeResourceCreate",
+    });
+  })
+);
 /** @internal */
 export type CreateServiceRequest$Outbound = {
   "Idempotency-Key": string;
@@ -50,17 +52,19 @@ export const CreateServiceRequest$outboundSchema: z.ZodType<
   CreateServiceRequest$Outbound,
   z.ZodTypeDef,
   CreateServiceRequest
-> = z.object({
-  idempotencyKey: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  computeResourceCreate: components.ComputeResourceCreate$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    idempotencyKey: "Idempotency-Key",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    computeResourceCreate: "ComputeResourceCreate",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    idempotencyKey: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    computeResourceCreate: components.ComputeResourceCreate$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      idempotencyKey: "Idempotency-Key",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      computeResourceCreate: "ComputeResourceCreate",
+    });
+  })
+);
 
 export function createServiceRequestToJSON(
   createServiceRequest: CreateServiceRequest,
@@ -84,10 +88,12 @@ export const CreateServiceResponse$inboundSchema: z.ZodType<
   CreateServiceResponse,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputeService$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateServiceResponse$Outbound =
   | components.ComputeService$Outbound
@@ -98,10 +104,12 @@ export const CreateServiceResponse$outboundSchema: z.ZodType<
   CreateServiceResponse$Outbound,
   z.ZodTypeDef,
   CreateServiceResponse
-> = z.union([
-  components.ComputeService$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputeService$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function createServiceResponseToJSON(
   createServiceResponse: CreateServiceResponse,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,10 +30,12 @@ export const GetTeamModelAccessSecurity$inboundSchema: z.ZodType<
   GetTeamModelAccessSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type GetTeamModelAccessSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -45,10 +47,12 @@ export const GetTeamModelAccessSecurity$outboundSchema: z.ZodType<
   GetTeamModelAccessSecurity$Outbound,
   z.ZodTypeDef,
   GetTeamModelAccessSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function getTeamModelAccessSecurityToJSON(
   getTeamModelAccessSecurity: GetTeamModelAccessSecurity,
@@ -72,10 +76,12 @@ export const GetTeamModelAccessRequest$inboundSchema: z.ZodType<
   GetTeamModelAccessRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+  })
+);
 /** @internal */
 export type GetTeamModelAccessRequest$Outbound = {
   orgId: string;
@@ -87,10 +93,12 @@ export const GetTeamModelAccessRequest$outboundSchema: z.ZodType<
   GetTeamModelAccessRequest$Outbound,
   z.ZodTypeDef,
   GetTeamModelAccessRequest
-> = z.object({
-  orgId: z.string(),
-  teamId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    teamId: z.string(),
+  })
+);
 
 export function getTeamModelAccessRequestToJSON(
   getTeamModelAccessRequest: GetTeamModelAccessRequest,
@@ -114,13 +122,15 @@ export const GetTeamModelAccessResponseBody$inboundSchema: z.ZodType<
   GetTeamModelAccessResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model_ids: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    "model_ids": "modelIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model_ids: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_ids": "modelIds",
+    });
+  })
+);
 /** @internal */
 export type GetTeamModelAccessResponseBody$Outbound = {
   model_ids: Array<string> | null;
@@ -131,13 +141,15 @@ export const GetTeamModelAccessResponseBody$outboundSchema: z.ZodType<
   GetTeamModelAccessResponseBody$Outbound,
   z.ZodTypeDef,
   GetTeamModelAccessResponseBody
-> = z.object({
-  modelIds: z.nullable(z.array(z.string())),
-}).transform((v) => {
-  return remap$(v, {
-    modelIds: "model_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    modelIds: z.nullable(z.array(z.string())),
+  }).transform((v) => {
+    return remap$(v, {
+      modelIds: "model_ids",
+    });
+  })
+);
 
 export function getTeamModelAccessResponseBodyToJSON(
   getTeamModelAccessResponseBody: GetTeamModelAccessResponseBody,

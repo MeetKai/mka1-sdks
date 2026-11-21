@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,17 @@ type GetFileContentInternalServerError struct {
 var _ error = &GetFileContentInternalServerError{}
 
 func (e *GetFileContentInternalServerError) Error() string {
+	if e != nil {
+		if v0 := e.ErrorInfo; v0 != nil {
+			if v0.Message != nil && *v0.Message != "" {
+				if v0.Code != nil {
+					return fmt.Sprintf("%v: %s", *v0.Code, *v0.Message)
+				}
+				return *v0.Message
+			}
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +42,17 @@ type GetFileContentNotFoundError struct {
 var _ error = &GetFileContentNotFoundError{}
 
 func (e *GetFileContentNotFoundError) Error() string {
+	if e != nil {
+		if v0 := e.ErrorInfo; v0 != nil {
+			if v0.Message != nil && *v0.Message != "" {
+				if v0.Code != nil {
+					return fmt.Sprintf("%v: %s", *v0.Code, *v0.Message)
+				}
+				return *v0.Message
+			}
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +66,17 @@ type GetFileContentUnauthorizedError struct {
 var _ error = &GetFileContentUnauthorizedError{}
 
 func (e *GetFileContentUnauthorizedError) Error() string {
+	if e != nil {
+		if v0 := e.ErrorInfo; v0 != nil {
+			if v0.Message != nil && *v0.Message != "" {
+				if v0.Code != nil {
+					return fmt.Sprintf("%v: %s", *v0.Code, *v0.Message)
+				}
+				return *v0.Message
+			}
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +90,17 @@ type GetFileContentBadRequestError struct {
 var _ error = &GetFileContentBadRequestError{}
 
 func (e *GetFileContentBadRequestError) Error() string {
+	if e != nil {
+		if v0 := e.ErrorInfo; v0 != nil {
+			if v0.Message != nil && *v0.Message != "" {
+				if v0.Code != nil {
+					return fmt.Sprintf("%v: %s", *v0.Code, *v0.Message)
+				}
+				return *v0.Message
+			}
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

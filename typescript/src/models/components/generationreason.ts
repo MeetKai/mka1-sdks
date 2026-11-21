@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,11 +21,13 @@ export const GenerationReason$inboundSchema: z.ZodType<
   GenerationReason,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  details: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    details: z.record(z.any()).optional(),
+  })
+);
 /** @internal */
 export type GenerationReason$Outbound = {
   code: string;
@@ -38,11 +40,13 @@ export const GenerationReason$outboundSchema: z.ZodType<
   GenerationReason$Outbound,
   z.ZodTypeDef,
   GenerationReason
-> = z.object({
-  code: z.string(),
-  message: z.string(),
-  details: z.record(z.any()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.string(),
+    message: z.string(),
+    details: z.record(z.any()).optional(),
+  })
+);
 
 export function generationReasonToJSON(
   generationReason: GenerationReason,

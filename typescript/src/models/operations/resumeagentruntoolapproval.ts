@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,15 +24,17 @@ export const ResumeAgentRunToolApprovalRequest$inboundSchema: z.ZodType<
   ResumeAgentRunToolApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  approval_request_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approval_request_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ResumeAgentRunToolApprovalRequest$Outbound = {
   approval_request_id: string;
@@ -44,15 +46,17 @@ export const ResumeAgentRunToolApprovalRequest$outboundSchema: z.ZodType<
   ResumeAgentRunToolApprovalRequest$Outbound,
   z.ZodTypeDef,
   ResumeAgentRunToolApprovalRequest
-> = z.object({
-  approvalRequestId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    approvalRequestId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function resumeAgentRunToolApprovalRequestToJSON(
   resumeAgentRunToolApprovalRequest: ResumeAgentRunToolApprovalRequest,

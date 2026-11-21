@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ExchangeAPIKeyTokenTooManyRequestsError struct {
 var _ error = &ExchangeAPIKeyTokenTooManyRequestsError{}
 
 func (e *ExchangeAPIKeyTokenTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ExchangeAPIKeyTokenGoneError struct {
 var _ error = &ExchangeAPIKeyTokenGoneError{}
 
 func (e *ExchangeAPIKeyTokenGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ExchangeAPIKeyTokenConflictError struct {
 var _ error = &ExchangeAPIKeyTokenConflictError{}
 
 func (e *ExchangeAPIKeyTokenConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ExchangeAPIKeyTokenNotFoundError struct {
 var _ error = &ExchangeAPIKeyTokenNotFoundError{}
 
 func (e *ExchangeAPIKeyTokenNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ExchangeAPIKeyTokenForbiddenError struct {
 var _ error = &ExchangeAPIKeyTokenForbiddenError{}
 
 func (e *ExchangeAPIKeyTokenForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ExchangeAPIKeyTokenUnauthorizedError struct {
 var _ error = &ExchangeAPIKeyTokenUnauthorizedError{}
 
 func (e *ExchangeAPIKeyTokenUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ExchangeAPIKeyTokenBadRequestError struct {
 var _ error = &ExchangeAPIKeyTokenBadRequestError{}
 
 func (e *ExchangeAPIKeyTokenBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

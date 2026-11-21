@@ -3,8 +3,12 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+  withinMaxLength as withinMaxLength$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -42,7 +46,7 @@ export type ListEvalSamplesRequest = {
 /** @internal */
 export const QueryParamStatus$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamStatus
-> = z.nativeEnum(QueryParamStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamStatus));
 /** @internal */
 export const QueryParamStatus$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamStatus
@@ -53,33 +57,35 @@ export const ListEvalSamplesRequest$inboundSchema: z.ZodType<
   ListEvalSamplesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  after: z.string().optional(),
-  limit: z.number().int().default(100),
-  task_id: z.string().optional(),
-  model: z.string().optional(),
-  status: QueryParamStatus$inboundSchema.optional(),
-  score_metric: z.string().optional(),
-  score_min: z.number().optional(),
-  score_max: z.number().optional(),
-  include_dataset_row: z.boolean().default(true),
-  include_reasoning: z.boolean().default(false),
-  sample_index: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "task_id": "taskId",
-    "score_metric": "scoreMetric",
-    "score_min": "scoreMin",
-    "score_max": "scoreMax",
-    "include_dataset_row": "includeDatasetRow",
-    "include_reasoning": "includeReasoning",
-    "sample_index": "sampleIndex",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    after: z.string().optional(),
+    limit: z.number().int().default(100),
+    task_id: z.string().optional(),
+    model: z.string().optional(),
+    status: QueryParamStatus$inboundSchema.optional(),
+    score_metric: z.string().optional(),
+    score_min: z.number().optional(),
+    score_max: z.number().optional(),
+    include_dataset_row: z.boolean().default(true),
+    include_reasoning: z.boolean().default(false),
+    sample_index: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "task_id": "taskId",
+      "score_metric": "scoreMetric",
+      "score_min": "scoreMin",
+      "score_max": "scoreMax",
+      "include_dataset_row": "includeDatasetRow",
+      "include_reasoning": "includeReasoning",
+      "sample_index": "sampleIndex",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListEvalSamplesRequest$Outbound = {
   run_id: string;
@@ -102,33 +108,43 @@ export const ListEvalSamplesRequest$outboundSchema: z.ZodType<
   ListEvalSamplesRequest$Outbound,
   z.ZodTypeDef,
   ListEvalSamplesRequest
-> = z.object({
-  runId: z.string(),
-  after: z.string().optional(),
-  limit: z.number().int().default(100),
-  taskId: z.string().optional(),
-  model: z.string().optional(),
-  status: QueryParamStatus$outboundSchema.optional(),
-  scoreMetric: z.string().optional(),
-  scoreMin: z.number().optional(),
-  scoreMax: z.number().optional(),
-  includeDatasetRow: z.boolean().default(true),
-  includeReasoning: z.boolean().default(false),
-  sampleIndex: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    taskId: "task_id",
-    scoreMetric: "score_metric",
-    scoreMin: "score_min",
-    scoreMax: "score_max",
-    includeDatasetRow: "include_dataset_row",
-    includeReasoning: "include_reasoning",
-    sampleIndex: "sample_index",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    after: z.string().optional(),
+    limit: z.number().int().default(100),
+    taskId: z.string().optional(),
+    model: z.string().optional(),
+    status: QueryParamStatus$outboundSchema.optional(),
+    scoreMetric: z.string().refine(withinMaxLength$(128), {
+      message: "Value must be at most 128 characters long",
+    }).refine(matchesPattern$("^[\\w.-]+$", 128), {
+      message: "Value must match pattern ^[\\w.-]+$",
+    }).optional(),
+    scoreMin: z.number().optional(),
+    scoreMax: z.number().optional(),
+    includeDatasetRow: z.boolean().default(true),
+    includeReasoning: z.boolean().default(false),
+    sampleIndex: z.string().refine(withinMaxLength$(6000), {
+      message: "Value must be at most 6000 characters long",
+    }).refine(matchesPattern$("^\\d+(,\\d+)*$", 6000), {
+      message: "Value must match pattern ^\\d+(,\\d+)*$",
+    }).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      taskId: "task_id",
+      scoreMetric: "score_metric",
+      scoreMin: "score_min",
+      scoreMax: "score_max",
+      includeDatasetRow: "include_dataset_row",
+      includeReasoning: "include_reasoning",
+      sampleIndex: "sample_index",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listEvalSamplesRequestToJSON(
   listEvalSamplesRequest: ListEvalSamplesRequest,

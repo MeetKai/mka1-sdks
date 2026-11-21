@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,10 +26,12 @@ export const SchemaDeleteResponse$inboundSchema: z.ZodType<
   SchemaDeleteResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  success: z.boolean(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type SchemaDeleteResponse$Outbound = {
   success: boolean;
@@ -41,10 +43,12 @@ export const SchemaDeleteResponse$outboundSchema: z.ZodType<
   SchemaDeleteResponse$Outbound,
   z.ZodTypeDef,
   SchemaDeleteResponse
-> = z.object({
-  success: z.boolean(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    message: z.string(),
+  })
+);
 
 export function schemaDeleteResponseToJSON(
   schemaDeleteResponse: SchemaDeleteResponse,

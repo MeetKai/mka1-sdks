@@ -6,7 +6,13 @@ from .agentcompactioncontextmanagement import (
     AgentCompactionContextManagementTypedDict,
 )
 from .agentschedulespec import AgentScheduleSpec, AgentScheduleSpecTypedDict
-from meetkai_mka1.types import BaseModel, UNSET_SENTINEL
+from meetkai_mka1.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 import pydantic
 from pydantic import ConfigDict, model_serializer
 from typing import Any, Dict, List, Literal, Optional, Union
@@ -34,13 +40,20 @@ class CreateAgentScheduleRequestInput(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["type"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             serialized.pop(k, serialized.pop(n, None))
 
@@ -104,6 +117,9 @@ class CreateAgentScheduleRequest(BaseModel):
     r"""chat: each run replies in the caller's own Telegram chat with this agent, as that chat, in its conversation. The caller must be a chat user of one of this agent's active Telegram connectors (its X-On-Behalf-Of is the chat's external user id). The input must be a single text message, conversation, previous_response_id and context_management cannot be set, a repeat can be at most once an hour (interval_seconds of at least 3600, or a five-field cron with a single minute), and a chat holds at most 20 schedules (409 beyond that). The run sees the input framed as a follow-up the user set up earlier, not as the user speaking, and a whole reply of exactly NO_REPLY sends nothing."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -115,11 +131,15 @@ class CreateAgentScheduleRequest(BaseModel):
                 "deliver_to",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

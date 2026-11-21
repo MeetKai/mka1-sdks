@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const DeleteSpeechToTextHistoryRequest$inboundSchema: z.ZodType<
   DeleteSpeechToTextHistoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  stt_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "stt_id": "sttId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    stt_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "stt_id": "sttId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type DeleteSpeechToTextHistoryRequest$Outbound = {
   stt_id: string;
@@ -41,15 +43,17 @@ export const DeleteSpeechToTextHistoryRequest$outboundSchema: z.ZodType<
   DeleteSpeechToTextHistoryRequest$Outbound,
   z.ZodTypeDef,
   DeleteSpeechToTextHistoryRequest
-> = z.object({
-  sttId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sttId: "stt_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sttId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sttId: "stt_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function deleteSpeechToTextHistoryRequestToJSON(
   deleteSpeechToTextHistoryRequest: DeleteSpeechToTextHistoryRequest,

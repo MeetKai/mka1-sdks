@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,20 +21,22 @@ export const ResponseSleepCallSleepingEvent$inboundSchema: z.ZodType<
   ResponseSleepCallSleepingEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.sleep_call.sleeping"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  wake_at: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "wake_at": "wakeAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.sleeping"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    wake_at: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "wake_at": "wakeAt",
+    });
+  })
+);
 /** @internal */
 export type ResponseSleepCallSleepingEvent$Outbound = {
   type: "response.sleep_call.sleeping";
@@ -49,20 +51,22 @@ export const ResponseSleepCallSleepingEvent$outboundSchema: z.ZodType<
   ResponseSleepCallSleepingEvent$Outbound,
   z.ZodTypeDef,
   ResponseSleepCallSleepingEvent
-> = z.object({
-  type: z.literal("response.sleep_call.sleeping"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  wakeAt: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    wakeAt: "wake_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.sleep_call.sleeping"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    wakeAt: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      wakeAt: "wake_at",
+    });
+  })
+);
 
 export function responseSleepCallSleepingEventToJSON(
   responseSleepCallSleepingEvent: ResponseSleepCallSleepingEvent,

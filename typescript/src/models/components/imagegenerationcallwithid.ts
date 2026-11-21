@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -49,11 +49,13 @@ export const ImageGenerationCallWithIdError$inboundSchema: z.ZodType<
   ImageGenerationCallWithIdError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  code: z.nullable(z.string()),
-  type: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.nullable(z.string()),
+    type: z.string(),
+    message: z.string(),
+  })
+);
 /** @internal */
 export type ImageGenerationCallWithIdError$Outbound = {
   code: string | null;
@@ -66,11 +68,13 @@ export const ImageGenerationCallWithIdError$outboundSchema: z.ZodType<
   ImageGenerationCallWithIdError$Outbound,
   z.ZodTypeDef,
   ImageGenerationCallWithIdError
-> = z.object({
-  code: z.nullable(z.string()),
-  type: z.string(),
-  message: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    code: z.nullable(z.string()),
+    type: z.string(),
+    message: z.string(),
+  })
+);
 
 export function imageGenerationCallWithIdErrorToJSON(
   imageGenerationCallWithIdError: ImageGenerationCallWithIdError,
@@ -96,27 +100,30 @@ export const ImageGenerationCallWithId$inboundSchema: z.ZodType<
   ImageGenerationCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("image_generation_call"),
-  id: z.string(),
-  status: z.string(),
-  result: z.string(),
-  background: z.string().optional(),
-  output_format: z.string().optional(),
-  quality: z.string().optional(),
-  size: z.string().optional(),
-  revised_prompt: z.string().optional(),
-  error: z.nullable(z.lazy(() => ImageGenerationCallWithIdError$inboundSchema))
-    .optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "output_format": "outputFormat",
-    "revised_prompt": "revisedPrompt",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_generation_call"),
+    id: z.string(),
+    status: z.string(),
+    result: z.string(),
+    background: z.string().optional(),
+    output_format: z.string().optional(),
+    quality: z.string().optional(),
+    size: z.string().optional(),
+    revised_prompt: z.string().optional(),
+    error: z.nullable(
+      z.lazy(() => ImageGenerationCallWithIdError$inboundSchema),
+    ).optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "output_format": "outputFormat",
+      "revised_prompt": "revisedPrompt",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ImageGenerationCallWithId$Outbound = {
   type: "image_generation_call";
@@ -138,27 +145,30 @@ export const ImageGenerationCallWithId$outboundSchema: z.ZodType<
   ImageGenerationCallWithId$Outbound,
   z.ZodTypeDef,
   ImageGenerationCallWithId
-> = z.object({
-  type: z.literal("image_generation_call"),
-  id: z.string(),
-  status: z.string(),
-  result: z.string(),
-  background: z.string().optional(),
-  outputFormat: z.string().optional(),
-  quality: z.string().optional(),
-  size: z.string().optional(),
-  revisedPrompt: z.string().optional(),
-  error: z.nullable(z.lazy(() => ImageGenerationCallWithIdError$outboundSchema))
-    .optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    outputFormat: "output_format",
-    revisedPrompt: "revised_prompt",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("image_generation_call"),
+    id: z.string(),
+    status: z.string(),
+    result: z.string(),
+    background: z.string().optional(),
+    outputFormat: z.string().optional(),
+    quality: z.string().optional(),
+    size: z.string().optional(),
+    revisedPrompt: z.string().optional(),
+    error: z.nullable(
+      z.lazy(() => ImageGenerationCallWithIdError$outboundSchema),
+    ).optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      outputFormat: "output_format",
+      revisedPrompt: "revised_prompt",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function imageGenerationCallWithIdToJSON(
   imageGenerationCallWithId: ImageGenerationCallWithId,

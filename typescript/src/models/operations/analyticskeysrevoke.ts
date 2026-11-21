@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const AnalyticsKeysRevokeRequest$inboundSchema: z.ZodType<
   AnalyticsKeysRevokeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    keyId: z.string(),
+  })
+);
 /** @internal */
 export type AnalyticsKeysRevokeRequest$Outbound = {
   id: string;
@@ -35,10 +37,12 @@ export const AnalyticsKeysRevokeRequest$outboundSchema: z.ZodType<
   AnalyticsKeysRevokeRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsKeysRevokeRequest
-> = z.object({
-  id: z.string(),
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    keyId: z.string(),
+  })
+);
 
 export function analyticsKeysRevokeRequestToJSON(
   analyticsKeysRevokeRequest: AnalyticsKeysRevokeRequest,

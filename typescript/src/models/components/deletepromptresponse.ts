@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -27,11 +27,13 @@ export const DeletePromptResponse$inboundSchema: z.ZodType<
   DeletePromptResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("prompt.deleted"),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("prompt.deleted"),
+    deleted: z.literal(true),
+  })
+);
 /** @internal */
 export type DeletePromptResponse$Outbound = {
   id: string;
@@ -44,11 +46,13 @@ export const DeletePromptResponse$outboundSchema: z.ZodType<
   DeletePromptResponse$Outbound,
   z.ZodTypeDef,
   DeletePromptResponse
-> = z.object({
-  id: z.string(),
-  object: z.literal("prompt.deleted"),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("prompt.deleted"),
+    deleted: z.literal(true),
+  })
+);
 
 export function deletePromptResponseToJSON(
   deletePromptResponse: DeletePromptResponse,

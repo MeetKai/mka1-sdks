@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -54,7 +54,9 @@ export const Embedding$inboundSchema: z.ZodType<
   Embedding,
   z.ZodTypeDef,
   unknown
-> = z.union([z.array(z.number()), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.number()), z.string()])
+);
 /** @internal */
 export type Embedding$Outbound = Array<number> | string;
 
@@ -63,7 +65,9 @@ export const Embedding$outboundSchema: z.ZodType<
   Embedding$Outbound,
   z.ZodTypeDef,
   Embedding
-> = z.union([z.array(z.number()), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.array(z.number()), z.string()])
+);
 
 export function embeddingToJSON(embedding: Embedding): string {
   return JSON.stringify(Embedding$outboundSchema.parse(embedding));
@@ -79,12 +83,14 @@ export function embeddingFromJSON(
 }
 
 /** @internal */
-export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> = z
-  .object({
-    object: z.literal("embedding").default("embedding"),
-    embedding: z.union([z.array(z.number()), z.string()]),
-    index: z.number(),
-  });
+export const Data$inboundSchema: z.ZodType<Data, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      object: z.literal("embedding").default("embedding"),
+      embedding: z.union([z.array(z.number()), z.string()]),
+      index: z.number(),
+    })
+  );
 /** @internal */
 export type Data$Outbound = {
   object: "embedding";
@@ -94,11 +100,13 @@ export type Data$Outbound = {
 
 /** @internal */
 export const Data$outboundSchema: z.ZodType<Data$Outbound, z.ZodTypeDef, Data> =
-  z.object({
-    object: z.literal("embedding").default("embedding" as const),
-    embedding: z.union([z.array(z.number()), z.string()]),
-    index: z.number(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      object: z.literal("embedding").default("embedding" as const),
+      embedding: z.union([z.array(z.number()), z.string()]),
+      index: z.number(),
+    })
+  );
 
 export function dataToJSON(data: Data): string {
   return JSON.stringify(Data$outboundSchema.parse(data));
@@ -118,15 +126,17 @@ export const EmbeddingsResponseUsage$inboundSchema: z.ZodType<
   EmbeddingsResponseUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  prompt_tokens: z.number(),
-  total_tokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "prompt_tokens": "promptTokens",
-    "total_tokens": "totalTokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    prompt_tokens: z.number(),
+    total_tokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "prompt_tokens": "promptTokens",
+      "total_tokens": "totalTokens",
+    });
+  })
+);
 /** @internal */
 export type EmbeddingsResponseUsage$Outbound = {
   prompt_tokens: number;
@@ -138,15 +148,17 @@ export const EmbeddingsResponseUsage$outboundSchema: z.ZodType<
   EmbeddingsResponseUsage$Outbound,
   z.ZodTypeDef,
   EmbeddingsResponseUsage
-> = z.object({
-  promptTokens: z.number(),
-  totalTokens: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    promptTokens: "prompt_tokens",
-    totalTokens: "total_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    promptTokens: z.number(),
+    totalTokens: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      promptTokens: "prompt_tokens",
+      totalTokens: "total_tokens",
+    });
+  })
+);
 
 export function embeddingsResponseUsageToJSON(
   embeddingsResponseUsage: EmbeddingsResponseUsage,
@@ -170,12 +182,14 @@ export const EmbeddingsResponse$inboundSchema: z.ZodType<
   EmbeddingsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.array(z.lazy(() => Data$inboundSchema)),
-  model: z.string(),
-  object: z.literal("list").default("list"),
-  usage: z.lazy(() => EmbeddingsResponseUsage$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => Data$inboundSchema)),
+    model: z.string(),
+    object: z.literal("list").default("list"),
+    usage: z.lazy(() => EmbeddingsResponseUsage$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type EmbeddingsResponse$Outbound = {
   data: Array<Data$Outbound>;
@@ -189,12 +203,14 @@ export const EmbeddingsResponse$outboundSchema: z.ZodType<
   EmbeddingsResponse$Outbound,
   z.ZodTypeDef,
   EmbeddingsResponse
-> = z.object({
-  data: z.array(z.lazy(() => Data$outboundSchema)),
-  model: z.string(),
-  object: z.literal("list").default("list" as const),
-  usage: z.lazy(() => EmbeddingsResponseUsage$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.array(z.lazy(() => Data$outboundSchema)),
+    model: z.string(),
+    object: z.literal("list").default("list" as const),
+    usage: z.lazy(() => EmbeddingsResponseUsage$outboundSchema).optional(),
+  })
+);
 
 export function embeddingsResponseToJSON(
   embeddingsResponse: EmbeddingsResponse,

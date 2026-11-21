@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -58,7 +58,7 @@ export type GroundednessClaim = {
 /** @internal */
 export const GroundednessClaimVerdict$inboundSchema: z.ZodNativeEnum<
   typeof GroundednessClaimVerdict
-> = z.nativeEnum(GroundednessClaimVerdict);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GroundednessClaimVerdict));
 /** @internal */
 export const GroundednessClaimVerdict$outboundSchema: z.ZodNativeEnum<
   typeof GroundednessClaimVerdict
@@ -69,19 +69,21 @@ export const GroundednessClaim$inboundSchema: z.ZodType<
   GroundednessClaim,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-  start_index: z.nullable(z.number().int()),
-  end_index: z.nullable(z.number().int()),
-  verdict: GroundednessClaimVerdict$inboundSchema,
-  sources: z.array(z.number().int()),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_index": "startIndex",
-    "end_index": "endIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    start_index: z.nullable(z.number().int()),
+    end_index: z.nullable(z.number().int()),
+    verdict: GroundednessClaimVerdict$inboundSchema,
+    sources: z.array(z.number().int()),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_index": "startIndex",
+      "end_index": "endIndex",
+    });
+  })
+);
 /** @internal */
 export type GroundednessClaim$Outbound = {
   text: string;
@@ -97,19 +99,21 @@ export const GroundednessClaim$outboundSchema: z.ZodType<
   GroundednessClaim$Outbound,
   z.ZodTypeDef,
   GroundednessClaim
-> = z.object({
-  text: z.string(),
-  startIndex: z.nullable(z.number().int()),
-  endIndex: z.nullable(z.number().int()),
-  verdict: GroundednessClaimVerdict$outboundSchema,
-  sources: z.array(z.number().int()),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startIndex: "start_index",
-    endIndex: "end_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    startIndex: z.nullable(z.number().int()),
+    endIndex: z.nullable(z.number().int()),
+    verdict: GroundednessClaimVerdict$outboundSchema,
+    sources: z.array(z.number().int()),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startIndex: "start_index",
+      endIndex: "end_index",
+    });
+  })
+);
 
 export function groundednessClaimToJSON(
   groundednessClaim: GroundednessClaim,

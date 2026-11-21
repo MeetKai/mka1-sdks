@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,16 +32,18 @@ export const ListSupportCasesRequest$inboundSchema: z.ZodType<
   ListSupportCasesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: z.string().optional(),
-  limit: z.number().int().default(20),
-  offset: z.number().int().default(0),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+    limit: z.number().int().default(20),
+    offset: z.number().int().default(0),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListSupportCasesRequest$Outbound = {
   status?: string | undefined;
@@ -55,16 +57,18 @@ export const ListSupportCasesRequest$outboundSchema: z.ZodType<
   ListSupportCasesRequest$Outbound,
   z.ZodTypeDef,
   ListSupportCasesRequest
-> = z.object({
-  status: z.string().optional(),
-  limit: z.number().int().default(20),
-  offset: z.number().int().default(0),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: z.string().optional(),
+    limit: z.number().int().default(20),
+    offset: z.number().int().default(0),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listSupportCasesRequestToJSON(
   listSupportCasesRequest: ListSupportCasesRequest,

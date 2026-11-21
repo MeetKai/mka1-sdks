@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,9 +33,8 @@ export type FineTuningEvent = {
 };
 
 /** @internal */
-export const Level$inboundSchema: z.ZodNativeEnum<typeof Level> = z.nativeEnum(
-  Level,
-);
+export const Level$inboundSchema: z.ZodNativeEnum<typeof Level> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Level));
 /** @internal */
 export const Level$outboundSchema: z.ZodNativeEnum<typeof Level> =
   Level$inboundSchema;
@@ -43,7 +42,7 @@ export const Level$outboundSchema: z.ZodNativeEnum<typeof Level> =
 /** @internal */
 export const FineTuningEventType$inboundSchema: z.ZodNativeEnum<
   typeof FineTuningEventType
-> = z.nativeEnum(FineTuningEventType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FineTuningEventType));
 /** @internal */
 export const FineTuningEventType$outboundSchema: z.ZodNativeEnum<
   typeof FineTuningEventType
@@ -54,19 +53,21 @@ export const FineTuningEvent$inboundSchema: z.ZodType<
   FineTuningEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job.event"),
-  created_at: z.number().int(),
-  level: Level$inboundSchema,
-  message: z.string(),
-  type: z.nullable(FineTuningEventType$inboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job.event"),
+    created_at: z.number().int(),
+    level: Level$inboundSchema,
+    message: z.string(),
+    type: z.nullable(FineTuningEventType$inboundSchema).optional(),
+    data: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type FineTuningEvent$Outbound = {
   id: string;
@@ -83,19 +84,21 @@ export const FineTuningEvent$outboundSchema: z.ZodType<
   FineTuningEvent$Outbound,
   z.ZodTypeDef,
   FineTuningEvent
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job.event"),
-  createdAt: z.number().int(),
-  level: Level$outboundSchema,
-  message: z.string(),
-  type: z.nullable(FineTuningEventType$outboundSchema).optional(),
-  data: z.nullable(z.record(z.any())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job.event"),
+    createdAt: z.number().int(),
+    level: Level$outboundSchema,
+    message: z.string(),
+    type: z.nullable(FineTuningEventType$outboundSchema).optional(),
+    data: z.nullable(z.record(z.any())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function fineTuningEventToJSON(
   fineTuningEvent: FineTuningEvent,

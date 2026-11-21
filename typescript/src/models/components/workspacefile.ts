@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const WorkspaceFile$inboundSchema: z.ZodType<
   WorkspaceFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  path: z.string(),
-  size: z.number().int().default(0),
-  etag: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    size: z.number().int().default(0),
+    etag: z.nullable(z.string()).optional(),
+  })
+);
 /** @internal */
 export type WorkspaceFile$Outbound = {
   path: string;
@@ -35,11 +37,13 @@ export const WorkspaceFile$outboundSchema: z.ZodType<
   WorkspaceFile$Outbound,
   z.ZodTypeDef,
   WorkspaceFile
-> = z.object({
-  path: z.string(),
-  size: z.number().int().default(0),
-  etag: z.nullable(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    path: z.string(),
+    size: z.number().int().default(0),
+    etag: z.nullable(z.string()).optional(),
+  })
+);
 
 export function workspaceFileToJSON(workspaceFile: WorkspaceFile): string {
   return JSON.stringify(WorkspaceFile$outboundSchema.parse(workspaceFile));

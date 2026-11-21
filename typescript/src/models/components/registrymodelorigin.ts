@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const RegistryModelOrigin = {
@@ -14,7 +15,7 @@ export type RegistryModelOrigin = ClosedEnum<typeof RegistryModelOrigin>;
 /** @internal */
 export const RegistryModelOrigin$inboundSchema: z.ZodNativeEnum<
   typeof RegistryModelOrigin
-> = z.nativeEnum(RegistryModelOrigin);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RegistryModelOrigin));
 /** @internal */
 export const RegistryModelOrigin$outboundSchema: z.ZodNativeEnum<
   typeof RegistryModelOrigin

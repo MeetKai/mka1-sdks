@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -197,19 +198,21 @@ export const GetOrgRateLimitAuthOrgsResponse429ResponseBody$inboundSchema:
     GetOrgRateLimitAuthOrgsResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetOrgRateLimitAuthOrgsResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetOrgRateLimitAuthOrgsResponse429ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponse429ResponseBody$Outbound = {
@@ -222,11 +225,13 @@ export const GetOrgRateLimitAuthOrgsResponse429ResponseBody$outboundSchema:
     GetOrgRateLimitAuthOrgsResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgRateLimitAuthOrgsResponse429ResponseBody
-  > = z.instanceof(GetOrgRateLimitAuthOrgsResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgRateLimitAuthOrgsResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgRateLimitAuthOrgsResponse410ResponseBody$inboundSchema:
@@ -234,19 +239,21 @@ export const GetOrgRateLimitAuthOrgsResponse410ResponseBody$inboundSchema:
     GetOrgRateLimitAuthOrgsResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetOrgRateLimitAuthOrgsResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetOrgRateLimitAuthOrgsResponse410ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponse410ResponseBody$Outbound = {
@@ -259,11 +266,13 @@ export const GetOrgRateLimitAuthOrgsResponse410ResponseBody$outboundSchema:
     GetOrgRateLimitAuthOrgsResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgRateLimitAuthOrgsResponse410ResponseBody
-  > = z.instanceof(GetOrgRateLimitAuthOrgsResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgRateLimitAuthOrgsResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgRateLimitAuthOrgsResponse409ResponseBody$inboundSchema:
@@ -271,19 +280,21 @@ export const GetOrgRateLimitAuthOrgsResponse409ResponseBody$inboundSchema:
     GetOrgRateLimitAuthOrgsResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetOrgRateLimitAuthOrgsResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetOrgRateLimitAuthOrgsResponse409ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponse409ResponseBody$Outbound = {
@@ -296,11 +307,13 @@ export const GetOrgRateLimitAuthOrgsResponse409ResponseBody$outboundSchema:
     GetOrgRateLimitAuthOrgsResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgRateLimitAuthOrgsResponse409ResponseBody
-  > = z.instanceof(GetOrgRateLimitAuthOrgsResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgRateLimitAuthOrgsResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgRateLimitAuthOrgsResponse404ResponseBody$inboundSchema:
@@ -308,19 +321,21 @@ export const GetOrgRateLimitAuthOrgsResponse404ResponseBody$inboundSchema:
     GetOrgRateLimitAuthOrgsResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetOrgRateLimitAuthOrgsResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetOrgRateLimitAuthOrgsResponse404ResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponse404ResponseBody$Outbound = {
@@ -333,11 +348,13 @@ export const GetOrgRateLimitAuthOrgsResponse404ResponseBody$outboundSchema:
     GetOrgRateLimitAuthOrgsResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgRateLimitAuthOrgsResponse404ResponseBody
-  > = z.instanceof(GetOrgRateLimitAuthOrgsResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgRateLimitAuthOrgsResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgRateLimitAuthOrgsResponseResponseBody$inboundSchema:
@@ -345,20 +362,22 @@ export const GetOrgRateLimitAuthOrgsResponseResponseBody$inboundSchema:
     GetOrgRateLimitAuthOrgsResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new GetOrgRateLimitAuthOrgsResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new GetOrgRateLimitAuthOrgsResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponseResponseBody$Outbound = {
@@ -372,31 +391,35 @@ export const GetOrgRateLimitAuthOrgsResponseResponseBody$outboundSchema:
     GetOrgRateLimitAuthOrgsResponseResponseBody$Outbound,
     z.ZodTypeDef,
     GetOrgRateLimitAuthOrgsResponseResponseBody
-  > = z.instanceof(GetOrgRateLimitAuthOrgsResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(GetOrgRateLimitAuthOrgsResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const GetOrgRateLimitAuthOrgsResponseBody$inboundSchema: z.ZodType<
   GetOrgRateLimitAuthOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetOrgRateLimitAuthOrgsResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetOrgRateLimitAuthOrgsResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetOrgRateLimitAuthOrgsResponseBody$Outbound = {
@@ -408,30 +431,34 @@ export const GetOrgRateLimitAuthOrgsResponseBody$outboundSchema: z.ZodType<
   GetOrgRateLimitAuthOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgRateLimitAuthOrgsResponseBody
-> = z.instanceof(GetOrgRateLimitAuthOrgsResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetOrgRateLimitAuthOrgsResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);
 
 /** @internal */
 export const GetOrgRateLimitResponseBody$inboundSchema: z.ZodType<
   GetOrgRateLimitResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new GetOrgRateLimitResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new GetOrgRateLimitResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type GetOrgRateLimitResponseBody$Outbound = {
@@ -443,8 +470,10 @@ export const GetOrgRateLimitResponseBody$outboundSchema: z.ZodType<
   GetOrgRateLimitResponseBody$Outbound,
   z.ZodTypeDef,
   GetOrgRateLimitResponseBody
-> = z.instanceof(GetOrgRateLimitResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(GetOrgRateLimitResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

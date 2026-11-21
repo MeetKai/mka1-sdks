@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,13 +30,15 @@ export const GetPricingRequest$inboundSchema: z.ZodType<
   GetPricingRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetPricingRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -47,13 +49,15 @@ export const GetPricingRequest$outboundSchema: z.ZodType<
   GetPricingRequest$Outbound,
   z.ZodTypeDef,
   GetPricingRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getPricingRequestToJSON(
   getPricingRequest: GetPricingRequest,
@@ -77,10 +81,12 @@ export const GetPricingResponseResult$inboundSchema: z.ZodType<
   GetPricingResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.ComputePricing$inboundSchema,
-  components.ComputeErrorEnvelope$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputePricing$inboundSchema,
+    components.ComputeErrorEnvelope$inboundSchema,
+  ])
+);
 /** @internal */
 export type GetPricingResponseResult$Outbound =
   | components.ComputePricing$Outbound
@@ -91,10 +97,12 @@ export const GetPricingResponseResult$outboundSchema: z.ZodType<
   GetPricingResponseResult$Outbound,
   z.ZodTypeDef,
   GetPricingResponseResult
-> = z.union([
-  components.ComputePricing$outboundSchema,
-  components.ComputeErrorEnvelope$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.ComputePricing$outboundSchema,
+    components.ComputeErrorEnvelope$outboundSchema,
+  ])
+);
 
 export function getPricingResponseResultToJSON(
   getPricingResponseResult: GetPricingResponseResult,
@@ -118,18 +126,20 @@ export const GetPricingResponse$inboundSchema: z.ZodType<
   GetPricingResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    components.ComputePricing$inboundSchema,
-    components.ComputeErrorEnvelope$inboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      components.ComputePricing$inboundSchema,
+      components.ComputeErrorEnvelope$inboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type GetPricingResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -143,18 +153,20 @@ export const GetPricingResponse$outboundSchema: z.ZodType<
   GetPricingResponse$Outbound,
   z.ZodTypeDef,
   GetPricingResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    components.ComputePricing$outboundSchema,
-    components.ComputeErrorEnvelope$outboundSchema,
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      components.ComputePricing$outboundSchema,
+      components.ComputeErrorEnvelope$outboundSchema,
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function getPricingResponseToJSON(
   getPricingResponse: GetPricingResponse,

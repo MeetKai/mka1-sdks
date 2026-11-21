@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,17 +23,19 @@ export const UpdateSandboxEnvironmentRequest$inboundSchema: z.ZodType<
   UpdateSandboxEnvironmentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  environment_id: z.number().int(),
-  "X-On-Behalf-Of": z.string().optional(),
-  SaveEnvironmentRequest: components.SaveEnvironmentRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "environment_id": "environmentId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "SaveEnvironmentRequest": "saveEnvironmentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environment_id: z.number().int(),
+    "X-On-Behalf-Of": z.string().optional(),
+    SaveEnvironmentRequest: components.SaveEnvironmentRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "environment_id": "environmentId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "SaveEnvironmentRequest": "saveEnvironmentRequest",
+    });
+  })
+);
 /** @internal */
 export type UpdateSandboxEnvironmentRequest$Outbound = {
   environment_id: number;
@@ -46,17 +48,19 @@ export const UpdateSandboxEnvironmentRequest$outboundSchema: z.ZodType<
   UpdateSandboxEnvironmentRequest$Outbound,
   z.ZodTypeDef,
   UpdateSandboxEnvironmentRequest
-> = z.object({
-  environmentId: z.number().int(),
-  xOnBehalfOf: z.string().optional(),
-  saveEnvironmentRequest: components.SaveEnvironmentRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    environmentId: "environment_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    saveEnvironmentRequest: "SaveEnvironmentRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    environmentId: z.number().int(),
+    xOnBehalfOf: z.string().optional(),
+    saveEnvironmentRequest: components.SaveEnvironmentRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      environmentId: "environment_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      saveEnvironmentRequest: "SaveEnvironmentRequest",
+    });
+  })
+);
 
 export function updateSandboxEnvironmentRequestToJSON(
   updateSandboxEnvironmentRequest: UpdateSandboxEnvironmentRequest,

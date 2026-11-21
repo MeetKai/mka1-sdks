@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,7 +30,7 @@ export type ListSkillsRequest = {
 /** @internal */
 export const ListSkillsQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ListSkillsQueryParamOrder
-> = z.nativeEnum(ListSkillsQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListSkillsQueryParamOrder));
 /** @internal */
 export const ListSkillsQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ListSkillsQueryParamOrder
@@ -41,16 +41,18 @@ export const ListSkillsRequest$inboundSchema: z.ZodType<
   ListSkillsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListSkillsQueryParamOrder$inboundSchema.default("desc"),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListSkillsQueryParamOrder$inboundSchema.default("desc"),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListSkillsRequest$Outbound = {
   after?: string | undefined;
@@ -64,16 +66,18 @@ export const ListSkillsRequest$outboundSchema: z.ZodType<
   ListSkillsRequest$Outbound,
   z.ZodTypeDef,
   ListSkillsRequest
-> = z.object({
-  after: z.string().optional(),
-  limit: z.number().int().default(20),
-  order: ListSkillsQueryParamOrder$outboundSchema.default("desc"),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    after: z.string().optional(),
+    limit: z.number().int().default(20),
+    order: ListSkillsQueryParamOrder$outboundSchema.default("desc"),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listSkillsRequestToJSON(
   listSkillsRequest: ListSkillsRequest,

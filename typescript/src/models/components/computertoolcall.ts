@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,19 +45,21 @@ export const ComputerToolCall$inboundSchema: z.ZodType<
   ComputerToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("computer_call"),
-  id: z.string(),
-  call_id: z.string(),
-  action: ComputerAction$inboundSchema,
-  pending_safety_checks: z.array(PendingSafetyCheck$inboundSchema),
-  status: Status$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "pending_safety_checks": "pendingSafetyChecks",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_call"),
+    id: z.string(),
+    call_id: z.string(),
+    action: ComputerAction$inboundSchema,
+    pending_safety_checks: z.array(PendingSafetyCheck$inboundSchema),
+    status: Status$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "pending_safety_checks": "pendingSafetyChecks",
+    });
+  })
+);
 /** @internal */
 export type ComputerToolCall$Outbound = {
   type: "computer_call";
@@ -73,19 +75,21 @@ export const ComputerToolCall$outboundSchema: z.ZodType<
   ComputerToolCall$Outbound,
   z.ZodTypeDef,
   ComputerToolCall
-> = z.object({
-  type: z.literal("computer_call"),
-  id: z.string(),
-  callId: z.string(),
-  action: ComputerAction$outboundSchema,
-  pendingSafetyChecks: z.array(PendingSafetyCheck$outboundSchema),
-  status: Status$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    pendingSafetyChecks: "pending_safety_checks",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_call"),
+    id: z.string(),
+    callId: z.string(),
+    action: ComputerAction$outboundSchema,
+    pendingSafetyChecks: z.array(PendingSafetyCheck$outboundSchema),
+    status: Status$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      pendingSafetyChecks: "pending_safety_checks",
+    });
+  })
+);
 
 export function computerToolCallToJSON(
   computerToolCall: ComputerToolCall,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -32,8 +32,8 @@ export type ToolApprovalDecisionRequest = {
 };
 
 /** @internal */
-export const Decision$inboundSchema: z.ZodNativeEnum<typeof Decision> = z
-  .nativeEnum(Decision);
+export const Decision$inboundSchema: z.ZodNativeEnum<typeof Decision> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Decision));
 /** @internal */
 export const Decision$outboundSchema: z.ZodNativeEnum<typeof Decision> =
   Decision$inboundSchema;
@@ -43,10 +43,12 @@ export const ToolApprovalDecisionRequest$inboundSchema: z.ZodType<
   ToolApprovalDecisionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  decision: Decision$inboundSchema,
-  comment: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decision: Decision$inboundSchema,
+    comment: z.string().optional(),
+  })
+);
 /** @internal */
 export type ToolApprovalDecisionRequest$Outbound = {
   decision: string;
@@ -58,10 +60,12 @@ export const ToolApprovalDecisionRequest$outboundSchema: z.ZodType<
   ToolApprovalDecisionRequest$Outbound,
   z.ZodTypeDef,
   ToolApprovalDecisionRequest
-> = z.object({
-  decision: Decision$outboundSchema,
-  comment: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    decision: Decision$outboundSchema,
+    comment: z.string().optional(),
+  })
+);
 
 export function toolApprovalDecisionRequestToJSON(
   toolApprovalDecisionRequest: ToolApprovalDecisionRequest,

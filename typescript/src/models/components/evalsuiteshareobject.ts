@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,21 +28,23 @@ export const EvalSuiteShareObject$inboundSchema: z.ZodType<
   EvalSuiteShareObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.share"),
-  suite_id: z.string(),
-  org_id: z.string(),
-  granted_by: z.string(),
-  created_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "org_id": "orgId",
-    "granted_by": "grantedBy",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.share"),
+    suite_id: z.string(),
+    org_id: z.string(),
+    granted_by: z.string(),
+    created_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "org_id": "orgId",
+      "granted_by": "grantedBy",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteShareObject$Outbound = {
   id: string;
@@ -58,21 +60,23 @@ export const EvalSuiteShareObject$outboundSchema: z.ZodType<
   EvalSuiteShareObject$Outbound,
   z.ZodTypeDef,
   EvalSuiteShareObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("eval.suite.share"),
-  suiteId: z.string(),
-  orgId: z.string(),
-  grantedBy: z.string(),
-  createdAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    orgId: "org_id",
-    grantedBy: "granted_by",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("eval.suite.share"),
+    suiteId: z.string(),
+    orgId: z.string(),
+    grantedBy: z.string(),
+    createdAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      orgId: "org_id",
+      grantedBy: "granted_by",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function evalSuiteShareObjectToJSON(
   evalSuiteShareObject: EvalSuiteShareObject,

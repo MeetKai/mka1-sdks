@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -42,8 +42,8 @@ export type TrackingRunsUpdateResponseBody = {
 };
 
 /** @internal */
-export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> = z
-  .nativeEnum(Status);
+export const Status$inboundSchema: z.ZodNativeEnum<typeof Status> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Status));
 /** @internal */
 export const Status$outboundSchema: z.ZodNativeEnum<typeof Status> =
   Status$inboundSchema;
@@ -53,18 +53,20 @@ export const TrackingRunsUpdateRequestBody$inboundSchema: z.ZodType<
   TrackingRunsUpdateRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_id: z.string(),
-  status: Status$inboundSchema.optional(),
-  end_time: z.number().int().optional(),
-  run_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_id": "runId",
-    "end_time": "endTime",
-    "run_name": "runName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_id: z.string(),
+    status: Status$inboundSchema.optional(),
+    end_time: z.number().int().optional(),
+    run_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_id": "runId",
+      "end_time": "endTime",
+      "run_name": "runName",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsUpdateRequestBody$Outbound = {
   run_id: string;
@@ -78,18 +80,20 @@ export const TrackingRunsUpdateRequestBody$outboundSchema: z.ZodType<
   TrackingRunsUpdateRequestBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsUpdateRequestBody
-> = z.object({
-  runId: z.string(),
-  status: Status$outboundSchema.optional(),
-  endTime: z.number().int().optional(),
-  runName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runId: "run_id",
-    endTime: "end_time",
-    runName: "run_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runId: z.string(),
+    status: Status$outboundSchema.optional(),
+    endTime: z.number().int().optional(),
+    runName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runId: "run_id",
+      endTime: "end_time",
+      runName: "run_name",
+    });
+  })
+);
 
 export function trackingRunsUpdateRequestBodyToJSON(
   trackingRunsUpdateRequestBody: TrackingRunsUpdateRequestBody,
@@ -115,15 +119,17 @@ export const TrackingRunsUpdateRequest$inboundSchema: z.ZodType<
   TrackingRunsUpdateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => TrackingRunsUpdateRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => TrackingRunsUpdateRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsUpdateRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -135,15 +141,17 @@ export const TrackingRunsUpdateRequest$outboundSchema: z.ZodType<
   TrackingRunsUpdateRequest$Outbound,
   z.ZodTypeDef,
   TrackingRunsUpdateRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => TrackingRunsUpdateRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => TrackingRunsUpdateRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function trackingRunsUpdateRequestToJSON(
   trackingRunsUpdateRequest: TrackingRunsUpdateRequest,
@@ -167,13 +175,15 @@ export const TrackingRunsUpdateResponseBody$inboundSchema: z.ZodType<
   TrackingRunsUpdateResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  run_info: components.RunInfo$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "run_info": "runInfo",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    run_info: components.RunInfo$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "run_info": "runInfo",
+    });
+  })
+);
 /** @internal */
 export type TrackingRunsUpdateResponseBody$Outbound = {
   run_info?: components.RunInfo$Outbound | undefined;
@@ -184,13 +194,15 @@ export const TrackingRunsUpdateResponseBody$outboundSchema: z.ZodType<
   TrackingRunsUpdateResponseBody$Outbound,
   z.ZodTypeDef,
   TrackingRunsUpdateResponseBody
-> = z.object({
-  runInfo: components.RunInfo$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    runInfo: "run_info",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    runInfo: components.RunInfo$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      runInfo: "run_info",
+    });
+  })
+);
 
 export function trackingRunsUpdateResponseBodyToJSON(
   trackingRunsUpdateResponseBody: TrackingRunsUpdateResponseBody,

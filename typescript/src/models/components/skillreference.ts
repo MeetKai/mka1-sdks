@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -30,7 +30,7 @@ export const SkillReferenceVersion$inboundSchema: z.ZodType<
   SkillReferenceVersion,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 /** @internal */
 export type SkillReferenceVersion$Outbound = string | number;
 
@@ -39,7 +39,7 @@ export const SkillReferenceVersion$outboundSchema: z.ZodType<
   SkillReferenceVersion$Outbound,
   z.ZodTypeDef,
   SkillReferenceVersion
-> = z.union([z.string(), z.number().int()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.string(), z.number().int()]));
 
 export function skillReferenceVersionToJSON(
   skillReferenceVersion: SkillReferenceVersion,
@@ -63,15 +63,17 @@ export const SkillReference$inboundSchema: z.ZodType<
   SkillReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("skill_reference"),
-  skill_id: z.string(),
-  version: z.union([z.string(), z.number().int()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("skill_reference"),
+    skill_id: z.string(),
+    version: z.union([z.string(), z.number().int()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+    });
+  })
+);
 /** @internal */
 export type SkillReference$Outbound = {
   type: "skill_reference";
@@ -84,15 +86,17 @@ export const SkillReference$outboundSchema: z.ZodType<
   SkillReference$Outbound,
   z.ZodTypeDef,
   SkillReference
-> = z.object({
-  type: z.literal("skill_reference"),
-  skillId: z.string(),
-  version: z.union([z.string(), z.number().int()]).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("skill_reference"),
+    skillId: z.string(),
+    version: z.union([z.string(), z.number().int()]).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+    });
+  })
+);
 
 export function skillReferenceToJSON(skillReference: SkillReference): string {
   return JSON.stringify(SkillReference$outboundSchema.parse(skillReference));

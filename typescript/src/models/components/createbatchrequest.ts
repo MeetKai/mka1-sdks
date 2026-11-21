@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,19 +29,21 @@ export const CreateBatchRequest$inboundSchema: z.ZodType<
   CreateBatchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  input_file_id: z.string(),
-  endpoint: BatchEndpoint$inboundSchema,
-  completion_window: z.literal("24h"),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  max_concurrency: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "input_file_id": "inputFileId",
-    "completion_window": "completionWindow",
-    "max_concurrency": "maxConcurrency",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input_file_id: z.string(),
+    endpoint: BatchEndpoint$inboundSchema,
+    completion_window: z.literal("24h"),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    max_concurrency: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "input_file_id": "inputFileId",
+      "completion_window": "completionWindow",
+      "max_concurrency": "maxConcurrency",
+    });
+  })
+);
 /** @internal */
 export type CreateBatchRequest$Outbound = {
   input_file_id: string;
@@ -56,19 +58,21 @@ export const CreateBatchRequest$outboundSchema: z.ZodType<
   CreateBatchRequest$Outbound,
   z.ZodTypeDef,
   CreateBatchRequest
-> = z.object({
-  inputFileId: z.string(),
-  endpoint: BatchEndpoint$outboundSchema,
-  completionWindow: z.literal("24h"),
-  metadata: z.nullable(z.record(z.string())).optional(),
-  maxConcurrency: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputFileId: "input_file_id",
-    completionWindow: "completion_window",
-    maxConcurrency: "max_concurrency",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputFileId: z.string(),
+    endpoint: BatchEndpoint$outboundSchema,
+    completionWindow: z.literal("24h"),
+    metadata: z.nullable(z.record(z.string())).optional(),
+    maxConcurrency: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputFileId: "input_file_id",
+      completionWindow: "completion_window",
+      maxConcurrency: "max_concurrency",
+    });
+  })
+);
 
 export function createBatchRequestToJSON(
   createBatchRequest: CreateBatchRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -83,7 +83,9 @@ export type AnalyticsEventSearchRequest = {
 /** @internal */
 export const AnalyticsEventSearchRequestOp$inboundSchema: z.ZodNativeEnum<
   typeof AnalyticsEventSearchRequestOp
-> = z.nativeEnum(AnalyticsEventSearchRequestOp);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AnalyticsEventSearchRequestOp)
+);
 /** @internal */
 export const AnalyticsEventSearchRequestOp$outboundSchema: z.ZodNativeEnum<
   typeof AnalyticsEventSearchRequestOp
@@ -94,7 +96,9 @@ export const AnalyticsEventSearchRequestValue$inboundSchema: z.ZodType<
   AnalyticsEventSearchRequestValue,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 /** @internal */
 export type AnalyticsEventSearchRequestValue$Outbound =
   | string
@@ -106,7 +110,9 @@ export const AnalyticsEventSearchRequestValue$outboundSchema: z.ZodType<
   AnalyticsEventSearchRequestValue$Outbound,
   z.ZodTypeDef,
   AnalyticsEventSearchRequestValue
-> = z.union([z.string(), z.number(), z.boolean()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.number(), z.boolean()])
+);
 
 export function analyticsEventSearchRequestValueToJSON(
   analyticsEventSearchRequestValue: AnalyticsEventSearchRequestValue,
@@ -132,11 +138,14 @@ export const AnalyticsEventSearchRequestFilters$inboundSchema: z.ZodType<
   AnalyticsEventSearchRequestFilters,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  property: z.string(),
-  op: AnalyticsEventSearchRequestOp$inboundSchema,
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    property: z.string(),
+    op: AnalyticsEventSearchRequestOp$inboundSchema,
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+  })
+);
 /** @internal */
 export type AnalyticsEventSearchRequestFilters$Outbound = {
   property: string;
@@ -149,11 +158,14 @@ export const AnalyticsEventSearchRequestFilters$outboundSchema: z.ZodType<
   AnalyticsEventSearchRequestFilters$Outbound,
   z.ZodTypeDef,
   AnalyticsEventSearchRequestFilters
-> = z.object({
-  property: z.string(),
-  op: AnalyticsEventSearchRequestOp$outboundSchema,
-  value: z.nullable(z.union([z.string(), z.number(), z.boolean()])).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    property: z.string(),
+    op: AnalyticsEventSearchRequestOp$outboundSchema,
+    value: z.nullable(z.union([z.string(), z.number(), z.boolean()]))
+      .optional(),
+  })
+);
 
 export function analyticsEventSearchRequestFiltersToJSON(
   analyticsEventSearchRequestFilters: AnalyticsEventSearchRequestFilters,
@@ -180,22 +192,24 @@ export const AnalyticsEventSearchRequest$inboundSchema: z.ZodType<
   AnalyticsEventSearchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  event_name: z.string().optional(),
-  filters: z.array(
-    z.lazy(() => AnalyticsEventSearchRequestFilters$inboundSchema),
-  ).optional(),
-  distinct_id: z.string().optional(),
-  limit: z.number().int().default(50),
-  cursor: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "event_name": "eventName",
-    "distinct_id": "distinctId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    to: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    event_name: z.string().optional(),
+    filters: z.array(
+      z.lazy(() => AnalyticsEventSearchRequestFilters$inboundSchema),
+    ).optional(),
+    distinct_id: z.string().optional(),
+    limit: z.number().int().default(50),
+    cursor: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "event_name": "eventName",
+      "distinct_id": "distinctId",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsEventSearchRequest$Outbound = {
   from: string;
@@ -212,22 +226,24 @@ export const AnalyticsEventSearchRequest$outboundSchema: z.ZodType<
   AnalyticsEventSearchRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsEventSearchRequest
-> = z.object({
-  from: z.date().transform(v => v.toISOString()),
-  to: z.date().transform(v => v.toISOString()),
-  eventName: z.string().optional(),
-  filters: z.array(
-    z.lazy(() => AnalyticsEventSearchRequestFilters$outboundSchema),
-  ).optional(),
-  distinctId: z.string().optional(),
-  limit: z.number().int().default(50),
-  cursor: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    eventName: "event_name",
-    distinctId: "distinct_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    from: z.date().transform(v => v.toISOString()),
+    to: z.date().transform(v => v.toISOString()),
+    eventName: z.string().optional(),
+    filters: z.array(
+      z.lazy(() => AnalyticsEventSearchRequestFilters$outboundSchema),
+    ).optional(),
+    distinctId: z.string().optional(),
+    limit: z.number().int().default(50),
+    cursor: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      eventName: "event_name",
+      distinctId: "distinct_id",
+    });
+  })
+);
 
 export function analyticsEventSearchRequestToJSON(
   analyticsEventSearchRequest: AnalyticsEventSearchRequest,

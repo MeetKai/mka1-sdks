@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -61,23 +61,25 @@ export const ExtractionResponseMetadata$inboundSchema: z.ZodType<
   ExtractionResponseMetadata,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  filename: z.string(),
-  file_size: z.number(),
-  extracted_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  schema_id: z.string().optional(),
-  schema_name: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_size": "fileSize",
-    "extracted_at": "extractedAt",
-    "schema_id": "schemaId",
-    "schema_name": "schemaName",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    filename: z.string(),
+    file_size: z.number(),
+    extracted_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    schema_id: z.string().optional(),
+    schema_name: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_size": "fileSize",
+      "extracted_at": "extractedAt",
+      "schema_id": "schemaId",
+      "schema_name": "schemaName",
+    });
+  })
+);
 /** @internal */
 export type ExtractionResponseMetadata$Outbound = {
   model: string;
@@ -93,21 +95,23 @@ export const ExtractionResponseMetadata$outboundSchema: z.ZodType<
   ExtractionResponseMetadata$Outbound,
   z.ZodTypeDef,
   ExtractionResponseMetadata
-> = z.object({
-  model: z.string(),
-  filename: z.string(),
-  fileSize: z.number(),
-  extractedAt: z.date().transform(v => v.toISOString()),
-  schemaId: z.string().optional(),
-  schemaName: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileSize: "file_size",
-    extractedAt: "extracted_at",
-    schemaId: "schema_id",
-    schemaName: "schema_name",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    filename: z.string(),
+    fileSize: z.number(),
+    extractedAt: z.date().transform(v => v.toISOString()),
+    schemaId: z.string().optional(),
+    schemaName: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileSize: "file_size",
+      extractedAt: "extracted_at",
+      schemaId: "schema_id",
+      schemaName: "schema_name",
+    });
+  })
+);
 
 export function extractionResponseMetadataToJSON(
   extractionResponseMetadata: ExtractionResponseMetadata,
@@ -131,11 +135,13 @@ export const ExtractionResponse$inboundSchema: z.ZodType<
   ExtractionResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  success: z.boolean(),
-  data: z.any().optional(),
-  metadata: z.lazy(() => ExtractionResponseMetadata$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.any().optional(),
+    metadata: z.lazy(() => ExtractionResponseMetadata$inboundSchema),
+  })
+);
 /** @internal */
 export type ExtractionResponse$Outbound = {
   success: boolean;
@@ -148,11 +154,13 @@ export const ExtractionResponse$outboundSchema: z.ZodType<
   ExtractionResponse$Outbound,
   z.ZodTypeDef,
   ExtractionResponse
-> = z.object({
-  success: z.boolean(),
-  data: z.any().optional(),
-  metadata: z.lazy(() => ExtractionResponseMetadata$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    success: z.boolean(),
+    data: z.any().optional(),
+    metadata: z.lazy(() => ExtractionResponseMetadata$outboundSchema),
+  })
+);
 
 export function extractionResponseToJSON(
   extractionResponse: ExtractionResponse,

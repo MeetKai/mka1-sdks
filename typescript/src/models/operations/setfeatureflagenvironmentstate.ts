@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,19 +36,21 @@ export const SetFeatureFlagEnvironmentStateRequest$inboundSchema: z.ZodType<
   SetFeatureFlagEnvironmentStateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  key: z.string(),
-  env: z.string(),
-  "If-Match": z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagStateInput: components.FeatureFlagStateInput$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "If-Match": "ifMatch",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagStateInput": "featureFlagStateInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string(),
+    env: z.string(),
+    "If-Match": z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagStateInput: components.FeatureFlagStateInput$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "If-Match": "ifMatch",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagStateInput": "featureFlagStateInput",
+    });
+  })
+);
 /** @internal */
 export type SetFeatureFlagEnvironmentStateRequest$Outbound = {
   key: string;
@@ -60,19 +65,25 @@ export const SetFeatureFlagEnvironmentStateRequest$outboundSchema: z.ZodType<
   SetFeatureFlagEnvironmentStateRequest$Outbound,
   z.ZodTypeDef,
   SetFeatureFlagEnvironmentStateRequest
-> = z.object({
-  key: z.string(),
-  env: z.string(),
-  ifMatch: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-  featureFlagStateInput: components.FeatureFlagStateInput$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    ifMatch: "If-Match",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagStateInput: "FeatureFlagStateInput",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    key: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    env: z.string().refine(matchesPattern$("^[a-z0-9][a-z0-9-]{0,62}$"), {
+      message: "Value must match pattern ^[a-z0-9][a-z0-9-]{0,62}$",
+    }),
+    ifMatch: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+    featureFlagStateInput: components.FeatureFlagStateInput$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      ifMatch: "If-Match",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagStateInput: "FeatureFlagStateInput",
+    });
+  })
+);
 
 export function setFeatureFlagEnvironmentStateRequestToJSON(
   setFeatureFlagEnvironmentStateRequest: SetFeatureFlagEnvironmentStateRequest,
@@ -99,15 +110,17 @@ export const SetFeatureFlagEnvironmentStateResponse$inboundSchema: z.ZodType<
   SetFeatureFlagEnvironmentStateResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: components.FeatureFlagState$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: components.FeatureFlagState$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type SetFeatureFlagEnvironmentStateResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -119,15 +132,17 @@ export const SetFeatureFlagEnvironmentStateResponse$outboundSchema: z.ZodType<
   SetFeatureFlagEnvironmentStateResponse$Outbound,
   z.ZodTypeDef,
   SetFeatureFlagEnvironmentStateResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: components.FeatureFlagState$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: components.FeatureFlagState$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function setFeatureFlagEnvironmentStateResponseToJSON(
   setFeatureFlagEnvironmentStateResponse:

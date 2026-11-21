@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const DeleteMemoryEntryRequest$inboundSchema: z.ZodType<
   DeleteMemoryEntryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  if_match: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "if_match": "ifMatch",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    if_match: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "if_match": "ifMatch",
+    });
+  })
+);
 /** @internal */
 export type DeleteMemoryEntryRequest$Outbound = {
   if_match?: string | undefined;
@@ -34,13 +36,15 @@ export const DeleteMemoryEntryRequest$outboundSchema: z.ZodType<
   DeleteMemoryEntryRequest$Outbound,
   z.ZodTypeDef,
   DeleteMemoryEntryRequest
-> = z.object({
-  ifMatch: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ifMatch: "if_match",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ifMatch: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ifMatch: "if_match",
+    });
+  })
+);
 
 export function deleteMemoryEntryRequestToJSON(
   deleteMemoryEntryRequest: DeleteMemoryEntryRequest,

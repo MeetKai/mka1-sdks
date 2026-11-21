@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,34 +48,36 @@ export const CreateEvalRunRequest$inboundSchema: z.ZodType<
   CreateEvalRunRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  suite_version: z.number().int().optional(),
-  models: z.array(z.string()).optional(),
-  candidates: z.array(EvalCandidate$inboundSchema).optional(),
-  task_ids: z.array(z.string()).optional(),
-  judge_model: z.string().optional(),
-  embedding_model: z.string().optional(),
-  generation: EvalGenerationRequestConfig$inboundSchema.optional(),
-  generation_concurrency: z.number().int().optional(),
-  concurrency: z.number().int().optional(),
-  grader_concurrency: z.number().int().optional(),
-  max_samples_per_task: z.number().int().optional(),
-  max_workflow_sample_activities: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-    "task_ids": "taskIds",
-    "judge_model": "judgeModel",
-    "embedding_model": "embeddingModel",
-    "generation_concurrency": "generationConcurrency",
-    "grader_concurrency": "graderConcurrency",
-    "max_samples_per_task": "maxSamplesPerTask",
-    "max_workflow_sample_activities": "maxWorkflowSampleActivities",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    suite_version: z.number().int().optional(),
+    models: z.array(z.string()).optional(),
+    candidates: z.array(EvalCandidate$inboundSchema).optional(),
+    task_ids: z.array(z.string()).optional(),
+    judge_model: z.string().optional(),
+    embedding_model: z.string().optional(),
+    generation: EvalGenerationRequestConfig$inboundSchema.optional(),
+    generation_concurrency: z.number().int().optional(),
+    concurrency: z.number().int().optional(),
+    grader_concurrency: z.number().int().optional(),
+    max_samples_per_task: z.number().int().optional(),
+    max_workflow_sample_activities: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+      "task_ids": "taskIds",
+      "judge_model": "judgeModel",
+      "embedding_model": "embeddingModel",
+      "generation_concurrency": "generationConcurrency",
+      "grader_concurrency": "graderConcurrency",
+      "max_samples_per_task": "maxSamplesPerTask",
+      "max_workflow_sample_activities": "maxWorkflowSampleActivities",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalRunRequest$Outbound = {
   suite_id: string;
@@ -99,34 +101,36 @@ export const CreateEvalRunRequest$outboundSchema: z.ZodType<
   CreateEvalRunRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalRunRequest
-> = z.object({
-  suiteId: z.string(),
-  suiteVersion: z.number().int().optional(),
-  models: z.array(z.string()).optional(),
-  candidates: z.array(EvalCandidate$outboundSchema).optional(),
-  taskIds: z.array(z.string()).optional(),
-  judgeModel: z.string().optional(),
-  embeddingModel: z.string().optional(),
-  generation: EvalGenerationRequestConfig$outboundSchema.optional(),
-  generationConcurrency: z.number().int().optional(),
-  concurrency: z.number().int().optional(),
-  graderConcurrency: z.number().int().optional(),
-  maxSamplesPerTask: z.number().int().optional(),
-  maxWorkflowSampleActivities: z.number().int().optional(),
-  metadata: z.record(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-    taskIds: "task_ids",
-    judgeModel: "judge_model",
-    embeddingModel: "embedding_model",
-    generationConcurrency: "generation_concurrency",
-    graderConcurrency: "grader_concurrency",
-    maxSamplesPerTask: "max_samples_per_task",
-    maxWorkflowSampleActivities: "max_workflow_sample_activities",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    suiteVersion: z.number().int().optional(),
+    models: z.array(z.string()).optional(),
+    candidates: z.array(EvalCandidate$outboundSchema).optional(),
+    taskIds: z.array(z.string()).optional(),
+    judgeModel: z.string().optional(),
+    embeddingModel: z.string().optional(),
+    generation: EvalGenerationRequestConfig$outboundSchema.optional(),
+    generationConcurrency: z.number().int().optional(),
+    concurrency: z.number().int().optional(),
+    graderConcurrency: z.number().int().optional(),
+    maxSamplesPerTask: z.number().int().optional(),
+    maxWorkflowSampleActivities: z.number().int().optional(),
+    metadata: z.record(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+      taskIds: "task_ids",
+      judgeModel: "judge_model",
+      embeddingModel: "embedding_model",
+      generationConcurrency: "generation_concurrency",
+      graderConcurrency: "grader_concurrency",
+      maxSamplesPerTask: "max_samples_per_task",
+      maxWorkflowSampleActivities: "max_workflow_sample_activities",
+    });
+  })
+);
 
 export function createEvalRunRequestToJSON(
   createEvalRunRequest: CreateEvalRunRequest,

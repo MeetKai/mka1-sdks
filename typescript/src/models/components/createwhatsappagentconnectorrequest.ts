@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -67,15 +67,17 @@ export const CreateWhatsAppAgentConnectorRequestCredentials$inboundSchema:
     CreateWhatsAppAgentConnectorRequestCredentials,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    access_token: z.string(),
-    app_secret: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "access_token": "accessToken",
-      "app_secret": "appSecret",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      access_token: z.string(),
+      app_secret: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "access_token": "accessToken",
+        "app_secret": "appSecret",
+      });
+    })
+  );
 /** @internal */
 export type CreateWhatsAppAgentConnectorRequestCredentials$Outbound = {
   access_token: string;
@@ -88,15 +90,17 @@ export const CreateWhatsAppAgentConnectorRequestCredentials$outboundSchema:
     CreateWhatsAppAgentConnectorRequestCredentials$Outbound,
     z.ZodTypeDef,
     CreateWhatsAppAgentConnectorRequestCredentials
-  > = z.object({
-    accessToken: z.string(),
-    appSecret: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      accessToken: "access_token",
-      appSecret: "app_secret",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      accessToken: z.string(),
+      appSecret: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        accessToken: "access_token",
+        appSecret: "app_secret",
+      });
+    })
+  );
 
 export function createWhatsAppAgentConnectorRequestCredentialsToJSON(
   createWhatsAppAgentConnectorRequestCredentials:
@@ -126,17 +130,19 @@ export function createWhatsAppAgentConnectorRequestCredentialsFromJSON(
 
 /** @internal */
 export const Account$inboundSchema: z.ZodType<Account, z.ZodTypeDef, unknown> =
-  z.object({
-    app_id: z.string(),
-    whatsapp_business_account_id: z.string(),
-    phone_number_id: z.string(),
-  }).transform((v) => {
-    return remap$(v, {
-      "app_id": "appId",
-      "whatsapp_business_account_id": "whatsappBusinessAccountId",
-      "phone_number_id": "phoneNumberId",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      app_id: z.string(),
+      whatsapp_business_account_id: z.string(),
+      phone_number_id: z.string(),
+    }).transform((v) => {
+      return remap$(v, {
+        "app_id": "appId",
+        "whatsapp_business_account_id": "whatsappBusinessAccountId",
+        "phone_number_id": "phoneNumberId",
+      });
+    })
+  );
 /** @internal */
 export type Account$Outbound = {
   app_id: string;
@@ -149,17 +155,19 @@ export const Account$outboundSchema: z.ZodType<
   Account$Outbound,
   z.ZodTypeDef,
   Account
-> = z.object({
-  appId: z.string(),
-  whatsappBusinessAccountId: z.string(),
-  phoneNumberId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    appId: "app_id",
-    whatsappBusinessAccountId: "whatsapp_business_account_id",
-    phoneNumberId: "phone_number_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    appId: z.string(),
+    whatsappBusinessAccountId: z.string(),
+    phoneNumberId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      appId: "app_id",
+      whatsappBusinessAccountId: "whatsapp_business_account_id",
+      phoneNumberId: "phone_number_id",
+    });
+  })
+);
 
 export function accountToJSON(account: Account): string {
   return JSON.stringify(Account$outboundSchema.parse(account));
@@ -176,8 +184,10 @@ export function accountFromJSON(
 
 /** @internal */
 export const CreateWhatsAppAgentConnectorRequestMode$inboundSchema:
-  z.ZodNativeEnum<typeof CreateWhatsAppAgentConnectorRequestMode> = z
-    .nativeEnum(CreateWhatsAppAgentConnectorRequestMode);
+  z.ZodNativeEnum<typeof CreateWhatsAppAgentConnectorRequestMode> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateWhatsAppAgentConnectorRequestMode)
+    );
 /** @internal */
 export const CreateWhatsAppAgentConnectorRequestMode$outboundSchema:
   z.ZodNativeEnum<typeof CreateWhatsAppAgentConnectorRequestMode> =
@@ -188,14 +198,16 @@ export const CreateWhatsAppAgentConnectorRequestAccess$inboundSchema: z.ZodType<
   CreateWhatsAppAgentConnectorRequestAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: CreateWhatsAppAgentConnectorRequestMode$inboundSchema,
-  user_ids: z.array(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "user_ids": "userIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CreateWhatsAppAgentConnectorRequestMode$inboundSchema,
+    user_ids: z.array(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_ids": "userIds",
+    });
+  })
+);
 /** @internal */
 export type CreateWhatsAppAgentConnectorRequestAccess$Outbound = {
   mode: string;
@@ -208,14 +220,16 @@ export const CreateWhatsAppAgentConnectorRequestAccess$outboundSchema:
     CreateWhatsAppAgentConnectorRequestAccess$Outbound,
     z.ZodTypeDef,
     CreateWhatsAppAgentConnectorRequestAccess
-  > = z.object({
-    mode: CreateWhatsAppAgentConnectorRequestMode$outboundSchema,
-    userIds: z.array(z.string()),
-  }).transform((v) => {
-    return remap$(v, {
-      userIds: "user_ids",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mode: CreateWhatsAppAgentConnectorRequestMode$outboundSchema,
+      userIds: z.array(z.string()),
+    }).transform((v) => {
+      return remap$(v, {
+        userIds: "user_ids",
+      });
+    })
+  );
 
 export function createWhatsAppAgentConnectorRequestAccessToJSON(
   createWhatsAppAgentConnectorRequestAccess:
@@ -248,15 +262,19 @@ export const CreateWhatsAppAgentConnectorRequest$inboundSchema: z.ZodType<
   CreateWhatsAppAgentConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.literal("whatsapp"),
-  name: z.string().optional(),
-  credentials: z.lazy(() =>
-    CreateWhatsAppAgentConnectorRequestCredentials$inboundSchema
-  ),
-  account: z.lazy(() => Account$inboundSchema),
-  access: z.lazy(() => CreateWhatsAppAgentConnectorRequestAccess$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("whatsapp"),
+    name: z.string().optional(),
+    credentials: z.lazy(() =>
+      CreateWhatsAppAgentConnectorRequestCredentials$inboundSchema
+    ),
+    account: z.lazy(() => Account$inboundSchema),
+    access: z.lazy(() =>
+      CreateWhatsAppAgentConnectorRequestAccess$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type CreateWhatsAppAgentConnectorRequest$Outbound = {
   provider: "whatsapp";
@@ -271,17 +289,19 @@ export const CreateWhatsAppAgentConnectorRequest$outboundSchema: z.ZodType<
   CreateWhatsAppAgentConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateWhatsAppAgentConnectorRequest
-> = z.object({
-  provider: z.literal("whatsapp"),
-  name: z.string().optional(),
-  credentials: z.lazy(() =>
-    CreateWhatsAppAgentConnectorRequestCredentials$outboundSchema
-  ),
-  account: z.lazy(() => Account$outboundSchema),
-  access: z.lazy(() =>
-    CreateWhatsAppAgentConnectorRequestAccess$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("whatsapp"),
+    name: z.string().optional(),
+    credentials: z.lazy(() =>
+      CreateWhatsAppAgentConnectorRequestCredentials$outboundSchema
+    ),
+    account: z.lazy(() => Account$outboundSchema),
+    access: z.lazy(() =>
+      CreateWhatsAppAgentConnectorRequestAccess$outboundSchema
+    ),
+  })
+);
 
 export function createWhatsAppAgentConnectorRequestToJSON(
   createWhatsAppAgentConnectorRequest: CreateWhatsAppAgentConnectorRequest,

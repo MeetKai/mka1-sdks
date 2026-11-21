@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -71,7 +71,7 @@ export type OpenApiToolSet = {
 /** @internal */
 export const OpenApiToolSetObject$inboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetObject
-> = z.nativeEnum(OpenApiToolSetObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OpenApiToolSetObject));
 /** @internal */
 export const OpenApiToolSetObject$outboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetObject
@@ -82,16 +82,18 @@ export const SkippedOperations$inboundSchema: z.ZodType<
   SkippedOperations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  operation_id: z.nullable(z.string()),
-  method: z.string(),
-  path: z.string(),
-  reason: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "operation_id": "operationId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    operation_id: z.nullable(z.string()),
+    method: z.string(),
+    path: z.string(),
+    reason: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "operation_id": "operationId",
+    });
+  })
+);
 /** @internal */
 export type SkippedOperations$Outbound = {
   operation_id: string | null;
@@ -105,16 +107,18 @@ export const SkippedOperations$outboundSchema: z.ZodType<
   SkippedOperations$Outbound,
   z.ZodTypeDef,
   SkippedOperations
-> = z.object({
-  operationId: z.nullable(z.string()),
-  method: z.string(),
-  path: z.string(),
-  reason: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    operationId: "operation_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    operationId: z.nullable(z.string()),
+    method: z.string(),
+    path: z.string(),
+    reason: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      operationId: "operation_id",
+    });
+  })
+);
 
 export function skippedOperationsToJSON(
   skippedOperations: SkippedOperations,
@@ -136,7 +140,7 @@ export function skippedOperationsFromJSON(
 /** @internal */
 export const OpenApiToolSetType$inboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetType
-> = z.nativeEnum(OpenApiToolSetType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OpenApiToolSetType));
 /** @internal */
 export const OpenApiToolSetType$outboundSchema: z.ZodNativeEnum<
   typeof OpenApiToolSetType
@@ -147,11 +151,13 @@ export const Authentication$inboundSchema: z.ZodType<
   Authentication,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scheme: z.string(),
-  type: OpenApiToolSetType$inboundSchema,
-  header: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheme: z.string(),
+    type: OpenApiToolSetType$inboundSchema,
+    header: z.string(),
+  })
+);
 /** @internal */
 export type Authentication$Outbound = {
   scheme: string;
@@ -164,11 +170,13 @@ export const Authentication$outboundSchema: z.ZodType<
   Authentication$Outbound,
   z.ZodTypeDef,
   Authentication
-> = z.object({
-  scheme: z.string(),
-  type: OpenApiToolSetType$outboundSchema,
-  header: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scheme: z.string(),
+    type: OpenApiToolSetType$outboundSchema,
+    header: z.string(),
+  })
+);
 
 export function authenticationToJSON(authentication: Authentication): string {
   return JSON.stringify(Authentication$outboundSchema.parse(authentication));
@@ -188,24 +196,30 @@ export const OpenApiToolSet$inboundSchema: z.ZodType<
   OpenApiToolSet,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: OpenApiToolSetObject$inboundSchema,
-  id: z.string(),
-  name: z.string(),
-  title: z.nullable(z.string()),
-  version: z.nullable(z.string()),
-  definition: AgentsOpenApiToolDefinition$inboundSchema,
-  skipped_operations: z.array(z.lazy(() => SkippedOperations$inboundSchema)),
-  authentication: z.array(z.lazy(() => Authentication$inboundSchema)),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "skipped_operations": "skippedOperations",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: OpenApiToolSetObject$inboundSchema,
+    id: z.string(),
+    name: z.string(),
+    title: z.nullable(z.string()),
+    version: z.nullable(z.string()),
+    definition: AgentsOpenApiToolDefinition$inboundSchema,
+    skipped_operations: z.array(z.lazy(() => SkippedOperations$inboundSchema)),
+    authentication: z.array(z.lazy(() => Authentication$inboundSchema)),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "skipped_operations": "skippedOperations",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type OpenApiToolSet$Outbound = {
   object: string;
@@ -225,24 +239,26 @@ export const OpenApiToolSet$outboundSchema: z.ZodType<
   OpenApiToolSet$Outbound,
   z.ZodTypeDef,
   OpenApiToolSet
-> = z.object({
-  object: OpenApiToolSetObject$outboundSchema,
-  id: z.string(),
-  name: z.string(),
-  title: z.nullable(z.string()),
-  version: z.nullable(z.string()),
-  definition: AgentsOpenApiToolDefinition$outboundSchema,
-  skippedOperations: z.array(z.lazy(() => SkippedOperations$outboundSchema)),
-  authentication: z.array(z.lazy(() => Authentication$outboundSchema)),
-  createdAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    skippedOperations: "skipped_operations",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: OpenApiToolSetObject$outboundSchema,
+    id: z.string(),
+    name: z.string(),
+    title: z.nullable(z.string()),
+    version: z.nullable(z.string()),
+    definition: AgentsOpenApiToolDefinition$outboundSchema,
+    skippedOperations: z.array(z.lazy(() => SkippedOperations$outboundSchema)),
+    authentication: z.array(z.lazy(() => Authentication$outboundSchema)),
+    createdAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      skippedOperations: "skipped_operations",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function openApiToolSetToJSON(openApiToolSet: OpenApiToolSet): string {
   return JSON.stringify(OpenApiToolSet$outboundSchema.parse(openApiToolSet));

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -48,12 +48,14 @@ export const FunctionT$inboundSchema: z.ZodType<
   FunctionT,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    parameters: z.any().optional(),
+    strict: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type FunctionT$Outbound = {
   name: string;
@@ -67,12 +69,14 @@ export const FunctionT$outboundSchema: z.ZodType<
   FunctionT$Outbound,
   z.ZodTypeDef,
   FunctionT
-> = z.object({
-  name: z.string(),
-  description: z.string().optional(),
-  parameters: z.any().optional(),
-  strict: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    description: z.string().optional(),
+    parameters: z.any().optional(),
+    strict: z.boolean().optional(),
+  })
+);
 
 export function functionToJSON(functionT: FunctionT): string {
   return JSON.stringify(FunctionT$outboundSchema.parse(functionT));
@@ -92,10 +96,12 @@ export const OpenAIToolDefinition$inboundSchema: z.ZodType<
   OpenAIToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function"),
-  function: z.lazy(() => FunctionT$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    function: z.lazy(() => FunctionT$inboundSchema),
+  })
+);
 /** @internal */
 export type OpenAIToolDefinition$Outbound = {
   type: "function";
@@ -107,10 +113,12 @@ export const OpenAIToolDefinition$outboundSchema: z.ZodType<
   OpenAIToolDefinition$Outbound,
   z.ZodTypeDef,
   OpenAIToolDefinition
-> = z.object({
-  type: z.literal("function"),
-  function: z.lazy(() => FunctionT$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    function: z.lazy(() => FunctionT$outboundSchema),
+  })
+);
 
 export function openAIToolDefinitionToJSON(
   openAIToolDefinition: OpenAIToolDefinition,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -35,23 +35,25 @@ export const CodeResult$inboundSchema: z.ZodType<
   CodeResult,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  runtime: CodeRuntime$inboundSchema,
-  cwd: z.string(),
-  stdout: z.string().default(""),
-  stderr: z.string().default(""),
-  exit_code: z.number().int(),
-  files_changed: z.array(z.string()).optional(),
-  resource_usage: z.nullable(RuntimeResourceUsage$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "exit_code": "exitCode",
-    "files_changed": "filesChanged",
-    "resource_usage": "resourceUsage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    runtime: CodeRuntime$inboundSchema,
+    cwd: z.string(),
+    stdout: z.string().default(""),
+    stderr: z.string().default(""),
+    exit_code: z.number().int(),
+    files_changed: z.array(z.string()).optional(),
+    resource_usage: z.nullable(RuntimeResourceUsage$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "exit_code": "exitCode",
+      "files_changed": "filesChanged",
+      "resource_usage": "resourceUsage",
+    });
+  })
+);
 /** @internal */
 export type CodeResult$Outbound = {
   session_id: string;
@@ -69,23 +71,25 @@ export const CodeResult$outboundSchema: z.ZodType<
   CodeResult$Outbound,
   z.ZodTypeDef,
   CodeResult
-> = z.object({
-  sessionId: z.string(),
-  runtime: CodeRuntime$outboundSchema,
-  cwd: z.string(),
-  stdout: z.string().default(""),
-  stderr: z.string().default(""),
-  exitCode: z.number().int(),
-  filesChanged: z.array(z.string()).optional(),
-  resourceUsage: z.nullable(RuntimeResourceUsage$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    exitCode: "exit_code",
-    filesChanged: "files_changed",
-    resourceUsage: "resource_usage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    runtime: CodeRuntime$outboundSchema,
+    cwd: z.string(),
+    stdout: z.string().default(""),
+    stderr: z.string().default(""),
+    exitCode: z.number().int(),
+    filesChanged: z.array(z.string()).optional(),
+    resourceUsage: z.nullable(RuntimeResourceUsage$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      exitCode: "exit_code",
+      filesChanged: "files_changed",
+      resourceUsage: "resource_usage",
+    });
+  })
+);
 
 export function codeResultToJSON(codeResult: CodeResult): string {
   return JSON.stringify(CodeResult$outboundSchema.parse(codeResult));

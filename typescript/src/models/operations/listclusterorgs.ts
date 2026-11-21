@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,13 +47,15 @@ export const ListClusterOrgsRequest$inboundSchema: z.ZodType<
   ListClusterOrgsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ListClusterOrgsRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -64,13 +66,15 @@ export const ListClusterOrgsRequest$outboundSchema: z.ZodType<
   ListClusterOrgsRequest$Outbound,
   z.ZodTypeDef,
   ListClusterOrgsRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function listClusterOrgsRequestToJSON(
   listClusterOrgsRequest: ListClusterOrgsRequest,
@@ -92,7 +96,7 @@ export function listClusterOrgsRequestFromJSON(
 /** @internal */
 export const ListClusterOrgsStatus$inboundSchema: z.ZodNativeEnum<
   typeof ListClusterOrgsStatus
-> = z.nativeEnum(ListClusterOrgsStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ListClusterOrgsStatus));
 /** @internal */
 export const ListClusterOrgsStatus$outboundSchema: z.ZodNativeEnum<
   typeof ListClusterOrgsStatus
@@ -103,17 +107,19 @@ export const Organizations$inboundSchema: z.ZodType<
   Organizations,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: ListClusterOrgsStatus$inboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().optional(),
-  apiKeyCount: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: ListClusterOrgsStatus$inboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().optional(),
+    apiKeyCount: z.number().optional(),
+  })
+);
 /** @internal */
 export type Organizations$Outbound = {
   id: string;
@@ -132,17 +138,19 @@ export const Organizations$outboundSchema: z.ZodType<
   Organizations$Outbound,
   z.ZodTypeDef,
   Organizations
-> = z.object({
-  id: z.string(),
-  slug: z.string(),
-  name: z.string(),
-  logo: z.nullable(z.string()),
-  status: ListClusterOrgsStatus$outboundSchema,
-  createdAt: z.string(),
-  purgeAfter: z.nullable(z.string()).optional(),
-  memberCount: z.number().optional(),
-  apiKeyCount: z.number().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    slug: z.string(),
+    name: z.string(),
+    logo: z.nullable(z.string()),
+    status: ListClusterOrgsStatus$outboundSchema,
+    createdAt: z.string(),
+    purgeAfter: z.nullable(z.string()).optional(),
+    memberCount: z.number().optional(),
+    apiKeyCount: z.number().optional(),
+  })
+);
 
 export function organizationsToJSON(organizations: Organizations): string {
   return JSON.stringify(Organizations$outboundSchema.parse(organizations));
@@ -162,9 +170,11 @@ export const ListClusterOrgsResponseBody$inboundSchema: z.ZodType<
   ListClusterOrgsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  organizations: z.array(z.lazy(() => Organizations$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizations: z.array(z.lazy(() => Organizations$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListClusterOrgsResponseBody$Outbound = {
   organizations: Array<Organizations$Outbound>;
@@ -175,9 +185,11 @@ export const ListClusterOrgsResponseBody$outboundSchema: z.ZodType<
   ListClusterOrgsResponseBody$Outbound,
   z.ZodTypeDef,
   ListClusterOrgsResponseBody
-> = z.object({
-  organizations: z.array(z.lazy(() => Organizations$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    organizations: z.array(z.lazy(() => Organizations$outboundSchema)),
+  })
+);
 
 export function listClusterOrgsResponseBodyToJSON(
   listClusterOrgsResponseBody: ListClusterOrgsResponseBody,

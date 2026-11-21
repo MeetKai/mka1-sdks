@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,13 +25,15 @@ export const UpdateMemoryStoreRequest$inboundSchema: z.ZodType<
   UpdateMemoryStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
-  visibility: MemoryStoreVisibility$inboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    instructions: z.nullable(z.string()).optional(),
+    visibility: MemoryStoreVisibility$inboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+  })
+);
 /** @internal */
 export type UpdateMemoryStoreRequest$Outbound = {
   name?: string | undefined;
@@ -46,13 +48,15 @@ export const UpdateMemoryStoreRequest$outboundSchema: z.ZodType<
   UpdateMemoryStoreRequest$Outbound,
   z.ZodTypeDef,
   UpdateMemoryStoreRequest
-> = z.object({
-  name: z.string().optional(),
-  description: z.nullable(z.string()).optional(),
-  instructions: z.nullable(z.string()).optional(),
-  visibility: MemoryStoreVisibility$outboundSchema.optional(),
-  metadata: z.record(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.nullable(z.string()).optional(),
+    instructions: z.nullable(z.string()).optional(),
+    visibility: MemoryStoreVisibility$outboundSchema.optional(),
+    metadata: z.record(z.string()).optional(),
+  })
+);
 
 export function updateMemoryStoreRequestToJSON(
   updateMemoryStoreRequest: UpdateMemoryStoreRequest,

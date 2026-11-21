@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -73,9 +73,10 @@ export type PromptInjectionGuardrail = {
 
 /** @internal */
 export const PromptInjectionGuardrailOutputTiming$inboundSchema:
-  z.ZodNativeEnum<typeof PromptInjectionGuardrailOutputTiming> = z.nativeEnum(
-    PromptInjectionGuardrailOutputTiming,
-  );
+  z.ZodNativeEnum<typeof PromptInjectionGuardrailOutputTiming> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(PromptInjectionGuardrailOutputTiming)
+    );
 /** @internal */
 export const PromptInjectionGuardrailOutputTiming$outboundSchema:
   z.ZodNativeEnum<typeof PromptInjectionGuardrailOutputTiming> =
@@ -86,22 +87,25 @@ export const PromptInjectionGuardrail$inboundSchema: z.ZodType<
   PromptInjectionGuardrail,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: z.literal("prompt_injection"),
-  enabled: z.boolean().default(true),
-  check_output: z.boolean().optional(),
-  output_timing: PromptInjectionGuardrailOutputTiming$inboundSchema.optional(),
-  output_window: OutputWindow$inboundSchema.optional(),
-  input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
-  config: PromptInjectionConfig$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "check_output": "checkOutput",
-    "output_timing": "outputTiming",
-    "output_window": "outputWindow",
-    "input_sources": "inputSources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("prompt_injection"),
+    enabled: z.boolean().default(true),
+    check_output: z.boolean().optional(),
+    output_timing: PromptInjectionGuardrailOutputTiming$inboundSchema
+      .optional(),
+    output_window: OutputWindow$inboundSchema.optional(),
+    input_sources: z.array(GuardrailInputSource$inboundSchema).optional(),
+    config: PromptInjectionConfig$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "check_output": "checkOutput",
+      "output_timing": "outputTiming",
+      "output_window": "outputWindow",
+      "input_sources": "inputSources",
+    });
+  })
+);
 /** @internal */
 export type PromptInjectionGuardrail$Outbound = {
   mode: "prompt_injection";
@@ -118,22 +122,25 @@ export const PromptInjectionGuardrail$outboundSchema: z.ZodType<
   PromptInjectionGuardrail$Outbound,
   z.ZodTypeDef,
   PromptInjectionGuardrail
-> = z.object({
-  mode: z.literal("prompt_injection"),
-  enabled: z.boolean().default(true),
-  checkOutput: z.boolean().optional(),
-  outputTiming: PromptInjectionGuardrailOutputTiming$outboundSchema.optional(),
-  outputWindow: OutputWindow$outboundSchema.optional(),
-  inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
-  config: PromptInjectionConfig$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    checkOutput: "check_output",
-    outputTiming: "output_timing",
-    outputWindow: "output_window",
-    inputSources: "input_sources",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: z.literal("prompt_injection"),
+    enabled: z.boolean().default(true),
+    checkOutput: z.boolean().optional(),
+    outputTiming: PromptInjectionGuardrailOutputTiming$outboundSchema
+      .optional(),
+    outputWindow: OutputWindow$outboundSchema.optional(),
+    inputSources: z.array(GuardrailInputSource$outboundSchema).optional(),
+    config: PromptInjectionConfig$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      checkOutput: "check_output",
+      outputTiming: "output_timing",
+      outputWindow: "output_window",
+      inputSources: "input_sources",
+    });
+  })
+);
 
 export function promptInjectionGuardrailToJSON(
   promptInjectionGuardrail: PromptInjectionGuardrail,

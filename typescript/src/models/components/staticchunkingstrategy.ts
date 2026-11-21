@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,16 +31,18 @@ export type StaticChunkingStrategy = {
 };
 
 /** @internal */
-export const Static$inboundSchema: z.ZodType<Static, z.ZodTypeDef, unknown> = z
-  .object({
-    chunk_overlap_tokens: z.number().int(),
-    max_chunk_size_tokens: z.number().int(),
-  }).transform((v) => {
-    return remap$(v, {
-      "chunk_overlap_tokens": "chunkOverlapTokens",
-      "max_chunk_size_tokens": "maxChunkSizeTokens",
-    });
-  });
+export const Static$inboundSchema: z.ZodType<Static, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      chunk_overlap_tokens: z.number().int(),
+      max_chunk_size_tokens: z.number().int(),
+    }).transform((v) => {
+      return remap$(v, {
+        "chunk_overlap_tokens": "chunkOverlapTokens",
+        "max_chunk_size_tokens": "maxChunkSizeTokens",
+      });
+    })
+  );
 /** @internal */
 export type Static$Outbound = {
   chunk_overlap_tokens: number;
@@ -52,15 +54,17 @@ export const Static$outboundSchema: z.ZodType<
   Static$Outbound,
   z.ZodTypeDef,
   Static
-> = z.object({
-  chunkOverlapTokens: z.number().int(),
-  maxChunkSizeTokens: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    chunkOverlapTokens: "chunk_overlap_tokens",
-    maxChunkSizeTokens: "max_chunk_size_tokens",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    chunkOverlapTokens: z.number().int(),
+    maxChunkSizeTokens: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      chunkOverlapTokens: "chunk_overlap_tokens",
+      maxChunkSizeTokens: "max_chunk_size_tokens",
+    });
+  })
+);
 
 export function staticToJSON(value: Static): string {
   return JSON.stringify(Static$outboundSchema.parse(value));
@@ -80,10 +84,12 @@ export const StaticChunkingStrategy$inboundSchema: z.ZodType<
   StaticChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("static"),
-  static: z.lazy(() => Static$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("static"),
+    static: z.lazy(() => Static$inboundSchema),
+  })
+);
 /** @internal */
 export type StaticChunkingStrategy$Outbound = {
   type: "static";
@@ -95,10 +101,12 @@ export const StaticChunkingStrategy$outboundSchema: z.ZodType<
   StaticChunkingStrategy$Outbound,
   z.ZodTypeDef,
   StaticChunkingStrategy
-> = z.object({
-  type: z.literal("static"),
-  static: z.lazy(() => Static$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("static"),
+    static: z.lazy(() => Static$outboundSchema),
+  })
+);
 
 export function staticChunkingStrategyToJSON(
   staticChunkingStrategy: StaticChunkingStrategy,

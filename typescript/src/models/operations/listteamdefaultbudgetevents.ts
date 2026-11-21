@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -46,13 +46,15 @@ export const ListTeamDefaultBudgetEventsRequest$inboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type ListTeamDefaultBudgetEventsRequest$Outbound = {
   org_id?: string | undefined;
@@ -63,13 +65,15 @@ export const ListTeamDefaultBudgetEventsRequest$outboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsRequest$Outbound,
   z.ZodTypeDef,
   ListTeamDefaultBudgetEventsRequest
-> = z.object({
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function listTeamDefaultBudgetEventsRequestToJSON(
   listTeamDefaultBudgetEventsRequest: ListTeamDefaultBudgetEventsRequest,
@@ -94,7 +98,9 @@ export function listTeamDefaultBudgetEventsRequestFromJSON(
 /** @internal */
 export const ListTeamDefaultBudgetEventsType$inboundSchema: z.ZodNativeEnum<
   typeof ListTeamDefaultBudgetEventsType
-> = z.nativeEnum(ListTeamDefaultBudgetEventsType);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ListTeamDefaultBudgetEventsType)
+);
 /** @internal */
 export const ListTeamDefaultBudgetEventsType$outboundSchema: z.ZodNativeEnum<
   typeof ListTeamDefaultBudgetEventsType
@@ -105,26 +111,28 @@ export const ListTeamDefaultBudgetEventsData$inboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  budget_id: z.string(),
-  type: ListTeamDefaultBudgetEventsType$inboundSchema,
-  pct: z.nullable(z.number()),
-  period_key: z.string(),
-  target_id: z.string(),
-  spend_snapshot: z.number(),
-  limit_snapshot: z.number(),
-  created_at: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "budget_id": "budgetId",
-    "period_key": "periodKey",
-    "target_id": "targetId",
-    "spend_snapshot": "spendSnapshot",
-    "limit_snapshot": "limitSnapshot",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    budget_id: z.string(),
+    type: ListTeamDefaultBudgetEventsType$inboundSchema,
+    pct: z.nullable(z.number()),
+    period_key: z.string(),
+    target_id: z.string(),
+    spend_snapshot: z.number(),
+    limit_snapshot: z.number(),
+    created_at: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "budget_id": "budgetId",
+      "period_key": "periodKey",
+      "target_id": "targetId",
+      "spend_snapshot": "spendSnapshot",
+      "limit_snapshot": "limitSnapshot",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type ListTeamDefaultBudgetEventsData$Outbound = {
   id: string;
@@ -143,26 +151,28 @@ export const ListTeamDefaultBudgetEventsData$outboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsData$Outbound,
   z.ZodTypeDef,
   ListTeamDefaultBudgetEventsData
-> = z.object({
-  id: z.string(),
-  budgetId: z.string(),
-  type: ListTeamDefaultBudgetEventsType$outboundSchema,
-  pct: z.nullable(z.number()),
-  periodKey: z.string(),
-  targetId: z.string(),
-  spendSnapshot: z.number(),
-  limitSnapshot: z.number(),
-  createdAt: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    budgetId: "budget_id",
-    periodKey: "period_key",
-    targetId: "target_id",
-    spendSnapshot: "spend_snapshot",
-    limitSnapshot: "limit_snapshot",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    budgetId: z.string(),
+    type: ListTeamDefaultBudgetEventsType$outboundSchema,
+    pct: z.nullable(z.number()),
+    periodKey: z.string(),
+    targetId: z.string(),
+    spendSnapshot: z.number(),
+    limitSnapshot: z.number(),
+    createdAt: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      budgetId: "budget_id",
+      periodKey: "period_key",
+      targetId: "target_id",
+      spendSnapshot: "spend_snapshot",
+      limitSnapshot: "limit_snapshot",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function listTeamDefaultBudgetEventsDataToJSON(
   listTeamDefaultBudgetEventsData: ListTeamDefaultBudgetEventsData,
@@ -188,10 +198,12 @@ export const ListTeamDefaultBudgetEventsResponseBody$inboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListTeamDefaultBudgetEventsData$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListTeamDefaultBudgetEventsData$inboundSchema)),
+  })
+);
 /** @internal */
 export type ListTeamDefaultBudgetEventsResponseBody$Outbound = {
   object: "list";
@@ -203,10 +215,12 @@ export const ListTeamDefaultBudgetEventsResponseBody$outboundSchema: z.ZodType<
   ListTeamDefaultBudgetEventsResponseBody$Outbound,
   z.ZodTypeDef,
   ListTeamDefaultBudgetEventsResponseBody
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(z.lazy(() => ListTeamDefaultBudgetEventsData$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(z.lazy(() => ListTeamDefaultBudgetEventsData$outboundSchema)),
+  })
+);
 
 export function listTeamDefaultBudgetEventsResponseBodyToJSON(
   listTeamDefaultBudgetEventsResponseBody:

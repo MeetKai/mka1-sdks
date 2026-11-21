@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -110,10 +110,12 @@ export const ExpiresAfter$inboundSchema: z.ZodType<
   ExpiresAfter,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 /** @internal */
 export type ExpiresAfter$Outbound = {
   anchor: "last_active_at";
@@ -125,10 +127,12 @@ export const ExpiresAfter$outboundSchema: z.ZodType<
   ExpiresAfter$Outbound,
   z.ZodTypeDef,
   ExpiresAfter
-> = z.object({
-  anchor: z.literal("last_active_at"),
-  days: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    anchor: z.literal("last_active_at"),
+    days: z.number().int(),
+  })
+);
 
 export function expiresAfterToJSON(expiresAfter: ExpiresAfter): string {
   return JSON.stringify(ExpiresAfter$outboundSchema.parse(expiresAfter));
@@ -148,10 +152,12 @@ export const CreateVectorStoreRequestChunkingStrategy$inboundSchema: z.ZodType<
   CreateVectorStoreRequestChunkingStrategy,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  AutoChunkingStrategy$inboundSchema,
-  StaticChunkingStrategy$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AutoChunkingStrategy$inboundSchema,
+    StaticChunkingStrategy$inboundSchema,
+  ])
+);
 /** @internal */
 export type CreateVectorStoreRequestChunkingStrategy$Outbound =
   | AutoChunkingStrategy$Outbound
@@ -162,10 +168,12 @@ export const CreateVectorStoreRequestChunkingStrategy$outboundSchema: z.ZodType<
   CreateVectorStoreRequestChunkingStrategy$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreRequestChunkingStrategy
-> = z.union([
-  AutoChunkingStrategy$outboundSchema,
-  StaticChunkingStrategy$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    AutoChunkingStrategy$outboundSchema,
+    StaticChunkingStrategy$outboundSchema,
+  ])
+);
 
 export function createVectorStoreRequestChunkingStrategyToJSON(
   createVectorStoreRequestChunkingStrategy:
@@ -196,7 +204,7 @@ export function createVectorStoreRequestChunkingStrategyFromJSON(
 /** @internal */
 export const RetrievalMode$inboundSchema: z.ZodNativeEnum<
   typeof RetrievalMode
-> = z.nativeEnum(RetrievalMode);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(RetrievalMode));
 /** @internal */
 export const RetrievalMode$outboundSchema: z.ZodNativeEnum<
   typeof RetrievalMode
@@ -207,33 +215,35 @@ export const CreateVectorStoreRequest$inboundSchema: z.ZodType<
   CreateVectorStoreRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  file_ids: z.array(z.string()).optional(),
-  expires_after: z.lazy(() => ExpiresAfter$inboundSchema).optional(),
-  chunking_strategy: z.union([
-    AutoChunkingStrategy$inboundSchema,
-    StaticChunkingStrategy$inboundSchema,
-  ]).optional(),
-  metadata: z.record(z.string()).optional(),
-  embedding_model: z.string().optional(),
-  embedding_dimensions: z.number().int().optional(),
-  retrieval_mode: RetrievalMode$inboundSchema.optional(),
-  extraction_model: z.string().optional(),
-  max_hops: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_ids": "fileIds",
-    "expires_after": "expiresAfter",
-    "chunking_strategy": "chunkingStrategy",
-    "embedding_model": "embeddingModel",
-    "embedding_dimensions": "embeddingDimensions",
-    "retrieval_mode": "retrievalMode",
-    "extraction_model": "extractionModel",
-    "max_hops": "maxHops",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    file_ids: z.array(z.string()).optional(),
+    expires_after: z.lazy(() => ExpiresAfter$inboundSchema).optional(),
+    chunking_strategy: z.union([
+      AutoChunkingStrategy$inboundSchema,
+      StaticChunkingStrategy$inboundSchema,
+    ]).optional(),
+    metadata: z.record(z.string()).optional(),
+    embedding_model: z.string().optional(),
+    embedding_dimensions: z.number().int().optional(),
+    retrieval_mode: RetrievalMode$inboundSchema.optional(),
+    extraction_model: z.string().optional(),
+    max_hops: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_ids": "fileIds",
+      "expires_after": "expiresAfter",
+      "chunking_strategy": "chunkingStrategy",
+      "embedding_model": "embeddingModel",
+      "embedding_dimensions": "embeddingDimensions",
+      "retrieval_mode": "retrievalMode",
+      "extraction_model": "extractionModel",
+      "max_hops": "maxHops",
+    });
+  })
+);
 /** @internal */
 export type CreateVectorStoreRequest$Outbound = {
   name?: string | undefined;
@@ -257,33 +267,35 @@ export const CreateVectorStoreRequest$outboundSchema: z.ZodType<
   CreateVectorStoreRequest$Outbound,
   z.ZodTypeDef,
   CreateVectorStoreRequest
-> = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  fileIds: z.array(z.string()).optional(),
-  expiresAfter: z.lazy(() => ExpiresAfter$outboundSchema).optional(),
-  chunkingStrategy: z.union([
-    AutoChunkingStrategy$outboundSchema,
-    StaticChunkingStrategy$outboundSchema,
-  ]).optional(),
-  metadata: z.record(z.string()).optional(),
-  embeddingModel: z.string().optional(),
-  embeddingDimensions: z.number().int().optional(),
-  retrievalMode: RetrievalMode$outboundSchema.optional(),
-  extractionModel: z.string().optional(),
-  maxHops: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    fileIds: "file_ids",
-    expiresAfter: "expires_after",
-    chunkingStrategy: "chunking_strategy",
-    embeddingModel: "embedding_model",
-    embeddingDimensions: "embedding_dimensions",
-    retrievalMode: "retrieval_mode",
-    extractionModel: "extraction_model",
-    maxHops: "max_hops",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    fileIds: z.array(z.string()).optional(),
+    expiresAfter: z.lazy(() => ExpiresAfter$outboundSchema).optional(),
+    chunkingStrategy: z.union([
+      AutoChunkingStrategy$outboundSchema,
+      StaticChunkingStrategy$outboundSchema,
+    ]).optional(),
+    metadata: z.record(z.string()).optional(),
+    embeddingModel: z.string().optional(),
+    embeddingDimensions: z.number().int().optional(),
+    retrievalMode: RetrievalMode$outboundSchema.optional(),
+    extractionModel: z.string().optional(),
+    maxHops: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileIds: "file_ids",
+      expiresAfter: "expires_after",
+      chunkingStrategy: "chunking_strategy",
+      embeddingModel: "embedding_model",
+      embeddingDimensions: "embedding_dimensions",
+      retrievalMode: "retrieval_mode",
+      extractionModel: "extraction_model",
+      maxHops: "max_hops",
+    });
+  })
+);
 
 export function createVectorStoreRequestToJSON(
   createVectorStoreRequest: CreateVectorStoreRequest,

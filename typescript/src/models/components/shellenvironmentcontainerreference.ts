@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -48,19 +48,21 @@ export const ShellEnvironmentContainerReference$inboundSchema: z.ZodType<
   ShellEnvironmentContainerReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("container_reference"),
-  container_id: z.string(),
-  network_policy: ShellNetworkPolicy$inboundSchema.optional(),
-  skills: z.array(SkillEntry$inboundSchema).optional(),
-  memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-    "network_policy": "networkPolicy",
-    "memory_stores": "memoryStores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    container_id: z.string(),
+    network_policy: ShellNetworkPolicy$inboundSchema.optional(),
+    skills: z.array(SkillEntry$inboundSchema).optional(),
+    memory_stores: z.array(MemoryStoreMount$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+      "network_policy": "networkPolicy",
+      "memory_stores": "memoryStores",
+    });
+  })
+);
 /** @internal */
 export type ShellEnvironmentContainerReference$Outbound = {
   type: "container_reference";
@@ -75,19 +77,21 @@ export const ShellEnvironmentContainerReference$outboundSchema: z.ZodType<
   ShellEnvironmentContainerReference$Outbound,
   z.ZodTypeDef,
   ShellEnvironmentContainerReference
-> = z.object({
-  type: z.literal("container_reference"),
-  containerId: z.string(),
-  networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
-  skills: z.array(SkillEntry$outboundSchema).optional(),
-  memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-    networkPolicy: "network_policy",
-    memoryStores: "memory_stores",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("container_reference"),
+    containerId: z.string(),
+    networkPolicy: ShellNetworkPolicy$outboundSchema.optional(),
+    skills: z.array(SkillEntry$outboundSchema).optional(),
+    memoryStores: z.array(MemoryStoreMount$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+      networkPolicy: "network_policy",
+      memoryStores: "memory_stores",
+    });
+  })
+);
 
 export function shellEnvironmentContainerReferenceToJSON(
   shellEnvironmentContainerReference: ShellEnvironmentContainerReference,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -105,96 +105,100 @@ export const SessionRecord$inboundSchema: z.ZodType<
   SessionRecord,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  session_id: z.string(),
-  session_key: z.nullable(z.string()).optional(),
-  user_id: z.string(),
-  org_id: z.nullable(z.string()).optional(),
-  team_id: z.nullable(z.string()).optional(),
-  network_policy: z.nullable(OutboundNetworkPolicySummary$inboundSchema)
-    .optional(),
-  status: SessionStatus$inboundSchema.optional(),
-  session_kind: SessionKind$inboundSchema.optional(),
-  resource_class: z.nullable(SandboxResourceClass$inboundSchema).optional(),
-  assignment_generation: z.number().int().default(1),
-  managed_services: z.array(ManagedServiceRecord$inboundSchema).optional(),
-  github_repository_manifest_version: z.nullable(z.number().int()).optional(),
-  environment_id: z.nullable(z.number().int()).optional(),
-  environment_setup_status: z.nullable(z.string()).optional(),
-  environment_network_access: z.nullable(NetworkAccess$inboundSchema)
-    .optional(),
-  coding_harness_skills_digest: z.nullable(z.string()).optional(),
-  ttl_seconds: z.number().int().default(600),
-  workspace_expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  persistent: z.boolean().default(false),
-  last_user_activity_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  idle_expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  absolute_expires_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  stop_reason: z.nullable(CodingHarnessStopReason$inboundSchema).optional(),
-  runner_cleanup_hold_reason: z.nullable(z.string()).optional(),
-  runner_cleanup_held_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  last_checkpoint_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  last_checkpoint_generation: z.nullable(z.number().int()).optional(),
-  sandbox_features: z.array(SandboxFeature$inboundSchema).optional(),
-  runtime_profile: SandboxRuntimeProfile$inboundSchema.optional(),
-  memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
-  api_key_id: z.nullable(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  memory_limit_mib: z.nullable(z.number().int()).optional(),
-  sandbox_memory_mib: z.number().int().default(256),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "session_id": "sessionId",
-    "session_key": "sessionKey",
-    "user_id": "userId",
-    "org_id": "orgId",
-    "team_id": "teamId",
-    "network_policy": "networkPolicy",
-    "session_kind": "sessionKind",
-    "resource_class": "resourceClass",
-    "assignment_generation": "assignmentGeneration",
-    "managed_services": "managedServices",
-    "github_repository_manifest_version": "githubRepositoryManifestVersion",
-    "environment_id": "environmentId",
-    "environment_setup_status": "environmentSetupStatus",
-    "environment_network_access": "environmentNetworkAccess",
-    "coding_harness_skills_digest": "codingHarnessSkillsDigest",
-    "ttl_seconds": "ttlSeconds",
-    "workspace_expires_at": "workspaceExpiresAt",
-    "last_user_activity_at": "lastUserActivityAt",
-    "idle_expires_at": "idleExpiresAt",
-    "absolute_expires_at": "absoluteExpiresAt",
-    "stop_reason": "stopReason",
-    "runner_cleanup_hold_reason": "runnerCleanupHoldReason",
-    "runner_cleanup_held_at": "runnerCleanupHeldAt",
-    "last_checkpoint_at": "lastCheckpointAt",
-    "last_checkpoint_generation": "lastCheckpointGeneration",
-    "sandbox_features": "sandboxFeatures",
-    "runtime_profile": "runtimeProfile",
-    "memory_mounts": "memoryMounts",
-    "api_key_id": "apiKeyId",
-    "memory_limit_mib": "memoryLimitMib",
-    "sandbox_memory_mib": "sandboxMemoryMib",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    session_id: z.string(),
+    session_key: z.nullable(z.string()).optional(),
+    user_id: z.string(),
+    org_id: z.nullable(z.string()).optional(),
+    team_id: z.nullable(z.string()).optional(),
+    network_policy: z.nullable(OutboundNetworkPolicySummary$inboundSchema)
+      .optional(),
+    status: SessionStatus$inboundSchema.optional(),
+    session_kind: SessionKind$inboundSchema.optional(),
+    resource_class: z.nullable(SandboxResourceClass$inboundSchema).optional(),
+    assignment_generation: z.number().int().default(1),
+    managed_services: z.array(ManagedServiceRecord$inboundSchema).optional(),
+    github_repository_manifest_version: z.nullable(z.number().int()).optional(),
+    environment_id: z.nullable(z.number().int()).optional(),
+    environment_setup_status: z.nullable(z.string()).optional(),
+    environment_network_access: z.nullable(NetworkAccess$inboundSchema)
+      .optional(),
+    coding_harness_skills_digest: z.nullable(z.string()).optional(),
+    ttl_seconds: z.number().int().default(600),
+    workspace_expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    persistent: z.boolean().default(false),
+    last_user_activity_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    idle_expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    absolute_expires_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    stop_reason: z.nullable(CodingHarnessStopReason$inboundSchema).optional(),
+    runner_cleanup_hold_reason: z.nullable(z.string()).optional(),
+    runner_cleanup_held_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    last_checkpoint_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    last_checkpoint_generation: z.nullable(z.number().int()).optional(),
+    sandbox_features: z.array(SandboxFeature$inboundSchema).optional(),
+    runtime_profile: SandboxRuntimeProfile$inboundSchema.optional(),
+    memory_mounts: z.array(MemoryMount$inboundSchema).optional(),
+    api_key_id: z.nullable(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+    memory_limit_mib: z.nullable(z.number().int()).optional(),
+    sandbox_memory_mib: z.number().int().default(256),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "session_id": "sessionId",
+      "session_key": "sessionKey",
+      "user_id": "userId",
+      "org_id": "orgId",
+      "team_id": "teamId",
+      "network_policy": "networkPolicy",
+      "session_kind": "sessionKind",
+      "resource_class": "resourceClass",
+      "assignment_generation": "assignmentGeneration",
+      "managed_services": "managedServices",
+      "github_repository_manifest_version": "githubRepositoryManifestVersion",
+      "environment_id": "environmentId",
+      "environment_setup_status": "environmentSetupStatus",
+      "environment_network_access": "environmentNetworkAccess",
+      "coding_harness_skills_digest": "codingHarnessSkillsDigest",
+      "ttl_seconds": "ttlSeconds",
+      "workspace_expires_at": "workspaceExpiresAt",
+      "last_user_activity_at": "lastUserActivityAt",
+      "idle_expires_at": "idleExpiresAt",
+      "absolute_expires_at": "absoluteExpiresAt",
+      "stop_reason": "stopReason",
+      "runner_cleanup_hold_reason": "runnerCleanupHoldReason",
+      "runner_cleanup_held_at": "runnerCleanupHeldAt",
+      "last_checkpoint_at": "lastCheckpointAt",
+      "last_checkpoint_generation": "lastCheckpointGeneration",
+      "sandbox_features": "sandboxFeatures",
+      "runtime_profile": "runtimeProfile",
+      "memory_mounts": "memoryMounts",
+      "api_key_id": "apiKeyId",
+      "memory_limit_mib": "memoryLimitMib",
+      "sandbox_memory_mib": "sandboxMemoryMib",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type SessionRecord$Outbound = {
   session_id: string;
@@ -240,87 +244,90 @@ export const SessionRecord$outboundSchema: z.ZodType<
   SessionRecord$Outbound,
   z.ZodTypeDef,
   SessionRecord
-> = z.object({
-  sessionId: z.string(),
-  sessionKey: z.nullable(z.string()).optional(),
-  userId: z.string(),
-  orgId: z.nullable(z.string()).optional(),
-  teamId: z.nullable(z.string()).optional(),
-  networkPolicy: z.nullable(OutboundNetworkPolicySummary$outboundSchema)
-    .optional(),
-  status: SessionStatus$outboundSchema.optional(),
-  sessionKind: SessionKind$outboundSchema.optional(),
-  resourceClass: z.nullable(SandboxResourceClass$outboundSchema).optional(),
-  assignmentGeneration: z.number().int().default(1),
-  managedServices: z.array(ManagedServiceRecord$outboundSchema).optional(),
-  githubRepositoryManifestVersion: z.nullable(z.number().int()).optional(),
-  environmentId: z.nullable(z.number().int()).optional(),
-  environmentSetupStatus: z.nullable(z.string()).optional(),
-  environmentNetworkAccess: z.nullable(NetworkAccess$outboundSchema).optional(),
-  codingHarnessSkillsDigest: z.nullable(z.string()).optional(),
-  ttlSeconds: z.number().int().default(600),
-  workspaceExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  persistent: z.boolean().default(false),
-  lastUserActivityAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  idleExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  absoluteExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  stopReason: z.nullable(CodingHarnessStopReason$outboundSchema).optional(),
-  runnerCleanupHoldReason: z.nullable(z.string()).optional(),
-  runnerCleanupHeldAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  lastCheckpointAt: z.nullable(z.date().transform(v => v.toISOString()))
-    .optional(),
-  lastCheckpointGeneration: z.nullable(z.number().int()).optional(),
-  sandboxFeatures: z.array(SandboxFeature$outboundSchema).optional(),
-  runtimeProfile: SandboxRuntimeProfile$outboundSchema.optional(),
-  memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
-  apiKeyId: z.nullable(z.string()).optional(),
-  permissions: z.array(z.string()).optional(),
-  memoryLimitMib: z.nullable(z.number().int()).optional(),
-  sandboxMemoryMib: z.number().int().default(256),
-  createdAt: z.date().transform(v => v.toISOString()).optional(),
-  updatedAt: z.date().transform(v => v.toISOString()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    sessionId: "session_id",
-    sessionKey: "session_key",
-    userId: "user_id",
-    orgId: "org_id",
-    teamId: "team_id",
-    networkPolicy: "network_policy",
-    sessionKind: "session_kind",
-    resourceClass: "resource_class",
-    assignmentGeneration: "assignment_generation",
-    managedServices: "managed_services",
-    githubRepositoryManifestVersion: "github_repository_manifest_version",
-    environmentId: "environment_id",
-    environmentSetupStatus: "environment_setup_status",
-    environmentNetworkAccess: "environment_network_access",
-    codingHarnessSkillsDigest: "coding_harness_skills_digest",
-    ttlSeconds: "ttl_seconds",
-    workspaceExpiresAt: "workspace_expires_at",
-    lastUserActivityAt: "last_user_activity_at",
-    idleExpiresAt: "idle_expires_at",
-    absoluteExpiresAt: "absolute_expires_at",
-    stopReason: "stop_reason",
-    runnerCleanupHoldReason: "runner_cleanup_hold_reason",
-    runnerCleanupHeldAt: "runner_cleanup_held_at",
-    lastCheckpointAt: "last_checkpoint_at",
-    lastCheckpointGeneration: "last_checkpoint_generation",
-    sandboxFeatures: "sandbox_features",
-    runtimeProfile: "runtime_profile",
-    memoryMounts: "memory_mounts",
-    apiKeyId: "api_key_id",
-    memoryLimitMib: "memory_limit_mib",
-    sandboxMemoryMib: "sandbox_memory_mib",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionId: z.string(),
+    sessionKey: z.nullable(z.string()).optional(),
+    userId: z.string(),
+    orgId: z.nullable(z.string()).optional(),
+    teamId: z.nullable(z.string()).optional(),
+    networkPolicy: z.nullable(OutboundNetworkPolicySummary$outboundSchema)
+      .optional(),
+    status: SessionStatus$outboundSchema.optional(),
+    sessionKind: SessionKind$outboundSchema.optional(),
+    resourceClass: z.nullable(SandboxResourceClass$outboundSchema).optional(),
+    assignmentGeneration: z.number().int().default(1),
+    managedServices: z.array(ManagedServiceRecord$outboundSchema).optional(),
+    githubRepositoryManifestVersion: z.nullable(z.number().int()).optional(),
+    environmentId: z.nullable(z.number().int()).optional(),
+    environmentSetupStatus: z.nullable(z.string()).optional(),
+    environmentNetworkAccess: z.nullable(NetworkAccess$outboundSchema)
+      .optional(),
+    codingHarnessSkillsDigest: z.nullable(z.string()).optional(),
+    ttlSeconds: z.number().int().default(600),
+    workspaceExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    persistent: z.boolean().default(false),
+    lastUserActivityAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    idleExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    absoluteExpiresAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    stopReason: z.nullable(CodingHarnessStopReason$outboundSchema).optional(),
+    runnerCleanupHoldReason: z.nullable(z.string()).optional(),
+    runnerCleanupHeldAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    lastCheckpointAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+    lastCheckpointGeneration: z.nullable(z.number().int()).optional(),
+    sandboxFeatures: z.array(SandboxFeature$outboundSchema).optional(),
+    runtimeProfile: SandboxRuntimeProfile$outboundSchema.optional(),
+    memoryMounts: z.array(MemoryMount$outboundSchema).optional(),
+    apiKeyId: z.nullable(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+    memoryLimitMib: z.nullable(z.number().int()).optional(),
+    sandboxMemoryMib: z.number().int().default(256),
+    createdAt: z.date().transform(v => v.toISOString()).optional(),
+    updatedAt: z.date().transform(v => v.toISOString()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      sessionId: "session_id",
+      sessionKey: "session_key",
+      userId: "user_id",
+      orgId: "org_id",
+      teamId: "team_id",
+      networkPolicy: "network_policy",
+      sessionKind: "session_kind",
+      resourceClass: "resource_class",
+      assignmentGeneration: "assignment_generation",
+      managedServices: "managed_services",
+      githubRepositoryManifestVersion: "github_repository_manifest_version",
+      environmentId: "environment_id",
+      environmentSetupStatus: "environment_setup_status",
+      environmentNetworkAccess: "environment_network_access",
+      codingHarnessSkillsDigest: "coding_harness_skills_digest",
+      ttlSeconds: "ttl_seconds",
+      workspaceExpiresAt: "workspace_expires_at",
+      lastUserActivityAt: "last_user_activity_at",
+      idleExpiresAt: "idle_expires_at",
+      absoluteExpiresAt: "absolute_expires_at",
+      stopReason: "stop_reason",
+      runnerCleanupHoldReason: "runner_cleanup_hold_reason",
+      runnerCleanupHeldAt: "runner_cleanup_held_at",
+      lastCheckpointAt: "last_checkpoint_at",
+      lastCheckpointGeneration: "last_checkpoint_generation",
+      sandboxFeatures: "sandbox_features",
+      runtimeProfile: "runtime_profile",
+      memoryMounts: "memory_mounts",
+      apiKeyId: "api_key_id",
+      memoryLimitMib: "memory_limit_mib",
+      sandboxMemoryMib: "sandbox_memory_mib",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function sessionRecordToJSON(sessionRecord: SessionRecord): string {
   return JSON.stringify(SessionRecord$outboundSchema.parse(sessionRecord));

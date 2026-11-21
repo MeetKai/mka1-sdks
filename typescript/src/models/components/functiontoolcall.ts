@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -33,18 +33,20 @@ export const FunctionToolCall$inboundSchema: z.ZodType<
   FunctionToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function_call"),
-  arguments: z.string(),
-  call_id: z.string(),
-  name: z.string(),
-  id: z.string().optional(),
-  status: Status$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call"),
+    arguments: z.string(),
+    call_id: z.string(),
+    name: z.string(),
+    id: z.string().optional(),
+    status: Status$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolCall$Outbound = {
   type: "function_call";
@@ -60,18 +62,20 @@ export const FunctionToolCall$outboundSchema: z.ZodType<
   FunctionToolCall$Outbound,
   z.ZodTypeDef,
   FunctionToolCall
-> = z.object({
-  type: z.literal("function_call"),
-  arguments: z.string(),
-  callId: z.string(),
-  name: z.string(),
-  id: z.string().optional(),
-  status: Status$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function_call"),
+    arguments: z.string(),
+    callId: z.string(),
+    name: z.string(),
+    id: z.string().optional(),
+    status: Status$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+    });
+  })
+);
 
 export function functionToolCallToJSON(
   functionToolCall: FunctionToolCall,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -26,17 +26,19 @@ export const ListModelAliasHistoryResponse$inboundSchema: z.ZodType<
   ListModelAliasHistoryResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ModelAliasChange$inboundSchema),
-  has_more: z.boolean(),
-  last_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-    "last_id": "lastId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ModelAliasChange$inboundSchema),
+    has_more: z.boolean(),
+    last_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+      "last_id": "lastId",
+    });
+  })
+);
 /** @internal */
 export type ListModelAliasHistoryResponse$Outbound = {
   object: "list";
@@ -50,17 +52,19 @@ export const ListModelAliasHistoryResponse$outboundSchema: z.ZodType<
   ListModelAliasHistoryResponse$Outbound,
   z.ZodTypeDef,
   ListModelAliasHistoryResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ModelAliasChange$outboundSchema),
-  hasMore: z.boolean(),
-  lastId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-    lastId: "last_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ModelAliasChange$outboundSchema),
+    hasMore: z.boolean(),
+    lastId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+      lastId: "last_id",
+    });
+  })
+);
 
 export function listModelAliasHistoryResponseToJSON(
   listModelAliasHistoryResponse: ListModelAliasHistoryResponse,

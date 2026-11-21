@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,22 +29,24 @@ export const FineTuningCheckpoint$inboundSchema: z.ZodType<
   FineTuningCheckpoint,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job.checkpoint"),
-  created_at: z.number().int(),
-  fine_tuned_model_checkpoint: z.string(),
-  fine_tuning_job_id: z.string(),
-  step_number: z.number().int(),
-  metrics: CheckpointMetrics$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "fine_tuned_model_checkpoint": "fineTunedModelCheckpoint",
-    "fine_tuning_job_id": "fineTuningJobId",
-    "step_number": "stepNumber",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job.checkpoint"),
+    created_at: z.number().int(),
+    fine_tuned_model_checkpoint: z.string(),
+    fine_tuning_job_id: z.string(),
+    step_number: z.number().int(),
+    metrics: CheckpointMetrics$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "fine_tuned_model_checkpoint": "fineTunedModelCheckpoint",
+      "fine_tuning_job_id": "fineTuningJobId",
+      "step_number": "stepNumber",
+    });
+  })
+);
 /** @internal */
 export type FineTuningCheckpoint$Outbound = {
   id: string;
@@ -61,22 +63,24 @@ export const FineTuningCheckpoint$outboundSchema: z.ZodType<
   FineTuningCheckpoint$Outbound,
   z.ZodTypeDef,
   FineTuningCheckpoint
-> = z.object({
-  id: z.string(),
-  object: z.literal("fine_tuning.job.checkpoint"),
-  createdAt: z.number().int(),
-  fineTunedModelCheckpoint: z.string(),
-  fineTuningJobId: z.string(),
-  stepNumber: z.number().int(),
-  metrics: CheckpointMetrics$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    fineTunedModelCheckpoint: "fine_tuned_model_checkpoint",
-    fineTuningJobId: "fine_tuning_job_id",
-    stepNumber: "step_number",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("fine_tuning.job.checkpoint"),
+    createdAt: z.number().int(),
+    fineTunedModelCheckpoint: z.string(),
+    fineTuningJobId: z.string(),
+    stepNumber: z.number().int(),
+    metrics: CheckpointMetrics$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      fineTunedModelCheckpoint: "fine_tuned_model_checkpoint",
+      fineTuningJobId: "fine_tuning_job_id",
+      stepNumber: "step_number",
+    });
+  })
+);
 
 export function fineTuningCheckpointToJSON(
   fineTuningCheckpoint: FineTuningCheckpoint,

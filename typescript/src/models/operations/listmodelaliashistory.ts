@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export const ListModelAliasHistoryRequest$inboundSchema: z.ZodType<
   ListModelAliasHistoryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+  })
+);
 /** @internal */
 export type ListModelAliasHistoryRequest$Outbound = {
   name: string;
@@ -35,11 +37,13 @@ export const ListModelAliasHistoryRequest$outboundSchema: z.ZodType<
   ListModelAliasHistoryRequest$Outbound,
   z.ZodTypeDef,
   ListModelAliasHistoryRequest
-> = z.object({
-  name: z.string(),
-  limit: z.number().int().default(20),
-  after: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    limit: z.number().int().default(20),
+    after: z.string().optional(),
+  })
+);
 
 export function listModelAliasHistoryRequestToJSON(
   listModelAliasHistoryRequest: ListModelAliasHistoryRequest,

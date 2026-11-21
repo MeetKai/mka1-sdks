@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,7 @@ export type FunctionToolReference = {
 /** @internal */
 export const FunctionToolReferenceType$inboundSchema: z.ZodNativeEnum<
   typeof FunctionToolReferenceType
-> = z.nativeEnum(FunctionToolReferenceType);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FunctionToolReferenceType));
 /** @internal */
 export const FunctionToolReferenceType$outboundSchema: z.ZodNativeEnum<
   typeof FunctionToolReferenceType
@@ -35,14 +35,16 @@ export const FunctionToolReference$inboundSchema: z.ZodType<
   FunctionToolReference,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: FunctionToolReferenceType$inboundSchema,
-  function_tool_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "function_tool_id": "functionToolId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FunctionToolReferenceType$inboundSchema,
+    function_tool_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "function_tool_id": "functionToolId",
+    });
+  })
+);
 /** @internal */
 export type FunctionToolReference$Outbound = {
   type: string;
@@ -54,14 +56,16 @@ export const FunctionToolReference$outboundSchema: z.ZodType<
   FunctionToolReference$Outbound,
   z.ZodTypeDef,
   FunctionToolReference
-> = z.object({
-  type: FunctionToolReferenceType$outboundSchema,
-  functionToolId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    functionToolId: "function_tool_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: FunctionToolReferenceType$outboundSchema,
+    functionToolId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      functionToolId: "function_tool_id",
+    });
+  })
+);
 
 export function functionToolReferenceToJSON(
   functionToolReference: FunctionToolReference,

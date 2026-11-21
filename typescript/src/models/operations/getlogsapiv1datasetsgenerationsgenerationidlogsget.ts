@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -40,8 +40,8 @@ export type GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest = {
 };
 
 /** @internal */
-export const Stream$inboundSchema: z.ZodNativeEnum<typeof Stream> = z
-  .nativeEnum(Stream);
+export const Stream$inboundSchema: z.ZodNativeEnum<typeof Stream> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Stream));
 /** @internal */
 export const Stream$outboundSchema: z.ZodNativeEnum<typeof Stream> =
   Stream$inboundSchema;
@@ -50,8 +50,10 @@ export const Stream$outboundSchema: z.ZodNativeEnum<typeof Stream> =
 export const GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$inboundSchema:
   z.ZodNativeEnum<
     typeof GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder
-  > = z.nativeEnum(
-    GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder,
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.nativeEnum(
+      GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder,
+    )
   );
 /** @internal */
 export const GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$outboundSchema:
@@ -66,21 +68,23 @@ export const GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest$inboundSc
     GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    generation_id: z.string(),
-    stream: z.nullable(Stream$inboundSchema).optional(),
-    limit: z.number().int().default(100),
-    cursor: z.nullable(z.string()).optional(),
-    order:
-      GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$inboundSchema
-        .default("asc"),
-    "X-On-Behalf-Of": z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "generation_id": "generationId",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generation_id: z.string(),
+      stream: z.nullable(Stream$inboundSchema).optional(),
+      limit: z.number().int().default(100),
+      cursor: z.nullable(z.string()).optional(),
+      order:
+        GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$inboundSchema
+          .default("asc"),
+      "X-On-Behalf-Of": z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "generation_id": "generationId",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+      });
+    })
+  );
 /** @internal */
 export type GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest$Outbound =
   {
@@ -98,21 +102,23 @@ export const GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest$outboundS
     GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest$Outbound,
     z.ZodTypeDef,
     GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest
-  > = z.object({
-    generationId: z.string(),
-    stream: z.nullable(Stream$outboundSchema).optional(),
-    limit: z.number().int().default(100),
-    cursor: z.nullable(z.string()).optional(),
-    order:
-      GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$outboundSchema
-        .default("asc"),
-    xOnBehalfOf: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      generationId: "generation_id",
-      xOnBehalfOf: "X-On-Behalf-Of",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      generationId: z.string(),
+      stream: z.nullable(Stream$outboundSchema).optional(),
+      limit: z.number().int().default(100),
+      cursor: z.nullable(z.string()).optional(),
+      order:
+        GetLogsApiV1DatasetsGenerationsGenerationIdLogsGetQueryParamOrder$outboundSchema
+          .default("asc"),
+      xOnBehalfOf: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        generationId: "generation_id",
+        xOnBehalfOf: "X-On-Behalf-Of",
+      });
+    })
+  );
 
 export function getLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequestToJSON(
   getLogsApiV1DatasetsGenerationsGenerationIdLogsGetRequest:

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -27,20 +27,22 @@ export const SandboxPricingCard$inboundSchema: z.ZodType<
   SandboxPricingCard,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("sandbox.pricing").default("sandbox.pricing"),
-  currency: z.nullable(z.string()).optional(),
-  rates: z.record(SandboxPriceRate$inboundSchema).optional(),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  updated_by: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "updated_at": "updatedAt",
-    "updated_by": "updatedBy",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("sandbox.pricing").default("sandbox.pricing"),
+    currency: z.nullable(z.string()).optional(),
+    rates: z.record(SandboxPriceRate$inboundSchema).optional(),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    updated_by: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "updated_at": "updatedAt",
+      "updated_by": "updatedBy",
+    });
+  })
+);
 /** @internal */
 export type SandboxPricingCard$Outbound = {
   object: "sandbox.pricing";
@@ -55,18 +57,20 @@ export const SandboxPricingCard$outboundSchema: z.ZodType<
   SandboxPricingCard$Outbound,
   z.ZodTypeDef,
   SandboxPricingCard
-> = z.object({
-  object: z.literal("sandbox.pricing").default("sandbox.pricing" as const),
-  currency: z.nullable(z.string()).optional(),
-  rates: z.record(SandboxPriceRate$outboundSchema).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  updatedBy: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    updatedAt: "updated_at",
-    updatedBy: "updated_by",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("sandbox.pricing").default("sandbox.pricing" as const),
+    currency: z.nullable(z.string()).optional(),
+    rates: z.record(SandboxPriceRate$outboundSchema).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    updatedBy: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      updatedAt: "updated_at",
+      updatedBy: "updated_by",
+    });
+  })
+);
 
 export function sandboxPricingCardToJSON(
   sandboxPricingCard: SandboxPricingCard,

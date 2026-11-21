@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -28,18 +28,20 @@ export const MCPApprovalRequest$inboundSchema: z.ZodType<
   MCPApprovalRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_approval_request"),
-  id: z.string(),
-  arguments: z.string(),
-  name: z.string(),
-  server_label: z.string(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_request"),
+    id: z.string(),
+    arguments: z.string(),
+    name: z.string(),
+    server_label: z.string(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+    });
+  })
+);
 /** @internal */
 export type MCPApprovalRequest$Outbound = {
   type: "mcp_approval_request";
@@ -55,18 +57,20 @@ export const MCPApprovalRequest$outboundSchema: z.ZodType<
   MCPApprovalRequest$Outbound,
   z.ZodTypeDef,
   MCPApprovalRequest
-> = z.object({
-  type: z.literal("mcp_approval_request"),
-  id: z.string(),
-  arguments: z.string(),
-  name: z.string(),
-  serverLabel: z.string(),
-  reason: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_request"),
+    id: z.string(),
+    arguments: z.string(),
+    name: z.string(),
+    serverLabel: z.string(),
+    reason: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+    });
+  })
+);
 
 export function mcpApprovalRequestToJSON(
   mcpApprovalRequest: MCPApprovalRequest,

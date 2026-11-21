@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,17 +23,19 @@ export const ComputerUseToolDefinition$inboundSchema: z.ZodType<
   ComputerUseToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("computer_use_preview"),
-  display_height: z.number().int(),
-  display_width: z.number().int(),
-  environment: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "display_height": "displayHeight",
-    "display_width": "displayWidth",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_use_preview"),
+    display_height: z.number().int(),
+    display_width: z.number().int(),
+    environment: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "display_height": "displayHeight",
+      "display_width": "displayWidth",
+    });
+  })
+);
 /** @internal */
 export type ComputerUseToolDefinition$Outbound = {
   type: "computer_use_preview";
@@ -47,17 +49,19 @@ export const ComputerUseToolDefinition$outboundSchema: z.ZodType<
   ComputerUseToolDefinition$Outbound,
   z.ZodTypeDef,
   ComputerUseToolDefinition
-> = z.object({
-  type: z.literal("computer_use_preview"),
-  displayHeight: z.number().int(),
-  displayWidth: z.number().int(),
-  environment: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    displayHeight: "display_height",
-    displayWidth: "display_width",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("computer_use_preview"),
+    displayHeight: z.number().int(),
+    displayWidth: z.number().int(),
+    environment: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      displayHeight: "display_height",
+      displayWidth: "display_width",
+    });
+  })
+);
 
 export function computerUseToolDefinitionToJSON(
   computerUseToolDefinition: ComputerUseToolDefinition,

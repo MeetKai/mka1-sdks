@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,9 +52,11 @@ export const GetPendingInvitationSecurity$inboundSchema: z.ZodType<
   GetPendingInvitationSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 /** @internal */
 export type GetPendingInvitationSecurity$Outbound = {
   sessionCookie: string;
@@ -65,9 +67,11 @@ export const GetPendingInvitationSecurity$outboundSchema: z.ZodType<
   GetPendingInvitationSecurity$Outbound,
   z.ZodTypeDef,
   GetPendingInvitationSecurity
-> = z.object({
-  sessionCookie: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    sessionCookie: z.string(),
+  })
+);
 
 export function getPendingInvitationSecurityToJSON(
   getPendingInvitationSecurity: GetPendingInvitationSecurity,
@@ -93,13 +97,15 @@ export const GetPendingInvitationRequest$inboundSchema: z.ZodType<
   GetPendingInvitationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetPendingInvitationRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -110,13 +116,15 @@ export const GetPendingInvitationRequest$outboundSchema: z.ZodType<
   GetPendingInvitationRequest$Outbound,
   z.ZodTypeDef,
   GetPendingInvitationRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getPendingInvitationRequestToJSON(
   getPendingInvitationRequest: GetPendingInvitationRequest,
@@ -142,10 +150,12 @@ export const Invitation2$inboundSchema: z.ZodType<
   Invitation2,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("cluster"),
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cluster"),
+    token: z.string(),
+  })
+);
 /** @internal */
 export type Invitation2$Outbound = {
   type: "cluster";
@@ -157,10 +167,12 @@ export const Invitation2$outboundSchema: z.ZodType<
   Invitation2$Outbound,
   z.ZodTypeDef,
   Invitation2
-> = z.object({
-  type: z.literal("cluster"),
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("cluster"),
+    token: z.string(),
+  })
+);
 
 export function invitation2ToJSON(invitation2: Invitation2): string {
   return JSON.stringify(Invitation2$outboundSchema.parse(invitation2));
@@ -180,10 +192,12 @@ export const Invitation1$inboundSchema: z.ZodType<
   Invitation1,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("organization"),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("organization"),
+    id: z.string(),
+  })
+);
 /** @internal */
 export type Invitation1$Outbound = {
   type: "organization";
@@ -195,10 +209,12 @@ export const Invitation1$outboundSchema: z.ZodType<
   Invitation1$Outbound,
   z.ZodTypeDef,
   Invitation1
-> = z.object({
-  type: z.literal("organization"),
-  id: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("organization"),
+    id: z.string(),
+  })
+);
 
 export function invitation1ToJSON(invitation1: Invitation1): string {
   return JSON.stringify(Invitation1$outboundSchema.parse(invitation1));
@@ -218,10 +234,12 @@ export const GetPendingInvitationInvitation$inboundSchema: z.ZodType<
   GetPendingInvitationInvitation,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  organization: z.lazy(() => Invitation1$inboundSchema),
-  cluster: z.lazy(() => Invitation2$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    organization: z.lazy(() => Invitation1$inboundSchema),
+    cluster: z.lazy(() => Invitation2$inboundSchema),
+  })
+);
 /** @internal */
 export type GetPendingInvitationInvitation$Outbound =
   | Invitation1$Outbound
@@ -232,10 +250,12 @@ export const GetPendingInvitationInvitation$outboundSchema: z.ZodType<
   GetPendingInvitationInvitation$Outbound,
   z.ZodTypeDef,
   GetPendingInvitationInvitation
-> = z.union([
-  z.lazy(() => Invitation1$outboundSchema),
-  z.lazy(() => Invitation2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => Invitation1$outboundSchema),
+    z.lazy(() => Invitation2$outboundSchema),
+  ])
+);
 
 export function getPendingInvitationInvitationToJSON(
   getPendingInvitationInvitation: GetPendingInvitationInvitation,
@@ -261,14 +281,16 @@ export const GetPendingInvitationResponseBody$inboundSchema: z.ZodType<
   GetPendingInvitationResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  invitation: z.nullable(
-    discriminatedUnion("type", {
-      organization: z.lazy(() => Invitation1$inboundSchema),
-      cluster: z.lazy(() => Invitation2$inboundSchema),
-    }),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.nullable(
+      discriminatedUnion("type", {
+        organization: z.lazy(() => Invitation1$inboundSchema),
+        cluster: z.lazy(() => Invitation2$inboundSchema),
+      }),
+    ),
+  })
+);
 /** @internal */
 export type GetPendingInvitationResponseBody$Outbound = {
   invitation: Invitation1$Outbound | Invitation2$Outbound | null;
@@ -279,14 +301,14 @@ export const GetPendingInvitationResponseBody$outboundSchema: z.ZodType<
   GetPendingInvitationResponseBody$Outbound,
   z.ZodTypeDef,
   GetPendingInvitationResponseBody
-> = z.object({
-  invitation: z.nullable(
-    z.union([
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    invitation: z.nullable(z.union([
       z.lazy(() => Invitation1$outboundSchema),
       z.lazy(() => Invitation2$outboundSchema),
-    ]),
-  ),
-});
+    ])),
+  })
+);
 
 export function getPendingInvitationResponseBodyToJSON(
   getPendingInvitationResponseBody: GetPendingInvitationResponseBody,

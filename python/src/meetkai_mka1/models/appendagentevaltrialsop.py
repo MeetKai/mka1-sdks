@@ -10,7 +10,15 @@ from .evalcandidateobject_union import (
     EvalCandidateObjectUnionTypedDict,
 )
 from .evalrunstatus import EvalRunStatus
-from meetkai_mka1.types import BaseModel, Nullable, UNSET_SENTINEL, UnrecognizedStr
+from meetkai_mka1.types import (
+    BaseModel,
+    Nullable,
+    UNSET_SENTINEL,
+    UnrecognizedStr,
+    current_exclude_none,
+    serialize_with_info,
+)
+from meetkai_mka1.types.basemodel import current_filtered_dump
 from meetkai_mka1.utils import (
     FieldMetadata,
     HeaderMetadata,
@@ -50,13 +58,20 @@ class AppendAgentEvalTrialsRequest(BaseModel):
     r"""Optional external end-user identifier forwarded by the API gateway."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["X-On-Behalf-Of"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -212,6 +227,9 @@ class AppendAgentEvalTrialsGeneration(BaseModel):
         self.__pydantic_extra__ = value  # pyright: ignore[reportIncompatibleVariableOverride]
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -245,11 +263,15 @@ class AppendAgentEvalTrialsGeneration(BaseModel):
                 "max_empty_retries",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             serialized.pop(k, serialized.pop(n, None))
 
@@ -303,12 +325,19 @@ class AppendAgentEvalTrialsTokens(BaseModel):
     r"""Reasoning tokens inside `output`, summed over the samples whose provider reported the split. Null when none did; the per-task figures in `metrics.by_task` estimate the split from the stored text in that case."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -432,6 +461,9 @@ class AppendAgentEvalTrialsResponse(BaseModel):
     r"""Typed candidates, including pinned saved-agent versions. models remains the legacy storage/filter key list."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["candidates"])
         nullable_fields = set(
@@ -451,11 +483,15 @@ class AppendAgentEvalTrialsResponse(BaseModel):
                 "failed_at",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields

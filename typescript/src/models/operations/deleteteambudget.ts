@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -54,7 +54,9 @@ export type DeleteTeamBudgetResponseBody = {
 /** @internal */
 export const DeleteTeamBudgetQueryParamOwner$inboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetQueryParamOwner
-> = z.nativeEnum(DeleteTeamBudgetQueryParamOwner);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(DeleteTeamBudgetQueryParamOwner)
+);
 /** @internal */
 export const DeleteTeamBudgetQueryParamOwner$outboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetQueryParamOwner
@@ -65,15 +67,17 @@ export const DeleteTeamBudgetRequest$inboundSchema: z.ZodType<
   DeleteTeamBudgetRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  owner: DeleteTeamBudgetQueryParamOwner$inboundSchema,
-  org_id: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    owner: DeleteTeamBudgetQueryParamOwner$inboundSchema,
+    org_id: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type DeleteTeamBudgetRequest$Outbound = {
   id: string;
@@ -86,15 +90,17 @@ export const DeleteTeamBudgetRequest$outboundSchema: z.ZodType<
   DeleteTeamBudgetRequest$Outbound,
   z.ZodTypeDef,
   DeleteTeamBudgetRequest
-> = z.object({
-  id: z.string(),
-  owner: DeleteTeamBudgetQueryParamOwner$outboundSchema,
-  orgId: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    owner: DeleteTeamBudgetQueryParamOwner$outboundSchema,
+    orgId: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function deleteTeamBudgetRequestToJSON(
   deleteTeamBudgetRequest: DeleteTeamBudgetRequest,
@@ -116,7 +122,7 @@ export function deleteTeamBudgetRequestFromJSON(
 /** @internal */
 export const DeleteTeamBudgetScope$inboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetScope
-> = z.nativeEnum(DeleteTeamBudgetScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteTeamBudgetScope));
 /** @internal */
 export const DeleteTeamBudgetScope$outboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetScope
@@ -125,7 +131,7 @@ export const DeleteTeamBudgetScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const DeleteTeamBudgetOwner$inboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetOwner
-> = z.nativeEnum(DeleteTeamBudgetOwner);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(DeleteTeamBudgetOwner));
 /** @internal */
 export const DeleteTeamBudgetOwner$outboundSchema: z.ZodNativeEnum<
   typeof DeleteTeamBudgetOwner
@@ -136,16 +142,18 @@ export const DeleteTeamBudgetResponseBody$inboundSchema: z.ZodType<
   DeleteTeamBudgetResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  scope: DeleteTeamBudgetScope$inboundSchema,
-  scope_id: z.string(),
-  owner: DeleteTeamBudgetOwner$inboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "scope_id": "scopeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteTeamBudgetScope$inboundSchema,
+    scope_id: z.string(),
+    owner: DeleteTeamBudgetOwner$inboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "scope_id": "scopeId",
+    });
+  })
+);
 /** @internal */
 export type DeleteTeamBudgetResponseBody$Outbound = {
   scope: string;
@@ -159,16 +167,18 @@ export const DeleteTeamBudgetResponseBody$outboundSchema: z.ZodType<
   DeleteTeamBudgetResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteTeamBudgetResponseBody
-> = z.object({
-  scope: DeleteTeamBudgetScope$outboundSchema,
-  scopeId: z.string(),
-  owner: DeleteTeamBudgetOwner$outboundSchema,
-  deleted: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    scopeId: "scope_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scope: DeleteTeamBudgetScope$outboundSchema,
+    scopeId: z.string(),
+    owner: DeleteTeamBudgetOwner$outboundSchema,
+    deleted: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      scopeId: "scope_id",
+    });
+  })
+);
 
 export function deleteTeamBudgetResponseBodyToJSON(
   deleteTeamBudgetResponseBody: DeleteTeamBudgetResponseBody,

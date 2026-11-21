@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -45,8 +45,8 @@ export type MemoryStoreMount = {
 };
 
 /** @internal */
-export const Access$inboundSchema: z.ZodNativeEnum<typeof Access> = z
-  .nativeEnum(Access);
+export const Access$inboundSchema: z.ZodNativeEnum<typeof Access> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Access));
 /** @internal */
 export const Access$outboundSchema: z.ZodNativeEnum<typeof Access> =
   Access$inboundSchema;
@@ -56,17 +56,19 @@ export const MemoryStoreMount$inboundSchema: z.ZodType<
   MemoryStoreMount,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  store_id: z.string(),
-  label: z.string(),
-  access: Access$inboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "store_id": "storeId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    store_id: z.string(),
+    label: z.string(),
+    access: Access$inboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "store_id": "storeId",
+    });
+  })
+);
 /** @internal */
 export type MemoryStoreMount$Outbound = {
   store_id: string;
@@ -81,17 +83,19 @@ export const MemoryStoreMount$outboundSchema: z.ZodType<
   MemoryStoreMount$Outbound,
   z.ZodTypeDef,
   MemoryStoreMount
-> = z.object({
-  storeId: z.string(),
-  label: z.string(),
-  access: Access$outboundSchema.default("read_only"),
-  description: z.string().optional(),
-  instructions: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    storeId: "store_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    storeId: z.string(),
+    label: z.string(),
+    access: Access$outboundSchema.default("read_only"),
+    description: z.string().optional(),
+    instructions: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      storeId: "store_id",
+    });
+  })
+);
 
 export function memoryStoreMountToJSON(
   memoryStoreMount: MemoryStoreMount,

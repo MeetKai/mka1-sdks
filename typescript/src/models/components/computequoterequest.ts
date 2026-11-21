@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -82,9 +82,11 @@ export const ComputeQuoteRequestAccess$inboundSchema: z.ZodType<
   ComputeQuoteRequestAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  ssh: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh: z.boolean().optional(),
+  })
+);
 /** @internal */
 export type ComputeQuoteRequestAccess$Outbound = {
   ssh?: boolean | undefined;
@@ -95,9 +97,11 @@ export const ComputeQuoteRequestAccess$outboundSchema: z.ZodType<
   ComputeQuoteRequestAccess$Outbound,
   z.ZodTypeDef,
   ComputeQuoteRequestAccess
-> = z.object({
-  ssh: z.boolean().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    ssh: z.boolean().optional(),
+  })
+);
 
 export function computeQuoteRequestAccessToJSON(
   computeQuoteRequestAccess: ComputeQuoteRequestAccess,
@@ -121,15 +125,17 @@ export const ComputeQuoteRequestContainer$inboundSchema: z.ZodType<
   ComputeQuoteRequestContainer,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  image: z.string(),
-  image_pull_secret: z.string().optional(),
-  ports: z.array(ComputePort$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "image_pull_secret": "imagePullSecret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image: z.string(),
+    image_pull_secret: z.string().optional(),
+    ports: z.array(ComputePort$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "image_pull_secret": "imagePullSecret",
+    });
+  })
+);
 /** @internal */
 export type ComputeQuoteRequestContainer$Outbound = {
   image: string;
@@ -142,15 +148,17 @@ export const ComputeQuoteRequestContainer$outboundSchema: z.ZodType<
   ComputeQuoteRequestContainer$Outbound,
   z.ZodTypeDef,
   ComputeQuoteRequestContainer
-> = z.object({
-  image: z.string(),
-  imagePullSecret: z.string().optional(),
-  ports: z.array(ComputePort$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    imagePullSecret: "image_pull_secret",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    image: z.string(),
+    imagePullSecret: z.string().optional(),
+    ports: z.array(ComputePort$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      imagePullSecret: "image_pull_secret",
+    });
+  })
+);
 
 export function computeQuoteRequestContainerToJSON(
   computeQuoteRequestContainer: ComputeQuoteRequestContainer,
@@ -173,10 +181,12 @@ export function computeQuoteRequestContainerFromJSON(
 
 /** @internal */
 export const Service$inboundSchema: z.ZodType<Service, z.ZodTypeDef, unknown> =
-  z.object({
-    scaling: ComputeScalingInput$inboundSchema.optional(),
-    volume: ComputeVolumeInput$inboundSchema.optional(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      scaling: ComputeScalingInput$inboundSchema.optional(),
+      volume: ComputeVolumeInput$inboundSchema.optional(),
+    })
+  );
 /** @internal */
 export type Service$Outbound = {
   scaling?: ComputeScalingInput$Outbound | undefined;
@@ -188,10 +198,12 @@ export const Service$outboundSchema: z.ZodType<
   Service$Outbound,
   z.ZodTypeDef,
   Service
-> = z.object({
-  scaling: ComputeScalingInput$outboundSchema.optional(),
-  volume: ComputeVolumeInput$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    scaling: ComputeScalingInput$outboundSchema.optional(),
+    volume: ComputeVolumeInput$outboundSchema.optional(),
+  })
+);
 
 export function serviceToJSON(service: Service): string {
   return JSON.stringify(Service$outboundSchema.parse(service));
@@ -211,19 +223,21 @@ export const ComputeQuoteRequest$inboundSchema: z.ZodType<
   ComputeQuoteRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access: z.lazy(() => ComputeQuoteRequestAccess$inboundSchema).optional(),
-  compute: ComputeRequest$inboundSchema,
-  container: z.lazy(() => ComputeQuoteRequestContainer$inboundSchema),
-  placement: ComputePlacement$inboundSchema,
-  resource_type: ComputeResourceType$inboundSchema,
-  service: z.lazy(() => Service$inboundSchema).optional(),
-  volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: z.lazy(() => ComputeQuoteRequestAccess$inboundSchema).optional(),
+    compute: ComputeRequest$inboundSchema,
+    container: z.lazy(() => ComputeQuoteRequestContainer$inboundSchema),
+    placement: ComputePlacement$inboundSchema,
+    resource_type: ComputeResourceType$inboundSchema,
+    service: z.lazy(() => Service$inboundSchema).optional(),
+    volumes: z.array(ComputeStandaloneVolumeMount$inboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+    });
+  })
+);
 /** @internal */
 export type ComputeQuoteRequest$Outbound = {
   access?: ComputeQuoteRequestAccess$Outbound | undefined;
@@ -240,19 +254,21 @@ export const ComputeQuoteRequest$outboundSchema: z.ZodType<
   ComputeQuoteRequest$Outbound,
   z.ZodTypeDef,
   ComputeQuoteRequest
-> = z.object({
-  access: z.lazy(() => ComputeQuoteRequestAccess$outboundSchema).optional(),
-  compute: ComputeRequest$outboundSchema,
-  container: z.lazy(() => ComputeQuoteRequestContainer$outboundSchema),
-  placement: ComputePlacement$outboundSchema,
-  resourceType: ComputeResourceType$outboundSchema,
-  service: z.lazy(() => Service$outboundSchema).optional(),
-  volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access: z.lazy(() => ComputeQuoteRequestAccess$outboundSchema).optional(),
+    compute: ComputeRequest$outboundSchema,
+    container: z.lazy(() => ComputeQuoteRequestContainer$outboundSchema),
+    placement: ComputePlacement$outboundSchema,
+    resourceType: ComputeResourceType$outboundSchema,
+    service: z.lazy(() => Service$outboundSchema).optional(),
+    volumes: z.array(ComputeStandaloneVolumeMount$outboundSchema).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+    });
+  })
+);
 
 export function computeQuoteRequestToJSON(
   computeQuoteRequest: ComputeQuoteRequest,

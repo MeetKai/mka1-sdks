@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type UpdateOrgMemberTooManyRequestsError struct {
 var _ error = &UpdateOrgMemberTooManyRequestsError{}
 
 func (e *UpdateOrgMemberTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type UpdateOrgMemberGoneError struct {
 var _ error = &UpdateOrgMemberGoneError{}
 
 func (e *UpdateOrgMemberGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type UpdateOrgMemberConflictError struct {
 var _ error = &UpdateOrgMemberConflictError{}
 
 func (e *UpdateOrgMemberConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type UpdateOrgMemberNotFoundError struct {
 var _ error = &UpdateOrgMemberNotFoundError{}
 
 func (e *UpdateOrgMemberNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type UpdateOrgMemberForbiddenError struct {
 var _ error = &UpdateOrgMemberForbiddenError{}
 
 func (e *UpdateOrgMemberForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type UpdateOrgMemberUnauthorizedError struct {
 var _ error = &UpdateOrgMemberUnauthorizedError{}
 
 func (e *UpdateOrgMemberUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type UpdateOrgMemberBadRequestError struct {
 var _ error = &UpdateOrgMemberBadRequestError{}
 
 func (e *UpdateOrgMemberBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { blobLikeSchema } from "../../types/blobs.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -43,15 +43,17 @@ export const ExtractWithSchemaFile$inboundSchema: z.ZodType<
   ExtractWithSchemaFile,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 /** @internal */
 export type ExtractWithSchemaFile$Outbound = {
   fileName: string;
@@ -63,15 +65,17 @@ export const ExtractWithSchemaFile$outboundSchema: z.ZodType<
   ExtractWithSchemaFile$Outbound,
   z.ZodTypeDef,
   ExtractWithSchemaFile
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function extractWithSchemaFileToJSON(
   extractWithSchemaFile: ExtractWithSchemaFile,
@@ -95,11 +99,13 @@ export const ExtractWithSchemaRequestBody$inboundSchema: z.ZodType<
   ExtractWithSchemaRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  file: z.lazy(() => ExtractWithSchemaFile$inboundSchema),
-  prompt: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    file: z.lazy(() => ExtractWithSchemaFile$inboundSchema),
+    prompt: z.string().optional(),
+  })
+);
 /** @internal */
 export type ExtractWithSchemaRequestBody$Outbound = {
   model: string;
@@ -112,11 +118,13 @@ export const ExtractWithSchemaRequestBody$outboundSchema: z.ZodType<
   ExtractWithSchemaRequestBody$Outbound,
   z.ZodTypeDef,
   ExtractWithSchemaRequestBody
-> = z.object({
-  model: z.string(),
-  file: z.lazy(() => ExtractWithSchemaFile$outboundSchema).or(blobLikeSchema),
-  prompt: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    file: z.lazy(() => ExtractWithSchemaFile$outboundSchema).or(blobLikeSchema),
+    prompt: z.string().optional(),
+  })
+);
 
 export function extractWithSchemaRequestBodyToJSON(
   extractWithSchemaRequestBody: ExtractWithSchemaRequestBody,
@@ -142,17 +150,19 @@ export const ExtractWithSchemaRequest$inboundSchema: z.ZodType<
   ExtractWithSchemaRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  schema_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => ExtractWithSchemaRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "schema_id": "schemaId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schema_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => ExtractWithSchemaRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "schema_id": "schemaId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ExtractWithSchemaRequest$Outbound = {
   schema_id: string;
@@ -165,17 +175,19 @@ export const ExtractWithSchemaRequest$outboundSchema: z.ZodType<
   ExtractWithSchemaRequest$Outbound,
   z.ZodTypeDef,
   ExtractWithSchemaRequest
-> = z.object({
-  schemaId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => ExtractWithSchemaRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    schemaId: "schema_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    schemaId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => ExtractWithSchemaRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      schemaId: "schema_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function extractWithSchemaRequestToJSON(
   extractWithSchemaRequest: ExtractWithSchemaRequest,

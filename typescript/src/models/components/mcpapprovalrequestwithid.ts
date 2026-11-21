@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -39,21 +39,23 @@ export const MCPApprovalRequestWithId$inboundSchema: z.ZodType<
   MCPApprovalRequestWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("mcp_approval_request"),
-  id: z.string(),
-  arguments: z.string(),
-  name: z.string(),
-  server_label: z.string(),
-  reason: z.string().optional(),
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "server_label": "serverLabel",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_request"),
+    id: z.string(),
+    arguments: z.string(),
+    name: z.string(),
+    server_label: z.string(),
+    reason: z.string().optional(),
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "server_label": "serverLabel",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type MCPApprovalRequestWithId$Outbound = {
   type: "mcp_approval_request";
@@ -71,21 +73,23 @@ export const MCPApprovalRequestWithId$outboundSchema: z.ZodType<
   MCPApprovalRequestWithId$Outbound,
   z.ZodTypeDef,
   MCPApprovalRequestWithId
-> = z.object({
-  type: z.literal("mcp_approval_request"),
-  id: z.string(),
-  arguments: z.string(),
-  name: z.string(),
-  serverLabel: z.string(),
-  reason: z.string().optional(),
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    serverLabel: "server_label",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("mcp_approval_request"),
+    id: z.string(),
+    arguments: z.string(),
+    name: z.string(),
+    serverLabel: z.string(),
+    reason: z.string().optional(),
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      serverLabel: "server_label",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function mcpApprovalRequestWithIdToJSON(
   mcpApprovalRequestWithId: MCPApprovalRequestWithId,

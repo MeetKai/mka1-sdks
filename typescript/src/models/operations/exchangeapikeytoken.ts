@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -50,12 +50,14 @@ export const ExchangeApiKeyTokenRequestBody$inboundSchema: z.ZodType<
   ExchangeApiKeyTokenRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  audience: z.string(),
-  externalUserId: z.string(),
-  expiresIn: z.number().default(3600),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+    externalUserId: z.string(),
+    expiresIn: z.number().default(3600),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type ExchangeApiKeyTokenRequestBody$Outbound = {
   audience: string;
@@ -69,12 +71,14 @@ export const ExchangeApiKeyTokenRequestBody$outboundSchema: z.ZodType<
   ExchangeApiKeyTokenRequestBody$Outbound,
   z.ZodTypeDef,
   ExchangeApiKeyTokenRequestBody
-> = z.object({
-  audience: z.string(),
-  externalUserId: z.string(),
-  expiresIn: z.number().default(3600),
-  permissions: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    audience: z.string(),
+    externalUserId: z.string(),
+    expiresIn: z.number().default(3600),
+    permissions: z.array(z.string()).optional(),
+  })
+);
 
 export function exchangeApiKeyTokenRequestBodyToJSON(
   exchangeApiKeyTokenRequestBody: ExchangeApiKeyTokenRequestBody,
@@ -100,15 +104,17 @@ export const ExchangeApiKeyTokenRequest$inboundSchema: z.ZodType<
   ExchangeApiKeyTokenRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => ExchangeApiKeyTokenRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => ExchangeApiKeyTokenRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type ExchangeApiKeyTokenRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -120,15 +126,17 @@ export const ExchangeApiKeyTokenRequest$outboundSchema: z.ZodType<
   ExchangeApiKeyTokenRequest$Outbound,
   z.ZodTypeDef,
   ExchangeApiKeyTokenRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => ExchangeApiKeyTokenRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => ExchangeApiKeyTokenRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function exchangeApiKeyTokenRequestToJSON(
   exchangeApiKeyTokenRequest: ExchangeApiKeyTokenRequest,
@@ -152,9 +160,11 @@ export const ExchangeApiKeyTokenResponseBody$inboundSchema: z.ZodType<
   ExchangeApiKeyTokenResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+  })
+);
 /** @internal */
 export type ExchangeApiKeyTokenResponseBody$Outbound = {
   token: string;
@@ -165,9 +175,11 @@ export const ExchangeApiKeyTokenResponseBody$outboundSchema: z.ZodType<
   ExchangeApiKeyTokenResponseBody$Outbound,
   z.ZodTypeDef,
   ExchangeApiKeyTokenResponseBody
-> = z.object({
-  token: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    token: z.string(),
+  })
+);
 
 export function exchangeApiKeyTokenResponseBodyToJSON(
   exchangeApiKeyTokenResponseBody: ExchangeApiKeyTokenResponseBody,

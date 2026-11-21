@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -42,27 +42,29 @@ export const ComputeServiceScaling$inboundSchema: z.ZodType<
   ComputeServiceScaling,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  applied: z.nullable(ComputeScalingInput$inboundSchema),
-  applied_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  applied_generation: z.number().int(),
-  autoscaler: ComputeAutoscalerState$inboundSchema,
-  desired: ComputeScalingInput$inboundSchema,
-  desired_generation: z.number().int(),
-  desired_updated_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  replicas: ComputeScalingReplicas$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "applied_at": "appliedAt",
-    "applied_generation": "appliedGeneration",
-    "desired_generation": "desiredGeneration",
-    "desired_updated_at": "desiredUpdatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applied: z.nullable(ComputeScalingInput$inboundSchema),
+    applied_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    applied_generation: z.number().int(),
+    autoscaler: ComputeAutoscalerState$inboundSchema,
+    desired: ComputeScalingInput$inboundSchema,
+    desired_generation: z.number().int(),
+    desired_updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    replicas: ComputeScalingReplicas$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "applied_at": "appliedAt",
+      "applied_generation": "appliedGeneration",
+      "desired_generation": "desiredGeneration",
+      "desired_updated_at": "desiredUpdatedAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeServiceScaling$Outbound = {
   applied: ComputeScalingInput$Outbound | null;
@@ -80,23 +82,25 @@ export const ComputeServiceScaling$outboundSchema: z.ZodType<
   ComputeServiceScaling$Outbound,
   z.ZodTypeDef,
   ComputeServiceScaling
-> = z.object({
-  applied: z.nullable(ComputeScalingInput$outboundSchema),
-  appliedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  appliedGeneration: z.number().int(),
-  autoscaler: ComputeAutoscalerState$outboundSchema,
-  desired: ComputeScalingInput$outboundSchema,
-  desiredGeneration: z.number().int(),
-  desiredUpdatedAt: z.date().transform(v => v.toISOString()),
-  replicas: ComputeScalingReplicas$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    appliedAt: "applied_at",
-    appliedGeneration: "applied_generation",
-    desiredGeneration: "desired_generation",
-    desiredUpdatedAt: "desired_updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    applied: z.nullable(ComputeScalingInput$outboundSchema),
+    appliedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    appliedGeneration: z.number().int(),
+    autoscaler: ComputeAutoscalerState$outboundSchema,
+    desired: ComputeScalingInput$outboundSchema,
+    desiredGeneration: z.number().int(),
+    desiredUpdatedAt: z.date().transform(v => v.toISOString()),
+    replicas: ComputeScalingReplicas$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      appliedAt: "applied_at",
+      appliedGeneration: "applied_generation",
+      desiredGeneration: "desired_generation",
+      desiredUpdatedAt: "desired_updated_at",
+    });
+  })
+);
 
 export function computeServiceScalingToJSON(
   computeServiceScaling: ComputeServiceScaling,

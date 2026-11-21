@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -32,14 +32,16 @@ export const PutOrgAutoModelRequest$inboundSchema: z.ZodType<
   PutOrgAutoModelRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endpoint: components.AutoEndpoint$inboundSchema,
-  PutOrgAutoModelRequest: components.PutOrgAutoModelRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "PutOrgAutoModelRequest": "putOrgAutoModelRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: components.AutoEndpoint$inboundSchema,
+    PutOrgAutoModelRequest: components.PutOrgAutoModelRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "PutOrgAutoModelRequest": "putOrgAutoModelRequest",
+    });
+  })
+);
 /** @internal */
 export type PutOrgAutoModelRequest$Outbound = {
   endpoint: string;
@@ -51,14 +53,16 @@ export const PutOrgAutoModelRequest$outboundSchema: z.ZodType<
   PutOrgAutoModelRequest$Outbound,
   z.ZodTypeDef,
   PutOrgAutoModelRequest
-> = z.object({
-  endpoint: components.AutoEndpoint$outboundSchema,
-  putOrgAutoModelRequest: components.PutOrgAutoModelRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    putOrgAutoModelRequest: "PutOrgAutoModelRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: components.AutoEndpoint$outboundSchema,
+    putOrgAutoModelRequest: components.PutOrgAutoModelRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      putOrgAutoModelRequest: "PutOrgAutoModelRequest",
+    });
+  })
+);
 
 export function putOrgAutoModelRequestToJSON(
   putOrgAutoModelRequest: PutOrgAutoModelRequest,
@@ -82,13 +86,15 @@ export const PutOrgAutoModelResponseBody$inboundSchema: z.ZodType<
   PutOrgAutoModelResponseBody,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("mode", {
-  direct: components.DirectOrgAutoModel$inboundSchema,
-  balanced: components.BalancedOrgAutoModel$inboundSchema,
-  price: components.PriceOrgAutoModel$inboundSchema,
-  quality: components.QualityOrgAutoModel$inboundSchema,
-  speed: components.SpeedOrgAutoModel$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("mode", {
+    direct: components.DirectOrgAutoModel$inboundSchema,
+    balanced: components.BalancedOrgAutoModel$inboundSchema,
+    price: components.PriceOrgAutoModel$inboundSchema,
+    quality: components.QualityOrgAutoModel$inboundSchema,
+    speed: components.SpeedOrgAutoModel$inboundSchema,
+  })
+);
 /** @internal */
 export type PutOrgAutoModelResponseBody$Outbound =
   | components.DirectOrgAutoModel$Outbound
@@ -102,13 +108,15 @@ export const PutOrgAutoModelResponseBody$outboundSchema: z.ZodType<
   PutOrgAutoModelResponseBody$Outbound,
   z.ZodTypeDef,
   PutOrgAutoModelResponseBody
-> = z.union([
-  components.DirectOrgAutoModel$outboundSchema,
-  components.BalancedOrgAutoModel$outboundSchema,
-  components.PriceOrgAutoModel$outboundSchema,
-  components.QualityOrgAutoModel$outboundSchema,
-  components.SpeedOrgAutoModel$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.DirectOrgAutoModel$outboundSchema,
+    components.BalancedOrgAutoModel$outboundSchema,
+    components.PriceOrgAutoModel$outboundSchema,
+    components.QualityOrgAutoModel$outboundSchema,
+    components.SpeedOrgAutoModel$outboundSchema,
+  ])
+);
 
 export function putOrgAutoModelResponseBodyToJSON(
   putOrgAutoModelResponseBody: PutOrgAutoModelResponseBody,

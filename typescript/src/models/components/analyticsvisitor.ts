@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,19 +32,25 @@ export const AnalyticsVisitor$inboundSchema: z.ZodType<
   AnalyticsVisitor,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  distinct_id: z.string(),
-  first_seen: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  last_seen: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  event_count: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "distinct_id": "distinctId",
-    "first_seen": "firstSeen",
-    "last_seen": "lastSeen",
-    "event_count": "eventCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    distinct_id: z.string(),
+    first_seen: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    last_seen: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    event_count: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "distinct_id": "distinctId",
+      "first_seen": "firstSeen",
+      "last_seen": "lastSeen",
+      "event_count": "eventCount",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsVisitor$Outbound = {
   distinct_id: string;
@@ -58,19 +64,21 @@ export const AnalyticsVisitor$outboundSchema: z.ZodType<
   AnalyticsVisitor$Outbound,
   z.ZodTypeDef,
   AnalyticsVisitor
-> = z.object({
-  distinctId: z.string(),
-  firstSeen: z.date().transform(v => v.toISOString()),
-  lastSeen: z.date().transform(v => v.toISOString()),
-  eventCount: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    distinctId: "distinct_id",
-    firstSeen: "first_seen",
-    lastSeen: "last_seen",
-    eventCount: "event_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    distinctId: z.string(),
+    firstSeen: z.date().transform(v => v.toISOString()),
+    lastSeen: z.date().transform(v => v.toISOString()),
+    eventCount: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      distinctId: "distinct_id",
+      firstSeen: "first_seen",
+      lastSeen: "last_seen",
+      eventCount: "event_count",
+    });
+  })
+);
 
 export function analyticsVisitorToJSON(
   analyticsVisitor: AnalyticsVisitor,

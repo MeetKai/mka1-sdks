@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -63,7 +63,9 @@ export type QualityOrgAutoModel = {
 /** @internal */
 export const QualityOrgAutoModelFallbackLanguage$inboundSchema: z.ZodNativeEnum<
   typeof QualityOrgAutoModelFallbackLanguage
-> = z.nativeEnum(QualityOrgAutoModelFallbackLanguage);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(QualityOrgAutoModelFallbackLanguage)
+);
 /** @internal */
 export const QualityOrgAutoModelFallbackLanguage$outboundSchema:
   z.ZodNativeEnum<typeof QualityOrgAutoModelFallbackLanguage> =
@@ -74,29 +76,31 @@ export const QualityOrgAutoModel$inboundSchema: z.ZodType<
   QualityOrgAutoModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  endpoint: AutoEndpoint$inboundSchema,
-  set_by: z.string(),
-  set_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  fallback_language: z.nullable(
-    QualityOrgAutoModelFallbackLanguage$inboundSchema,
-  ).optional(),
-  judge_model_id: z.string(),
-  candidate_model_ids: z.array(z.string()),
-  judge_resolvable: z.boolean(),
-  resolvable_candidate_model_ids: z.array(z.string()),
-  mode: z.literal("quality"),
-}).transform((v) => {
-  return remap$(v, {
-    "set_by": "setBy",
-    "set_at": "setAt",
-    "fallback_language": "fallbackLanguage",
-    "judge_model_id": "judgeModelId",
-    "candidate_model_ids": "candidateModelIds",
-    "judge_resolvable": "judgeResolvable",
-    "resolvable_candidate_model_ids": "resolvableCandidateModelIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$inboundSchema,
+    set_by: z.string(),
+    set_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    fallback_language: z.nullable(
+      QualityOrgAutoModelFallbackLanguage$inboundSchema,
+    ).optional(),
+    judge_model_id: z.string(),
+    candidate_model_ids: z.array(z.string()),
+    judge_resolvable: z.boolean(),
+    resolvable_candidate_model_ids: z.array(z.string()),
+    mode: z.literal("quality"),
+  }).transform((v) => {
+    return remap$(v, {
+      "set_by": "setBy",
+      "set_at": "setAt",
+      "fallback_language": "fallbackLanguage",
+      "judge_model_id": "judgeModelId",
+      "candidate_model_ids": "candidateModelIds",
+      "judge_resolvable": "judgeResolvable",
+      "resolvable_candidate_model_ids": "resolvableCandidateModelIds",
+    });
+  })
+);
 /** @internal */
 export type QualityOrgAutoModel$Outbound = {
   endpoint: string;
@@ -115,29 +119,31 @@ export const QualityOrgAutoModel$outboundSchema: z.ZodType<
   QualityOrgAutoModel$Outbound,
   z.ZodTypeDef,
   QualityOrgAutoModel
-> = z.object({
-  endpoint: AutoEndpoint$outboundSchema,
-  setBy: z.string(),
-  setAt: z.date().transform(v => v.toISOString()),
-  fallbackLanguage: z.nullable(
-    QualityOrgAutoModelFallbackLanguage$outboundSchema,
-  ).optional(),
-  judgeModelId: z.string(),
-  candidateModelIds: z.array(z.string()),
-  judgeResolvable: z.boolean(),
-  resolvableCandidateModelIds: z.array(z.string()),
-  mode: z.literal("quality"),
-}).transform((v) => {
-  return remap$(v, {
-    setBy: "set_by",
-    setAt: "set_at",
-    fallbackLanguage: "fallback_language",
-    judgeModelId: "judge_model_id",
-    candidateModelIds: "candidate_model_ids",
-    judgeResolvable: "judge_resolvable",
-    resolvableCandidateModelIds: "resolvable_candidate_model_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    endpoint: AutoEndpoint$outboundSchema,
+    setBy: z.string(),
+    setAt: z.date().transform(v => v.toISOString()),
+    fallbackLanguage: z.nullable(
+      QualityOrgAutoModelFallbackLanguage$outboundSchema,
+    ).optional(),
+    judgeModelId: z.string(),
+    candidateModelIds: z.array(z.string()),
+    judgeResolvable: z.boolean(),
+    resolvableCandidateModelIds: z.array(z.string()),
+    mode: z.literal("quality"),
+  }).transform((v) => {
+    return remap$(v, {
+      setBy: "set_by",
+      setAt: "set_at",
+      fallbackLanguage: "fallback_language",
+      judgeModelId: "judge_model_id",
+      candidateModelIds: "candidate_model_ids",
+      judgeResolvable: "judge_resolvable",
+      resolvableCandidateModelIds: "resolvable_candidate_model_ids",
+    });
+  })
+);
 
 export function qualityOrgAutoModelToJSON(
   qualityOrgAutoModel: QualityOrgAutoModel,

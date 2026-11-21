@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,34 +52,36 @@ export type CatalogPricePreview = {
 };
 
 /** @internal */
-export const Rates$inboundSchema: z.ZodType<Rates, z.ZodTypeDef, unknown> = z
-  .object({
-    input_tokens: z.number().optional(),
-    output_tokens: z.number().optional(),
-    cached_tokens: z.number().optional(),
-    reasoning_tokens: z.number().optional(),
-    batch_input_tokens: z.number().optional(),
-    batch_output_tokens: z.number().optional(),
-    batch_cached_tokens: z.number().optional(),
-    batch_reasoning_tokens: z.number().optional(),
-    characters: z.number().optional(),
-    seconds: z.number().optional(),
-    image: z.number().optional(),
-    image_tiers: z.record(z.number()).optional(),
-    searches: z.number().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_tokens": "inputTokens",
-      "output_tokens": "outputTokens",
-      "cached_tokens": "cachedTokens",
-      "reasoning_tokens": "reasoningTokens",
-      "batch_input_tokens": "batchInputTokens",
-      "batch_output_tokens": "batchOutputTokens",
-      "batch_cached_tokens": "batchCachedTokens",
-      "batch_reasoning_tokens": "batchReasoningTokens",
-      "image_tiers": "imageTiers",
-    });
-  });
+export const Rates$inboundSchema: z.ZodType<Rates, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input_tokens: z.number().optional(),
+      output_tokens: z.number().optional(),
+      cached_tokens: z.number().optional(),
+      reasoning_tokens: z.number().optional(),
+      batch_input_tokens: z.number().optional(),
+      batch_output_tokens: z.number().optional(),
+      batch_cached_tokens: z.number().optional(),
+      batch_reasoning_tokens: z.number().optional(),
+      characters: z.number().optional(),
+      seconds: z.number().optional(),
+      image: z.number().optional(),
+      image_tiers: z.record(z.number()).optional(),
+      searches: z.number().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_tokens": "inputTokens",
+        "output_tokens": "outputTokens",
+        "cached_tokens": "cachedTokens",
+        "reasoning_tokens": "reasoningTokens",
+        "batch_input_tokens": "batchInputTokens",
+        "batch_output_tokens": "batchOutputTokens",
+        "batch_cached_tokens": "batchCachedTokens",
+        "batch_reasoning_tokens": "batchReasoningTokens",
+        "image_tiers": "imageTiers",
+      });
+    })
+  );
 /** @internal */
 export type Rates$Outbound = {
   input_tokens?: number | undefined;
@@ -102,33 +104,35 @@ export const Rates$outboundSchema: z.ZodType<
   Rates$Outbound,
   z.ZodTypeDef,
   Rates
-> = z.object({
-  inputTokens: z.number().optional(),
-  outputTokens: z.number().optional(),
-  cachedTokens: z.number().optional(),
-  reasoningTokens: z.number().optional(),
-  batchInputTokens: z.number().optional(),
-  batchOutputTokens: z.number().optional(),
-  batchCachedTokens: z.number().optional(),
-  batchReasoningTokens: z.number().optional(),
-  characters: z.number().optional(),
-  seconds: z.number().optional(),
-  image: z.number().optional(),
-  imageTiers: z.record(z.number()).optional(),
-  searches: z.number().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputTokens: "input_tokens",
-    outputTokens: "output_tokens",
-    cachedTokens: "cached_tokens",
-    reasoningTokens: "reasoning_tokens",
-    batchInputTokens: "batch_input_tokens",
-    batchOutputTokens: "batch_output_tokens",
-    batchCachedTokens: "batch_cached_tokens",
-    batchReasoningTokens: "batch_reasoning_tokens",
-    imageTiers: "image_tiers",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    inputTokens: z.number().optional(),
+    outputTokens: z.number().optional(),
+    cachedTokens: z.number().optional(),
+    reasoningTokens: z.number().optional(),
+    batchInputTokens: z.number().optional(),
+    batchOutputTokens: z.number().optional(),
+    batchCachedTokens: z.number().optional(),
+    batchReasoningTokens: z.number().optional(),
+    characters: z.number().optional(),
+    seconds: z.number().optional(),
+    image: z.number().optional(),
+    imageTiers: z.record(z.number()).optional(),
+    searches: z.number().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputTokens: "input_tokens",
+      outputTokens: "output_tokens",
+      cachedTokens: "cached_tokens",
+      reasoningTokens: "reasoning_tokens",
+      batchInputTokens: "batch_input_tokens",
+      batchOutputTokens: "batch_output_tokens",
+      batchCachedTokens: "batch_cached_tokens",
+      batchReasoningTokens: "batch_reasoning_tokens",
+      imageTiers: "image_tiers",
+    });
+  })
+);
 
 export function ratesToJSON(rates: Rates): string {
   return JSON.stringify(Rates$outboundSchema.parse(rates));
@@ -146,7 +150,7 @@ export function ratesFromJSON(
 /** @internal */
 export const CatalogPricePreviewSource$inboundSchema: z.ZodNativeEnum<
   typeof CatalogPricePreviewSource
-> = z.nativeEnum(CatalogPricePreviewSource);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(CatalogPricePreviewSource));
 /** @internal */
 export const CatalogPricePreviewSource$outboundSchema: z.ZodNativeEnum<
   typeof CatalogPricePreviewSource
@@ -157,10 +161,12 @@ export const CatalogPricePreview$inboundSchema: z.ZodType<
   CatalogPricePreview,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rates: z.nullable(z.lazy(() => Rates$inboundSchema)),
-  source: CatalogPricePreviewSource$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rates: z.nullable(z.lazy(() => Rates$inboundSchema)),
+    source: CatalogPricePreviewSource$inboundSchema,
+  })
+);
 /** @internal */
 export type CatalogPricePreview$Outbound = {
   rates: Rates$Outbound | null;
@@ -172,10 +178,12 @@ export const CatalogPricePreview$outboundSchema: z.ZodType<
   CatalogPricePreview$Outbound,
   z.ZodTypeDef,
   CatalogPricePreview
-> = z.object({
-  rates: z.nullable(z.lazy(() => Rates$outboundSchema)),
-  source: CatalogPricePreviewSource$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rates: z.nullable(z.lazy(() => Rates$outboundSchema)),
+    source: CatalogPricePreviewSource$outboundSchema,
+  })
+);
 
 export function catalogPricePreviewToJSON(
   catalogPricePreview: CatalogPricePreview,

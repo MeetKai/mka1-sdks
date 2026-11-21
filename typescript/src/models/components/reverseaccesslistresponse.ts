@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -25,15 +25,17 @@ export const ReverseAccessListResponse$inboundSchema: z.ZodType<
   ReverseAccessListResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  model_id: z.string(),
-  data: z.array(ReverseAccessEntry$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "model_id": "modelId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    model_id: z.string(),
+    data: z.array(ReverseAccessEntry$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "model_id": "modelId",
+    });
+  })
+);
 /** @internal */
 export type ReverseAccessListResponse$Outbound = {
   object: "list";
@@ -46,15 +48,17 @@ export const ReverseAccessListResponse$outboundSchema: z.ZodType<
   ReverseAccessListResponse$Outbound,
   z.ZodTypeDef,
   ReverseAccessListResponse
-> = z.object({
-  object: z.literal("list"),
-  modelId: z.string(),
-  data: z.array(ReverseAccessEntry$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    modelId: "model_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    modelId: z.string(),
+    data: z.array(ReverseAccessEntry$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      modelId: "model_id",
+    });
+  })
+);
 
 export function reverseAccessListResponseToJSON(
   reverseAccessListResponse: ReverseAccessListResponse,

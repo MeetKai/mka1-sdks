@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const DeleteModelPriceResponse$inboundSchema: z.ZodType<
   DeleteModelPriceResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  org_id: z.nullable(z.string()),
-  cleared: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    org_id: z.nullable(z.string()),
+    cleared: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type DeleteModelPriceResponse$Outbound = {
   model: string;
@@ -40,15 +42,17 @@ export const DeleteModelPriceResponse$outboundSchema: z.ZodType<
   DeleteModelPriceResponse$Outbound,
   z.ZodTypeDef,
   DeleteModelPriceResponse
-> = z.object({
-  model: z.string(),
-  orgId: z.nullable(z.string()),
-  cleared: z.literal(true),
-}).transform((v) => {
-  return remap$(v, {
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    orgId: z.nullable(z.string()),
+    cleared: z.literal(true),
+  }).transform((v) => {
+    return remap$(v, {
+      orgId: "org_id",
+    });
+  })
+);
 
 export function deleteModelPriceResponseToJSON(
   deleteModelPriceResponse: DeleteModelPriceResponse,

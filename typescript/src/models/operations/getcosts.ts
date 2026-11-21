@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -76,21 +76,23 @@ export const GetCostsRequest$inboundSchema: z.ZodType<
   GetCostsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  start_time: z.number().int(),
-  end_time: z.number().int(),
-  group_by: z.string().default(""),
-  org_id: z.string().optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "group_by": "groupBy",
-    "org_id": "orgId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    start_time: z.number().int(),
+    end_time: z.number().int(),
+    group_by: z.string().default(""),
+    org_id: z.string().optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "group_by": "groupBy",
+      "org_id": "orgId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type GetCostsRequest$Outbound = {
   start_time: number;
@@ -105,21 +107,23 @@ export const GetCostsRequest$outboundSchema: z.ZodType<
   GetCostsRequest$Outbound,
   z.ZodTypeDef,
   GetCostsRequest
-> = z.object({
-  startTime: z.number().int(),
-  endTime: z.number().int(),
-  groupBy: z.string().default(""),
-  orgId: z.string().optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    groupBy: "group_by",
-    orgId: "org_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    startTime: z.number().int(),
+    endTime: z.number().int(),
+    groupBy: z.string().default(""),
+    orgId: z.string().optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      groupBy: "group_by",
+      orgId: "org_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function getCostsRequestToJSON(
   getCostsRequest: GetCostsRequest,
@@ -141,26 +145,28 @@ export const GetCostsData$inboundSchema: z.ZodType<
   GetCostsData,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  service: z.nullable(z.string()),
-  task_type: z.nullable(z.string()),
-  model: z.nullable(z.string()),
-  api_key_id: z.nullable(z.string()),
-  team_id: z.nullable(z.string()),
-  user_id: z.nullable(z.string()),
-  external_user_id: z.nullable(z.string()),
-  org_id: z.nullable(z.string()),
-  cost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "task_type": "taskType",
-    "api_key_id": "apiKeyId",
-    "team_id": "teamId",
-    "user_id": "userId",
-    "external_user_id": "externalUserId",
-    "org_id": "orgId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    service: z.nullable(z.string()),
+    task_type: z.nullable(z.string()),
+    model: z.nullable(z.string()),
+    api_key_id: z.nullable(z.string()),
+    team_id: z.nullable(z.string()),
+    user_id: z.nullable(z.string()),
+    external_user_id: z.nullable(z.string()),
+    org_id: z.nullable(z.string()),
+    cost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "task_type": "taskType",
+      "api_key_id": "apiKeyId",
+      "team_id": "teamId",
+      "user_id": "userId",
+      "external_user_id": "externalUserId",
+      "org_id": "orgId",
+    });
+  })
+);
 /** @internal */
 export type GetCostsData$Outbound = {
   service: string | null;
@@ -179,26 +185,28 @@ export const GetCostsData$outboundSchema: z.ZodType<
   GetCostsData$Outbound,
   z.ZodTypeDef,
   GetCostsData
-> = z.object({
-  service: z.nullable(z.string()),
-  taskType: z.nullable(z.string()),
-  model: z.nullable(z.string()),
-  apiKeyId: z.nullable(z.string()),
-  teamId: z.nullable(z.string()),
-  userId: z.nullable(z.string()),
-  externalUserId: z.nullable(z.string()),
-  orgId: z.nullable(z.string()),
-  cost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    taskType: "task_type",
-    apiKeyId: "api_key_id",
-    teamId: "team_id",
-    userId: "user_id",
-    externalUserId: "external_user_id",
-    orgId: "org_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    service: z.nullable(z.string()),
+    taskType: z.nullable(z.string()),
+    model: z.nullable(z.string()),
+    apiKeyId: z.nullable(z.string()),
+    teamId: z.nullable(z.string()),
+    userId: z.nullable(z.string()),
+    externalUserId: z.nullable(z.string()),
+    orgId: z.nullable(z.string()),
+    cost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      taskType: "task_type",
+      apiKeyId: "api_key_id",
+      teamId: "team_id",
+      userId: "user_id",
+      externalUserId: "external_user_id",
+      orgId: "org_id",
+    });
+  })
+);
 
 export function getCostsDataToJSON(getCostsData: GetCostsData): string {
   return JSON.stringify(GetCostsData$outboundSchema.parse(getCostsData));
@@ -218,34 +226,36 @@ export const GetCostsResponseBody$inboundSchema: z.ZodType<
   GetCostsResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  currency: z.string(),
-  start_time: z.number(),
-  end_time: z.number(),
-  group_by: z.array(z.string()),
-  data: z.array(z.lazy(() => GetCostsData$inboundSchema)),
-  total_cost: z.number(),
-  as_of: z.number().int(),
-  settlement_window_seconds: z.number().int(),
-  final_through: z.number().int(),
-  final: z.boolean(),
-  unpriced_entries: z.number().int(),
-  late_entries: z.number().int(),
-  late_cost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "start_time": "startTime",
-    "end_time": "endTime",
-    "group_by": "groupBy",
-    "total_cost": "totalCost",
-    "as_of": "asOf",
-    "settlement_window_seconds": "settlementWindowSeconds",
-    "final_through": "finalThrough",
-    "unpriced_entries": "unpricedEntries",
-    "late_entries": "lateEntries",
-    "late_cost": "lateCost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+    start_time: z.number(),
+    end_time: z.number(),
+    group_by: z.array(z.string()),
+    data: z.array(z.lazy(() => GetCostsData$inboundSchema)),
+    total_cost: z.number(),
+    as_of: z.number().int(),
+    settlement_window_seconds: z.number().int(),
+    final_through: z.number().int(),
+    final: z.boolean(),
+    unpriced_entries: z.number().int(),
+    late_entries: z.number().int(),
+    late_cost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "start_time": "startTime",
+      "end_time": "endTime",
+      "group_by": "groupBy",
+      "total_cost": "totalCost",
+      "as_of": "asOf",
+      "settlement_window_seconds": "settlementWindowSeconds",
+      "final_through": "finalThrough",
+      "unpriced_entries": "unpricedEntries",
+      "late_entries": "lateEntries",
+      "late_cost": "lateCost",
+    });
+  })
+);
 /** @internal */
 export type GetCostsResponseBody$Outbound = {
   currency: string;
@@ -268,34 +278,36 @@ export const GetCostsResponseBody$outboundSchema: z.ZodType<
   GetCostsResponseBody$Outbound,
   z.ZodTypeDef,
   GetCostsResponseBody
-> = z.object({
-  currency: z.string(),
-  startTime: z.number(),
-  endTime: z.number(),
-  groupBy: z.array(z.string()),
-  data: z.array(z.lazy(() => GetCostsData$outboundSchema)),
-  totalCost: z.number(),
-  asOf: z.number().int(),
-  settlementWindowSeconds: z.number().int(),
-  finalThrough: z.number().int(),
-  final: z.boolean(),
-  unpricedEntries: z.number().int(),
-  lateEntries: z.number().int(),
-  lateCost: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    startTime: "start_time",
-    endTime: "end_time",
-    groupBy: "group_by",
-    totalCost: "total_cost",
-    asOf: "as_of",
-    settlementWindowSeconds: "settlement_window_seconds",
-    finalThrough: "final_through",
-    unpricedEntries: "unpriced_entries",
-    lateEntries: "late_entries",
-    lateCost: "late_cost",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    currency: z.string(),
+    startTime: z.number(),
+    endTime: z.number(),
+    groupBy: z.array(z.string()),
+    data: z.array(z.lazy(() => GetCostsData$outboundSchema)),
+    totalCost: z.number(),
+    asOf: z.number().int(),
+    settlementWindowSeconds: z.number().int(),
+    finalThrough: z.number().int(),
+    final: z.boolean(),
+    unpricedEntries: z.number().int(),
+    lateEntries: z.number().int(),
+    lateCost: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      startTime: "start_time",
+      endTime: "end_time",
+      groupBy: "group_by",
+      totalCost: "total_cost",
+      asOf: "as_of",
+      settlementWindowSeconds: "settlement_window_seconds",
+      finalThrough: "final_through",
+      unpricedEntries: "unpriced_entries",
+      lateEntries: "late_entries",
+      lateCost: "late_cost",
+    });
+  })
+);
 
 export function getCostsResponseBodyToJSON(
   getCostsResponseBody: GetCostsResponseBody,

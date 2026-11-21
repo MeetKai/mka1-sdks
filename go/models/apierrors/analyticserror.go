@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,15 @@ type AnalyticsError struct {
 var _ error = &AnalyticsError{}
 
 func (e *AnalyticsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != "" {
+				return fmt.Sprintf("%v: %s", e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -47,7 +47,7 @@ export type ShellCallWithId = {
 /** @internal */
 export const ShellCallWithIdStatus$inboundSchema: z.ZodNativeEnum<
   typeof ShellCallWithIdStatus
-> = z.nativeEnum(ShellCallWithIdStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ShellCallWithIdStatus));
 /** @internal */
 export const ShellCallWithIdStatus$outboundSchema: z.ZodNativeEnum<
   typeof ShellCallWithIdStatus
@@ -58,20 +58,22 @@ export const ShellCallWithId$inboundSchema: z.ZodType<
   ShellCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("shell_call"),
-  id: z.string(),
-  call_id: z.string(),
-  action: ShellCallAction$inboundSchema,
-  status: ShellCallWithIdStatus$inboundSchema,
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "call_id": "callId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call"),
+    id: z.string(),
+    call_id: z.string(),
+    action: ShellCallAction$inboundSchema,
+    status: ShellCallWithIdStatus$inboundSchema,
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "call_id": "callId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type ShellCallWithId$Outbound = {
   type: "shell_call";
@@ -88,20 +90,22 @@ export const ShellCallWithId$outboundSchema: z.ZodType<
   ShellCallWithId$Outbound,
   z.ZodTypeDef,
   ShellCallWithId
-> = z.object({
-  type: z.literal("shell_call"),
-  id: z.string(),
-  callId: z.string(),
-  action: ShellCallAction$outboundSchema,
-  status: ShellCallWithIdStatus$outboundSchema,
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    callId: "call_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("shell_call"),
+    id: z.string(),
+    callId: z.string(),
+    action: ShellCallAction$outboundSchema,
+    status: ShellCallWithIdStatus$outboundSchema,
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      callId: "call_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function shellCallWithIdToJSON(
   shellCallWithId: ShellCallWithId,

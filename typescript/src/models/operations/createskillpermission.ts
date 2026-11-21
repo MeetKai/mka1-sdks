@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateSkillPermissionRequest$inboundSchema: z.ZodType<
   CreateSkillPermissionRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  skill_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateResourcePermissionRequest:
-    components.CreateResourcePermissionRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "skill_id": "skillId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateResourcePermissionRequest": "createResourcePermissionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skill_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateResourcePermissionRequest:
+      components.CreateResourcePermissionRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "skill_id": "skillId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateResourcePermissionRequest": "createResourcePermissionRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateSkillPermissionRequest$Outbound = {
   skill_id: string;
@@ -48,18 +50,20 @@ export const CreateSkillPermissionRequest$outboundSchema: z.ZodType<
   CreateSkillPermissionRequest$Outbound,
   z.ZodTypeDef,
   CreateSkillPermissionRequest
-> = z.object({
-  skillId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createResourcePermissionRequest:
-    components.CreateResourcePermissionRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    skillId: "skill_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createResourcePermissionRequest: "CreateResourcePermissionRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    skillId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createResourcePermissionRequest:
+      components.CreateResourcePermissionRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      skillId: "skill_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createResourcePermissionRequest: "CreateResourcePermissionRequest",
+    });
+  })
+);
 
 export function createSkillPermissionRequestToJSON(
   createSkillPermissionRequest: CreateSkillPermissionRequest,

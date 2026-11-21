@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -33,7 +33,9 @@ export type VectorStoreConnectorRunItem = {
 /** @internal */
 export const VectorStoreConnectorRunItemStatus$inboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRunItemStatus
-> = z.nativeEnum(VectorStoreConnectorRunItemStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(VectorStoreConnectorRunItemStatus)
+);
 /** @internal */
 export const VectorStoreConnectorRunItemStatus$outboundSchema: z.ZodNativeEnum<
   typeof VectorStoreConnectorRunItemStatus
@@ -44,16 +46,18 @@ export const VectorStoreConnectorRunItem$inboundSchema: z.ZodType<
   VectorStoreConnectorRunItem,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  source_path: z.string(),
-  status: VectorStoreConnectorRunItemStatus$inboundSchema,
-  reason: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "source_path": "sourcePath",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    source_path: z.string(),
+    status: VectorStoreConnectorRunItemStatus$inboundSchema,
+    reason: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "source_path": "sourcePath",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorRunItem$Outbound = {
   id: string;
@@ -67,16 +71,18 @@ export const VectorStoreConnectorRunItem$outboundSchema: z.ZodType<
   VectorStoreConnectorRunItem$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorRunItem
-> = z.object({
-  id: z.string(),
-  sourcePath: z.string(),
-  status: VectorStoreConnectorRunItemStatus$outboundSchema,
-  reason: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sourcePath: "source_path",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    sourcePath: z.string(),
+    status: VectorStoreConnectorRunItemStatus$outboundSchema,
+    reason: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sourcePath: "source_path",
+    });
+  })
+);
 
 export function vectorStoreConnectorRunItemToJSON(
   vectorStoreConnectorRunItem: VectorStoreConnectorRunItem,

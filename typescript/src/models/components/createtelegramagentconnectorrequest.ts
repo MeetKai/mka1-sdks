@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,13 +52,15 @@ export const Credentials$inboundSchema: z.ZodType<
   Credentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bot_token: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "bot_token": "botToken",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bot_token: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "bot_token": "botToken",
+    });
+  })
+);
 /** @internal */
 export type Credentials$Outbound = {
   bot_token: string;
@@ -69,13 +71,15 @@ export const Credentials$outboundSchema: z.ZodType<
   Credentials$Outbound,
   z.ZodTypeDef,
   Credentials
-> = z.object({
-  botToken: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    botToken: "bot_token",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    botToken: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      botToken: "bot_token",
+    });
+  })
+);
 
 export function credentialsToJSON(credentials: Credentials): string {
   return JSON.stringify(Credentials$outboundSchema.parse(credentials));
@@ -92,8 +96,10 @@ export function credentialsFromJSON(
 
 /** @internal */
 export const CreateTelegramAgentConnectorRequestMode$inboundSchema:
-  z.ZodNativeEnum<typeof CreateTelegramAgentConnectorRequestMode> = z
-    .nativeEnum(CreateTelegramAgentConnectorRequestMode);
+  z.ZodNativeEnum<typeof CreateTelegramAgentConnectorRequestMode> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(CreateTelegramAgentConnectorRequestMode)
+    );
 /** @internal */
 export const CreateTelegramAgentConnectorRequestMode$outboundSchema:
   z.ZodNativeEnum<typeof CreateTelegramAgentConnectorRequestMode> =
@@ -104,14 +110,16 @@ export const CreateTelegramAgentConnectorRequestAccess$inboundSchema: z.ZodType<
   CreateTelegramAgentConnectorRequestAccess,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  mode: CreateTelegramAgentConnectorRequestMode$inboundSchema,
-  chat_ids: z.array(z.number().int()),
-}).transform((v) => {
-  return remap$(v, {
-    "chat_ids": "chatIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    mode: CreateTelegramAgentConnectorRequestMode$inboundSchema,
+    chat_ids: z.array(z.number().int()),
+  }).transform((v) => {
+    return remap$(v, {
+      "chat_ids": "chatIds",
+    });
+  })
+);
 /** @internal */
 export type CreateTelegramAgentConnectorRequestAccess$Outbound = {
   mode: string;
@@ -124,14 +132,16 @@ export const CreateTelegramAgentConnectorRequestAccess$outboundSchema:
     CreateTelegramAgentConnectorRequestAccess$Outbound,
     z.ZodTypeDef,
     CreateTelegramAgentConnectorRequestAccess
-  > = z.object({
-    mode: CreateTelegramAgentConnectorRequestMode$outboundSchema,
-    chatIds: z.array(z.number().int()),
-  }).transform((v) => {
-    return remap$(v, {
-      chatIds: "chat_ids",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      mode: CreateTelegramAgentConnectorRequestMode$outboundSchema,
+      chatIds: z.array(z.number().int()),
+    }).transform((v) => {
+      return remap$(v, {
+        chatIds: "chat_ids",
+      });
+    })
+  );
 
 export function createTelegramAgentConnectorRequestAccessToJSON(
   createTelegramAgentConnectorRequestAccess:
@@ -164,12 +174,16 @@ export const CreateTelegramAgentConnectorRequest$inboundSchema: z.ZodType<
   CreateTelegramAgentConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.literal("telegram"),
-  name: z.string().optional(),
-  credentials: z.lazy(() => Credentials$inboundSchema),
-  access: z.lazy(() => CreateTelegramAgentConnectorRequestAccess$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("telegram"),
+    name: z.string().optional(),
+    credentials: z.lazy(() => Credentials$inboundSchema),
+    access: z.lazy(() =>
+      CreateTelegramAgentConnectorRequestAccess$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type CreateTelegramAgentConnectorRequest$Outbound = {
   provider: "telegram";
@@ -183,14 +197,16 @@ export const CreateTelegramAgentConnectorRequest$outboundSchema: z.ZodType<
   CreateTelegramAgentConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateTelegramAgentConnectorRequest
-> = z.object({
-  provider: z.literal("telegram"),
-  name: z.string().optional(),
-  credentials: z.lazy(() => Credentials$outboundSchema),
-  access: z.lazy(() =>
-    CreateTelegramAgentConnectorRequestAccess$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("telegram"),
+    name: z.string().optional(),
+    credentials: z.lazy(() => Credentials$outboundSchema),
+    access: z.lazy(() =>
+      CreateTelegramAgentConnectorRequestAccess$outboundSchema
+    ),
+  })
+);
 
 export function createTelegramAgentConnectorRequestToJSON(
   createTelegramAgentConnectorRequest: CreateTelegramAgentConnectorRequest,

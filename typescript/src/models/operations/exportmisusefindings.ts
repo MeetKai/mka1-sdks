@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -79,9 +79,10 @@ export type ExportMisuseFindingsResponse = {
 
 /** @internal */
 export const ExportMisuseFindingsQueryParamFormat$inboundSchema:
-  z.ZodNativeEnum<typeof ExportMisuseFindingsQueryParamFormat> = z.nativeEnum(
-    ExportMisuseFindingsQueryParamFormat,
-  );
+  z.ZodNativeEnum<typeof ExportMisuseFindingsQueryParamFormat> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(ExportMisuseFindingsQueryParamFormat)
+    );
 /** @internal */
 export const ExportMisuseFindingsQueryParamFormat$outboundSchema:
   z.ZodNativeEnum<typeof ExportMisuseFindingsQueryParamFormat> =
@@ -90,7 +91,9 @@ export const ExportMisuseFindingsQueryParamFormat$outboundSchema:
 /** @internal */
 export const ExportMisuseFindingsQueryParamScope$inboundSchema: z.ZodNativeEnum<
   typeof ExportMisuseFindingsQueryParamScope
-> = z.nativeEnum(ExportMisuseFindingsQueryParamScope);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ExportMisuseFindingsQueryParamScope)
+);
 /** @internal */
 export const ExportMisuseFindingsQueryParamScope$outboundSchema:
   z.ZodNativeEnum<typeof ExportMisuseFindingsQueryParamScope> =
@@ -101,20 +104,22 @@ export const ExportMisuseFindingsRequest$inboundSchema: z.ZodType<
   ExportMisuseFindingsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: ExportMisuseFindingsQueryParamFormat$inboundSchema.default("json"),
-  orgId: z.string().optional(),
-  scope: ExportMisuseFindingsQueryParamScope$inboundSchema.optional(),
-  dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: ExportMisuseFindingsQueryParamFormat$inboundSchema.default("json"),
+    orgId: z.string().optional(),
+    scope: ExportMisuseFindingsQueryParamScope$inboundSchema.optional(),
+    dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ExportMisuseFindingsRequest$Outbound = {
   format: string;
@@ -130,18 +135,20 @@ export const ExportMisuseFindingsRequest$outboundSchema: z.ZodType<
   ExportMisuseFindingsRequest$Outbound,
   z.ZodTypeDef,
   ExportMisuseFindingsRequest
-> = z.object({
-  format: ExportMisuseFindingsQueryParamFormat$outboundSchema.default("json"),
-  orgId: z.string().optional(),
-  scope: ExportMisuseFindingsQueryParamScope$outboundSchema.optional(),
-  dateFrom: z.date().transform(v => v.toISOString()).optional(),
-  dateTo: z.date().transform(v => v.toISOString()).optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: ExportMisuseFindingsQueryParamFormat$outboundSchema.default("json"),
+    orgId: z.string().optional(),
+    scope: ExportMisuseFindingsQueryParamScope$outboundSchema.optional(),
+    dateFrom: z.date().transform(v => v.toISOString()).optional(),
+    dateTo: z.date().transform(v => v.toISOString()).optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function exportMisuseFindingsRequestToJSON(
   exportMisuseFindingsRequest: ExportMisuseFindingsRequest,
@@ -167,11 +174,13 @@ export const ExportMisuseFindingsResponseResult$inboundSchema: z.ZodType<
   ExportMisuseFindingsResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.AuditExportQueued$inboundSchema,
-  z.array(components.MisuseFindingExportRow$inboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AuditExportQueued$inboundSchema,
+    z.array(components.MisuseFindingExportRow$inboundSchema),
+    z.string(),
+  ])
+);
 /** @internal */
 export type ExportMisuseFindingsResponseResult$Outbound =
   | components.AuditExportQueued$Outbound
@@ -183,11 +192,13 @@ export const ExportMisuseFindingsResponseResult$outboundSchema: z.ZodType<
   ExportMisuseFindingsResponseResult$Outbound,
   z.ZodTypeDef,
   ExportMisuseFindingsResponseResult
-> = z.union([
-  components.AuditExportQueued$outboundSchema,
-  z.array(components.MisuseFindingExportRow$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AuditExportQueued$outboundSchema,
+    z.array(components.MisuseFindingExportRow$outboundSchema),
+    z.string(),
+  ])
+);
 
 export function exportMisuseFindingsResponseResultToJSON(
   exportMisuseFindingsResponseResult: ExportMisuseFindingsResponseResult,
@@ -214,19 +225,21 @@ export const ExportMisuseFindingsResponse$inboundSchema: z.ZodType<
   ExportMisuseFindingsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    components.AuditExportQueued$inboundSchema,
-    z.array(components.MisuseFindingExportRow$inboundSchema),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      components.AuditExportQueued$inboundSchema,
+      z.array(components.MisuseFindingExportRow$inboundSchema),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ExportMisuseFindingsResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -241,19 +254,21 @@ export const ExportMisuseFindingsResponse$outboundSchema: z.ZodType<
   ExportMisuseFindingsResponse$Outbound,
   z.ZodTypeDef,
   ExportMisuseFindingsResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    components.AuditExportQueued$outboundSchema,
-    z.array(components.MisuseFindingExportRow$outboundSchema),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      components.AuditExportQueued$outboundSchema,
+      z.array(components.MisuseFindingExportRow$outboundSchema),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function exportMisuseFindingsResponseToJSON(
   exportMisuseFindingsResponse: ExportMisuseFindingsResponse,

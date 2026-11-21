@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,15 +31,17 @@ export const FilePath$inboundSchema: z.ZodType<
   FilePath,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_path"),
-  file_id: z.string(),
-  index: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "file_id": "fileId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_path"),
+    file_id: z.string(),
+    index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "file_id": "fileId",
+    });
+  })
+);
 /** @internal */
 export type FilePath$Outbound = {
   type: "file_path";
@@ -52,15 +54,17 @@ export const FilePath$outboundSchema: z.ZodType<
   FilePath$Outbound,
   z.ZodTypeDef,
   FilePath
-> = z.object({
-  type: z.literal("file_path"),
-  fileId: z.string(),
-  index: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    fileId: "file_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_path"),
+    fileId: z.string(),
+    index: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      fileId: "file_id",
+    });
+  })
+);
 
 export function filePathToJSON(filePath: FilePath): string {
   return JSON.stringify(FilePath$outboundSchema.parse(filePath));

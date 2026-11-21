@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -26,25 +26,27 @@ export const MemoryEntry$inboundSchema: z.ZodType<
   MemoryEntry,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("memory_entry"),
-  memory_store_id: z.string(),
-  path: z.string(),
-  content: z.string(),
-  content_hash: z.string(),
-  bytes: z.number().int(),
-  metadata: z.record(z.string()).optional(),
-  created_at: z.number(),
-  updated_at: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    "memory_store_id": "memoryStoreId",
-    "content_hash": "contentHash",
-    "created_at": "createdAt",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("memory_entry"),
+    memory_store_id: z.string(),
+    path: z.string(),
+    content: z.string(),
+    content_hash: z.string(),
+    bytes: z.number().int(),
+    metadata: z.record(z.string()).optional(),
+    created_at: z.number(),
+    updated_at: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      "memory_store_id": "memoryStoreId",
+      "content_hash": "contentHash",
+      "created_at": "createdAt",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type MemoryEntry$Outbound = {
   id: string;
@@ -64,25 +66,27 @@ export const MemoryEntry$outboundSchema: z.ZodType<
   MemoryEntry$Outbound,
   z.ZodTypeDef,
   MemoryEntry
-> = z.object({
-  id: z.string(),
-  object: z.literal("memory_entry"),
-  memoryStoreId: z.string(),
-  path: z.string(),
-  content: z.string(),
-  contentHash: z.string(),
-  bytes: z.number().int(),
-  metadata: z.record(z.string()).optional(),
-  createdAt: z.number(),
-  updatedAt: z.number(),
-}).transform((v) => {
-  return remap$(v, {
-    memoryStoreId: "memory_store_id",
-    contentHash: "content_hash",
-    createdAt: "created_at",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("memory_entry"),
+    memoryStoreId: z.string(),
+    path: z.string(),
+    content: z.string(),
+    contentHash: z.string(),
+    bytes: z.number().int(),
+    metadata: z.record(z.string()).optional(),
+    createdAt: z.number(),
+    updatedAt: z.number(),
+  }).transform((v) => {
+    return remap$(v, {
+      memoryStoreId: "memory_store_id",
+      contentHash: "content_hash",
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function memoryEntryToJSON(memoryEntry: MemoryEntry): string {
   return JSON.stringify(MemoryEntry$outboundSchema.parse(memoryEntry));

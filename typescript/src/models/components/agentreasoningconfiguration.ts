@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,7 +24,9 @@ export type AgentReasoningConfiguration = {
 /** @internal */
 export const AgentReasoningConfigurationEffort$inboundSchema: z.ZodNativeEnum<
   typeof AgentReasoningConfigurationEffort
-> = z.nativeEnum(AgentReasoningConfigurationEffort);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(AgentReasoningConfigurationEffort)
+);
 /** @internal */
 export const AgentReasoningConfigurationEffort$outboundSchema: z.ZodNativeEnum<
   typeof AgentReasoningConfigurationEffort
@@ -35,9 +37,11 @@ export const AgentReasoningConfiguration$inboundSchema: z.ZodType<
   AgentReasoningConfiguration,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  effort: AgentReasoningConfigurationEffort$inboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effort: AgentReasoningConfigurationEffort$inboundSchema.optional(),
+  })
+);
 /** @internal */
 export type AgentReasoningConfiguration$Outbound = {
   effort?: string | undefined;
@@ -48,9 +52,11 @@ export const AgentReasoningConfiguration$outboundSchema: z.ZodType<
   AgentReasoningConfiguration$Outbound,
   z.ZodTypeDef,
   AgentReasoningConfiguration
-> = z.object({
-  effort: AgentReasoningConfigurationEffort$outboundSchema.optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    effort: AgentReasoningConfigurationEffort$outboundSchema.optional(),
+  })
+);
 
 export function agentReasoningConfigurationToJSON(
   agentReasoningConfiguration: AgentReasoningConfiguration,

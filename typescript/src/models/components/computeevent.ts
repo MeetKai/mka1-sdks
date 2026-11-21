@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,12 +19,16 @@ export const ComputeEvent$inboundSchema: z.ZodType<
   ComputeEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  data: z.record(z.any()),
-  id: z.string(),
-  timestamp: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  type: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.record(z.any()),
+    id: z.string(),
+    timestamp: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    type: z.string(),
+  })
+);
 /** @internal */
 export type ComputeEvent$Outbound = {
   data: { [k: string]: any };
@@ -38,12 +42,14 @@ export const ComputeEvent$outboundSchema: z.ZodType<
   ComputeEvent$Outbound,
   z.ZodTypeDef,
   ComputeEvent
-> = z.object({
-  data: z.record(z.any()),
-  id: z.string(),
-  timestamp: z.date().transform(v => v.toISOString()),
-  type: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    data: z.record(z.any()),
+    id: z.string(),
+    timestamp: z.date().transform(v => v.toISOString()),
+    type: z.string(),
+  })
+);
 
 export function computeEventToJSON(computeEvent: ComputeEvent): string {
   return JSON.stringify(ComputeEvent$outboundSchema.parse(computeEvent));

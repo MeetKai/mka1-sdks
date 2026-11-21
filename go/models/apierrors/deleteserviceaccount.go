@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type DeleteServiceAccountTooManyRequestsError struct {
 var _ error = &DeleteServiceAccountTooManyRequestsError{}
 
 func (e *DeleteServiceAccountTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type DeleteServiceAccountGoneError struct {
 var _ error = &DeleteServiceAccountGoneError{}
 
 func (e *DeleteServiceAccountGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type DeleteServiceAccountConflictError struct {
 var _ error = &DeleteServiceAccountConflictError{}
 
 func (e *DeleteServiceAccountConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type DeleteServiceAccountNotFoundError struct {
 var _ error = &DeleteServiceAccountNotFoundError{}
 
 func (e *DeleteServiceAccountNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type DeleteServiceAccountForbiddenError struct {
 var _ error = &DeleteServiceAccountForbiddenError{}
 
 func (e *DeleteServiceAccountForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type DeleteServiceAccountUnauthorizedError struct {
 var _ error = &DeleteServiceAccountUnauthorizedError{}
 
 func (e *DeleteServiceAccountUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type DeleteServiceAccountBadRequestError struct {
 var _ error = &DeleteServiceAccountBadRequestError{}
 
 func (e *DeleteServiceAccountBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

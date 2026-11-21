@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -23,23 +23,25 @@ export const SessionRepositoryPullRequest$inboundSchema: z.ZodType<
   SessionRepositoryPullRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  number: z.number().int(),
-  url: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  draft: z.nullable(z.boolean()).optional(),
-  head_branch: z.nullable(z.string()).optional(),
-  base_branch: z.nullable(z.string()).optional(),
-  updated_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "head_branch": "headBranch",
-    "base_branch": "baseBranch",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    number: z.number().int(),
+    url: z.nullable(z.string()).optional(),
+    state: z.nullable(z.string()).optional(),
+    draft: z.nullable(z.boolean()).optional(),
+    head_branch: z.nullable(z.string()).optional(),
+    base_branch: z.nullable(z.string()).optional(),
+    updated_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "head_branch": "headBranch",
+      "base_branch": "baseBranch",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type SessionRepositoryPullRequest$Outbound = {
   number: number;
@@ -56,21 +58,23 @@ export const SessionRepositoryPullRequest$outboundSchema: z.ZodType<
   SessionRepositoryPullRequest$Outbound,
   z.ZodTypeDef,
   SessionRepositoryPullRequest
-> = z.object({
-  number: z.number().int(),
-  url: z.nullable(z.string()).optional(),
-  state: z.nullable(z.string()).optional(),
-  draft: z.nullable(z.boolean()).optional(),
-  headBranch: z.nullable(z.string()).optional(),
-  baseBranch: z.nullable(z.string()).optional(),
-  updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    headBranch: "head_branch",
-    baseBranch: "base_branch",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    number: z.number().int(),
+    url: z.nullable(z.string()).optional(),
+    state: z.nullable(z.string()).optional(),
+    draft: z.nullable(z.boolean()).optional(),
+    headBranch: z.nullable(z.string()).optional(),
+    baseBranch: z.nullable(z.string()).optional(),
+    updatedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      headBranch: "head_branch",
+      baseBranch: "base_branch",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function sessionRepositoryPullRequestToJSON(
   sessionRepositoryPullRequest: SessionRepositoryPullRequest,

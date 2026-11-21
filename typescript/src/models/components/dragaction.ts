@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -18,11 +18,13 @@ export type DragAction = {
 };
 
 /** @internal */
-export const Path$inboundSchema: z.ZodType<Path, z.ZodTypeDef, unknown> = z
-  .object({
-    x: z.number().int(),
-    y: z.number().int(),
-  });
+export const Path$inboundSchema: z.ZodType<Path, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      x: z.number().int(),
+      y: z.number().int(),
+    })
+  );
 /** @internal */
 export type Path$Outbound = {
   x: number;
@@ -31,10 +33,12 @@ export type Path$Outbound = {
 
 /** @internal */
 export const Path$outboundSchema: z.ZodType<Path$Outbound, z.ZodTypeDef, Path> =
-  z.object({
-    x: z.number().int(),
-    y: z.number().int(),
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      x: z.number().int(),
+      y: z.number().int(),
+    })
+  );
 
 export function pathToJSON(path: Path): string {
   return JSON.stringify(Path$outboundSchema.parse(path));
@@ -54,10 +58,12 @@ export const DragAction$inboundSchema: z.ZodType<
   DragAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("drag"),
-  path: z.array(z.lazy(() => Path$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("drag"),
+    path: z.array(z.lazy(() => Path$inboundSchema)),
+  })
+);
 /** @internal */
 export type DragAction$Outbound = {
   type: "drag";
@@ -69,10 +75,12 @@ export const DragAction$outboundSchema: z.ZodType<
   DragAction$Outbound,
   z.ZodTypeDef,
   DragAction
-> = z.object({
-  type: z.literal("drag"),
-  path: z.array(z.lazy(() => Path$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("drag"),
+    path: z.array(z.lazy(() => Path$outboundSchema)),
+  })
+);
 
 export function dragActionToJSON(dragAction: DragAction): string {
   return JSON.stringify(DragAction$outboundSchema.parse(dragAction));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,7 +30,9 @@ export type ConnectorConnectionModel = {
 /** @internal */
 export const ConnectorConnectionModelStatus$inboundSchema: z.ZodNativeEnum<
   typeof ConnectorConnectionModelStatus
-> = z.nativeEnum(ConnectorConnectionModelStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ConnectorConnectionModelStatus)
+);
 /** @internal */
 export const ConnectorConnectionModelStatus$outboundSchema: z.ZodNativeEnum<
   typeof ConnectorConnectionModelStatus
@@ -41,29 +43,33 @@ export const ConnectorConnectionModel$inboundSchema: z.ZodType<
   ConnectorConnectionModel,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  status: ConnectorConnectionModelStatus$inboundSchema,
-  scope: z.nullable(z.string()).optional(),
-  tool_allowlist: z.nullable(z.array(z.string())).optional(),
-  connected_at: z.string().datetime({ offset: true }).transform(v =>
-    new Date(v)
-  ),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  last_used_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-  needs_login_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_allowlist": "toolAllowlist",
-    "connected_at": "connectedAt",
-    "updated_at": "updatedAt",
-    "last_used_at": "lastUsedAt",
-    "needs_login_at": "needsLoginAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: ConnectorConnectionModelStatus$inboundSchema,
+    scope: z.nullable(z.string()).optional(),
+    tool_allowlist: z.nullable(z.array(z.string())).optional(),
+    connected_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    last_used_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+    needs_login_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_allowlist": "toolAllowlist",
+      "connected_at": "connectedAt",
+      "updated_at": "updatedAt",
+      "last_used_at": "lastUsedAt",
+      "needs_login_at": "needsLoginAt",
+    });
+  })
+);
 /** @internal */
 export type ConnectorConnectionModel$Outbound = {
   status: string;
@@ -80,23 +86,26 @@ export const ConnectorConnectionModel$outboundSchema: z.ZodType<
   ConnectorConnectionModel$Outbound,
   z.ZodTypeDef,
   ConnectorConnectionModel
-> = z.object({
-  status: ConnectorConnectionModelStatus$outboundSchema,
-  scope: z.nullable(z.string()).optional(),
-  toolAllowlist: z.nullable(z.array(z.string())).optional(),
-  connectedAt: z.date().transform(v => v.toISOString()),
-  updatedAt: z.date().transform(v => v.toISOString()),
-  lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-  needsLoginAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    toolAllowlist: "tool_allowlist",
-    connectedAt: "connected_at",
-    updatedAt: "updated_at",
-    lastUsedAt: "last_used_at",
-    needsLoginAt: "needs_login_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    status: ConnectorConnectionModelStatus$outboundSchema,
+    scope: z.nullable(z.string()).optional(),
+    toolAllowlist: z.nullable(z.array(z.string())).optional(),
+    connectedAt: z.date().transform(v => v.toISOString()),
+    updatedAt: z.date().transform(v => v.toISOString()),
+    lastUsedAt: z.nullable(z.date().transform(v => v.toISOString())).optional(),
+    needsLoginAt: z.nullable(z.date().transform(v => v.toISOString()))
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      toolAllowlist: "tool_allowlist",
+      connectedAt: "connected_at",
+      updatedAt: "updated_at",
+      lastUsedAt: "last_used_at",
+      needsLoginAt: "needs_login_at",
+    });
+  })
+);
 
 export function connectorConnectionModelToJSON(
   connectorConnectionModel: ConnectorConnectionModel,

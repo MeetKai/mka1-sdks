@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreatePromptRequest$inboundSchema: z.ZodType<
   CreatePromptRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreatePromptRequest: components.CreatePromptRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreatePromptRequest": "createPromptRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreatePromptRequest: components.CreatePromptRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreatePromptRequest": "createPromptRequest",
+    });
+  })
+);
 /** @internal */
 export type CreatePromptRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreatePromptRequest$outboundSchema: z.ZodType<
   CreatePromptRequest$Outbound,
   z.ZodTypeDef,
   CreatePromptRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createPromptRequest: components.CreatePromptRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createPromptRequest: "CreatePromptRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createPromptRequest: components.CreatePromptRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createPromptRequest: "CreatePromptRequest",
+    });
+  })
+);
 
 export function createPromptRequestToJSON(
   createPromptRequest: CreatePromptRequest,

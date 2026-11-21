@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -69,14 +69,16 @@ export const RejectOwnerKeyRecoveryRequest$inboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type RejectOwnerKeyRecoveryRequest$Outbound = {
   id: string;
@@ -88,14 +90,16 @@ export const RejectOwnerKeyRecoveryRequest$outboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryRequest$Outbound,
   z.ZodTypeDef,
   RejectOwnerKeyRecoveryRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function rejectOwnerKeyRecoveryRequestToJSON(
   rejectOwnerKeyRecoveryRequest: RejectOwnerKeyRecoveryRequest,
@@ -119,7 +123,9 @@ export function rejectOwnerKeyRecoveryRequestFromJSON(
 /** @internal */
 export const RejectOwnerKeyRecoveryStatus$inboundSchema: z.ZodNativeEnum<
   typeof RejectOwnerKeyRecoveryStatus
-> = z.nativeEnum(RejectOwnerKeyRecoveryStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(RejectOwnerKeyRecoveryStatus)
+);
 /** @internal */
 export const RejectOwnerKeyRecoveryStatus$outboundSchema: z.ZodNativeEnum<
   typeof RejectOwnerKeyRecoveryStatus
@@ -130,11 +136,13 @@ export const RejectOwnerKeyRecoveryRequestedBy$inboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryRequestedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type RejectOwnerKeyRecoveryRequestedBy$Outbound = {
   id: string;
@@ -147,11 +155,13 @@ export const RejectOwnerKeyRecoveryRequestedBy$outboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryRequestedBy$Outbound,
   z.ZodTypeDef,
   RejectOwnerKeyRecoveryRequestedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function rejectOwnerKeyRecoveryRequestedByToJSON(
   rejectOwnerKeyRecoveryRequestedBy: RejectOwnerKeyRecoveryRequestedBy,
@@ -177,11 +187,13 @@ export const RejectOwnerKeyRecoveryDecidedBy$inboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryDecidedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type RejectOwnerKeyRecoveryDecidedBy$Outbound = {
   id: string;
@@ -194,11 +206,13 @@ export const RejectOwnerKeyRecoveryDecidedBy$outboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryDecidedBy$Outbound,
   z.ZodTypeDef,
   RejectOwnerKeyRecoveryDecidedBy
-> = z.object({
-  id: z.string(),
-  email: z.nullable(z.string()),
-  name: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    email: z.nullable(z.string()),
+    name: z.nullable(z.string()),
+  })
+);
 
 export function rejectOwnerKeyRecoveryDecidedByToJSON(
   rejectOwnerKeyRecoveryDecidedBy: RejectOwnerKeyRecoveryDecidedBy,
@@ -224,25 +238,27 @@ export const RejectOwnerKeyRecoveryAuthClusterRequest$inboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryAuthClusterRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: RejectOwnerKeyRecoveryStatus$inboundSchema,
-  requestedBy: z.lazy(() => RejectOwnerKeyRecoveryRequestedBy$inboundSchema),
-  decidedBy: z.nullable(
-    z.lazy(() => RejectOwnerKeyRecoveryDecidedBy$inboundSchema),
-  ),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: RejectOwnerKeyRecoveryStatus$inboundSchema,
+    requestedBy: z.lazy(() => RejectOwnerKeyRecoveryRequestedBy$inboundSchema),
+    decidedBy: z.nullable(
+      z.lazy(() => RejectOwnerKeyRecoveryDecidedBy$inboundSchema),
+    ),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 /** @internal */
 export type RejectOwnerKeyRecoveryAuthClusterRequest$Outbound = {
   id: string;
@@ -267,25 +283,27 @@ export const RejectOwnerKeyRecoveryAuthClusterRequest$outboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryAuthClusterRequest$Outbound,
   z.ZodTypeDef,
   RejectOwnerKeyRecoveryAuthClusterRequest
-> = z.object({
-  id: z.string(),
-  orgId: z.string(),
-  orgName: z.string(),
-  orgSlug: z.string(),
-  targetUserId: z.string(),
-  targetUserEmail: z.nullable(z.string()),
-  teamId: z.string(),
-  reason: z.string(),
-  status: RejectOwnerKeyRecoveryStatus$outboundSchema,
-  requestedBy: z.lazy(() => RejectOwnerKeyRecoveryRequestedBy$outboundSchema),
-  decidedBy: z.nullable(
-    z.lazy(() => RejectOwnerKeyRecoveryDecidedBy$outboundSchema),
-  ),
-  decidedAt: z.nullable(z.string()),
-  expiresAt: z.string(),
-  createdAt: z.string(),
-  mintedKeyId: z.nullable(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    orgId: z.string(),
+    orgName: z.string(),
+    orgSlug: z.string(),
+    targetUserId: z.string(),
+    targetUserEmail: z.nullable(z.string()),
+    teamId: z.string(),
+    reason: z.string(),
+    status: RejectOwnerKeyRecoveryStatus$outboundSchema,
+    requestedBy: z.lazy(() => RejectOwnerKeyRecoveryRequestedBy$outboundSchema),
+    decidedBy: z.nullable(
+      z.lazy(() => RejectOwnerKeyRecoveryDecidedBy$outboundSchema),
+    ),
+    decidedAt: z.nullable(z.string()),
+    expiresAt: z.string(),
+    createdAt: z.string(),
+    mintedKeyId: z.nullable(z.string()),
+  })
+);
 
 export function rejectOwnerKeyRecoveryAuthClusterRequestToJSON(
   rejectOwnerKeyRecoveryAuthClusterRequest:
@@ -318,9 +336,13 @@ export const RejectOwnerKeyRecoveryResponseBody$inboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  request: z.lazy(() => RejectOwnerKeyRecoveryAuthClusterRequest$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request: z.lazy(() =>
+      RejectOwnerKeyRecoveryAuthClusterRequest$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type RejectOwnerKeyRecoveryResponseBody$Outbound = {
   request: RejectOwnerKeyRecoveryAuthClusterRequest$Outbound;
@@ -331,11 +353,13 @@ export const RejectOwnerKeyRecoveryResponseBody$outboundSchema: z.ZodType<
   RejectOwnerKeyRecoveryResponseBody$Outbound,
   z.ZodTypeDef,
   RejectOwnerKeyRecoveryResponseBody
-> = z.object({
-  request: z.lazy(() =>
-    RejectOwnerKeyRecoveryAuthClusterRequest$outboundSchema
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    request: z.lazy(() =>
+      RejectOwnerKeyRecoveryAuthClusterRequest$outboundSchema
+    ),
+  })
+);
 
 export function rejectOwnerKeyRecoveryResponseBodyToJSON(
   rejectOwnerKeyRecoveryResponseBody: RejectOwnerKeyRecoveryResponseBody,

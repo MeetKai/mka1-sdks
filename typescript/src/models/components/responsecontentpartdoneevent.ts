@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
@@ -52,15 +52,19 @@ export const ResponseContentPartDoneEventPart$inboundSchema: z.ZodType<
   ResponseContentPartDoneEventPart,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("type", {
-  output_text: OutputText$inboundSchema.and(
-    z.object({ type: z.literal("output_text") }),
-  ),
-  refusal: Refusal$inboundSchema.and(z.object({ type: z.literal("refusal") })),
-  reasoning_text: ReasoningText$inboundSchema.and(
-    z.object({ type: z.literal("reasoning_text") }),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("type", {
+    output_text: OutputText$inboundSchema.and(
+      z.object({ type: z.literal("output_text") }),
+    ),
+    refusal: Refusal$inboundSchema.and(
+      z.object({ type: z.literal("refusal") }),
+    ),
+    reasoning_text: ReasoningText$inboundSchema.and(
+      z.object({ type: z.literal("reasoning_text") }),
+    ),
+  })
+);
 /** @internal */
 export type ResponseContentPartDoneEventPart$Outbound =
   | (OutputText$Outbound & { type: "output_text" })
@@ -72,13 +76,15 @@ export const ResponseContentPartDoneEventPart$outboundSchema: z.ZodType<
   ResponseContentPartDoneEventPart$Outbound,
   z.ZodTypeDef,
   ResponseContentPartDoneEventPart
-> = z.union([
-  OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
-  Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-  ReasoningText$outboundSchema.and(
-    z.object({ type: z.literal("reasoning_text") }),
-  ),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
+    Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+    ReasoningText$outboundSchema.and(
+      z.object({ type: z.literal("reasoning_text") }),
+    ),
+  ])
+);
 
 export function responseContentPartDoneEventPartToJSON(
   responseContentPartDoneEventPart: ResponseContentPartDoneEventPart,
@@ -104,31 +110,33 @@ export const ResponseContentPartDoneEvent$inboundSchema: z.ZodType<
   ResponseContentPartDoneEvent,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("response.content_part.done"),
-  sequence_number: z.number().int(),
-  item_id: z.string(),
-  output_index: z.number().int(),
-  content_index: z.number().int(),
-  part: discriminatedUnion("type", {
-    output_text: OutputText$inboundSchema.and(
-      z.object({ type: z.literal("output_text") }),
-    ),
-    refusal: Refusal$inboundSchema.and(
-      z.object({ type: z.literal("refusal") }),
-    ),
-    reasoning_text: ReasoningText$inboundSchema.and(
-      z.object({ type: z.literal("reasoning_text") }),
-    ),
-  }),
-}).transform((v) => {
-  return remap$(v, {
-    "sequence_number": "sequenceNumber",
-    "item_id": "itemId",
-    "output_index": "outputIndex",
-    "content_index": "contentIndex",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.content_part.done"),
+    sequence_number: z.number().int(),
+    item_id: z.string(),
+    output_index: z.number().int(),
+    content_index: z.number().int(),
+    part: discriminatedUnion("type", {
+      output_text: OutputText$inboundSchema.and(
+        z.object({ type: z.literal("output_text") }),
+      ),
+      refusal: Refusal$inboundSchema.and(
+        z.object({ type: z.literal("refusal") }),
+      ),
+      reasoning_text: ReasoningText$inboundSchema.and(
+        z.object({ type: z.literal("reasoning_text") }),
+      ),
+    }),
+  }).transform((v) => {
+    return remap$(v, {
+      "sequence_number": "sequenceNumber",
+      "item_id": "itemId",
+      "output_index": "outputIndex",
+      "content_index": "contentIndex",
+    });
+  })
+);
 /** @internal */
 export type ResponseContentPartDoneEvent$Outbound = {
   type: "response.content_part.done";
@@ -147,27 +155,31 @@ export const ResponseContentPartDoneEvent$outboundSchema: z.ZodType<
   ResponseContentPartDoneEvent$Outbound,
   z.ZodTypeDef,
   ResponseContentPartDoneEvent
-> = z.object({
-  type: z.literal("response.content_part.done"),
-  sequenceNumber: z.number().int(),
-  itemId: z.string(),
-  outputIndex: z.number().int(),
-  contentIndex: z.number().int(),
-  part: z.union([
-    OutputText$outboundSchema.and(z.object({ type: z.literal("output_text") })),
-    Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
-    ReasoningText$outboundSchema.and(
-      z.object({ type: z.literal("reasoning_text") }),
-    ),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    sequenceNumber: "sequence_number",
-    itemId: "item_id",
-    outputIndex: "output_index",
-    contentIndex: "content_index",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("response.content_part.done"),
+    sequenceNumber: z.number().int(),
+    itemId: z.string(),
+    outputIndex: z.number().int(),
+    contentIndex: z.number().int(),
+    part: z.union([
+      OutputText$outboundSchema.and(
+        z.object({ type: z.literal("output_text") }),
+      ),
+      Refusal$outboundSchema.and(z.object({ type: z.literal("refusal") })),
+      ReasoningText$outboundSchema.and(
+        z.object({ type: z.literal("reasoning_text") }),
+      ),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      sequenceNumber: "sequence_number",
+      itemId: "item_id",
+      outputIndex: "output_index",
+      contentIndex: "content_index",
+    });
+  })
+);
 
 export function responseContentPartDoneEventToJSON(
   responseContentPartDoneEvent: ResponseContentPartDoneEvent,

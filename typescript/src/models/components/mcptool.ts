@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,16 +17,18 @@ export type MCPTool = {
 
 /** @internal */
 export const MCPTool$inboundSchema: z.ZodType<MCPTool, z.ZodTypeDef, unknown> =
-  z.object({
-    name: z.string(),
-    input_schema: z.record(z.any()),
-    annotations: z.record(z.any()).optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "input_schema": "inputSchema",
-    });
-  });
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      input_schema: z.record(z.any()),
+      annotations: z.record(z.any()).optional(),
+      description: z.string().optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "input_schema": "inputSchema",
+      });
+    })
+  );
 /** @internal */
 export type MCPTool$Outbound = {
   name: string;
@@ -40,16 +42,18 @@ export const MCPTool$outboundSchema: z.ZodType<
   MCPTool$Outbound,
   z.ZodTypeDef,
   MCPTool
-> = z.object({
-  name: z.string(),
-  inputSchema: z.record(z.any()),
-  annotations: z.record(z.any()).optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    inputSchema: "input_schema",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    inputSchema: z.record(z.any()),
+    annotations: z.record(z.any()).optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      inputSchema: "input_schema",
+    });
+  })
+);
 
 export function mcpToolToJSON(mcpTool: MCPTool): string {
   return JSON.stringify(MCPTool$outboundSchema.parse(mcpTool));

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,16 +29,18 @@ export type CreateSkillRequest = {
 };
 
 /** @internal */
-export const Files$inboundSchema: z.ZodType<Files, z.ZodTypeDef, unknown> = z
-  .object({
-    fileName: z.string(),
-    content: z.union([
-      z.instanceof(ReadableStream<Uint8Array>),
-      z.instanceof(Blob),
-      z.instanceof(ArrayBuffer),
-      z.instanceof(Uint8Array),
-    ]),
-  });
+export const Files$inboundSchema: z.ZodType<Files, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      fileName: z.string(),
+      content: z.union([
+        z.instanceof(ReadableStream<Uint8Array>),
+        z.instanceof(Blob),
+        z.instanceof(ArrayBuffer),
+        z.instanceof(Uint8Array),
+      ]),
+    })
+  );
 /** @internal */
 export type Files$Outbound = {
   fileName: string;
@@ -50,15 +52,17 @@ export const Files$outboundSchema: z.ZodType<
   Files$Outbound,
   z.ZodTypeDef,
   Files
-> = z.object({
-  fileName: z.string(),
-  content: z.union([
-    z.instanceof(ReadableStream<Uint8Array>),
-    z.instanceof(Blob),
-    z.instanceof(ArrayBuffer),
-    z.instanceof(Uint8Array),
-  ]),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fileName: z.string(),
+    content: z.union([
+      z.instanceof(ReadableStream<Uint8Array>),
+      z.instanceof(Blob),
+      z.instanceof(ArrayBuffer),
+      z.instanceof(Uint8Array),
+    ]),
+  })
+);
 
 export function filesToJSON(files: Files): string {
   return JSON.stringify(Files$outboundSchema.parse(files));
@@ -78,9 +82,11 @@ export const CreateSkillRequestBody$inboundSchema: z.ZodType<
   CreateSkillRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  files: z.array(z.lazy(() => Files$inboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    files: z.array(z.lazy(() => Files$inboundSchema)).optional(),
+  })
+);
 /** @internal */
 export type CreateSkillRequestBody$Outbound = {
   files?: Array<Files$Outbound> | undefined;
@@ -91,9 +97,11 @@ export const CreateSkillRequestBody$outboundSchema: z.ZodType<
   CreateSkillRequestBody$Outbound,
   z.ZodTypeDef,
   CreateSkillRequestBody
-> = z.object({
-  files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    files: z.array(z.lazy(() => Files$outboundSchema)).optional(),
+  })
+);
 
 export function createSkillRequestBodyToJSON(
   createSkillRequestBody: CreateSkillRequestBody,
@@ -117,15 +125,17 @@ export const CreateSkillRequest$inboundSchema: z.ZodType<
   CreateSkillRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => CreateSkillRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => CreateSkillRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type CreateSkillRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -137,15 +147,17 @@ export const CreateSkillRequest$outboundSchema: z.ZodType<
   CreateSkillRequest$Outbound,
   z.ZodTypeDef,
   CreateSkillRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => CreateSkillRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => CreateSkillRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function createSkillRequestToJSON(
   createSkillRequest: CreateSkillRequest,

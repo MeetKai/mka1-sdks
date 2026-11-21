@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const FunctionToolChoice$inboundSchema: z.ZodType<
   FunctionToolChoice,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("function"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    name: z.string(),
+  })
+);
 /** @internal */
 export type FunctionToolChoice$Outbound = {
   type: "function";
@@ -35,10 +37,12 @@ export const FunctionToolChoice$outboundSchema: z.ZodType<
   FunctionToolChoice$Outbound,
   z.ZodTypeDef,
   FunctionToolChoice
-> = z.object({
-  type: z.literal("function"),
-  name: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("function"),
+    name: z.string(),
+  })
+);
 
 export function functionToolChoiceToJSON(
   functionToolChoice: FunctionToolChoice,

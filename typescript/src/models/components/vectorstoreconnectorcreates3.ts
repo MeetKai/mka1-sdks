@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -71,10 +71,12 @@ export const VectorStoreConnectorCreateS3ChunkingStrategy$inboundSchema:
     VectorStoreConnectorCreateS3ChunkingStrategy,
     z.ZodTypeDef,
     unknown
-  > = z.union([
-    VectorStoreConnectorAutoChunking$inboundSchema,
-    VectorStoreConnectorStaticChunking$inboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      VectorStoreConnectorAutoChunking$inboundSchema,
+      VectorStoreConnectorStaticChunking$inboundSchema,
+    ])
+  );
 /** @internal */
 export type VectorStoreConnectorCreateS3ChunkingStrategy$Outbound =
   | VectorStoreConnectorAutoChunking$Outbound
@@ -86,10 +88,12 @@ export const VectorStoreConnectorCreateS3ChunkingStrategy$outboundSchema:
     VectorStoreConnectorCreateS3ChunkingStrategy$Outbound,
     z.ZodTypeDef,
     VectorStoreConnectorCreateS3ChunkingStrategy
-  > = z.union([
-    VectorStoreConnectorAutoChunking$outboundSchema,
-    VectorStoreConnectorStaticChunking$outboundSchema,
-  ]);
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      VectorStoreConnectorAutoChunking$outboundSchema,
+      VectorStoreConnectorStaticChunking$outboundSchema,
+    ])
+  );
 
 export function vectorStoreConnectorCreateS3ChunkingStrategyToJSON(
   vectorStoreConnectorCreateS3ChunkingStrategy:
@@ -122,32 +126,34 @@ export const VectorStoreConnectorCreateS3$inboundSchema: z.ZodType<
   VectorStoreConnectorCreateS3,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("s3"),
-  location: VectorStoreConnectorS3Location$inboundSchema,
-  credentials: VectorStoreConnectorS3Credentials$inboundSchema,
-  name: z.string(),
-  include_patterns: z.array(z.string()).optional(),
-  exclude_patterns: z.array(z.string()).optional(),
-  chunking_strategy: z.nullable(
-    z.union([
-      VectorStoreConnectorAutoChunking$inboundSchema,
-      VectorStoreConnectorStaticChunking$inboundSchema,
-    ]),
-  ).optional(),
-  auto_sync: z.boolean().default(true),
-  sync_interval_minutes: z.number().int().optional(),
-  vector_store_ids: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_patterns": "includePatterns",
-    "exclude_patterns": "excludePatterns",
-    "chunking_strategy": "chunkingStrategy",
-    "auto_sync": "autoSync",
-    "sync_interval_minutes": "syncIntervalMinutes",
-    "vector_store_ids": "vectorStoreIds",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("s3"),
+    location: VectorStoreConnectorS3Location$inboundSchema,
+    credentials: VectorStoreConnectorS3Credentials$inboundSchema,
+    name: z.string(),
+    include_patterns: z.array(z.string()).optional(),
+    exclude_patterns: z.array(z.string()).optional(),
+    chunking_strategy: z.nullable(
+      z.union([
+        VectorStoreConnectorAutoChunking$inboundSchema,
+        VectorStoreConnectorStaticChunking$inboundSchema,
+      ]),
+    ).optional(),
+    auto_sync: z.boolean().default(true),
+    sync_interval_minutes: z.number().int().optional(),
+    vector_store_ids: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_patterns": "includePatterns",
+      "exclude_patterns": "excludePatterns",
+      "chunking_strategy": "chunkingStrategy",
+      "auto_sync": "autoSync",
+      "sync_interval_minutes": "syncIntervalMinutes",
+      "vector_store_ids": "vectorStoreIds",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorCreateS3$Outbound = {
   type: "s3";
@@ -171,32 +177,34 @@ export const VectorStoreConnectorCreateS3$outboundSchema: z.ZodType<
   VectorStoreConnectorCreateS3$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorCreateS3
-> = z.object({
-  type: z.literal("s3"),
-  location: VectorStoreConnectorS3Location$outboundSchema,
-  credentials: VectorStoreConnectorS3Credentials$outboundSchema,
-  name: z.string(),
-  includePatterns: z.array(z.string()).optional(),
-  excludePatterns: z.array(z.string()).optional(),
-  chunkingStrategy: z.nullable(
-    z.union([
-      VectorStoreConnectorAutoChunking$outboundSchema,
-      VectorStoreConnectorStaticChunking$outboundSchema,
-    ]),
-  ).optional(),
-  autoSync: z.boolean().default(true),
-  syncIntervalMinutes: z.number().int().optional(),
-  vectorStoreIds: z.array(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includePatterns: "include_patterns",
-    excludePatterns: "exclude_patterns",
-    chunkingStrategy: "chunking_strategy",
-    autoSync: "auto_sync",
-    syncIntervalMinutes: "sync_interval_minutes",
-    vectorStoreIds: "vector_store_ids",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("s3"),
+    location: VectorStoreConnectorS3Location$outboundSchema,
+    credentials: VectorStoreConnectorS3Credentials$outboundSchema,
+    name: z.string(),
+    includePatterns: z.array(z.string()).optional(),
+    excludePatterns: z.array(z.string()).optional(),
+    chunkingStrategy: z.nullable(
+      z.union([
+        VectorStoreConnectorAutoChunking$outboundSchema,
+        VectorStoreConnectorStaticChunking$outboundSchema,
+      ]),
+    ).optional(),
+    autoSync: z.boolean().default(true),
+    syncIntervalMinutes: z.number().int().optional(),
+    vectorStoreIds: z.array(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includePatterns: "include_patterns",
+      excludePatterns: "exclude_patterns",
+      chunkingStrategy: "chunking_strategy",
+      autoSync: "auto_sync",
+      syncIntervalMinutes: "sync_interval_minutes",
+      vectorStoreIds: "vector_store_ids",
+    });
+  })
+);
 
 export function vectorStoreConnectorCreateS3ToJSON(
   vectorStoreConnectorCreateS3: VectorStoreConnectorCreateS3,

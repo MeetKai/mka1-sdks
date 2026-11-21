@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -57,18 +57,20 @@ export const Appearance$inboundSchema: z.ZodType<
   Appearance,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  title: z.string().default("Chat"),
-  greeting: z.string().default("Hi! How can I help?"),
-  placeholder: z.string().default("Type a message"),
-  primary_color: z.string().default("#0f0f10"),
-  logo_url: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "primary_color": "primaryColor",
-    "logo_url": "logoUrl",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    title: z.string().default("Chat"),
+    greeting: z.string().default("Hi! How can I help?"),
+    placeholder: z.string().default("Type a message"),
+    primary_color: z.string().default("#0f0f10"),
+    logo_url: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "primary_color": "primaryColor",
+      "logo_url": "logoUrl",
+    });
+  })
+);
 /** @internal */
 export type Appearance$Outbound = {
   title: string;
@@ -83,18 +85,20 @@ export const Appearance$outboundSchema: z.ZodType<
   Appearance$Outbound,
   z.ZodTypeDef,
   Appearance
-> = z.object({
-  title: z.string().default("Chat"),
-  greeting: z.string().default("Hi! How can I help?"),
-  placeholder: z.string().default("Type a message"),
-  primaryColor: z.string().default("#0f0f10"),
-  logoUrl: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    primaryColor: "primary_color",
-    logoUrl: "logo_url",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    title: z.string().default("Chat"),
+    greeting: z.string().default("Hi! How can I help?"),
+    placeholder: z.string().default("Type a message"),
+    primaryColor: z.string().default("#0f0f10"),
+    logoUrl: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      primaryColor: "primary_color",
+      logoUrl: "logo_url",
+    });
+  })
+);
 
 export function appearanceToJSON(appearance: Appearance): string {
   return JSON.stringify(Appearance$outboundSchema.parse(appearance));
@@ -110,17 +114,19 @@ export function appearanceFromJSON(
 }
 
 /** @internal */
-export const Web$inboundSchema: z.ZodType<Web, z.ZodTypeDef, unknown> = z
-  .object({
-    allowed_origins: z.array(z.string()).optional(),
-    allow_direct_link: z.boolean().default(true),
-    appearance: z.lazy(() => Appearance$inboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "allowed_origins": "allowedOrigins",
-      "allow_direct_link": "allowDirectLink",
-    });
-  });
+export const Web$inboundSchema: z.ZodType<Web, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowed_origins: z.array(z.string()).optional(),
+      allow_direct_link: z.boolean().default(true),
+      appearance: z.lazy(() => Appearance$inboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        "allowed_origins": "allowedOrigins",
+        "allow_direct_link": "allowDirectLink",
+      });
+    })
+  );
 /** @internal */
 export type Web$Outbound = {
   allowed_origins?: Array<string> | undefined;
@@ -129,17 +135,19 @@ export type Web$Outbound = {
 };
 
 /** @internal */
-export const Web$outboundSchema: z.ZodType<Web$Outbound, z.ZodTypeDef, Web> = z
-  .object({
-    allowedOrigins: z.array(z.string()).optional(),
-    allowDirectLink: z.boolean().default(true),
-    appearance: z.lazy(() => Appearance$outboundSchema).optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      allowedOrigins: "allowed_origins",
-      allowDirectLink: "allow_direct_link",
-    });
-  });
+export const Web$outboundSchema: z.ZodType<Web$Outbound, z.ZodTypeDef, Web> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      allowedOrigins: z.array(z.string()).optional(),
+      allowDirectLink: z.boolean().default(true),
+      appearance: z.lazy(() => Appearance$outboundSchema).optional(),
+    }).transform((v) => {
+      return remap$(v, {
+        allowedOrigins: "allowed_origins",
+        allowDirectLink: "allow_direct_link",
+      });
+    })
+  );
 
 export function webToJSON(web: Web): string {
   return JSON.stringify(Web$outboundSchema.parse(web));
@@ -159,11 +167,13 @@ export const CreateWebAgentConnectorRequest$inboundSchema: z.ZodType<
   CreateWebAgentConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  provider: z.literal("web"),
-  name: z.string().optional(),
-  web: z.lazy(() => Web$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("web"),
+    name: z.string().optional(),
+    web: z.lazy(() => Web$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type CreateWebAgentConnectorRequest$Outbound = {
   provider: "web";
@@ -176,11 +186,13 @@ export const CreateWebAgentConnectorRequest$outboundSchema: z.ZodType<
   CreateWebAgentConnectorRequest$Outbound,
   z.ZodTypeDef,
   CreateWebAgentConnectorRequest
-> = z.object({
-  provider: z.literal("web"),
-  name: z.string().optional(),
-  web: z.lazy(() => Web$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    provider: z.literal("web"),
+    name: z.string().optional(),
+    web: z.lazy(() => Web$outboundSchema).optional(),
+  })
+);
 
 export function createWebAgentConnectorRequestToJSON(
   createWebAgentConnectorRequest: CreateWebAgentConnectorRequest,

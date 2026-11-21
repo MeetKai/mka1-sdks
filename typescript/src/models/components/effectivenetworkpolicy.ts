@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const EffectiveNetworkPolicy$inboundSchema: z.ZodType<
   EffectiveNetworkPolicy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  rules: z.array(z.array(z.string())).optional(),
-  revision: z.string(),
-  domain_secrets_revision: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    "domain_secrets_revision": "domainSecretsRevision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.array(z.array(z.string())).optional(),
+    revision: z.string(),
+    domain_secrets_revision: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      "domain_secrets_revision": "domainSecretsRevision",
+    });
+  })
+);
 /** @internal */
 export type EffectiveNetworkPolicy$Outbound = {
   rules?: Array<Array<string>> | undefined;
@@ -40,15 +42,17 @@ export const EffectiveNetworkPolicy$outboundSchema: z.ZodType<
   EffectiveNetworkPolicy$Outbound,
   z.ZodTypeDef,
   EffectiveNetworkPolicy
-> = z.object({
-  rules: z.array(z.array(z.string())).optional(),
-  revision: z.string(),
-  domainSecretsRevision: z.string().default(""),
-}).transform((v) => {
-  return remap$(v, {
-    domainSecretsRevision: "domain_secrets_revision",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rules: z.array(z.array(z.string())).optional(),
+    revision: z.string(),
+    domainSecretsRevision: z.string().default(""),
+  }).transform((v) => {
+    return remap$(v, {
+      domainSecretsRevision: "domain_secrets_revision",
+    });
+  })
+);
 
 export function effectiveNetworkPolicyToJSON(
   effectiveNetworkPolicy: EffectiveNetworkPolicy,

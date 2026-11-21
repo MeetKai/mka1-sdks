@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -16,9 +16,11 @@ export const WorkspaceArchiveRequest$inboundSchema: z.ZodType<
   WorkspaceArchiveRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  paths: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.array(z.string()).optional(),
+  })
+);
 /** @internal */
 export type WorkspaceArchiveRequest$Outbound = {
   paths?: Array<string> | undefined;
@@ -29,9 +31,11 @@ export const WorkspaceArchiveRequest$outboundSchema: z.ZodType<
   WorkspaceArchiveRequest$Outbound,
   z.ZodTypeDef,
   WorkspaceArchiveRequest
-> = z.object({
-  paths: z.array(z.string()).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    paths: z.array(z.string()).optional(),
+  })
+);
 
 export function workspaceArchiveRequestToJSON(
   workspaceArchiveRequest: WorkspaceArchiveRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -24,26 +24,32 @@ export const ComputeTenant$inboundSchema: z.ZodType<
   ComputeTenant,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  enabled: z.boolean(),
-  max_live_jobs: z.nullable(z.number().int()),
-  max_live_service_replicas: z.nullable(z.number().int()),
-  max_live_services: z.nullable(z.number().int()),
-  max_live_volumes: z.nullable(z.number().int()),
-  org_id: z.string(),
-  updated_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-}).transform((v) => {
-  return remap$(v, {
-    "created_at": "createdAt",
-    "max_live_jobs": "maxLiveJobs",
-    "max_live_service_replicas": "maxLiveServiceReplicas",
-    "max_live_services": "maxLiveServices",
-    "max_live_volumes": "maxLiveVolumes",
-    "org_id": "orgId",
-    "updated_at": "updatedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    enabled: z.boolean(),
+    max_live_jobs: z.nullable(z.number().int()),
+    max_live_service_replicas: z.nullable(z.number().int()),
+    max_live_services: z.nullable(z.number().int()),
+    max_live_volumes: z.nullable(z.number().int()),
+    org_id: z.string(),
+    updated_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "created_at": "createdAt",
+      "max_live_jobs": "maxLiveJobs",
+      "max_live_service_replicas": "maxLiveServiceReplicas",
+      "max_live_services": "maxLiveServices",
+      "max_live_volumes": "maxLiveVolumes",
+      "org_id": "orgId",
+      "updated_at": "updatedAt",
+    });
+  })
+);
 /** @internal */
 export type ComputeTenant$Outbound = {
   created_at: string;
@@ -61,26 +67,28 @@ export const ComputeTenant$outboundSchema: z.ZodType<
   ComputeTenant$Outbound,
   z.ZodTypeDef,
   ComputeTenant
-> = z.object({
-  createdAt: z.date().transform(v => v.toISOString()),
-  enabled: z.boolean(),
-  maxLiveJobs: z.nullable(z.number().int()),
-  maxLiveServiceReplicas: z.nullable(z.number().int()),
-  maxLiveServices: z.nullable(z.number().int()),
-  maxLiveVolumes: z.nullable(z.number().int()),
-  orgId: z.string(),
-  updatedAt: z.date().transform(v => v.toISOString()),
-}).transform((v) => {
-  return remap$(v, {
-    createdAt: "created_at",
-    maxLiveJobs: "max_live_jobs",
-    maxLiveServiceReplicas: "max_live_service_replicas",
-    maxLiveServices: "max_live_services",
-    maxLiveVolumes: "max_live_volumes",
-    orgId: "org_id",
-    updatedAt: "updated_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    createdAt: z.date().transform(v => v.toISOString()),
+    enabled: z.boolean(),
+    maxLiveJobs: z.nullable(z.number().int()),
+    maxLiveServiceReplicas: z.nullable(z.number().int()),
+    maxLiveServices: z.nullable(z.number().int()),
+    maxLiveVolumes: z.nullable(z.number().int()),
+    orgId: z.string(),
+    updatedAt: z.date().transform(v => v.toISOString()),
+  }).transform((v) => {
+    return remap$(v, {
+      createdAt: "created_at",
+      maxLiveJobs: "max_live_jobs",
+      maxLiveServiceReplicas: "max_live_service_replicas",
+      maxLiveServices: "max_live_services",
+      maxLiveVolumes: "max_live_volumes",
+      orgId: "org_id",
+      updatedAt: "updated_at",
+    });
+  })
+);
 
 export function computeTenantToJSON(computeTenant: ComputeTenant): string {
   return JSON.stringify(ComputeTenant$outboundSchema.parse(computeTenant));

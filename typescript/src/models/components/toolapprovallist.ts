@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -28,15 +28,17 @@ export const ToolApprovalList$inboundSchema: z.ZodType<
   ToolApprovalList,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ToolApproval$inboundSchema),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ToolApproval$inboundSchema),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type ToolApprovalList$Outbound = {
   object: "list";
@@ -49,15 +51,17 @@ export const ToolApprovalList$outboundSchema: z.ZodType<
   ToolApprovalList$Outbound,
   z.ZodTypeDef,
   ToolApprovalList
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(ToolApproval$outboundSchema),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(ToolApproval$outboundSchema),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function toolApprovalListToJSON(
   toolApprovalList: ToolApprovalList,

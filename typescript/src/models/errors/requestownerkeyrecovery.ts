@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { SDKError } from "./sdkerror.js";
 
 /**
@@ -214,19 +215,20 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody$inboundSc
     RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody$Outbound =
@@ -240,11 +242,13 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody$outboundS
     RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse429ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody$inboundSchema:
@@ -252,19 +256,20 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody$inboundSc
     RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody$Outbound =
@@ -278,11 +283,13 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody$outboundS
     RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse410ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody$inboundSchema:
@@ -290,21 +297,22 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody$inboundSc
     RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    requestId: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      requestId: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody$Outbound =
@@ -320,13 +328,15 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody$outboundS
     RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-      requestId: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse409ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+        requestId: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody$inboundSchema:
@@ -334,19 +344,20 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody$inboundSc
     RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody(
+          v,
+          { request: v.request$, response: v.response$, body: v.body$ },
+        );
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody$Outbound =
@@ -360,11 +371,13 @@ export const RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody$outboundS
     RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponse404ResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryAuthClusterResponseResponseBody$inboundSchema:
@@ -372,20 +385,22 @@ export const RequestOwnerKeyRecoveryAuthClusterResponseResponseBody$inboundSchem
     RequestOwnerKeyRecoveryAuthClusterResponseResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    code: z.string().optional(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponseResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      code: z.string().optional(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponseResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponseResponseBody$Outbound = {
@@ -399,12 +414,14 @@ export const RequestOwnerKeyRecoveryAuthClusterResponseResponseBody$outboundSche
     RequestOwnerKeyRecoveryAuthClusterResponseResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponseResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponseResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-      code: z.string().optional(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponseResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+        code: z.string().optional(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryAuthClusterResponseBody$inboundSchema:
@@ -412,19 +429,21 @@ export const RequestOwnerKeyRecoveryAuthClusterResponseBody$inboundSchema:
     RequestOwnerKeyRecoveryAuthClusterResponseBody,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    message: z.string(),
-    request$: z.instanceof(Request),
-    response$: z.instanceof(Response),
-    body$: z.string(),
-  })
-    .transform((v) => {
-      return new RequestOwnerKeyRecoveryAuthClusterResponseBody(v, {
-        request: v.request$,
-        response: v.response$,
-        body: v.body$,
-      });
-    });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      message: z.string(),
+      request$: z.instanceof(Request),
+      response$: z.instanceof(Response),
+      body$: z.string(),
+    })
+      .transform((v) => {
+        return new RequestOwnerKeyRecoveryAuthClusterResponseBody(v, {
+          request: v.request$,
+          response: v.response$,
+          body: v.body$,
+        });
+      })
+  );
 
 /** @internal */
 export type RequestOwnerKeyRecoveryAuthClusterResponseBody$Outbound = {
@@ -437,30 +456,34 @@ export const RequestOwnerKeyRecoveryAuthClusterResponseBody$outboundSchema:
     RequestOwnerKeyRecoveryAuthClusterResponseBody$Outbound,
     z.ZodTypeDef,
     RequestOwnerKeyRecoveryAuthClusterResponseBody
-  > = z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponseBody)
-    .transform(v => v.data$)
-    .pipe(z.object({
-      message: z.string(),
-    }));
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.instanceof(RequestOwnerKeyRecoveryAuthClusterResponseBody)
+      .transform(v => v.data$)
+      .pipe(z.object({
+        message: z.string(),
+      }))
+  );
 
 /** @internal */
 export const RequestOwnerKeyRecoveryResponseBody$inboundSchema: z.ZodType<
   RequestOwnerKeyRecoveryResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  message: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    return new RequestOwnerKeyRecoveryResponseBody(v, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    message: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      return new RequestOwnerKeyRecoveryResponseBody(v, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type RequestOwnerKeyRecoveryResponseBody$Outbound = {
@@ -472,8 +495,10 @@ export const RequestOwnerKeyRecoveryResponseBody$outboundSchema: z.ZodType<
   RequestOwnerKeyRecoveryResponseBody$Outbound,
   z.ZodTypeDef,
   RequestOwnerKeyRecoveryResponseBody
-> = z.instanceof(RequestOwnerKeyRecoveryResponseBody)
-  .transform(v => v.data$)
-  .pipe(z.object({
-    message: z.string(),
-  }));
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(RequestOwnerKeyRecoveryResponseBody)
+    .transform(v => v.data$)
+    .pipe(z.object({
+      message: z.string(),
+    }))
+);

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -13,11 +13,13 @@ export type JobRef = {
 };
 
 /** @internal */
-export const JobRef$inboundSchema: z.ZodType<JobRef, z.ZodTypeDef, unknown> = z
-  .object({
-    name: z.string(),
-    attempt: z.number().int(),
-  });
+export const JobRef$inboundSchema: z.ZodType<JobRef, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      name: z.string(),
+      attempt: z.number().int(),
+    })
+  );
 /** @internal */
 export type JobRef$Outbound = {
   name: string;
@@ -29,10 +31,12 @@ export const JobRef$outboundSchema: z.ZodType<
   JobRef$Outbound,
   z.ZodTypeDef,
   JobRef
-> = z.object({
-  name: z.string(),
-  attempt: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string(),
+    attempt: z.number().int(),
+  })
+);
 
 export function jobRefToJSON(jobRef: JobRef): string {
   return JSON.stringify(JobRef$outboundSchema.parse(jobRef));

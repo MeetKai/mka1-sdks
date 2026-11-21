@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
 import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { ClosedEnum } from "../../types/enums.js";
@@ -72,10 +72,12 @@ export const AddClusterOrgMemberSecurity$inboundSchema: z.ZodType<
   AddClusterOrgMemberSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type AddClusterOrgMemberSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -87,10 +89,12 @@ export const AddClusterOrgMemberSecurity$outboundSchema: z.ZodType<
   AddClusterOrgMemberSecurity$Outbound,
   z.ZodTypeDef,
   AddClusterOrgMemberSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function addClusterOrgMemberSecurityToJSON(
   addClusterOrgMemberSecurity: AddClusterOrgMemberSecurity,
@@ -114,7 +118,7 @@ export function addClusterOrgMemberSecurityFromJSON(
 /** @internal */
 export const AddClusterOrgMemberRole$inboundSchema: z.ZodNativeEnum<
   typeof AddClusterOrgMemberRole
-> = z.nativeEnum(AddClusterOrgMemberRole);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AddClusterOrgMemberRole));
 /** @internal */
 export const AddClusterOrgMemberRole$outboundSchema: z.ZodNativeEnum<
   typeof AddClusterOrgMemberRole
@@ -125,11 +129,13 @@ export const AddClusterOrgMemberRequestBody$inboundSchema: z.ZodType<
   AddClusterOrgMemberRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  name: z.string().optional(),
-  role: AddClusterOrgMemberRole$inboundSchema.default("member"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string().optional(),
+    role: AddClusterOrgMemberRole$inboundSchema.default("member"),
+  })
+);
 /** @internal */
 export type AddClusterOrgMemberRequestBody$Outbound = {
   email: string;
@@ -142,11 +148,13 @@ export const AddClusterOrgMemberRequestBody$outboundSchema: z.ZodType<
   AddClusterOrgMemberRequestBody$Outbound,
   z.ZodTypeDef,
   AddClusterOrgMemberRequestBody
-> = z.object({
-  email: z.string(),
-  name: z.string().optional(),
-  role: AddClusterOrgMemberRole$outboundSchema.default("member"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    name: z.string().optional(),
+    role: AddClusterOrgMemberRole$outboundSchema.default("member"),
+  })
+);
 
 export function addClusterOrgMemberRequestBodyToJSON(
   addClusterOrgMemberRequestBody: AddClusterOrgMemberRequestBody,
@@ -172,16 +180,18 @@ export const AddClusterOrgMemberRequest$inboundSchema: z.ZodType<
   AddClusterOrgMemberRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => AddClusterOrgMemberRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => AddClusterOrgMemberRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type AddClusterOrgMemberRequest$Outbound = {
   id: string;
@@ -194,16 +204,18 @@ export const AddClusterOrgMemberRequest$outboundSchema: z.ZodType<
   AddClusterOrgMemberRequest$Outbound,
   z.ZodTypeDef,
   AddClusterOrgMemberRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => AddClusterOrgMemberRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => AddClusterOrgMemberRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function addClusterOrgMemberRequestToJSON(
   addClusterOrgMemberRequest: AddClusterOrgMemberRequest,
@@ -225,12 +237,14 @@ export function addClusterOrgMemberRequestFromJSON(
 /** @internal */
 export const AddClusterOrgMemberAuthClusterResponseBody$inboundSchema:
   z.ZodType<AddClusterOrgMemberAuthClusterResponseBody, z.ZodTypeDef, unknown> =
-    z.object({
-      email: z.string(),
-      status: z.literal("added"),
-      memberId: z.string(),
-      userId: z.string(),
-    });
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        email: z.string(),
+        status: z.literal("added"),
+        memberId: z.string(),
+        userId: z.string(),
+      })
+    );
 /** @internal */
 export type AddClusterOrgMemberAuthClusterResponseBody$Outbound = {
   email: string;
@@ -245,12 +259,14 @@ export const AddClusterOrgMemberAuthClusterResponseBody$outboundSchema:
     AddClusterOrgMemberAuthClusterResponseBody$Outbound,
     z.ZodTypeDef,
     AddClusterOrgMemberAuthClusterResponseBody
-  > = z.object({
-    email: z.string(),
-    status: z.literal("added"),
-    memberId: z.string(),
-    userId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      email: z.string(),
+      status: z.literal("added"),
+      memberId: z.string(),
+      userId: z.string(),
+    })
+  );
 
 export function addClusterOrgMemberAuthClusterResponseBodyToJSON(
   addClusterOrgMemberAuthClusterResponseBody:
@@ -283,12 +299,14 @@ export const AddClusterOrgMemberResponseBody$inboundSchema: z.ZodType<
   AddClusterOrgMemberResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  email: z.string(),
-  status: z.literal("already_member"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("already_member"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 /** @internal */
 export type AddClusterOrgMemberResponseBody$Outbound = {
   email: string;
@@ -302,12 +320,14 @@ export const AddClusterOrgMemberResponseBody$outboundSchema: z.ZodType<
   AddClusterOrgMemberResponseBody$Outbound,
   z.ZodTypeDef,
   AddClusterOrgMemberResponseBody
-> = z.object({
-  email: z.string(),
-  status: z.literal("already_member"),
-  memberId: z.string(),
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    email: z.string(),
+    status: z.literal("already_member"),
+    memberId: z.string(),
+    userId: z.string(),
+  })
+);
 
 export function addClusterOrgMemberResponseBodyToJSON(
   addClusterOrgMemberResponseBody: AddClusterOrgMemberResponseBody,
@@ -333,10 +353,14 @@ export const AddClusterOrgMemberResponse$inboundSchema: z.ZodType<
   AddClusterOrgMemberResponse,
   z.ZodTypeDef,
   unknown
-> = discriminatedUnion("status", {
-  already_member: z.lazy(() => AddClusterOrgMemberResponseBody$inboundSchema),
-  added: z.lazy(() => AddClusterOrgMemberAuthClusterResponseBody$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  discriminatedUnion("status", {
+    already_member: z.lazy(() => AddClusterOrgMemberResponseBody$inboundSchema),
+    added: z.lazy(() =>
+      AddClusterOrgMemberAuthClusterResponseBody$inboundSchema
+    ),
+  })
+);
 /** @internal */
 export type AddClusterOrgMemberResponse$Outbound =
   | AddClusterOrgMemberResponseBody$Outbound
@@ -347,10 +371,12 @@ export const AddClusterOrgMemberResponse$outboundSchema: z.ZodType<
   AddClusterOrgMemberResponse$Outbound,
   z.ZodTypeDef,
   AddClusterOrgMemberResponse
-> = z.union([
-  z.lazy(() => AddClusterOrgMemberResponseBody$outboundSchema),
-  z.lazy(() => AddClusterOrgMemberAuthClusterResponseBody$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    z.lazy(() => AddClusterOrgMemberResponseBody$outboundSchema),
+    z.lazy(() => AddClusterOrgMemberAuthClusterResponseBody$outboundSchema),
+  ])
+);
 
 export function addClusterOrgMemberResponseToJSON(
   addClusterOrgMemberResponse: AddClusterOrgMemberResponse,

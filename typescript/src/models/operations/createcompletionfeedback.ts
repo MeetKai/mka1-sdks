@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CreateCompletionFeedbackRequest$inboundSchema: z.ZodType<
   CreateCompletionFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateFeedbackRequest: components.CreateFeedbackRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateFeedbackRequest": "createFeedbackRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateFeedbackRequest: components.CreateFeedbackRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateFeedbackRequest": "createFeedbackRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateCompletionFeedbackRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CreateCompletionFeedbackRequest$outboundSchema: z.ZodType<
   CreateCompletionFeedbackRequest$Outbound,
   z.ZodTypeDef,
   CreateCompletionFeedbackRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  createFeedbackRequest: components.CreateFeedbackRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createFeedbackRequest: "CreateFeedbackRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    createFeedbackRequest: components.CreateFeedbackRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createFeedbackRequest: "CreateFeedbackRequest",
+    });
+  })
+);
 
 export function createCompletionFeedbackRequestToJSON(
   createCompletionFeedbackRequest: CreateCompletionFeedbackRequest,

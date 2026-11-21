@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,8 +39,8 @@ export type CreateFeedbackRequest = {
 };
 
 /** @internal */
-export const Rating$inboundSchema: z.ZodNativeEnum<typeof Rating> = z
-  .nativeEnum(Rating);
+export const Rating$inboundSchema: z.ZodNativeEnum<typeof Rating> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Rating));
 /** @internal */
 export const Rating$outboundSchema: z.ZodNativeEnum<typeof Rating> =
   Rating$inboundSchema;
@@ -50,11 +50,13 @@ export const CreateFeedbackRequest$inboundSchema: z.ZodType<
   CreateFeedbackRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  rating: Rating$inboundSchema.optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: Rating$inboundSchema.optional(),
+    description: z.string().optional(),
+  })
+);
 /** @internal */
 export type CreateFeedbackRequest$Outbound = {
   id: string;
@@ -67,11 +69,13 @@ export const CreateFeedbackRequest$outboundSchema: z.ZodType<
   CreateFeedbackRequest$Outbound,
   z.ZodTypeDef,
   CreateFeedbackRequest
-> = z.object({
-  id: z.string(),
-  rating: Rating$outboundSchema.optional(),
-  description: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    rating: Rating$outboundSchema.optional(),
+    description: z.string().optional(),
+  })
+);
 
 export function createFeedbackRequestToJSON(
   createFeedbackRequest: CreateFeedbackRequest,

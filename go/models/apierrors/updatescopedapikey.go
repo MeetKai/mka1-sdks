@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 	"github.com/MeetKai/mka1-sdks/go/models/operations"
 )
@@ -17,6 +18,12 @@ type UpdateScopedAPIKeyTooManyRequestsError struct {
 var _ error = &UpdateScopedAPIKeyTooManyRequestsError{}
 
 func (e *UpdateScopedAPIKeyTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -30,6 +37,12 @@ type UpdateScopedAPIKeyGoneError struct {
 var _ error = &UpdateScopedAPIKeyGoneError{}
 
 func (e *UpdateScopedAPIKeyGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -43,6 +56,12 @@ type UpdateScopedAPIKeyConflictError struct {
 var _ error = &UpdateScopedAPIKeyConflictError{}
 
 func (e *UpdateScopedAPIKeyConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -56,6 +75,12 @@ type UpdateScopedAPIKeyNotFoundError struct {
 var _ error = &UpdateScopedAPIKeyNotFoundError{}
 
 func (e *UpdateScopedAPIKeyNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -70,6 +95,15 @@ type UpdateScopedAPIKeyForbiddenError struct {
 var _ error = &UpdateScopedAPIKeyForbiddenError{}
 
 func (e *UpdateScopedAPIKeyForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -83,6 +117,12 @@ type UpdateScopedAPIKeyUnauthorizedError struct {
 var _ error = &UpdateScopedAPIKeyUnauthorizedError{}
 
 func (e *UpdateScopedAPIKeyUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -97,6 +137,12 @@ type UpdateScopedAPIKeyBadRequestError struct {
 var _ error = &UpdateScopedAPIKeyBadRequestError{}
 
 func (e *UpdateScopedAPIKeyBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

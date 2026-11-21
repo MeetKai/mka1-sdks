@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,16 +22,18 @@ export const CreateFeatureFlagProjectRequest$inboundSchema: z.ZodType<
   CreateFeatureFlagProjectRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  FeatureFlagProjectCreateRequest:
-    components.FeatureFlagProjectCreateRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "FeatureFlagProjectCreateRequest": "featureFlagProjectCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    FeatureFlagProjectCreateRequest:
+      components.FeatureFlagProjectCreateRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "FeatureFlagProjectCreateRequest": "featureFlagProjectCreateRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateFeatureFlagProjectRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -44,16 +46,18 @@ export const CreateFeatureFlagProjectRequest$outboundSchema: z.ZodType<
   CreateFeatureFlagProjectRequest$Outbound,
   z.ZodTypeDef,
   CreateFeatureFlagProjectRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  featureFlagProjectCreateRequest:
-    components.FeatureFlagProjectCreateRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    featureFlagProjectCreateRequest: "FeatureFlagProjectCreateRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    featureFlagProjectCreateRequest:
+      components.FeatureFlagProjectCreateRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      featureFlagProjectCreateRequest: "FeatureFlagProjectCreateRequest",
+    });
+  })
+);
 
 export function createFeatureFlagProjectRequestToJSON(
   createFeatureFlagProjectRequest: CreateFeatureFlagProjectRequest,

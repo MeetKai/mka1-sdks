@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,10 +28,12 @@ export const UpdateOrganizationSecurity$inboundSchema: z.ZodType<
   UpdateOrganizationSecurity,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 /** @internal */
 export type UpdateOrganizationSecurity$Outbound = {
   bearerAuth?: string | undefined;
@@ -43,10 +45,12 @@ export const UpdateOrganizationSecurity$outboundSchema: z.ZodType<
   UpdateOrganizationSecurity$Outbound,
   z.ZodTypeDef,
   UpdateOrganizationSecurity
-> = z.object({
-  bearerAuth: z.string().optional(),
-  sessionCookie: z.string().optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    bearerAuth: z.string().optional(),
+    sessionCookie: z.string().optional(),
+  })
+);
 
 export function updateOrganizationSecurityToJSON(
   updateOrganizationSecurity: UpdateOrganizationSecurity,
@@ -70,16 +74,18 @@ export const UpdateOrganizationRequest$inboundSchema: z.ZodType<
   UpdateOrganizationRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  orgId: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  UpdateOrganizationBody: components.UpdateOrganizationBody$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "UpdateOrganizationBody": "updateOrganizationBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    UpdateOrganizationBody: components.UpdateOrganizationBody$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "UpdateOrganizationBody": "updateOrganizationBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateOrganizationRequest$Outbound = {
   orgId: string;
@@ -92,16 +98,18 @@ export const UpdateOrganizationRequest$outboundSchema: z.ZodType<
   UpdateOrganizationRequest$Outbound,
   z.ZodTypeDef,
   UpdateOrganizationRequest
-> = z.object({
-  orgId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  updateOrganizationBody: components.UpdateOrganizationBody$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    updateOrganizationBody: "UpdateOrganizationBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    orgId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    updateOrganizationBody: components.UpdateOrganizationBody$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      updateOrganizationBody: "UpdateOrganizationBody",
+    });
+  })
+);
 
 export function updateOrganizationRequestToJSON(
   updateOrganizationRequest: UpdateOrganizationRequest,

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -32,13 +32,15 @@ export type IntegrationObject = {
 };
 
 /** @internal */
-export const Wandb$inboundSchema: z.ZodType<Wandb, z.ZodTypeDef, unknown> = z
-  .object({
-    project: z.string(),
-    entity: z.nullable(z.string()).optional(),
-    name: z.nullable(z.string()).optional(),
-    tags: z.nullable(z.array(z.string())).optional(),
-  });
+export const Wandb$inboundSchema: z.ZodType<Wandb, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      project: z.string(),
+      entity: z.nullable(z.string()).optional(),
+      name: z.nullable(z.string()).optional(),
+      tags: z.nullable(z.array(z.string())).optional(),
+    })
+  );
 /** @internal */
 export type Wandb$Outbound = {
   project: string;
@@ -52,12 +54,14 @@ export const Wandb$outboundSchema: z.ZodType<
   Wandb$Outbound,
   z.ZodTypeDef,
   Wandb
-> = z.object({
-  project: z.string(),
-  entity: z.nullable(z.string()).optional(),
-  name: z.nullable(z.string()).optional(),
-  tags: z.nullable(z.array(z.string())).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    project: z.string(),
+    entity: z.nullable(z.string()).optional(),
+    name: z.nullable(z.string()).optional(),
+    tags: z.nullable(z.array(z.string())).optional(),
+  })
+);
 
 export function wandbToJSON(wandb: Wandb): string {
   return JSON.stringify(Wandb$outboundSchema.parse(wandb));
@@ -77,10 +81,12 @@ export const IntegrationObject$inboundSchema: z.ZodType<
   IntegrationObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("wandb"),
-  wandb: z.lazy(() => Wandb$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("wandb"),
+    wandb: z.lazy(() => Wandb$inboundSchema),
+  })
+);
 /** @internal */
 export type IntegrationObject$Outbound = {
   type: "wandb";
@@ -92,10 +98,12 @@ export const IntegrationObject$outboundSchema: z.ZodType<
   IntegrationObject$Outbound,
   z.ZodTypeDef,
   IntegrationObject
-> = z.object({
-  type: z.literal("wandb"),
-  wandb: z.lazy(() => Wandb$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("wandb"),
+    wandb: z.lazy(() => Wandb$outboundSchema),
+  })
+);
 
 export function integrationObjectToJSON(
   integrationObject: IntegrationObject,

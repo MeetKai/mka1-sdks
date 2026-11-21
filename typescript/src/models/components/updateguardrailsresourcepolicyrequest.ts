@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -43,8 +43,10 @@ export type UpdateGuardrailsResourcePolicyRequest = {
 
 /** @internal */
 export const UpdateGuardrailsResourcePolicyRequestResourceType$inboundSchema:
-  z.ZodNativeEnum<typeof UpdateGuardrailsResourcePolicyRequestResourceType> = z
-    .nativeEnum(UpdateGuardrailsResourcePolicyRequestResourceType);
+  z.ZodNativeEnum<typeof UpdateGuardrailsResourcePolicyRequestResourceType> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.nativeEnum(UpdateGuardrailsResourcePolicyRequestResourceType)
+    );
 /** @internal */
 export const UpdateGuardrailsResourcePolicyRequestResourceType$outboundSchema:
   z.ZodNativeEnum<typeof UpdateGuardrailsResourcePolicyRequestResourceType> =
@@ -55,17 +57,19 @@ export const UpdateGuardrailsResourcePolicyRequest$inboundSchema: z.ZodType<
   UpdateGuardrailsResourcePolicyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  resource_type:
-    UpdateGuardrailsResourcePolicyRequestResourceType$inboundSchema,
-  resource_id: z.string(),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "resource_type": "resourceType",
-    "resource_id": "resourceId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resource_type:
+      UpdateGuardrailsResourcePolicyRequestResourceType$inboundSchema,
+    resource_id: z.string(),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "resource_type": "resourceType",
+      "resource_id": "resourceId",
+    });
+  })
+);
 /** @internal */
 export type UpdateGuardrailsResourcePolicyRequest$Outbound = {
   resource_type: string;
@@ -78,17 +82,19 @@ export const UpdateGuardrailsResourcePolicyRequest$outboundSchema: z.ZodType<
   UpdateGuardrailsResourcePolicyRequest$Outbound,
   z.ZodTypeDef,
   UpdateGuardrailsResourcePolicyRequest
-> = z.object({
-  resourceType:
-    UpdateGuardrailsResourcePolicyRequestResourceType$outboundSchema,
-  resourceId: z.string(),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    resourceType: "resource_type",
-    resourceId: "resource_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    resourceType:
+      UpdateGuardrailsResourcePolicyRequestResourceType$outboundSchema,
+    resourceId: z.string(),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      resourceType: "resource_type",
+      resourceId: "resource_id",
+    });
+  })
+);
 
 export function updateGuardrailsResourcePolicyRequestToJSON(
   updateGuardrailsResourcePolicyRequest: UpdateGuardrailsResourcePolicyRequest,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,21 +21,23 @@ export const CreatedBy$inboundSchema: z.ZodType<
   CreatedBy,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  user_id: z.string(),
-  team_id: z.nullable(z.string()),
-  api_key_id: z.nullable(z.string()),
-  delegation_id: z.nullable(z.string()),
-  external_user_id: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    "user_id": "userId",
-    "team_id": "teamId",
-    "api_key_id": "apiKeyId",
-    "delegation_id": "delegationId",
-    "external_user_id": "externalUserId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    user_id: z.string(),
+    team_id: z.nullable(z.string()),
+    api_key_id: z.nullable(z.string()),
+    delegation_id: z.nullable(z.string()),
+    external_user_id: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      "user_id": "userId",
+      "team_id": "teamId",
+      "api_key_id": "apiKeyId",
+      "delegation_id": "delegationId",
+      "external_user_id": "externalUserId",
+    });
+  })
+);
 /** @internal */
 export type CreatedBy$Outbound = {
   user_id: string;
@@ -50,21 +52,23 @@ export const CreatedBy$outboundSchema: z.ZodType<
   CreatedBy$Outbound,
   z.ZodTypeDef,
   CreatedBy
-> = z.object({
-  userId: z.string(),
-  teamId: z.nullable(z.string()),
-  apiKeyId: z.nullable(z.string()),
-  delegationId: z.nullable(z.string()),
-  externalUserId: z.nullable(z.string()),
-}).transform((v) => {
-  return remap$(v, {
-    userId: "user_id",
-    teamId: "team_id",
-    apiKeyId: "api_key_id",
-    delegationId: "delegation_id",
-    externalUserId: "external_user_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+    teamId: z.nullable(z.string()),
+    apiKeyId: z.nullable(z.string()),
+    delegationId: z.nullable(z.string()),
+    externalUserId: z.nullable(z.string()),
+  }).transform((v) => {
+    return remap$(v, {
+      userId: "user_id",
+      teamId: "team_id",
+      apiKeyId: "api_key_id",
+      delegationId: "delegation_id",
+      externalUserId: "external_user_id",
+    });
+  })
+);
 
 export function createdByToJSON(createdBy: CreatedBy): string {
   return JSON.stringify(CreatedBy$outboundSchema.parse(createdBy));

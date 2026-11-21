@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -492,7 +492,9 @@ export const ResponsesCreateRequestInput$inboundSchema: z.ZodType<
   ResponsesCreateRequestInput,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(Item$inboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$inboundSchema)])
+);
 /** @internal */
 export type ResponsesCreateRequestInput$Outbound =
   | string
@@ -503,7 +505,9 @@ export const ResponsesCreateRequestInput$outboundSchema: z.ZodType<
   ResponsesCreateRequestInput$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequestInput
-> = z.union([z.string(), z.array(Item$outboundSchema)]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(Item$outboundSchema)])
+);
 
 export function responsesCreateRequestInputToJSON(
   responsesCreateRequestInput: ResponsesCreateRequestInput,
@@ -529,7 +533,9 @@ export const ResponsesCreateRequestConversation$inboundSchema: z.ZodType<
   ResponsesCreateRequestConversation,
   z.ZodTypeDef,
   unknown
-> = z.union([Conversation$inboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([Conversation$inboundSchema, z.string()])
+);
 /** @internal */
 export type ResponsesCreateRequestConversation$Outbound =
   | Conversation$Outbound
@@ -540,7 +546,9 @@ export const ResponsesCreateRequestConversation$outboundSchema: z.ZodType<
   ResponsesCreateRequestConversation$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequestConversation
-> = z.union([Conversation$outboundSchema, z.string()]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([Conversation$outboundSchema, z.string()])
+);
 
 export function responsesCreateRequestConversationToJSON(
   responsesCreateRequestConversation: ResponsesCreateRequestConversation,
@@ -563,8 +571,8 @@ export function responsesCreateRequestConversationFromJSON(
 }
 
 /** @internal */
-export const Include$inboundSchema: z.ZodNativeEnum<typeof Include> = z
-  .nativeEnum(Include);
+export const Include$inboundSchema: z.ZodNativeEnum<typeof Include> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Include));
 /** @internal */
 export const Include$outboundSchema: z.ZodNativeEnum<typeof Include> =
   Include$inboundSchema;
@@ -574,15 +582,17 @@ export const ResponsesCreateRequestStreamOptions$inboundSchema: z.ZodType<
   ResponsesCreateRequestStreamOptions,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  include_usage: z.boolean().optional(),
-  include_obfuscation: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_usage": "includeUsage",
-    "include_obfuscation": "includeObfuscation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    include_usage: z.boolean().optional(),
+    include_obfuscation: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_usage": "includeUsage",
+      "include_obfuscation": "includeObfuscation",
+    });
+  })
+);
 /** @internal */
 export type ResponsesCreateRequestStreamOptions$Outbound = {
   include_usage?: boolean | undefined;
@@ -594,15 +604,17 @@ export const ResponsesCreateRequestStreamOptions$outboundSchema: z.ZodType<
   ResponsesCreateRequestStreamOptions$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequestStreamOptions
-> = z.object({
-  includeUsage: z.boolean().optional(),
-  includeObfuscation: z.boolean().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includeUsage: "include_usage",
-    includeObfuscation: "include_obfuscation",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    includeUsage: z.boolean().optional(),
+    includeObfuscation: z.boolean().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includeUsage: "include_usage",
+      includeObfuscation: "include_obfuscation",
+    });
+  })
+);
 
 export function responsesCreateRequestStreamOptionsToJSON(
   responsesCreateRequestStreamOptions: ResponsesCreateRequestStreamOptions,
@@ -625,27 +637,29 @@ export function responsesCreateRequestStreamOptionsFromJSON(
 }
 
 /** @internal */
-export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> = z
-  .union([
-    FunctionToolDefinition$inboundSchema,
-    ComputerUseToolDefinition$inboundSchema,
-    OpenApiToolDefinition$inboundSchema,
-    FileSearchToolDefinition$inboundSchema,
-    CodeInterpreterToolRequest$inboundSchema,
-    CustomToolDefinition$inboundSchema,
-    AgentToolDefinition$inboundSchema,
-    ScheduleToolDefinition$inboundSchema,
-    WebSearchToolDefinition$inboundSchema,
-    MCPToolDefinition$inboundSchema,
-    ImageGenerationToolDefinition$inboundSchema,
-    LocalShellToolDefinition$inboundSchema,
-    ShellToolRequest$inboundSchema,
-    WebSearchPreviewToolDefinition$inboundSchema,
-    HostedToolShorthandDefinition$inboundSchema,
-    SleepToolDefinition$inboundSchema,
-    HistoryToolDefinition$inboundSchema,
-    ApprovalToolDefinition$inboundSchema,
-  ]);
+export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.union([
+      FunctionToolDefinition$inboundSchema,
+      ComputerUseToolDefinition$inboundSchema,
+      OpenApiToolDefinition$inboundSchema,
+      FileSearchToolDefinition$inboundSchema,
+      CodeInterpreterToolRequest$inboundSchema,
+      CustomToolDefinition$inboundSchema,
+      AgentToolDefinition$inboundSchema,
+      ScheduleToolDefinition$inboundSchema,
+      WebSearchToolDefinition$inboundSchema,
+      MCPToolDefinition$inboundSchema,
+      ImageGenerationToolDefinition$inboundSchema,
+      LocalShellToolDefinition$inboundSchema,
+      ShellToolRequest$inboundSchema,
+      WebSearchPreviewToolDefinition$inboundSchema,
+      HostedToolShorthandDefinition$inboundSchema,
+      SleepToolDefinition$inboundSchema,
+      HistoryToolDefinition$inboundSchema,
+      ApprovalToolDefinition$inboundSchema,
+    ])
+  );
 /** @internal */
 export type Tools$Outbound =
   | FunctionToolDefinition$Outbound
@@ -672,26 +686,28 @@ export const Tools$outboundSchema: z.ZodType<
   Tools$Outbound,
   z.ZodTypeDef,
   Tools
-> = z.union([
-  FunctionToolDefinition$outboundSchema,
-  ComputerUseToolDefinition$outboundSchema,
-  OpenApiToolDefinition$outboundSchema,
-  FileSearchToolDefinition$outboundSchema,
-  CodeInterpreterToolRequest$outboundSchema,
-  CustomToolDefinition$outboundSchema,
-  AgentToolDefinition$outboundSchema,
-  ScheduleToolDefinition$outboundSchema,
-  WebSearchToolDefinition$outboundSchema,
-  MCPToolDefinition$outboundSchema,
-  ImageGenerationToolDefinition$outboundSchema,
-  LocalShellToolDefinition$outboundSchema,
-  ShellToolRequest$outboundSchema,
-  WebSearchPreviewToolDefinition$outboundSchema,
-  HostedToolShorthandDefinition$outboundSchema,
-  SleepToolDefinition$outboundSchema,
-  HistoryToolDefinition$outboundSchema,
-  ApprovalToolDefinition$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    FunctionToolDefinition$outboundSchema,
+    ComputerUseToolDefinition$outboundSchema,
+    OpenApiToolDefinition$outboundSchema,
+    FileSearchToolDefinition$outboundSchema,
+    CodeInterpreterToolRequest$outboundSchema,
+    CustomToolDefinition$outboundSchema,
+    AgentToolDefinition$outboundSchema,
+    ScheduleToolDefinition$outboundSchema,
+    WebSearchToolDefinition$outboundSchema,
+    MCPToolDefinition$outboundSchema,
+    ImageGenerationToolDefinition$outboundSchema,
+    LocalShellToolDefinition$outboundSchema,
+    ShellToolRequest$outboundSchema,
+    WebSearchPreviewToolDefinition$outboundSchema,
+    HostedToolShorthandDefinition$outboundSchema,
+    SleepToolDefinition$outboundSchema,
+    HistoryToolDefinition$outboundSchema,
+    ApprovalToolDefinition$outboundSchema,
+  ])
+);
 
 export function toolsToJSON(tools: Tools): string {
   return JSON.stringify(Tools$outboundSchema.parse(tools));
@@ -711,7 +727,9 @@ export const ResponsesCreateRequestStop$inboundSchema: z.ZodType<
   ResponsesCreateRequestStop,
   z.ZodTypeDef,
   unknown
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 /** @internal */
 export type ResponsesCreateRequestStop$Outbound = string | Array<string>;
 
@@ -720,7 +738,9 @@ export const ResponsesCreateRequestStop$outboundSchema: z.ZodType<
   ResponsesCreateRequestStop$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequestStop
-> = z.union([z.string(), z.array(z.string())]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([z.string(), z.array(z.string())])
+);
 
 export function responsesCreateRequestStopToJSON(
   responsesCreateRequestStop: ResponsesCreateRequestStop,
@@ -744,7 +764,7 @@ export const ResponsesCreateRequestPrefillThink$inboundSchema: z.ZodType<
   ResponsesCreateRequestPrefillThink,
   z.ZodTypeDef,
   unknown
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 /** @internal */
 export type ResponsesCreateRequestPrefillThink$Outbound = boolean | string;
 
@@ -753,7 +773,7 @@ export const ResponsesCreateRequestPrefillThink$outboundSchema: z.ZodType<
   ResponsesCreateRequestPrefillThink$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequestPrefillThink
-> = z.union([z.boolean(), z.string()]);
+> = /* @__PURE__ */ lazySchema$(() => z.union([z.boolean(), z.string()]));
 
 export function responsesCreateRequestPrefillThinkToJSON(
   responsesCreateRequestPrefillThink: ResponsesCreateRequestPrefillThink,
@@ -778,7 +798,9 @@ export function responsesCreateRequestPrefillThinkFromJSON(
 /** @internal */
 export const ResponsesCreateRequestTruncation$inboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestTruncation
-> = z.nativeEnum(ResponsesCreateRequestTruncation);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponsesCreateRequestTruncation)
+);
 /** @internal */
 export const ResponsesCreateRequestTruncation$outboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestTruncation
@@ -787,15 +809,17 @@ export const ResponsesCreateRequestTruncation$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ResponsesCreateRequestServiceTier$inboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestServiceTier
-> = z.nativeEnum(ResponsesCreateRequestServiceTier);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponsesCreateRequestServiceTier)
+);
 /** @internal */
 export const ResponsesCreateRequestServiceTier$outboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestServiceTier
 > = ResponsesCreateRequestServiceTier$inboundSchema;
 
 /** @internal */
-export const Modalities$inboundSchema: z.ZodNativeEnum<typeof Modalities> = z
-  .nativeEnum(Modalities);
+export const Modalities$inboundSchema: z.ZodNativeEnum<typeof Modalities> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Modalities));
 /** @internal */
 export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> =
   Modalities$inboundSchema;
@@ -803,18 +827,22 @@ export const Modalities$outboundSchema: z.ZodNativeEnum<typeof Modalities> =
 /** @internal */
 export const ResponsesCreateRequestFormat$inboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestFormat
-> = z.nativeEnum(ResponsesCreateRequestFormat);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ResponsesCreateRequestFormat)
+);
 /** @internal */
 export const ResponsesCreateRequestFormat$outboundSchema: z.ZodNativeEnum<
   typeof ResponsesCreateRequestFormat
 > = ResponsesCreateRequestFormat$inboundSchema;
 
 /** @internal */
-export const Audio$inboundSchema: z.ZodType<Audio, z.ZodTypeDef, unknown> = z
-  .object({
-    voice: z.string().default("alloy"),
-    format: ResponsesCreateRequestFormat$inboundSchema.default("wav"),
-  });
+export const Audio$inboundSchema: z.ZodType<Audio, z.ZodTypeDef, unknown> =
+  /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      voice: z.string().default("alloy"),
+      format: ResponsesCreateRequestFormat$inboundSchema.default("wav"),
+    })
+  );
 /** @internal */
 export type Audio$Outbound = {
   voice: string;
@@ -826,10 +854,12 @@ export const Audio$outboundSchema: z.ZodType<
   Audio$Outbound,
   z.ZodTypeDef,
   Audio
-> = z.object({
-  voice: z.string().default("alloy"),
-  format: ResponsesCreateRequestFormat$outboundSchema.default("wav"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    voice: z.string().default("alloy"),
+    format: ResponsesCreateRequestFormat$outboundSchema.default("wav"),
+  })
+);
 
 export function audioToJSON(audio: Audio): string {
   return JSON.stringify(Audio$outboundSchema.parse(audio));
@@ -849,109 +879,113 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
   ResponsesCreateRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  guardrail_agent_id: z.string().optional(),
-  fallback_models: z.array(z.string()).optional(),
-  input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
-  instructions: z.string().optional(),
-  conversation: z.nullable(z.union([Conversation$inboundSchema, z.string()]))
-    .optional(),
-  previous_response_id: z.string().optional(),
-  prompt: PromptTemplate$inboundSchema.optional(),
-  include: z.array(Include$inboundSchema).optional(),
-  text: TextConfiguration$inboundSchema.optional(),
-  stream: z.boolean().default(false),
-  stream_options: z.nullable(
-    z.lazy(() => ResponsesCreateRequestStreamOptions$inboundSchema),
-  ).optional(),
-  stream_events: z.boolean().optional(),
-  store: z.boolean().default(true),
-  background: z.boolean().default(false),
-  webhook_url: z.string().optional(),
-  webhook_secret: z.string().optional(),
-  tools: z.array(
-    z.union([
-      FunctionToolDefinition$inboundSchema,
-      ComputerUseToolDefinition$inboundSchema,
-      OpenApiToolDefinition$inboundSchema,
-      FileSearchToolDefinition$inboundSchema,
-      CodeInterpreterToolRequest$inboundSchema,
-      CustomToolDefinition$inboundSchema,
-      AgentToolDefinition$inboundSchema,
-      ScheduleToolDefinition$inboundSchema,
-      WebSearchToolDefinition$inboundSchema,
-      MCPToolDefinition$inboundSchema,
-      ImageGenerationToolDefinition$inboundSchema,
-      LocalShellToolDefinition$inboundSchema,
-      ShellToolRequest$inboundSchema,
-      WebSearchPreviewToolDefinition$inboundSchema,
-      HostedToolShorthandDefinition$inboundSchema,
-      SleepToolDefinition$inboundSchema,
-      HistoryToolDefinition$inboundSchema,
-      ApprovalToolDefinition$inboundSchema,
-    ]),
-  ).optional(),
-  tool_choice: ToolChoice$inboundSchema.optional(),
-  parallel_tool_calls: z.boolean().default(true),
-  max_tool_calls: z.number().int().default(64),
-  reasoning: z.nullable(ReasoningConfiguration$inboundSchema).optional(),
-  max_output_tokens: z.number().int().optional(),
-  temperature: z.number().optional(),
-  top_p: z.number().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  top_k: z.number().int().optional(),
-  min_p: z.number().optional(),
-  repetition_penalty: z.number().optional(),
-  do_sample: z.boolean().optional(),
-  extra_body: z.record(z.any()).optional(),
-  chat_template_kwargs: z.record(z.any()).optional(),
-  prefill_think: z.union([z.boolean(), z.string()]).optional(),
-  use_cache: z.boolean().optional(),
-  top_logprobs: z.number().int().optional(),
-  truncation: ResponsesCreateRequestTruncation$inboundSchema.default("auto"),
-  context_management: z.array(CompactionContextManagement$inboundSchema)
-    .optional(),
-  presence_penalty: z.number().optional(),
-  frequency_penalty: z.number().optional(),
-  service_tier: ResponsesCreateRequestServiceTier$inboundSchema.default("auto"),
-  prompt_cache_key: z.string().optional(),
-  safety_identifier: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-  modalities: z.array(Modalities$inboundSchema).optional(),
-  audio: z.lazy(() => Audio$inboundSchema).optional(),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "guardrail_agent_id": "guardrailAgentId",
-    "fallback_models": "fallbackModels",
-    "previous_response_id": "previousResponseId",
-    "stream_options": "streamOptions",
-    "stream_events": "streamEvents",
-    "webhook_url": "webhookUrl",
-    "webhook_secret": "webhookSecret",
-    "tool_choice": "toolChoice",
-    "parallel_tool_calls": "parallelToolCalls",
-    "max_tool_calls": "maxToolCalls",
-    "max_output_tokens": "maxOutputTokens",
-    "top_p": "topP",
-    "top_k": "topK",
-    "min_p": "minP",
-    "repetition_penalty": "repetitionPenalty",
-    "do_sample": "doSample",
-    "extra_body": "extraBody",
-    "chat_template_kwargs": "chatTemplateKwargs",
-    "prefill_think": "prefillThink",
-    "use_cache": "useCache",
-    "top_logprobs": "topLogprobs",
-    "context_management": "contextManagement",
-    "presence_penalty": "presencePenalty",
-    "frequency_penalty": "frequencyPenalty",
-    "service_tier": "serviceTier",
-    "prompt_cache_key": "promptCacheKey",
-    "safety_identifier": "safetyIdentifier",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    guardrail_agent_id: z.string().optional(),
+    fallback_models: z.array(z.string()).optional(),
+    input: z.union([z.string(), z.array(Item$inboundSchema)]).optional(),
+    instructions: z.string().optional(),
+    conversation: z.nullable(z.union([Conversation$inboundSchema, z.string()]))
+      .optional(),
+    previous_response_id: z.string().optional(),
+    prompt: PromptTemplate$inboundSchema.optional(),
+    include: z.array(Include$inboundSchema).optional(),
+    text: TextConfiguration$inboundSchema.optional(),
+    stream: z.boolean().default(false),
+    stream_options: z.nullable(
+      z.lazy(() => ResponsesCreateRequestStreamOptions$inboundSchema),
+    ).optional(),
+    stream_events: z.boolean().optional(),
+    store: z.boolean().default(true),
+    background: z.boolean().default(false),
+    webhook_url: z.string().optional(),
+    webhook_secret: z.string().optional(),
+    tools: z.array(
+      z.union([
+        FunctionToolDefinition$inboundSchema,
+        ComputerUseToolDefinition$inboundSchema,
+        OpenApiToolDefinition$inboundSchema,
+        FileSearchToolDefinition$inboundSchema,
+        CodeInterpreterToolRequest$inboundSchema,
+        CustomToolDefinition$inboundSchema,
+        AgentToolDefinition$inboundSchema,
+        ScheduleToolDefinition$inboundSchema,
+        WebSearchToolDefinition$inboundSchema,
+        MCPToolDefinition$inboundSchema,
+        ImageGenerationToolDefinition$inboundSchema,
+        LocalShellToolDefinition$inboundSchema,
+        ShellToolRequest$inboundSchema,
+        WebSearchPreviewToolDefinition$inboundSchema,
+        HostedToolShorthandDefinition$inboundSchema,
+        SleepToolDefinition$inboundSchema,
+        HistoryToolDefinition$inboundSchema,
+        ApprovalToolDefinition$inboundSchema,
+      ]),
+    ).optional(),
+    tool_choice: ToolChoice$inboundSchema.optional(),
+    parallel_tool_calls: z.boolean().default(true),
+    max_tool_calls: z.number().int().default(64),
+    reasoning: z.nullable(ReasoningConfiguration$inboundSchema).optional(),
+    max_output_tokens: z.number().int().optional(),
+    temperature: z.number().optional(),
+    top_p: z.number().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    top_k: z.number().int().optional(),
+    min_p: z.number().optional(),
+    repetition_penalty: z.number().optional(),
+    do_sample: z.boolean().optional(),
+    extra_body: z.record(z.any()).optional(),
+    chat_template_kwargs: z.record(z.any()).optional(),
+    prefill_think: z.union([z.boolean(), z.string()]).optional(),
+    use_cache: z.boolean().optional(),
+    top_logprobs: z.number().int().optional(),
+    truncation: ResponsesCreateRequestTruncation$inboundSchema.default("auto"),
+    context_management: z.array(CompactionContextManagement$inboundSchema)
+      .optional(),
+    presence_penalty: z.number().optional(),
+    frequency_penalty: z.number().optional(),
+    service_tier: ResponsesCreateRequestServiceTier$inboundSchema.default(
+      "auto",
+    ),
+    prompt_cache_key: z.string().optional(),
+    safety_identifier: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+    modalities: z.array(Modalities$inboundSchema).optional(),
+    audio: z.lazy(() => Audio$inboundSchema).optional(),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "guardrail_agent_id": "guardrailAgentId",
+      "fallback_models": "fallbackModels",
+      "previous_response_id": "previousResponseId",
+      "stream_options": "streamOptions",
+      "stream_events": "streamEvents",
+      "webhook_url": "webhookUrl",
+      "webhook_secret": "webhookSecret",
+      "tool_choice": "toolChoice",
+      "parallel_tool_calls": "parallelToolCalls",
+      "max_tool_calls": "maxToolCalls",
+      "max_output_tokens": "maxOutputTokens",
+      "top_p": "topP",
+      "top_k": "topK",
+      "min_p": "minP",
+      "repetition_penalty": "repetitionPenalty",
+      "do_sample": "doSample",
+      "extra_body": "extraBody",
+      "chat_template_kwargs": "chatTemplateKwargs",
+      "prefill_think": "prefillThink",
+      "use_cache": "useCache",
+      "top_logprobs": "topLogprobs",
+      "context_management": "contextManagement",
+      "presence_penalty": "presencePenalty",
+      "frequency_penalty": "frequencyPenalty",
+      "service_tier": "serviceTier",
+      "prompt_cache_key": "promptCacheKey",
+      "safety_identifier": "safetyIdentifier",
+    });
+  })
+);
 /** @internal */
 export type ResponsesCreateRequest$Outbound = {
   model: string;
@@ -1031,109 +1065,113 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
   ResponsesCreateRequest$Outbound,
   z.ZodTypeDef,
   ResponsesCreateRequest
-> = z.object({
-  model: z.string(),
-  guardrailAgentId: z.string().optional(),
-  fallbackModels: z.array(z.string()).optional(),
-  input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
-  instructions: z.string().optional(),
-  conversation: z.nullable(z.union([Conversation$outboundSchema, z.string()]))
-    .optional(),
-  previousResponseId: z.string().optional(),
-  prompt: PromptTemplate$outboundSchema.optional(),
-  include: z.array(Include$outboundSchema).optional(),
-  text: TextConfiguration$outboundSchema.optional(),
-  stream: z.boolean().default(false),
-  streamOptions: z.nullable(
-    z.lazy(() => ResponsesCreateRequestStreamOptions$outboundSchema),
-  ).optional(),
-  streamEvents: z.boolean().optional(),
-  store: z.boolean().default(true),
-  background: z.boolean().default(false),
-  webhookUrl: z.string().optional(),
-  webhookSecret: z.string().optional(),
-  tools: z.array(
-    z.union([
-      FunctionToolDefinition$outboundSchema,
-      ComputerUseToolDefinition$outboundSchema,
-      OpenApiToolDefinition$outboundSchema,
-      FileSearchToolDefinition$outboundSchema,
-      CodeInterpreterToolRequest$outboundSchema,
-      CustomToolDefinition$outboundSchema,
-      AgentToolDefinition$outboundSchema,
-      ScheduleToolDefinition$outboundSchema,
-      WebSearchToolDefinition$outboundSchema,
-      MCPToolDefinition$outboundSchema,
-      ImageGenerationToolDefinition$outboundSchema,
-      LocalShellToolDefinition$outboundSchema,
-      ShellToolRequest$outboundSchema,
-      WebSearchPreviewToolDefinition$outboundSchema,
-      HostedToolShorthandDefinition$outboundSchema,
-      SleepToolDefinition$outboundSchema,
-      HistoryToolDefinition$outboundSchema,
-      ApprovalToolDefinition$outboundSchema,
-    ]),
-  ).optional(),
-  toolChoice: ToolChoice$outboundSchema.optional(),
-  parallelToolCalls: z.boolean().default(true),
-  maxToolCalls: z.number().int().default(64),
-  reasoning: z.nullable(ReasoningConfiguration$outboundSchema).optional(),
-  maxOutputTokens: z.number().int().optional(),
-  temperature: z.number().optional(),
-  topP: z.number().optional(),
-  stop: z.union([z.string(), z.array(z.string())]).optional(),
-  topK: z.number().int().optional(),
-  minP: z.number().optional(),
-  repetitionPenalty: z.number().optional(),
-  doSample: z.boolean().optional(),
-  extraBody: z.record(z.any()).optional(),
-  chatTemplateKwargs: z.record(z.any()).optional(),
-  prefillThink: z.union([z.boolean(), z.string()]).optional(),
-  useCache: z.boolean().optional(),
-  topLogprobs: z.number().int().optional(),
-  truncation: ResponsesCreateRequestTruncation$outboundSchema.default("auto"),
-  contextManagement: z.array(CompactionContextManagement$outboundSchema)
-    .optional(),
-  presencePenalty: z.number().optional(),
-  frequencyPenalty: z.number().optional(),
-  serviceTier: ResponsesCreateRequestServiceTier$outboundSchema.default("auto"),
-  promptCacheKey: z.string().optional(),
-  safetyIdentifier: z.string().optional(),
-  metadata: z.record(z.string()).optional(),
-  modalities: z.array(Modalities$outboundSchema).optional(),
-  audio: z.lazy(() => Audio$outboundSchema).optional(),
-  user: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    guardrailAgentId: "guardrail_agent_id",
-    fallbackModels: "fallback_models",
-    previousResponseId: "previous_response_id",
-    streamOptions: "stream_options",
-    streamEvents: "stream_events",
-    webhookUrl: "webhook_url",
-    webhookSecret: "webhook_secret",
-    toolChoice: "tool_choice",
-    parallelToolCalls: "parallel_tool_calls",
-    maxToolCalls: "max_tool_calls",
-    maxOutputTokens: "max_output_tokens",
-    topP: "top_p",
-    topK: "top_k",
-    minP: "min_p",
-    repetitionPenalty: "repetition_penalty",
-    doSample: "do_sample",
-    extraBody: "extra_body",
-    chatTemplateKwargs: "chat_template_kwargs",
-    prefillThink: "prefill_think",
-    useCache: "use_cache",
-    topLogprobs: "top_logprobs",
-    contextManagement: "context_management",
-    presencePenalty: "presence_penalty",
-    frequencyPenalty: "frequency_penalty",
-    serviceTier: "service_tier",
-    promptCacheKey: "prompt_cache_key",
-    safetyIdentifier: "safety_identifier",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    guardrailAgentId: z.string().optional(),
+    fallbackModels: z.array(z.string()).optional(),
+    input: z.union([z.string(), z.array(Item$outboundSchema)]).optional(),
+    instructions: z.string().optional(),
+    conversation: z.nullable(z.union([Conversation$outboundSchema, z.string()]))
+      .optional(),
+    previousResponseId: z.string().optional(),
+    prompt: PromptTemplate$outboundSchema.optional(),
+    include: z.array(Include$outboundSchema).optional(),
+    text: TextConfiguration$outboundSchema.optional(),
+    stream: z.boolean().default(false),
+    streamOptions: z.nullable(
+      z.lazy(() => ResponsesCreateRequestStreamOptions$outboundSchema),
+    ).optional(),
+    streamEvents: z.boolean().optional(),
+    store: z.boolean().default(true),
+    background: z.boolean().default(false),
+    webhookUrl: z.string().optional(),
+    webhookSecret: z.string().optional(),
+    tools: z.array(
+      z.union([
+        FunctionToolDefinition$outboundSchema,
+        ComputerUseToolDefinition$outboundSchema,
+        OpenApiToolDefinition$outboundSchema,
+        FileSearchToolDefinition$outboundSchema,
+        CodeInterpreterToolRequest$outboundSchema,
+        CustomToolDefinition$outboundSchema,
+        AgentToolDefinition$outboundSchema,
+        ScheduleToolDefinition$outboundSchema,
+        WebSearchToolDefinition$outboundSchema,
+        MCPToolDefinition$outboundSchema,
+        ImageGenerationToolDefinition$outboundSchema,
+        LocalShellToolDefinition$outboundSchema,
+        ShellToolRequest$outboundSchema,
+        WebSearchPreviewToolDefinition$outboundSchema,
+        HostedToolShorthandDefinition$outboundSchema,
+        SleepToolDefinition$outboundSchema,
+        HistoryToolDefinition$outboundSchema,
+        ApprovalToolDefinition$outboundSchema,
+      ]),
+    ).optional(),
+    toolChoice: ToolChoice$outboundSchema.optional(),
+    parallelToolCalls: z.boolean().default(true),
+    maxToolCalls: z.number().int().default(64),
+    reasoning: z.nullable(ReasoningConfiguration$outboundSchema).optional(),
+    maxOutputTokens: z.number().int().optional(),
+    temperature: z.number().optional(),
+    topP: z.number().optional(),
+    stop: z.union([z.string(), z.array(z.string())]).optional(),
+    topK: z.number().int().optional(),
+    minP: z.number().optional(),
+    repetitionPenalty: z.number().optional(),
+    doSample: z.boolean().optional(),
+    extraBody: z.record(z.any()).optional(),
+    chatTemplateKwargs: z.record(z.any()).optional(),
+    prefillThink: z.union([z.boolean(), z.string()]).optional(),
+    useCache: z.boolean().optional(),
+    topLogprobs: z.number().int().optional(),
+    truncation: ResponsesCreateRequestTruncation$outboundSchema.default("auto"),
+    contextManagement: z.array(CompactionContextManagement$outboundSchema)
+      .optional(),
+    presencePenalty: z.number().optional(),
+    frequencyPenalty: z.number().optional(),
+    serviceTier: ResponsesCreateRequestServiceTier$outboundSchema.default(
+      "auto",
+    ),
+    promptCacheKey: z.string().optional(),
+    safetyIdentifier: z.string().optional(),
+    metadata: z.record(z.string()).optional(),
+    modalities: z.array(Modalities$outboundSchema).optional(),
+    audio: z.lazy(() => Audio$outboundSchema).optional(),
+    user: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      guardrailAgentId: "guardrail_agent_id",
+      fallbackModels: "fallback_models",
+      previousResponseId: "previous_response_id",
+      streamOptions: "stream_options",
+      streamEvents: "stream_events",
+      webhookUrl: "webhook_url",
+      webhookSecret: "webhook_secret",
+      toolChoice: "tool_choice",
+      parallelToolCalls: "parallel_tool_calls",
+      maxToolCalls: "max_tool_calls",
+      maxOutputTokens: "max_output_tokens",
+      topP: "top_p",
+      topK: "top_k",
+      minP: "min_p",
+      repetitionPenalty: "repetition_penalty",
+      doSample: "do_sample",
+      extraBody: "extra_body",
+      chatTemplateKwargs: "chat_template_kwargs",
+      prefillThink: "prefill_think",
+      useCache: "use_cache",
+      topLogprobs: "top_logprobs",
+      contextManagement: "context_management",
+      presencePenalty: "presence_penalty",
+      frequencyPenalty: "frequency_penalty",
+      serviceTier: "service_tier",
+      promptCacheKey: "prompt_cache_key",
+      safetyIdentifier: "safety_identifier",
+    });
+  })
+);
 
 export function responsesCreateRequestToJSON(
   responsesCreateRequest: ResponsesCreateRequest,

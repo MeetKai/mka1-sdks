@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,15 +19,17 @@ export const ListFineTuningCheckpointsRequest$inboundSchema: z.ZodType<
   ListFineTuningCheckpointsRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  fine_tuning_job_id: z.string(),
-  after: z.nullable(z.string()).optional(),
-  limit: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    "fine_tuning_job_id": "fineTuningJobId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fine_tuning_job_id: z.string(),
+    after: z.nullable(z.string()).optional(),
+    limit: z.number().int().default(10),
+  }).transform((v) => {
+    return remap$(v, {
+      "fine_tuning_job_id": "fineTuningJobId",
+    });
+  })
+);
 /** @internal */
 export type ListFineTuningCheckpointsRequest$Outbound = {
   fine_tuning_job_id: string;
@@ -40,15 +42,17 @@ export const ListFineTuningCheckpointsRequest$outboundSchema: z.ZodType<
   ListFineTuningCheckpointsRequest$Outbound,
   z.ZodTypeDef,
   ListFineTuningCheckpointsRequest
-> = z.object({
-  fineTuningJobId: z.string(),
-  after: z.nullable(z.string()).optional(),
-  limit: z.number().int().default(10),
-}).transform((v) => {
-  return remap$(v, {
-    fineTuningJobId: "fine_tuning_job_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    fineTuningJobId: z.string(),
+    after: z.nullable(z.string()).optional(),
+    limit: z.number().int().default(10),
+  }).transform((v) => {
+    return remap$(v, {
+      fineTuningJobId: "fine_tuning_job_id",
+    });
+  })
+);
 
 export function listFineTuningCheckpointsRequestToJSON(
   listFineTuningCheckpointsRequest: ListFineTuningCheckpointsRequest,

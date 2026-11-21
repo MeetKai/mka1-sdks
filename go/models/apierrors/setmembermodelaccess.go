@@ -16,6 +16,12 @@ type SetMemberModelAccessNotFoundError struct {
 var _ error = &SetMemberModelAccessNotFoundError{}
 
 func (e *SetMemberModelAccessNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +35,12 @@ type SetMemberModelAccessForbiddenError struct {
 var _ error = &SetMemberModelAccessForbiddenError{}
 
 func (e *SetMemberModelAccessForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +54,12 @@ type SetMemberModelAccessUnauthorizedError struct {
 var _ error = &SetMemberModelAccessUnauthorizedError{}
 
 func (e *SetMemberModelAccessUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +73,12 @@ type SetMemberModelAccessBadRequestError struct {
 var _ error = &SetMemberModelAccessBadRequestError{}
 
 func (e *SetMemberModelAccessBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

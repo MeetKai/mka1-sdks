@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const AnalyticsEventsSearchRequest$inboundSchema: z.ZodType<
   AnalyticsEventsSearchRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  AnalyticsEventSearchRequest:
-    components.AnalyticsEventSearchRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "AnalyticsEventSearchRequest": "analyticsEventSearchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    AnalyticsEventSearchRequest:
+      components.AnalyticsEventSearchRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "AnalyticsEventSearchRequest": "analyticsEventSearchRequest",
+    });
+  })
+);
 /** @internal */
 export type AnalyticsEventsSearchRequest$Outbound = {
   id: string;
@@ -42,15 +44,17 @@ export const AnalyticsEventsSearchRequest$outboundSchema: z.ZodType<
   AnalyticsEventsSearchRequest$Outbound,
   z.ZodTypeDef,
   AnalyticsEventsSearchRequest
-> = z.object({
-  id: z.string(),
-  analyticsEventSearchRequest:
-    components.AnalyticsEventSearchRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    analyticsEventSearchRequest: "AnalyticsEventSearchRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    analyticsEventSearchRequest:
+      components.AnalyticsEventSearchRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      analyticsEventSearchRequest: "AnalyticsEventSearchRequest",
+    });
+  })
+);
 
 export function analyticsEventsSearchRequestToJSON(
   analyticsEventsSearchRequest: AnalyticsEventsSearchRequest,

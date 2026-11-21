@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -39,26 +39,28 @@ export const VectorStoreConnectorObject$inboundSchema: z.ZodType<
   VectorStoreConnectorObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("vector_store.connector.object"),
-  source_path: z.string(),
-  status: VectorStoreConnectorObjectStatus$inboundSchema,
-  reason: z.nullable(z.string()),
-  file_id: z.nullable(z.string()),
-  size_bytes: z.number().int(),
-  modified_at: z.number().int(),
-  first_seen_run_id: z.string(),
-  last_seen_run_id: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "source_path": "sourcePath",
-    "file_id": "fileId",
-    "size_bytes": "sizeBytes",
-    "modified_at": "modifiedAt",
-    "first_seen_run_id": "firstSeenRunId",
-    "last_seen_run_id": "lastSeenRunId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.connector.object"),
+    source_path: z.string(),
+    status: VectorStoreConnectorObjectStatus$inboundSchema,
+    reason: z.nullable(z.string()),
+    file_id: z.nullable(z.string()),
+    size_bytes: z.number().int(),
+    modified_at: z.number().int(),
+    first_seen_run_id: z.string(),
+    last_seen_run_id: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "source_path": "sourcePath",
+      "file_id": "fileId",
+      "size_bytes": "sizeBytes",
+      "modified_at": "modifiedAt",
+      "first_seen_run_id": "firstSeenRunId",
+      "last_seen_run_id": "lastSeenRunId",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorObject$Outbound = {
   object: "vector_store.connector.object";
@@ -77,26 +79,28 @@ export const VectorStoreConnectorObject$outboundSchema: z.ZodType<
   VectorStoreConnectorObject$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorObject
-> = z.object({
-  object: z.literal("vector_store.connector.object"),
-  sourcePath: z.string(),
-  status: VectorStoreConnectorObjectStatus$outboundSchema,
-  reason: z.nullable(z.string()),
-  fileId: z.nullable(z.string()),
-  sizeBytes: z.number().int(),
-  modifiedAt: z.number().int(),
-  firstSeenRunId: z.string(),
-  lastSeenRunId: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    sourcePath: "source_path",
-    fileId: "file_id",
-    sizeBytes: "size_bytes",
-    modifiedAt: "modified_at",
-    firstSeenRunId: "first_seen_run_id",
-    lastSeenRunId: "last_seen_run_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("vector_store.connector.object"),
+    sourcePath: z.string(),
+    status: VectorStoreConnectorObjectStatus$outboundSchema,
+    reason: z.nullable(z.string()),
+    fileId: z.nullable(z.string()),
+    sizeBytes: z.number().int(),
+    modifiedAt: z.number().int(),
+    firstSeenRunId: z.string(),
+    lastSeenRunId: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      sourcePath: "source_path",
+      fileId: "file_id",
+      sizeBytes: "size_bytes",
+      modifiedAt: "modified_at",
+      firstSeenRunId: "first_seen_run_id",
+      lastSeenRunId: "last_seen_run_id",
+    });
+  })
+);
 
 export function vectorStoreConnectorObjectToJSON(
   vectorStoreConnectorObject: VectorStoreConnectorObject,

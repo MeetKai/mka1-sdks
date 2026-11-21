@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -110,7 +110,7 @@ export type ToolApproval = {
 /** @internal */
 export const ToolApprovalKind$inboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalKind
-> = z.nativeEnum(ToolApprovalKind);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolApprovalKind));
 /** @internal */
 export const ToolApprovalKind$outboundSchema: z.ZodNativeEnum<
   typeof ToolApprovalKind
@@ -121,42 +121,48 @@ export const ToolApproval$inboundSchema: z.ZodType<
   ToolApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("tool_approval"),
-  id: z.string(),
-  kind: ToolApprovalKind$inboundSchema,
-  status: ToolApprovalStatus$inboundSchema,
-  tool_type: z.string(),
-  tool_name: z.string(),
-  server_label: z.nullable(z.string()),
-  arguments: z.record(z.any()),
-  response_id: z.string(),
-  agent_id: z.nullable(z.string()),
-  requested_by: ToolApprovalRequester$inboundSchema,
-  approver_user_ids: z.array(z.string()),
-  decided_by_user_id: z.nullable(z.string()),
-  comment: z.nullable(z.string()),
-  claimed: z.boolean(),
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  expires_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  decided_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "tool_type": "toolType",
-    "tool_name": "toolName",
-    "server_label": "serverLabel",
-    "response_id": "responseId",
-    "agent_id": "agentId",
-    "requested_by": "requestedBy",
-    "approver_user_ids": "approverUserIds",
-    "decided_by_user_id": "decidedByUserId",
-    "created_at": "createdAt",
-    "expires_at": "expiresAt",
-    "decided_at": "decidedAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("tool_approval"),
+    id: z.string(),
+    kind: ToolApprovalKind$inboundSchema,
+    status: ToolApprovalStatus$inboundSchema,
+    tool_type: z.string(),
+    tool_name: z.string(),
+    server_label: z.nullable(z.string()),
+    arguments: z.record(z.any()),
+    response_id: z.string(),
+    agent_id: z.nullable(z.string()),
+    requested_by: ToolApprovalRequester$inboundSchema,
+    approver_user_ids: z.array(z.string()),
+    decided_by_user_id: z.nullable(z.string()),
+    comment: z.nullable(z.string()),
+    claimed: z.boolean(),
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    expires_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    decided_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "tool_type": "toolType",
+      "tool_name": "toolName",
+      "server_label": "serverLabel",
+      "response_id": "responseId",
+      "agent_id": "agentId",
+      "requested_by": "requestedBy",
+      "approver_user_ids": "approverUserIds",
+      "decided_by_user_id": "decidedByUserId",
+      "created_at": "createdAt",
+      "expires_at": "expiresAt",
+      "decided_at": "decidedAt",
+    });
+  })
+);
 /** @internal */
 export type ToolApproval$Outbound = {
   object: "tool_approval";
@@ -184,40 +190,42 @@ export const ToolApproval$outboundSchema: z.ZodType<
   ToolApproval$Outbound,
   z.ZodTypeDef,
   ToolApproval
-> = z.object({
-  object: z.literal("tool_approval"),
-  id: z.string(),
-  kind: ToolApprovalKind$outboundSchema,
-  status: ToolApprovalStatus$outboundSchema,
-  toolType: z.string(),
-  toolName: z.string(),
-  serverLabel: z.nullable(z.string()),
-  arguments: z.record(z.any()),
-  responseId: z.string(),
-  agentId: z.nullable(z.string()),
-  requestedBy: ToolApprovalRequester$outboundSchema,
-  approverUserIds: z.array(z.string()),
-  decidedByUserId: z.nullable(z.string()),
-  comment: z.nullable(z.string()),
-  claimed: z.boolean(),
-  createdAt: z.date().transform(v => v.toISOString()),
-  expiresAt: z.date().transform(v => v.toISOString()),
-  decidedAt: z.nullable(z.date().transform(v => v.toISOString())),
-}).transform((v) => {
-  return remap$(v, {
-    toolType: "tool_type",
-    toolName: "tool_name",
-    serverLabel: "server_label",
-    responseId: "response_id",
-    agentId: "agent_id",
-    requestedBy: "requested_by",
-    approverUserIds: "approver_user_ids",
-    decidedByUserId: "decided_by_user_id",
-    createdAt: "created_at",
-    expiresAt: "expires_at",
-    decidedAt: "decided_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("tool_approval"),
+    id: z.string(),
+    kind: ToolApprovalKind$outboundSchema,
+    status: ToolApprovalStatus$outboundSchema,
+    toolType: z.string(),
+    toolName: z.string(),
+    serverLabel: z.nullable(z.string()),
+    arguments: z.record(z.any()),
+    responseId: z.string(),
+    agentId: z.nullable(z.string()),
+    requestedBy: ToolApprovalRequester$outboundSchema,
+    approverUserIds: z.array(z.string()),
+    decidedByUserId: z.nullable(z.string()),
+    comment: z.nullable(z.string()),
+    claimed: z.boolean(),
+    createdAt: z.date().transform(v => v.toISOString()),
+    expiresAt: z.date().transform(v => v.toISOString()),
+    decidedAt: z.nullable(z.date().transform(v => v.toISOString())),
+  }).transform((v) => {
+    return remap$(v, {
+      toolType: "tool_type",
+      toolName: "tool_name",
+      serverLabel: "server_label",
+      responseId: "response_id",
+      agentId: "agent_id",
+      requestedBy: "requested_by",
+      approverUserIds: "approver_user_ids",
+      decidedByUserId: "decided_by_user_id",
+      createdAt: "created_at",
+      expiresAt: "expires_at",
+      decidedAt: "decided_at",
+    });
+  })
+);
 
 export function toolApprovalToJSON(toolApproval: ToolApproval): string {
   return JSON.stringify(ToolApproval$outboundSchema.parse(toolApproval));

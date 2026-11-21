@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -33,9 +33,11 @@ export const DeleteScopedApiKeyRequestBody$inboundSchema: z.ZodType<
   DeleteScopedApiKeyRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+  })
+);
 /** @internal */
 export type DeleteScopedApiKeyRequestBody$Outbound = {
   keyId: string;
@@ -46,9 +48,11 @@ export const DeleteScopedApiKeyRequestBody$outboundSchema: z.ZodType<
   DeleteScopedApiKeyRequestBody$Outbound,
   z.ZodTypeDef,
   DeleteScopedApiKeyRequestBody
-> = z.object({
-  keyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    keyId: z.string(),
+  })
+);
 
 export function deleteScopedApiKeyRequestBodyToJSON(
   deleteScopedApiKeyRequestBody: DeleteScopedApiKeyRequestBody,
@@ -74,16 +78,18 @@ export const DeleteScopedApiKeyRequest$inboundSchema: z.ZodType<
   DeleteScopedApiKeyRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => DeleteScopedApiKeyRequestBody$inboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => DeleteScopedApiKeyRequestBody$inboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type DeleteScopedApiKeyRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -95,16 +101,18 @@ export const DeleteScopedApiKeyRequest$outboundSchema: z.ZodType<
   DeleteScopedApiKeyRequest$Outbound,
   z.ZodTypeDef,
   DeleteScopedApiKeyRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => DeleteScopedApiKeyRequestBody$outboundSchema)
-    .optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => DeleteScopedApiKeyRequestBody$outboundSchema)
+      .optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function deleteScopedApiKeyRequestToJSON(
   deleteScopedApiKeyRequest: DeleteScopedApiKeyRequest,
@@ -128,10 +136,12 @@ export const DeleteScopedApiKeyResponseBody$inboundSchema: z.ZodType<
   DeleteScopedApiKeyResponseBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.literal(true),
+  })
+);
 /** @internal */
 export type DeleteScopedApiKeyResponseBody$Outbound = {
   id: string;
@@ -143,10 +153,12 @@ export const DeleteScopedApiKeyResponseBody$outboundSchema: z.ZodType<
   DeleteScopedApiKeyResponseBody$Outbound,
   z.ZodTypeDef,
   DeleteScopedApiKeyResponseBody
-> = z.object({
-  id: z.string(),
-  deleted: z.literal(true),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    deleted: z.literal(true),
+  })
+);
 
 export function deleteScopedApiKeyResponseBodyToJSON(
   deleteScopedApiKeyResponseBody: DeleteScopedApiKeyResponseBody,

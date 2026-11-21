@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -31,21 +31,23 @@ export const ComputeRequest$inboundSchema: z.ZodType<
   ComputeRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  accelerator: z.string(),
-  ephemeral_disk_gb: z.number().int(),
-  gpu_count: z.number().int(),
-  instance_count: z.number().int().optional(),
-  interconnect: z.string().optional(),
-  vcpu_count: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "ephemeral_disk_gb": "ephemeralDiskGb",
-    "gpu_count": "gpuCount",
-    "instance_count": "instanceCount",
-    "vcpu_count": "vcpuCount",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string(),
+    ephemeral_disk_gb: z.number().int(),
+    gpu_count: z.number().int(),
+    instance_count: z.number().int().optional(),
+    interconnect: z.string().optional(),
+    vcpu_count: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "ephemeral_disk_gb": "ephemeralDiskGb",
+      "gpu_count": "gpuCount",
+      "instance_count": "instanceCount",
+      "vcpu_count": "vcpuCount",
+    });
+  })
+);
 /** @internal */
 export type ComputeRequest$Outbound = {
   accelerator: string;
@@ -61,21 +63,23 @@ export const ComputeRequest$outboundSchema: z.ZodType<
   ComputeRequest$Outbound,
   z.ZodTypeDef,
   ComputeRequest
-> = z.object({
-  accelerator: z.string(),
-  ephemeralDiskGb: z.number().int(),
-  gpuCount: z.number().int(),
-  instanceCount: z.number().int().optional(),
-  interconnect: z.string().optional(),
-  vcpuCount: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    ephemeralDiskGb: "ephemeral_disk_gb",
-    gpuCount: "gpu_count",
-    instanceCount: "instance_count",
-    vcpuCount: "vcpu_count",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accelerator: z.string(),
+    ephemeralDiskGb: z.number().int(),
+    gpuCount: z.number().int(),
+    instanceCount: z.number().int().optional(),
+    interconnect: z.string().optional(),
+    vcpuCount: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      ephemeralDiskGb: "ephemeral_disk_gb",
+      gpuCount: "gpu_count",
+      instanceCount: "instance_count",
+      vcpuCount: "vcpu_count",
+    });
+  })
+);
 
 export function computeRequestToJSON(computeRequest: ComputeRequest): string {
   return JSON.stringify(ComputeRequest$outboundSchema.parse(computeRequest));

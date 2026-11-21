@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/models/components"
 )
 
@@ -16,6 +17,12 @@ type ListOwnerKeyRecoveriesTooManyRequestsError struct {
 var _ error = &ListOwnerKeyRecoveriesTooManyRequestsError{}
 
 func (e *ListOwnerKeyRecoveriesTooManyRequestsError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -29,6 +36,12 @@ type ListOwnerKeyRecoveriesGoneError struct {
 var _ error = &ListOwnerKeyRecoveriesGoneError{}
 
 func (e *ListOwnerKeyRecoveriesGoneError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -42,6 +55,12 @@ type ListOwnerKeyRecoveriesConflictError struct {
 var _ error = &ListOwnerKeyRecoveriesConflictError{}
 
 func (e *ListOwnerKeyRecoveriesConflictError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -55,6 +74,12 @@ type ListOwnerKeyRecoveriesNotFoundError struct {
 var _ error = &ListOwnerKeyRecoveriesNotFoundError{}
 
 func (e *ListOwnerKeyRecoveriesNotFoundError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -69,6 +94,15 @@ type ListOwnerKeyRecoveriesForbiddenError struct {
 var _ error = &ListOwnerKeyRecoveriesForbiddenError{}
 
 func (e *ListOwnerKeyRecoveriesForbiddenError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, e.Message)
+			}
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -82,6 +116,12 @@ type ListOwnerKeyRecoveriesUnauthorizedError struct {
 var _ error = &ListOwnerKeyRecoveriesUnauthorizedError{}
 
 func (e *ListOwnerKeyRecoveriesUnauthorizedError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
@@ -95,6 +135,12 @@ type ListOwnerKeyRecoveriesBadRequestError struct {
 var _ error = &ListOwnerKeyRecoveriesBadRequestError{}
 
 func (e *ListOwnerKeyRecoveriesBadRequestError) Error() string {
+	if e != nil {
+		if e.Message != "" {
+			return e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

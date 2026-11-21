@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -19,9 +19,11 @@ export const LocalShellToolDefinition$inboundSchema: z.ZodType<
   LocalShellToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("local_shell"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell"),
+  })
+);
 /** @internal */
 export type LocalShellToolDefinition$Outbound = {
   type: "local_shell";
@@ -32,9 +34,11 @@ export const LocalShellToolDefinition$outboundSchema: z.ZodType<
   LocalShellToolDefinition$Outbound,
   z.ZodTypeDef,
   LocalShellToolDefinition
-> = z.object({
-  type: z.literal("local_shell"),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("local_shell"),
+  })
+);
 
 export function localShellToolDefinitionToJSON(
   localShellToolDefinition: LocalShellToolDefinition,

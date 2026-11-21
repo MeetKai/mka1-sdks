@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,10 +20,12 @@ export const ComputeRegistryCredential$inboundSchema: z.ZodType<
   ComputeRegistryCredential,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  password: z.string(),
-  username: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    password: z.string(),
+    username: z.string(),
+  })
+);
 /** @internal */
 export type ComputeRegistryCredential$Outbound = {
   password: string;
@@ -35,10 +37,12 @@ export const ComputeRegistryCredential$outboundSchema: z.ZodType<
   ComputeRegistryCredential$Outbound,
   z.ZodTypeDef,
   ComputeRegistryCredential
-> = z.object({
-  password: z.string(),
-  username: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    password: z.string(),
+    username: z.string(),
+  })
+);
 
 export function computeRegistryCredentialToJSON(
   computeRegistryCredential: ComputeRegistryCredential,

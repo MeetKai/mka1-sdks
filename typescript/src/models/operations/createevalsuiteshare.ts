@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,18 +23,20 @@ export const CreateEvalSuiteShareRequest$inboundSchema: z.ZodType<
   CreateEvalSuiteShareRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  suite_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  CreateEvalSuiteShareRequest:
-    components.CreateEvalSuiteShareRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CreateEvalSuiteShareRequest": "createEvalSuiteShareRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suite_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    CreateEvalSuiteShareRequest:
+      components.CreateEvalSuiteShareRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CreateEvalSuiteShareRequest": "createEvalSuiteShareRequest",
+    });
+  })
+);
 /** @internal */
 export type CreateEvalSuiteShareRequest$Outbound = {
   suite_id: string;
@@ -47,18 +49,20 @@ export const CreateEvalSuiteShareRequest$outboundSchema: z.ZodType<
   CreateEvalSuiteShareRequest$Outbound,
   z.ZodTypeDef,
   CreateEvalSuiteShareRequest
-> = z.object({
-  suiteId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  createEvalSuiteShareRequest:
-    components.CreateEvalSuiteShareRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    createEvalSuiteShareRequest: "CreateEvalSuiteShareRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    suiteId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    createEvalSuiteShareRequest:
+      components.CreateEvalSuiteShareRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      createEvalSuiteShareRequest: "CreateEvalSuiteShareRequest",
+    });
+  })
+);
 
 export function createEvalSuiteShareRequestToJSON(
   createEvalSuiteShareRequest: CreateEvalSuiteShareRequest,

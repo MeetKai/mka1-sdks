@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -39,7 +39,7 @@ export type FileSearchToolCall = {
 /** @internal */
 export const FileSearchToolCallStatus$inboundSchema: z.ZodNativeEnum<
   typeof FileSearchToolCallStatus
-> = z.nativeEnum(FileSearchToolCallStatus);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FileSearchToolCallStatus));
 /** @internal */
 export const FileSearchToolCallStatus$outboundSchema: z.ZodNativeEnum<
   typeof FileSearchToolCallStatus
@@ -50,13 +50,15 @@ export const FileSearchToolCall$inboundSchema: z.ZodType<
   FileSearchToolCall,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_search_call"),
-  id: z.string(),
-  queries: z.array(z.string()),
-  status: FileSearchToolCallStatus$inboundSchema,
-  results: z.array(FileSearchResult$inboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search_call"),
+    id: z.string(),
+    queries: z.array(z.string()),
+    status: FileSearchToolCallStatus$inboundSchema,
+    results: z.array(FileSearchResult$inboundSchema).optional(),
+  })
+);
 /** @internal */
 export type FileSearchToolCall$Outbound = {
   type: "file_search_call";
@@ -71,13 +73,15 @@ export const FileSearchToolCall$outboundSchema: z.ZodType<
   FileSearchToolCall$Outbound,
   z.ZodTypeDef,
   FileSearchToolCall
-> = z.object({
-  type: z.literal("file_search_call"),
-  id: z.string(),
-  queries: z.array(z.string()),
-  status: FileSearchToolCallStatus$outboundSchema,
-  results: z.array(FileSearchResult$outboundSchema).optional(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search_call"),
+    id: z.string(),
+    queries: z.array(z.string()),
+    status: FileSearchToolCallStatus$outboundSchema,
+    results: z.array(FileSearchResult$outboundSchema).optional(),
+  })
+);
 
 export function fileSearchToolCallToJSON(
   fileSearchToolCall: FileSearchToolCall,

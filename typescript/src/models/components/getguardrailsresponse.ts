@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -37,15 +37,19 @@ export const GetGuardrailsResponse$inboundSchema: z.ZodType<
   GetGuardrailsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  guardrails: z.array(GuardrailConfig$inboundSchema),
-  cluster_default: z.nullable(z.array(ClusterDefaultRuleSummary$inboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    "cluster_default": "clusterDefault",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    guardrails: z.array(GuardrailConfig$inboundSchema),
+    cluster_default: z.nullable(
+      z.array(ClusterDefaultRuleSummary$inboundSchema),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "cluster_default": "clusterDefault",
+    });
+  })
+);
 /** @internal */
 export type GetGuardrailsResponse$Outbound = {
   object: "guardrails_settings";
@@ -58,15 +62,19 @@ export const GetGuardrailsResponse$outboundSchema: z.ZodType<
   GetGuardrailsResponse$Outbound,
   z.ZodTypeDef,
   GetGuardrailsResponse
-> = z.object({
-  object: z.literal("guardrails_settings"),
-  guardrails: z.array(GuardrailConfig$outboundSchema),
-  clusterDefault: z.nullable(z.array(ClusterDefaultRuleSummary$outboundSchema)),
-}).transform((v) => {
-  return remap$(v, {
-    clusterDefault: "cluster_default",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("guardrails_settings"),
+    guardrails: z.array(GuardrailConfig$outboundSchema),
+    clusterDefault: z.nullable(
+      z.array(ClusterDefaultRuleSummary$outboundSchema),
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      clusterDefault: "cluster_default",
+    });
+  })
+);
 
 export function getGuardrailsResponseToJSON(
   getGuardrailsResponse: GetGuardrailsResponse,

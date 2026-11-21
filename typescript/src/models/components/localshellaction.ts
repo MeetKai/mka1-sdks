@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -22,19 +22,21 @@ export const LocalShellAction$inboundSchema: z.ZodType<
   LocalShellAction,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("exec"),
-  command: z.array(z.string()),
-  env: z.record(z.string()),
-  timeout_ms: z.number().int().optional(),
-  user: z.string().optional(),
-  working_directory: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "timeout_ms": "timeoutMs",
-    "working_directory": "workingDirectory",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("exec"),
+    command: z.array(z.string()),
+    env: z.record(z.string()),
+    timeout_ms: z.number().int().optional(),
+    user: z.string().optional(),
+    working_directory: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "timeout_ms": "timeoutMs",
+      "working_directory": "workingDirectory",
+    });
+  })
+);
 /** @internal */
 export type LocalShellAction$Outbound = {
   type: "exec";
@@ -50,19 +52,21 @@ export const LocalShellAction$outboundSchema: z.ZodType<
   LocalShellAction$Outbound,
   z.ZodTypeDef,
   LocalShellAction
-> = z.object({
-  type: z.literal("exec"),
-  command: z.array(z.string()),
-  env: z.record(z.string()),
-  timeoutMs: z.number().int().optional(),
-  user: z.string().optional(),
-  workingDirectory: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    timeoutMs: "timeout_ms",
-    workingDirectory: "working_directory",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("exec"),
+    command: z.array(z.string()),
+    env: z.record(z.string()),
+    timeoutMs: z.number().int().optional(),
+    user: z.string().optional(),
+    workingDirectory: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      timeoutMs: "timeout_ms",
+      workingDirectory: "working_directory",
+    });
+  })
+);
 
 export function localShellActionToJSON(
   localShellAction: LocalShellAction,

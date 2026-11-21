@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -71,28 +71,30 @@ export const TextToSpeechHistoryObject$inboundSchema: z.ZodType<
   TextToSpeechHistoryObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  object: z.literal("speech.tts"),
-  text: z.string(),
-  language: z.string(),
-  detected_language: z.nullable(z.string()),
-  model: z.string(),
-  provider_id: z.nullable(z.string()),
-  format: z.string(),
-  audio_bytes: z.number().int(),
-  characters: z.number().int(),
-  streaming: z.boolean(),
-  metadata: z.record(z.any()),
-  created_at: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    "detected_language": "detectedLanguage",
-    "provider_id": "providerId",
-    "audio_bytes": "audioBytes",
-    "created_at": "createdAt",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("speech.tts"),
+    text: z.string(),
+    language: z.string(),
+    detected_language: z.nullable(z.string()),
+    model: z.string(),
+    provider_id: z.nullable(z.string()),
+    format: z.string(),
+    audio_bytes: z.number().int(),
+    characters: z.number().int(),
+    streaming: z.boolean(),
+    metadata: z.record(z.any()),
+    created_at: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      "detected_language": "detectedLanguage",
+      "provider_id": "providerId",
+      "audio_bytes": "audioBytes",
+      "created_at": "createdAt",
+    });
+  })
+);
 /** @internal */
 export type TextToSpeechHistoryObject$Outbound = {
   id: string;
@@ -115,28 +117,30 @@ export const TextToSpeechHistoryObject$outboundSchema: z.ZodType<
   TextToSpeechHistoryObject$Outbound,
   z.ZodTypeDef,
   TextToSpeechHistoryObject
-> = z.object({
-  id: z.string(),
-  object: z.literal("speech.tts"),
-  text: z.string(),
-  language: z.string(),
-  detectedLanguage: z.nullable(z.string()),
-  model: z.string(),
-  providerId: z.nullable(z.string()),
-  format: z.string(),
-  audioBytes: z.number().int(),
-  characters: z.number().int(),
-  streaming: z.boolean(),
-  metadata: z.record(z.any()),
-  createdAt: z.number().int(),
-}).transform((v) => {
-  return remap$(v, {
-    detectedLanguage: "detected_language",
-    providerId: "provider_id",
-    audioBytes: "audio_bytes",
-    createdAt: "created_at",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    object: z.literal("speech.tts"),
+    text: z.string(),
+    language: z.string(),
+    detectedLanguage: z.nullable(z.string()),
+    model: z.string(),
+    providerId: z.nullable(z.string()),
+    format: z.string(),
+    audioBytes: z.number().int(),
+    characters: z.number().int(),
+    streaming: z.boolean(),
+    metadata: z.record(z.any()),
+    createdAt: z.number().int(),
+  }).transform((v) => {
+    return remap$(v, {
+      detectedLanguage: "detected_language",
+      providerId: "provider_id",
+      audioBytes: "audio_bytes",
+      createdAt: "created_at",
+    });
+  })
+);
 
 export function textToSpeechHistoryObjectToJSON(
   textToSpeechHistoryObject: TextToSpeechHistoryObject,

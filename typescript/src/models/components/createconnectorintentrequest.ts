@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,13 +17,15 @@ export const CreateConnectorIntentRequest$inboundSchema: z.ZodType<
   CreateConnectorIntentRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_key": "connectorKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_key": "connectorKey",
+    });
+  })
+);
 /** @internal */
 export type CreateConnectorIntentRequest$Outbound = {
   connector_key: string;
@@ -34,13 +36,15 @@ export const CreateConnectorIntentRequest$outboundSchema: z.ZodType<
   CreateConnectorIntentRequest$Outbound,
   z.ZodTypeDef,
   CreateConnectorIntentRequest
-> = z.object({
-  connectorKey: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    connectorKey: "connector_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorKey: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorKey: "connector_key",
+    });
+  })
+);
 
 export function createConnectorIntentRequestToJSON(
   createConnectorIntentRequest: CreateConnectorIntentRequest,

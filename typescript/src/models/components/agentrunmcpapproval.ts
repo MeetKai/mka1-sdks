@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -49,7 +49,7 @@ export type AgentRunMcpApproval = {
 /** @internal */
 export const AgentRunMcpApprovalObject$inboundSchema: z.ZodNativeEnum<
   typeof AgentRunMcpApprovalObject
-> = z.nativeEnum(AgentRunMcpApprovalObject);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(AgentRunMcpApprovalObject));
 /** @internal */
 export const AgentRunMcpApprovalObject$outboundSchema: z.ZodNativeEnum<
   typeof AgentRunMcpApprovalObject
@@ -60,20 +60,22 @@ export const AgentRunMcpApproval$inboundSchema: z.ZodType<
   AgentRunMcpApproval,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: AgentRunMcpApprovalObject$inboundSchema,
-  approval_request_id: z.string(),
-  approved: z.boolean(),
-  decisions: z.array(AgentRunApprovalDecision$inboundSchema).optional(),
-  source_run_id: z.string(),
-  continuation_run: AgentRun$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "approval_request_id": "approvalRequestId",
-    "source_run_id": "sourceRunId",
-    "continuation_run": "continuationRun",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunMcpApprovalObject$inboundSchema,
+    approval_request_id: z.string(),
+    approved: z.boolean(),
+    decisions: z.array(AgentRunApprovalDecision$inboundSchema).optional(),
+    source_run_id: z.string(),
+    continuation_run: AgentRun$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "approval_request_id": "approvalRequestId",
+      "source_run_id": "sourceRunId",
+      "continuation_run": "continuationRun",
+    });
+  })
+);
 /** @internal */
 export type AgentRunMcpApproval$Outbound = {
   object: string;
@@ -89,20 +91,22 @@ export const AgentRunMcpApproval$outboundSchema: z.ZodType<
   AgentRunMcpApproval$Outbound,
   z.ZodTypeDef,
   AgentRunMcpApproval
-> = z.object({
-  object: AgentRunMcpApprovalObject$outboundSchema,
-  approvalRequestId: z.string(),
-  approved: z.boolean(),
-  decisions: z.array(AgentRunApprovalDecision$outboundSchema).optional(),
-  sourceRunId: z.string(),
-  continuationRun: AgentRun$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    approvalRequestId: "approval_request_id",
-    sourceRunId: "source_run_id",
-    continuationRun: "continuation_run",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: AgentRunMcpApprovalObject$outboundSchema,
+    approvalRequestId: z.string(),
+    approved: z.boolean(),
+    decisions: z.array(AgentRunApprovalDecision$outboundSchema).optional(),
+    sourceRunId: z.string(),
+    continuationRun: AgentRun$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      approvalRequestId: "approval_request_id",
+      sourceRunId: "source_run_id",
+      continuationRun: "continuation_run",
+    });
+  })
+);
 
 export function agentRunMcpApprovalToJSON(
   agentRunMcpApproval: AgentRunMcpApproval,

@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -27,8 +27,8 @@ export type EvalMetric = {
 };
 
 /** @internal */
-export const Aggregation$inboundSchema: z.ZodNativeEnum<typeof Aggregation> = z
-  .nativeEnum(Aggregation);
+export const Aggregation$inboundSchema: z.ZodNativeEnum<typeof Aggregation> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Aggregation));
 /** @internal */
 export const Aggregation$outboundSchema: z.ZodNativeEnum<typeof Aggregation> =
   Aggregation$inboundSchema;
@@ -38,18 +38,20 @@ export const EvalMetric$inboundSchema: z.ZodType<
   EvalMetric,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  aggregation: Aggregation$inboundSchema.default("mean"),
-  higher_is_better: z.boolean().default(true),
-  requires_target: z.boolean().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "higher_is_better": "higherIsBetter",
-    "requires_target": "requiresTarget",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    aggregation: Aggregation$inboundSchema.default("mean"),
+    higher_is_better: z.boolean().default(true),
+    requires_target: z.boolean().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "higher_is_better": "higherIsBetter",
+      "requires_target": "requiresTarget",
+    });
+  })
+);
 /** @internal */
 export type EvalMetric$Outbound = {
   id: string;
@@ -64,18 +66,20 @@ export const EvalMetric$outboundSchema: z.ZodType<
   EvalMetric$Outbound,
   z.ZodTypeDef,
   EvalMetric
-> = z.object({
-  id: z.string(),
-  aggregation: Aggregation$outboundSchema.default("mean"),
-  higherIsBetter: z.boolean().default(true),
-  requiresTarget: z.boolean().optional(),
-  description: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    higherIsBetter: "higher_is_better",
-    requiresTarget: "requires_target",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    aggregation: Aggregation$outboundSchema.default("mean"),
+    higherIsBetter: z.boolean().default(true),
+    requiresTarget: z.boolean().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      higherIsBetter: "higher_is_better",
+      requiresTarget: "requires_target",
+    });
+  })
+);
 
 export function evalMetricToJSON(evalMetric: EvalMetric): string {
   return JSON.stringify(EvalMetric$outboundSchema.parse(evalMetric));

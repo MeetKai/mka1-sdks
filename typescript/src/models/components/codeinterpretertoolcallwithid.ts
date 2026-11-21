@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -52,7 +52,9 @@ export type CodeInterpreterToolCallWithId = {
 /** @internal */
 export const CodeInterpreterToolCallWithIdStatus$inboundSchema: z.ZodNativeEnum<
   typeof CodeInterpreterToolCallWithIdStatus
-> = z.nativeEnum(CodeInterpreterToolCallWithIdStatus);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(CodeInterpreterToolCallWithIdStatus)
+);
 /** @internal */
 export const CodeInterpreterToolCallWithIdStatus$outboundSchema:
   z.ZodNativeEnum<typeof CodeInterpreterToolCallWithIdStatus> =
@@ -63,21 +65,23 @@ export const CodeInterpreterToolCallWithId$inboundSchema: z.ZodType<
   CodeInterpreterToolCallWithId,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("code_interpreter_call"),
-  id: z.string(),
-  code: z.nullable(z.string()),
-  container_id: z.string(),
-  outputs: z.nullable(z.array(CodeInterpreterOutput$inboundSchema)),
-  status: CodeInterpreterToolCallWithIdStatus$inboundSchema,
-  response_id: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "container_id": "containerId",
-    "response_id": "responseId",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter_call"),
+    id: z.string(),
+    code: z.nullable(z.string()),
+    container_id: z.string(),
+    outputs: z.nullable(z.array(CodeInterpreterOutput$inboundSchema)),
+    status: CodeInterpreterToolCallWithIdStatus$inboundSchema,
+    response_id: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "container_id": "containerId",
+      "response_id": "responseId",
+    });
+  })
+);
 /** @internal */
 export type CodeInterpreterToolCallWithId$Outbound = {
   type: "code_interpreter_call";
@@ -95,21 +99,23 @@ export const CodeInterpreterToolCallWithId$outboundSchema: z.ZodType<
   CodeInterpreterToolCallWithId$Outbound,
   z.ZodTypeDef,
   CodeInterpreterToolCallWithId
-> = z.object({
-  type: z.literal("code_interpreter_call"),
-  id: z.string(),
-  code: z.nullable(z.string()),
-  containerId: z.string(),
-  outputs: z.nullable(z.array(CodeInterpreterOutput$outboundSchema)),
-  status: CodeInterpreterToolCallWithIdStatus$outboundSchema,
-  responseId: z.nullable(z.string()).optional(),
-  metadata: z.nullable(z.record(z.string())).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    containerId: "container_id",
-    responseId: "response_id",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("code_interpreter_call"),
+    id: z.string(),
+    code: z.nullable(z.string()),
+    containerId: z.string(),
+    outputs: z.nullable(z.array(CodeInterpreterOutput$outboundSchema)),
+    status: CodeInterpreterToolCallWithIdStatus$outboundSchema,
+    responseId: z.nullable(z.string()).optional(),
+    metadata: z.nullable(z.record(z.string())).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      containerId: "container_id",
+      responseId: "response_id",
+    });
+  })
+);
 
 export function codeInterpreterToolCallWithIdToJSON(
   codeInterpreterToolCallWithId: CodeInterpreterToolCallWithId,

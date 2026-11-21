@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -36,18 +36,20 @@ export const EvalSuiteLeaderboard$inboundSchema: z.ZodType<
   EvalSuiteLeaderboard,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("eval.leaderboard"),
-  suite_id: z.string(),
-  suite_version: z.nullable(z.number().int()),
-  metric: z.string(),
-  data: z.array(EvalLeaderboardRow$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "suite_id": "suiteId",
-    "suite_version": "suiteVersion",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.leaderboard"),
+    suite_id: z.string(),
+    suite_version: z.nullable(z.number().int()),
+    metric: z.string(),
+    data: z.array(EvalLeaderboardRow$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "suite_id": "suiteId",
+      "suite_version": "suiteVersion",
+    });
+  })
+);
 /** @internal */
 export type EvalSuiteLeaderboard$Outbound = {
   object: "eval.leaderboard";
@@ -62,18 +64,20 @@ export const EvalSuiteLeaderboard$outboundSchema: z.ZodType<
   EvalSuiteLeaderboard$Outbound,
   z.ZodTypeDef,
   EvalSuiteLeaderboard
-> = z.object({
-  object: z.literal("eval.leaderboard"),
-  suiteId: z.string(),
-  suiteVersion: z.nullable(z.number().int()),
-  metric: z.string(),
-  data: z.array(EvalLeaderboardRow$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    suiteId: "suite_id",
-    suiteVersion: "suite_version",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("eval.leaderboard"),
+    suiteId: z.string(),
+    suiteVersion: z.nullable(z.number().int()),
+    metric: z.string(),
+    data: z.array(EvalLeaderboardRow$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      suiteId: "suite_id",
+      suiteVersion: "suite_version",
+    });
+  })
+);
 
 export function evalSuiteLeaderboardToJSON(
   evalSuiteLeaderboard: EvalSuiteLeaderboard,

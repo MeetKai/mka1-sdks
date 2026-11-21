@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -24,17 +24,19 @@ export const CreateGenerationApiV1DatasetsGenerationsPostRequest$inboundSchema:
     CreateGenerationApiV1DatasetsGenerationsPostRequest,
     z.ZodTypeDef,
     unknown
-  > = z.object({
-    "Idempotency-Key": z.string(),
-    "X-On-Behalf-Of": z.string().optional(),
-    CreateGeneration: components.CreateGeneration$inboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      "Idempotency-Key": "idempotencyKey",
-      "X-On-Behalf-Of": "xOnBehalfOf",
-      "CreateGeneration": "createGeneration",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      "Idempotency-Key": z.string(),
+      "X-On-Behalf-Of": z.string().optional(),
+      CreateGeneration: components.CreateGeneration$inboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        "Idempotency-Key": "idempotencyKey",
+        "X-On-Behalf-Of": "xOnBehalfOf",
+        "CreateGeneration": "createGeneration",
+      });
+    })
+  );
 /** @internal */
 export type CreateGenerationApiV1DatasetsGenerationsPostRequest$Outbound = {
   "Idempotency-Key": string;
@@ -48,17 +50,19 @@ export const CreateGenerationApiV1DatasetsGenerationsPostRequest$outboundSchema:
     CreateGenerationApiV1DatasetsGenerationsPostRequest$Outbound,
     z.ZodTypeDef,
     CreateGenerationApiV1DatasetsGenerationsPostRequest
-  > = z.object({
-    idempotencyKey: z.string(),
-    xOnBehalfOf: z.string().optional(),
-    createGeneration: components.CreateGeneration$outboundSchema,
-  }).transform((v) => {
-    return remap$(v, {
-      idempotencyKey: "Idempotency-Key",
-      xOnBehalfOf: "X-On-Behalf-Of",
-      createGeneration: "CreateGeneration",
-    });
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      idempotencyKey: z.string(),
+      xOnBehalfOf: z.string().optional(),
+      createGeneration: components.CreateGeneration$outboundSchema,
+    }).transform((v) => {
+      return remap$(v, {
+        idempotencyKey: "Idempotency-Key",
+        xOnBehalfOf: "X-On-Behalf-Of",
+        createGeneration: "CreateGeneration",
+      });
+    })
+  );
 
 export function createGenerationApiV1DatasetsGenerationsPostRequestToJSON(
   createGenerationApiV1DatasetsGenerationsPostRequest:

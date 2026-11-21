@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
@@ -140,8 +140,8 @@ export type ExportAuditCasesResponse = {
 };
 
 /** @internal */
-export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> = z
-  .nativeEnum(Format);
+export const Format$inboundSchema: z.ZodNativeEnum<typeof Format> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Format));
 /** @internal */
 export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
   Format$inboundSchema;
@@ -149,7 +149,7 @@ export const Format$outboundSchema: z.ZodNativeEnum<typeof Format> =
 /** @internal */
 export const QueryParamScope$inboundSchema: z.ZodNativeEnum<
   typeof QueryParamScope
-> = z.nativeEnum(QueryParamScope);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(QueryParamScope));
 /** @internal */
 export const QueryParamScope$outboundSchema: z.ZodNativeEnum<
   typeof QueryParamScope
@@ -158,7 +158,9 @@ export const QueryParamScope$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ExportAuditCasesQueryParamOrder$inboundSchema: z.ZodNativeEnum<
   typeof ExportAuditCasesQueryParamOrder
-> = z.nativeEnum(ExportAuditCasesQueryParamOrder);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.nativeEnum(ExportAuditCasesQueryParamOrder)
+);
 /** @internal */
 export const ExportAuditCasesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
   typeof ExportAuditCasesQueryParamOrder
@@ -167,7 +169,7 @@ export const ExportAuditCasesQueryParamOrder$outboundSchema: z.ZodNativeEnum<
 /** @internal */
 export const ReviewRequired$inboundSchema: z.ZodNativeEnum<
   typeof ReviewRequired
-> = z.nativeEnum(ReviewRequired);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ReviewRequired));
 /** @internal */
 export const ReviewRequired$outboundSchema: z.ZodNativeEnum<
   typeof ReviewRequired
@@ -178,30 +180,32 @@ export const ExportAuditCasesRequest$inboundSchema: z.ZodType<
   ExportAuditCasesRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  format: Format$inboundSchema.default("json"),
-  orgId: z.string().optional(),
-  scope: QueryParamScope$inboundSchema.optional(),
-  dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
-    .optional(),
-  order: ExportAuditCasesQueryParamOrder$inboundSchema.default("newest"),
-  q: z.string().optional(),
-  userId: z.string().optional(),
-  externalUserId: z.string().optional(),
-  conversationId: z.string().optional(),
-  model: z.string().optional(),
-  caseStatus: z.string().optional(),
-  outcome: z.string().optional(),
-  guardrailTriggered: z.string().optional(),
-  reviewRequired: ReviewRequired$inboundSchema.optional(),
-  "X-On-Behalf-Of": z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: Format$inboundSchema.default("json"),
+    orgId: z.string().optional(),
+    scope: QueryParamScope$inboundSchema.optional(),
+    dateFrom: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    dateTo: z.string().datetime({ offset: true }).transform(v => new Date(v))
+      .optional(),
+    order: ExportAuditCasesQueryParamOrder$inboundSchema.default("newest"),
+    q: z.string().optional(),
+    userId: z.string().optional(),
+    externalUserId: z.string().optional(),
+    conversationId: z.string().optional(),
+    model: z.string().optional(),
+    caseStatus: z.string().optional(),
+    outcome: z.string().optional(),
+    guardrailTriggered: z.string().optional(),
+    reviewRequired: ReviewRequired$inboundSchema.optional(),
+    "X-On-Behalf-Of": z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+    });
+  })
+);
 /** @internal */
 export type ExportAuditCasesRequest$Outbound = {
   format: string;
@@ -227,28 +231,30 @@ export const ExportAuditCasesRequest$outboundSchema: z.ZodType<
   ExportAuditCasesRequest$Outbound,
   z.ZodTypeDef,
   ExportAuditCasesRequest
-> = z.object({
-  format: Format$outboundSchema.default("json"),
-  orgId: z.string().optional(),
-  scope: QueryParamScope$outboundSchema.optional(),
-  dateFrom: z.date().transform(v => v.toISOString()).optional(),
-  dateTo: z.date().transform(v => v.toISOString()).optional(),
-  order: ExportAuditCasesQueryParamOrder$outboundSchema.default("newest"),
-  q: z.string().optional(),
-  userId: z.string().optional(),
-  externalUserId: z.string().optional(),
-  conversationId: z.string().optional(),
-  model: z.string().optional(),
-  caseStatus: z.string().optional(),
-  outcome: z.string().optional(),
-  guardrailTriggered: z.string().optional(),
-  reviewRequired: ReviewRequired$outboundSchema.optional(),
-  xOnBehalfOf: z.string().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    format: Format$outboundSchema.default("json"),
+    orgId: z.string().optional(),
+    scope: QueryParamScope$outboundSchema.optional(),
+    dateFrom: z.date().transform(v => v.toISOString()).optional(),
+    dateTo: z.date().transform(v => v.toISOString()).optional(),
+    order: ExportAuditCasesQueryParamOrder$outboundSchema.default("newest"),
+    q: z.string().optional(),
+    userId: z.string().optional(),
+    externalUserId: z.string().optional(),
+    conversationId: z.string().optional(),
+    model: z.string().optional(),
+    caseStatus: z.string().optional(),
+    outcome: z.string().optional(),
+    guardrailTriggered: z.string().optional(),
+    reviewRequired: ReviewRequired$outboundSchema.optional(),
+    xOnBehalfOf: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+    });
+  })
+);
 
 export function exportAuditCasesRequestToJSON(
   exportAuditCasesRequest: ExportAuditCasesRequest,
@@ -272,11 +278,13 @@ export const ExportAuditCasesResponseResult$inboundSchema: z.ZodType<
   ExportAuditCasesResponseResult,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.AuditExportQueued$inboundSchema,
-  z.array(components.AuditCaseExportRow$inboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AuditExportQueued$inboundSchema,
+    z.array(components.AuditCaseExportRow$inboundSchema),
+    z.string(),
+  ])
+);
 /** @internal */
 export type ExportAuditCasesResponseResult$Outbound =
   | components.AuditExportQueued$Outbound
@@ -288,11 +296,13 @@ export const ExportAuditCasesResponseResult$outboundSchema: z.ZodType<
   ExportAuditCasesResponseResult$Outbound,
   z.ZodTypeDef,
   ExportAuditCasesResponseResult
-> = z.union([
-  components.AuditExportQueued$outboundSchema,
-  z.array(components.AuditCaseExportRow$outboundSchema),
-  z.string(),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.AuditExportQueued$outboundSchema,
+    z.array(components.AuditCaseExportRow$outboundSchema),
+    z.string(),
+  ])
+);
 
 export function exportAuditCasesResponseResultToJSON(
   exportAuditCasesResponseResult: ExportAuditCasesResponseResult,
@@ -318,19 +328,21 @@ export const ExportAuditCasesResponse$inboundSchema: z.ZodType<
   ExportAuditCasesResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  Headers: z.record(z.array(z.string())).default({}),
-  Result: z.union([
-    components.AuditExportQueued$inboundSchema,
-    z.array(components.AuditCaseExportRow$inboundSchema),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    "Headers": "headers",
-    "Result": "result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    Headers: z.record(z.array(z.string())).default({}),
+    Result: z.union([
+      components.AuditExportQueued$inboundSchema,
+      z.array(components.AuditCaseExportRow$inboundSchema),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      "Headers": "headers",
+      "Result": "result",
+    });
+  })
+);
 /** @internal */
 export type ExportAuditCasesResponse$Outbound = {
   Headers: { [k: string]: Array<string> };
@@ -345,19 +357,21 @@ export const ExportAuditCasesResponse$outboundSchema: z.ZodType<
   ExportAuditCasesResponse$Outbound,
   z.ZodTypeDef,
   ExportAuditCasesResponse
-> = z.object({
-  headers: z.record(z.array(z.string())),
-  result: z.union([
-    components.AuditExportQueued$outboundSchema,
-    z.array(components.AuditCaseExportRow$outboundSchema),
-    z.string(),
-  ]),
-}).transform((v) => {
-  return remap$(v, {
-    headers: "Headers",
-    result: "Result",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    headers: z.record(z.array(z.string())),
+    result: z.union([
+      components.AuditExportQueued$outboundSchema,
+      z.array(components.AuditCaseExportRow$outboundSchema),
+      z.string(),
+    ]),
+  }).transform((v) => {
+    return remap$(v, {
+      headers: "Headers",
+      result: "Result",
+    });
+  })
+);
 
 export function exportAuditCasesResponseToJSON(
   exportAuditCasesResponse: ExportAuditCasesResponse,

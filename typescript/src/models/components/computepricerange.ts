@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -17,10 +17,12 @@ export const ComputePriceRange$inboundSchema: z.ZodType<
   ComputePriceRange,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max: z.number(),
-  min: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max: z.number(),
+    min: z.number(),
+  })
+);
 /** @internal */
 export type ComputePriceRange$Outbound = {
   max: number;
@@ -32,10 +34,12 @@ export const ComputePriceRange$outboundSchema: z.ZodType<
   ComputePriceRange$Outbound,
   z.ZodTypeDef,
   ComputePriceRange
-> = z.object({
-  max: z.number(),
-  min: z.number(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max: z.number(),
+    min: z.number(),
+  })
+);
 
 export function computePriceRangeToJSON(
   computePriceRange: ComputePriceRange,

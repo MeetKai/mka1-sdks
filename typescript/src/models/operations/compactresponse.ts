@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,15 +22,17 @@ export const CompactResponseRequest$inboundSchema: z.ZodType<
   CompactResponseRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  CompactResponseRequest: components.CompactResponseRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "CompactResponseRequest": "compactResponseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    CompactResponseRequest: components.CompactResponseRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "CompactResponseRequest": "compactResponseRequest",
+    });
+  })
+);
 /** @internal */
 export type CompactResponseRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -42,15 +44,17 @@ export const CompactResponseRequest$outboundSchema: z.ZodType<
   CompactResponseRequest$Outbound,
   z.ZodTypeDef,
   CompactResponseRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  compactResponseRequest: components.CompactResponseRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    compactResponseRequest: "CompactResponseRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    compactResponseRequest: components.CompactResponseRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      compactResponseRequest: "CompactResponseRequest",
+    });
+  })
+);
 
 export function compactResponseRequestToJSON(
   compactResponseRequest: CompactResponseRequest,

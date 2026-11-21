@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -29,9 +29,11 @@ export const RollbackPromptRequestBody$inboundSchema: z.ZodType<
   RollbackPromptRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  version: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.number().int(),
+  })
+);
 /** @internal */
 export type RollbackPromptRequestBody$Outbound = {
   version: number;
@@ -42,9 +44,11 @@ export const RollbackPromptRequestBody$outboundSchema: z.ZodType<
   RollbackPromptRequestBody$Outbound,
   z.ZodTypeDef,
   RollbackPromptRequestBody
-> = z.object({
-  version: z.number().int(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    version: z.number().int(),
+  })
+);
 
 export function rollbackPromptRequestBodyToJSON(
   rollbackPromptRequestBody: RollbackPromptRequestBody,
@@ -68,16 +72,18 @@ export const RollbackPromptRequest$inboundSchema: z.ZodType<
   RollbackPromptRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() => RollbackPromptRequestBody$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() => RollbackPromptRequestBody$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type RollbackPromptRequest$Outbound = {
   id: string;
@@ -90,16 +96,18 @@ export const RollbackPromptRequest$outboundSchema: z.ZodType<
   RollbackPromptRequest$Outbound,
   z.ZodTypeDef,
   RollbackPromptRequest
-> = z.object({
-  id: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() => RollbackPromptRequestBody$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() => RollbackPromptRequestBody$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function rollbackPromptRequestToJSON(
   rollbackPromptRequest: RollbackPromptRequest,

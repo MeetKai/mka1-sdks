@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -51,10 +51,12 @@ export const Credentials$inboundSchema: z.ZodType<
   Credentials,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  components.VectorStoreConnectorSharePointCredentials$inboundSchema,
-  components.VectorStoreConnectorS3Credentials$inboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.VectorStoreConnectorSharePointCredentials$inboundSchema,
+    components.VectorStoreConnectorS3Credentials$inboundSchema,
+  ])
+);
 /** @internal */
 export type Credentials$Outbound =
   | components.VectorStoreConnectorSharePointCredentials$Outbound
@@ -65,10 +67,12 @@ export const Credentials$outboundSchema: z.ZodType<
   Credentials$Outbound,
   z.ZodTypeDef,
   Credentials
-> = z.union([
-  components.VectorStoreConnectorSharePointCredentials$outboundSchema,
-  components.VectorStoreConnectorS3Credentials$outboundSchema,
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    components.VectorStoreConnectorSharePointCredentials$outboundSchema,
+    components.VectorStoreConnectorS3Credentials$outboundSchema,
+  ])
+);
 
 export function credentialsToJSON(credentials: Credentials): string {
   return JSON.stringify(Credentials$outboundSchema.parse(credentials));
@@ -88,24 +92,26 @@ export const UpdateVectorStoreConnectorRequestBody$inboundSchema: z.ZodType<
   UpdateVectorStoreConnectorRequestBody,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  name: z.string().optional(),
-  credentials: z.union([
-    components.VectorStoreConnectorSharePointCredentials$inboundSchema,
-    components.VectorStoreConnectorS3Credentials$inboundSchema,
-  ]).optional(),
-  include_patterns: z.array(z.string()).optional(),
-  exclude_patterns: z.array(z.string()).optional(),
-  auto_sync: z.boolean().optional(),
-  sync_interval_minutes: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "include_patterns": "includePatterns",
-    "exclude_patterns": "excludePatterns",
-    "auto_sync": "autoSync",
-    "sync_interval_minutes": "syncIntervalMinutes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    credentials: z.union([
+      components.VectorStoreConnectorSharePointCredentials$inboundSchema,
+      components.VectorStoreConnectorS3Credentials$inboundSchema,
+    ]).optional(),
+    include_patterns: z.array(z.string()).optional(),
+    exclude_patterns: z.array(z.string()).optional(),
+    auto_sync: z.boolean().optional(),
+    sync_interval_minutes: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "include_patterns": "includePatterns",
+      "exclude_patterns": "excludePatterns",
+      "auto_sync": "autoSync",
+      "sync_interval_minutes": "syncIntervalMinutes",
+    });
+  })
+);
 /** @internal */
 export type UpdateVectorStoreConnectorRequestBody$Outbound = {
   name?: string | undefined;
@@ -124,24 +130,26 @@ export const UpdateVectorStoreConnectorRequestBody$outboundSchema: z.ZodType<
   UpdateVectorStoreConnectorRequestBody$Outbound,
   z.ZodTypeDef,
   UpdateVectorStoreConnectorRequestBody
-> = z.object({
-  name: z.string().optional(),
-  credentials: z.union([
-    components.VectorStoreConnectorSharePointCredentials$outboundSchema,
-    components.VectorStoreConnectorS3Credentials$outboundSchema,
-  ]).optional(),
-  includePatterns: z.array(z.string()).optional(),
-  excludePatterns: z.array(z.string()).optional(),
-  autoSync: z.boolean().optional(),
-  syncIntervalMinutes: z.number().int().optional(),
-}).transform((v) => {
-  return remap$(v, {
-    includePatterns: "include_patterns",
-    excludePatterns: "exclude_patterns",
-    autoSync: "auto_sync",
-    syncIntervalMinutes: "sync_interval_minutes",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    name: z.string().optional(),
+    credentials: z.union([
+      components.VectorStoreConnectorSharePointCredentials$outboundSchema,
+      components.VectorStoreConnectorS3Credentials$outboundSchema,
+    ]).optional(),
+    includePatterns: z.array(z.string()).optional(),
+    excludePatterns: z.array(z.string()).optional(),
+    autoSync: z.boolean().optional(),
+    syncIntervalMinutes: z.number().int().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      includePatterns: "include_patterns",
+      excludePatterns: "exclude_patterns",
+      autoSync: "auto_sync",
+      syncIntervalMinutes: "sync_interval_minutes",
+    });
+  })
+);
 
 export function updateVectorStoreConnectorRequestBodyToJSON(
   updateVectorStoreConnectorRequestBody: UpdateVectorStoreConnectorRequestBody,
@@ -168,19 +176,21 @@ export const UpdateVectorStoreConnectorRequest$inboundSchema: z.ZodType<
   UpdateVectorStoreConnectorRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  connector_id: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  RequestBody: z.lazy(() =>
-    UpdateVectorStoreConnectorRequestBody$inboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "connector_id": "connectorId",
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "RequestBody": "requestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connector_id: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    RequestBody: z.lazy(() =>
+      UpdateVectorStoreConnectorRequestBody$inboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "connector_id": "connectorId",
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "RequestBody": "requestBody",
+    });
+  })
+);
 /** @internal */
 export type UpdateVectorStoreConnectorRequest$Outbound = {
   connector_id: string;
@@ -193,19 +203,21 @@ export const UpdateVectorStoreConnectorRequest$outboundSchema: z.ZodType<
   UpdateVectorStoreConnectorRequest$Outbound,
   z.ZodTypeDef,
   UpdateVectorStoreConnectorRequest
-> = z.object({
-  connectorId: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  requestBody: z.lazy(() =>
-    UpdateVectorStoreConnectorRequestBody$outboundSchema
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    connectorId: "connector_id",
-    xOnBehalfOf: "X-On-Behalf-Of",
-    requestBody: "RequestBody",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    connectorId: z.string(),
+    xOnBehalfOf: z.string().optional(),
+    requestBody: z.lazy(() =>
+      UpdateVectorStoreConnectorRequestBody$outboundSchema
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      connectorId: "connector_id",
+      xOnBehalfOf: "X-On-Behalf-Of",
+      requestBody: "RequestBody",
+    });
+  })
+);
 
 export function updateVectorStoreConnectorRequestToJSON(
   updateVectorStoreConnectorRequest: UpdateVectorStoreConnectorRequest,

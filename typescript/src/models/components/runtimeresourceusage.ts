@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -20,19 +20,21 @@ export const RuntimeResourceUsage$inboundSchema: z.ZodType<
   RuntimeResourceUsage,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  reserved_memory_mib: z.nullable(z.number().int()).optional(),
-  peak_memory_mib: z.nullable(z.number()).optional(),
-  memory_pressure: z.nullable(z.number()).optional(),
-  oom_killed: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    "reserved_memory_mib": "reservedMemoryMib",
-    "peak_memory_mib": "peakMemoryMib",
-    "memory_pressure": "memoryPressure",
-    "oom_killed": "oomKilled",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reserved_memory_mib: z.nullable(z.number().int()).optional(),
+    peak_memory_mib: z.nullable(z.number()).optional(),
+    memory_pressure: z.nullable(z.number()).optional(),
+    oom_killed: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      "reserved_memory_mib": "reservedMemoryMib",
+      "peak_memory_mib": "peakMemoryMib",
+      "memory_pressure": "memoryPressure",
+      "oom_killed": "oomKilled",
+    });
+  })
+);
 /** @internal */
 export type RuntimeResourceUsage$Outbound = {
   reserved_memory_mib?: number | null | undefined;
@@ -46,19 +48,21 @@ export const RuntimeResourceUsage$outboundSchema: z.ZodType<
   RuntimeResourceUsage$Outbound,
   z.ZodTypeDef,
   RuntimeResourceUsage
-> = z.object({
-  reservedMemoryMib: z.nullable(z.number().int()).optional(),
-  peakMemoryMib: z.nullable(z.number()).optional(),
-  memoryPressure: z.nullable(z.number()).optional(),
-  oomKilled: z.boolean().default(false),
-}).transform((v) => {
-  return remap$(v, {
-    reservedMemoryMib: "reserved_memory_mib",
-    peakMemoryMib: "peak_memory_mib",
-    memoryPressure: "memory_pressure",
-    oomKilled: "oom_killed",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    reservedMemoryMib: z.nullable(z.number().int()).optional(),
+    peakMemoryMib: z.nullable(z.number()).optional(),
+    memoryPressure: z.nullable(z.number()).optional(),
+    oomKilled: z.boolean().default(false),
+  }).transform((v) => {
+    return remap$(v, {
+      reservedMemoryMib: "reserved_memory_mib",
+      peakMemoryMib: "peak_memory_mib",
+      memoryPressure: "memory_pressure",
+      oomKilled: "oom_killed",
+    });
+  })
+);
 
 export function runtimeResourceUsageToJSON(
   runtimeResourceUsage: RuntimeResourceUsage,

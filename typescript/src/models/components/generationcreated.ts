@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -96,42 +96,46 @@ export const GenerationCreated$inboundSchema: z.ZodType<
   GenerationCreated,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  id: z.string(),
-  state: GenerationState$inboundSchema,
-  reason: z.nullable(GenerationReason$inboundSchema),
-  generator: GeneratorRef$inboundSchema,
-  params: z.record(z.any()),
-  params_hash: z.string(),
-  output: OutputRef$inboundSchema,
-  inputs: z.record(z.string()),
-  counts: z.nullable(z.record(z.number().int())),
-  llm: LlmRef$inboundSchema,
-  limits: Limits$inboundSchema,
-  usage: z.nullable(GenerationUsage$inboundSchema),
-  job: z.nullable(JobRef$inboundSchema),
-  name: z.nullable(z.string()),
-  derived_from: z.array(z.string()),
-  created_by: CreatedBy$inboundSchema,
-  created_at: z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  started_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  terminal_at: z.nullable(
-    z.string().datetime({ offset: true }).transform(v => new Date(v)),
-  ),
-  duplicate_of: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "params_hash": "paramsHash",
-    "derived_from": "derivedFrom",
-    "created_by": "createdBy",
-    "created_at": "createdAt",
-    "started_at": "startedAt",
-    "terminal_at": "terminalAt",
-    "duplicate_of": "duplicateOf",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    state: GenerationState$inboundSchema,
+    reason: z.nullable(GenerationReason$inboundSchema),
+    generator: GeneratorRef$inboundSchema,
+    params: z.record(z.any()),
+    params_hash: z.string(),
+    output: OutputRef$inboundSchema,
+    inputs: z.record(z.string()),
+    counts: z.nullable(z.record(z.number().int())),
+    llm: LlmRef$inboundSchema,
+    limits: Limits$inboundSchema,
+    usage: z.nullable(GenerationUsage$inboundSchema),
+    job: z.nullable(JobRef$inboundSchema),
+    name: z.nullable(z.string()),
+    derived_from: z.array(z.string()),
+    created_by: CreatedBy$inboundSchema,
+    created_at: z.string().datetime({ offset: true }).transform(v =>
+      new Date(v)
+    ),
+    started_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    terminal_at: z.nullable(
+      z.string().datetime({ offset: true }).transform(v => new Date(v)),
+    ),
+    duplicate_of: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "params_hash": "paramsHash",
+      "derived_from": "derivedFrom",
+      "created_by": "createdBy",
+      "created_at": "createdAt",
+      "started_at": "startedAt",
+      "terminal_at": "terminalAt",
+      "duplicate_of": "duplicateOf",
+    });
+  })
+);
 /** @internal */
 export type GenerationCreated$Outbound = {
   id: string;
@@ -161,38 +165,40 @@ export const GenerationCreated$outboundSchema: z.ZodType<
   GenerationCreated$Outbound,
   z.ZodTypeDef,
   GenerationCreated
-> = z.object({
-  id: z.string(),
-  state: GenerationState$outboundSchema,
-  reason: z.nullable(GenerationReason$outboundSchema),
-  generator: GeneratorRef$outboundSchema,
-  params: z.record(z.any()),
-  paramsHash: z.string(),
-  output: OutputRef$outboundSchema,
-  inputs: z.record(z.string()),
-  counts: z.nullable(z.record(z.number().int())),
-  llm: LlmRef$outboundSchema,
-  limits: Limits$outboundSchema,
-  usage: z.nullable(GenerationUsage$outboundSchema),
-  job: z.nullable(JobRef$outboundSchema),
-  name: z.nullable(z.string()),
-  derivedFrom: z.array(z.string()),
-  createdBy: CreatedBy$outboundSchema,
-  createdAt: z.date().transform(v => v.toISOString()),
-  startedAt: z.nullable(z.date().transform(v => v.toISOString())),
-  terminalAt: z.nullable(z.date().transform(v => v.toISOString())),
-  duplicateOf: z.nullable(z.string()).optional(),
-}).transform((v) => {
-  return remap$(v, {
-    paramsHash: "params_hash",
-    derivedFrom: "derived_from",
-    createdBy: "created_by",
-    createdAt: "created_at",
-    startedAt: "started_at",
-    terminalAt: "terminal_at",
-    duplicateOf: "duplicate_of",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    id: z.string(),
+    state: GenerationState$outboundSchema,
+    reason: z.nullable(GenerationReason$outboundSchema),
+    generator: GeneratorRef$outboundSchema,
+    params: z.record(z.any()),
+    paramsHash: z.string(),
+    output: OutputRef$outboundSchema,
+    inputs: z.record(z.string()),
+    counts: z.nullable(z.record(z.number().int())),
+    llm: LlmRef$outboundSchema,
+    limits: Limits$outboundSchema,
+    usage: z.nullable(GenerationUsage$outboundSchema),
+    job: z.nullable(JobRef$outboundSchema),
+    name: z.nullable(z.string()),
+    derivedFrom: z.array(z.string()),
+    createdBy: CreatedBy$outboundSchema,
+    createdAt: z.date().transform(v => v.toISOString()),
+    startedAt: z.nullable(z.date().transform(v => v.toISOString())),
+    terminalAt: z.nullable(z.date().transform(v => v.toISOString())),
+    duplicateOf: z.nullable(z.string()).optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      paramsHash: "params_hash",
+      derivedFrom: "derived_from",
+      createdBy: "created_by",
+      createdAt: "created_at",
+      startedAt: "started_at",
+      terminalAt: "terminal_at",
+      duplicateOf: "duplicate_of",
+    });
+  })
+);
 
 export function generationCreatedToJSON(
   generationCreated: GenerationCreated,

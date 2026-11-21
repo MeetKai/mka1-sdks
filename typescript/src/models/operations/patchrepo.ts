@@ -3,8 +3,11 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import {
+  matchesPattern as matchesPattern$,
+  remap as remap$,
+} from "../../lib/primitives.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,17 +33,19 @@ export const PatchRepoRequest$inboundSchema: z.ZodType<
   PatchRepoRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  org: z.string(),
-  name: z.string(),
-  "X-On-Behalf-Of": z.string().optional(),
-  PatchRepoRequest: components.PatchRepoRequest$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "PatchRepoRequest": "patchRepoRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    name: z.string(),
+    "X-On-Behalf-Of": z.string().optional(),
+    PatchRepoRequest: components.PatchRepoRequest$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "PatchRepoRequest": "patchRepoRequest",
+    });
+  })
+);
 /** @internal */
 export type PatchRepoRequest$Outbound = {
   org: string;
@@ -54,17 +59,22 @@ export const PatchRepoRequest$outboundSchema: z.ZodType<
   PatchRepoRequest$Outbound,
   z.ZodTypeDef,
   PatchRepoRequest
-> = z.object({
-  org: z.string(),
-  name: z.string(),
-  xOnBehalfOf: z.string().optional(),
-  patchRepoRequest: components.PatchRepoRequest$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    patchRepoRequest: "PatchRepoRequest",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    org: z.string(),
+    name: z.string().refine(
+      matchesPattern$("^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$"),
+      { message: "Value must match pattern ^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$" },
+    ),
+    xOnBehalfOf: z.string().optional(),
+    patchRepoRequest: components.PatchRepoRequest$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      patchRepoRequest: "PatchRepoRequest",
+    });
+  })
+);
 
 export function patchRepoRequestToJSON(
   patchRepoRequest: PatchRepoRequest,

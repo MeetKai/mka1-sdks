@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as components from "../components/index.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -22,16 +22,18 @@ export const CreateFunctionToolRequest$inboundSchema: z.ZodType<
   CreateFunctionToolRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  "X-On-Behalf-Of": z.string().optional(),
-  AgentsFunctionToolDefinition:
-    components.AgentsFunctionToolDefinition$inboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    "X-On-Behalf-Of": "xOnBehalfOf",
-    "AgentsFunctionToolDefinition": "agentsFunctionToolDefinition",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    "X-On-Behalf-Of": z.string().optional(),
+    AgentsFunctionToolDefinition:
+      components.AgentsFunctionToolDefinition$inboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      "X-On-Behalf-Of": "xOnBehalfOf",
+      "AgentsFunctionToolDefinition": "agentsFunctionToolDefinition",
+    });
+  })
+);
 /** @internal */
 export type CreateFunctionToolRequest$Outbound = {
   "X-On-Behalf-Of"?: string | undefined;
@@ -44,16 +46,18 @@ export const CreateFunctionToolRequest$outboundSchema: z.ZodType<
   CreateFunctionToolRequest$Outbound,
   z.ZodTypeDef,
   CreateFunctionToolRequest
-> = z.object({
-  xOnBehalfOf: z.string().optional(),
-  agentsFunctionToolDefinition:
-    components.AgentsFunctionToolDefinition$outboundSchema,
-}).transform((v) => {
-  return remap$(v, {
-    xOnBehalfOf: "X-On-Behalf-Of",
-    agentsFunctionToolDefinition: "AgentsFunctionToolDefinition",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    xOnBehalfOf: z.string().optional(),
+    agentsFunctionToolDefinition:
+      components.AgentsFunctionToolDefinition$outboundSchema,
+  }).transform((v) => {
+    return remap$(v, {
+      xOnBehalfOf: "X-On-Behalf-Of",
+      agentsFunctionToolDefinition: "AgentsFunctionToolDefinition",
+    });
+  })
+);
 
 export function createFunctionToolRequestToJSON(
   createFunctionToolRequest: CreateFunctionToolRequest,

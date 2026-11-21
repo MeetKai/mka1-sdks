@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -68,8 +68,8 @@ export type TextToSpeechRequest = {
 };
 
 /** @internal */
-export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> = z
-  .nativeEnum(Language);
+export const Language$inboundSchema: z.ZodNativeEnum<typeof Language> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Language));
 /** @internal */
 export const Language$outboundSchema: z.ZodNativeEnum<typeof Language> =
   Language$inboundSchema;
@@ -79,13 +79,15 @@ export const TextToSpeechRequest$inboundSchema: z.ZodType<
   TextToSpeechRequest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  text: z.string(),
-  voice: z.string().optional(),
-  language: Language$inboundSchema.default("auto"),
-  model: z.string().default("auto"),
-  store: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    voice: z.string().optional(),
+    language: Language$inboundSchema.default("auto"),
+    model: z.string().default("auto"),
+    store: z.boolean().default(false),
+  })
+);
 /** @internal */
 export type TextToSpeechRequest$Outbound = {
   text: string;
@@ -100,13 +102,15 @@ export const TextToSpeechRequest$outboundSchema: z.ZodType<
   TextToSpeechRequest$Outbound,
   z.ZodTypeDef,
   TextToSpeechRequest
-> = z.object({
-  text: z.string(),
-  voice: z.string().optional(),
-  language: Language$outboundSchema.default("auto"),
-  model: z.string().default("auto"),
-  store: z.boolean().default(false),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    text: z.string(),
+    voice: z.string().optional(),
+    language: Language$outboundSchema.default("auto"),
+    model: z.string().default("auto"),
+    store: z.boolean().default(false),
+  })
+);
 
 export function textToSpeechRequestToJSON(
   textToSpeechRequest: TextToSpeechRequest,

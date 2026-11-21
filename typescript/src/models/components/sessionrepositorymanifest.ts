@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -24,14 +24,16 @@ export const SessionRepositoryManifest$inboundSchema: z.ZodType<
   SessionRepositoryManifest,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  max_repositories: z.number().int().default(5),
-  repositories: z.array(SessionRepositoryModel$inboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    "max_repositories": "maxRepositories",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    max_repositories: z.number().int().default(5),
+    repositories: z.array(SessionRepositoryModel$inboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      "max_repositories": "maxRepositories",
+    });
+  })
+);
 /** @internal */
 export type SessionRepositoryManifest$Outbound = {
   max_repositories: number;
@@ -43,14 +45,16 @@ export const SessionRepositoryManifest$outboundSchema: z.ZodType<
   SessionRepositoryManifest$Outbound,
   z.ZodTypeDef,
   SessionRepositoryManifest
-> = z.object({
-  maxRepositories: z.number().int().default(5),
-  repositories: z.array(SessionRepositoryModel$outboundSchema),
-}).transform((v) => {
-  return remap$(v, {
-    maxRepositories: "max_repositories",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    maxRepositories: z.number().int().default(5),
+    repositories: z.array(SessionRepositoryModel$outboundSchema),
+  }).transform((v) => {
+    return remap$(v, {
+      maxRepositories: "max_repositories",
+    });
+  })
+);
 
 export function sessionRepositoryManifestToJSON(
   sessionRepositoryManifest: SessionRepositoryManifest,

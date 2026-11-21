@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v3";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -29,10 +29,12 @@ export const ListVersionsResponse$inboundSchema: z.ZodType<
   ListVersionsResponse,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(CreateVersionResponse$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(CreateVersionResponse$inboundSchema),
+  })
+);
 /** @internal */
 export type ListVersionsResponse$Outbound = {
   object: "list";
@@ -44,10 +46,12 @@ export const ListVersionsResponse$outboundSchema: z.ZodType<
   ListVersionsResponse$Outbound,
   z.ZodTypeDef,
   ListVersionsResponse
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(CreateVersionResponse$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(CreateVersionResponse$outboundSchema),
+  })
+);
 
 export function listVersionsResponseToJSON(
   listVersionsResponse: ListVersionsResponse,

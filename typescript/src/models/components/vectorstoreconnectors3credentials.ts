@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
@@ -21,15 +21,17 @@ export const VectorStoreConnectorS3Credentials$inboundSchema: z.ZodType<
   VectorStoreConnectorS3Credentials,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  access_key_id: z.string(),
-  secret_access_key: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    "access_key_id": "accessKeyId",
-    "secret_access_key": "secretAccessKey",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    access_key_id: z.string(),
+    secret_access_key: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      "access_key_id": "accessKeyId",
+      "secret_access_key": "secretAccessKey",
+    });
+  })
+);
 /** @internal */
 export type VectorStoreConnectorS3Credentials$Outbound = {
   access_key_id: string;
@@ -41,15 +43,17 @@ export const VectorStoreConnectorS3Credentials$outboundSchema: z.ZodType<
   VectorStoreConnectorS3Credentials$Outbound,
   z.ZodTypeDef,
   VectorStoreConnectorS3Credentials
-> = z.object({
-  accessKeyId: z.string(),
-  secretAccessKey: z.string(),
-}).transform((v) => {
-  return remap$(v, {
-    accessKeyId: "access_key_id",
-    secretAccessKey: "secret_access_key",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    accessKeyId: z.string(),
+    secretAccessKey: z.string(),
+  }).transform((v) => {
+    return remap$(v, {
+      accessKeyId: "access_key_id",
+      secretAccessKey: "secret_access_key",
+    });
+  })
+);
 
 export function vectorStoreConnectorS3CredentialsToJSON(
   vectorStoreConnectorS3Credentials: VectorStoreConnectorS3Credentials,

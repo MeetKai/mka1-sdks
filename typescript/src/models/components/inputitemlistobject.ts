@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -45,19 +45,21 @@ export const InputItemListObject$inboundSchema: z.ZodType<
   InputItemListObject,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(Item$inboundSchema),
-  first_id: z.string().optional(),
-  last_id: z.string().optional(),
-  has_more: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    "first_id": "firstId",
-    "last_id": "lastId",
-    "has_more": "hasMore",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(Item$inboundSchema),
+    first_id: z.string().optional(),
+    last_id: z.string().optional(),
+    has_more: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      "first_id": "firstId",
+      "last_id": "lastId",
+      "has_more": "hasMore",
+    });
+  })
+);
 /** @internal */
 export type InputItemListObject$Outbound = {
   object: "list";
@@ -72,19 +74,21 @@ export const InputItemListObject$outboundSchema: z.ZodType<
   InputItemListObject$Outbound,
   z.ZodTypeDef,
   InputItemListObject
-> = z.object({
-  object: z.literal("list"),
-  data: z.array(Item$outboundSchema),
-  firstId: z.string().optional(),
-  lastId: z.string().optional(),
-  hasMore: z.boolean(),
-}).transform((v) => {
-  return remap$(v, {
-    firstId: "first_id",
-    lastId: "last_id",
-    hasMore: "has_more",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    object: z.literal("list"),
+    data: z.array(Item$outboundSchema),
+    firstId: z.string().optional(),
+    lastId: z.string().optional(),
+    hasMore: z.boolean(),
+  }).transform((v) => {
+    return remap$(v, {
+      firstId: "first_id",
+      lastId: "last_id",
+      hasMore: "has_more",
+    });
+  })
+);
 
 export function inputItemListObjectToJSON(
   inputItemListObject: InputItemListObject,

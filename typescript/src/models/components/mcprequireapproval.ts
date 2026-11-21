@@ -3,6 +3,7 @@
  */
 
 import * as z from "zod/v3";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 export const MCPRequireApproval = {
@@ -14,7 +15,7 @@ export type MCPRequireApproval = ClosedEnum<typeof MCPRequireApproval>;
 /** @internal */
 export const MCPRequireApproval$inboundSchema: z.ZodNativeEnum<
   typeof MCPRequireApproval
-> = z.nativeEnum(MCPRequireApproval);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(MCPRequireApproval));
 /** @internal */
 export const MCPRequireApproval$outboundSchema: z.ZodNativeEnum<
   typeof MCPRequireApproval

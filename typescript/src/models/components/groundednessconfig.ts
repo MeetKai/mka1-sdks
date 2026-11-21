@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,8 +59,8 @@ export type GroundednessConfig = {
 };
 
 /** @internal */
-export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> = z
-  .nativeEnum(Action);
+export const Action$inboundSchema: z.ZodNativeEnum<typeof Action> =
+  /* @__PURE__ */ lazySchema$(() => z.nativeEnum(Action));
 /** @internal */
 export const Action$outboundSchema: z.ZodNativeEnum<typeof Action> =
   Action$inboundSchema;
@@ -68,7 +68,7 @@ export const Action$outboundSchema: z.ZodNativeEnum<typeof Action> =
 /** @internal */
 export const GroundednessConfigOnError$inboundSchema: z.ZodNativeEnum<
   typeof GroundednessConfigOnError
-> = z.nativeEnum(GroundednessConfigOnError);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(GroundednessConfigOnError));
 /** @internal */
 export const GroundednessConfigOnError$outboundSchema: z.ZodNativeEnum<
   typeof GroundednessConfigOnError
@@ -79,20 +79,22 @@ export const GroundednessConfig$inboundSchema: z.ZodType<
   GroundednessConfig,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0.5),
-  action: Action$inboundSchema.default("flag"),
-  on_error: GroundednessConfigOnError$inboundSchema.default("fail_closed"),
-  rejection_message: z.string().default(
-    "I'm sorry, but I can't share this answer: it isn't sufficiently supported by its sources. Please try again.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    "on_error": "onError",
-    "rejection_message": "rejectionMessage",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    threshold: z.number().default(0.5),
+    action: Action$inboundSchema.default("flag"),
+    on_error: GroundednessConfigOnError$inboundSchema.default("fail_closed"),
+    rejection_message: z.string().default(
+      "I'm sorry, but I can't share this answer: it isn't sufficiently supported by its sources. Please try again.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      "on_error": "onError",
+      "rejection_message": "rejectionMessage",
+    });
+  })
+);
 /** @internal */
 export type GroundednessConfig$Outbound = {
   model: string;
@@ -107,20 +109,22 @@ export const GroundednessConfig$outboundSchema: z.ZodType<
   GroundednessConfig$Outbound,
   z.ZodTypeDef,
   GroundednessConfig
-> = z.object({
-  model: z.string(),
-  threshold: z.number().default(0.5),
-  action: Action$outboundSchema.default("flag"),
-  onError: GroundednessConfigOnError$outboundSchema.default("fail_closed"),
-  rejectionMessage: z.string().default(
-    "I'm sorry, but I can't share this answer: it isn't sufficiently supported by its sources. Please try again.",
-  ),
-}).transform((v) => {
-  return remap$(v, {
-    onError: "on_error",
-    rejectionMessage: "rejection_message",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    model: z.string(),
+    threshold: z.number().default(0.5),
+    action: Action$outboundSchema.default("flag"),
+    onError: GroundednessConfigOnError$outboundSchema.default("fail_closed"),
+    rejectionMessage: z.string().default(
+      "I'm sorry, but I can't share this answer: it isn't sufficiently supported by its sources. Please try again.",
+    ),
+  }).transform((v) => {
+    return remap$(v, {
+      onError: "on_error",
+      rejectionMessage: "rejection_message",
+    });
+  })
+);
 
 export function groundednessConfigToJSON(
   groundednessConfig: GroundednessConfig,

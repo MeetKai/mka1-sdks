@@ -4,6 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
+import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { SDKError } from "./sdkerror.js";
 
@@ -55,7 +56,7 @@ export class FeatureFlagError extends SDKError {
 /** @internal */
 export const FeatureFlagErrorError$inboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagErrorError
-> = z.nativeEnum(FeatureFlagErrorError);
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(FeatureFlagErrorError));
 /** @internal */
 export const FeatureFlagErrorError$outboundSchema: z.ZodNativeEnum<
   typeof FeatureFlagErrorError
@@ -66,25 +67,27 @@ export const FeatureFlagError$inboundSchema: z.ZodType<
   FeatureFlagError,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  error: FeatureFlagErrorError$inboundSchema,
-  message: z.string(),
-  request_id: z.string(),
-  request$: z.instanceof(Request),
-  response$: z.instanceof(Response),
-  body$: z.string(),
-})
-  .transform((v) => {
-    const remapped = remap$(v, {
-      "request_id": "requestId",
-    });
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    error: FeatureFlagErrorError$inboundSchema,
+    message: z.string(),
+    request_id: z.string(),
+    request$: z.instanceof(Request),
+    response$: z.instanceof(Response),
+    body$: z.string(),
+  })
+    .transform((v) => {
+      const remapped = remap$(v, {
+        "request_id": "requestId",
+      });
 
-    return new FeatureFlagError(remapped, {
-      request: v.request$,
-      response: v.response$,
-      body: v.body$,
-    });
-  });
+      return new FeatureFlagError(remapped, {
+        request: v.request$,
+        response: v.response$,
+        body: v.body$,
+      });
+    })
+);
 
 /** @internal */
 export type FeatureFlagError$Outbound = {
@@ -98,16 +101,18 @@ export const FeatureFlagError$outboundSchema: z.ZodType<
   FeatureFlagError$Outbound,
   z.ZodTypeDef,
   FeatureFlagError
-> = z.instanceof(FeatureFlagError)
-  .transform(v => v.data$)
-  .pipe(
-    z.object({
-      error: FeatureFlagErrorError$outboundSchema,
-      message: z.string(),
-      requestId: z.string(),
-    }).transform((v) => {
-      return remap$(v, {
-        requestId: "request_id",
-      });
-    }),
-  );
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.instanceof(FeatureFlagError)
+    .transform(v => v.data$)
+    .pipe(
+      z.object({
+        error: FeatureFlagErrorError$outboundSchema,
+        message: z.string(),
+        requestId: z.string(),
+      }).transform((v) => {
+        return remap$(v, {
+          requestId: "request_id",
+        });
+      }),
+    )
+);

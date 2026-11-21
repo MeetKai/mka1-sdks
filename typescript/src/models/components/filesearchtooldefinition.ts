@@ -4,7 +4,7 @@
 
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -64,16 +64,18 @@ export const FileSearchToolDefinitionFilters$inboundSchema: z.ZodType<
   FileSearchToolDefinitionFilters,
   z.ZodTypeDef,
   unknown
-> = z.union([
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-  ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-  CompoundFilter$inboundSchema.and(z.object({ type: z.literal("and") })),
-  CompoundFilter$inboundSchema.and(z.object({ type: z.literal("or") })),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
+    CompoundFilter$inboundSchema.and(z.object({ type: z.literal("and") })),
+    CompoundFilter$inboundSchema.and(z.object({ type: z.literal("or") })),
+  ])
+);
 /** @internal */
 export type FileSearchToolDefinitionFilters$Outbound =
   | (ComparisonFilter$Outbound & { type: "eq" })
@@ -90,16 +92,18 @@ export const FileSearchToolDefinitionFilters$outboundSchema: z.ZodType<
   FileSearchToolDefinitionFilters$Outbound,
   z.ZodTypeDef,
   FileSearchToolDefinitionFilters
-> = z.union([
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-  ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-  CompoundFilter$outboundSchema.and(z.object({ type: z.literal("and") })),
-  CompoundFilter$outboundSchema.and(z.object({ type: z.literal("or") })),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.union([
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+    CompoundFilter$outboundSchema.and(z.object({ type: z.literal("and") })),
+    CompoundFilter$outboundSchema.and(z.object({ type: z.literal("or") })),
+  ])
+);
 
 export function fileSearchToolDefinitionFiltersToJSON(
   fileSearchToolDefinitionFilters: FileSearchToolDefinitionFilters,
@@ -125,28 +129,30 @@ export const FileSearchToolDefinition$inboundSchema: z.ZodType<
   FileSearchToolDefinition,
   z.ZodTypeDef,
   unknown
-> = z.object({
-  type: z.literal("file_search"),
-  vector_store_ids: z.array(z.string()),
-  filters: z.union([
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
-    ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
-    CompoundFilter$inboundSchema.and(z.object({ type: z.literal("and") })),
-    CompoundFilter$inboundSchema.and(z.object({ type: z.literal("or") })),
-  ]).optional(),
-  max_num_results: z.number().int().optional(),
-  ranking_options: RankingOptions$inboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    "vector_store_ids": "vectorStoreIds",
-    "max_num_results": "maxNumResults",
-    "ranking_options": "rankingOptions",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search"),
+    vector_store_ids: z.array(z.string()),
+    filters: z.union([
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("eq") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("ne") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gt") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("gte") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lt") })),
+      ComparisonFilter$inboundSchema.and(z.object({ type: z.literal("lte") })),
+      CompoundFilter$inboundSchema.and(z.object({ type: z.literal("and") })),
+      CompoundFilter$inboundSchema.and(z.object({ type: z.literal("or") })),
+    ]).optional(),
+    max_num_results: z.number().int().optional(),
+    ranking_options: RankingOptions$inboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "vector_store_ids": "vectorStoreIds",
+      "max_num_results": "maxNumResults",
+      "ranking_options": "rankingOptions",
+    });
+  })
+);
 /** @internal */
 export type FileSearchToolDefinition$Outbound = {
   type: "file_search";
@@ -170,28 +176,30 @@ export const FileSearchToolDefinition$outboundSchema: z.ZodType<
   FileSearchToolDefinition$Outbound,
   z.ZodTypeDef,
   FileSearchToolDefinition
-> = z.object({
-  type: z.literal("file_search"),
-  vectorStoreIds: z.array(z.string()),
-  filters: z.union([
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
-    ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
-    CompoundFilter$outboundSchema.and(z.object({ type: z.literal("and") })),
-    CompoundFilter$outboundSchema.and(z.object({ type: z.literal("or") })),
-  ]).optional(),
-  maxNumResults: z.number().int().optional(),
-  rankingOptions: RankingOptions$outboundSchema.optional(),
-}).transform((v) => {
-  return remap$(v, {
-    vectorStoreIds: "vector_store_ids",
-    maxNumResults: "max_num_results",
-    rankingOptions: "ranking_options",
-  });
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: z.literal("file_search"),
+    vectorStoreIds: z.array(z.string()),
+    filters: z.union([
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("eq") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("ne") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gt") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("gte") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lt") })),
+      ComparisonFilter$outboundSchema.and(z.object({ type: z.literal("lte") })),
+      CompoundFilter$outboundSchema.and(z.object({ type: z.literal("and") })),
+      CompoundFilter$outboundSchema.and(z.object({ type: z.literal("or") })),
+    ]).optional(),
+    maxNumResults: z.number().int().optional(),
+    rankingOptions: RankingOptions$outboundSchema.optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      vectorStoreIds: "vector_store_ids",
+      maxNumResults: "max_num_results",
+      rankingOptions: "ranking_options",
+    });
+  })
+);
 
 export function fileSearchToolDefinitionToJSON(
   fileSearchToolDefinition: FileSearchToolDefinition,
