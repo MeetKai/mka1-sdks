@@ -32,3 +32,4 @@ value := components.PolicyToolTypeFunction
 | `PolicyToolTypeSleep`           | sleep                           |
 | `PolicyToolTypeApproval`        | approval                        |
 | `PolicyToolTypeSchedule`        | schedule                        |
+| `PolicyToolTypeBrowser`         | browser                         |

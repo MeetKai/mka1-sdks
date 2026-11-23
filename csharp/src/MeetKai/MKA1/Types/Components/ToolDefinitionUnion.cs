@@ -104,6 +104,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ToolDefinitionUnionType ToolDefinitionBrowser
+        {
+            get {
+                return new ToolDefinitionUnionType("ToolDefinition_Browser");
+            }
+        }
+
         public static ToolDefinitionUnionType ToolDefinitionAgent
         {
             get {
@@ -152,6 +159,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ToolDefinitionApproval;
                 case "ToolDefinition_Schedule":
                     return ToolDefinitionSchedule;
+                case "ToolDefinition_Browser":
+                    return ToolDefinitionBrowser;
                 case "ToolDefinition_Agent":
                     return ToolDefinitionAgent;
                 case "ToolDefinition_Shell":
@@ -215,6 +224,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionSchedule? ToolDefinitionSchedule { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ToolDefinitionBrowser? ToolDefinitionBrowser { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ToolDefinitionAgent? ToolDefinitionAgent { get; set; }
@@ -311,6 +323,14 @@ namespace MeetKai.MKA1.Types.Components
             res.ToolDefinitionSchedule = toolDefinitionSchedule;
             return res;
         }
+        public static ToolDefinitionUnion CreateToolDefinitionBrowser(ToolDefinitionBrowser toolDefinitionBrowser)
+        {
+            ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionBrowser;
+
+            ToolDefinitionUnion res = new ToolDefinitionUnion(typ);
+            res.ToolDefinitionBrowser = toolDefinitionBrowser;
+            return res;
+        }
         public static ToolDefinitionUnion CreateToolDefinitionAgent(ToolDefinitionAgent toolDefinitionAgent)
         {
             ToolDefinitionUnionType typ = ToolDefinitionUnionType.ToolDefinitionAgent;
@@ -365,32 +385,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition2) {
-                        ToolDefinition2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinition2>(json)
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionBrowser) {
+                        ToolDefinitionBrowser = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionBrowser>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolDefinition2), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition2), "ToolDefinition2"));
-                }
-                catch (ResponseBodyDeserializer.DeserializationException)
-                {
-                    // try next option
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-
-                try
-                {
-                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep) {
-                        ToolDefinitionSleep = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionSleep>(json)
-                    };
-                }
-                catch (ResponseBodyDeserializer.MissingMemberException)
-                {
-                    fallbackCandidates.Add((typeof(ToolDefinitionSleep), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep), "ToolDefinitionSleep"));
+                    fallbackCandidates.Add((typeof(ToolDefinitionBrowser), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionBrowser), "ToolDefinitionBrowser"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -422,13 +423,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference) {
-                        OpenApiToolSetReference = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<OpenApiToolSetReference>(json)
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep) {
+                        ToolDefinitionSleep = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionSleep>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(OpenApiToolSetReference), new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference), "OpenApiToolSetReference"));
+                    fallbackCandidates.Add((typeof(ToolDefinitionSleep), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionSleep), "ToolDefinitionSleep"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -441,13 +442,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter) {
-                        ToolDefinitionCodeInterpreter = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionCodeInterpreter>(json)
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition2) {
+                        ToolDefinition2 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinition2>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolDefinitionCodeInterpreter), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter), "ToolDefinitionCodeInterpreter"));
+                    fallbackCandidates.Add((typeof(ToolDefinition2), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition2), "ToolDefinition2"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -498,13 +499,32 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition1) {
-                        ToolDefinition1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinition1>(json)
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter) {
+                        ToolDefinitionCodeInterpreter = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinitionCodeInterpreter>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ToolDefinition1), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition1), "ToolDefinition1"));
+                    fallbackCandidates.Add((typeof(ToolDefinitionCodeInterpreter), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionCodeInterpreter), "ToolDefinitionCodeInterpreter"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference) {
+                        OpenApiToolSetReference = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<OpenApiToolSetReference>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(OpenApiToolSetReference), new ToolDefinitionUnion(ToolDefinitionUnionType.OpenApiToolSetReference), "OpenApiToolSetReference"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -524,6 +544,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(ToolDefinitionAgent), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinitionAgent), "ToolDefinitionAgent"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition1) {
+                        ToolDefinition1 = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ToolDefinition1>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(ToolDefinition1), new ToolDefinitionUnion(ToolDefinitionUnionType.ToolDefinition1), "ToolDefinition1"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -686,6 +725,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ToolDefinitionSchedule != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionSchedule));
+                    return;
+                }
+
+                if (res.ToolDefinitionBrowser != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ToolDefinitionBrowser));
                     return;
                 }
 

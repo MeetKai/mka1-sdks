@@ -105,6 +105,12 @@ responseObjectTool := components.CreateResponseObjectToolApprovalToolDefinition(
 responseObjectTool := components.CreateResponseObjectToolScheduleToolDefinition(components.ScheduleToolDefinition{/* values here */})
 ```
 
+### BrowserToolDefinition
+
+```go
+responseObjectTool := components.CreateResponseObjectToolBrowserToolDefinition(components.BrowserToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -151,6 +157,8 @@ switch responseObjectTool.Type {
 		// responseObjectTool.ApprovalToolDefinition is populated
 	case components.ResponseObjectToolTypeScheduleToolDefinition:
 		// responseObjectTool.ScheduleToolDefinition is populated
+	case components.ResponseObjectToolTypeBrowserToolDefinition:
+		// responseObjectTool.BrowserToolDefinition is populated
 	case components.ResponseObjectToolTypeOpenAPIToolDefinition:
 		// responseObjectTool.OpenAPIToolDefinition is populated
 	default:

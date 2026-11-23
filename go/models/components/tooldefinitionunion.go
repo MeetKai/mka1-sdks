@@ -584,6 +584,50 @@ func (t *ToolDefinitionAgent) GetDescription() *string {
 	return t.Description
 }
 
+type TypeBrowser string
+
+const (
+	TypeBrowserBrowser TypeBrowser = "browser"
+)
+
+func (e TypeBrowser) ToPointer() *TypeBrowser {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TypeBrowser) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "browser":
+			return true
+		}
+	}
+	return false
+}
+
+// ToolDefinitionBrowser - The user's own web browser, which keeps their logins between conversations. The model opens pages, reads them and clicks or types; it runs no scripts of its own and never sees what a password field holds. When a site needs the user, for example to sign in, the model asks them to take over: in a private Telegram chat they get a button that opens a live view of the browser, and the agent carries on when they tap Done.
+type ToolDefinitionBrowser struct {
+	Type TypeBrowser `json:"type"`
+}
+
+func (t ToolDefinitionBrowser) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolDefinitionBrowser) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolDefinitionBrowser) GetType() TypeBrowser {
+	if t == nil {
+		return TypeBrowser("")
+	}
+	return t.Type
+}
+
 type TypeSchedule string
 
 const (
@@ -2693,6 +2737,7 @@ const (
 	ToolDefinitionUnionTypeToolDefinitionSleep           ToolDefinitionUnionType = "ToolDefinition_Sleep"
 	ToolDefinitionUnionTypeToolDefinitionApproval        ToolDefinitionUnionType = "ToolDefinition_Approval"
 	ToolDefinitionUnionTypeToolDefinitionSchedule        ToolDefinitionUnionType = "ToolDefinition_Schedule"
+	ToolDefinitionUnionTypeToolDefinitionBrowser         ToolDefinitionUnionType = "ToolDefinition_Browser"
 	ToolDefinitionUnionTypeToolDefinitionAgent           ToolDefinitionUnionType = "ToolDefinition_Agent"
 	ToolDefinitionUnionTypeToolDefinitionShell           ToolDefinitionUnionType = "ToolDefinition_Shell"
 	ToolDefinitionUnionTypeUnknown                       ToolDefinitionUnionType = "Unknown"
@@ -2710,6 +2755,7 @@ type ToolDefinitionUnion struct {
 	ToolDefinitionSleep           *ToolDefinitionSleep           `queryParam:"inline" union:"member"`
 	ToolDefinitionApproval        *ToolDefinitionApproval        `queryParam:"inline" union:"member"`
 	ToolDefinitionSchedule        *ToolDefinitionSchedule        `queryParam:"inline" union:"member"`
+	ToolDefinitionBrowser         *ToolDefinitionBrowser         `queryParam:"inline" union:"member"`
 	ToolDefinitionAgent           *ToolDefinitionAgent           `queryParam:"inline" union:"member"`
 	ToolDefinitionShell           *ToolDefinitionShell           `queryParam:"inline" union:"member"`
 	UnknownRaw                    json.RawMessage                `json:"-" union:"unknown"`
@@ -2813,6 +2859,15 @@ func CreateToolDefinitionUnionToolDefinitionSchedule(toolDefinitionSchedule Tool
 	return ToolDefinitionUnion{
 		ToolDefinitionSchedule: &toolDefinitionSchedule,
 		Type:                   typ,
+	}
+}
+
+func CreateToolDefinitionUnionToolDefinitionBrowser(toolDefinitionBrowser ToolDefinitionBrowser) ToolDefinitionUnion {
+	typ := ToolDefinitionUnionTypeToolDefinitionBrowser
+
+	return ToolDefinitionUnion{
+		ToolDefinitionBrowser: &toolDefinitionBrowser,
+		Type:                  typ,
 	}
 }
 
@@ -2943,6 +2998,14 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var toolDefinitionBrowser ToolDefinitionBrowser = ToolDefinitionBrowser{}
+	if err := utils.UnmarshalJSON(data, &toolDefinitionBrowser, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ToolDefinitionUnionTypeToolDefinitionBrowser,
+			Value: &toolDefinitionBrowser,
+		})
+	}
+
 	var toolDefinitionAgent ToolDefinitionAgent = ToolDefinitionAgent{}
 	if err := utils.UnmarshalJSON(data, &toolDefinitionAgent, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -3012,6 +3075,9 @@ func (u *ToolDefinitionUnion) UnmarshalJSON(data []byte) error {
 	case ToolDefinitionUnionTypeToolDefinitionSchedule:
 		u.ToolDefinitionSchedule = best.Value.(*ToolDefinitionSchedule)
 		return nil
+	case ToolDefinitionUnionTypeToolDefinitionBrowser:
+		u.ToolDefinitionBrowser = best.Value.(*ToolDefinitionBrowser)
+		return nil
 	case ToolDefinitionUnionTypeToolDefinitionAgent:
 		u.ToolDefinitionAgent = best.Value.(*ToolDefinitionAgent)
 		return nil
@@ -3071,6 +3137,10 @@ func (u ToolDefinitionUnion) MarshalJSON() ([]byte, error) {
 
 	if u.ToolDefinitionSchedule != nil {
 		return utils.MarshalJSON(u.ToolDefinitionSchedule, "", true)
+	}
+
+	if u.ToolDefinitionBrowser != nil {
+		return utils.MarshalJSON(u.ToolDefinitionBrowser, "", true)
 	}
 
 	if u.ToolDefinitionAgent != nil {

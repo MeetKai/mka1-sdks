@@ -213,6 +213,18 @@ responseStreamingEvent := components.CreateResponseStreamingEventResponseSchedul
 responseStreamingEvent := components.CreateResponseStreamingEventResponseScheduleCallCompleted(components.ResponseScheduleCallCompletedEvent{/* values here */})
 ```
 
+### ResponseBrowserCallInProgressEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseBrowserCallInProgress(components.ResponseBrowserCallInProgressEvent{/* values here */})
+```
+
+### ResponseBrowserCallCompletedEvent
+
+```go
+responseStreamingEvent := components.CreateResponseStreamingEventResponseBrowserCallCompleted(components.ResponseBrowserCallCompletedEvent{/* values here */})
+```
+
 ### ResponseToolSearchCallInProgressEvent
 
 ```go
@@ -547,6 +559,10 @@ switch responseStreamingEvent.Type {
 		// responseStreamingEvent.ResponseScheduleCallInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseScheduleCallCompleted:
 		// responseStreamingEvent.ResponseScheduleCallCompletedEvent is populated
+	case components.ResponseStreamingEventTypeResponseBrowserCallInProgress:
+		// responseStreamingEvent.ResponseBrowserCallInProgressEvent is populated
+	case components.ResponseStreamingEventTypeResponseBrowserCallCompleted:
+		// responseStreamingEvent.ResponseBrowserCallCompletedEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallInProgress:
 		// responseStreamingEvent.ResponseToolSearchCallInProgressEvent is populated
 	case components.ResponseStreamingEventTypeResponseToolSearchCallSearching:

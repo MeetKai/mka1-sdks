@@ -23,6 +23,12 @@ import {
   ApprovalToolDefinition$outboundSchema,
 } from "./approvaltooldefinition.js";
 import {
+  BrowserToolDefinition,
+  BrowserToolDefinition$inboundSchema,
+  BrowserToolDefinition$Outbound,
+  BrowserToolDefinition$outboundSchema,
+} from "./browsertooldefinition.js";
+import {
   CodeInterpreterToolDefinition,
   CodeInterpreterToolDefinition$inboundSchema,
   CodeInterpreterToolDefinition$Outbound,
@@ -300,6 +306,7 @@ export type ResponseObjectTools =
   | SleepToolDefinition
   | HistoryToolDefinition
   | ApprovalToolDefinition
+  | BrowserToolDefinition
   | any;
 
 export const ResponseObjectTruncation = {
@@ -377,6 +384,7 @@ export type ResponseObject = {
     | SleepToolDefinition
     | HistoryToolDefinition
     | ApprovalToolDefinition
+    | BrowserToolDefinition
     | any
     | null
   >;
@@ -877,6 +885,7 @@ export const ResponseObjectTools$inboundSchema: z.ZodType<
     SleepToolDefinition$inboundSchema,
     HistoryToolDefinition$inboundSchema,
     ApprovalToolDefinition$inboundSchema,
+    BrowserToolDefinition$inboundSchema,
     z.any(),
   ])
 );
@@ -899,6 +908,7 @@ export type ResponseObjectTools$Outbound =
   | SleepToolDefinition$Outbound
   | HistoryToolDefinition$Outbound
   | ApprovalToolDefinition$Outbound
+  | BrowserToolDefinition$Outbound
   | any;
 
 /** @internal */
@@ -925,6 +935,7 @@ export const ResponseObjectTools$outboundSchema: z.ZodType<
     SleepToolDefinition$outboundSchema,
     HistoryToolDefinition$outboundSchema,
     ApprovalToolDefinition$outboundSchema,
+    BrowserToolDefinition$outboundSchema,
     z.any(),
   ])
 );
@@ -1017,6 +1028,7 @@ export const ResponseObject$inboundSchema: z.ZodType<
           SleepToolDefinition$inboundSchema,
           HistoryToolDefinition$inboundSchema,
           ApprovalToolDefinition$inboundSchema,
+          BrowserToolDefinition$inboundSchema,
           z.any(),
         ]),
       ),
@@ -1106,6 +1118,7 @@ export type ResponseObject$Outbound = {
     | SleepToolDefinition$Outbound
     | HistoryToolDefinition$Outbound
     | ApprovalToolDefinition$Outbound
+    | BrowserToolDefinition$Outbound
     | any
     | null
   >;
@@ -1179,6 +1192,7 @@ export const ResponseObject$outboundSchema: z.ZodType<
           SleepToolDefinition$outboundSchema,
           HistoryToolDefinition$outboundSchema,
           ApprovalToolDefinition$outboundSchema,
+          BrowserToolDefinition$outboundSchema,
           z.any(),
         ]),
       ),

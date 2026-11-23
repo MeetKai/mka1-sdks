@@ -11,7 +11,7 @@ type ToolApprovalRequest struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ string `const:"tool_approval_request" json:"type"`
 	ID    string `json:"id"`
-	// The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent. MCP calls use mcp_approval_request instead.
+	// The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent, browser. MCP calls use mcp_approval_request instead.
 	ToolType string `json:"tool_type"`
 	// The name of the tool the model called, such as web_search or an OpenAPI operation name.
 	Name string `json:"name"`

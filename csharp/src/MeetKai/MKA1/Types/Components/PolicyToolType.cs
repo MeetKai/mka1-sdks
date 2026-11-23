@@ -33,6 +33,7 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("sleep")] Sleep,
         [JsonProperty("approval")] Approval,
         [JsonProperty("schedule")] Schedule,
+        [JsonProperty("browser")] Browser,
     }
 
     public static class PolicyToolTypeExtension

@@ -126,6 +126,7 @@ const (
 	LivekitTokenRequestToolTypeAgentToolDefinition            LivekitTokenRequestToolType = "AgentToolDefinition"
 	LivekitTokenRequestToolTypeApprovalToolDefinition         LivekitTokenRequestToolType = "ApprovalToolDefinition"
 	LivekitTokenRequestToolTypeScheduleToolDefinition         LivekitTokenRequestToolType = "ScheduleToolDefinition"
+	LivekitTokenRequestToolTypeBrowserToolDefinition          LivekitTokenRequestToolType = "BrowserToolDefinition"
 	LivekitTokenRequestToolTypeOpenAPIToolDefinition          LivekitTokenRequestToolType = "OpenApiToolDefinition"
 )
 
@@ -147,6 +148,7 @@ type LivekitTokenRequestTool struct {
 	AgentToolDefinition            *AgentToolDefinition            `queryParam:"inline" union:"member"`
 	ApprovalToolDefinition         *ApprovalToolDefinition         `queryParam:"inline" union:"member"`
 	ScheduleToolDefinition         *ScheduleToolDefinition         `queryParam:"inline" union:"member"`
+	BrowserToolDefinition          *BrowserToolDefinition          `queryParam:"inline" union:"member"`
 	OpenAPIToolDefinition          *OpenAPIToolDefinition          `queryParam:"inline" union:"member"`
 
 	Type LivekitTokenRequestToolType
@@ -302,6 +304,15 @@ func CreateLivekitTokenRequestToolScheduleToolDefinition(scheduleToolDefinition 
 	return LivekitTokenRequestTool{
 		ScheduleToolDefinition: &scheduleToolDefinition,
 		Type:                   typ,
+	}
+}
+
+func CreateLivekitTokenRequestToolBrowserToolDefinition(browserToolDefinition BrowserToolDefinition) LivekitTokenRequestTool {
+	typ := LivekitTokenRequestToolTypeBrowserToolDefinition
+
+	return LivekitTokenRequestTool{
+		BrowserToolDefinition: &browserToolDefinition,
+		Type:                  typ,
 	}
 }
 
@@ -462,6 +473,14 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		})
 	}
 
+	var browserToolDefinition BrowserToolDefinition = BrowserToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &browserToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  LivekitTokenRequestToolTypeBrowserToolDefinition,
+			Value: &browserToolDefinition,
+		})
+	}
+
 	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
 	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -533,6 +552,9 @@ func (u *LivekitTokenRequestTool) UnmarshalJSON(data []byte) (err error) {
 		return nil
 	case LivekitTokenRequestToolTypeScheduleToolDefinition:
 		u.ScheduleToolDefinition = best.Value.(*ScheduleToolDefinition)
+		return nil
+	case LivekitTokenRequestToolTypeBrowserToolDefinition:
+		u.BrowserToolDefinition = best.Value.(*BrowserToolDefinition)
 		return nil
 	case LivekitTokenRequestToolTypeOpenAPIToolDefinition:
 		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
@@ -609,6 +631,10 @@ func (u LivekitTokenRequestTool) MarshalJSON() ([]byte, error) {
 
 	if u.ScheduleToolDefinition != nil {
 		return utils.MarshalJSON(u.ScheduleToolDefinition, "", true)
+	}
+
+	if u.BrowserToolDefinition != nil {
+		return utils.MarshalJSON(u.BrowserToolDefinition, "", true)
 	}
 
 	if u.OpenAPIToolDefinition != nil {

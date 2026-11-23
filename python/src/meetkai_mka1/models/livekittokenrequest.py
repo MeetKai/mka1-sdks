@@ -6,6 +6,7 @@ from .approvaltooldefinition import (
     ApprovalToolDefinition,
     ApprovalToolDefinitionTypedDict,
 )
+from .browsertooldefinition import BrowserToolDefinition, BrowserToolDefinitionTypedDict
 from .codeinterpretertoolrequest import (
     CodeInterpreterToolRequest,
     CodeInterpreterToolRequestTypedDict,
@@ -94,6 +95,7 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
     "LivekitTokenRequestToolTypedDict",
     Union[
         LocalShellToolDefinitionTypedDict,
+        BrowserToolDefinitionTypedDict,
         ApprovalToolDefinitionTypedDict,
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
@@ -104,8 +106,8 @@ LivekitTokenRequestToolTypedDict = TypeAliasType(
         CustomToolDefinitionTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
-        ComputerUseToolDefinitionTypedDict,
         AgentToolDefinitionTypedDict,
+        ComputerUseToolDefinitionTypedDict,
         FileSearchToolDefinitionTypedDict,
         FunctionToolDefinitionTypedDict,
         OpenAPIToolDefinitionTypedDict,
@@ -119,6 +121,7 @@ LivekitTokenRequestTool = TypeAliasType(
     "LivekitTokenRequestTool",
     Union[
         LocalShellToolDefinition,
+        BrowserToolDefinition,
         ApprovalToolDefinition,
         HistoryToolDefinition,
         SleepToolDefinition,
@@ -129,8 +132,8 @@ LivekitTokenRequestTool = TypeAliasType(
         CustomToolDefinition,
         WebSearchPreviewToolDefinition,
         WebSearchToolDefinition,
-        ComputerUseToolDefinition,
         AgentToolDefinition,
+        ComputerUseToolDefinition,
         FileSearchToolDefinition,
         FunctionToolDefinition,
         OpenAPIToolDefinition,

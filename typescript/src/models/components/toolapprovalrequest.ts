@@ -15,7 +15,7 @@ export type ToolApprovalRequest = {
   type: "tool_approval_request";
   id: string;
   /**
-   * The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent. MCP calls use mcp_approval_request instead.
+   * The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent, browser. MCP calls use mcp_approval_request instead.
    */
   toolType: string;
   /**

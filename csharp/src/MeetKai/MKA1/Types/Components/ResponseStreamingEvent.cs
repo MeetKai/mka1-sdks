@@ -272,6 +272,20 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static ResponseStreamingEventType ResponseBrowserCallInProgress
+        {
+            get {
+                return new ResponseStreamingEventType("response.browser_call.in_progress");
+            }
+        }
+
+        public static ResponseStreamingEventType ResponseBrowserCallCompleted
+        {
+            get {
+                return new ResponseStreamingEventType("response.browser_call.completed");
+            }
+        }
+
         public static ResponseStreamingEventType ResponseToolSearchCallInProgress
         {
             get {
@@ -662,6 +676,10 @@ namespace MeetKai.MKA1.Types.Components
                     return ResponseScheduleCallInProgress;
                 case "response.schedule_call.completed":
                     return ResponseScheduleCallCompleted;
+                case "response.browser_call.in_progress":
+                    return ResponseBrowserCallInProgress;
+                case "response.browser_call.completed":
+                    return ResponseBrowserCallCompleted;
                 case "response.tool_search_call.in_progress":
                     return ResponseToolSearchCallInProgress;
                 case "response.tool_search_call.searching":
@@ -881,6 +899,12 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseScheduleCallCompletedEvent? ResponseScheduleCallCompletedEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseBrowserCallInProgressEvent? ResponseBrowserCallInProgressEvent { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ResponseBrowserCallCompletedEvent? ResponseBrowserCallCompletedEvent { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public ResponseToolSearchCallInProgressEvent? ResponseToolSearchCallInProgressEvent { get; set; }
@@ -1305,6 +1329,22 @@ namespace MeetKai.MKA1.Types.Components
             ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseScheduleCallCompleted;
             ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
             res.ResponseScheduleCallCompletedEvent = responseScheduleCallCompleted;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseBrowserCallInProgress(ResponseBrowserCallInProgressEvent responseBrowserCallInProgress)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseBrowserCallInProgress;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseBrowserCallInProgressEvent = responseBrowserCallInProgress;
+            return res;
+        }
+
+        public static ResponseStreamingEvent CreateResponseBrowserCallCompleted(ResponseBrowserCallCompletedEvent responseBrowserCallCompleted)
+        {
+            ResponseStreamingEventType typ = ResponseStreamingEventType.ResponseBrowserCallCompleted;
+            ResponseStreamingEvent res = new ResponseStreamingEvent(typ);
+            res.ResponseBrowserCallCompletedEvent = responseBrowserCallCompleted;
             return res;
         }
 
@@ -1854,6 +1894,16 @@ namespace MeetKai.MKA1.Types.Components
                     ResponseScheduleCallCompletedEvent responseScheduleCallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseScheduleCallCompletedEvent>(jo.ToString());
                     return CreateResponseScheduleCallCompleted(responseScheduleCallCompletedEvent);
                 }
+                if (discriminator == ResponseStreamingEventType.ResponseBrowserCallInProgress.ToString())
+                {
+                    ResponseBrowserCallInProgressEvent responseBrowserCallInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseBrowserCallInProgressEvent>(jo.ToString());
+                    return CreateResponseBrowserCallInProgress(responseBrowserCallInProgressEvent);
+                }
+                if (discriminator == ResponseStreamingEventType.ResponseBrowserCallCompleted.ToString())
+                {
+                    ResponseBrowserCallCompletedEvent responseBrowserCallCompletedEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseBrowserCallCompletedEvent>(jo.ToString());
+                    return CreateResponseBrowserCallCompleted(responseBrowserCallCompletedEvent);
+                }
                 if (discriminator == ResponseStreamingEventType.ResponseToolSearchCallInProgress.ToString())
                 {
                     ResponseToolSearchCallInProgressEvent responseToolSearchCallInProgressEvent = ResponseBodyDeserializer.DeserializeNotNull<ResponseToolSearchCallInProgressEvent>(jo.ToString());
@@ -2299,6 +2349,18 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ResponseScheduleCallCompletedEvent != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseScheduleCallCompletedEvent));
+                    return;
+                }
+
+                if (res.ResponseBrowserCallInProgressEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseBrowserCallInProgressEvent));
+                    return;
+                }
+
+                if (res.ResponseBrowserCallCompletedEvent != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ResponseBrowserCallCompletedEvent));
                     return;
                 }
 

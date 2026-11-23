@@ -203,6 +203,16 @@ namespace MeetKai.MKA1.Types.Requests
             return Data.ResponseScheduleCallCompletedEvent;
         }
 
+        public ResponseBrowserCallInProgressEvent? GetDataResponseBrowserCallInProgress()
+        {
+            return Data.ResponseBrowserCallInProgressEvent;
+        }
+
+        public ResponseBrowserCallCompletedEvent? GetDataResponseBrowserCallCompleted()
+        {
+            return Data.ResponseBrowserCallCompletedEvent;
+        }
+
         public ResponseToolSearchCallInProgressEvent? GetDataResponseToolSearchCallInProgress()
         {
             return Data.ResponseToolSearchCallInProgressEvent;

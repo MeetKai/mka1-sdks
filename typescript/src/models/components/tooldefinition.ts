@@ -51,10 +51,10 @@ import {
   OpenApiToolSetReference$outboundSchema,
 } from "./openapitoolsetreference.js";
 
-export const ToolDefinition13Type = {
+export const ToolDefinition14Type = {
   Shell: "shell",
 } as const;
-export type ToolDefinition13Type = ClosedEnum<typeof ToolDefinition13Type>;
+export type ToolDefinition14Type = ClosedEnum<typeof ToolDefinition14Type>;
 
 export const ToolDefinitionEnvironmentAccess = {
   ReadOnly: "read_only",
@@ -116,8 +116,8 @@ export type ToolDefinitionEnvironment =
   | ToolDefinitionEnvironment2
   | discriminatedUnionTypes.Unknown<"type">;
 
-export type Thirteen = {
-  type: ToolDefinition13Type;
+export type Fourteen = {
+  type: ToolDefinition14Type;
   environment?:
     | Environment1
     | ToolDefinitionEnvironment2
@@ -125,19 +125,31 @@ export type Thirteen = {
     | undefined;
 };
 
-export const ToolDefinition12Type = {
+export const ToolDefinition13Type = {
   Agent: "agent",
 } as const;
-export type ToolDefinition12Type = ClosedEnum<typeof ToolDefinition12Type>;
+export type ToolDefinition13Type = ClosedEnum<typeof ToolDefinition13Type>;
 
 /**
  * Another saved agent of the same team, called as a tool. The Responses API starts a run of that agent and returns its answer.
  */
-export type Twelve = {
-  type: ToolDefinition12Type;
+export type Thirteen = {
+  type: ToolDefinition13Type;
   agentId: string;
   name?: string | undefined;
   description?: string | undefined;
+};
+
+export const ToolDefinition12Type = {
+  Browser: "browser",
+} as const;
+export type ToolDefinition12Type = ClosedEnum<typeof ToolDefinition12Type>;
+
+/**
+ * The user's own web browser, which keeps their logins between conversations. The model opens pages, reads them and clicks or types; it runs no scripts of its own and never sees what a password field holds. When a site needs the user, for example to sign in, the model asks them to take over: in a private Telegram chat they get a button that opens a live view of the browser, and the agent carries on when they tap Done.
+ */
+export type Twelve = {
+  type: ToolDefinition12Type;
 };
 
 export const ToolDefinition11Type = {
@@ -396,24 +408,25 @@ export type ToolDefinition =
   | OpenApiToolSetReference
   | ToolDefinition6
   | Eight
-  | Twelve
+  | Thirteen
   | ToolDefinition3
   | Seven
   | Nine
   | Ten
   | Eleven
-  | Thirteen
+  | Twelve
+  | Fourteen
   | Five1
   | Five2;
 
 /** @internal */
-export const ToolDefinition13Type$inboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition13Type
-> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition13Type));
+export const ToolDefinition14Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition14Type
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition14Type));
 /** @internal */
-export const ToolDefinition13Type$outboundSchema: z.ZodNativeEnum<
-  typeof ToolDefinition13Type
-> = ToolDefinition13Type$inboundSchema;
+export const ToolDefinition14Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition14Type
+> = ToolDefinition14Type$inboundSchema;
 
 /** @internal */
 export const ToolDefinitionEnvironmentAccess$inboundSchema: z.ZodNativeEnum<
@@ -735,13 +748,13 @@ export function toolDefinitionEnvironmentFromJSON(
 }
 
 /** @internal */
-export const Thirteen$inboundSchema: z.ZodType<
-  Thirteen,
+export const Fourteen$inboundSchema: z.ZodType<
+  Fourteen,
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    type: ToolDefinition13Type$inboundSchema,
+    type: ToolDefinition14Type$inboundSchema,
     environment: discriminatedUnion("type", {
       container_auto: z.lazy(() => Environment1$inboundSchema),
       container_reference: z.lazy(() =>
@@ -751,12 +764,74 @@ export const Thirteen$inboundSchema: z.ZodType<
   })
 );
 /** @internal */
-export type Thirteen$Outbound = {
+export type Fourteen$Outbound = {
   type: string;
   environment?:
     | Environment1$Outbound
     | ToolDefinitionEnvironment2$Outbound
     | undefined;
+};
+
+/** @internal */
+export const Fourteen$outboundSchema: z.ZodType<
+  Fourteen$Outbound,
+  z.ZodTypeDef,
+  Fourteen
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition14Type$outboundSchema,
+    environment: z.union([
+      z.lazy(() => Environment1$outboundSchema),
+      z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
+    ]).optional(),
+  })
+);
+
+export function fourteenToJSON(fourteen: Fourteen): string {
+  return JSON.stringify(Fourteen$outboundSchema.parse(fourteen));
+}
+export function fourteenFromJSON(
+  jsonString: string,
+): SafeParseResult<Fourteen, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Fourteen$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Fourteen' from JSON`,
+  );
+}
+
+/** @internal */
+export const ToolDefinition13Type$inboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition13Type
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(ToolDefinition13Type));
+/** @internal */
+export const ToolDefinition13Type$outboundSchema: z.ZodNativeEnum<
+  typeof ToolDefinition13Type
+> = ToolDefinition13Type$inboundSchema;
+
+/** @internal */
+export const Thirteen$inboundSchema: z.ZodType<
+  Thirteen,
+  z.ZodTypeDef,
+  unknown
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ToolDefinition13Type$inboundSchema,
+    agent_id: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      "agent_id": "agentId",
+    });
+  })
+);
+/** @internal */
+export type Thirteen$Outbound = {
+  type: string;
+  agent_id: string;
+  name?: string | undefined;
+  description?: string | undefined;
 };
 
 /** @internal */
@@ -767,10 +842,13 @@ export const Thirteen$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     type: ToolDefinition13Type$outboundSchema,
-    environment: z.union([
-      z.lazy(() => Environment1$outboundSchema),
-      z.lazy(() => ToolDefinitionEnvironment2$outboundSchema),
-    ]).optional(),
+    agentId: z.string(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+  }).transform((v) => {
+    return remap$(v, {
+      agentId: "agent_id",
+    });
   })
 );
 
@@ -801,21 +879,11 @@ export const Twelve$inboundSchema: z.ZodType<Twelve, z.ZodTypeDef, unknown> =
   /* @__PURE__ */ lazySchema$(() =>
     z.object({
       type: ToolDefinition12Type$inboundSchema,
-      agent_id: z.string(),
-      name: z.string().optional(),
-      description: z.string().optional(),
-    }).transform((v) => {
-      return remap$(v, {
-        "agent_id": "agentId",
-      });
     })
   );
 /** @internal */
 export type Twelve$Outbound = {
   type: string;
-  agent_id: string;
-  name?: string | undefined;
-  description?: string | undefined;
 };
 
 /** @internal */
@@ -826,13 +894,6 @@ export const Twelve$outboundSchema: z.ZodType<
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
     type: ToolDefinition12Type$outboundSchema,
-    agentId: z.string(),
-    name: z.string().optional(),
-    description: z.string().optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      agentId: "agent_id",
-    });
   })
 );
 
@@ -2292,13 +2353,14 @@ export const ToolDefinition$inboundSchema: z.ZodType<
     OpenApiToolSetReference$inboundSchema,
     z.lazy(() => ToolDefinition6$inboundSchema),
     z.lazy(() => Eight$inboundSchema),
-    z.lazy(() => Twelve$inboundSchema),
+    z.lazy(() => Thirteen$inboundSchema),
     z.lazy(() => ToolDefinition3$inboundSchema),
     z.lazy(() => Seven$inboundSchema),
     z.lazy(() => Nine$inboundSchema),
     z.lazy(() => Ten$inboundSchema),
     z.lazy(() => Eleven$inboundSchema),
-    z.lazy(() => Thirteen$inboundSchema),
+    z.lazy(() => Twelve$inboundSchema),
+    z.lazy(() => Fourteen$inboundSchema),
     z.union([
       z.lazy(() => Five1$inboundSchema),
       z.lazy(() => Five2$inboundSchema),
@@ -2312,13 +2374,14 @@ export type ToolDefinition$Outbound =
   | OpenApiToolSetReference$Outbound
   | ToolDefinition6$Outbound
   | Eight$Outbound
-  | Twelve$Outbound
+  | Thirteen$Outbound
   | ToolDefinition3$Outbound
   | Seven$Outbound
   | Nine$Outbound
   | Ten$Outbound
   | Eleven$Outbound
-  | Thirteen$Outbound
+  | Twelve$Outbound
+  | Fourteen$Outbound
   | Five1$Outbound
   | Five2$Outbound;
 
@@ -2334,13 +2397,14 @@ export const ToolDefinition$outboundSchema: z.ZodType<
     OpenApiToolSetReference$outboundSchema,
     z.lazy(() => ToolDefinition6$outboundSchema),
     z.lazy(() => Eight$outboundSchema),
-    z.lazy(() => Twelve$outboundSchema),
+    z.lazy(() => Thirteen$outboundSchema),
     z.lazy(() => ToolDefinition3$outboundSchema),
     z.lazy(() => Seven$outboundSchema),
     z.lazy(() => Nine$outboundSchema),
     z.lazy(() => Ten$outboundSchema),
     z.lazy(() => Eleven$outboundSchema),
-    z.lazy(() => Thirteen$outboundSchema),
+    z.lazy(() => Twelve$outboundSchema),
+    z.lazy(() => Fourteen$outboundSchema),
     z.union([
       z.lazy(() => Five1$outboundSchema),
       z.lazy(() => Five2$outboundSchema),

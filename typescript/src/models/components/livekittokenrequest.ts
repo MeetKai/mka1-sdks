@@ -21,6 +21,12 @@ import {
   ApprovalToolDefinition$outboundSchema,
 } from "./approvaltooldefinition.js";
 import {
+  BrowserToolDefinition,
+  BrowserToolDefinition$inboundSchema,
+  BrowserToolDefinition$Outbound,
+  BrowserToolDefinition$outboundSchema,
+} from "./browsertooldefinition.js";
+import {
   CodeInterpreterToolRequest,
   CodeInterpreterToolRequest$inboundSchema,
   CodeInterpreterToolRequest$Outbound,
@@ -179,7 +185,8 @@ export type LivekitTokenRequestTools =
   | HostedToolShorthandDefinition
   | SleepToolDefinition
   | HistoryToolDefinition
-  | ApprovalToolDefinition;
+  | ApprovalToolDefinition
+  | BrowserToolDefinition;
 
 /**
  * The truncation strategy for handling inputs that exceed the model's context window. 'auto' automatically truncates old messages to fit, 'disabled' returns an error if context is too long. Defaults to 'auto'.
@@ -255,6 +262,7 @@ export type Llm = {
       | SleepToolDefinition
       | HistoryToolDefinition
       | ApprovalToolDefinition
+      | BrowserToolDefinition
     >
     | undefined;
   toolChoice?: ToolChoice | undefined;
@@ -427,6 +435,7 @@ export const LivekitTokenRequestTools$inboundSchema: z.ZodType<
     SleepToolDefinition$inboundSchema,
     HistoryToolDefinition$inboundSchema,
     ApprovalToolDefinition$inboundSchema,
+    BrowserToolDefinition$inboundSchema,
   ])
 );
 /** @internal */
@@ -448,7 +457,8 @@ export type LivekitTokenRequestTools$Outbound =
   | HostedToolShorthandDefinition$Outbound
   | SleepToolDefinition$Outbound
   | HistoryToolDefinition$Outbound
-  | ApprovalToolDefinition$Outbound;
+  | ApprovalToolDefinition$Outbound
+  | BrowserToolDefinition$Outbound;
 
 /** @internal */
 export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
@@ -475,6 +485,7 @@ export const LivekitTokenRequestTools$outboundSchema: z.ZodType<
     SleepToolDefinition$outboundSchema,
     HistoryToolDefinition$outboundSchema,
     ApprovalToolDefinition$outboundSchema,
+    BrowserToolDefinition$outboundSchema,
   ])
 );
 
@@ -548,6 +559,7 @@ export const Llm$inboundSchema: z.ZodType<Llm, z.ZodTypeDef, unknown> =
           SleepToolDefinition$inboundSchema,
           HistoryToolDefinition$inboundSchema,
           ApprovalToolDefinition$inboundSchema,
+          BrowserToolDefinition$inboundSchema,
         ]),
       ).optional(),
       tool_choice: ToolChoice$inboundSchema.optional(),
@@ -609,6 +621,7 @@ export type Llm$Outbound = {
       | SleepToolDefinition$Outbound
       | HistoryToolDefinition$Outbound
       | ApprovalToolDefinition$Outbound
+      | BrowserToolDefinition$Outbound
     >
     | undefined;
   tool_choice?: ToolChoice$Outbound | undefined;
@@ -658,6 +671,7 @@ export const Llm$outboundSchema: z.ZodType<Llm$Outbound, z.ZodTypeDef, Llm> =
           SleepToolDefinition$outboundSchema,
           HistoryToolDefinition$outboundSchema,
           ApprovalToolDefinition$outboundSchema,
+          BrowserToolDefinition$outboundSchema,
         ]),
       ).optional(),
       toolChoice: ToolChoice$outboundSchema.optional(),

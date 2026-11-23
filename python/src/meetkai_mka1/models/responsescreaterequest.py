@@ -6,6 +6,7 @@ from .approvaltooldefinition import (
     ApprovalToolDefinition,
     ApprovalToolDefinitionTypedDict,
 )
+from .browsertooldefinition import BrowserToolDefinition, BrowserToolDefinitionTypedDict
 from .codeinterpretertoolrequest import (
     CodeInterpreterToolRequest,
     CodeInterpreterToolRequestTypedDict,
@@ -156,6 +157,7 @@ ResponsesCreateRequestToolTypedDict = TypeAliasType(
     "ResponsesCreateRequestToolTypedDict",
     Union[
         LocalShellToolDefinitionTypedDict,
+        BrowserToolDefinitionTypedDict,
         ApprovalToolDefinitionTypedDict,
         HistoryToolDefinitionTypedDict,
         SleepToolDefinitionTypedDict,
@@ -166,8 +168,8 @@ ResponsesCreateRequestToolTypedDict = TypeAliasType(
         CustomToolDefinitionTypedDict,
         WebSearchPreviewToolDefinitionTypedDict,
         WebSearchToolDefinitionTypedDict,
-        ComputerUseToolDefinitionTypedDict,
         AgentToolDefinitionTypedDict,
+        ComputerUseToolDefinitionTypedDict,
         FileSearchToolDefinitionTypedDict,
         FunctionToolDefinitionTypedDict,
         OpenAPIToolDefinitionTypedDict,
@@ -181,6 +183,7 @@ ResponsesCreateRequestTool = TypeAliasType(
     "ResponsesCreateRequestTool",
     Union[
         LocalShellToolDefinition,
+        BrowserToolDefinition,
         ApprovalToolDefinition,
         HistoryToolDefinition,
         SleepToolDefinition,
@@ -191,8 +194,8 @@ ResponsesCreateRequestTool = TypeAliasType(
         CustomToolDefinition,
         WebSearchPreviewToolDefinition,
         WebSearchToolDefinition,
-        ComputerUseToolDefinition,
         AgentToolDefinition,
+        ComputerUseToolDefinition,
         FileSearchToolDefinition,
         FunctionToolDefinition,
         OpenAPIToolDefinition,

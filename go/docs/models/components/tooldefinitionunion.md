@@ -69,6 +69,12 @@ toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionApprova
 toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionSchedule(components.ToolDefinitionSchedule{/* values here */})
 ```
 
+### ToolDefinitionBrowser
+
+```go
+toolDefinitionUnion := components.CreateToolDefinitionUnionToolDefinitionBrowser(components.ToolDefinitionBrowser{/* values here */})
+```
+
 ### ToolDefinitionAgent
 
 ```go
@@ -109,6 +115,8 @@ switch toolDefinitionUnion.Type {
 		// toolDefinitionUnion.ToolDefinitionApproval is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionSchedule:
 		// toolDefinitionUnion.ToolDefinitionSchedule is populated
+	case components.ToolDefinitionUnionTypeToolDefinitionBrowser:
+		// toolDefinitionUnion.ToolDefinitionBrowser is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionAgent:
 		// toolDefinitionUnion.ToolDefinitionAgent is populated
 	case components.ToolDefinitionUnionTypeToolDefinitionShell:

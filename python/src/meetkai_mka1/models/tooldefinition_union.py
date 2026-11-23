@@ -371,6 +371,21 @@ class ToolDefinitionAgent(BaseModel):
         return m
 
 
+TypeBrowser = Literal["browser",]
+
+
+class ToolDefinitionBrowserTypedDict(TypedDict):
+    r"""The user's own web browser, which keeps their logins between conversations. The model opens pages, reads them and clicks or types; it runs no scripts of its own and never sees what a password field holds. When a site needs the user, for example to sign in, the model asks them to take over: in a private Telegram chat they get a button that opens a live view of the browser, and the agent carries on when they tap Done."""
+
+    type: TypeBrowser
+
+
+class ToolDefinitionBrowser(BaseModel):
+    r"""The user's own web browser, which keeps their logins between conversations. The model opens pages, reads them and clicks or types; it runs no scripts of its own and never sees what a password field holds. When a site needs the user, for example to sign in, the model asks them to take over: in a private Telegram chat they get a button that opens a live view of the browser, and the agent carries on when they tap Done."""
+
+    type: TypeBrowser
+
+
 TypeSchedule = Literal["schedule",]
 
 
@@ -1125,15 +1140,16 @@ ToolDefinitionUnionTypedDict = TypeAliasType(
     "ToolDefinitionUnionTypedDict",
     Union[
         ToolDefinitionApprovalTypedDict,
-        ToolDefinition2TypedDict,
-        ToolDefinitionSleepTypedDict,
+        ToolDefinitionBrowserTypedDict,
         ToolDefinitionScheduleTypedDict,
-        OpenAPIToolSetReferenceTypedDict,
-        ToolDefinitionCodeInterpreterTypedDict,
+        ToolDefinitionSleepTypedDict,
+        ToolDefinition2TypedDict,
         FunctionToolReferenceTypedDict,
         ToolDefinitionShellTypedDict,
-        ToolDefinition1TypedDict,
+        ToolDefinitionCodeInterpreterTypedDict,
+        OpenAPIToolSetReferenceTypedDict,
         ToolDefinitionAgentTypedDict,
+        ToolDefinition1TypedDict,
         ToolDefinitionFileSearchTypedDict,
         ToolDefinitionFunctionTypedDict,
         ToolDefinitionUnion1TypedDict,
@@ -1145,15 +1161,16 @@ ToolDefinitionUnion = TypeAliasType(
     "ToolDefinitionUnion",
     Union[
         ToolDefinitionApproval,
-        ToolDefinition2,
-        ToolDefinitionSleep,
+        ToolDefinitionBrowser,
         ToolDefinitionSchedule,
-        OpenAPIToolSetReference,
-        ToolDefinitionCodeInterpreter,
+        ToolDefinitionSleep,
+        ToolDefinition2,
         FunctionToolReference,
         ToolDefinitionShell,
-        ToolDefinition1,
+        ToolDefinitionCodeInterpreter,
+        OpenAPIToolSetReference,
         ToolDefinitionAgent,
+        ToolDefinition1,
         ToolDefinitionFileSearch,
         ToolDefinitionFunction,
         ToolDefinitionUnion1,

@@ -906,6 +906,7 @@ const (
 	ResponseObjectToolTypeAgentToolDefinition                    ResponseObjectToolType = "AgentToolDefinition"
 	ResponseObjectToolTypeApprovalToolDefinition                 ResponseObjectToolType = "ApprovalToolDefinition"
 	ResponseObjectToolTypeScheduleToolDefinition                 ResponseObjectToolType = "ScheduleToolDefinition"
+	ResponseObjectToolTypeBrowserToolDefinition                  ResponseObjectToolType = "BrowserToolDefinition"
 	ResponseObjectToolTypeOpenAPIToolDefinition                  ResponseObjectToolType = "OpenApiToolDefinition"
 	ResponseObjectToolTypeUnknown                                ResponseObjectToolType = "Unknown"
 )
@@ -928,6 +929,7 @@ type ResponseObjectTool struct {
 	AgentToolDefinition                    *AgentToolDefinition                    `queryParam:"inline" union:"member"`
 	ApprovalToolDefinition                 *ApprovalToolDefinition                 `queryParam:"inline" union:"member"`
 	ScheduleToolDefinition                 *ScheduleToolDefinition                 `queryParam:"inline" union:"member"`
+	BrowserToolDefinition                  *BrowserToolDefinition                  `queryParam:"inline" union:"member"`
 	OpenAPIToolDefinition                  *OpenAPIToolDefinition                  `queryParam:"inline" union:"member"`
 	UnknownRaw                             json.RawMessage                         `json:"-" union:"unknown"`
 
@@ -1084,6 +1086,15 @@ func CreateResponseObjectToolScheduleToolDefinition(scheduleToolDefinition Sched
 	return ResponseObjectTool{
 		ScheduleToolDefinition: &scheduleToolDefinition,
 		Type:                   typ,
+	}
+}
+
+func CreateResponseObjectToolBrowserToolDefinition(browserToolDefinition BrowserToolDefinition) ResponseObjectTool {
+	typ := ResponseObjectToolTypeBrowserToolDefinition
+
+	return ResponseObjectTool{
+		BrowserToolDefinition: &browserToolDefinition,
+		Type:                  typ,
 	}
 }
 
@@ -1253,6 +1264,14 @@ func (u *ResponseObjectTool) UnmarshalJSON(data []byte) error {
 		})
 	}
 
+	var browserToolDefinition BrowserToolDefinition = BrowserToolDefinition{}
+	if err := utils.UnmarshalJSON(data, &browserToolDefinition, "", true, nil); err == nil {
+		candidates = append(candidates, utils.UnionCandidate{
+			Type:  ResponseObjectToolTypeBrowserToolDefinition,
+			Value: &browserToolDefinition,
+		})
+	}
+
 	var openAPIToolDefinition OpenAPIToolDefinition = OpenAPIToolDefinition{}
 	if err := utils.UnmarshalJSON(data, &openAPIToolDefinition, "", true, nil); err == nil {
 		candidates = append(candidates, utils.UnionCandidate{
@@ -1331,6 +1350,9 @@ func (u *ResponseObjectTool) UnmarshalJSON(data []byte) error {
 		return nil
 	case ResponseObjectToolTypeScheduleToolDefinition:
 		u.ScheduleToolDefinition = best.Value.(*ScheduleToolDefinition)
+		return nil
+	case ResponseObjectToolTypeBrowserToolDefinition:
+		u.BrowserToolDefinition = best.Value.(*BrowserToolDefinition)
 		return nil
 	case ResponseObjectToolTypeOpenAPIToolDefinition:
 		u.OpenAPIToolDefinition = best.Value.(*OpenAPIToolDefinition)
@@ -1412,6 +1434,10 @@ func (u ResponseObjectTool) MarshalJSON() ([]byte, error) {
 
 	if u.ScheduleToolDefinition != nil {
 		return utils.MarshalJSON(u.ScheduleToolDefinition, "", true)
+	}
+
+	if u.BrowserToolDefinition != nil {
+		return utils.MarshalJSON(u.BrowserToolDefinition, "", true)
 	}
 
 	if u.OpenAPIToolDefinition != nil {

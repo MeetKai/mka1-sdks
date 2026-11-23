@@ -193,6 +193,14 @@ func (c *CreateResponseResponseBody) GetDataResponseScheduleCallCompleted() *com
 	return c.GetData().ResponseScheduleCallCompletedEvent
 }
 
+func (c *CreateResponseResponseBody) GetDataResponseBrowserCallInProgress() *components.ResponseBrowserCallInProgressEvent {
+	return c.GetData().ResponseBrowserCallInProgressEvent
+}
+
+func (c *CreateResponseResponseBody) GetDataResponseBrowserCallCompleted() *components.ResponseBrowserCallCompletedEvent {
+	return c.GetData().ResponseBrowserCallCompletedEvent
+}
+
 func (c *CreateResponseResponseBody) GetDataResponseToolSearchCallInProgress() *components.ResponseToolSearchCallInProgressEvent {
 	return c.GetData().ResponseToolSearchCallInProgressEvent
 }

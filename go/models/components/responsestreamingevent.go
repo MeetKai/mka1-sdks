@@ -47,6 +47,8 @@ const (
 	ResponseStreamingEventTypeResponseApprovalCallCompleted           ResponseStreamingEventType = "response.approval_call.completed"
 	ResponseStreamingEventTypeResponseScheduleCallInProgress          ResponseStreamingEventType = "response.schedule_call.in_progress"
 	ResponseStreamingEventTypeResponseScheduleCallCompleted           ResponseStreamingEventType = "response.schedule_call.completed"
+	ResponseStreamingEventTypeResponseBrowserCallInProgress           ResponseStreamingEventType = "response.browser_call.in_progress"
+	ResponseStreamingEventTypeResponseBrowserCallCompleted            ResponseStreamingEventType = "response.browser_call.completed"
 	ResponseStreamingEventTypeResponseToolSearchCallInProgress        ResponseStreamingEventType = "response.tool_search_call.in_progress"
 	ResponseStreamingEventTypeResponseToolSearchCallSearching         ResponseStreamingEventType = "response.tool_search_call.searching"
 	ResponseStreamingEventTypeResponseToolSearchCallCompleted         ResponseStreamingEventType = "response.tool_search_call.completed"
@@ -129,6 +131,8 @@ type ResponseStreamingEvent struct {
 	ResponseApprovalCallCompletedEvent           *ResponseApprovalCallCompletedEvent           `queryParam:"inline" union:"member"`
 	ResponseScheduleCallInProgressEvent          *ResponseScheduleCallInProgressEvent          `queryParam:"inline" union:"member"`
 	ResponseScheduleCallCompletedEvent           *ResponseScheduleCallCompletedEvent           `queryParam:"inline" union:"member"`
+	ResponseBrowserCallInProgressEvent           *ResponseBrowserCallInProgressEvent           `queryParam:"inline" union:"member"`
+	ResponseBrowserCallCompletedEvent            *ResponseBrowserCallCompletedEvent            `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallInProgressEvent        *ResponseToolSearchCallInProgressEvent        `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallSearchingEvent         *ResponseToolSearchCallSearchingEvent         `queryParam:"inline" union:"member"`
 	ResponseToolSearchCallCompletedEvent         *ResponseToolSearchCallCompletedEvent         `queryParam:"inline" union:"member"`
@@ -489,6 +493,24 @@ func CreateResponseStreamingEventResponseScheduleCallCompleted(responseScheduleC
 	return ResponseStreamingEvent{
 		ResponseScheduleCallCompletedEvent: &responseScheduleCallCompleted,
 		Type:                               typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseBrowserCallInProgress(responseBrowserCallInProgress ResponseBrowserCallInProgressEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseBrowserCallInProgress
+
+	return ResponseStreamingEvent{
+		ResponseBrowserCallInProgressEvent: &responseBrowserCallInProgress,
+		Type:                               typ,
+	}
+}
+
+func CreateResponseStreamingEventResponseBrowserCallCompleted(responseBrowserCallCompleted ResponseBrowserCallCompletedEvent) ResponseStreamingEvent {
+	typ := ResponseStreamingEventTypeResponseBrowserCallCompleted
+
+	return ResponseStreamingEvent{
+		ResponseBrowserCallCompletedEvent: &responseBrowserCallCompleted,
+		Type:                              typ,
 	}
 }
 
@@ -1239,6 +1261,24 @@ func (u *ResponseStreamingEvent) UnmarshalJSON(data []byte) (err error) {
 		u.ResponseScheduleCallCompletedEvent = responseScheduleCallCompletedEvent
 		u.Type = ResponseStreamingEventTypeResponseScheduleCallCompleted
 		return nil
+	case "response.browser_call.in_progress":
+		responseBrowserCallInProgressEvent := new(ResponseBrowserCallInProgressEvent)
+		if err := utils.UnmarshalJSON(data, &responseBrowserCallInProgressEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.browser_call.in_progress) type ResponseBrowserCallInProgressEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseBrowserCallInProgressEvent = responseBrowserCallInProgressEvent
+		u.Type = ResponseStreamingEventTypeResponseBrowserCallInProgress
+		return nil
+	case "response.browser_call.completed":
+		responseBrowserCallCompletedEvent := new(ResponseBrowserCallCompletedEvent)
+		if err := utils.UnmarshalJSON(data, &responseBrowserCallCompletedEvent, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == response.browser_call.completed) type ResponseBrowserCallCompletedEvent within ResponseStreamingEvent: %w", string(data), err)
+		}
+
+		u.ResponseBrowserCallCompletedEvent = responseBrowserCallCompletedEvent
+		u.Type = ResponseStreamingEventTypeResponseBrowserCallCompleted
+		return nil
 	case "response.tool_search_call.in_progress":
 		responseToolSearchCallInProgressEvent := new(ResponseToolSearchCallInProgressEvent)
 		if err := utils.UnmarshalJSON(data, &responseToolSearchCallInProgressEvent, "", true, nil); err != nil {
@@ -1773,6 +1813,14 @@ func (u ResponseStreamingEvent) MarshalJSON() ([]byte, error) {
 
 	if u.ResponseScheduleCallCompletedEvent != nil {
 		return utils.MarshalJSON(u.ResponseScheduleCallCompletedEvent, "", true)
+	}
+
+	if u.ResponseBrowserCallInProgressEvent != nil {
+		return utils.MarshalJSON(u.ResponseBrowserCallInProgressEvent, "", true)
+	}
+
+	if u.ResponseBrowserCallCompletedEvent != nil {
+		return utils.MarshalJSON(u.ResponseBrowserCallCompletedEvent, "", true)
 	}
 
 	if u.ResponseToolSearchCallInProgressEvent != nil {

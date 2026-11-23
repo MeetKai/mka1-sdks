@@ -26,6 +26,7 @@ const (
 	PolicyToolTypeSleep           PolicyToolType = "sleep"
 	PolicyToolTypeApproval        PolicyToolType = "approval"
 	PolicyToolTypeSchedule        PolicyToolType = "schedule"
+	PolicyToolTypeBrowser         PolicyToolType = "browser"
 )
 
 func (e PolicyToolType) ToPointer() *PolicyToolType {
@@ -66,6 +67,8 @@ func (e *PolicyToolType) UnmarshalJSON(data []byte) error {
 	case "approval":
 		fallthrough
 	case "schedule":
+		fallthrough
+	case "browser":
 		*e = PolicyToolType(v)
 		return nil
 	default:

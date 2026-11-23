@@ -21,6 +21,12 @@ import {
   ApprovalToolDefinition$outboundSchema,
 } from "./approvaltooldefinition.js";
 import {
+  BrowserToolDefinition,
+  BrowserToolDefinition$inboundSchema,
+  BrowserToolDefinition$Outbound,
+  BrowserToolDefinition$outboundSchema,
+} from "./browsertooldefinition.js";
+import {
   CodeInterpreterToolRequest,
   CodeInterpreterToolRequest$inboundSchema,
   CodeInterpreterToolRequest$Outbound,
@@ -206,7 +212,8 @@ export type Tools =
   | HostedToolShorthandDefinition
   | SleepToolDefinition
   | HistoryToolDefinition
-  | ApprovalToolDefinition;
+  | ApprovalToolDefinition
+  | BrowserToolDefinition;
 
 /**
  * Gateway extension. Stop sequence(s) where compatible upstream providers should stop generation. Eval runs also enforce this as a post-processing guard.
@@ -374,6 +381,7 @@ export type ResponsesCreateRequest = {
       | SleepToolDefinition
       | HistoryToolDefinition
       | ApprovalToolDefinition
+      | BrowserToolDefinition
     >
     | undefined;
   toolChoice?: ToolChoice | undefined;
@@ -658,6 +666,7 @@ export const Tools$inboundSchema: z.ZodType<Tools, z.ZodTypeDef, unknown> =
       SleepToolDefinition$inboundSchema,
       HistoryToolDefinition$inboundSchema,
       ApprovalToolDefinition$inboundSchema,
+      BrowserToolDefinition$inboundSchema,
     ])
   );
 /** @internal */
@@ -679,7 +688,8 @@ export type Tools$Outbound =
   | HostedToolShorthandDefinition$Outbound
   | SleepToolDefinition$Outbound
   | HistoryToolDefinition$Outbound
-  | ApprovalToolDefinition$Outbound;
+  | ApprovalToolDefinition$Outbound
+  | BrowserToolDefinition$Outbound;
 
 /** @internal */
 export const Tools$outboundSchema: z.ZodType<
@@ -706,6 +716,7 @@ export const Tools$outboundSchema: z.ZodType<
     SleepToolDefinition$outboundSchema,
     HistoryToolDefinition$outboundSchema,
     ApprovalToolDefinition$outboundSchema,
+    BrowserToolDefinition$outboundSchema,
   ])
 );
 
@@ -921,6 +932,7 @@ export const ResponsesCreateRequest$inboundSchema: z.ZodType<
         SleepToolDefinition$inboundSchema,
         HistoryToolDefinition$inboundSchema,
         ApprovalToolDefinition$inboundSchema,
+        BrowserToolDefinition$inboundSchema,
       ]),
     ).optional(),
     tool_choice: ToolChoice$inboundSchema.optional(),
@@ -1028,6 +1040,7 @@ export type ResponsesCreateRequest$Outbound = {
       | SleepToolDefinition$Outbound
       | HistoryToolDefinition$Outbound
       | ApprovalToolDefinition$Outbound
+      | BrowserToolDefinition$Outbound
     >
     | undefined;
   tool_choice?: ToolChoice$Outbound | undefined;
@@ -1107,6 +1120,7 @@ export const ResponsesCreateRequest$outboundSchema: z.ZodType<
         SleepToolDefinition$outboundSchema,
         HistoryToolDefinition$outboundSchema,
         ApprovalToolDefinition$outboundSchema,
+        BrowserToolDefinition$outboundSchema,
       ]),
     ).optional(),
     toolChoice: ToolChoice$outboundSchema.optional(),

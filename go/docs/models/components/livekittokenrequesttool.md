@@ -105,6 +105,12 @@ livekitTokenRequestTool := components.CreateLivekitTokenRequestToolApprovalToolD
 livekitTokenRequestTool := components.CreateLivekitTokenRequestToolScheduleToolDefinition(components.ScheduleToolDefinition{/* values here */})
 ```
 
+### BrowserToolDefinition
+
+```go
+livekitTokenRequestTool := components.CreateLivekitTokenRequestToolBrowserToolDefinition(components.BrowserToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -151,6 +157,8 @@ switch livekitTokenRequestTool.Type {
 		// livekitTokenRequestTool.ApprovalToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeScheduleToolDefinition:
 		// livekitTokenRequestTool.ScheduleToolDefinition is populated
+	case components.LivekitTokenRequestToolTypeBrowserToolDefinition:
+		// livekitTokenRequestTool.BrowserToolDefinition is populated
 	case components.LivekitTokenRequestToolTypeOpenAPIToolDefinition:
 		// livekitTokenRequestTool.OpenAPIToolDefinition is populated
 }

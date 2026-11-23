@@ -146,6 +146,13 @@ namespace MeetKai.MKA1.Types.Components
             }
         }
 
+        public static LivekitTokenRequestToolType BrowserToolDefinition
+        {
+            get {
+                return new LivekitTokenRequestToolType("BrowserToolDefinition");
+            }
+        }
+
         public static LivekitTokenRequestToolType OpenApiToolDefinition
         {
             get {
@@ -199,6 +206,8 @@ namespace MeetKai.MKA1.Types.Components
                     return ApprovalToolDefinition;
                 case "ScheduleToolDefinition":
                     return ScheduleToolDefinition;
+                case "BrowserToolDefinition":
+                    return BrowserToolDefinition;
                 case "OpenApiToolDefinition":
                     return OpenApiToolDefinition;
                 default:
@@ -278,6 +287,9 @@ namespace MeetKai.MKA1.Types.Components
 
         [SpeakeasyMetadata("form:explode=true")]
         public ScheduleToolDefinition? ScheduleToolDefinition { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public BrowserToolDefinition? BrowserToolDefinition { get; set; }
 
         [SpeakeasyMetadata("form:explode=true")]
         public OpenApiToolDefinition? OpenApiToolDefinition { get; set; }
@@ -419,6 +431,14 @@ namespace MeetKai.MKA1.Types.Components
             res.ScheduleToolDefinition = scheduleToolDefinition;
             return res;
         }
+        public static LivekitTokenRequestTool CreateBrowserToolDefinition(BrowserToolDefinition browserToolDefinition)
+        {
+            LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.BrowserToolDefinition;
+
+            LivekitTokenRequestTool res = new LivekitTokenRequestTool(typ);
+            res.BrowserToolDefinition = browserToolDefinition;
+            return res;
+        }
         public static LivekitTokenRequestTool CreateOpenApiToolDefinition(OpenApiToolDefinition openAPIToolDefinition)
         {
             LivekitTokenRequestToolType typ = LivekitTokenRequestToolType.OpenApiToolDefinition;
@@ -453,6 +473,25 @@ namespace MeetKai.MKA1.Types.Components
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
                     fallbackCandidates.Add((typeof(LocalShellToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.LocalShellToolDefinition), "LocalShellToolDefinition"));
+                }
+                catch (ResponseBodyDeserializer.DeserializationException)
+                {
+                    // try next option
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                try
+                {
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.BrowserToolDefinition) {
+                        BrowserToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<BrowserToolDefinition>(json)
+                    };
+                }
+                catch (ResponseBodyDeserializer.MissingMemberException)
+                {
+                    fallbackCandidates.Add((typeof(BrowserToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.BrowserToolDefinition), "BrowserToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -655,13 +694,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ComputerUseToolDefinition) {
-                        ComputerUseToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ComputerUseToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition) {
+                        AgentToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<AgentToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(ComputerUseToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ComputerUseToolDefinition), "ComputerUseToolDefinition"));
+                    fallbackCandidates.Add((typeof(AgentToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition), "AgentToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -674,13 +713,13 @@ namespace MeetKai.MKA1.Types.Components
 
                 try
                 {
-                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition) {
-                        AgentToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<AgentToolDefinition>(json)
+                    return new LivekitTokenRequestTool(LivekitTokenRequestToolType.ComputerUseToolDefinition) {
+                        ComputerUseToolDefinition = ResponseBodyDeserializer.DeserializeUndiscriminatedUnionMember<ComputerUseToolDefinition>(json)
                     };
                 }
                 catch (ResponseBodyDeserializer.MissingMemberException)
                 {
-                    fallbackCandidates.Add((typeof(AgentToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.AgentToolDefinition), "AgentToolDefinition"));
+                    fallbackCandidates.Add((typeof(ComputerUseToolDefinition), new LivekitTokenRequestTool(LivekitTokenRequestToolType.ComputerUseToolDefinition), "ComputerUseToolDefinition"));
                 }
                 catch (ResponseBodyDeserializer.DeserializationException)
                 {
@@ -917,6 +956,12 @@ namespace MeetKai.MKA1.Types.Components
                 if (res.ScheduleToolDefinition != null)
                 {
                     writer.WriteRawValue(Utilities.SerializeJSON(res.ScheduleToolDefinition));
+                    return;
+                }
+
+                if (res.BrowserToolDefinition != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.BrowserToolDefinition));
                     return;
                 }
 

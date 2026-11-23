@@ -20,5 +20,6 @@ PolicyToolType = Literal[
     "sleep",
     "approval",
     "schedule",
+    "browser",
 ]
 r"""The tool type the rule governs. web_search covers every web_search and web_search_preview variant. function, custom and local_shell tools run in the caller's application, and history, sleep, approval and schedule are not held for review, so the policy can deny them but not require approval for them."""

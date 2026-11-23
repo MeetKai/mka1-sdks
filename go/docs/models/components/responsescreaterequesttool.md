@@ -105,6 +105,12 @@ responsesCreateRequestTool := components.CreateResponsesCreateRequestToolApprova
 responsesCreateRequestTool := components.CreateResponsesCreateRequestToolScheduleToolDefinition(components.ScheduleToolDefinition{/* values here */})
 ```
 
+### BrowserToolDefinition
+
+```go
+responsesCreateRequestTool := components.CreateResponsesCreateRequestToolBrowserToolDefinition(components.BrowserToolDefinition{/* values here */})
+```
+
 ### OpenAPIToolDefinition
 
 ```go
@@ -151,6 +157,8 @@ switch responsesCreateRequestTool.Type {
 		// responsesCreateRequestTool.ApprovalToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeScheduleToolDefinition:
 		// responsesCreateRequestTool.ScheduleToolDefinition is populated
+	case components.ResponsesCreateRequestToolTypeBrowserToolDefinition:
+		// responsesCreateRequestTool.BrowserToolDefinition is populated
 	case components.ResponsesCreateRequestToolTypeOpenAPIToolDefinition:
 		// responsesCreateRequestTool.OpenAPIToolDefinition is populated
 }

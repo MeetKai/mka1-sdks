@@ -21,7 +21,7 @@ class ToolApprovalRequestTypedDict(TypedDict):
 
     id: str
     tool_type: str
-    r"""The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent. MCP calls use mcp_approval_request instead."""
+    r"""The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent, browser. MCP calls use mcp_approval_request instead."""
     name: str
     r"""The name of the tool the model called, such as web_search or an OpenAPI operation name."""
     arguments: str
@@ -37,7 +37,7 @@ class ToolApprovalRequest(BaseModel):
     id: str
 
     tool_type: str
-    r"""The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent. MCP calls use mcp_approval_request instead."""
+    r"""The tool type whose call is held: file_search, web_search, code_interpreter, shell, image_generation, openapi, agent, browser. MCP calls use mcp_approval_request instead."""
 
     name: str
     r"""The name of the tool the model called, such as web_search or an OpenAPI operation name."""
