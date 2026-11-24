@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: 8cd2ba7f68166ce89c44a5e54d721da7
+  docChecksum: 9fe6f53a16680230df3ea1280b8056b1
   docVersion: 1.1.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 0.1.86
-  configChecksum: fc1f3fbf5c05284a5f0e8cf3d7f66f61
+  releaseVersion: 0.1.87
+  configChecksum: 15069cc20d9585c15edf465f9f2cbc97
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: b47d26ef-b7d7-4a4c-a8ef-392bdb4afd95
-  pristine_commit_hash: 0520cf371cb796e694549eaf08c2a54e62055970
-  pristine_tree_hash: 63d4d9d6ab066e752165a139c9ea9c65acd4fe05
+  generation_id: fd8f43cf-4ed6-419b-becf-354729045814
+  pristine_commit_hash: a3300588f9a032b6ec87cb1c7352610ff9c34bb0
+  pristine_tree_hash: 569ba0e89af0c9ae8372f6d474c5f42804e8fe00
 features:
   go:
     acceptHeaders: 2.81.2
@@ -24174,8 +24174,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:f017f3852c22fdc75220db3e5f1fbfc75d4aebc6
-    pristine_git_object: 6692226bc597f4e9550ac6d610e5dcf4b3ac5081
+    last_write_checksum: sha1:d9f9d4af4364c9394f38bcda690339f33f7ec14d
+    pristine_git_object: fe7f01669454e2e31291adddc0f022872b5a76e4
   secrets.go:
     id: a7cb06737994
     last_write_checksum: sha1:062181f28ff2f41663907971e4932f139110b1be
