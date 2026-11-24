@@ -14,7 +14,7 @@ export const tool$llmSkillsCreatePermission: ToolDefinition<typeof args> = {
   name: "llm-skills-create-permission",
   description: `Grant a skill permission
 
-Grants \`reader\` or \`writer\` on the skill to one principal, or to every member of the skill's team (\`grantee_type: team\`), replacing any role that principal already held. Only the skill's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The \`user_id\` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.`,
+Grants \`reader\` or \`writer\` on the skill to one principal, or to every member of the skill's team (\`grantee_type: team\`), replacing any role that principal already held. Only the skill's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The \`user_id\` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmSkillsCreatePermission(

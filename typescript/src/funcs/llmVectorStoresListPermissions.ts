@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List vector store permissions
  *
  * @remarks
- * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+ * Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an admin of its organization can list them (403 otherwise). Admins of the store's organization can always read it and are not listed. Returns 410 once the vector store has expired.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

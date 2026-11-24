@@ -14,7 +14,7 @@ export const tool$llmSkillsListPermissions: ToolDefinition<typeof args> = {
   name: "llm-skills-list-permissions",
   description: `List skill permissions
 
-Lists who holds a role on the skill: its owner, then its team when that permission is set, then individual principals. Only the skill's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the skill's team can always read it and are not listed.`,
+Lists who holds a role on the skill: its owner, then its team when that permission is set, then individual principals. Only the skill's owner or an admin of its organization can list them (403 otherwise). Admins of the skill's organization can always read it and are not listed.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmSkillsListPermissions(

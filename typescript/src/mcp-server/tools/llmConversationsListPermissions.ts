@@ -15,7 +15,7 @@ export const tool$llmConversationsListPermissions: ToolDefinition<typeof args> =
     name: "llm-conversations-list-permissions",
     description: `List conversation permissions
 
-Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the conversation's team can always read it and are not listed.`,
+Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an admin of its organization can list them (403 otherwise). Admins of the conversation's organization can always read it and are not listed.`,
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await llmConversationsListPermissions(

@@ -14,7 +14,7 @@ namespace MeetKai.MKA1.Types.Components
     using System;
 
     /// <summary>
-    /// Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an org admin of its team, if at all.
+    /// Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an admin of its org, if at all.
     /// </summary>
     public enum VectorStorePermissionSource
     {

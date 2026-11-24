@@ -3773,7 +3773,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermissionList:
         r"""List vector store permissions
 
-        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an admin of its organization can list them (403 otherwise). Admins of the store's organization can always read it and are not listed. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -3873,7 +3873,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermissionList:
         r"""List vector store permissions
 
-        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.
+        Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an admin of its organization can list them (403 otherwise). Admins of the store's organization can always read it and are not listed. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -3977,7 +3977,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermission:
         r"""Grant a vector store permission
 
-        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -4092,7 +4092,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermission:
         r"""Grant a vector store permission
 
-        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+        Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -4204,7 +4204,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreEffectivePermission:
         r"""Retrieve a vector store permission
 
-        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.
+        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an admin of its organization; that comes from the organization membership the authorization service holds, not from a grant. Only the store's owner or an admin of its organization can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -4309,7 +4309,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStoreEffectivePermission:
         r"""Retrieve a vector store permission
 
-        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an organization admin of its team; that is decided per request from the caller's role. Only the store's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.
+        Returns the role a principal effectively holds on the vector store and where it comes from: `owner`, a permission granted to it (`grant`), the store's `team` permission, or `none`. A principal with `none` can still reach the store as an admin of its organization; that comes from the organization membership the authorization service holds, not from a grant. Only the store's owner or an admin of its organization can retrieve another principal's permission (403 otherwise). Any caller who can read the store can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -4414,7 +4414,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermissionDeleted:
         r"""Remove a vector store permission
 
-        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an admin of its organization can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 
@@ -4519,7 +4519,7 @@ class VectorStores(BaseSDK):
     ) -> models.VectorStorePermissionDeleted:
         r"""Remove a vector store permission
 
-        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
+        Removes every role the principal holds on the vector store, or the `team` permission. Only the store's owner or an admin of its organization can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission. Returns 410 once the vector store has expired.
 
         If set, this operation will use `bearer_auth` from the global security.
 

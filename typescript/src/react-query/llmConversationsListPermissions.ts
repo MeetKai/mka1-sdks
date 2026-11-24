@@ -54,7 +54,7 @@ export type LlmConversationsListPermissionsQueryError =
  * List conversation permissions
  *
  * @remarks
- * Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the conversation's team can always read it and are not listed.
+ * Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an admin of its organization can list them (403 otherwise). Admins of the conversation's organization can always read it and are not listed.
  */
 export function useLlmConversationsListPermissions(
   request: operations.ListConversationPermissionsRequest,
@@ -81,7 +81,7 @@ export function useLlmConversationsListPermissions(
  * List conversation permissions
  *
  * @remarks
- * Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the conversation's team can always read it and are not listed.
+ * Lists who holds a role on the conversation: its owner, then its team when that permission is set, then individual principals. Only the conversation's owner or an admin of its organization can list them (403 otherwise). Admins of the conversation's organization can always read it and are not listed.
  */
 export function useLlmConversationsListPermissionsSuspense(
   request: operations.ListConversationPermissionsRequest,

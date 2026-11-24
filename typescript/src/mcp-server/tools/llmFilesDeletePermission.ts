@@ -14,7 +14,7 @@ export const tool$llmFilesDeletePermission: ToolDefinition<typeof args> = {
   name: "llm-files-delete-permission",
   description: `Remove a file permission
 
-Removes every role the principal holds on the file, or the \`team\` permission. Only the file's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.`,
+Removes every role the principal holds on the file, or the \`team\` permission. Only the file's owner or an admin of its organization can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmFilesDeletePermission(

@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Grant a vector store permission
  *
  * @remarks
- * Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
+ * Grants `reader` or `writer` on the vector store to one principal, or to every member of the store's team (`grantee_type: team`), replacing any role that principal already held. Only the store's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

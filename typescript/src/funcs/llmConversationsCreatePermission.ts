@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * Grant a conversation permission
  *
  * @remarks
- * Grants `reader` or `writer` on the conversation to one principal, or to every member of the conversation's team (`grantee_type: team`), replacing any role that principal already held. Only the conversation's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+ * Grants `reader` or `writer` on the conversation to one principal, or to every member of the conversation's team (`grantee_type: team`), replacing any role that principal already held. Only the conversation's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

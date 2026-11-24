@@ -18,7 +18,7 @@ type VectorStoreEffectivePermission struct {
 	UserID      *string                          `json:"user_id"`
 	// The highest role the principal holds on the store, or null when it holds none.
 	Role *VectorStorePermissionRole `json:"role"`
-	// Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an org admin of its team, if at all.
+	// Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an admin of its org, if at all.
 	Source VectorStorePermissionSource `json:"source"`
 }
 

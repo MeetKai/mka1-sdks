@@ -31,7 +31,7 @@ class VectorStoreEffectivePermissionTypedDict(TypedDict):
     role: Nullable[VectorStorePermissionRole]
     r"""The highest role the principal holds on the store, or null when it holds none."""
     source: VectorStorePermissionSource
-    r"""Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an admin of its org, if at all."""
     object: Literal["vector_store.permission"]
     r"""The object type, which is always 'vector_store.permission'."""
 
@@ -51,7 +51,7 @@ class VectorStoreEffectivePermission(BaseModel):
     r"""The highest role the principal holds on the store, or null when it holds none."""
 
     source: VectorStorePermissionSource
-    r"""Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the store's owner, a permission held by this principal, the store's `team` permission, or nothing — the principal reaches the store only as an admin of its org, if at all."""
 
     object: Annotated[
         Annotated[

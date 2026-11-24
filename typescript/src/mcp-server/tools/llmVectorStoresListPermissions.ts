@@ -15,7 +15,7 @@ export const tool$llmVectorStoresListPermissions: ToolDefinition<typeof args> =
     name: "llm-vector-stores-list-permissions",
     description: `List vector store permissions
 
-Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the store's team can always read it and are not listed. Returns 410 once the vector store has expired.`,
+Lists who holds a role on the vector store: its owner, then its team when that permission is set, then individual principals. Only the store's owner or an admin of its organization can list them (403 otherwise). Admins of the store's organization can always read it and are not listed. Returns 410 once the vector store has expired.`,
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await llmVectorStoresListPermissions(

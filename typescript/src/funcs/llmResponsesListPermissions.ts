@@ -29,7 +29,7 @@ import { Result } from "../types/fp.js";
  * List response permissions
  *
  * @remarks
- * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.
+ * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an admin of its organization can list them (403 otherwise). Admins of the response's organization can always read it and are not listed.
  *
  * If set, this operation will use {@link Security.bearerAuth} from the global security.
  */

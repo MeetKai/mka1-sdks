@@ -14,7 +14,7 @@ export const tool$llmResponsesListPermissions: ToolDefinition<typeof args> = {
   name: "llm-responses-list-permissions",
   description: `List response permissions
 
-Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.`,
+Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an admin of its organization can list them (403 otherwise). Admins of the response's organization can always read it and are not listed.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmResponsesListPermissions(

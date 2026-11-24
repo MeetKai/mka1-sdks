@@ -2,7 +2,7 @@
 
 package components
 
-// ResourcePermissionSource - Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all.
+// ResourcePermissionSource - Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all.
 type ResourcePermissionSource string
 
 const (

@@ -54,7 +54,7 @@ export type LlmFilesListPermissionsQueryError =
  * List file permissions
  *
  * @remarks
- * Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.
+ * Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an admin of its organization can list them (403 otherwise). Admins of the file's organization can always read it and are not listed.
  */
 export function useLlmFilesListPermissions(
   request: operations.ListFilePermissionsRequest,
@@ -81,7 +81,7 @@ export function useLlmFilesListPermissions(
  * List file permissions
  *
  * @remarks
- * Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.
+ * Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an admin of its organization can list them (403 otherwise). Admins of the file's organization can always read it and are not listed.
  */
 export function useLlmFilesListPermissionsSuspense(
   request: operations.ListFilePermissionsRequest,

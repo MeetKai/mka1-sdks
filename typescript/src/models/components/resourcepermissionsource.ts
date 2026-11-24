@@ -7,7 +7,7 @@ import { lazySchema as lazySchema$ } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 
 /**
- * Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all.
+ * Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all.
  */
 export const ResourcePermissionSource = {
   Owner: "owner",
@@ -16,7 +16,7 @@ export const ResourcePermissionSource = {
   None: "none",
 } as const;
 /**
- * Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all.
+ * Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all.
  */
 export type ResourcePermissionSource = ClosedEnum<
   typeof ResourcePermissionSource

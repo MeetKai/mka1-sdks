@@ -32,7 +32,7 @@ class SkillEffectivePermissionTypedDict(TypedDict):
     role: Nullable[ResourcePermissionRole]
     r"""The highest role the principal holds on the skill, or null when it holds none."""
     source: ResourcePermissionSource
-    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all."""
     object: Literal["skill.permission"]
     r"""The object type, which is always 'skill.permission'."""
 
@@ -53,7 +53,7 @@ class SkillEffectivePermission(BaseModel):
     r"""The highest role the principal holds on the skill, or null when it holds none."""
 
     source: ResourcePermissionSource
-    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all."""
 
     object: Annotated[
         Annotated[

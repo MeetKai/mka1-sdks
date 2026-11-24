@@ -54,7 +54,7 @@ export type LlmResponsesListPermissionsQueryError =
  * List response permissions
  *
  * @remarks
- * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.
+ * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an admin of its organization can list them (403 otherwise). Admins of the response's organization can always read it and are not listed.
  */
 export function useLlmResponsesListPermissions(
   request: operations.ListResponsePermissionsRequest,
@@ -81,7 +81,7 @@ export function useLlmResponsesListPermissions(
  * List response permissions
  *
  * @remarks
- * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the response's team can always read it and are not listed.
+ * Lists who holds a role on the response: its owner, then its team when that permission is set, then individual principals. Only the response's owner or an admin of its organization can list them (403 otherwise). Admins of the response's organization can always read it and are not listed.
  */
 export function useLlmResponsesListPermissionsSuspense(
   request: operations.ListResponsePermissionsRequest,

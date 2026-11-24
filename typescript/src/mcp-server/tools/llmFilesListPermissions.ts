@@ -14,7 +14,7 @@ export const tool$llmFilesListPermissions: ToolDefinition<typeof args> = {
   name: "llm-files-list-permissions",
   description: `List file permissions
 
-Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.`,
+Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an admin of its organization can list them (403 otherwise). Admins of the file's organization can always read it and are not listed.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmFilesListPermissions(

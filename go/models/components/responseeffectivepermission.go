@@ -19,7 +19,7 @@ type ResponseEffectivePermission struct {
 	UserID *string `json:"user_id"`
 	// The highest role the principal holds on the response, or null when it holds none.
 	Role *ResourcePermissionRole `json:"role"`
-	// Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all.
+	// Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all.
 	Source ResourcePermissionSource `json:"source"`
 }
 

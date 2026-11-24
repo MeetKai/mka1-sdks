@@ -32,7 +32,7 @@ class FileEffectivePermissionTypedDict(TypedDict):
     role: Nullable[ResourcePermissionRole]
     r"""The highest role the principal holds on the file, or null when it holds none."""
     source: ResourcePermissionSource
-    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all."""
     object: Literal["file.permission"]
     r"""The object type, which is always 'file.permission'."""
 
@@ -53,7 +53,7 @@ class FileEffectivePermission(BaseModel):
     r"""The highest role the principal holds on the file, or null when it holds none."""
 
     source: ResourcePermissionSource
-    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an org admin of its team, if at all."""
+    r"""Where the role comes from: the resource's owner, a permission held by this principal, the resource's `team` permission, or nothing — the principal reaches the resource only as an admin of its org, if at all."""
 
     object: Annotated[
         Annotated[

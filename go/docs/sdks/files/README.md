@@ -298,7 +298,7 @@ func main() {
 
 ## ListPermissions
 
-Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an organization admin of its team can list them (403 otherwise). Organization admins of the file's team can always read it and are not listed.
+Lists who holds a role on the file: its owner, then its team when that permission is set, then individual principals. Only the file's owner or an admin of its organization can list them (403 otherwise). Admins of the file's organization can always read it and are not listed.
 
 ### Example Usage
 
@@ -350,7 +350,7 @@ func main() {
 
 ## CreatePermission
 
-Grants `reader` or `writer` on the file to one principal, or to every member of the file's team (`grantee_type: team`), replacing any role that principal already held. Only the file's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
+Grants `reader` or `writer` on the file to one principal, or to every member of the file's team (`grantee_type: team`), replacing any role that principal already held. Only the file's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. The `user_id` is not checked against a directory: an id that names no member of the organization is stored as an end-user id, so a mistyped id is accepted and listed until it is removed.
 
 ### Example Usage
 
@@ -409,7 +409,7 @@ func main() {
 
 ## GetPermission
 
-Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an organization admin of its team; that is decided per request from the caller's role. Only the file's owner or an organization admin of its team can retrieve another principal's permission (403 otherwise). Any caller who can read the file can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.
+Returns the role a principal effectively holds on the file and where it comes from: `owner`, a permission granted to it (`grant`), the file's `team` permission, or `none`. A principal with `none` can still reach the file as an admin of its organization; that comes from the organization membership the authorization service holds, not from a grant. Only the file's owner or an admin of its organization can retrieve another principal's permission (403 otherwise). Any caller who can read the file can retrieve its own, by passing the id its requests are known by: the `X-On-Behalf-Of` end-user id when the request carries one, else its user id. For a caller who is neither the owner nor an organization admin that answer is `reader` or `writer`, which is how it learns whether it may write.
 
 ### Example Usage
 
@@ -462,7 +462,7 @@ func main() {
 
 ## DeletePermission
 
-Removes every role the principal holds on the file, or the `team` permission. Only the file's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
+Removes every role the principal holds on the file, or the `team` permission. Only the file's owner or an admin of its organization can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.
 
 ### Example Usage
 

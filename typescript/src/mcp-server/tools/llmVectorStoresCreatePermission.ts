@@ -15,7 +15,7 @@ export const tool$llmVectorStoresCreatePermission: ToolDefinition<typeof args> =
     name: "llm-vector-stores-create-permission",
     description: `Grant a vector store permission
 
-Grants \`reader\` or \`writer\` on the vector store to one principal, or to every member of the store's team (\`grantee_type: team\`), replacing any role that principal already held. Only the store's owner or an organization admin of its team can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.`,
+Grants \`reader\` or \`writer\` on the vector store to one principal, or to every member of the store's team (\`grantee_type: team\`), replacing any role that principal already held. Only the store's owner or an admin of its organization can grant (403 otherwise). The owner's role is fixed at creation and cannot be granted or changed. Returns 410 once the vector store has expired.`,
     args,
     tool: async (client, args, ctx) => {
       const [result, apiCall] = await llmVectorStoresCreatePermission(

@@ -14,7 +14,7 @@ export const tool$llmSkillsDeletePermission: ToolDefinition<typeof args> = {
   name: "llm-skills-delete-permission",
   description: `Remove a skill permission
 
-Removes every role the principal holds on the skill, or the \`team\` permission. Only the skill's owner or an organization admin of its team can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.`,
+Removes every role the principal holds on the skill, or the \`team\` permission. Only the skill's owner or an admin of its organization can remove permissions (403 otherwise); the owner's own permission cannot be removed. 404 when the principal holds no permission.`,
   args,
   tool: async (client, args, ctx) => {
     const [result, apiCall] = await llmSkillsDeletePermission(
