@@ -12,6 +12,7 @@ from meetkai_mka1.extract import Extract
 from meetkai_mka1.feedback import Feedback
 from meetkai_mka1.files import Files
 from meetkai_mka1.finetuning import FineTuning
+from meetkai_mka1.httprequests import HTTPRequests
 from meetkai_mka1.images import Images
 from meetkai_mka1.llm_audit import LlmAudit
 from meetkai_mka1.llm_usage import LlmUsage
@@ -37,6 +38,7 @@ class LlmSDK(BaseSDK):
     feedback: Feedback
     files: Files
     fine_tuning: FineTuning
+    http_requests: HTTPRequests
     images: Images
     mcp_vault: McpVault
     memory_stores: MemoryStores
@@ -70,6 +72,9 @@ class LlmSDK(BaseSDK):
         self.feedback = Feedback(self.sdk_configuration, parent_ref=self.parent_ref)
         self.files = Files(self.sdk_configuration, parent_ref=self.parent_ref)
         self.fine_tuning = FineTuning(
+            self.sdk_configuration, parent_ref=self.parent_ref
+        )
+        self.http_requests = HTTPRequests(
             self.sdk_configuration, parent_ref=self.parent_ref
         )
         self.images = Images(self.sdk_configuration, parent_ref=self.parent_ref)

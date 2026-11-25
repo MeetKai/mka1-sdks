@@ -13,6 +13,7 @@ import { ExtractT } from "./extract.lazy.js";
 import { Feedback } from "./feedback.lazy.js";
 import { Files } from "./files.lazy.js";
 import { FineTuning } from "./finetuning.lazy.js";
+import { HttpRequests } from "./httprequests.lazy.js";
 import { Images } from "./images.lazy.js";
 import { McpVault } from "./mcpvault.lazy.js";
 import { MemoryStores } from "./memorystores.lazy.js";
@@ -70,6 +71,11 @@ export class Llm extends ClientSDK {
   private _fineTuning?: FineTuning;
   get fineTuning(): FineTuning {
     return (this._fineTuning ??= new FineTuning(this._options));
+  }
+
+  private _httpRequests?: HttpRequests;
+  get httpRequests(): HttpRequests {
+    return (this._httpRequests ??= new HttpRequests(this._options));
   }
 
   private _images?: Images;

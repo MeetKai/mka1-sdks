@@ -343,6 +343,7 @@ import { tool$llmFineTuningListEvents } from "./tools/llmFineTuningListEvents.js
 import { tool$llmFineTuningPause } from "./tools/llmFineTuningPause.js";
 import { tool$llmFineTuningResume } from "./tools/llmFineTuningResume.js";
 import { tool$llmFineTuningRetrieve } from "./tools/llmFineTuningRetrieve.js";
+import { tool$llmHttpRequestsSend } from "./tools/llmHttpRequestsSend.js";
 import { tool$llmImagesCreate } from "./tools/llmImagesCreate.js";
 import { tool$llmMcpVaultAuthorizeServerOAuth } from "./tools/llmMcpVaultAuthorizeServerOAuth.js";
 import { tool$llmMcpVaultCompleteOAuth } from "./tools/llmMcpVaultCompleteOAuth.js";
@@ -600,7 +601,7 @@ export function createMCPServer(deps: {
 }) {
   const server = new McpServer({
     name: "SDK",
-    version: "0.55.108",
+    version: "0.55.109",
   });
 
   const client = new SDKCore({
@@ -913,6 +914,7 @@ export function createMCPServer(deps: {
   tool(tool$llmFineTuningResume);
   tool(tool$llmFineTuningListEvents);
   tool(tool$llmFineTuningListCheckpoints);
+  tool(tool$llmHttpRequestsSend);
   tool(tool$llmImagesCreate);
   tool(tool$llmMcpVaultCreateServer);
   tool(tool$llmMcpVaultListServers);

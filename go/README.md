@@ -646,6 +646,10 @@ func main() {
 * [~~ListEvents~~](docs/sdks/finetuning/README.md#listevents) - [Deprecated] List fine-tuning events :warning: **Deprecated**
 * [~~ListCheckpoints~~](docs/sdks/finetuning/README.md#listcheckpoints) - [Deprecated] List fine-tuning checkpoints :warning: **Deprecated**
 
+### [Llm.HttpRequests](docs/sdks/httprequests/README.md)
+
+* [Send](docs/sdks/httprequests/README.md#send) - Send HTTP request
+
 ### [Llm.Images](docs/sdks/images/README.md)
 
 * [Create](docs/sdks/images/README.md#create) - Generate images from text descriptions

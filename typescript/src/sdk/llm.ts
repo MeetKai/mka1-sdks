@@ -13,6 +13,7 @@ import { ExtractT } from "./extract.js";
 import { Feedback } from "./feedback.js";
 import { Files } from "./files.js";
 import { FineTuning } from "./finetuning.js";
+import { HttpRequests } from "./httprequests.js";
 import { Images } from "./images.js";
 import { McpVault } from "./mcpvault.js";
 import { MemoryStores } from "./memorystores.js";
@@ -70,6 +71,11 @@ export class Llm extends ClientSDK {
   private _fineTuning?: FineTuning;
   get fineTuning(): FineTuning {
     return (this._fineTuning ??= new FineTuning(this._options));
+  }
+
+  private _httpRequests?: HttpRequests;
+  get httpRequests(): HttpRequests {
+    return (this._httpRequests ??= new HttpRequests(this._options));
   }
 
   private _images?: Images;

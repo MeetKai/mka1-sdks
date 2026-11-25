@@ -482,6 +482,7 @@ export * from "./runcode.js";
 export * from "./runcommand.js";
 export * from "./runsandboxenvironmentsetup.js";
 export * from "./searchvectorstore.js";
+export * from "./sendhttprequest.js";
 export * from "./setapikeybudget.js";
 export * from "./setcurrency.js";
 export * from "./setexternaluserbudget.js";

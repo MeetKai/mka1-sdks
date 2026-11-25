@@ -3703,6 +3703,7 @@ if TYPE_CHECKING:
         HostedToolShorthandDefinitionType,
         HostedToolShorthandDefinitionTypedDict,
     )
+    from .httprequestresult import HTTPRequestResult, HTTPRequestResultTypedDict
     from .imagegenerationcall import (
         ImageGenerationCall,
         ImageGenerationCallError,
@@ -5995,6 +5996,15 @@ if TYPE_CHECKING:
     from .secretlist import SecretList, SecretListTypedDict
     from .security import Security, SecurityTypedDict
     from .semanticrule import SemanticRule, SemanticRuleTypedDict
+    from .sendhttprequestop import (
+        SendHTTPRequestRequestRequest,
+        SendHTTPRequestRequestRequestTypedDict,
+    )
+    from .sendhttprequestrequest import (
+        SendHTTPRequestRequest,
+        SendHTTPRequestRequestMethod,
+        SendHTTPRequestRequestTypedDict,
+    )
     from .sessionkind import SessionKind
     from .sessionrecord import SessionRecord, SessionRecordTypedDict
     from .sessionrepositoryfailure import (
@@ -10349,6 +10359,8 @@ __all__ = [
     "GuardrailsResourceTarget",
     "GuardrailsResourceTargetResourceType",
     "GuardrailsResourceTargetTypedDict",
+    "HTTPRequestResult",
+    "HTTPRequestResultTypedDict",
     "HardwareClass",
     "Health",
     "HistoryToolDefinition",
@@ -12081,6 +12093,11 @@ __all__ = [
     "SecurityTypedDict",
     "SemanticRule",
     "SemanticRuleTypedDict",
+    "SendHTTPRequestRequest",
+    "SendHTTPRequestRequestMethod",
+    "SendHTTPRequestRequestRequest",
+    "SendHTTPRequestRequestRequestTypedDict",
+    "SendHTTPRequestRequestTypedDict",
     "Service",
     "ServiceTypedDict",
     "SessionKind",
@@ -16120,6 +16137,8 @@ _dynamic_imports: dict[str, str] = {
     "HostedToolShorthandDefinition": ".hostedtoolshorthanddefinition",
     "HostedToolShorthandDefinitionType": ".hostedtoolshorthanddefinition",
     "HostedToolShorthandDefinitionTypedDict": ".hostedtoolshorthanddefinition",
+    "HTTPRequestResult": ".httprequestresult",
+    "HTTPRequestResultTypedDict": ".httprequestresult",
     "ImageGenerationCall": ".imagegenerationcall",
     "ImageGenerationCallError": ".imagegenerationcall",
     "ImageGenerationCallErrorTypedDict": ".imagegenerationcall",
@@ -17856,6 +17875,11 @@ _dynamic_imports: dict[str, str] = {
     "SecurityTypedDict": ".security",
     "SemanticRule": ".semanticrule",
     "SemanticRuleTypedDict": ".semanticrule",
+    "SendHTTPRequestRequestRequest": ".sendhttprequestop",
+    "SendHTTPRequestRequestRequestTypedDict": ".sendhttprequestop",
+    "SendHTTPRequestRequest": ".sendhttprequestrequest",
+    "SendHTTPRequestRequestMethod": ".sendhttprequestrequest",
+    "SendHTTPRequestRequestTypedDict": ".sendhttprequestrequest",
     "SessionKind": ".sessionkind",
     "SessionRecord": ".sessionrecord",
     "SessionRecordTypedDict": ".sessionrecord",

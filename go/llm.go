@@ -17,6 +17,7 @@ type Llm struct {
 	Feedback      *Feedback
 	Files         *Files
 	FineTuning    *FineTuning
+	HTTPRequests  *HTTPRequests
 	Images        *Images
 	McpVault      *McpVault
 	MemoryStores  *MemoryStores
@@ -50,6 +51,7 @@ func newLlm(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks)
 		Feedback:         newFeedback(rootSDK, sdkConfig, hooks),
 		Files:            newFiles(rootSDK, sdkConfig, hooks),
 		FineTuning:       newFineTuning(rootSDK, sdkConfig, hooks),
+		HTTPRequests:     newHTTPRequests(rootSDK, sdkConfig, hooks),
 		Images:           newImages(rootSDK, sdkConfig, hooks),
 		McpVault:         newMcpVault(rootSDK, sdkConfig, hooks),
 		MemoryStores:     newMemoryStores(rootSDK, sdkConfig, hooks),

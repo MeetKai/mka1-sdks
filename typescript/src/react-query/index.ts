@@ -358,6 +358,7 @@ export * from "./llmFineTuningListEvents.js";
 export * from "./llmFineTuningPause.js";
 export * from "./llmFineTuningResume.js";
 export * from "./llmFineTuningRetrieve.js";
+export * from "./llmHttpRequestsSend.js";
 export * from "./llmImagesCreate.js";
 export * from "./llmMcpVaultAuthorizeServerOAuth.js";
 export * from "./llmMcpVaultCompleteOAuth.js";

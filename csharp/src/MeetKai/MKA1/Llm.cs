@@ -34,6 +34,8 @@ namespace MeetKai.MKA1
 
         public IFineTuning FineTuning { get; }
 
+        public IHttpRequests HttpRequests { get; }
+
         public IImages Images { get; }
 
         public IMcpVault McpVault { get; }
@@ -122,6 +124,12 @@ namespace MeetKai.MKA1
         /// <see cref="IFineTuning"/>
         /// </summary>
         public IFineTuning FineTuning { get; private set; }
+
+        /// <summary>
+        /// HttpRequests SubSDK.
+        /// <see cref="IHttpRequests"/>
+        /// </summary>
+        public IHttpRequests HttpRequests { get; private set; }
 
         /// <summary>
         /// Images SubSDK.
@@ -213,6 +221,7 @@ namespace MeetKai.MKA1
             Feedback = new Feedback(SDKConfiguration);
             Files = new Files(SDKConfiguration);
             FineTuning = new FineTuning(SDKConfiguration);
+            HttpRequests = new HttpRequests(SDKConfiguration);
             Images = new Images(SDKConfiguration);
             McpVault = new McpVault(SDKConfiguration);
             MemoryStores = new MemoryStores(SDKConfiguration);
