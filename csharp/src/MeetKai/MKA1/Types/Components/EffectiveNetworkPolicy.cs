@@ -23,5 +23,8 @@ namespace MeetKai.MKA1.Types.Components
 
         [JsonProperty("domain_secrets_revision")]
         public string? DomainSecretsRevision { get; set; } = "";
+
+        [JsonProperty("public_internet")]
+        public bool? PublicInternet { get; set; } = false;
     }
 }

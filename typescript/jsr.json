@@ -2,7 +2,7 @@
 
 {
   "name": "@meetkai/mka1",
-  "version": "0.55.109",
+  "version": "0.55.110",
   "exports": {
     ".": "./src/index.ts",
     "./node": "./src/node.ts",

@@ -5,6 +5,7 @@
 import * as z from "zod/v3";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
+import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
@@ -14,11 +15,28 @@ import {
   DomainSecretInput$outboundSchema,
 } from "./domainsecretinput.js";
 
+export const OutboundNetworkPolicyType = {
+  Allowlist: "allowlist",
+  PublicInternet: "public_internet",
+} as const;
+export type OutboundNetworkPolicyType = ClosedEnum<
+  typeof OutboundNetworkPolicyType
+>;
+
 export type OutboundNetworkPolicy = {
-  type?: "allowlist" | undefined;
-  allowedDomains: Array<string>;
+  type?: OutboundNetworkPolicyType | undefined;
+  allowedDomains?: Array<string> | undefined;
   domainSecrets?: Array<DomainSecretInput> | undefined;
 };
+
+/** @internal */
+export const OutboundNetworkPolicyType$inboundSchema: z.ZodNativeEnum<
+  typeof OutboundNetworkPolicyType
+> = /* @__PURE__ */ lazySchema$(() => z.nativeEnum(OutboundNetworkPolicyType));
+/** @internal */
+export const OutboundNetworkPolicyType$outboundSchema: z.ZodNativeEnum<
+  typeof OutboundNetworkPolicyType
+> = OutboundNetworkPolicyType$inboundSchema;
 
 /** @internal */
 export const OutboundNetworkPolicy$inboundSchema: z.ZodType<
@@ -27,8 +45,8 @@ export const OutboundNetworkPolicy$inboundSchema: z.ZodType<
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    type: z.literal("allowlist").default("allowlist"),
-    allowed_domains: z.array(z.string()),
+    type: OutboundNetworkPolicyType$inboundSchema.default("allowlist"),
+    allowed_domains: z.array(z.string()).optional(),
     domain_secrets: z.array(DomainSecretInput$inboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {
@@ -39,8 +57,8 @@ export const OutboundNetworkPolicy$inboundSchema: z.ZodType<
 );
 /** @internal */
 export type OutboundNetworkPolicy$Outbound = {
-  type: "allowlist";
-  allowed_domains: Array<string>;
+  type: string;
+  allowed_domains?: Array<string> | undefined;
   domain_secrets?: Array<DomainSecretInput$Outbound> | undefined;
 };
 
@@ -51,8 +69,8 @@ export const OutboundNetworkPolicy$outboundSchema: z.ZodType<
   OutboundNetworkPolicy
 > = /* @__PURE__ */ lazySchema$(() =>
   z.object({
-    type: z.literal("allowlist").default("allowlist" as const),
-    allowedDomains: z.array(z.string()),
+    type: OutboundNetworkPolicyType$outboundSchema.default("allowlist"),
+    allowedDomains: z.array(z.string()).optional(),
     domainSecrets: z.array(DomainSecretInput$outboundSchema).optional(),
   }).transform((v) => {
     return remap$(v, {

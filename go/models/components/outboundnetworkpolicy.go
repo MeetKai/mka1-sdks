@@ -3,15 +3,41 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
-	"github.com/MeetKai/mka1-sdks/go/types"
 )
 
+type OutboundNetworkPolicyType string
+
+const (
+	OutboundNetworkPolicyTypeAllowlist      OutboundNetworkPolicyType = "allowlist"
+	OutboundNetworkPolicyTypePublicInternet OutboundNetworkPolicyType = "public_internet"
+)
+
+func (e OutboundNetworkPolicyType) ToPointer() *OutboundNetworkPolicyType {
+	return &e
+}
+func (e *OutboundNetworkPolicyType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "allowlist":
+		fallthrough
+	case "public_internet":
+		*e = OutboundNetworkPolicyType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for OutboundNetworkPolicyType: %v", v)
+	}
+}
+
 type OutboundNetworkPolicy struct {
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_          *string             `const:"allowlist" json:"type"`
-	AllowedDomains []string            `json:"allowed_domains"`
-	DomainSecrets  []DomainSecretInput `json:"domain_secrets,omitzero"`
+	Type           *OutboundNetworkPolicyType `default:"allowlist" json:"type"`
+	AllowedDomains []string                   `json:"allowed_domains,omitzero"`
+	DomainSecrets  []DomainSecretInput        `json:"domain_secrets,omitzero"`
 }
 
 func (o OutboundNetworkPolicy) MarshalJSON() ([]byte, error) {
@@ -25,13 +51,16 @@ func (o *OutboundNetworkPolicy) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *OutboundNetworkPolicy) GetType() *string {
-	return types.Pointer("allowlist")
+func (o *OutboundNetworkPolicy) GetType() *OutboundNetworkPolicyType {
+	if o == nil {
+		return nil
+	}
+	return o.Type
 }
 
 func (o *OutboundNetworkPolicy) GetAllowedDomains() []string {
 	if o == nil {
-		return []string{}
+		return nil
 	}
 	return o.AllowedDomains
 }

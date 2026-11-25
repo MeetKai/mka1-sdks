@@ -17,10 +17,10 @@ namespace MeetKai.MKA1.Types.Components
     public class OutboundNetworkPolicy
     {
         [JsonProperty("type")]
-        public string Type { get; } = "allowlist";
+        public OutboundNetworkPolicyType? Type { get; set; } = MeetKai.MKA1.Types.Components.OutboundNetworkPolicyType.Allowlist;
 
         [JsonProperty("allowed_domains")]
-        public List<string> AllowedDomains { get; set; } = default!;
+        public List<string>? AllowedDomains { get; set; }
 
         [JsonProperty("domain_secrets")]
         public List<DomainSecretInput>? DomainSecrets { get; set; }

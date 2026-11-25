@@ -5101,10 +5101,12 @@ if TYPE_CHECKING:
     )
     from .outboundnetworkpolicy import (
         OutboundNetworkPolicy,
+        OutboundNetworkPolicyType,
         OutboundNetworkPolicyTypedDict,
     )
     from .outboundnetworkpolicysummary import (
         OutboundNetworkPolicySummary,
+        OutboundNetworkPolicySummaryType,
         OutboundNetworkPolicySummaryTypedDict,
     )
     from .outputaudioitem import (
@@ -11425,7 +11427,9 @@ __all__ = [
     "OtherChunkingStrategyTypedDict",
     "OutboundNetworkPolicy",
     "OutboundNetworkPolicySummary",
+    "OutboundNetworkPolicySummaryType",
     "OutboundNetworkPolicySummaryTypedDict",
+    "OutboundNetworkPolicyType",
     "OutboundNetworkPolicyTypedDict",
     "OutputAudioItem",
     "OutputAudioItemStatus",
@@ -17231,8 +17235,10 @@ _dynamic_imports: dict[str, str] = {
     "OtherChunkingStrategy": ".otherchunkingstrategy",
     "OtherChunkingStrategyTypedDict": ".otherchunkingstrategy",
     "OutboundNetworkPolicy": ".outboundnetworkpolicy",
+    "OutboundNetworkPolicyType": ".outboundnetworkpolicy",
     "OutboundNetworkPolicyTypedDict": ".outboundnetworkpolicy",
     "OutboundNetworkPolicySummary": ".outboundnetworkpolicysummary",
+    "OutboundNetworkPolicySummaryType": ".outboundnetworkpolicysummary",
     "OutboundNetworkPolicySummaryTypedDict": ".outboundnetworkpolicysummary",
     "OutputAudioItem": ".outputaudioitem",
     "OutputAudioItemStatus": ".outputaudioitem",

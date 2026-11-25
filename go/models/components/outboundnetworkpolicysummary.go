@@ -4,14 +4,34 @@ package components
 
 import (
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
-	"github.com/MeetKai/mka1-sdks/go/types"
 )
 
+type OutboundNetworkPolicySummaryType string
+
+const (
+	OutboundNetworkPolicySummaryTypeAllowlist      OutboundNetworkPolicySummaryType = "allowlist"
+	OutboundNetworkPolicySummaryTypePublicInternet OutboundNetworkPolicySummaryType = "public_internet"
+)
+
+func (e OutboundNetworkPolicySummaryType) ToPointer() *OutboundNetworkPolicySummaryType {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *OutboundNetworkPolicySummaryType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "allowlist", "public_internet":
+			return true
+		}
+	}
+	return false
+}
+
 type OutboundNetworkPolicySummary struct {
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_          *string               `const:"allowlist" json:"type"`
-	AllowedDomains []string              `json:"allowed_domains"`
-	DomainSecrets  []DomainSecretSummary `json:"domain_secrets,omitzero"`
+	Type           *OutboundNetworkPolicySummaryType `default:"allowlist" json:"type"`
+	AllowedDomains []string                          `json:"allowed_domains,omitzero"`
+	DomainSecrets  []DomainSecretSummary             `json:"domain_secrets,omitzero"`
 }
 
 func (o OutboundNetworkPolicySummary) MarshalJSON() ([]byte, error) {
@@ -25,13 +45,16 @@ func (o *OutboundNetworkPolicySummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *OutboundNetworkPolicySummary) GetType() *string {
-	return types.Pointer("allowlist")
+func (o *OutboundNetworkPolicySummary) GetType() *OutboundNetworkPolicySummaryType {
+	if o == nil {
+		return nil
+	}
+	return o.Type
 }
 
 func (o *OutboundNetworkPolicySummary) GetAllowedDomains() []string {
 	if o == nil {
-		return []string{}
+		return nil
 	}
 	return o.AllowedDomains
 }

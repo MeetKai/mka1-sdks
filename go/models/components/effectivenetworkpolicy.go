@@ -10,6 +10,7 @@ type EffectiveNetworkPolicy struct {
 	Rules                 [][]string `json:"rules,omitzero"`
 	Revision              string     `json:"revision"`
 	DomainSecretsRevision *string    `default:"" json:"domain_secrets_revision"`
+	PublicInternet        *bool      `default:"false" json:"public_internet"`
 }
 
 func (e EffectiveNetworkPolicy) MarshalJSON() ([]byte, error) {
@@ -42,4 +43,11 @@ func (e *EffectiveNetworkPolicy) GetDomainSecretsRevision() *string {
 		return nil
 	}
 	return e.DomainSecretsRevision
+}
+
+func (e *EffectiveNetworkPolicy) GetPublicInternet() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.PublicInternet
 }

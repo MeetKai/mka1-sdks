@@ -5,33 +5,35 @@ from .domainsecretsummary import DomainSecretSummary, DomainSecretSummaryTypedDi
 from meetkai_mka1.types import (
     BaseModel,
     UNSET_SENTINEL,
+    UnrecognizedStr,
     current_exclude_none,
     serialize_with_info,
 )
 from meetkai_mka1.types.basemodel import current_filtered_dump
-from meetkai_mka1.utils import validate_const
-import pydantic
 from pydantic import model_serializer
-from pydantic.functional_validators import AfterValidator
-from typing import List, Literal, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import List, Literal, Optional, Union
+from typing_extensions import NotRequired, TypedDict
+
+
+OutboundNetworkPolicySummaryType = Union[
+    Literal[
+        "allowlist",
+        "public_internet",
+    ],
+    UnrecognizedStr,
+]
 
 
 class OutboundNetworkPolicySummaryTypedDict(TypedDict):
-    allowed_domains: List[str]
-    type: Literal["allowlist"]
+    type: NotRequired[OutboundNetworkPolicySummaryType]
+    allowed_domains: NotRequired[List[str]]
     domain_secrets: NotRequired[List[DomainSecretSummaryTypedDict]]
 
 
 class OutboundNetworkPolicySummary(BaseModel):
-    allowed_domains: List[str]
+    type: Optional[OutboundNetworkPolicySummaryType] = "allowlist"
 
-    type: Annotated[
-        Annotated[
-            Optional[Literal["allowlist"]], AfterValidator(validate_const("allowlist"))
-        ],
-        pydantic.Field(alias="type"),
-    ] = "allowlist"
+    allowed_domains: Optional[List[str]] = None
 
     domain_secrets: Optional[List[DomainSecretSummary]] = None
 
@@ -40,7 +42,7 @@ class OutboundNetworkPolicySummary(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["type", "domain_secrets"])
+        optional_fields = set(["type", "allowed_domains", "domain_secrets"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -57,9 +59,3 @@ class OutboundNetworkPolicySummary(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    OutboundNetworkPolicySummary.model_rebuild()
-except NameError:
-    pass

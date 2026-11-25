@@ -17,6 +17,7 @@ class EffectiveNetworkPolicyTypedDict(TypedDict):
     revision: str
     rules: NotRequired[List[List[str]]]
     domain_secrets_revision: NotRequired[str]
+    public_internet: NotRequired[bool]
 
 
 class EffectiveNetworkPolicy(BaseModel):
@@ -26,12 +27,14 @@ class EffectiveNetworkPolicy(BaseModel):
 
     domain_secrets_revision: Optional[str] = ""
 
+    public_internet: Optional[bool] = False
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["rules", "domain_secrets_revision"])
+        optional_fields = set(["rules", "domain_secrets_revision", "public_internet"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

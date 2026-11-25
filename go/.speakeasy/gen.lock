@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: f863e27a-eff0-43d5-ac4c-af89c5ae0d43
 management:
-  docChecksum: de1042de402d1246baf1acaa61607619
+  docChecksum: c8fffefb8de77f6f009ea265416c290c
   docVersion: 1.1.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 0.1.89
-  configChecksum: e8ae4fd62dae0008ab0ffe5478415158
+  releaseVersion: 0.1.90
+  configChecksum: 257aad42309743c3a402379d556a3bb2
   repoURL: https://github.com/MeetKai/mka1-sdks
   repoSubDirectory: go
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: aa8af67f-185a-4368-b98f-06faae4f3987
-  pristine_commit_hash: b36a44352fa609fbbc797e5fbd14f49b7472512a
-  pristine_tree_hash: 94b9a888c979575363f1723a9db4bace1748b079
+  generation_id: 330d02c2-2269-4c7b-a9c3-3e2fda426c4c
+  pristine_commit_hash: 889dcdbd01f1f3e2df3e23388d3fc9dde1de5abb
+  pristine_tree_hash: eae6c593712fdc51bb77a49d437eedc75a53ca3e
 features:
   go:
     acceptHeaders: 2.81.2
@@ -4054,8 +4054,8 @@ trackedFiles:
     pristine_git_object: c1e31eddf4251f291160203ae316db72e685567d
   docs/models/components/effectivenetworkpolicy.md:
     id: 7c1f9eba76a8
-    last_write_checksum: sha1:5d60c86cb3d5f6fdafd243c56e432f40dd4c6d82
-    pristine_git_object: be4fe8142a7b5043a323649b0a40b8eefb45d65d
+    last_write_checksum: sha1:d3e7e2400685bc730ae04364fe1f01ad8e66396d
+    pristine_git_object: 378ec0b36013234cbcd9e04c4520a579cdae8c96
   docs/models/components/effectivepricerow.md:
     id: fbe1d709c0c2
     last_write_checksum: sha1:2ae34777636ac3afdfac6d666c2b6563da05e11b
@@ -6290,12 +6290,20 @@ trackedFiles:
     pristine_git_object: a9b16720b04965965a7ce6684bec53dc7553eb82
   docs/models/components/outboundnetworkpolicy.md:
     id: 3c09e896d18e
-    last_write_checksum: sha1:a5faa17b91abb61c1994db7a59dc0b8a7fa80d21
-    pristine_git_object: 90385a3c4510013e2dcb825eaa8e240b8a2e837f
+    last_write_checksum: sha1:f06f79b77e4433c973260d96ec17898ab3271046
+    pristine_git_object: eba31c493942a434133c26900d138fd85b730cfc
   docs/models/components/outboundnetworkpolicysummary.md:
     id: 475c05c4dd10
-    last_write_checksum: sha1:a750b3a635ff5b17061fff4d70958b8945f5b554
-    pristine_git_object: 251e513c3bd9e2fab33086fb9a0e240660825fc2
+    last_write_checksum: sha1:e225810a9ec526e525cdb6af4eaec40b879d21c5
+    pristine_git_object: 2c16b6e87a346b2bc0d5ca6bb4b725a703bb1199
+  docs/models/components/outboundnetworkpolicysummarytype.md:
+    id: 48e6ad984e81
+    last_write_checksum: sha1:3b28d37a9a9f718e4c9cd042e45116ef7b787778
+    pristine_git_object: 895d633e76d6374438fd95210da76d431fa44424
+  docs/models/components/outboundnetworkpolicytype.md:
+    id: 1490a2dfa0b7
+    last_write_checksum: sha1:f225c6335e6567be9d137859d400d790f2b606b0
+    pristine_git_object: 21d77e5f9926c4f5471a8db17bcc4d6f474462c9
   docs/models/components/outputaudioitem.md:
     id: 68f70bc5b1e0
     last_write_checksum: sha1:240cd96c4586d661b2ad8bd17ce67e2ad743a94a
@@ -19002,8 +19010,8 @@ trackedFiles:
     pristine_git_object: 4a000c6ff23062eaf83e54fb3f06f4f3af39190c
   models/components/effectivenetworkpolicy.go:
     id: dd8e9e039220
-    last_write_checksum: sha1:31db64bb503b488362663b7a629d54ca9bd47471
-    pristine_git_object: 91ca8b23fcb8f2c612f13ed99a8cf133a6bbbd2a
+    last_write_checksum: sha1:d6a2979dcd141c7ae2d071667df10f143a0015e2
+    pristine_git_object: 998605c8924a33cb6f43a2ade97b5771eb7c9e74
   models/components/effectivepricerow.go:
     id: beb3ac100752
     last_write_checksum: sha1:76dc866e203b725d65b5d9609a2a124cf1daa09f
@@ -20254,12 +20262,12 @@ trackedFiles:
     pristine_git_object: c690bab52e16707ddd5edc2bc52c6a09f7ba80a4
   models/components/outboundnetworkpolicy.go:
     id: bfe5aac94e7d
-    last_write_checksum: sha1:cedc3bf190913bc63353a603ad5cdbbc1edded1b
-    pristine_git_object: f6c1389abc8356da75608489df39f92e0be7b855
+    last_write_checksum: sha1:5b1650d800f2ea8e2a92c304b035db3ee9a13b18
+    pristine_git_object: 5218a9e1685dc20c29e31122d491ab4e33662da0
   models/components/outboundnetworkpolicysummary.go:
     id: 1bc4050bcb3a
-    last_write_checksum: sha1:312ff35eec19e3282762ef915150f7545a1b24c1
-    pristine_git_object: 9be36560731e69e3600e5fb6a49c99f8ec03fe7b
+    last_write_checksum: sha1:b1fd657cbebe178b70d8aa2679c75bf7b7028959
+    pristine_git_object: ad3b1ba1336c2fb39e1cfb2dbb1eb368b3895233
   models/components/outputaudioitem.go:
     id: bd6c40934d03
     last_write_checksum: sha1:45eba053fbdb4d9dcaaea96bbd9a20a59c295f5f
@@ -24230,8 +24238,8 @@ trackedFiles:
     pristine_git_object: 5e871c90b06760099eb968330f63f11a48903ac2
   sdk.go:
     id: 8db9b9536b0a
-    last_write_checksum: sha1:4cedb9e5ebf822479b80cd4c4d40e81aae6fe8dd
-    pristine_git_object: 39d06f6e29e7b27d31d8ed6eaa418f0dc4ae0ab4
+    last_write_checksum: sha1:d119a0b31e743753132f76b4571aae36c3ad9b2e
+    pristine_git_object: a179e810c32c07e6b41fccebd0e43f0faa1e4ab6
   secrets.go:
     id: a7cb06737994
     last_write_checksum: sha1:062181f28ff2f41663907971e4932f139110b1be
@@ -27670,7 +27678,7 @@ examples:
     speakeasy-default-get-effective-network-policy:
       responses:
         "200":
-          application/json: {"revision": "<value>", "domain_secrets_revision": ""}
+          application/json: {"revision": "<value>", "domain_secrets_revision": "", "public_internet": false}
   getTenantNetworkPolicy:
     speakeasy-default-get-tenant-network-policy:
       parameters:
@@ -30872,6 +30880,4 @@ examples:
         "200":
           application/json: {"object": "http_request.result", "status": 733488, "ok": false, "content_type": "<value>", "body": "<value>", "body_bytes": 885846, "body_omitted": false}
 examplesVersion: 1.0.2
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Sdk.Llm.HttpRequests.Send()`: **Added**
+releaseNotes: "## Go SDK Changes:\n* `Sdk.Sandbox.Create()`: \n  *  `request.Body.NetworkPolicy` **Changed** (Breaking ⚠️)\n  *  `response.Session.NetworkPolicy` **Changed** (Breaking ⚠️)\n* `Sdk.Sandbox.List()`:  `response.[].NetworkPolicy` **Changed** (Breaking ⚠️)\n* `Sdk.Sandbox.Get()`:  `response.NetworkPolicy` **Changed** (Breaking ⚠️)\n* `Sdk.Sandbox.Terminate()`:  `response.Session.NetworkPolicy` **Changed** (Breaking ⚠️)\n* `Sdk.Sandbox.NetworkPolicies.Effective()`:  `response.PublicInternet` **Added**\n"

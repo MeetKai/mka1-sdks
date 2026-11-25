@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 56b0ed9a-4399-4fa7-a57a-15cae07b6dc4
 management:
-  docChecksum: de1042de402d1246baf1acaa61607619
+  docChecksum: c8fffefb8de77f6f009ea265416c290c
   docVersion: 1.1.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 0.55.109
-  configChecksum: 2881f60c80586364749f764b823ed15c
+  releaseVersion: 0.55.110
+  configChecksum: dbd5d220240ca4c281323ebe0139550f
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: typescript
   installationURL: https://github.com/MeetKai/mka1-sdks
 persistentEdits:
-  generation_id: 2a6960c6-eab7-4182-9ee5-31f787f762e6
-  pristine_commit_hash: 093f2ab31e2f064f59133ac20f5c48a67b04283c
-  pristine_tree_hash: c0c6fbf4a03ecf9bd0b9b00562b534b3a02b03a6
+  generation_id: b5264649-cda1-4808-b5cb-894d0601be92
+  pristine_commit_hash: b9b264b7095fc031c6a4a0fa40c83ce86a1946e1
+  pristine_tree_hash: 3d465112d7d828f51feaad57c36241fb2f8ce629
 features:
   typescript:
     acceptHeaders: 2.81.2
@@ -91,12 +91,12 @@ trackedFiles:
     pristine_git_object: 36f4a7403d213e61658c181b38812c6c4c9ff53f
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:c872dca442b43c82d03d1166f526d79d091c1ee7
-    pristine_git_object: b2c3c9db2e12aa54a00817c173dd992ecf14001a
+    last_write_checksum: sha1:cc1670bfa176e4fb417dda643fe3050008ce8ebe
+    pristine_git_object: 465aa7f8b942df43046f4c50779ecc799e4870fc
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1978e1cfc9dcc8a8ff4ec01bd7f1a5b37cb45be6
-    pristine_git_object: 68f01a6a48e6c5f047344a02e3ab39d63b6d71b2
+    last_write_checksum: sha1:decd5b56dae51729d9b726fec89100cc5a9a5a8d
+    pristine_git_object: 594a0200c640d550682fbd56e5baddffb8b7152d
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:ce840032c45608f5f4022b32bcce32cb69c5ed26
@@ -2535,8 +2535,8 @@ trackedFiles:
     pristine_git_object: 0aebd8b0a4867e35cb3348fc52921c3c0b4725b7
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:a25f101222050d16279a7b6ac2b20836e0f563f9
-    pristine_git_object: dfd398580a8e7118648dc6e39b91d738fcccd3b4
+    last_write_checksum: sha1:25644a9dcc958f453fbe1646e0fb54fbf0665ace
+    pristine_git_object: 76cfd0bcd86932067f19a1e582be06877af19ff5
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:320ad978da272ff7ef2a1d1efd5d53a81190a936
@@ -2611,8 +2611,8 @@ trackedFiles:
     pristine_git_object: 0955a573c2ce989d63c737410ab8cc28706d9f74
   src/mcp-server/mcp-server.ts:
     id: aabbc4ab07c1
-    last_write_checksum: sha1:5b74203b5886d85194da2517fe71e12b5cac9a3b
-    pristine_git_object: d4d3c51cfc1d672fca0732bd9b04673a9e4558ac
+    last_write_checksum: sha1:091217ebce063ff7c9175ca2021ca0285f1fbb1d
+    pristine_git_object: 11d6a2fefa53886074e77f2ae82e0d86ecb8528f
   src/mcp-server/prompts.ts:
     id: 26f3d73cbf31
     last_write_checksum: sha1:b4889e092aa0b816cfe9aa2e534e3f7ed22053ec
@@ -2627,8 +2627,8 @@ trackedFiles:
     pristine_git_object: c25696d4c4f70e081fa5d87ad6891874c509a577
   src/mcp-server/server.ts:
     id: 2784dd48e82a
-    last_write_checksum: sha1:4391b4c6128647ce4c220e8fd207e1ffc5cec1a0
-    pristine_git_object: f62fa1225512a75c0ff071c2d5f6970803596545
+    last_write_checksum: sha1:7740f7f4758ae7c132bed1d612398dad9dc8a901
+    pristine_git_object: 8525ac9f5cc2c079a3e36bb7377ac6e04918f644
   src/mcp-server/shared.ts:
     id: 074e80d4be1e
     last_write_checksum: sha1:c4c1d8169a3a283584b8f13ea1533e438fe6fd69
@@ -6115,8 +6115,8 @@ trackedFiles:
     pristine_git_object: 5860520f8c125a5ec02efec27d306c9150c77d8b
   src/models/components/effectivenetworkpolicy.ts:
     id: fcef57ca1b86
-    last_write_checksum: sha1:b379d392c6861bb47bde271b84f1ad7fd92493b0
-    pristine_git_object: ed6ffd0dfd153aec83e15af5c517a7b2ae19e4f5
+    last_write_checksum: sha1:d980d6e3a2eea12f922d2b6a84c1918806191b80
+    pristine_git_object: c527a85111ffc8183d4ae705b3b181ede7e055e8
   src/models/components/effectivepricerow.ts:
     id: 8e1a7e131d53
     last_write_checksum: sha1:2c4bc4f98ecc44aa911a0b57f4db59920ac25993
@@ -7359,12 +7359,12 @@ trackedFiles:
     pristine_git_object: 1a5be820d9b06216478518fe09c0d610797eb2cf
   src/models/components/outboundnetworkpolicy.ts:
     id: 06c097963765
-    last_write_checksum: sha1:d21d6a724f78e224e9ee4c57442f62f216466c3f
-    pristine_git_object: 6c5fa38781446c144931facb1c96e7f6c879dfa7
+    last_write_checksum: sha1:16b9cf0c665661c5834a1046f6506a6518e644f0
+    pristine_git_object: c1bd5236c8dd69da014124a4f024977b194988cb
   src/models/components/outboundnetworkpolicysummary.ts:
     id: 3ebece03f630
-    last_write_checksum: sha1:053f580d29367ca937baa81c3a394892001e49f2
-    pristine_git_object: 051ca903a25307449b79da16896dd3b872818d49
+    last_write_checksum: sha1:7dff6e60280c7bdd0b0732394636db8ac1cd637a
+    pristine_git_object: a5102af8e12f116e1b7f4c204a3367a8023b3e69
   src/models/components/outputaudioitem.ts:
     id: 1cdc24dba83c
     last_write_checksum: sha1:5bd04028d9c9e5569f5a7912c1c022533038db76
@@ -24005,7 +24005,7 @@ examples:
     speakeasy-default-get-effective-network-policy:
       responses:
         "200":
-          application/json: {"revision": "<value>", "domain_secrets_revision": ""}
+          application/json: {"revision": "<value>", "domain_secrets_revision": "", "public_internet": false}
   getTenantNetworkPolicy:
     speakeasy-default-get-tenant-network-policy:
       parameters:
@@ -25601,9 +25601,7 @@ examples:
           application/json: {"object": "http_request.result", "status": 733488, "ok": false, "content_type": "<value>", "body": "<value>", "body_bytes": 885846, "body_omitted": false}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Typescript SDK Changes:
-  * `sdk.llm.httpRequests.send()`: **Added**
+releaseNotes: "## Typescript SDK Changes:\n* `sdk.sandbox.create()`: \n  *  `request.createSessionRequest.networkPolicy` **Changed** (Breaking ⚠️)\n  *  `response.session.networkPolicy` **Changed** (Breaking ⚠️)\n* `sdk.sandbox.list()`:  `response.[].networkPolicy` **Changed** (Breaking ⚠️)\n* `sdk.sandbox.get()`:  `response.networkPolicy` **Changed** (Breaking ⚠️)\n* `sdk.sandbox.terminate()`:  `response.session.networkPolicy` **Changed** (Breaking ⚠️)\n* `sdk.sandbox.networkPolicies.effective()`:  `response.publicInternet` **Added**\n"
 generatedFiles:
   - .gitattributes
   - .npmignore

@@ -12,6 +12,7 @@ export type EffectiveNetworkPolicy = {
   rules?: Array<Array<string>> | undefined;
   revision: string;
   domainSecretsRevision?: string | undefined;
+  publicInternet?: boolean | undefined;
 };
 
 /** @internal */
@@ -24,9 +25,11 @@ export const EffectiveNetworkPolicy$inboundSchema: z.ZodType<
     rules: z.array(z.array(z.string())).optional(),
     revision: z.string(),
     domain_secrets_revision: z.string().default(""),
+    public_internet: z.boolean().default(false),
   }).transform((v) => {
     return remap$(v, {
       "domain_secrets_revision": "domainSecretsRevision",
+      "public_internet": "publicInternet",
     });
   })
 );
@@ -35,6 +38,7 @@ export type EffectiveNetworkPolicy$Outbound = {
   rules?: Array<Array<string>> | undefined;
   revision: string;
   domain_secrets_revision: string;
+  public_internet: boolean;
 };
 
 /** @internal */
@@ -47,9 +51,11 @@ export const EffectiveNetworkPolicy$outboundSchema: z.ZodType<
     rules: z.array(z.array(z.string())).optional(),
     revision: z.string(),
     domainSecretsRevision: z.string().default(""),
+    publicInternet: z.boolean().default(false),
   }).transform((v) => {
     return remap$(v, {
       domainSecretsRevision: "domain_secrets_revision",
+      publicInternet: "public_internet",
     });
   })
 );
