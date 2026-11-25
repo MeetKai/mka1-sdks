@@ -6294,6 +6294,10 @@ if TYPE_CHECKING:
         SetUserDefaultBudgetThresholdResponseTypedDict,
     )
     from .severity import Severity
+    from .shellallowlistnetworkpolicy import (
+        ShellAllowlistNetworkPolicy,
+        ShellAllowlistNetworkPolicyTypedDict,
+    )
     from .shellcall import ShellCall, ShellCallStatus, ShellCallTypedDict
     from .shellcallaction import ShellCallAction, ShellCallActionTypedDict
     from .shellcalloutput import (
@@ -6332,10 +6336,18 @@ if TYPE_CHECKING:
         ShellEnvironmentContainerReference,
         ShellEnvironmentContainerReferenceTypedDict,
     )
-    from .shellnetworkpolicy import ShellNetworkPolicy, ShellNetworkPolicyTypedDict
+    from .shellnetworkpolicy import (
+        ShellNetworkPolicy,
+        ShellNetworkPolicyTypedDict,
+        UnknownShellNetworkPolicy,
+    )
     from .shellnetworkpolicydomainsecret import (
         ShellNetworkPolicyDomainSecret,
         ShellNetworkPolicyDomainSecretTypedDict,
+    )
+    from .shellpublicinternetnetworkpolicy import (
+        ShellPublicInternetNetworkPolicy,
+        ShellPublicInternetNetworkPolicyTypedDict,
     )
     from .shellsessionscope import ShellSessionScope
     from .shelltooldefinition import ShellToolDefinition, ShellToolDefinitionTypedDict
@@ -12318,6 +12330,8 @@ __all__ = [
     "SetupWhatsAppAppWebhookResponse",
     "SetupWhatsAppAppWebhookResponseTypedDict",
     "Severity",
+    "ShellAllowlistNetworkPolicy",
+    "ShellAllowlistNetworkPolicyTypedDict",
     "ShellCall",
     "ShellCallAction",
     "ShellCallActionTypedDict",
@@ -12350,6 +12364,8 @@ __all__ = [
     "ShellNetworkPolicyDomainSecret",
     "ShellNetworkPolicyDomainSecretTypedDict",
     "ShellNetworkPolicyTypedDict",
+    "ShellPublicInternetNetworkPolicy",
+    "ShellPublicInternetNetworkPolicyTypedDict",
     "ShellSessionScope",
     "ShellToolDefinition",
     "ShellToolDefinitionTypedDict",
@@ -12798,6 +12814,7 @@ __all__ = [
     "UnknownResponseOutputTextAnnotationAddedEventAnnotation",
     "UnknownResponseStreamingEvent",
     "UnknownShellEnvironment",
+    "UnknownShellNetworkPolicy",
     "UnknownSkillEntry",
     "UnknownToolDefinitionEnvironmentUnion",
     "UnknownToolDefinitionFiltersUnion",
@@ -18087,6 +18104,8 @@ _dynamic_imports: dict[str, str] = {
     "SetUserDefaultBudgetThresholdResponse": ".setuserdefaultbudgetop",
     "SetUserDefaultBudgetThresholdResponseTypedDict": ".setuserdefaultbudgetop",
     "Severity": ".severity",
+    "ShellAllowlistNetworkPolicy": ".shellallowlistnetworkpolicy",
+    "ShellAllowlistNetworkPolicyTypedDict": ".shellallowlistnetworkpolicy",
     "ShellCall": ".shellcall",
     "ShellCallStatus": ".shellcall",
     "ShellCallTypedDict": ".shellcall",
@@ -18118,8 +18137,11 @@ _dynamic_imports: dict[str, str] = {
     "ShellEnvironmentContainerReferenceTypedDict": ".shellenvironmentcontainerreference",
     "ShellNetworkPolicy": ".shellnetworkpolicy",
     "ShellNetworkPolicyTypedDict": ".shellnetworkpolicy",
+    "UnknownShellNetworkPolicy": ".shellnetworkpolicy",
     "ShellNetworkPolicyDomainSecret": ".shellnetworkpolicydomainsecret",
     "ShellNetworkPolicyDomainSecretTypedDict": ".shellnetworkpolicydomainsecret",
+    "ShellPublicInternetNetworkPolicy": ".shellpublicinternetnetworkpolicy",
+    "ShellPublicInternetNetworkPolicyTypedDict": ".shellpublicinternetnetworkpolicy",
     "ShellSessionScope": ".shellsessionscope",
     "ShellToolDefinition": ".shelltooldefinition",
     "ShellToolDefinitionTypedDict": ".shelltooldefinition",

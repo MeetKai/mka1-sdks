@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 3398a214-ec57-40c4-b9d5-ae1287926458
 management:
-  docChecksum: 9fe6f53a16680230df3ea1280b8056b1
+  docChecksum: f57e76904f4dd78a134fec19c27b3ed0
   docVersion: 1.1.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 0.12.204
-  configChecksum: 240d637bf3e3285f84fdf221ff31ccd8
+  releaseVersion: 0.12.205
+  configChecksum: 6198c89fa9d9828f07b9f643f5f65b51
   repoURL: https://github.com/MeetKai/mka1-sdks.git
   repoSubDirectory: python
   installationURL: https://github.com/MeetKai/mka1-sdks.git#subdirectory=python
 persistentEdits:
-  generation_id: 25f4b984-2aeb-48af-8630-e3e2f9d0c751
-  pristine_commit_hash: 2a8bea4e2d8d5c88024822f28b3010411b6500fa
-  pristine_tree_hash: 1156376450748c2b69ec1cad365bade1ecec111d
+  generation_id: 9b7c8ded-3b8e-4d7b-a1f0-8d6fe2fb9508
+  pristine_commit_hash: 39395f55811baa6c4ec9640caa762f7eb1ffc398
+  pristine_tree_hash: fa830ec4c418a2f8f74f27635ef0b44f3f6b13fd
 features:
   python:
     acceptHeaders: 3.0.0
@@ -69,8 +69,8 @@ trackedFiles:
     pristine_git_object: 965e5329cf9c7940bdf829e47431d7cb9b0f26f2
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:6b6dfdbb104143684d0800b013e74230db8bdad0
-    pristine_git_object: 3e4fd96fa91eae3391ac4b9a6e0d9aab1b658734
+    last_write_checksum: sha1:c08cfe5b25ba47f5c57161778c32908fb0a8837a
+    pristine_git_object: ffc5778c0b011a6000e13459c9cd0795acefd6b4
   scripts/publish.sh:
     id: fe273b08f514
     last_write_checksum: sha1:b290b25b36dca3d5eb1a2e66a2e1bcf2e7326cf3
@@ -93,8 +93,8 @@ trackedFiles:
     pristine_git_object: d8b0f16ccb7f6afcb37c352391eb1732be13be20
   src/meetkai_mka1/_version.py:
     id: 8b83ccf8fbda
-    last_write_checksum: sha1:b1bad62139169c27de02139b7413c6c61f7123fc
-    pristine_git_object: bc3b693867f6aff6d670e560b1c58876a8a55649
+    last_write_checksum: sha1:c5c90f67e0176c3f1ed4c96979aa3ce46da0aa3a
+    pristine_git_object: 80a2cf68cf4bfffbb960d2e2af37bef3943cb0ba
   src/meetkai_mka1/agent_connectors.py:
     id: 368b69cafd46
     last_write_checksum: sha1:a653a460d712dc71a5e4ed29686d3dae3f15b614
@@ -633,8 +633,8 @@ trackedFiles:
     pristine_git_object: 7e89d452a53d4fb22d897d18933e33f5985bbbf2
   src/meetkai_mka1/models/__init__.py:
     id: 2ea44c0e1a28
-    last_write_checksum: sha1:b1205aa8059de81d528f2d449f56a1681ea59350
-    pristine_git_object: a8bd00cd05245aa2654fbf3ce04e4aab88e4fc93
+    last_write_checksum: sha1:ec5526e228cc67c214cf617707ed9c0cc591c794
+    pristine_git_object: 1f86ecfa5895dbf897a9972621098f88eb87fc49
   src/meetkai_mka1/models/_schema0.py:
     id: a64d174b50ee
     last_write_checksum: sha1:e54b58720a32ee1dd7cc9e7940f4c95077536180
@@ -5855,6 +5855,10 @@ trackedFiles:
     id: a5e36df2baee
     last_write_checksum: sha1:82c0ef881daae0e2e084963c3588ac77ddcf3551
     pristine_git_object: f43e130de97b9de7518f024d5415a72a2a072610
+  src/meetkai_mka1/models/shellallowlistnetworkpolicy.py:
+    id: 9e558f554bb0
+    last_write_checksum: sha1:29a31ae1a60ca39a46bcb0bde03a8ea1f2363e74
+    pristine_git_object: 583b9c9d2d9daa10d21524441976843f242ce398
   src/meetkai_mka1/models/shellcall.py:
     id: 5893b3b27b8b
     last_write_checksum: sha1:b47c45e59742b06a22b17b8981e6fdb094496d10
@@ -5889,12 +5893,16 @@ trackedFiles:
     pristine_git_object: f408159bb178d2afe3f2f0d69830142d289297e3
   src/meetkai_mka1/models/shellnetworkpolicy.py:
     id: 1cbdbea61714
-    last_write_checksum: sha1:e8ab67422dffd64182a5499385ffbadb521238b3
-    pristine_git_object: 9ad080507819ec5682ad014f203cee93c04562cb
+    last_write_checksum: sha1:3ed94f16a8311d5cc43034db16c8059d949bf598
+    pristine_git_object: 2c7aef4d8cbf115fda36fb1259eb2d866bfe0875
   src/meetkai_mka1/models/shellnetworkpolicydomainsecret.py:
     id: c3023e6af2cd
     last_write_checksum: sha1:9a6d162c931cb9db1ba2fa5077cce70a65aadc7c
     pristine_git_object: 3963c9bf79e5a5d8edb846661cd910ec06457dc1
+  src/meetkai_mka1/models/shellpublicinternetnetworkpolicy.py:
+    id: 3ddf7eadd42d
+    last_write_checksum: sha1:7ca4951376a109f7b28a3037d3e8e8139307008a
+    pristine_git_object: 9d9189d578015e99f8d49649d32f32e386f1e7da
   src/meetkai_mka1/models/shellsessionscope.py:
     id: 6f79ef52d6f0
     last_write_checksum: sha1:bf1ad31087166cd900b6b2ec886082f022b9622d
@@ -15093,3 +15101,4 @@ examples:
         "200":
           application/json: {"id": "<id>", "object": "secret", "name": "<value>", "domain": "chubby-gift.net", "description": "strategy oh apropos an phooey silver wrongly um very doubtfully", "value_preview": "<value>", "expires_at": "2026-12-22T06:47:37.115Z", "last_used_at": "2026-11-07T14:03:52.441Z", "created_at": "2024-11-01T15:25:53.745Z", "updated_at": "2024-11-20T17:31:03.678Z"}
 examplesVersion: 1.0.2
+releaseNotes: "## Python SDK Changes:\n* `sdk.llm.responses.create()`: \n  *  `request.tools[].union(ShellToolRequest).environment.union(container_auto).network_policy` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.list()`:  `response.data[].tools[].union(ShellToolDefinition).environment.union(container_auto).network_policy` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.get()`:  `response` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.update()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).network_policy` **Changed** (Breaking ⚠️)\n* `sdk.llm.responses.cancel()`:  `response.tools[].union(ShellToolDefinition).environment.union(container_auto).network_policy` **Changed** (Breaking ⚠️)\n* `sdk.llm.speech.livekit_token()`: \n  *  `request.llm.tools[].union(ShellToolRequest).environment.union(container_auto).network_policy` **Changed** (Breaking ⚠️)\n"

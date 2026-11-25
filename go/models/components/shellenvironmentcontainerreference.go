@@ -47,6 +47,20 @@ func (s *ShellEnvironmentContainerReference) GetNetworkPolicy() *ShellNetworkPol
 	return s.NetworkPolicy
 }
 
+func (s *ShellEnvironmentContainerReference) GetNetworkPolicyAllowlist() *ShellAllowlistNetworkPolicy {
+	if v := s.GetNetworkPolicy(); v != nil {
+		return v.ShellAllowlistNetworkPolicy
+	}
+	return nil
+}
+
+func (s *ShellEnvironmentContainerReference) GetNetworkPolicyPublicInternet() *ShellPublicInternetNetworkPolicy {
+	if v := s.GetNetworkPolicy(); v != nil {
+		return v.ShellPublicInternetNetworkPolicy
+	}
+	return nil
+}
+
 func (s *ShellEnvironmentContainerReference) GetSkills() []SkillEntry {
 	if s == nil {
 		return nil

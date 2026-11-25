@@ -3,28 +3,28 @@
  */
 
 import * as z from "zod/v3";
-import { remap as remap$ } from "../../lib/primitives.js";
 import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminatedUnion.js";
+import { discriminatedUnion } from "../../types/discriminatedUnion.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 import {
-  ShellNetworkPolicyDomainSecret,
-  ShellNetworkPolicyDomainSecret$inboundSchema,
-  ShellNetworkPolicyDomainSecret$Outbound,
-  ShellNetworkPolicyDomainSecret$outboundSchema,
-} from "./shellnetworkpolicydomainsecret.js";
+  ShellAllowlistNetworkPolicy,
+  ShellAllowlistNetworkPolicy$inboundSchema,
+  ShellAllowlistNetworkPolicy$Outbound,
+  ShellAllowlistNetworkPolicy$outboundSchema,
+} from "./shellallowlistnetworkpolicy.js";
+import {
+  ShellPublicInternetNetworkPolicy,
+  ShellPublicInternetNetworkPolicy$inboundSchema,
+  ShellPublicInternetNetworkPolicy$Outbound,
+  ShellPublicInternetNetworkPolicy$outboundSchema,
+} from "./shellpublicinternetnetworkpolicy.js";
 
-export type ShellNetworkPolicy = {
-  type: "allowlist";
-  /**
-   * Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions.
-   */
-  allowedDomains?: Array<string> | undefined;
-  /**
-   * Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
-   */
-  domainSecrets?: Array<ShellNetworkPolicyDomainSecret> | undefined;
-};
+export type ShellNetworkPolicy =
+  | ShellAllowlistNetworkPolicy
+  | ShellPublicInternetNetworkPolicy
+  | discriminatedUnionTypes.Unknown<"type">;
 
 /** @internal */
 export const ShellNetworkPolicy$inboundSchema: z.ZodType<
@@ -32,24 +32,15 @@ export const ShellNetworkPolicy$inboundSchema: z.ZodType<
   z.ZodTypeDef,
   unknown
 > = /* @__PURE__ */ lazySchema$(() =>
-  z.object({
-    type: z.literal("allowlist"),
-    allowed_domains: z.array(z.string()).optional(),
-    domain_secrets: z.array(ShellNetworkPolicyDomainSecret$inboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      "allowed_domains": "allowedDomains",
-      "domain_secrets": "domainSecrets",
-    });
+  discriminatedUnion("type", {
+    allowlist: ShellAllowlistNetworkPolicy$inboundSchema,
+    public_internet: ShellPublicInternetNetworkPolicy$inboundSchema,
   })
 );
 /** @internal */
-export type ShellNetworkPolicy$Outbound = {
-  type: "allowlist";
-  allowed_domains?: Array<string> | undefined;
-  domain_secrets?: Array<ShellNetworkPolicyDomainSecret$Outbound> | undefined;
-};
+export type ShellNetworkPolicy$Outbound =
+  | ShellAllowlistNetworkPolicy$Outbound
+  | ShellPublicInternetNetworkPolicy$Outbound;
 
 /** @internal */
 export const ShellNetworkPolicy$outboundSchema: z.ZodType<
@@ -57,17 +48,10 @@ export const ShellNetworkPolicy$outboundSchema: z.ZodType<
   z.ZodTypeDef,
   ShellNetworkPolicy
 > = /* @__PURE__ */ lazySchema$(() =>
-  z.object({
-    type: z.literal("allowlist"),
-    allowedDomains: z.array(z.string()).optional(),
-    domainSecrets: z.array(ShellNetworkPolicyDomainSecret$outboundSchema)
-      .optional(),
-  }).transform((v) => {
-    return remap$(v, {
-      allowedDomains: "allowed_domains",
-      domainSecrets: "domain_secrets",
-    });
-  })
+  z.union([
+    ShellAllowlistNetworkPolicy$outboundSchema,
+    ShellPublicInternetNetworkPolicy$outboundSchema,
+  ])
 );
 
 export function shellNetworkPolicyToJSON(

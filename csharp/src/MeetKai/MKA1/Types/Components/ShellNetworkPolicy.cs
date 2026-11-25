@@ -12,23 +12,203 @@ namespace MeetKai.MKA1.Types.Components
     using MeetKai.MKA1.Types.Components;
     using MeetKai.MKA1.Utils;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
     using System.Collections.Generic;
+    using System.Numerics;
+    using System.Reflection;
 
-    public class ShellNetworkPolicy
+    public class ShellNetworkPolicyType
     {
-        [JsonProperty("type")]
-        public string Type { get; } = "allowlist";
+        private ShellNetworkPolicyType(string value)
+        {
+            Value = value;
+        }
 
-        /// <summary>
-        /// Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions.
-        /// </summary>
-        [JsonProperty("allowed_domains")]
-        public List<string>? AllowedDomains { get; set; }
+        public string Value { get; private set; }
 
-        /// <summary>
-        /// Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
-        /// </summary>
-        [JsonProperty("domain_secrets")]
-        public List<ShellNetworkPolicyDomainSecret>? DomainSecrets { get; set; }
+        public static ShellNetworkPolicyType Allowlist
+        {
+            get {
+                return new ShellNetworkPolicyType("allowlist");
+            }
+        }
+
+        public static ShellNetworkPolicyType PublicInternet
+        {
+            get {
+                return new ShellNetworkPolicyType("public_internet");
+            }
+        }
+
+        public static ShellNetworkPolicyType Unknown
+        {
+            get {
+                return new ShellNetworkPolicyType("UNKNOWN");
+            }
+        }
+
+        public override string ToString()
+        {
+            return Value;
+        }
+        public static implicit operator String(ShellNetworkPolicyType v)
+        {
+            return v.Value;
+        }
+        public static ShellNetworkPolicyType FromString(string v)
+        {
+            switch (v)
+            {
+                case "allowlist":
+                    return Allowlist;
+                case "public_internet":
+                    return PublicInternet;
+                case "UNKNOWN":
+                    return Unknown;
+                default:
+                    throw new ArgumentException("Invalid value for ShellNetworkPolicyType");
+            }
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            return Value.Equals(((ShellNetworkPolicyType)obj).Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+    }
+
+    [JsonConverter(typeof(ShellNetworkPolicy.ShellNetworkPolicyConverter))]
+    public class ShellNetworkPolicy : MeetKai.MKA1.Utils.IOpenUnion
+    {
+        public ShellNetworkPolicy(ShellNetworkPolicyType type)
+        {
+            Type = type;
+        }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ShellAllowlistNetworkPolicy? ShellAllowlistNetworkPolicy { get; set; }
+
+        [SpeakeasyMetadata("form:explode=true")]
+        public ShellPublicInternetNetworkPolicy? ShellPublicInternetNetworkPolicy { get; set; }
+
+        public ShellNetworkPolicyType Type { get; set; }
+
+        [JsonIgnore]
+        public JToken? UnknownRaw { get; private set; }
+
+        public static ShellNetworkPolicy CreateUnknown(JToken raw)
+        {
+            return new ShellNetworkPolicy(ShellNetworkPolicyType.Unknown) { UnknownRaw = raw };
+        }
+
+        public bool IsUnknown()
+        {
+            return Type.Equals(ShellNetworkPolicyType.Unknown);
+        }
+
+        bool MeetKai.MKA1.Utils.IOpenUnion.IsUnknown() => IsUnknown();
+
+        public static ShellNetworkPolicy CreateAllowlist(ShellAllowlistNetworkPolicy allowlist)
+        {
+            ShellNetworkPolicyType typ = ShellNetworkPolicyType.Allowlist;
+            ShellNetworkPolicy res = new ShellNetworkPolicy(typ);
+            res.ShellAllowlistNetworkPolicy = allowlist;
+            return res;
+        }
+
+        public static ShellNetworkPolicy CreatePublicInternet(ShellPublicInternetNetworkPolicy publicInternet)
+        {
+            ShellNetworkPolicyType typ = ShellNetworkPolicyType.PublicInternet;
+            ShellNetworkPolicy res = new ShellNetworkPolicy(typ);
+            res.ShellPublicInternetNetworkPolicy = publicInternet;
+            return res;
+        }
+
+        public class ShellNetworkPolicyConverter : JsonConverter
+        {
+            public override bool CanConvert(System.Type objectType) => objectType == typeof(ShellNetworkPolicy);
+
+            public override bool CanRead => true;
+
+            public override object? ReadJson(JsonReader reader, System.Type objectType, object? existingValue, JsonSerializer serializer)
+            {
+                if (reader.TokenType == JsonToken.Null)
+                {
+                    return CreateUnknown(JValue.CreateNull());
+                }
+
+                JToken token = Utilities.LoadRawToken(reader);
+                JObject? jo = token as JObject;
+                if (jo == null)
+                {
+                    return CreateUnknown(token);
+                }
+
+                JToken? discriminatorToken = jo.GetValue("type");
+                if (discriminatorToken == null || discriminatorToken.Type != JTokenType.String)
+                {
+                    return CreateUnknown(jo);
+                }
+
+                string discriminator = discriminatorToken.ToString();
+                if (discriminator == ShellNetworkPolicyType.Allowlist.ToString())
+                {
+                    ShellAllowlistNetworkPolicy shellAllowlistNetworkPolicy = ResponseBodyDeserializer.DeserializeNotNull<ShellAllowlistNetworkPolicy>(jo.ToString());
+                    return CreateAllowlist(shellAllowlistNetworkPolicy);
+                }
+                if (discriminator == ShellNetworkPolicyType.PublicInternet.ToString())
+                {
+                    ShellPublicInternetNetworkPolicy shellPublicInternetNetworkPolicy = ResponseBodyDeserializer.DeserializeNotNull<ShellPublicInternetNetworkPolicy>(jo.ToString());
+                    return CreatePublicInternet(shellPublicInternetNetworkPolicy);
+                }
+
+                return CreateUnknown(jo);
+            }
+
+            public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
+            {
+                if (value == null)
+                {
+                    throw new InvalidOperationException("Unexpected null JSON value.");
+                }
+
+                ShellNetworkPolicy res = (ShellNetworkPolicy)value;
+
+                if (res.IsUnknown())
+                {
+                    if (res.UnknownRaw != null)
+                    {
+                        res.UnknownRaw.WriteTo(writer);
+                        return;
+                    }
+                    throw new InvalidOperationException("Unknown union value has no raw payload; construct via CreateUnknown(JToken).");
+                }
+
+                if (res.ShellAllowlistNetworkPolicy != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ShellAllowlistNetworkPolicy));
+                    return;
+                }
+
+                if (res.ShellPublicInternetNetworkPolicy != null)
+                {
+                    writer.WriteRawValue(Utilities.SerializeJSON(res.ShellPublicInternetNetworkPolicy));
+                    return;
+                }
+
+                throw new InvalidOperationException(
+                    "Could not serialize union to JSON: no variant value was set. " +
+                    "Construct this union using one of the Create* factory methods."
+                );
+            }
+        }
     }
 }

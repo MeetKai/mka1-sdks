@@ -31,8 +31,18 @@ namespace MeetKai.MKA1.Types.Components
         [JsonProperty("context_files")]
         public List<string>? ContextFiles { get; set; }
 
-        [JsonProperty("network_policy")]
+        [JsonProperty("network_policy", NullValueHandling = NullValueHandling.Include)]
         public ShellNetworkPolicy? NetworkPolicy { get; set; }
+
+        public ShellAllowlistNetworkPolicy? GetNetworkPolicyAllowlist()
+        {
+            return NetworkPolicy != null ? NetworkPolicy.ShellAllowlistNetworkPolicy : null;
+        }
+
+        public ShellPublicInternetNetworkPolicy? GetNetworkPolicyPublicInternet()
+        {
+            return NetworkPolicy != null ? NetworkPolicy.ShellPublicInternetNetworkPolicy : null;
+        }
 
         /// <summary>
         /// Skills to inject into the container's /skills directory.

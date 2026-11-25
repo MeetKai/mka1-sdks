@@ -3,43 +3,128 @@
 package components
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
 	"github.com/MeetKai/mka1-sdks/go/internal/utils"
 )
 
+type ShellNetworkPolicyType string
+
+const (
+	ShellNetworkPolicyTypeAllowlist      ShellNetworkPolicyType = "allowlist"
+	ShellNetworkPolicyTypePublicInternet ShellNetworkPolicyType = "public_internet"
+	ShellNetworkPolicyTypeUnknown        ShellNetworkPolicyType = "UNKNOWN"
+)
+
 type ShellNetworkPolicy struct {
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_ string `const:"allowlist" json:"type"`
-	// Allowed hostnames and their subdomains. An empty or omitted list denies all outbound access. Intersects with tenant and operator restrictions.
-	AllowedDomains []string `json:"allowed_domains,omitzero"`
-	// Secrets injected by the sandbox egress proxy over verified HTTPS on exact domain match, exposed inside the sandbox only as placeholders.
-	DomainSecrets []ShellNetworkPolicyDomainSecret `json:"domain_secrets,omitzero"`
+	ShellAllowlistNetworkPolicy      *ShellAllowlistNetworkPolicy      `queryParam:"inline" union:"member"`
+	ShellPublicInternetNetworkPolicy *ShellPublicInternetNetworkPolicy `queryParam:"inline" union:"member"`
+	UnknownRaw                       json.RawMessage                   `json:"-" union:"unknown"`
+
+	Type ShellNetworkPolicyType
 }
 
-func (s ShellNetworkPolicy) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(s, "", false)
-}
+func CreateShellNetworkPolicyAllowlist(allowlist ShellAllowlistNetworkPolicy) ShellNetworkPolicy {
+	typ := ShellNetworkPolicyTypeAllowlist
 
-func (s *ShellNetworkPolicy) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
-		return err
+	return ShellNetworkPolicy{
+		ShellAllowlistNetworkPolicy: &allowlist,
+		Type:                        typ,
 	}
-	return nil
 }
 
-func (s *ShellNetworkPolicy) GetType() string {
-	return "allowlist"
+func CreateShellNetworkPolicyPublicInternet(publicInternet ShellPublicInternetNetworkPolicy) ShellNetworkPolicy {
+	typ := ShellNetworkPolicyTypePublicInternet
+
+	return ShellNetworkPolicy{
+		ShellPublicInternetNetworkPolicy: &publicInternet,
+		Type:                             typ,
+	}
 }
 
-func (s *ShellNetworkPolicy) GetAllowedDomains() []string {
-	if s == nil {
+func CreateShellNetworkPolicyUnknown(raw json.RawMessage) ShellNetworkPolicy {
+	return ShellNetworkPolicy{
+		UnknownRaw: raw,
+		Type:       ShellNetworkPolicyTypeUnknown,
+	}
+}
+
+func (u ShellNetworkPolicy) GetUnknownRaw() json.RawMessage {
+	return u.UnknownRaw
+}
+
+func (u ShellNetworkPolicy) IsUnknown() bool {
+	return u.Type == ShellNetworkPolicyTypeUnknown
+}
+
+func (u *ShellNetworkPolicy) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ShellNetworkPolicy{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	type discriminator struct {
+		Type string `json:"type"`
+	}
+
+	dis := new(discriminator)
+	if err := json.Unmarshal(data, &dis); err != nil {
+		var syntaxErr *json.SyntaxError
+		if errors.As(err, &syntaxErr) {
+			return fmt.Errorf("could not unmarshal discriminator: %w", err)
+		}
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ShellNetworkPolicyTypeUnknown
 		return nil
 	}
-	return s.AllowedDomains
-}
-
-func (s *ShellNetworkPolicy) GetDomainSecrets() []ShellNetworkPolicyDomainSecret {
-	if s == nil {
+	if dis == nil {
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ShellNetworkPolicyTypeUnknown
 		return nil
 	}
-	return s.DomainSecrets
+
+	switch dis.Type {
+	case "allowlist":
+		shellAllowlistNetworkPolicy := new(ShellAllowlistNetworkPolicy)
+		if err := utils.UnmarshalJSON(data, &shellAllowlistNetworkPolicy, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == allowlist) type ShellAllowlistNetworkPolicy within ShellNetworkPolicy: %w", string(data), err)
+		}
+
+		u.ShellAllowlistNetworkPolicy = shellAllowlistNetworkPolicy
+		u.Type = ShellNetworkPolicyTypeAllowlist
+		return nil
+	case "public_internet":
+		shellPublicInternetNetworkPolicy := new(ShellPublicInternetNetworkPolicy)
+		if err := utils.UnmarshalJSON(data, &shellPublicInternetNetworkPolicy, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == public_internet) type ShellPublicInternetNetworkPolicy within ShellNetworkPolicy: %w", string(data), err)
+		}
+
+		u.ShellPublicInternetNetworkPolicy = shellPublicInternetNetworkPolicy
+		u.Type = ShellNetworkPolicyTypePublicInternet
+		return nil
+	default:
+		u.UnknownRaw = json.RawMessage(data)
+		u.Type = ShellNetworkPolicyTypeUnknown
+		return nil
+	}
+
+}
+
+func (u ShellNetworkPolicy) MarshalJSON() ([]byte, error) {
+	if u.ShellAllowlistNetworkPolicy != nil {
+		return utils.MarshalJSON(u.ShellAllowlistNetworkPolicy, "", true)
+	}
+
+	if u.ShellPublicInternetNetworkPolicy != nil {
+		return utils.MarshalJSON(u.ShellPublicInternetNetworkPolicy, "", true)
+	}
+
+	if u.UnknownRaw != nil {
+		return json.RawMessage(u.UnknownRaw), nil
+	}
+	return nil, errors.New("could not marshal union type ShellNetworkPolicy: all fields are null")
 }

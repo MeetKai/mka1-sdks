@@ -52,6 +52,20 @@ func (s *ShellToolRequestEnvironment) GetNetworkPolicy() *ShellNetworkPolicy {
 	return s.NetworkPolicy
 }
 
+func (s *ShellToolRequestEnvironment) GetNetworkPolicyAllowlist() *ShellAllowlistNetworkPolicy {
+	if v := s.GetNetworkPolicy(); v != nil {
+		return v.ShellAllowlistNetworkPolicy
+	}
+	return nil
+}
+
+func (s *ShellToolRequestEnvironment) GetNetworkPolicyPublicInternet() *ShellPublicInternetNetworkPolicy {
+	if v := s.GetNetworkPolicy(); v != nil {
+		return v.ShellPublicInternetNetworkPolicy
+	}
+	return nil
+}
+
 func (s *ShellToolRequestEnvironment) GetSkills() []SkillEntry {
 	if s == nil {
 		return nil
